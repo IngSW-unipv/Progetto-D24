@@ -13,12 +13,12 @@ public class Festival extends Event {
 
     // override metodi interfaccia EventType
     @Override
-    public void getClassName() {
-
+    public String getClassName() {
+        return "Festival";
     }
 
     @Override
-    public void getKeyCode() {
-
+    public int getKeyCode() {
+        return 2; // 2 = Festival
     }
 }

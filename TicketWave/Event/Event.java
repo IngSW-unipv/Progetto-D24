@@ -18,4 +18,62 @@ public abstract class Event implements EventType {
         this.genre = genre;
     }
 
+    // getter + setter
+
+
+    public String getName() {
+        return name;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public Province getProvince() {
+        return province;
+    }
+
+    public int getMaxNumberOfSeats() {
+        return maxNumberOfSeats;
+    }
+
+    public int getTicketsSoldNumber() {
+        return ticketsSoldNumber;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
+    }
+
+    public void setMaxNumberOfSeats(int maxNumberOfSeats) {
+        this.maxNumberOfSeats = maxNumberOfSeats;
+    }
+
+    public void setTicketsSoldNumber(int ticketsSoldNumber) {
+        this.ticketsSoldNumber = ticketsSoldNumber;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
 }

@@ -11,12 +11,12 @@ public class Concert extends Event{
 
     // override metodi interfaccia EventType
     @Override
-    public void getClassName() {
-
+    public String getClassName() {
+        return "Concert";
     }
 
     @Override
-    public void getKeyCode() {
-
+    public int getKeyCode() {
+        return 1; // 1 = Concert
     }
 }

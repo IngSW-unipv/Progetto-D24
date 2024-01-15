@@ -1,6 +1,7 @@
 package TicketWave.Event;
+import java.lang.String;
 
 public interface EventType {
-    void getClassName();
-    void getKeyCode();
+    String getClassName();
+    int getKeyCode();
 }

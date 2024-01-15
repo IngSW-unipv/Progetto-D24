@@ -11,12 +11,12 @@ public class Other extends Event{
 
     // override metodi interfaccia EventType
     @Override
-    public void getClassName() {
-
+    public String getClassName() {
+        return "Other";
     }
 
     @Override
-    public void getKeyCode() {
-
+    public int getKeyCode() {
+        return 0; // 0 = Other
     }
 }

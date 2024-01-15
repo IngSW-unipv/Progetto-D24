@@ -12,12 +12,12 @@ public class Theater extends Event{
 
     // override metodi interfaccia EventType
     @Override
-    public void getClassName() {
-
+    public String getClassName() {
+        return "Theater";
     }
 
     @Override
-    public void getKeyCode() {
-
+    public int getKeyCode() {
+        return 3; // 3 = Theater
     }
 }
