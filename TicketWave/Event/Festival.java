@@ -5,8 +5,8 @@ public class Festival extends Event {
     int artistsNumber;
 
     // costruttore
-    public Festival(String name, String city, String location, Province province, int maxNumberOfSeats, int ticketsSoldNumber, Genre genre, String[] artists, int artistsNumber) {
-        super(name, city, location, province, maxNumberOfSeats, ticketsSoldNumber, genre);
+    public Festival(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] ticketsSoldNumberForType, int[] price, Genre genre, String[] artists, int artistsNumber) {
+        super(idEvent, name, city, location, province, maxNumberOfSeats, ticketsSoldNumberForType, price, genre);
         this.artists = artists;
         this.artistsNumber = artistsNumber;
     }

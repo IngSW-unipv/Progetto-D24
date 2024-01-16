@@ -4,8 +4,8 @@ public class Theater extends Event{
     String theatreCompany, authorName;
 
     // costruttore
-    public Theater(String name, String city, String location, Province province, int maxNumberOfSeats, int ticketsSoldNumber, Genre genre, String theatreCompany, String authorName) {
-        super(name, city, location, province, maxNumberOfSeats, ticketsSoldNumber, genre);
+    public Theater(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] ticketsSoldNumberForType, int[] price, Genre genre, String theatreCompany, String authorName) {
+        super(idEvent, name, city, location, province, maxNumberOfSeats, ticketsSoldNumberForType, price, genre);
         this.theatreCompany = theatreCompany;
         this.authorName = authorName;
     }
