@@ -13,6 +13,7 @@ public class TicketHandler {
 			barcode = createbarcode(event,type);
 			price = event.getPrice(type);
 			Ticket t = new Ticket(barcode, price, type);
+			return t;
 		}
 		
 		private String createbarcode(Event event, TicketType type) {
