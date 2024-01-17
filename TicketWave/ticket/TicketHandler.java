@@ -1,4 +1,5 @@
 package TicketWave.ticket;
+import TicketWave.event.*;
 
 public class TicketHandler {
 	// possibile singletone

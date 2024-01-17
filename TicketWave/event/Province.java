@@ -1,4 +1,4 @@
-package TicketWave.Event;
+package TicketWave.event;
 
 public enum Province {
 
