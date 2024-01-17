@@ -5,7 +5,7 @@ public class SubscriptionHandler {
 	private Manager m; 
 
 	
-	 void Change_Sub(int typeSubscription, String iban) {
+	 void ChangeSub(int typeSubscription, String iban) {
 		
 		 if( m.subscription==1  && typeSubscription ==2) {
 			 //PAY-MODE with iban
