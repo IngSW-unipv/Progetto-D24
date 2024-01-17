@@ -40,15 +40,38 @@ public class Manager extends User {
 */
 
 	@Override
-	public void createEvent(String type, String name, String city, String location, Province province, int maxNumberOfSeats, int ticketsSoldNumber, Genre genre) {
+	public void createEvent(String type,String name, String city, String location, Province province, int maxNumberOfSeats, int ticketsSoldNumber, Genre genre) {
+		int index=0;
+		if (index<maxNumberOfEvents) {
+			
+		
 		switch (type) {
+		
+		//non posso mettere i parametri del costruttore di Event ma dovrei mettere i parametri di tutti i costruttori sulla firma dell'evento,non conviene  usare Adapter? 
+		 
 		case "Theater":
+			event[index]=new Theater(name, city, location, province, maxNumberOfSeats, ticketsSoldNumber, genre, location);
+			index++;
+			break; 
+			
+		case "Festival":
+			event[index]=new Festival(name, city, location, province, maxNumberOfSeats, ticketsSoldNumber, genre, location);
+			index++;
+			
+		case "Concert":
+			event[index]=new Concert(name, city, location, province, maxNumberOfSeats, ticketsSoldNumber, genre, location);
+			index++;
+			
+		case "Other":
+			event[index]=new Other(name, city, location, province, maxNumberOfSeats, ticketsSoldNumber, genre, location);
+			index++;
+			
 			
 			
 		}
 	}
 	
-
+	}
 
 	@Override
 	public Event getEvents() {
