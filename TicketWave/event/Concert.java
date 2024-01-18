@@ -2,11 +2,6 @@ package TicketWave.event;
 import java.lang.String;
 public class Concert extends Event{
     String artist;
-    int posti;
-
-    public void metod(){
-
-    }
 
     // costruttore
     public Concert(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] ticketsSoldNumberForType, int[] price, Genre genre, String artist) {
