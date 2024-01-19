@@ -1,5 +1,5 @@
-package TicketWave.ticket;
-import TicketWave.event.*;
+package TicketWave.src.it.unipv.ingsfw23.modelDomain.ticket;
+import TicketWave.src.it.unipv.ingsfw23.modelDomain.event.*;
 
 public class TicketHandler {
 	// possibile singletone

@@ -1,11 +1,11 @@
-package TicketWave.event;
+package TicketWave.src.it.unipv.ingsfw23.modelDomain.event;
 import java.lang.String;
 public class Other extends Event{
     String description;
 
     // costruttore
-    public Other(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] ticketsSoldNumberForType, int[] price, Genre genre, String description) {
-        super(idEvent, name, city, location, province, maxNumberOfSeats, ticketsSoldNumberForType, price, genre);
+    public Other(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre, String description) {
+        super(idEvent, name, city, location, province, maxNumberOfSeats, price, genre);
         this.description = description;
     }
 

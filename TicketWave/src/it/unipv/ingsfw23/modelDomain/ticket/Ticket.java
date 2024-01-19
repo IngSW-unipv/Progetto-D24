@@ -1,4 +1,4 @@
-package TicketWave.ticket;
+package TicketWave.src.it.unipv.ingsfw23.modelDomain.ticket;
 
 public class Ticket {
 	String barcode;
@@ -11,7 +11,7 @@ public class Ticket {
 		this.type = type;
 	}
 
-	// i setters non ci vanno perchè una volta creato il biglietto non vanno modificate le sue informazioni
+	// i setters non ci vanno perchï¿½ una volta creato il biglietto non vanno modificate le sue informazioni
 	
 	public String getBarcode() {
 		return barcode;

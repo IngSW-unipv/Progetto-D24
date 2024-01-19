@@ -1,13 +1,13 @@
-package TicketWave.event;
+package TicketWave.src.it.unipv.ingsfw23.modelDomain.event;
 
 import java.lang.String;
 
-import TicketWave.ticket.TicketType;
+import TicketWave.src.it.unipv.ingsfw23.modelDomain.ticket.TicketType;
 public abstract class Event implements EventType {
 
     private int idEvent;
     private String name, city, location;
-    private Province province; // mi serve l'enumeration di Province per associare l'enum all'attributo
+    private Province province;
     private int maxNumberOfSeats;
     private int [] ticketsSoldNumberForType; // vettore biglietti venduti per tipo
     private int [] price; // vettore prezzi per i vari tipi di biglietto, es: Vip = 40€, Base = 15€...
@@ -15,14 +15,13 @@ public abstract class Event implements EventType {
 
     // costruttore
 
-    public Event(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] ticketsSoldNumberForType, int[] price, Genre genre) {
+    public Event(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre) {
         this.idEvent = idEvent;
         this.name = name;
         this.city = city;
         this.location = location;
         this.province = province;
         this.maxNumberOfSeats = maxNumberOfSeats;
-        this.ticketsSoldNumberForType = ticketsSoldNumberForType;
         this.price = price;
         this.genre = genre;
     }
