@@ -1,6 +1,8 @@
-package TicketWave.Event;
+package TicketWave.event;
 
 import java.lang.String;
+
+import TicketWave.ticket.TicketType;
 public abstract class Event implements EventType {
 
     private int idEvent;
@@ -57,8 +59,8 @@ public abstract class Event implements EventType {
         return ticketsSoldNumberForType;
     }
 
-    public int[] getPrice() {
-        return price;
+    public int getPrice(TicketType type) {
+        return price[type.ordinal()]; //ordinal torna la posizione di type nella enum
     }
 
     public Genre getGenre() {

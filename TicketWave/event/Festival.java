@@ -1,4 +1,4 @@
-package TicketWave.Event;
+package TicketWave.event;
 import java.lang.String;
 public class Festival extends Event {
     String [] artists;
