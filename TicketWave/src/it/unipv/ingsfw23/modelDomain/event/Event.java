@@ -4,7 +4,6 @@ import java.lang.String;
 
 import TicketWave.src.it.unipv.ingsfw23.modelDomain.ticket.TicketType;
 public abstract class Event implements EventType {
-
     private int idEvent;
     private String name, city, location;
     private Province province;

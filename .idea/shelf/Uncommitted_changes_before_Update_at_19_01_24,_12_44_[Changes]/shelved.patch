@@ -1,0 +1,183 @@
+Index: TicketWave/Event/Event.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package TicketWave.Event;\n\nimport java.lang.String;\npublic abstract class Event implements EventType {\n\n    private int idEvent;\n    private String name, city, location;\n    private Province province; // mi serve l'enumeration di Province per associare l'enum all'attributo\n    private int maxNumberOfSeats;\n    private int [] ticketsSoldNumberForType; // vettore biglietti venduti per tipo\n    private int [] price; // vettore prezzi per i vari tipi di biglietto, es: Vip = 40€, Base = 15€...\n    private Genre genre;\n\n    // costruttore\n\n    public Event(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] ticketsSoldNumberForType, int[] price, Genre genre) {\n        this.idEvent = idEvent;\n        this.name = name;\n        this.city = city;\n        this.location = location;\n        this.province = province;\n        this.maxNumberOfSeats = maxNumberOfSeats;\n        this.ticketsSoldNumberForType = ticketsSoldNumberForType;\n        this.price = price;\n        this.genre = genre;\n    }\n\n\n    // getter + setter\n\n\n    public int getIdEvent() {\n        return idEvent;\n    }\n\n    public String getName() {\n        return name;\n    }\n\n    public String getCity() {\n        return city;\n    }\n\n    public String getLocation() {\n        return location;\n    }\n\n    public Province getProvince() {\n        return province;\n    }\n\n    public int getMaxNumberOfSeats() {\n        return maxNumberOfSeats;\n    }\n\n    public int[] getTicketsSoldNumberForType() {\n        return ticketsSoldNumberForType;\n    }\n\n    public int[] getPrice() {\n        return price;\n    }\n\n    public Genre getGenre() {\n        return genre;\n    }\n\n    public void setIdEvent(int idEvent) {\n        this.idEvent = idEvent;\n    }\n\n    public void setName(String name) {\n        this.name = name;\n    }\n\n    public void setCity(String city) {\n        this.city = city;\n    }\n\n    public void setLocation(String location) {\n        this.location = location;\n    }\n\n    public void setProvince(Province province) {\n        this.province = province;\n    }\n\n    public void setMaxNumberOfSeats(int maxNumberOfSeats) {\n        this.maxNumberOfSeats = maxNumberOfSeats;\n    }\n\n    public void setTicketsSoldNumberForType(int[] ticketsSoldNumberForType) {\n        this.ticketsSoldNumberForType = ticketsSoldNumberForType;\n    }\n\n    public void setPrice(int[] price) {\n        this.price = price;\n    }\n\n    public void setGenre(Genre genre) {\n        this.genre = genre;\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/TicketWave/Event/Event.java b/TicketWave/Event/Event.java
+--- a/TicketWave/Event/Event.java	(revision 490919f3b5f9cffbd52f38a5d8544c6d0f425d3f)
++++ b/TicketWave/Event/Event.java	(date 1705563273173)
+@@ -5,7 +5,7 @@
+ 
+     private int idEvent;
+     private String name, city, location;
+-    private Province province; // mi serve l'enumeration di Province per associare l'enum all'attributo
++    private Province province;
+     private int maxNumberOfSeats;
+     private int [] ticketsSoldNumberForType; // vettore biglietti venduti per tipo
+     private int [] price; // vettore prezzi per i vari tipi di biglietto, es: Vip = 40€, Base = 15€...
+@@ -13,14 +13,13 @@
+ 
+     // costruttore
+ 
+-    public Event(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] ticketsSoldNumberForType, int[] price, Genre genre) {
++    public Event(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre) {
+         this.idEvent = idEvent;
+         this.name = name;
+         this.city = city;
+         this.location = location;
+         this.province = province;
+         this.maxNumberOfSeats = maxNumberOfSeats;
+-        this.ticketsSoldNumberForType = ticketsSoldNumberForType;
+         this.price = price;
+         this.genre = genre;
+     }
+Index: TicketWave/Event/Concert.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package TicketWave.Event;\nimport java.lang.String;\npublic class Concert extends Event{\n    String artist;\n\n    // costruttore\n    public Concert(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] ticketsSoldNumberForType, int[] price, Genre genre, String artist) {\n        super(idEvent, name, city, location, province, maxNumberOfSeats, ticketsSoldNumberForType, price, genre);\n        this.artist = artist;\n    }\n\n    // override metodi interfaccia EventType\n    @Override\n    public String getClassName() {\n        return \"Concert\";\n    }\n\n    @Override\n    public int getKeyCode() {\n        return 1; // 1 = Concert\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/TicketWave/Event/Concert.java b/TicketWave/Event/Concert.java
+--- a/TicketWave/Event/Concert.java	(revision 490919f3b5f9cffbd52f38a5d8544c6d0f425d3f)
++++ b/TicketWave/Event/Concert.java	(date 1705563299702)
+@@ -4,8 +4,8 @@
+     String artist;
+ 
+     // costruttore
+-    public Concert(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] ticketsSoldNumberForType, int[] price, Genre genre, String artist) {
+-        super(idEvent, name, city, location, province, maxNumberOfSeats, ticketsSoldNumberForType, price, genre);
++    public Concert(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre, String artist) {
++        super(idEvent, name, city, location, province, maxNumberOfSeats, price, genre);
+         this.artist = artist;
+     }
+ 
+Index: TicketWave/Event/Theater.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package TicketWave.Event;\nimport java.lang.String;\npublic class Theater extends Event{\n    String theatreCompany, authorName;\n\n    // costruttore\n    public Theater(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] ticketsSoldNumberForType, int[] price, Genre genre, String theatreCompany, String authorName) {\n        super(idEvent, name, city, location, province, maxNumberOfSeats, ticketsSoldNumberForType, price, genre);\n        this.theatreCompany = theatreCompany;\n        this.authorName = authorName;\n    }\n\n    // override metodi interfaccia EventType\n    @Override\n    public String getClassName() {\n        return \"Theater\";\n    }\n\n    @Override\n    public int getKeyCode() {\n        return 3; // 3 = Theater\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/TicketWave/Event/Theater.java b/TicketWave/Event/Theater.java
+--- a/TicketWave/Event/Theater.java	(revision 490919f3b5f9cffbd52f38a5d8544c6d0f425d3f)
++++ b/TicketWave/Event/Theater.java	(date 1705563299705)
+@@ -4,8 +4,8 @@
+     String theatreCompany, authorName;
+ 
+     // costruttore
+-    public Theater(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] ticketsSoldNumberForType, int[] price, Genre genre, String theatreCompany, String authorName) {
+-        super(idEvent, name, city, location, province, maxNumberOfSeats, ticketsSoldNumberForType, price, genre);
++    public Theater(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre, String theatreCompany, String authorName) {
++        super(idEvent, name, city, location, province, maxNumberOfSeats, price, genre);
+         this.theatreCompany = theatreCompany;
+         this.authorName = authorName;
+     }
+Index: TicketWave/Event/Other.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package TicketWave.Event;\nimport java.lang.String;\npublic class Other extends Event{\n    String description;\n\n    // costruttore\n    public Other(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] ticketsSoldNumberForType, int[] price, Genre genre, String description) {\n        super(idEvent, name, city, location, province, maxNumberOfSeats, ticketsSoldNumberForType, price, genre);\n        this.description = description;\n    }\n\n    // override metodi interfaccia EventType\n    @Override\n    public String getClassName() {\n        return \"Other\";\n    }\n\n    @Override\n    public int getKeyCode() {\n        return 0; // 0 = Other\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/TicketWave/Event/Other.java b/TicketWave/Event/Other.java
+--- a/TicketWave/Event/Other.java	(revision 490919f3b5f9cffbd52f38a5d8544c6d0f425d3f)
++++ b/TicketWave/Event/Other.java	(date 1705563273175)
+@@ -4,8 +4,8 @@
+     String description;
+ 
+     // costruttore
+-    public Other(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] ticketsSoldNumberForType, int[] price, Genre genre, String description) {
+-        super(idEvent, name, city, location, province, maxNumberOfSeats, ticketsSoldNumberForType, price, genre);
++    public Other(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre, String description) {
++        super(idEvent, name, city, location, province, maxNumberOfSeats, price, genre);
+         this.description = description;
+     }
+ 
+Index: TicketWave/Event/Festival.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package TicketWave.Event;\nimport java.lang.String;\npublic class Festival extends Event {\n    String [] artists;\n    int artistsNumber;\n\n    // costruttore\n    public Festival(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] ticketsSoldNumberForType, int[] price, Genre genre, String[] artists, int artistsNumber) {\n        super(idEvent, name, city, location, province, maxNumberOfSeats, ticketsSoldNumberForType, price, genre);\n        this.artists = artists;\n        this.artistsNumber = artistsNumber;\n    }\n\n    // override metodi interfaccia EventType\n    @Override\n    public String getClassName() {\n        return \"Festival\";\n    }\n\n    @Override\n    public int getKeyCode() {\n        return 2; // 2 = Festival\n    }\n}\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/TicketWave/Event/Festival.java b/TicketWave/Event/Festival.java
+--- a/TicketWave/Event/Festival.java	(revision 490919f3b5f9cffbd52f38a5d8544c6d0f425d3f)
++++ b/TicketWave/Event/Festival.java	(date 1705563299707)
+@@ -5,8 +5,8 @@
+     int artistsNumber;
+ 
+     // costruttore
+-    public Festival(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] ticketsSoldNumberForType, int[] price, Genre genre, String[] artists, int artistsNumber) {
+-        super(idEvent, name, city, location, province, maxNumberOfSeats, ticketsSoldNumberForType, price, genre);
++    public Festival(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre, String[] artists, int artistsNumber) {
++        super(idEvent, name, city, location, province, maxNumberOfSeats, price, genre);
+         this.artists = artists;
+         this.artistsNumber = artistsNumber;
+     }
+Index: provagit/.classpath
+===================================================================
+diff --git a/provagit/.classpath b/provagit/.classpath
+deleted file mode 100644
+--- a/provagit/.classpath	(revision 490919f3b5f9cffbd52f38a5d8544c6d0f425d3f)
++++ /dev/null	(revision 490919f3b5f9cffbd52f38a5d8544c6d0f425d3f)
+@@ -1,10 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<classpath>
+-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8">
+-		<attributes>
+-			<attribute name="module" value="true"/>
+-		</attributes>
+-	</classpathentry>
+-	<classpathentry kind="src" path="src"/>
+-	<classpathentry kind="output" path="bin"/>
+-</classpath>
+Index: provagit/.gitignore
+===================================================================
+diff --git a/provagit/.gitignore b/provagit/.gitignore
+deleted file mode 100644
+--- a/provagit/.gitignore	(revision 490919f3b5f9cffbd52f38a5d8544c6d0f425d3f)
++++ /dev/null	(revision 490919f3b5f9cffbd52f38a5d8544c6d0f425d3f)
+@@ -1,1 +0,0 @@
+-/bin/
+Index: provagit/.project
+===================================================================
+diff --git a/provagit/.project b/provagit/.project
+deleted file mode 100644
+--- a/provagit/.project	(revision 490919f3b5f9cffbd52f38a5d8544c6d0f425d3f)
++++ /dev/null	(revision 490919f3b5f9cffbd52f38a5d8544c6d0f425d3f)
+@@ -1,17 +0,0 @@
+-<?xml version="1.0" encoding="UTF-8"?>
+-<projectDescription>
+-	<name>provagit</name>
+-	<comment></comment>
+-	<projects>
+-	</projects>
+-	<buildSpec>
+-		<buildCommand>
+-			<name>org.eclipse.jdt.core.javabuilder</name>
+-			<arguments>
+-			</arguments>
+-		</buildCommand>
+-	</buildSpec>
+-	<natures>
+-		<nature>org.eclipse.jdt.core.javanature</nature>
+-	</natures>
+-</projectDescription>
+Index: provagit/src/provagit/Sbiribao.java
+===================================================================
+diff --git a/provagit/src/provagit/Sbiribao.java b/provagit/src/provagit/Sbiribao.java
+deleted file mode 100644
+--- a/provagit/src/provagit/Sbiribao.java	(revision 490919f3b5f9cffbd52f38a5d8544c6d0f425d3f)
++++ /dev/null	(revision 490919f3b5f9cffbd52f38a5d8544c6d0f425d3f)
+@@ -1,8 +0,0 @@
+-package provagit;
+-
+-public class Sbiribao {
+-	public static void main(String[] args) {
+-		System.out.println("provagit");
+-	}
+-
+-}
