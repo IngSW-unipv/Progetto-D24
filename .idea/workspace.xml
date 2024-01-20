@@ -4,15 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="eliminazione int posti su concerto e metod">
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Progetto-D24.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/Prova1.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Nuove cartelle ok">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/ingsfw23-24/TicketWave/modelDomain/prova.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/ingsfw23-24/TicketWave/modelDomain/prova2.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/event/Concert.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/event/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/event/Event.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/event/EventType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/event/EventType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/event/Festival.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/event/Festival.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/event/Genre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/event/Genre.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/event/Other.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/event/Other.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/event/Province.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/event/Province.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/event/Theater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/event/Theater.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/ticket/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/ticket/Ticket.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/ticket/TicketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/ticket/TicketHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/ticket/TicketType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/ticket/TicketType.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/Prova1.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/payment/cio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/payment/cio.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,7 +70,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "1.8",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/david/Documents/IntelliJ_Workspace/Progetto-D24",
+    "last_opened_file_path": "C:/Users/david/Documents/IntelliJ_Workspace/Progetto-D24/src/it/unipv/insfw23/TicketWave/modelDomain/ticket",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -76,6 +83,12 @@
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\david\Documents\IntelliJ_Workspace\Progetto-D24\src\it\unipv\insfw23\TicketWave\modelDomain\ticket" />
+      <recent name="C:\Users\david\Documents\IntelliJ_Workspace\Progetto-D24\src\it\unipv\insfw23\TicketWave\modelDomain" />
+    </key>
+  </component>
   <component name="RunManager">
     <configuration default="true" type="JetRunConfigurationType">
       <method v="2">
@@ -104,7 +117,7 @@
       <workItem from="1705680719065" duration="2216000" />
       <workItem from="1705742357706" duration="372000" />
       <workItem from="1705742740425" duration="111000" />
-      <workItem from="1705742860890" duration="618000" />
+      <workItem from="1705742860890" duration="1854000" />
     </task>
     <task id="LOCAL-00001" summary="Prova int posti su concerto">
       <option name="closed" value="true" />
@@ -130,7 +143,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705679672497</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Nuove cartelle ok">
+      <option name="closed" value="true" />
+      <created>1705743510565</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1705743510565</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -139,6 +160,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Prova int posti su concerto" />
     <MESSAGE value="eliminazione int posti su concerto e metod" />
-    <option name="LAST_COMMIT_MESSAGE" value="eliminazione int posti su concerto e metod" />
+    <MESSAGE value="Nuove cartelle ok" />
+    <option name="LAST_COMMIT_MESSAGE" value="Nuove cartelle ok" />
   </component>
 </project>
