@@ -1,8 +1,8 @@
-package TicketWave.src.it.unipv.ingsfw23.modelDomain.event;
+package it.unipv.insfw23.TicketWave.modelDomain.event;
 
 import java.lang.String;
 
-import TicketWave.src.it.unipv.ingsfw23.modelDomain.ticket.TicketType;
+import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 public abstract class Event implements EventType {
     private int idEvent;
     private String name, city, location;

@@ -1,4 +1,4 @@
-package TicketWave.src.it.unipv.ingsfw23.modelDomain.event;
+package it.unipv.insfw23.TicketWave.modelDomain.event;
 
 public enum Province {
 
