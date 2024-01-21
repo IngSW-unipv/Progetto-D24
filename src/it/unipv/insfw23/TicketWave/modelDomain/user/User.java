@@ -1,68 +1,72 @@
 package it.unipv.insfw23.TicketWave.modelDomain.user;
 
-public abstract class User {
-    private String name;
-    private String surname;
-    private String dateOfBirth;
-    private String email;
-    private String password;
-    private int provinceOfResidence;
-    public User(String name, String surname, String dateOfBirth, String email, String password, int provinceOfResidence) {
+import it.unipv.insfw23.TicketWave.modelDomain.*;
 
-        this.name=name;
-        this.surname= surname;
-        this.dateOfBirth= dateOfBirth;
-        this.email=email;
-        this.password= password;
-        this.provinceOfResidence= provinceOfResidence;
-    }
+public abstract class User implements IEventCreator {
 
-    public String getName() {
-        return name;
-    }
+	private String name;
+	private String surname;
+	private String dateOfBirth;
+	private String email;
+	private String password;
+	private int provinceOfResidence;
+	
+	public User(String name, String surname, String dateOfBirth, String email, String password, int provinceOfResidence) {
+		
+		this.name=name;
+		this.surname= surname;
+		this.dateOfBirth= dateOfBirth;
+		this.email=email;
+		this.password= password;
+		this.provinceOfResidence= provinceOfResidence;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getSurname() {
-        return surname;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setSurname(String surname) {
-        this.surname = surname;
-    }
+	public String getSurname() {
+		return surname;
+	}
 
-    public String getDateOfBirth() {
-        return dateOfBirth;
-    }
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
 
-    public void setDateOfBirth(String dateOfBirth) {
-        this.dateOfBirth = dateOfBirth;
-    }
+	public String getDateOfBirth() {
+		return dateOfBirth;
+	}
 
-    public String getEmail() {
-        return email;
-    }
+	public void setDateOfBirth(String dateOfBirth) {
+		this.dateOfBirth = dateOfBirth;
+	}
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+	public String getEmail() {
+		return email;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public void setEmail(String email) {
+		this.email = email;
+	}
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public int getProvinceOfResidence() {
-        return provinceOfResidence;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public void setProvinceOfResidence(int provinceOfResidence) {
-        this.provinceOfResidence = provinceOfResidence;
-    }
+	public int getProvinceOfResidence() { return provinceOfResidence;
+	}
 
+	public void setProvinceOfResidence(int provinceOfResidence) {
+		this.provinceOfResidence = provinceOfResidence;
+	}
+
+	
 }
