@@ -4,22 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Nuove cartelle ok">
-      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="classe Customer + user">
+      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/user/Customer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/user/User.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/event/Concert.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/event/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/event/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/event/EventType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/event/EventType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/event/Festival.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/event/Festival.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/event/Genre.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/event/Genre.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/event/Other.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/event/Other.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/event/Province.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/event/Province.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/event/Theater.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/event/Theater.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/ticket/Ticket.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/ticket/Ticket.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/ticket/TicketHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/ticket/TicketHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TicketWave/src/it/unipv/ingsfw23/modelDomain/ticket/TicketType.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/ticket/TicketType.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/Prova1.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/payment/cio.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/payment/cio.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,6 +38,9 @@
       </UrlAndAccount>
     </option>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/User/Customer.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -61,28 +52,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "1.8",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/david/Documents/IntelliJ_Workspace/Progetto-D24/src/it/unipv/insfw23/TicketWave/modelDomain/ticket",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "vcs.Git",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/david/Documents/IntelliJ_Workspace/Progetto-D24/src/it/unipv/insfw23/TicketWave/modelDomain/ticket&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;vcs.Git&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\david\Documents\IntelliJ_Workspace\Progetto-D24\src\it\unipv\insfw23\TicketWave\modelDomain\ticket" />
@@ -102,6 +93,13 @@
       </method>
     </configuration>
   </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-1.8.0_402-corretto-1.8.0_402-f644763e9732-af3fa2b8" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -118,6 +116,10 @@
       <workItem from="1705742357706" duration="372000" />
       <workItem from="1705742740425" duration="111000" />
       <workItem from="1705742860890" duration="1854000" />
+      <workItem from="1705783866099" duration="55000" />
+      <workItem from="1705783992916" duration="2579000" />
+      <workItem from="1705834101301" duration="6871000" />
+      <workItem from="1705850670816" duration="2198000" />
     </task>
     <task id="LOCAL-00001" summary="Prova int posti su concerto">
       <option name="closed" value="true" />
@@ -157,10 +159,22 @@
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Prova int posti su concerto" />
     <MESSAGE value="eliminazione int posti su concerto e metod" />
     <MESSAGE value="Nuove cartelle ok" />
-    <option name="LAST_COMMIT_MESSAGE" value="Nuove cartelle ok" />
+    <MESSAGE value="classe Customer + user" />
+    <option name="LAST_COMMIT_MESSAGE" value="classe Customer + user" />
   </component>
 </project>
