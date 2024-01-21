@@ -11,15 +11,15 @@ public class Manager extends User {
     private   int subscription;
     private List <Event> event;
 
-    public Manager( String name, String surname,String dateOfBirth,String email,String password,int provinceOfResidence, String iban,List <Event> event , int maxNumberofEvents, int subscription){
+    public Manager( String name, String surname,String dateOfBirth,String email,String password,int provinceOfResidence, String iban,List <Event> event , int maxNumberofEvents){
         super (name,surname,dateOfBirth,email,password,provinceOfResidence);
         this.iban=iban;
         this.event=event;
         this.maxNumberofEvents=maxNumberofEvents;
-        this.subscription=subscription;
+        subscription=0;
         //imposto subscription=0 di default,in modo tale che non appena viene creato non presenta nessun abbonamento
         // poi gli viene assegnanto dai metodi di SubscriptionHandler
-        subscription=0;
+
 
     }
 
@@ -64,5 +64,31 @@ public class Manager extends User {
     public List <Event> getEvents() {
         return event;
     }
+
+    public void notifyM(){
+
+        if (subscription==1) {
+
+            baseNotify();
+        }
+        else {
+            if (subscription==2){
+                premiumNotify();
+            }
+
+
+
+        }
+    }
+
+    private void baseNotify(Event e){
+        Event ecomp;
+        if (ecomp.getProvince()=e.getCity()){
+
+        }
+
+
+    }
+
 
 }

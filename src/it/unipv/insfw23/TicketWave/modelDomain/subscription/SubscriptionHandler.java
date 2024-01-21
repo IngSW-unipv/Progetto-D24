@@ -1,5 +1,5 @@
-package it.unipv.ingsfw.modelDomain;
-
+package it.unipv.ingsfw23.modelDomain;
+import it.unipv.ingsfw23.modelDomain.user.*;
 public class SubscriptionHandler {
 
 		//costruttore di default
