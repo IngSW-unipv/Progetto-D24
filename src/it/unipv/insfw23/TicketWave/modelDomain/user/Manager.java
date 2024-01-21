@@ -5,7 +5,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import java.util.List;
 import java.lang.String;
 
-public class Manager extends User {
+public class Manager extends User implements IEventCreator {
     private String iban;
     private  int maxNumberofEvents;
     private   int subscription;
