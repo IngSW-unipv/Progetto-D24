@@ -8,7 +8,7 @@ public class SubscriptionHandler {
 	 
 		
 		// non dovrebbe servire il change sub percheè per cambiarlo posso comprarne un altro?
-		
+		//si mettiamo solo un metodo, mi sembra più logico
 	}
 	
 	public void buySub(Manager manager, int subscription, IPaymentAdapter payAdapter) {
