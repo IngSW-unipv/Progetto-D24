@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Nuove cartelle ok" />
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,7 +94,7 @@
       <workItem from="1705742740425" duration="111000" />
       <workItem from="1705742860890" duration="1854000" />
       <workItem from="1705834801260" duration="421000" />
-      <workItem from="1705835323849" duration="5500000" />
+      <workItem from="1705835323849" duration="5510000" />
     </task>
     <task id="LOCAL-00001" summary="Prova int posti su concerto">
       <option name="closed" value="true" />
@@ -136,7 +136,15 @@
       <option name="project" value="LOCAL" />
       <updated>1705846995557</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere">
+      <option name="closed" value="true" />
+      <created>1705847049481</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1705847049481</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -146,6 +154,7 @@
     <MESSAGE value="Prova int posti su concerto" />
     <MESSAGE value="eliminazione int posti su concerto e metod" />
     <MESSAGE value="Nuove cartelle ok" />
-    <option name="LAST_COMMIT_MESSAGE" value="Nuove cartelle ok" />
+    <MESSAGE value="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere" />
+    <option name="LAST_COMMIT_MESSAGE" value="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere" />
   </component>
 </project>
