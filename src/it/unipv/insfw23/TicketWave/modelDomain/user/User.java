@@ -2,7 +2,7 @@ package it.unipv.insfw23.TicketWave.modelDomain.user;
 
 import it.unipv.insfw23.TicketWave.modelDomain.*;
 
-public abstract class User implements IEventCreator {
+public abstract class User{
 
 	private String name;
 	private String surname;
