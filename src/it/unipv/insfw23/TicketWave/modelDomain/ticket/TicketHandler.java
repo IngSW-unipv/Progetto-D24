@@ -27,4 +27,6 @@ public class TicketHandler {
 			String bar = (event.getIdEvent()+"-"+type+"-"+idNumOfTicket);
 			return bar;
 		}
+		
+		//metodo deleteticket
 }
