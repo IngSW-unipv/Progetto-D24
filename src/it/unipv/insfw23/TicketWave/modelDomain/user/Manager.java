@@ -93,6 +93,7 @@ public class Manager extends User {
             if (subscription==2){
                 premiumNotify();
             }
+            //come dobbiamo gestire se l'abbonamento è scaduto? subscription=3, mandiamo exception?
         }
     }
 
