@@ -59,25 +59,25 @@ public class Manager extends User {
 
     //seguono dei metodi di crea Festival, Concerto ecc..
     //li ho lasciati referenziati come Event..good?
-    public void createFestival(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre, String[] artists, int artistsNumber) {
-        Event festival= new Festival(idEvent,name,city,location,province,maxNumberOfSeats,price,genre,artists,artistsNumber);
+    public void createFestival(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre, ArrayList<String>[] artists, int artistsNumber, Manager creator) {
+        Event festival= new Festival(idEvent,name,city,location,province,maxNumberOfSeats,price,genre,artists,artistsNumber,creator);
         event.add(festival);
 
     }
 
-    public void createConcert(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre, String artist) {
-        Event concert= new Concert(idEvent,name,city,location,province,maxNumberOfSeats,price,genre,artist);
+    public void createConcert(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre, String artist, Manager creator) {
+        Event concert= new Concert(idEvent,name,city,location,province,maxNumberOfSeats,price,genre,artist,creator);
         event.add(concert);
 
     }
 
-    public void createTheater(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre, String theatreCompany, String authorName) {
-        Event theater = new Theater(idEvent, name, city, location, province, maxNumberOfSeats, price, genre, theatreCompany, authorName);
+    public void createTheater(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre, String theatreCompany, String authorName, Manager creator) {
+        Event theater = new Theater(idEvent, name, city, location, province, maxNumberOfSeats, price, genre, theatreCompany, authorName,creator);
         event.add(theater);
     }
 
-    public void createOther(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre, String description){
-        Event other= new Other(idEvent, name, city, location, province, maxNumberOfSeats, price, genre, description);
+    public void createOther(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre, String description, Manager creator){
+        Event other= new Other(idEvent, name, city, location, province, maxNumberOfSeats, price, genre, description,creator);
         event.add(other);
     }
 
