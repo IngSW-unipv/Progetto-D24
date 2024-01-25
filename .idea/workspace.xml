@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="classe Customer + user">
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/subscription/SubscriptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/subscription/SubscriptionHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/user/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/user/Manager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/user/User.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,9 +38,6 @@
       </UrlAndAccount>
     </option>
   </component>
-  <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/User/Customer.java" root0="SKIP_INSPECTION" />
-  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -47,6 +45,7 @@
   &quot;associatedIndex&quot;: 1
 }</component>
   <component name="ProjectId" id="2b6JA06M650xqSgxysGdKx8KwzD" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -60,7 +59,7 @@
     &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
     &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/david/Documents/IntelliJ_Workspace/Progetto-D24/src/it/unipv/insfw23/TicketWave/modelDomain/ticket&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/claud/git/repository/TicketWave&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -78,26 +77,9 @@
       <recent name="C:\Users\david\Documents\IntelliJ_Workspace\Progetto-D24\src\it\unipv\insfw23\TicketWave\modelDomain\ticket" />
       <recent name="C:\Users\david\Documents\IntelliJ_Workspace\Progetto-D24\src\it\unipv\insfw23\TicketWave\modelDomain" />
     </key>
-  </component>
-  <component name="RunManager">
-    <configuration default="true" type="JetRunConfigurationType">
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
-      <option name="filePath" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="jdk-1.8.0_402-corretto-1.8.0_402-f644763e9732-af3fa2b8" />
-      </set>
-    </attachedChunks>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="it.unipv.insfw23.TicketWave.modelDomain.user" />
+    </key>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -115,10 +97,9 @@
       <workItem from="1705742357706" duration="372000" />
       <workItem from="1705742740425" duration="111000" />
       <workItem from="1705742860890" duration="1854000" />
-      <workItem from="1705783866099" duration="55000" />
-      <workItem from="1705783992916" duration="2579000" />
-      <workItem from="1705834101301" duration="6871000" />
-      <workItem from="1705850670816" duration="2910000" />
+      <workItem from="1705834801260" duration="421000" />
+      <workItem from="1705835323849" duration="6549000" />
+      <workItem from="1705854120925" duration="6063000" />
     </task>
     <task id="LOCAL-00001" summary="Prova int posti su concerto">
       <option name="closed" value="true" />
@@ -152,36 +133,49 @@
       <option name="project" value="LOCAL" />
       <updated>1705743510565</updated>
     </task>
-    <task id="LOCAL-00005" summary="classe Customer + user">
+    <task id="LOCAL-00005" summary="Nuove cartelle ok">
       <option name="closed" value="true" />
-      <created>1705854970216</created>
+      <created>1705846995557</created>
       <option name="number" value="00005" />
       <option name="presentableId" value="LOCAL-00005" />
       <option name="project" value="LOCAL" />
-      <updated>1705854970216</updated>
+      <updated>1705846995557</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere">
+      <option name="closed" value="true" />
+      <created>1705847049481</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1705847049481</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere">
+      <option name="closed" value="true" />
+      <created>1705847060561</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1705847060561</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere">
+      <option name="closed" value="true" />
+      <created>1705847074008</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1705847074008</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
   </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Prova int posti su concerto" />
     <MESSAGE value="eliminazione int posti su concerto e metod" />
     <MESSAGE value="Nuove cartelle ok" />
-    <MESSAGE value="classe Customer + user" />
-    <option name="LAST_COMMIT_MESSAGE" value="classe Customer + user" />
+    <MESSAGE value="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere" />
+    <option name="LAST_COMMIT_MESSAGE" value="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere" />
   </component>
 </project>
