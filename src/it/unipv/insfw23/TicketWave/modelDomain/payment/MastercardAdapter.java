@@ -1,13 +1,17 @@
-public class MastercardAdapter() implements IPaymentAdapter{
+package it.unipv.insfw23.TicketWave.modelDomain.payment;
+
+import it.unipv.insfw23.TicketWave.modelDomain.user.User;
+
+public class MastercardAdapter implements IPaymentAdapter{
 
     private MastercardPayment mastercardPayment;
 
     public MastercardAdapter(MastercardPayment mPayment){
         this.mastercardPayment = mPayment;
     }
-
-    public boolean paymentMetod(Manager manager){
-        result = mastercardPayment.msPaymentMetod(manager);
+    @Override
+    public boolean paymentMethod(User user){
+        boolean result = mastercardPayment.msPaymentMethod(user);
         return result;
     }
 }

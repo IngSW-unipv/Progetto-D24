@@ -1,9 +1,11 @@
-package it.unipv.ingsfw.modelDomain;
+package it.unipv.insfw23.TicketWave.modelDomain.payment;
+
+import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 
 public class PayPalPayment {
 
-	public boolean ppPaymentMetod(Manager manager){
-		String mail = manager.getMail();
+	public boolean ppPaymentMethod(User user){
+		String mail = user.getEmail();
 		return true;
 	}
 
