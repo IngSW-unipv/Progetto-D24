@@ -4,10 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere">
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="inserimento metodi createFestival..Concert.. e metodo notify da fare implementare">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_01_24,_20_49_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_16_01_24__20_49__Changes_.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_01_24,_12_44_[Changes]/shelved.patch" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_19_01_24__12_44__Changes_.xml" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/subscription/SubscriptionHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/subscription/SubscriptionHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/user/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/user/Manager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +101,10 @@
       <workItem from="1705742860890" duration="1854000" />
       <workItem from="1705834801260" duration="421000" />
       <workItem from="1705835323849" duration="6549000" />
-      <workItem from="1705854120925" duration="6063000" />
+      <workItem from="1705854120925" duration="9421000" />
+      <workItem from="1705963958961" duration="4064000" />
+      <workItem from="1707175185317" duration="16000" />
+      <workItem from="1707175237311" duration="431000" />
     </task>
     <task id="LOCAL-00001" summary="Prova int posti su concerto">
       <option name="closed" value="true" />
@@ -165,7 +170,31 @@
       <option name="project" value="LOCAL" />
       <updated>1705847074008</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere">
+      <option name="closed" value="true" />
+      <created>1705861957599</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1705861957599</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere">
+      <option name="closed" value="true" />
+      <created>1705967465845</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1705967465845</updated>
+    </task>
+    <task id="LOCAL-00011" summary="inserimento metodi createFestival..Concert.. e metodo notify da fare implementare">
+      <option name="closed" value="true" />
+      <created>1705967738377</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1705967738377</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -176,6 +205,7 @@
     <MESSAGE value="eliminazione int posti su concerto e metod" />
     <MESSAGE value="Nuove cartelle ok" />
     <MESSAGE value="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere" />
-    <option name="LAST_COMMIT_MESSAGE" value="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere" />
+    <MESSAGE value="inserimento metodi createFestival..Concert.. e metodo notify da fare implementare" />
+    <option name="LAST_COMMIT_MESSAGE" value="inserimento metodi createFestival..Concert.. e metodo notify da fare implementare" />
   </component>
 </project>
