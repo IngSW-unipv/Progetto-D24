@@ -6,6 +6,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class StatisticsHandlerArrayList {
 
@@ -16,15 +17,15 @@ public class StatisticsHandlerArrayList {
         int eventCounter = 0;
         ArrayList<Event> eventList = manager.getEventlist();
 
-        typeCode = eventList.get(0).getTypeCodeArray();
+        int[] typeCodeArray = eventList.get(0).getTypeCodeArray();
 
-        int typeCodeArrayLenght = Array.getLength(typeCode);
+        int typeCodeArrayLenght = Array.getLength(typeCodeArray);
         double[] results = new double[typeCodeArrayLenght];
 
-        for (int j = 0; j< Array.getLength(typeCode); j++) {
+        for (int j = 0; j< Array.getLength(typeCodeArray); j++) {
             for (Event currentEvent: eventList) {
 
-                if(currentEvent.getTypeCode() == typeCode[j]) {
+                if(currentEvent.getTypeCode() == typeCodeArray[j]) {
 
                     int maxn = currentEvent.getMaxNumberOfSeats();
                     int soldn = currentEvent.getTicketSoldNumber();
@@ -50,13 +51,15 @@ public class StatisticsHandlerArrayList {
 
 
 
-    public double[] artistStats(int typeCode, Manager manager) {
+
+    public ArrayList<Double> artistStats(int typeCode, Manager manager) {
 
         ArrayList<Event> eventList = manager.getEventlist();
         ArrayList<String> artistNames = new ArrayList<>();
         ArrayList<Double> results = new ArrayList<>();
-        artist
-        int[] artistCounter = new int[0];
+
+        ArrayList<Integer> artistCounter = new ArrayList<>();
+        //int[] artistCounter = new int[0];
         int j=0;
 
         for (Event currentEvent: eventList) {
@@ -70,12 +73,14 @@ public class StatisticsHandlerArrayList {
                     int soldn = currentEvent.getTicketSoldNumber();
 
                     double percResult = (soldn/maxn)*100;
-                    artistCounter[index]++;
-                    results.get(index) = results.get(index) + percResult;
+                    artistCounter.set(index, artistCounter.get(index) + 1);
+                    results.set(index, results.get(index) + percResult);
                 }
 
                 else {
-                    artistNames.get(j) = currentEvent.getArtist();
+                    artistNames.add(currentEvent.getArtist());
+                    int newindex = artistNames.indexOf(currentEvent.getArtist);
+
                     //come prelevo l'artista se sto scorrendo un vettore di eventi?
                     //possiamo fare un interfaccia con il metodo get artist e quindi poi
                     //usare un vettore di IArtistqualcosa
@@ -84,20 +89,28 @@ public class StatisticsHandlerArrayList {
                     int soldn = currentEvent.getTicketSoldNumber();
 
                     double percResult = (soldn/maxn)*100;
-                    artistCounter[j]++;
-                    results.get(index) = results.get(index) + percResult;
+                    artistCounter.add(newindex, 1);
+                    //artistCounter.set(newindex, artistCounter.get(newindex) + 1);
+                    results.add(newindex,results.get(index) + percResult);
+                    //results.get(index) = results.get(index) + percResult;
                 }
             }
         }
-        for (Double Value:results) {
-            for ()
-            Value = Value/artistCounter[j];
+        if (artistNames.lastIndexOf() == results.lastIndexOf()) {
+            for (int indexMod=0; indexMod<Array.getLength(results); indexMod++ ) {
+                for (Integer currentArtistCount : artistCounter) {
+
+                    results.set(indexMod, results.get(indexMod)/currentArtistCount);
+
+                }
+            }
         }
-        return results;
+        return results;   //classe wrapper per restituire due array ceh servono, ovvero artistNames creata, e results
     }
 
 
 
+    //Al suo posto uso il metodo di ArrayList ".indexOf"
     public int ricercaStringa(ArrayList<String> vettore, String parola) {
         int index = -1;
         for (String currentValue: vettore) {
