@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Commit 2">
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Modifica statistiche 1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/statistics/StatisticsHandlerArrayList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/statistics/StatisticsHandlerArrayList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,28 +49,28 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "1.8",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/claud/git/repository/TicketWave",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Modules",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "project.propVCSSupport.Mappings",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/claud/git/repository/TicketWave&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.sourceCode&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\david\Documents\IntelliJ_Workspace\Progetto-D24\src\it\unipv\insfw23\TicketWave\modelDomain\ticket" />
@@ -97,12 +98,9 @@
       <workItem from="1705742860890" duration="1854000" />
       <workItem from="1705834801260" duration="421000" />
       <workItem from="1705835323849" duration="6549000" />
-      <workItem from="1705854120925" duration="9421000" />
-      <workItem from="1705963958961" duration="4064000" />
-      <workItem from="1707175185317" duration="16000" />
-      <workItem from="1707175237311" duration="564000" />
-      <workItem from="1707175930522" duration="634000" />
-      <workItem from="1707230670632" duration="3208000" />
+      <workItem from="1705854120925" duration="6063000" />
+      <workItem from="1707070357348" duration="7154000" />
+      <workItem from="1707215110429" duration="4152000" />
     </task>
     <task id="LOCAL-00001" summary="Prova int posti su concerto">
       <option name="closed" value="true" />
@@ -168,62 +166,35 @@
       <option name="project" value="LOCAL" />
       <updated>1705847074008</updated>
     </task>
-    <task id="LOCAL-00009" summary="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere">
+    <task id="LOCAL-00009" summary="Adattamento pagamento a user, pagamento con carta di credito e mail">
       <option name="closed" value="true" />
-      <created>1705861957599</created>
+      <created>1707070130817</created>
       <option name="number" value="00009" />
       <option name="presentableId" value="LOCAL-00009" />
       <option name="project" value="LOCAL" />
-      <updated>1705861957599</updated>
+      <updated>1707070130817</updated>
     </task>
-    <task id="LOCAL-00010" summary="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere">
+    <task id="LOCAL-00010" summary="Modifica statistiche 1">
       <option name="closed" value="true" />
-      <created>1705967465845</created>
+      <created>1707085241254</created>
       <option name="number" value="00010" />
       <option name="presentableId" value="LOCAL-00010" />
       <option name="project" value="LOCAL" />
-      <updated>1705967465845</updated>
+      <updated>1707085241254</updated>
     </task>
-    <task id="LOCAL-00011" summary="inserimento metodi createFestival..Concert.. e metodo notify da fare implementare">
-      <option name="closed" value="true" />
-      <created>1705967738377</created>
-      <option name="number" value="00011" />
-      <option name="presentableId" value="LOCAL-00011" />
-      <option name="project" value="LOCAL" />
-      <updated>1705967738377</updated>
-    </task>
-    <task id="LOCAL-00012" summary="Commit 2">
-      <option name="closed" value="true" />
-      <created>1707175693270</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1707175693270</updated>
-    </task>
-    <option name="localTasksCounter" value="13" />
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Prova int posti su concerto" />
     <MESSAGE value="eliminazione int posti su concerto e metod" />
     <MESSAGE value="Nuove cartelle ok" />
     <MESSAGE value="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere" />
-    <MESSAGE value="inserimento metodi createFestival..Concert.. e metodo notify da fare implementare" />
-    <MESSAGE value="Commit 2" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit 2" />
+    <MESSAGE value="Adattamento pagamento a user, pagamento con carta di credito e mail" />
+    <MESSAGE value="Modifica statistiche 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifica statistiche 1" />
   </component>
 </project>
