@@ -10,7 +10,7 @@ import java.util.Iterator;
 
 public class StatisticsHandlerArrayList {
 
-    public double[] typeStats(Manager manager) {
+    public WrapType typeStats(Manager manager) {
         int[] typeCode;
         String[] typeName;
 
@@ -38,9 +38,12 @@ public class StatisticsHandlerArrayList {
             results[j] = results[j]/eventCounter;
             eventCounter = 0;
         }
-        return results;
+        WrapType returnClass = new WrapType(results, typeCodeArray);
+        return returnClass;
     }
 
+
+    // la UI non ne ha bisogno se utilizzo nel metodo la classe Wrapper
     public String[] getTypeNameArray(Manager manager) {
         ArrayList<Event> eventList = manager.getEventlist();
         return eventList.get(0).getTypeNameArray();
@@ -231,4 +234,24 @@ public class StatisticsHandlerArrayList {
         return events[0].getProvinceNameArray();
     }
 
+}
+
+
+
+class WrapType{
+    private String[] typeNameArray;
+    private Double[] typeResults;
+
+    public WrapType(double[] results, int[] typeCodeArray) {
+        this.typeNameArray = typeNameArray;
+        this.typeResults = typeResults;
+    }
+
+    public String[] getNameArrayType(){
+        return typeNameArray;
+    }
+
+    public Double[] getTypeRes(){
+        return typeResults;
+    }
 }
