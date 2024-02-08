@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Modifica statistiche 1">
+      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/statistics/StatisticsHandlerArrayList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/statistics/StatisticsHandlerArrayList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progetto-D24.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto-D24.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ArtistStatsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ArtistStatsView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,6 +21,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JavaFXApplication" />
       </list>
     </option>
   </component>
@@ -51,6 +56,9 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.MainStage.executor": "Run",
+    "Application.MainStageView.executor": "Run",
+    "Application.TypeStatsView.executor": "Run",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
@@ -58,7 +66,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "1.8",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/claud/git/repository/TicketWave",
+    "last_opened_file_path": "C:/Users/david/Documents/IntelliJ_Workspace/Progetto-D24/src/it/unipv/insfw23/TicketWave/modelView",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -67,18 +75,69 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.settingsdialog.IDE.editor.colors.Language Defaults",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.excludes",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\david\Documents\IntelliJ_Workspace\Progetto-D24\src\it\unipv\insfw23\TicketWave\modelView" />
       <recent name="C:\Users\david\Documents\IntelliJ_Workspace\Progetto-D24\src\it\unipv\insfw23\TicketWave\modelDomain\ticket" />
       <recent name="C:\Users\david\Documents\IntelliJ_Workspace\Progetto-D24\src\it\unipv\insfw23\TicketWave\modelDomain" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\david\Documents\IntelliJ_Workspace\Progetto-D24\src\it\unipv\insfw23\TicketWave\modelView\Resources" />
     </key>
     <key name="CopyClassDialog.RECENTS_KEY">
       <recent name="it.unipv.insfw23.TicketWave.modelDomain.user" />
     </key>
+  </component>
+  <component name="RunManager" selected="Application.TypeStatsView">
+    <configuration name="MainStageView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.MainStageView" />
+      <module name="Progetto-D24" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\david\Documents\openjfx-21.0.2_windows-x64_bin-sdk\javafx-sdk-21.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.unipv.insfw23.TicketWave.modelView.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TypeStatsView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.TypeStatsView" />
+      <module name="Progetto-D24" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\david\Documents\openjfx-21.0.2_windows-x64_bin-sdk\javafx-sdk-21.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.unipv.insfw23.TicketWave.modelView.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.MainStageView" />
+      <item itemvalue="Application.TypeStatsView" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.TypeStatsView" />
+        <item itemvalue="Application.MainStageView" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="jdk-21.0.2-openjdk-21.0.2-f644763e9732-c0c073db" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -101,6 +160,10 @@
       <workItem from="1705854120925" duration="6063000" />
       <workItem from="1707070357348" duration="7154000" />
       <workItem from="1707215110429" duration="8701000" />
+      <workItem from="1707329887317" duration="1712000" />
+      <workItem from="1707331626064" duration="265000" />
+      <workItem from="1707381182854" duration="3765000" />
+      <workItem from="1707387597337" duration="12668000" />
     </task>
     <task id="LOCAL-00001" summary="Prova int posti su concerto">
       <option name="closed" value="true" />
@@ -190,7 +253,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707219303644</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="Modifica statistiche 1">
+      <option name="closed" value="true" />
+      <created>1707329857039</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1707329857039</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

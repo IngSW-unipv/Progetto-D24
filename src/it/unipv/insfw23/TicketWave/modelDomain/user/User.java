@@ -1,6 +1,5 @@
 package it.unipv.insfw23.TicketWave.modelDomain.user;
 
-import it.unipv.insfw23.TicketWave.modelDomain.*;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 
 import java.util.*;
