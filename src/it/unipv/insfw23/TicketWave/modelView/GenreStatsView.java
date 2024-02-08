@@ -10,7 +10,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class ArtistStatsView extends Application {
+public class GenreStatsView extends Application {
 
     public static void main(String[] args) {
         launch(args);
@@ -29,12 +29,13 @@ public class ArtistStatsView extends Application {
 
         final NumberAxis yAxis = new NumberAxis(0, 100, 10);
         final CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setLabel("Artisti");
+        xAxis.setLabel("Generi");
         yAxis.setLabel("Percentuale venduta");
+
 
         final BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
         barChart.setStyle("-fx-bar-fill: #ea8928;");
-        barChart.setTitle("Statistiche sulle gategorie eventi");
+        barChart.setTitle("Statistiche sui Generi dei Concerti");
 
         barChart.setCategoryGap(45);
 
@@ -54,15 +55,12 @@ public class ArtistStatsView extends Application {
         barChart.getData().add(series);
 
         for(Node n:barChart.lookupAll(".default-color0.chart-bar")) {
-            n.setStyle("-fx-bar-fill: #ea8928;");
+            n.setStyle("-fx-bar-fill: #b381fa;");
         }
 
         Scene scene = new Scene(barChart, 600, 400);
 
         primaryStage.setScene(scene);
 
-
     }
-
-
 }
