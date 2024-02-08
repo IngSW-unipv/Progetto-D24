@@ -4,7 +4,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.*;
 import java.util.ArrayList;
-
+import it.unipv.ingsfw.modelDomain.IPaymentAdapter;
 public class Customer extends User {
     private int [] creditCard= new int[16];
     private ArrayList<Ticket> ticketsList= new ArrayList<>();
@@ -41,8 +41,8 @@ public class Customer extends User {
     }
     // acquisto biglietto
 
-    public boolean buy (int [] creditCard) {
-        if (creditCard.length < 16) {
+   /* public boolean buy (int [] creditCard) {
+        if (creditCard.length == 16) {
             return true;
         }
             else{
@@ -52,8 +52,10 @@ public class Customer extends User {
 
 
     }
-    public void buyticket(Ticket ticket ,int [] cerditCard , int usePoints){
-            if(buy(creditCard) == true && usePoints == 1 ){
+    */
+
+    public void buyticket(Ticket ticket , int [] cerditCard , int usePoints){
+            if(UserpaymentMetod(Customer) == true && usePoints == 1 ){
 
                 double price = ticket.getPrice() - (points* 0.25);
                 points=0;
@@ -68,6 +70,7 @@ public class Customer extends User {
                 addTickets(ticket);
             }
     }
+// exception false e buy con payment
 
     public void setFavoriteGenre(Genre [] favorite) {
         if (favorite.length > 5) {
