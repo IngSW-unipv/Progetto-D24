@@ -1,21 +1,23 @@
 package it.unipv.insfw23.TicketWave.modelDomain.event;
 
 import java.lang.String;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 
-import TicketWave.src.it.unipv.ingsfw23.modelDomain.ticket.TicketType;
+import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 public abstract class Event implements EventType {
-
     private int idEvent;
     private String name, city, location;
     private Province province;
     private int maxNumberOfSeats;
+    private int [] seatsRemainedNumberForType;
     private int [] ticketsSoldNumberForType; // vettore biglietti venduti per tipo
     private int [] price; // vettore prezzi per i vari tipi di biglietto, es: Vip = 40€, Base = 15€...
     private Genre genre;
+    private Manager creator;
 
     // costruttore
 
-    public Event(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre) {
+    public Event(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre, Manager creator) {
         this.idEvent = idEvent;
         this.name = name;
         this.city = city;
@@ -24,6 +26,7 @@ public abstract class Event implements EventType {
         this.maxNumberOfSeats = maxNumberOfSeats;
         this.price = price;
         this.genre = genre;
+        this.creator = creator;
     }
 
 
@@ -65,6 +68,22 @@ public abstract class Event implements EventType {
     public Genre getGenre() {
         return genre;
     }
+    
+    public int[] getSeatsRemainedNumberForType() {
+    	return seatsRemainedNumberForType;
+    }
+    
+    public int getSeatsRemaining() {
+    	int ntot = 0;
+    	for(int x : seatsRemainedNumberForType) {
+    		ntot += seatsRemainedNumberForType[x];
+    	}
+    	return ntot;
+    }
+    
+    public Manager getCreator() {
+    	return creator;
+    }
 
     public void setIdEvent(int idEvent) {
         this.idEvent = idEvent;
@@ -101,4 +120,10 @@ public abstract class Event implements EventType {
     public void setGenre(Genre genre) {
         this.genre = genre;
     }
+    
+    public void updateSeatsRemainedAndTicketSoldForType(int type) {
+    	seatsRemainedNumberForType[type]--;
+    	ticketsSoldNumberForType[type]++;
+    }
+    
 }

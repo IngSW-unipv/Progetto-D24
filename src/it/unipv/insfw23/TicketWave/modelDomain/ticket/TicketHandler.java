@@ -1,30 +1,53 @@
 package it.unipv.insfw23.TicketWave.modelDomain.ticket;
-import TicketWave.src.it.unipv.ingsfw23.modelDomain.event.*;
+
+import it.unipv.insfw23.TicketWave.modelDomain.event.*;
+import it.unipv.insfw23.TicketWave.modelDomain.user.*;
+import it.unipv.insfw23.TicketWave.modelDomain.notifications.*;
 
 public class TicketHandler {
-	// possibile singletone
-		public TicketHandler() {
+		
+		private static TicketHandler istance;
+	
+		private TicketHandler() {
 			
+		}
+		
+		public static TicketHandler getIstance() {
+			if(istance == null) {
+				istance = new TicketHandler();
+			}
+			return istance;
 		}
 		
 		public Ticket createTicket(Event event,TicketType type) {
 			String barcode;
 			double price;
-			barcode = createbarcode(event,type);
 			price = event.getPrice(type);
+			barcode = createbarcode(event,type);			
 			Ticket t = new Ticket(barcode, price, type);
+			//se non ci sono piu' biglietti notifica il creatore dell'evento
+			if(event.getSeatsRemaining() == 0) {
+				Manager creator;
+				creator = event.getCreator();
+				NotifHand.sendNotificationSoldOut(event, creator); //NotifHand e' l'istanza del NotificationHandler
+			}
 			return t;
 		}
 		
 		private String createbarcode(Event event, TicketType type) {
-			int idNumOfTicket;
+			int idNumOfTicket = 0;
+			String bar;
 
-			if(event.getSubdivisionOfSeatsRemaining(type) != 0) {
-				event.decrSubdovisionOfSeatsRemaining(type);
-				idNumOfTicket = event.getSubdivisionOfSeatsSoldByType(type) +1;
+			if(event.getSeatsRemainedNumberForType()[type.ordinal()] != 0) {
+				event.updateSeatsRemainedAndTicketSoldForType(type.ordinal());
+				idNumOfTicket = event.getTicketsSoldNumberForType()[type.ordinal()];
+				bar = (event.getIdEvent()+"-"+type+"-"+idNumOfTicket);
 			}
-			//implementare eccezione se i posti sono finiti
-			String bar = (event.getIdEvent()+"-"+type+"-"+idNumOfTicket);
+			else
+				bar = null;//quando posti sono finiti
+			//implementare comportamento se posti finiti
 			return bar;
 		}
+		
+		//metodo deleteticket
 }

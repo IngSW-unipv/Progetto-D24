@@ -1,6 +1,9 @@
 package it.unipv.insfw23.TicketWave.modelDomain.user;
 
 import it.unipv.insfw23.TicketWave.modelDomain.*;
+import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
+
+import java.util.*;
 
 public abstract class User{
 
@@ -10,6 +13,7 @@ public abstract class User{
 	private String email;
 	private String password;
 	private int provinceOfResidence;
+	private ArrayList<Notification> notifications;
 	
 	public User(String name, String surname, String dateOfBirth, String email, String password, int provinceOfResidence) {
 		
@@ -19,6 +23,7 @@ public abstract class User{
 		this.email=email;
 		this.password= password;
 		this.provinceOfResidence= provinceOfResidence;
+		//caricamento dell'arraylist delle notifiche dal db
 	}
 
 	public String getName() {
@@ -66,6 +71,10 @@ public abstract class User{
 
 	public void setProvinceOfResidence(int provinceOfResidence) {
 		this.provinceOfResidence = provinceOfResidence;
+	}
+	
+	public void addNotification(Notification n) {
+		notifications.add(n);
 	}
 
 	

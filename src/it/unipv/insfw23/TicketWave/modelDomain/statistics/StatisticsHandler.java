@@ -1,5 +1,7 @@
 package it.unipv.ingsfw.modelDomain;
 
+import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+
 import java.lang.reflect.Array;
 import java.util.Arrays;
 
@@ -18,13 +20,15 @@ public class StatisticsHandler {
 
 	
 	public double[] typeStats(Manager manager) {
-		int typeCode[];     
+		int typeCode[];
 		String typeName[];
 		double results[];
 		int eventCounter = 0;
 		Event list[] = manager.getEvent();
 		
-		typeCode = list[0].getTypeCodeArray();							//quanto è grande questo vettore? se poi aggiungo un tipo di 
+		typeCode = list[0].getTypeCodeArray();
+
+		//quanto è grande questo vettore? se poi aggiungo un tipo di
 		// evento, devo modificare ovunque abbia usato questo vettore
 		
 		
