@@ -58,6 +58,7 @@ public class GenreStatsView extends Application {
             n.setStyle("-fx-bar-fill: #b381fa;");
         }
 
+
         Scene scene = new Scene(barChart, 600, 400);
 
         primaryStage.setScene(scene);
