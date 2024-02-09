@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Modifica statistiche 1">
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Modifica manager:aggiunta getEventList + exception per subscription=1 per eventi all'infuori del MaxNumberOfEvents">
+      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TicketPageGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/user/Manager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/user/Manager.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +16,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="JavaFXApplication" />
         <option value="Class" />
       </list>
     </option>
@@ -80,6 +81,40 @@
       <recent name="it.unipv.insfw23.TicketWave.modelDomain.user" />
     </key>
   </component>
+  <component name="RunManager" selected="Application.TicketPageGUI">
+    <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.Main" />
+      <module name="Progetto-D24" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.unipv.insfw23.TicketWave.modelView.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TicketPageGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.TicketPageGUI" />
+      <module name="Progetto-D24" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.unipv.insfw23.TicketWave.modelView.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.TicketPageGUI" />
+        <item itemvalue="Application.Main" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -101,7 +136,10 @@
       <workItem from="1705854120925" duration="6063000" />
       <workItem from="1707070357348" duration="7154000" />
       <workItem from="1707215110429" duration="4152000" />
-      <workItem from="1707298750299" duration="5914000" />
+      <workItem from="1707298750299" duration="5978000" />
+      <workItem from="1707389279579" duration="55000" />
+      <workItem from="1707390674238" duration="392000" />
+      <workItem from="1707518727105" duration="1410000" />
     </task>
     <task id="LOCAL-00001" summary="Prova int posti su concerto">
       <option name="closed" value="true" />
@@ -183,7 +221,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707085241254</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Modifica manager:aggiunta getEventList + exception per subscription=1 per eventi all'infuori del MaxNumberOfEvents">
+      <option name="closed" value="true" />
+      <created>1707305311680</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1707305311680</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -196,6 +242,7 @@
     <MESSAGE value="Inserimento cartella user con User+ Manager e interfaccia EventCreator da discutere" />
     <MESSAGE value="Adattamento pagamento a user, pagamento con carta di credito e mail" />
     <MESSAGE value="Modifica statistiche 1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Modifica statistiche 1" />
+    <MESSAGE value="Modifica manager:aggiunta getEventList + exception per subscription=1 per eventi all'infuori del MaxNumberOfEvents" />
+    <option name="LAST_COMMIT_MESSAGE" value="Modifica manager:aggiunta getEventList + exception per subscription=1 per eventi all'infuori del MaxNumberOfEvents" />
   </component>
 </project>
