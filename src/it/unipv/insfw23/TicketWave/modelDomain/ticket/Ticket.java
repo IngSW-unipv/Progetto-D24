@@ -24,4 +24,13 @@ public class Ticket {
 	public TicketType getType() {
 		return type;
 	}
+
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return barcode;
+	}
+	
+	
+	
 }
