@@ -16,6 +16,7 @@ public class Customer extends User implements IPaymentAdapter {
     public Customer(String name, String surname, String dateOfBirth, String email, String password, int provinceOfResidence,int [] creditCard,Genre [] favoriteGenre ) {
         super(name,surname, dateOfBirth, email,password, provinceOfResidence);
         this.creditCard= creditCard;
+
         this.favoriteGenre= favoriteGenre;
     }
 
