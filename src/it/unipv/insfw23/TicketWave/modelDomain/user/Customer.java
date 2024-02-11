@@ -52,7 +52,7 @@ public class Customer extends User {
 
 
     }
-    public void buyticket(Ticket ticket ,int [] cerditCard , int usePoints){
+    public void buyticket(Ticket ticket ,int [] creditCard , int usePoints){
             if(buy(creditCard) == true && usePoints == 1 ){
 
                 double price = ticket.getPrice() - (points* 0.25);

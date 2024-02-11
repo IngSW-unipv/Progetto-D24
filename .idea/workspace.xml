@@ -5,9 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Modifica manager:aggiunta getEventList + exception per subscription=1 per eventi all'infuori del MaxNumberOfEvents">
-      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TicketPageGUI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Main.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/user/Customer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/user/Customer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/user/User.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/user/User.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TicketPageGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TicketPageView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,7 +94,7 @@
       <recent name="it.unipv.insfw23.TicketWave.modelDomain.user" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.TicketPageGUI">
+  <component name="RunManager" selected="Application.GenreStatsView">
     <configuration name="ArtistStatsView" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.ArtistStatsView" />
       <module name="Progetto-D24" />
@@ -123,8 +124,8 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TicketPageGUI" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.TicketPageGUI" />
+    <configuration name="TicketPageView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.TicketPageView" />
       <module name="Progetto-D24" />
       <extension name="coverage">
         <pattern>
@@ -154,11 +155,11 @@
       <item itemvalue="Application.GenreStatsView" />
       <item itemvalue="Application.ArtistStatsView" />
       <item itemvalue="Application.TypeStatsView" />
-      <item itemvalue="Application.TicketPageGUI" />
+      <item itemvalue="Application.TicketPageView" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TicketPageGUI" />
+        <item itemvalue="Application.TicketPageView" />
         <item itemvalue="Application.TicketPageGUI" />
         <item itemvalue="Application.TicketPageGUI (1)" />
       </list>
@@ -196,7 +197,7 @@
       <workItem from="1707521692206" duration="1863000" />
       <workItem from="1707561090053" duration="200000" />
       <workItem from="1707561319202" duration="3473000" />
-      <workItem from="1707574576069" duration="1558000" />
+      <workItem from="1707574576069" duration="12281000" />
     </task>
     <task id="LOCAL-00001" summary="Prova int posti su concerto">
       <option name="closed" value="true" />
@@ -294,7 +295,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707573580628</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Modifica manager:aggiunta getEventList + exception per subscription=1 per eventi all'infuori del MaxNumberOfEvents">
+      <option name="closed" value="true" />
+      <created>1707577908951</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1707577908951</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -309,5 +318,20 @@
     <MESSAGE value="Modifica statistiche 1" />
     <MESSAGE value="Modifica manager:aggiunta getEventList + exception per subscription=1 per eventi all'infuori del MaxNumberOfEvents" />
     <option name="LAST_COMMIT_MESSAGE" value="Modifica manager:aggiunta getEventList + exception per subscription=1 per eventi all'infuori del MaxNumberOfEvents" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-method">
+          <url>file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/PaymentSelectionView.java</url>
+          <line>13</line>
+          <properties class="it.unipv.insfw23.TicketWave.modelView.PaymentSelectionView" method="start">
+            <option name="EMULATED" value="true" />
+            <option name="WATCH_EXIT" value="false" />
+          </properties>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>
