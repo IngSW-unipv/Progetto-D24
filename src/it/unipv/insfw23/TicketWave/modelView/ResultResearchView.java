@@ -66,7 +66,7 @@ public class ResultResearchView extends Application {
 
             // List view per elencare i risultati della ricerca
             ListView<String> list = new ListView<String>();
-            ObservableList<String> result = FXCollections.observableArrayList( "paolo", "dio porco", "ehi");
+            ObservableList<String> result = FXCollections.observableArrayList( "Festival1", "Concerto1", "Festival3");
             list.setItems(result);
 
             // Creo un'HBOX che contiene barra + bottone di ricerca HBox = disposizione orizzontale
