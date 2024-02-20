@@ -10,8 +10,8 @@ public class PayPalAdapter implements IPaymentAdapter{
         this.paypalPayment = ppPayment;
     }
     @Override
-    public boolean paymentMethod(User user){
-        boolean result = paypalPayment.ppPaymentMethod(user);
+    public boolean paymentMethod(double obPrice){
+        boolean result = paypalPayment.ppPaymentMethod(obPrice);
         return result;
     }
 }

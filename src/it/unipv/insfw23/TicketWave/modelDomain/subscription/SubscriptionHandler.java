@@ -13,9 +13,9 @@ public class SubscriptionHandler {
 		//si mettiamo solo un metodo, mi sembra più logico
 	}
 	
-	public void buySub(Manager manager, int subscription, IPaymentAdapter payAdapter) {
+	public void buySub(Manager manager, int subscription, IPaymentAdapter payAdapter, double subPrice) {
 
-		boolean checkPayment = payAdapter.paymentMethod(manager);
+		boolean checkPayment = payAdapter.paymentMethod(subPrice);
 
 		if (checkPayment == true) {
 			manager.setSubscription(subscription);
