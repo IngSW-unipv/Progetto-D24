@@ -5,7 +5,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
 
 import java.util.*;
 
-public abstract class User implements IPaymentAdapter {
+public abstract class User {
 
 	private String name;
 	private String surname;
