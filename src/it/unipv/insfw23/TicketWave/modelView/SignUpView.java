@@ -9,7 +9,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.awt.*;
+
 
 public class SignUpView extends Application {
 
