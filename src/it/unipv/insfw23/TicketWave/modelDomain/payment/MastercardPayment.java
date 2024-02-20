@@ -8,7 +8,7 @@ public class MastercardPayment {
 
 		int[] creditCard = getCreditCard();
 
-		if (creditCard.length < 16) {
+		if (creditCard.length == 16) {
 			return true;
 		}
 		else {

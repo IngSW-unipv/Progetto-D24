@@ -1,10 +1,12 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.*;
@@ -64,6 +66,22 @@ public class TypeStatsView extends Application {
         Scene scene = new Scene(barChart, 600, 400);
 
         primaryStage.setScene(scene);
+
+        for(XYChart.Data<Number, String> data: series.getData()) {
+            data.getNode().setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    String yAxisLabel = data.getYValue();
+                    GenreStatsView genreScene = new GenreStatsView();
+                    ArtistStatsView artistScene = new ArtistStatsView();
+
+                    genreScene.setGenre(yAxisLabel);
+                    genreScene.start(primaryStage);
+                    System.out.println(yAxisLabel);
+
+                }
+            });
+        }
 
 
     }
