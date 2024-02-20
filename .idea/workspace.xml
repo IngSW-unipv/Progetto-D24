@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Modifica manager:aggiunta getEventList + exception per subscription=1 per eventi all'infuori del MaxNumberOfEvents">
-      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/PaymentDataM2View.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Resources/Mastercard_logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Resources/Paypal_logo.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Resources/back_arrow.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Resources/next_arrow.png" afterDir="false" />
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Commit UI: pagina descrizione ticket,seleziona metodo di pagamento e inserimento dati carta">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TicketPageView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TicketPageView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -211,7 +205,7 @@
       <workItem from="1707732073484" duration="3488000" />
       <workItem from="1707778613142" duration="1257000" />
       <workItem from="1708373515541" duration="229000" />
-      <workItem from="1708422928220" duration="2457000" />
+      <workItem from="1708422928220" duration="3458000" />
     </task>
     <task id="LOCAL-00001" summary="Prova int posti su concerto">
       <option name="closed" value="true" />
@@ -309,7 +303,15 @@
       <option name="project" value="LOCAL" />
       <updated>1707603023308</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Commit UI: pagina descrizione ticket,seleziona metodo di pagamento e inserimento dati carta">
+      <option name="closed" value="true" />
+      <created>1708425495885</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1708425495885</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -323,6 +325,7 @@
     <MESSAGE value="Adattamento pagamento a user, pagamento con carta di credito e mail" />
     <MESSAGE value="Modifica statistiche 1" />
     <MESSAGE value="Commit UI statistiche javaFX" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit UI statistiche javaFX" />
+    <MESSAGE value="Commit UI: pagina descrizione ticket,seleziona metodo di pagamento e inserimento dati carta" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit UI: pagina descrizione ticket,seleziona metodo di pagamento e inserimento dati carta" />
   </component>
 </project>
