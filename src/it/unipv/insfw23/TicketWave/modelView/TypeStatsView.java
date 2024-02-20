@@ -2,37 +2,66 @@ package it.unipv.insfw23.TicketWave.modelView;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.image.*;
 
 
 
-public class TypeStatsView extends Application {
+public class TypeStatsView  {
+    public static StackPane createTypeStats() {
 
+        HBox barraSup = new HBox();
+        DropShadow ombraSup = new DropShadow();
+        ombraSup.setColor(Color.GRAY);
+        barraSup.setEffect(ombraSup);
+        barraSup.setMinHeight(60);
+        barraSup.setBackground(new Background(new BackgroundFill(Color.web("#80C1E2"), CornerRadii.EMPTY, Insets.EMPTY)));
 
+        Label titolo = new Label(" TicketWave  ");
+        titolo.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 40));
+        titolo.setTextFill(Color.BLACK);
 
-    public static void main(String[] args){
-
-        launch(args);
-    }
-
-    @Override
-    public void start(Stage primaryStage) {
-
-        primaryStage.show();
-
-        primaryStage.setTitle("TicketWave");
         Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
-        primaryStage.getIcons().add(icon);
-        //primaryStage.setScene(scene);
+        ImageView iconLogo = new ImageView(icon);
+        iconLogo.setFitHeight(60);
+        iconLogo.setPreserveRatio(true);
+        barraSup.getChildren().add(titolo);
+        barraSup.getChildren().addAll(iconLogo);
+        barraSup.setAlignment(Pos.CENTER_LEFT);
+
+        HBox barraInf = new HBox();
+        DropShadow ombraInf = new DropShadow();
+        ombraInf.setColor(Color.GRAY);
+        barraInf.setEffect(ombraInf);
+        barraInf.setMinHeight(30);
+        barraInf.setBackground(new Background(new BackgroundFill(Color.web("#80C1E2"), CornerRadii.EMPTY, Insets.EMPTY)));
+
+        StackPane contenuto = new StackPane();
+        contenuto.setStyle("-fx-background-color: rgba(210,125,27,0.99)");
+
+        BorderPane layout = new BorderPane();
+        layout.setTop(barraSup);
+        layout.setCenter(contenuto);
+        layout.setBottom(barraInf);
+        Scene scene = new Scene(layout, 1080, 600);
+
+        scene.setFill(Color.web("#FFC943"));
+
+
 
 
         final NumberAxis xAxis = new NumberAxis(0, 100, 10);
@@ -63,27 +92,15 @@ public class TypeStatsView extends Application {
             n.setStyle("-fx-bar-fill: #070779;");
         }
 
-        Scene scene = new Scene(barChart, 600, 400);
+        Pane graphPane = new Pane(barChart);
+        graphPane.setBackground((new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY))));
+        graphPane.setPadding(new Insets(20));
+        graphPane.setPrefSize(400, 300);
+        graphPane.setMaxWidth(600);
+        contenuto.getChildren().add(graphPane);
+        contenuto.setPadding(new Insets(30));
 
-        primaryStage.setScene(scene);
-
-        for(XYChart.Data<Number, String> data: series.getData()) {
-            data.getNode().setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    String yAxisLabel = data.getYValue();
-                    GenreStatsView genreScene = new GenreStatsView();
-                    ArtistStatsView artistScene = new ArtistStatsView();
-
-                    genreScene.setGenre(yAxisLabel);
-                    genreScene.start(primaryStage);
-                    System.out.println(yAxisLabel);
-
-                }
-            });
-        }
-
-
+        return contenuto;
     }
 
 

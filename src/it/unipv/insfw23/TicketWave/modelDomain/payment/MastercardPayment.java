@@ -4,22 +4,14 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 
 public class MastercardPayment {
 	
-	public boolean msPaymentMethod(User user){
+	public boolean msPaymentMethod(double obPrice){
 
-		int[] creditCard = getCreditCard();
-
-		if (creditCard.length == 16) {
+		if (obPrice > 0) {
 			return true;
 		}
 		else {
-			System.out.println("Numero carta non corretto, riprovare");
+			System.out.println("Pagamento annullato");
 			return false;
 		}
-	}
-
-	public int[] getCreditCard(){
-		// chiede alla UI la carta di credito, da inserire al momento del pagamento, da tastiera
-		int[] card = {1,1};
-		return card;
 	}
 }

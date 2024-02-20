@@ -9,8 +9,6 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-
-
 public class SignUpView extends Application {
 
     @Override

@@ -7,7 +7,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.ticket.*;
 import java.util.ArrayList;
 
 
-public class Customer extends User implements IPaymentAdapter {
+public class Customer extends User {
     private int [] creditCard= new int[16];
     private ArrayList<Ticket> ticketsList= new ArrayList<>();
     private Event event;
@@ -84,10 +84,7 @@ public class Customer extends User implements IPaymentAdapter {
         return favoriteGenre;
     }
 
-    @Override
-    public boolean paymentMethod(User user) {
-        return true;
-    }
+
 
 
 }

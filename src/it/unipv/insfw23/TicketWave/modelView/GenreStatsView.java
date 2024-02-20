@@ -29,9 +29,9 @@ public class GenreStatsView extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        primaryStage.show();
+       // primaryStage.show();
 
-        primaryStage.setTitle("TicketWave");
+        primaryStage.setTitle("TicketWave2");
         Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
         primaryStage.getIcons().add(icon);
         //primaryStage.setScene(scene);
