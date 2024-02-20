@@ -4,17 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Commit UI statistiche javaFX">
-      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Resources/back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/StatsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Modifica manager:aggiunta getEventList + exception per subscription=1 per eventi all'infuori del MaxNumberOfEvents">
+      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/PaymentDataM2View.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Resources/Mastercard_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Resources/Paypal_logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Resources/back_arrow.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Resources/next_arrow.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResearchView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResultResearchView.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/GenreStatsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/GenreStatsView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/MainStageView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/MainStageView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TypeStatsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TypeStatsView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TicketPageView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TicketPageView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,8 +21,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="JavaFXApplication" />
         <option value="Class" />
+        <option value="JavaFXApplication" />
       </list>
     </option>
   </component>
@@ -73,7 +70,7 @@
     "ignore.virus.scanning.warn.message": "true",
     "jdk.selected.JAVA_MODULE": "1.8",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/david/Documents/IntelliJ_Workspace/Progetto-D24/src/it/unipv/insfw23/TicketWave/modelView/Resources",
+    "last_opened_file_path": "C:/Users/claud/git/repository/Progetto-D24/src/it/unipv/insfw23/TicketWave/modelView",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -88,6 +85,8 @@
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\claud\git\repository\Progetto-D24\src\it\unipv\insfw23\TicketWave\modelView" />
+      <recent name="C:\Users\claud\git\repository\Progetto-D24\src\it\unipv\insfw23\TicketWave\modelView\Resources" />
       <recent name="C:\Users\david\Documents\IntelliJ_Workspace\Progetto-D24\src\it\unipv\insfw23\TicketWave\modelView\Resources" />
       <recent name="C:\Users\david\Documents\IntelliJ_Workspace\Progetto-D24\src\it\unipv\insfw23\TicketWave\modelDomain\ticket" />
       <recent name="C:\Users\david\Documents\IntelliJ_Workspace\Progetto-D24\src\it\unipv\insfw23\TicketWave\modelDomain" />
@@ -208,6 +207,11 @@
       <workItem from="1707553514454" duration="1034000" />
       <workItem from="1707592717506" duration="250000" />
       <workItem from="1707593733755" duration="181000" />
+      <workItem from="1707728845885" duration="54000" />
+      <workItem from="1707732073484" duration="3488000" />
+      <workItem from="1707778613142" duration="1257000" />
+      <workItem from="1708373515541" duration="229000" />
+      <workItem from="1708422928220" duration="2457000" />
     </task>
     <task id="LOCAL-00001" summary="Prova int posti su concerto">
       <option name="closed" value="true" />
