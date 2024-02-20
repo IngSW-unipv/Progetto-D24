@@ -60,7 +60,7 @@ public class TypeStatsView extends Application {
         barChart.getData().add(series);
 
         for(Node n:barChart.lookupAll(".default-color0.chart-bar")) {
-            n.setStyle("-fx-bar-fill: #070779;");
+            n.setStyle("-fx-bar-fill: #f5b64c;");
         }
 
         Scene scene = new Scene(barChart, 600, 400);
