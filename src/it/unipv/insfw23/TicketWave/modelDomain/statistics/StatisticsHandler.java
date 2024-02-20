@@ -1,4 +1,4 @@
-package it.unipv.ingsfw.modelDomain;
+package it.unipv.insfw23.TicketWave.modelDomain.statistics;
 
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 
