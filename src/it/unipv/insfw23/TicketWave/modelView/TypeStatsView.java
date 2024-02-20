@@ -73,9 +73,10 @@ public class TypeStatsView extends Application {
                 public void handle(MouseEvent event) {
                     String yAxisLabel = data.getYValue();
                     GenreStatsView genreScene = new GenreStatsView();
+                    ArtistStatsView artistScene = new ArtistStatsView();
+
                     genreScene.setGenre(yAxisLabel);
                     genreScene.start(primaryStage);
-
                     System.out.println(yAxisLabel);
 
                 }

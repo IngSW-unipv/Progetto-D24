@@ -34,7 +34,7 @@ public class ArtistStatsView extends Application {
 
         final BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
         barChart.setStyle("-fx-bar-fill: #ea8928;");
-        barChart.setTitle("Statistiche sulle gategorie eventi");
+        barChart.setTitle("Statistiche sugli artisti degli eventi");
 
         barChart.setCategoryGap(45);
 
