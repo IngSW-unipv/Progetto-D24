@@ -1,10 +1,11 @@
 package it.unipv.insfw23.TicketWave.modelDomain.user;
 
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
 
 import java.util.*;
 
-public abstract class User{
+public abstract class User implements IPaymentAdapter {
 
 	private String name;
 	private String surname;
