@@ -1,14 +1,21 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
 import javafx.application.Application;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
+import javafx.scene.Node;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -54,9 +61,22 @@ public class MainStageView extends Application {
         ImageView iconLogo = new ImageView(icon);
         iconLogo.setFitHeight(60);
         iconLogo.setPreserveRatio(true);
-        barraSup.getChildren().add(titolo);
-        barraSup.getChildren().addAll(iconLogo);
         barraSup.setAlignment(Pos.CENTER_LEFT);
+
+        Button statsButton = new Button();
+        statsButton.setStyle("-fx-background-color: #80C1E2");
+        ImageView statsIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/statistics.png");
+        statsIcon.setFitHeight(16);
+        statsIcon.setFitWidth(20);
+        statsButton.setGraphic(statsIcon);
+
+        Region spacer = new Region();
+        barraSup.setHgrow(spacer, Priority.ALWAYS);
+        barraSup.getChildren().addAll(titolo, iconLogo, spacer, statsButton);
+        barraSup.setAlignment(Pos.CENTER_LEFT);
+
+
+
 
         HBox barraInf = new HBox();
         DropShadow ombraInf = new DropShadow();
@@ -78,6 +98,8 @@ public class MainStageView extends Application {
         primaryStage.setScene(scene);
 
         primaryStage.show();
+
+
 
     }
 }
