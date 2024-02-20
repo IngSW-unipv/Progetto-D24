@@ -21,6 +21,7 @@ public class SubscriptionHandler {
 			manager.setSubscription(subscription);
 		}
 		else {
+			manager.setSubscription(-1);
 			System.out.println("Pagamento negato");
 		}
 	}
