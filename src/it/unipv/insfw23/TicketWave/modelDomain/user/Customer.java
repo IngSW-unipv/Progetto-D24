@@ -2,9 +2,11 @@ package it.unipv.insfw23.TicketWave.modelDomain.user;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.*;
 import java.util.ArrayList;
-import it.unipv.insfw23.TicketWave.modelDomain.payment.*;
+
+
 public class Customer extends User implements IPaymentAdapter {
     private int [] creditCard= new int[16];
     private ArrayList<Ticket> ticketsList= new ArrayList<>();
@@ -37,7 +39,7 @@ public class Customer extends User implements IPaymentAdapter {
 
         return points;
     }
-    // acquisto biglietto
+    // metodo per acquisto biglietto con controllo su paymentmethod e usepoints
 
     public void buyticket(IPaymentAdapter pay,Event event,TicketType type ,int usePoints){
         Customer customer;
@@ -61,6 +63,7 @@ public class Customer extends User implements IPaymentAdapter {
             }
     }
 
+    // setto generi preferiti
 
     public void setFavoriteGenre(Genre [] favorite) {
         if (favorite.length > 5) {
