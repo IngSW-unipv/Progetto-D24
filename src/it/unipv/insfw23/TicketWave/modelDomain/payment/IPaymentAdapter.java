@@ -4,5 +4,5 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 
 public interface IPaymentAdapter {
 
-	public boolean paymentMethod(User user);
+	public boolean paymentMethod(double obPrice);
 }

@@ -2,38 +2,40 @@ package it.unipv.insfw23.TicketWave.modelView;
 
 import javafx.application.Application;
 import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.image.*;
 
 
 
-public class TypeStatsView extends Application {
+public class TypeStatsView extends Scene {
 
-
-
-    public static void main(String[] args){
-
-        launch(args);
+    public TypeStatsView(){
+        super(new BorderPane(), 1080, 600);
+        init();
     }
+    private void init() {
 
-    @Override
-    public void start(Stage primaryStage) {
+        BorderPane layout = (BorderPane) getRoot();
 
-        primaryStage.show();
-
-        primaryStage.setTitle("TicketWave");
-        Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
-        primaryStage.getIcons().add(icon);
-        //primaryStage.setScene(scene);
-
+        layout.setTop(ManagerUpperBar.getIstance());
+        layout.setBottom(LowerBar.getInstance());
+        layout.setStyle("-fx-background-color: rgb(27,84,161)");
+        //setFill(Color.web("#FFC943"));
 
         final NumberAxis xAxis = new NumberAxis(0, 100, 10);
         final CategoryAxis yAxis = new CategoryAxis();
@@ -63,27 +65,13 @@ public class TypeStatsView extends Application {
             n.setStyle("-fx-bar-fill: #070779;");
         }
 
-        Scene scene = new Scene(barChart, 600, 400);
-
-        primaryStage.setScene(scene);
-
-        for(XYChart.Data<Number, String> data: series.getData()) {
-            data.getNode().setOnMouseClicked(new EventHandler<MouseEvent>() {
-                @Override
-                public void handle(MouseEvent event) {
-                    String yAxisLabel = data.getYValue();
-                    GenreStatsView genreScene = new GenreStatsView();
-                    ArtistStatsView artistScene = new ArtistStatsView();
-
-                    genreScene.setGenre(yAxisLabel);
-                    genreScene.start(primaryStage);
-                    System.out.println(yAxisLabel);
-
-                }
-            });
-        }
-
-
+        Pane graphPane = new Pane(barChart);
+        graphPane.setBackground((new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY))));
+        graphPane.setPadding(new Insets(20));
+        //graphPane.setPrefSize(10, 10);
+        graphPane.setMaxWidth(600);
+        layout.setCenter(graphPane);
+        layout.setPadding(new Insets(30));
     }
 
 

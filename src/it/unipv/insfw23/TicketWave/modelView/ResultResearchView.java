@@ -20,7 +20,7 @@ public class ResultResearchView extends Application {
         @Override
         public void start(Stage primaryStage) {
             // Bottone per accedere al profilo
-            ImageView imv2 = new ImageView("93-938050_png-file-transparent-white-user-icon-png-download-338969596.png.jpeg");
+            ImageView imv2 = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/93-938050_png-file-transparent-white-user-icon-png-download-338969596.png.jpeg");
             imv2.setFitHeight(25);
             imv2.setFitWidth(20);
 
@@ -37,7 +37,7 @@ public class ResultResearchView extends Application {
             searchBar.setPromptText("Enter your search...");
 
             // Immagine lente di ingrandimento
-            ImageView imv = new ImageView("png-clipart-magnifying-glass-symbol-computer-icons-arrow-magnifier-magnifying-glass-logo-sign-987132787.png");
+            ImageView imv = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/png-clipart-magnifying-glass-symbol-computer-icons-arrow-magnifier-magnifying-glass-logo-sign-987132787.png");
             imv.setFitHeight(10);
             imv.setFitWidth(20);
 

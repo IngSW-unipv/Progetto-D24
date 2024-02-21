@@ -10,8 +10,8 @@ public class MastercardAdapter implements IPaymentAdapter{
         this.mastercardPayment = mPayment;
     }
     @Override
-    public boolean paymentMethod(User user){
-        boolean result = mastercardPayment.msPaymentMethod(user);
+    public boolean paymentMethod(double obPrice){
+        boolean result = mastercardPayment.msPaymentMethod(obPrice);
         return result;
     }
 }

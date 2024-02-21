@@ -118,6 +118,11 @@ public class Manager extends User {
         return event;
     }
 
+    @Override
+    public boolean paymentMethod(User user) {
+        return true;
+    }
+
 
     // segue il metodo notify, ma si rifà al metodo di object..override o cambio nome? tipo "notifyM"?
 //tipo notifyM?
