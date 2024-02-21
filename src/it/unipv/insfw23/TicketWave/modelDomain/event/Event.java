@@ -9,21 +9,23 @@ public abstract class Event implements EventType {
     private String name, city, location;
     private Province province;
     private int maxNumberOfSeats;
+    private int typeOfSeats; // indice dell'array ticketSoldNumberForType, serve per dire quante tipologie di posti ho: base + premium = 2, base = 1, base + premium + vip = 3 tipi di posti, mi server per scorrere l'array
     private int [] seatsRemainedNumberForType;
     private int [] ticketsSoldNumberForType; // vettore biglietti venduti per tipo
     private int [] price; // vettore prezzi per i vari tipi di biglietto, es: Vip = 40€, Base = 15€...
-    private Genre genre;
+    private Genre [] genre;
     private Manager creator;
 
     // costruttore
 
-    public Event(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int[] price, Genre genre, Manager creator) {
+    public Event(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator) {
         this.idEvent = idEvent;
         this.name = name;
         this.city = city;
         this.location = location;
         this.province = province;
         this.maxNumberOfSeats = maxNumberOfSeats;
+        this.typeOfSeats = typeOfSeats;
         this.price = price;
         this.genre = genre;
         this.creator = creator;
@@ -124,6 +126,22 @@ public abstract class Event implements EventType {
     public void updateSeatsRemainedAndTicketSoldForType(int type) {
     	seatsRemainedNumberForType[type]--;
     	ticketsSoldNumberForType[type]++;
+    }
+
+    // ultimi getter richiesti
+    public int getTicketSoldNumber () { // ritorna tutti i ticket venduti
+        int i;
+        int result = 0;
+
+        for (i = 0; i < typeOfSeats; i++){
+            result = result + ticketsSoldNumberForType[i];
+        }
+        return result;
+    }
+
+    public void getGenreNameArray() { // ritorna l'array con i nomi in coincidenza con i generi
+
+
     }
     
 }

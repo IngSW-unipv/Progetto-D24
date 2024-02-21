@@ -21,4 +21,8 @@ public class Concert extends Event{
     public int getKeyCode() {
         return 1; // 1 = Concert
     }
+
+    public String getArtist() { // getArtista
+        return artist;
+    }
 }
