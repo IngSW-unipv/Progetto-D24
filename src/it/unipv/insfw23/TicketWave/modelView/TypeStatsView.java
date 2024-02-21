@@ -24,6 +24,8 @@ import javafx.scene.image.*;
 
 public class TypeStatsView extends Scene {
 
+    private BarChart barChart;
+    private XYChart.Series<Number, String> serie;
     public TypeStatsView(){
         super(new BorderPane(), 1080, 600);
         init();
@@ -43,11 +45,12 @@ public class TypeStatsView extends Scene {
         xAxis.setLabel("Percentuale venduta");
 
         final BarChart<Number, String> barChart = new BarChart<>(xAxis, yAxis);
+        this.barChart=barChart;
         barChart.setStyle("-fx-bar-fill: #0d0d44;");
         barChart.setTitle("Statistiche sulle gategorie eventi");
 
         XYChart.Series<Number, String> series = new XYChart.Series<>();
-
+        this.serie=series;
         barChart.setLegendVisible(false);
         //series.setName("Biglietti venduti");
 
@@ -74,5 +77,11 @@ public class TypeStatsView extends Scene {
         layout.setPadding(new Insets(30));
     }
 
+    public BarChart getBarChart() {
+        return barChart;
+    }
 
+    public XYChart.Series<Number, String> getSerie() {
+        return serie;
+    }
 }

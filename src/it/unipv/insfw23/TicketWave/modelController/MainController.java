@@ -27,6 +27,7 @@ public class MainController {
             @Override
             public void handle(ActionEvent actionEvent){
                 System.out.println("STATISTICHE");
+                StatisticsController stat = new StatisticsController(typeView);
                 mainStage.setScene(typeView);
             }
         };
