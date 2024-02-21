@@ -1,11 +1,14 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
+import it.unipv.insfw23.TicketWave.modelController.MainController;
+import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -13,9 +16,11 @@ import javafx.scene.text.FontWeight;
 
 public class ManagerUpperBar extends HBox {
     // variabile che memorizza l'unica istanza
+    private Button statsButton;
     private static ManagerUpperBar istance;
     // costruttore privato per singleton
     private ManagerUpperBar() {
+
         DropShadow ombraSup = new DropShadow();
         ombraSup.setColor(Color.GRAY);
         setEffect(ombraSup);
@@ -32,6 +37,15 @@ public class ManagerUpperBar extends HBox {
         setAlignment(Pos.CENTER_LEFT);
 
         Button statsButton = new Button();
+        this.statsButton = statsButton;
+        /*****************************
+        statsButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent mouseEvent) {
+                System.out.println("Cliccato statistche");
+            }
+        });
+        */
         statsButton.setStyle("-fx-background-color: #80C1E2");
         ImageView statsIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/statistics.png");
         statsIcon.setFitHeight(16);
@@ -52,4 +66,7 @@ public class ManagerUpperBar extends HBox {
         return istance;
     }
 
+    public Button getStatsButton() {
+        return statsButton;
+    }
 }

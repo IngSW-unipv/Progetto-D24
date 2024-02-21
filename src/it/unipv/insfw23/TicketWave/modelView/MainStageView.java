@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
+import it.unipv.insfw23.TicketWave.modelController.MainController;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -27,6 +28,7 @@ import javafx.stage.StageStyle;
 
 public class MainStageView extends Application {
 
+    private Stage primaryStage;
     public static void main(String[] args) {
         launch(args);
     }
@@ -34,6 +36,9 @@ public class MainStageView extends Application {
     @Override
     public void start(Stage primaryStage) {
 
+        MainController main = new MainController(primaryStage, new TypeStatsView());
+
+        this.primaryStage = primaryStage;
         primaryStage.show();
 
         primaryStage.setTitle("TicketWave");
@@ -47,21 +52,21 @@ public class MainStageView extends Application {
         primaryStage.setFullScreen(true);
 
 
-        StackPane contenuto = new StackPane();
+        BorderPane contenuto = new BorderPane();
         contenuto.setStyle("-fx-background-color: rgb(27,84,161)");
 
         BorderPane layout = new BorderPane();
         layout.setTop(ManagerUpperBar.getIstance());
+
         layout.setCenter(contenuto);
         layout.setBottom(LowerBar.getInstance());
         Scene scene = new Scene(layout, 1080, 600);
 
-        scene.setFill(Color.web("#FFC943"));
+        //scene.setFill(Color.web("#FFC943"));
         primaryStage.setScene(scene);
 
         primaryStage.show();
 
-
-
     }
+
 }

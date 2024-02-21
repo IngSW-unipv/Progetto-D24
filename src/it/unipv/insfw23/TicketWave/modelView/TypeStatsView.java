@@ -8,6 +8,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
@@ -24,24 +25,17 @@ import javafx.scene.image.*;
 public class TypeStatsView extends Scene {
 
     public TypeStatsView(){
-        super(new StackPane(), 400, 300);
+        super(new BorderPane(), 1080, 600);
         init();
     }
     private void init() {
 
-        StackPane root = (StackPane) getRoot();
-        root.setStyle("-fx-background-color: rgba(210,125,27,0.99)");
+        BorderPane layout = (BorderPane) getRoot();
 
-        BorderPane layout = new BorderPane();
         layout.setTop(ManagerUpperBar.getIstance());
-        layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
-        Scene scene = new Scene(layout, 1080, 600);
-
-        scene.setFill(Color.web("#FFC943"));
-
-
-
+        layout.setStyle("-fx-background-color: rgb(27,84,161)");
+        //setFill(Color.web("#FFC943"));
 
         final NumberAxis xAxis = new NumberAxis(0, 100, 10);
         final CategoryAxis yAxis = new CategoryAxis();
@@ -74,10 +68,10 @@ public class TypeStatsView extends Scene {
         Pane graphPane = new Pane(barChart);
         graphPane.setBackground((new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY))));
         graphPane.setPadding(new Insets(20));
-        graphPane.setPrefSize(400, 300);
+        //graphPane.setPrefSize(10, 10);
         graphPane.setMaxWidth(600);
-        root.getChildren().add(graphPane);
-        root.setPadding(new Insets(30));
+        layout.setCenter(graphPane);
+        layout.setPadding(new Insets(30));
     }
 
 
