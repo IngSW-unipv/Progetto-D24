@@ -86,7 +86,7 @@ public class MainStageView extends Application {
         barraInf.setBackground(new Background(new BackgroundFill(Color.web("#80C1E2"), CornerRadii.EMPTY, Insets.EMPTY)));
 
         StackPane contenuto = new StackPane();
-        contenuto.setStyle("-fx-background-color: rgba(210,125,27,0.99)");
+        contenuto.setStyle("-fx-background-color: rgb(27,84,161)");
 
         BorderPane layout = new BorderPane();
         layout.setTop(barraSup);
