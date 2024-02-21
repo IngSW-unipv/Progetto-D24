@@ -5,11 +5,12 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-import java.awt.*;
+
 
 public class SignUpView extends Application {
 
@@ -106,6 +107,8 @@ public class SignUpView extends Application {
         );
 
         Scene scene = new Scene(grid, 800, 600);
+        Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
+        primaryStage.getIcons().add(icon);
         primaryStage.setScene(scene);
         primaryStage.setTitle("TicketWave");
         primaryStage.show();
