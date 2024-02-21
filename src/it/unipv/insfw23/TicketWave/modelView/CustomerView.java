@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -57,6 +58,10 @@ public class CustomerView extends Application {
         // Aggiungi visualizzazione dei punti
         root.setLeft(pointsBox);
 
+        Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
+        primaryStage.getIcons().add(icon);
+        primaryStage.setWidth(1080);
+        primaryStage.setHeight(600);
         primaryStage.setScene(scene);
         primaryStage.setTitle("TicketWave");
         primaryStage.show();

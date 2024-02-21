@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
+import javafx.scene.image.Image;
 
 public class SignUpView extends Application {
 
@@ -103,7 +104,14 @@ public class SignUpView extends Application {
                 customerRadioButton, managerRadioButton, signUpButton
         );
 
+
+
         Scene scene = new Scene(grid, 800, 600);
+
+        Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
+        primaryStage.getIcons().add(icon);
+        primaryStage.setWidth(1080);
+        primaryStage.setHeight(600);
         primaryStage.setScene(scene);
         primaryStage.setTitle("TicketWave");
         primaryStage.show();

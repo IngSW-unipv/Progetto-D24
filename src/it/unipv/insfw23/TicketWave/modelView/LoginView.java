@@ -66,6 +66,7 @@ public class LoginView extends Application {
         GridPane.setConstraints(loginButton, 1, 5);
 
 
+
         Button regButton = new Button("Registrati");
         GridPane.setConstraints(regButton, 1, 6);
 
@@ -79,6 +80,25 @@ public class LoginView extends Application {
             }
         });
 
+        // aggiungo signupview al bottone registrati
+        loginButton.setOnAction(e -> {
+            CustomerView customerView = new CustomerView();
+            try {
+                customerView.start(new Stage());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        regButton.setOnAction(e -> {
+            SignUpView signUpView = new SignUpView();
+            try {
+                signUpView.start(new Stage());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
         grid.getChildren().addAll(emailnameLabel, emailField, passwordLabel, passwordField, customerRadioButton, managerRadioButton, loginButton,signupLabel,regButton);
 
         Scene scene = new Scene(grid, 500, 500);
@@ -86,7 +106,10 @@ public class LoginView extends Application {
 
         primaryStage.setTitle("TicketWave");
 
-
+        Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
+        primaryStage.getIcons().add(icon);
+        primaryStage.setWidth(1080);
+        primaryStage.setHeight(600);
         primaryStage.show();
     }
 

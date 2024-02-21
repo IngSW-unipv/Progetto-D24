@@ -4,16 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Commit Controller del Main Stage">
-      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/CustomerUpperBar.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Resources/plus.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Resources/search_glass.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Resources/user.png" afterDir="false" />
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="foto nuove">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/StatisticsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/StatisticsController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ManagerUpperBar.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ManagerUpperBar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/TypeStatsView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/TypeStatsView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ManagerUpperBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ManagerUpperBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Progetto-D24.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto-D24.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/CustomerView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/CustomerView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/LoginView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/LoginView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/SignUpView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/SignUpView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -57,35 +53,38 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Application.ArtistStatsView.executor&quot;: &quot;Run&quot;,
-    &quot;Application.GenreStatsView.executor&quot;: &quot;Run&quot;,
-    &quot;Application.MainStageView.executor&quot;: &quot;Run&quot;,
-    &quot;Application.ResearchView.executor&quot;: &quot;Run&quot;,
-    &quot;Application.TicketPageView.executor&quot;: &quot;Run&quot;,
-    &quot;Application.TypeStatsView.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/david/Documents/IntelliJ_Workspace/Progetto-D24/src/it/unipv/insfw23/TicketWave/modelView/Resources&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Global Libraries&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.excludes&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.ArtistStatsView.executor": "Run",
+    "Application.CustomerView.executor": "Run",
+    "Application.GenreStatsView.executor": "Run",
+    "Application.LoginView.executor": "Run",
+    "Application.MainStageView.executor": "Run",
+    "Application.ResearchView.executor": "Run",
+    "Application.SignUpView.executor": "Run",
+    "Application.TicketPageView.executor": "Run",
+    "Application.TypeStatsView.executor": "Run",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "master",
+    "ignore.virus.scanning.warn.message": "true",
+    "jdk.selected.JAVA_MODULE": "1.8",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/bejan/Documents/openjfx-21.0.2_windows-x64_bin-sdk/javafx-sdk-21.0.2/lib",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.2",
+    "settings.editor.selected.configurable": "reference.projectsettings.compiler.excludes",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\david\Documents\IntelliJ_Workspace\Progetto-D24\src\it\unipv\insfw23\TicketWave\modelView\Resources" />
@@ -99,7 +98,7 @@
       <recent name="it.unipv.insfw23.TicketWave.modelDomain.user" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainStageView">
+  <component name="RunManager" selected="Application.LoginView">
     <configuration name="ArtistStatsView" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.ArtistStatsView" />
       <module name="Progetto-D24" />
@@ -110,6 +109,14 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="CustomerView" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.CustomerView" />
+      <module name="Progetto-D24" />
+      <option name="PROGRAM_PARAMETERS" value="--module-path &quot;C:\Users\bejan\Documents\openjfx-21.0.2_windows-x64_bin-sdk\javafx-sdk-21.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -125,6 +132,14 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginView" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.LoginView" />
+      <module name="Progetto-D24" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\bejan\Documents\openjfx-21.0.2_windows-x64_bin-sdk\javafx-sdk-21.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -152,6 +167,14 @@
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="SignUpView" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.SignUpView" />
+      <module name="Progetto-D24" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\bejan\Documents\openjfx-21.0.2_windows-x64_bin-sdk\javafx-sdk-21.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -187,6 +210,9 @@
       <item itemvalue="Application.GenreStatsView" />
       <item itemvalue="Application.ArtistStatsView" />
       <item itemvalue="Application.TypeStatsView" />
+      <item itemvalue="Application.SignUpView" />
+      <item itemvalue="Application.LoginView" />
+      <item itemvalue="Application.CustomerView" />
       <item itemvalue="Application.TicketPageView" />
       <item itemvalue="Application.MainStageView" />
       <item itemvalue="Application.ResearchView" />
@@ -202,6 +228,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
+        <option value="jdk-1.8.0_402-corretto-1.8.0_402-f644763e9732-af3fa2b8" />
         <option value="jdk-21.0.2-openjdk-21.0.2-f644763e9732-c0c073db" />
       </set>
     </attachedChunks>
@@ -241,6 +268,7 @@
       <workItem from="1708501714184" duration="7000" />
       <workItem from="1708501723144" duration="7000" />
       <workItem from="1708501756338" duration="2621000" />
+      <workItem from="1708548403160" duration="5281000" />
     </task>
     <task id="LOCAL-00001" summary="Prova int posti su concerto">
       <option name="closed" value="true" />
