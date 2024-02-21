@@ -7,10 +7,4 @@ import javafx.scene.layout.StackPane;
 public class StatisticsController {
 
 
-    /* Scene tipi = TypeStatsView.createTypeStats();
-      //  primaryStage.setScene(tipi);
-    StackPane tipi = TypeStatsView.createTypeStats();
-        layout.getChildren().clear();
-        layout.getChildren().addAll(barraSup, tipi, barraInf);
-        */
 }

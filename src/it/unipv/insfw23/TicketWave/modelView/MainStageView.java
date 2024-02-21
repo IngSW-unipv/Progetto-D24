@@ -61,5 +61,7 @@ public class MainStageView extends Application {
 
         primaryStage.show();
 
+
+
     }
 }

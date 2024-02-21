@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Commit creazione UpperBar come singleton">
-      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/LowerBar.java" afterDir="false" />
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Commit ManagerUpperBar and LowerBar">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/MainStageView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/MainStageView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/PaymentDataM2View.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/PaymentDataM2View.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/MainStageView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/MainStageView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TypeStatsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TypeStatsView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -390,7 +387,23 @@
       <option name="project" value="LOCAL" />
       <updated>1708527099042</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Commit ManagerUpperBar and LowerBar">
+      <option name="closed" value="true" />
+      <created>1708528102872</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1708528102872</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Commit ManagerUpperBar and LowerBar">
+      <option name="closed" value="true" />
+      <created>1708528123460</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1708528123460</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -420,6 +433,7 @@
     <MESSAGE value="Commit pagamento aggiornato, pagamento con il prezzo" />
     <MESSAGE value="Commit se pagamento annullato per manager, sub = -1" />
     <MESSAGE value="Commit creazione UpperBar come singleton" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit creazione UpperBar come singleton" />
+    <MESSAGE value="Commit ManagerUpperBar and LowerBar" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit ManagerUpperBar and LowerBar" />
   </component>
 </project>
