@@ -8,6 +8,7 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
@@ -21,48 +22,20 @@ import javafx.scene.image.*;
 
 
 
-public class TypeStatsView  {
-    public static StackPane createTypeStats() {
+public class TypeStatsView extends Scene {
 
-        HBox barraSup = new HBox();
-        DropShadow ombraSup = new DropShadow();
-        ombraSup.setColor(Color.GRAY);
-        barraSup.setEffect(ombraSup);
-        barraSup.setMinHeight(60);
-        barraSup.setBackground(new Background(new BackgroundFill(Color.web("#80C1E2"), CornerRadii.EMPTY, Insets.EMPTY)));
+    public TypeStatsView(){
+        super(new BorderPane(), 1080, 600);
+        init();
+    }
+    private void init() {
 
-        Label titolo = new Label(" TicketWave  ");
-        titolo.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 40));
-        titolo.setTextFill(Color.BLACK);
+        BorderPane layout = (BorderPane) getRoot();
 
-        Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
-        ImageView iconLogo = new ImageView(icon);
-        iconLogo.setFitHeight(60);
-        iconLogo.setPreserveRatio(true);
-        barraSup.getChildren().add(titolo);
-        barraSup.getChildren().addAll(iconLogo);
-        barraSup.setAlignment(Pos.CENTER_LEFT);
-
-        HBox barraInf = new HBox();
-        DropShadow ombraInf = new DropShadow();
-        ombraInf.setColor(Color.GRAY);
-        barraInf.setEffect(ombraInf);
-        barraInf.setMinHeight(30);
-        barraInf.setBackground(new Background(new BackgroundFill(Color.web("#80C1E2"), CornerRadii.EMPTY, Insets.EMPTY)));
-
-        StackPane contenuto = new StackPane();
-        contenuto.setStyle("-fx-background-color: rgba(210,125,27,0.99)");
-
-        BorderPane layout = new BorderPane();
-        layout.setTop(barraSup);
-        layout.setCenter(contenuto);
-        layout.setBottom(barraInf);
-        Scene scene = new Scene(layout, 1080, 600);
-
-        scene.setFill(Color.web("#FFC943"));
-
-
-
+        layout.setTop(ManagerUpperBar.getIstance());
+        layout.setBottom(LowerBar.getInstance());
+        layout.setStyle("-fx-background-color: rgb(27,84,161)");
+        //setFill(Color.web("#FFC943"));
 
         final NumberAxis xAxis = new NumberAxis(0, 100, 10);
         final CategoryAxis yAxis = new CategoryAxis();
@@ -95,12 +68,10 @@ public class TypeStatsView  {
         Pane graphPane = new Pane(barChart);
         graphPane.setBackground((new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY))));
         graphPane.setPadding(new Insets(20));
-        graphPane.setPrefSize(400, 300);
+        //graphPane.setPrefSize(10, 10);
         graphPane.setMaxWidth(600);
-        contenuto.getChildren().add(graphPane);
-        contenuto.setPadding(new Insets(30));
-
-        return contenuto;
+        layout.setCenter(graphPane);
+        layout.setPadding(new Insets(30));
     }
 
 
