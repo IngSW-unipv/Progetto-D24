@@ -4,10 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Commit CustomerUpperBar and ManagerUpperBar">
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Commit Statistics controller for Genre">
+      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Resources/back2.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/MainController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/MainController$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/MainController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/MainController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/StatisticsController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/StatisticsController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/GenreStatsView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/GenreStatsView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/MainStageView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/MainStageView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/TypeStatsView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/TypeStatsView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelController/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelController/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelController/StatisticsController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelController/StatisticsController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TypeStatsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TypeStatsView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/GenreStatsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/GenreStatsView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/MainStageView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/MainStageView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -235,7 +244,7 @@
       <workItem from="1708501714184" duration="7000" />
       <workItem from="1708501723144" duration="7000" />
       <workItem from="1708501756338" duration="2621000" />
-      <workItem from="1708549889381" duration="2892000" />
+      <workItem from="1708549889381" duration="4770000" />
     </task>
     <task id="LOCAL-00001" summary="Prova int posti su concerto">
       <option name="closed" value="true" />
@@ -445,7 +454,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708549912454</updated>
     </task>
-    <option name="localTasksCounter" value="27" />
+    <task id="LOCAL-00027" summary="Commit Statistics controller for Genre">
+      <option name="closed" value="true" />
+      <created>1708553306299</created>
+      <option name="number" value="00027" />
+      <option name="presentableId" value="LOCAL-00027" />
+      <option name="project" value="LOCAL" />
+      <updated>1708553306299</updated>
+    </task>
+    <option name="localTasksCounter" value="28" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -479,6 +496,7 @@
     <MESSAGE value="Commit TypeStats Scene" />
     <MESSAGE value="Commit Controller del Main Stage" />
     <MESSAGE value="Commit CustomerUpperBar and ManagerUpperBar" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit CustomerUpperBar and ManagerUpperBar" />
+    <MESSAGE value="Commit Statistics controller for Genre" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit Statistics controller for Genre" />
   </component>
 </project>
