@@ -11,11 +11,11 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class UpperBar extends HBox {
+public class ManagerUpperBar extends HBox {
     // variabile che memorizza l'unica istanza
-    private static UpperBar istance;
+    private static ManagerUpperBar istance;
     // costruttore privato per singleton
-    private UpperBar() {
+    private ManagerUpperBar() {
         DropShadow ombraSup = new DropShadow();
         ombraSup.setColor(Color.GRAY);
         setEffect(ombraSup);
@@ -45,9 +45,9 @@ public class UpperBar extends HBox {
     }
 
     //Metodo statico per ottenere l'unica istanza
-    public static UpperBar getIstance(){
+    public static ManagerUpperBar getIstance(){
         if(istance == null){
-            istance = new UpperBar();
+            istance = new ManagerUpperBar();
         }
         return istance;
     }

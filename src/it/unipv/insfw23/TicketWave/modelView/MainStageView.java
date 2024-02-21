@@ -24,6 +24,7 @@ import javafx.stage.Stage;
 import javafx.scene.image.*;
 import javafx.stage.StageStyle;
 
+
 public class MainStageView extends Application {
 
     public static void main(String[] args) {
@@ -38,68 +39,27 @@ public class MainStageView extends Application {
         primaryStage.setTitle("TicketWave");
         Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
         primaryStage.getIcons().add(icon);
-
         primaryStage.setWidth(1080);
         primaryStage.setHeight(600);
         primaryStage.centerOnScreen();
-
         primaryStage.setResizable(true);
         primaryStage.setFullScreenExitHint("");
         primaryStage.setFullScreen(true);
 
-        HBox barraSup = new HBox();
-        DropShadow ombraSup = new DropShadow();
-        ombraSup.setColor(Color.GRAY);
-        barraSup.setEffect(ombraSup);
-        barraSup.setMinHeight(60);
-        barraSup.setBackground(new Background(new BackgroundFill(Color.web("#80C1E2"), CornerRadii.EMPTY, Insets.EMPTY)));
-
-        Label titolo = new Label(" TicketWave  ");
-        titolo.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 40));
-        titolo.setTextFill(Color.BLACK);
-
-        ImageView iconLogo = new ImageView(icon);
-        iconLogo.setFitHeight(60);
-        iconLogo.setPreserveRatio(true);
-        barraSup.setAlignment(Pos.CENTER_LEFT);
-
-        Button statsButton = new Button();
-        statsButton.setStyle("-fx-background-color: #80C1E2");
-        ImageView statsIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/statistics.png");
-        statsIcon.setFitHeight(16);
-        statsIcon.setFitWidth(20);
-        statsButton.setGraphic(statsIcon);
-
-        Region spacer = new Region();
-        barraSup.setHgrow(spacer, Priority.ALWAYS);
-        barraSup.getChildren().addAll(titolo, iconLogo, spacer, statsButton);
-        barraSup.setAlignment(Pos.CENTER_LEFT);
-
-
-
-
-        HBox barraInf = new HBox();
-        DropShadow ombraInf = new DropShadow();
-        ombraInf.setColor(Color.GRAY);
-        barraInf.setEffect(ombraInf);
-        barraInf.setMinHeight(30);
-        barraInf.setBackground(new Background(new BackgroundFill(Color.web("#80C1E2"), CornerRadii.EMPTY, Insets.EMPTY)));
 
         StackPane contenuto = new StackPane();
         contenuto.setStyle("-fx-background-color: rgb(27,84,161)");
 
         BorderPane layout = new BorderPane();
-        layout.setTop(barraSup);
+        layout.setTop(ManagerUpperBar.getIstance());
         layout.setCenter(contenuto);
-        layout.setBottom(barraInf);
+        layout.setBottom(LowerBar.getInstance());
         Scene scene = new Scene(layout, 1080, 600);
 
         scene.setFill(Color.web("#FFC943"));
         primaryStage.setScene(scene);
 
         primaryStage.show();
-
-
 
     }
 }
