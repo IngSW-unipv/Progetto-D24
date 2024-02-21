@@ -13,7 +13,7 @@ public abstract class Event implements EventType {
     private int [] seatsRemainedNumberForType;
     private int [] ticketsSoldNumberForType; // vettore biglietti venduti per tipo
     private int [] price; // vettore prezzi per i vari tipi di biglietto, es: Vip = 40€, Base = 15€...
-    private Genre [] genre;
+    private Genre genre;
     private Manager creator;
 
     // costruttore
