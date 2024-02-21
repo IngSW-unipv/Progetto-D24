@@ -35,6 +35,7 @@ public class PaymentSelectionView extends Application {
         method1Button.setToggleGroup(paymethod);
         method2Button.setToggleGroup(paymethod);
 
+
         Image paypalLogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/Paypal_logo.png");
         Image mastercardLogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/Mastercard_logo.png");
         Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/back_arrow.png");
@@ -66,6 +67,7 @@ public class PaymentSelectionView extends Application {
         HBox backButtonBox = new HBox();
         backButtonBox.getChildren().add(backButton);
         backButtonBox.setAlignment(Pos.BOTTOM_LEFT);
+
 
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
