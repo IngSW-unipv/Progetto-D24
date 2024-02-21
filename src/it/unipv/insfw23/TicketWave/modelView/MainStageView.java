@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
 import it.unipv.insfw23.TicketWave.modelController.MainController;
+import it.unipv.insfw23.TicketWave.modelController.StatisticsController;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -37,6 +38,7 @@ public class MainStageView extends Application {
     public void start(Stage primaryStage) {
 
         MainController main = new MainController(primaryStage, new TypeStatsView());
+
 
         this.primaryStage = primaryStage;
         primaryStage.show();
