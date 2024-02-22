@@ -20,9 +20,9 @@ public class ResultResearchView extends Application {
         @Override
         public void start(Stage primaryStage) {
             // Bottone per accedere al profilo
-            ImageView imv2 = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/93-938050_png-file-transparent-white-user-icon-png-download-338969596.png.jpeg");
+            ImageView imv2 = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/user.png");
             imv2.setFitHeight(25);
-            imv2.setFitWidth(20);
+            imv2.setFitWidth(24);
 
             Button profileButton = new Button("Profile", imv2);
             profileButton.setOnAction(event -> {
@@ -37,9 +37,9 @@ public class ResultResearchView extends Application {
             searchBar.setPromptText("Enter your search...");
 
             // Immagine lente di ingrandimento
-            ImageView imv = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/png-clipart-magnifying-glass-symbol-computer-icons-arrow-magnifier-magnifying-glass-logo-sign-987132787.png");
-            imv.setFitHeight(10);
-            imv.setFitWidth(20);
+            ImageView imv = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/search_glass.png");
+            imv.setFitHeight(20);
+            imv.setFitWidth(18);
 
             // Button per l'invio della ricerca
             Button searchButton = new Button("Search", imv);
@@ -67,6 +67,8 @@ public class ResultResearchView extends Application {
             // List view per elencare i risultati della ricerca
             ListView<String> list = new ListView<String>();
             ObservableList<String> result = FXCollections.observableArrayList( "Festival1", "Concerto1", "Festival3");
+            list.setPrefSize(400, 300);
+            list.setEditable(false);
             list.setItems(result);
 
             // Creo un'HBOX che contiene barra + bottone di ricerca HBox = disposizione orizzontale
@@ -88,7 +90,7 @@ public class ResultResearchView extends Application {
             hb1.setAlignment(Pos.TOP_CENTER);
 
             // Creazione scene
-            Scene scene = new Scene(vb1, 500, 400);
+            Scene scene = new Scene(vb1, 1080, 600);
 
             // Setto lo stage
             primaryStage.setTitle("Search Bar Example");

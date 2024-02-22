@@ -54,9 +54,9 @@ public class ResearchView extends Application{
         barra.getMenus().addAll(generi, province);
 
         // Bottone per accedere al profilo
-        ImageView imv2 = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/93-938050_png-file-transparent-white-user-icon-png-download-338969596.png.jpeg");
+        ImageView imv2 = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/user.png");
         imv2.setFitHeight(25);
-        imv2.setFitWidth(20);
+        imv2.setFitWidth(24);
 
         Button profileButton = new Button("Profile", imv2);
         profileButton.setOnAction(event -> {
@@ -71,9 +71,9 @@ public class ResearchView extends Application{
         searchBar.setPromptText("Enter your search...");
 
         // Immagine lente di ingrandimento
-        ImageView imv = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/png-clipart-magnifying-glass-symbol-computer-icons-arrow-magnifier-magnifying-glass-logo-sign-987132787.png");
-        imv.setFitHeight(10);
-        imv.setFitWidth(20);
+        ImageView imv = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/search_glass.png");
+        imv.setFitHeight(20);
+        imv.setFitWidth(18);
 
         // Button per l'invio della ricerca
         Button searchButton = new Button("Search", imv);
@@ -83,29 +83,12 @@ public class ResearchView extends Application{
             System.out.println("Searching for: " + searchTerm);
         });
 
-        // Combo Box
-        ObservableList<String> genre = FXCollections.observableArrayList(
-                "Rock",
-                "Punk",
-                "Metal"
-        );
-        final ComboBox cb = new ComboBox(genre);
-
-        ObservableList<String> prov = FXCollections.observableArrayList(
-                "PV",
-                "MI",
-                "PR"
-        );
-        final ComboBox cb1 = new ComboBox(prov);
-
         // Creo un'HBOX che contiene barra + bottone di ricerca HBox = disposizione orizzontale
         HBox hb1 = new HBox();
         hb1.setSpacing(10);
         hb1.getChildren().add(searchBar);
         hb1.getChildren().add(searchButton);
         hb1.getChildren().add(barra);
-        hb1.getChildren().add(cb);
-        hb1.getChildren().add(cb1);
 
         // Creo il VBox che contiene gli HBox
         VBox vb1 = new VBox();
