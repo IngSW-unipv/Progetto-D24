@@ -1,10 +1,12 @@
 package it.unipv.insfw23.TicketWave.modelController;
 
-import it.unipv.insfw23.TicketWave.modelView.PaymentDataM2View;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+
+import java.util.List;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 public class PaymentDataController {
     public static void addListeners(TextField insertMM, TextField insertAA, TextField insertcvc, TextField insertNC, Button forwardButton) {
@@ -13,7 +15,6 @@ public class PaymentDataController {
         insertcvc.textProperty().addListener(new LimitedNumberTextFieldListener(insertcvc, 4));
         insertNC.textProperty().addListener(new LimitedNumberTextFieldListener(insertNC, 16));
 
-        addFocusListener(insertMM, insertAA, insertcvc);
 
         forwardButton.setOnAction(event -> handleForwardButtonClick());
     }
@@ -46,29 +47,36 @@ public class PaymentDataController {
         }
     }
 
-    private static void addFocusListener(TextField insertMM, TextField insertAA, TextField insertcvc) {
-        insertMM.focusedProperty().addListener((observable, oldValue, newValue) -> handleFocus(insertMM, newValue));
-        insertAA.focusedProperty().addListener((observable, oldValue, newValue) -> handleFocus(insertAA, newValue));
-        insertcvc.focusedProperty().addListener((observable, oldValue, newValue) -> handleFocus(insertcvc, newValue));
+    public static void setDefaultTextFieldStyle(List<TextField> textFields) {
+        for (TextField textField : textFields) {
+            textField.setStyle("-fx-text-fill: #A9A9A9;");
+        }
     }
 
-    private static void handleFocus(TextField textField, boolean hasFocus) {
-        if (hasFocus) {
+    public static void addTextChangeListeners(TextField insertMM, TextField insertAA, TextField insertcvc) {
+        addTextChangeListener(insertMM);
+        addTextChangeListener(insertAA);
+        addTextChangeListener(insertcvc);
+    }
+
+
+    private static void addTextChangeListener(TextField textField) {
+
+        AtomicBoolean isFirstClick = new AtomicBoolean(true);
+        textField.focusedProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue && isFirstClick.get()) {
+                textField.setText("");
+                textField.setStyle("-fx-text-fill: black;");
+                isFirstClick.set(false);
+            }
+        });
+        textField.textProperty().addListener((observable, oldValue, newValue) -> {
             if (textField.getText().equals("MM") || textField.getText().equals("AA") || textField.getText().equals("1234")) {
                 textField.setText("");
             }
             textField.setStyle("-fx-text-fill: black;");
-        } else {
-            if (textField.getText().isEmpty()) {
-                if (textField.getId().equals("insertMM")) {
-                    textField.setText("MM");
-                } else if (textField.getId().equals("insertAA")) {
-                    textField.setText("AA");
-                } else if (textField.getId().equals("insertcvc")) {
-                    textField.setText("1234");
-                }
-                textField.setStyle("-fx-text-fill: #A9A9A9;");
-            }
-        }
+        });
+
+
     }
 }
