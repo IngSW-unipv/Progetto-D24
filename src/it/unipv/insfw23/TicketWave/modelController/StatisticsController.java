@@ -16,10 +16,10 @@ public class StatisticsController {
     private TypeStatsView typeView;
     private GenreStatsView genreView;
 
-    public StatisticsController(Stage mainStage, TypeStatsView typeView, GenreStatsView genreView){
+    public StatisticsController(Stage mainStage, TypeStatsView typeView){
         this.mainStage=mainStage;
         this.typeView=typeView;
-        this.genreView=genreView;
+        //this.genreView = new GenreStatsView();
         initComponents();
     }
 
@@ -29,16 +29,24 @@ public class StatisticsController {
             @Override
             public void handle(MouseEvent actionEvent){
                 System.out.println("PASSO AI GENERI E ARTISTI");
+                GenreStatsView genreView = new GenreStatsView();
                 mainStage.setScene(genreView);
-
-
             }
         };
+
         for(XYChart.Data<Number, String> data: typeView.getSerie().getData()){
             data.getNode().setOnMouseClicked(statsBarButtonHandler);
         }
 
+/*
+        EventHandler<ActionEvent> backToTypeHandler = new EventHandler<>(){
+            @Override
+            public void handle(ActionEvent actionEvent){
+                mainStage.setScene(typeView);
+            }
+        };
+        genreView.getBackButton().setOnAction(backToTypeHandler);
 
-
+*/
     }
 }

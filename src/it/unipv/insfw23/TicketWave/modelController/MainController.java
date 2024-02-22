@@ -12,16 +12,12 @@ import javafx.scene.*;
 public class MainController {
 
     private Stage mainStage;
-    private TypeStatsView typeView;
-    private GenreStatsView genreView;
 
-    private ManagerUpperBar upperBar;
+    // private ManagerUpperBar upperBar;
 
-    public MainController(Stage mainStage, TypeStatsView typeView, GenreStatsView genreView){
+    public MainController(Stage mainStage){
         this.mainStage = mainStage;
-        this.typeView = typeView;
-        this.genreView = genreView;
-        upperBar.getIstance();
+        ManagerUpperBar.getIstance();
         initComponents();
     }
 
@@ -30,11 +26,12 @@ public class MainController {
             @Override
             public void handle(ActionEvent actionEvent){
                 //System.out.println("STATISTICHE");
-                StatisticsController stat = new StatisticsController(mainStage, typeView, genreView);
+                TypeStatsView typeView = new TypeStatsView();
+                StatisticsController stat = new StatisticsController(mainStage, typeView);
                 mainStage.setScene(typeView);
             }
         };
 
-        upperBar.getIstance().getStatsButton().setOnAction(statsButtonHandler);
+        ManagerUpperBar.getIstance().getStatsButton().setOnAction(statsButtonHandler);
     }
 }

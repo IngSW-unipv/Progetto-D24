@@ -33,7 +33,6 @@ public class GenreStatsView extends Scene {
 
         BorderPane layout = (BorderPane) getRoot();
 
-        layout.setTop(ManagerUpperBar.getIstance());
         layout.setStyle("-fx-background-color: rgb(27,84,161)");
 
         final NumberAxis yAxis = new NumberAxis(0, 100, 10);
@@ -78,15 +77,25 @@ public class GenreStatsView extends Scene {
 
         BorderPane paneGraph2 = new BorderPane();
         paneGraph2.setBackground((new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY))));
-        paneGraph2.setPadding(new Insets(20));
+        //paneGraph2.setPadding(new Insets(20));
         paneGraph2.setCenter(barChart);
 
-        layout.setTop(backButton);
-        layout.setCenter(paneGraph2);
+        paneGraph2.setMaxWidth(600);
+        paneGraph2.setMaxHeight(400);
 
+        BorderPane contenuto = new BorderPane();
+
+        contenuto.setTop(backButton);
+        contenuto.setCenter(paneGraph2);
         BorderPane.setAlignment(backButton, Pos.TOP_RIGHT);
         BorderPane.setMargin(backButton, new Insets(10));
         this.backButton = backButton;
+
+        layout.setTop(ManagerUpperBar.getIstance());
+        layout.setCenter(contenuto);
+        layout.setBottom(LowerBar.getInstance());
+
+
 
 
 

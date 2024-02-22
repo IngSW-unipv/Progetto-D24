@@ -37,8 +37,7 @@ public class MainStageView extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        MainController main = new MainController(primaryStage, new TypeStatsView(), new GenreStatsView());
-
+        MainController mainController= new MainController(primaryStage);
 
         this.primaryStage = primaryStage;
         primaryStage.show();
