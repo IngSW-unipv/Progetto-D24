@@ -21,44 +21,47 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.CheckMenuItem;
 
 import java.awt.*;
 import java.util.Observable;
 
-public class ResearchView extends Application{
+public class ResearchView extends Scene{
 
-    @Override
-    public void start(Stage primaryStage) {
+    private Button searchButton;
+    // costruttore
+    public ResearchView() {
+        super(new Pane(), 1080, 600);
+        scenaResearch();
+    }
+
+    public void scenaResearch(){
         // Barra dei filtri
-        MenuBar barra = new MenuBar();
-        Menu generi = new Menu("Generi");
-        Menu province = new Menu("Provincia");
+        final MenuBar barra = new MenuBar();
+        final Menu generi = new Menu("Generi");
+        final Menu province = new Menu("Provincia");
 
         // check menu filtri musica
-        CheckMenuItem cmi = new CheckMenuItem("Rock");
-        CheckMenuItem cmi1 = new CheckMenuItem("Punk");
+        CheckMenuItem cmi = new CheckMenuItem("ROCK");
+        CheckMenuItem cmi1 = new CheckMenuItem("PUNK");
         // check menu filtro provincia
-        CheckMenuItem pr = new CheckMenuItem("PV");
-        CheckMenuItem pr1 = new CheckMenuItem("PR");
-        CheckMenuItem pr2 = new CheckMenuItem("MI");
+        CheckMenuItem pr = new CheckMenuItem("PAVIA");
+        CheckMenuItem pr1 = new CheckMenuItem("PARMA");
+        CheckMenuItem pr2 = new CheckMenuItem("MILANO");
         // aggiungo i miei check menu alla menu bar
         generi.getItems().addAll(cmi, cmi1);
         province.getItems().addAll(pr, pr1, pr2);
         barra.getMenus().addAll(generi, province);
 
         // Bottone per accedere al profilo
-        ImageView imv2 = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/93-938050_png-file-transparent-white-user-icon-png-download-338969596.png.jpeg");
+        final ImageView imv2 = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/user.png");
         imv2.setFitHeight(25);
-        imv2.setFitWidth(20);
+        imv2.setFitWidth(24);
 
-        Button profileButton = new Button("Profile", imv2);
+        final Button profileButton = new Button("Profile", imv2);
         profileButton.setOnAction(event -> {
             // mettere la logica dietro l'azione della pressione dell'immagine di profilo
         });
@@ -71,41 +74,24 @@ public class ResearchView extends Application{
         searchBar.setPromptText("Enter your search...");
 
         // Immagine lente di ingrandimento
-        ImageView imv = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/png-clipart-magnifying-glass-symbol-computer-icons-arrow-magnifier-magnifying-glass-logo-sign-987132787.png");
-        imv.setFitHeight(10);
-        imv.setFitWidth(20);
+        ImageView imv = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/search_glass.png");
+        imv.setFitHeight(20);
+        imv.setFitWidth(18);
 
         // Button per l'invio della ricerca
-        Button searchButton = new Button("Search", imv);
+        final Button searchButton = new Button("Search", imv);
         searchButton.setOnAction(event -> {
-            // Devo rimpiazzare sta roba con la logica di ricerca !!!!!!!
+            // Devo mettere una query al DB !!!!!!! in generale tutta la logica che mi serve
             String searchTerm = searchBar.getText();
             System.out.println("Searching for: " + searchTerm);
         });
 
-        // Combo Box
-        ObservableList<String> genre = FXCollections.observableArrayList(
-                "Rock",
-                "Punk",
-                "Metal"
-        );
-        final ComboBox cb = new ComboBox(genre);
-
-        ObservableList<String> prov = FXCollections.observableArrayList(
-                "PV",
-                "MI",
-                "PR"
-        );
-        final ComboBox cb1 = new ComboBox(prov);
-
-        // Creo un'HBOX che contiene barra + bottone di ricerca HBox = disposizione orizzontale
+       // Creo un'HBOX che contiene barra + bottone di ricerca HBox = disposizione orizzontale
         HBox hb1 = new HBox();
         hb1.setSpacing(10);
         hb1.getChildren().add(searchBar);
         hb1.getChildren().add(searchButton);
         hb1.getChildren().add(barra);
-        hb1.getChildren().add(cb);
-        hb1.getChildren().add(cb1);
 
         // Creo il VBox che contiene gli HBox
         VBox vb1 = new VBox();
@@ -116,18 +102,16 @@ public class ResearchView extends Application{
         hb2.setAlignment(Pos.TOP_RIGHT);
         hb1.setAlignment(Pos.TOP_CENTER);
 
-        // Creazione scene
-        Scene scene = new Scene(vb1, 500, 400);
+        hb1.setStyle("-fx-background-color: rgb(27,84,161)");
+        hb2.setStyle("-fx-background-color: rgb(27,84,161)");
+        vb1.setStyle("-fx-background-color: rgb(27,84,161)");
 
-        // Setto lo stage
-        primaryStage.setTitle("Search Bar Example");
-        primaryStage.setScene(scene);
+        this.searchButton = searchButton;
 
-        // Mostro lo stage
-        primaryStage.show();
+    /*  // Creazione scene
+        Scene research = new Scene(vb1, 1080, 600);             */
     }
+    public Button getSearchButton() { return searchButton; } // lo chiamo nel ResearchController
 
-    public static void main(String[] args) {
-        launch(args);
-    }
 }
+
