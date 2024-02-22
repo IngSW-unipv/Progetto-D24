@@ -4,7 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Commit Statistics controller for Genre, with backbutton" />
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Cercando di fare i controller e collegare le scene al main stage">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResultResearchView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResultResearchView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ManagerUpperBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ManagerUpperBar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ResearchView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ResearchView.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ResultResearchView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ResultResearchView.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,8 +19,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="JavaFXApplication" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -35,6 +41,9 @@
       </UrlAndAccount>
     </option>
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelController/ResearchController.java" root0="FORCE_HIGHLIGHTING" />
+  </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
@@ -47,36 +56,37 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Application.ArtistStatsView.executor": "Run",
-    "Application.GenreStatsView.executor": "Run",
-    "Application.MainStageView.executor": "Run",
-    "Application.Prova.executor": "Run",
-    "Application.ResearchView.executor": "Run",
-    "Application.TicketPageView.executor": "Run",
-    "Application.TypeStatsView.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "master",
-    "ignore.virus.scanning.warn.message": "true",
-    "jdk.selected.JAVA_MODULE": "1.8",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/david/Documents/IntelliJ_Workspace/Progetto-D24/src/it/unipv/insfw23/TicketWave/modelView/Resources",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Global Libraries",
-    "project.structure.proportion": "0.15",
-    "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "reference.projectsettings.compiler.excludes",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Application.ArtistStatsView.executor&quot;: &quot;Run&quot;,
+    &quot;Application.GenreStatsView.executor&quot;: &quot;Run&quot;,
+    &quot;Application.MainStageView.executor&quot;: &quot;Run&quot;,
+    &quot;Application.Prova.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ResearchView.executor&quot;: &quot;Run&quot;,
+    &quot;Application.ResultResearchView.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TicketPageView.executor&quot;: &quot;Run&quot;,
+    &quot;Application.TypeStatsView.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;jdk.selected.JAVA_MODULE&quot;: &quot;1.8&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/itsxt/IdeaProjects/Progetto-D24/src/it/unipv/insfw23/TicketWave/modelController&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Libraries&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;reference.projectsettings.compiler.excludes&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\david\Documents\IntelliJ_Workspace\Progetto-D24\src\it\unipv\insfw23\TicketWave\modelView\Resources" />
@@ -94,7 +104,7 @@
     <configuration name="ArtistStatsView" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.ArtistStatsView" />
       <module name="Progetto-D24" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\david\Documents\openjfx-21.0.2_windows-x64_bin-sdk\javafx-sdk-21.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;$USER_HOME$/javafx-sdk-21.0.2/lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.unipv.insfw23.TicketWave.modelView.*" />
@@ -109,7 +119,21 @@
       <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.GenreStatsView" />
       <module name="Progetto-D24" />
       <shortenClasspath name="NONE" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\david\Documents\openjfx-21.0.2_windows-x64_bin-sdk\javafx-sdk-21.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;$USER_HOME$/javafx-sdk-21.0.2/lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.unipv.insfw23.TicketWave.modelView.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="LoginView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.LoginView" />
+      <module name="Progetto-D24" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;$USER_HOME$/javafx-sdk-21.0.2/lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.unipv.insfw23.TicketWave.modelView.*" />
@@ -121,9 +145,11 @@
       </method>
     </configuration>
     <configuration name="MainStageView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="21" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
       <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.MainStageView" />
       <module name="Progetto-D24" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\david\Documents\openjfx-21.0.2_windows-x64_bin-sdk\javafx-sdk-21.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;$USER_HOME$/javafx-sdk-21.0.2/lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.unipv.insfw23.TicketWave.modelView.*" />
@@ -137,7 +163,7 @@
     <configuration name="Prova" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.Prova" />
       <module name="Progetto-D24" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\david\Documents\openjfx-21.0.2_windows-x64_bin-sdk\javafx-sdk-21.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;$USER_HOME$/javafx-sdk-21.0.2/lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.unipv.insfw23.TicketWave.modelView.*" />
@@ -151,6 +177,7 @@
     <configuration name="ResearchView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.ResearchView" />
       <module name="Progetto-D24" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;$USER_HOME$/javafx-sdk-21.0.2/lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.unipv.insfw23.TicketWave.modelView.*" />
@@ -161,9 +188,24 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="TicketPageView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+    <configuration name="ResultResearchView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.ResultResearchView" />
+      <module name="Progetto-D24" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;$USER_HOME$/javafx-sdk-21.0.2/lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="it.unipv.insfw23.TicketWave.modelView.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TicketPageView" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.TicketPageView" />
       <module name="Progetto-D24" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;$USER_HOME$/javafx-sdk-21.0.2/lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.unipv.insfw23.TicketWave.modelView.*" />
@@ -177,7 +219,7 @@
     <configuration name="TypeStatsView" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.TypeStatsView" />
       <module name="Progetto-D24" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\david\Documents\openjfx-21.0.2_windows-x64_bin-sdk\javafx-sdk-21.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;$USER_HOME$/javafx-sdk-21.0.2/lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.unipv.insfw23.TicketWave.modelView.*" />
@@ -192,24 +234,27 @@
       <item itemvalue="Application.GenreStatsView" />
       <item itemvalue="Application.ArtistStatsView" />
       <item itemvalue="Application.TypeStatsView" />
-      <item itemvalue="Application.Prova" />
       <item itemvalue="Application.TicketPageView" />
+      <item itemvalue="Application.ResultResearchView" />
+      <item itemvalue="Application.LoginView" />
+      <item itemvalue="Application.Prova" />
       <item itemvalue="Application.MainStageView" />
       <item itemvalue="Application.ResearchView" />
     </list>
     <recent_temporary>
       <list>
         <item itemvalue="Application.MainStageView" />
-        <item itemvalue="Application.Prova" />
-        <item itemvalue="Application.TicketPageView" />
+        <item itemvalue="Application.ResultResearchView" />
         <item itemvalue="Application.ResearchView" />
+        <item itemvalue="Application.LoginView" />
+        <item itemvalue="Application.Prova" />
       </list>
     </recent_temporary>
   </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="jdk-21.0.2-openjdk-21.0.2-f644763e9732-c0c073db" />
+        <option value="jdk-21.0.1-openjdk-21.0.1-3183f394aec4-7d648f2c" />
       </set>
     </attachedChunks>
   </component>
@@ -249,7 +294,10 @@
       <workItem from="1708501723144" duration="7000" />
       <workItem from="1708501756338" duration="2621000" />
       <workItem from="1708549889381" duration="4911000" />
-      <workItem from="1708590862043" duration="11264000" />
+      <workItem from="1708590862043" duration="11049000" />
+      <workItem from="1708610930946" duration="23000" />
+      <workItem from="1708620517645" duration="2950000" />
+      <workItem from="1708630248747" duration="3215000" />
     </task>
     <task id="LOCAL-00001" summary="Prova int posti su concerto">
       <option name="closed" value="true" />
@@ -483,31 +531,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708555080552</updated>
     </task>
-    <task id="LOCAL-00030" summary="Commit Statistics controller for Genre, with backbutton">
+    <task id="LOCAL-00030" summary="Cercando di fare i controller e collegare le scene al main stage">
       <option name="closed" value="true" />
-      <created>1708602200454</created>
+      <created>1708627406524</created>
       <option name="number" value="00030" />
       <option name="presentableId" value="LOCAL-00030" />
       <option name="project" value="LOCAL" />
-      <updated>1708602200454</updated>
+      <updated>1708627406524</updated>
     </task>
-    <task id="LOCAL-00031" summary="Commit Statistics controller for Genre, with backbutton">
-      <option name="closed" value="true" />
-      <created>1708602217302</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1708602217302</updated>
-    </task>
-    <task id="LOCAL-00032" summary="Commit Statistics controller for Genre, with backbutton">
-      <option name="closed" value="true" />
-      <created>1708602235221</created>
-      <option name="number" value="00032" />
-      <option name="presentableId" value="LOCAL-00032" />
-      <option name="project" value="LOCAL" />
-      <updated>1708602235221</updated>
-    </task>
-    <option name="localTasksCounter" value="33" />
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -542,7 +574,7 @@
     <MESSAGE value="Commit Controller del Main Stage" />
     <MESSAGE value="Commit CustomerUpperBar and ManagerUpperBar" />
     <MESSAGE value="Commit Statistics controller for Genre" />
-    <MESSAGE value="Commit Statistics controller for Genre, with backbutton" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit Statistics controller for Genre, with backbutton" />
+    <MESSAGE value="Cercando di fare i controller e collegare le scene al main stage" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cercando di fare i controller e collegare le scene al main stage" />
   </component>
 </project>
