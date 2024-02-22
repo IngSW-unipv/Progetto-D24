@@ -1,8 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
 
-import it.unipv.insfw23.TicketWave.modelController.PaymentDataController;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -13,49 +11,67 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
+import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PaymentDataM2View extends Application {
-    private Label nameLabel = new Label("Nome Intestatario Carta:");
-    private Label surnameLabel = new Label("Cognome Intestatario Carta:");
-    private Label ncLabel = new Label("N° Carta:");
-    private Label expirationLabel = new Label("Data Scadenza:");
-    private Label cvcLabel = new Label("CVC:");
-    private final TextField insertName = new TextField();
-    private final TextField insertSurname = new TextField();
-    private static TextField insertNC = new TextField();
-    private static TextField insertMM = new TextField();
-    private static TextField insertYY = new TextField();
-    private static TextField insertcvc = new TextField();
-    private List<TextField> textFields = new ArrayList<>();
+import static javafx.application.Application.launch;
 
-    public static void main(String[] args) {
-        launch(args);
+public class PaymentDataM2View extends Scene {
+
+    private static  Label nameLabel = new Label("Nome Intestatario Carta:");
+    private static  Label surnameLabel = new Label("Cognome Intestatario Carta:");
+    private static  Label ncLabel = new Label("N° Carta:");
+    private static Label expirationLabel = new Label("Data Scadenza:");
+    private static Label cvcLabel = new Label("CVC:");
+    private static  final TextField insertName = new TextField();
+    private static  final TextField insertSurname = new TextField();
+    private static final TextField insertNC = new TextField();
+    private static final  TextField insertMM = new TextField();
+    private static final  TextField insertYY = new TextField();
+    private static final  TextField insertcvc = new TextField();
+    private static  List<TextField> textFields = new ArrayList<>();
+    private static  List<Label> labels = new ArrayList<>();
+    private Scene scene;
+
+    public PaymentDataM2View(){
+        super(new BorderPane(), 1080, 600);
+        initComponents();
     }
 
-    @Override
-    public void start(Stage primaryStage) {
 
-        Image forwardarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/next_arrow.png");
+    private void initComponents() {
+
+        Image forwardarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/nextArrow.png");
         Button forwardButton = new Button();
         forwardButton.setGraphic(new ImageView(forwardarrowlogo));
+        forwardButton.setPrefWidth(forwardarrowlogo.getWidth());
+        forwardButton.setPrefHeight(forwardarrowlogo.getHeight());
+        forwardButton.setPadding(new Insets(0));
+        forwardButton.setStyle("-fx-background-color: rgb(255,255,255)");
+
+        textFields.add(insertMM);
+        textFields.add(insertYY);
+        textFields.add(insertcvc);
 
 
+        labels.add(nameLabel);
+        labels.add(surnameLabel);
+        labels.add(ncLabel);
+        labels.add(expirationLabel);
+        labels.add(cvcLabel);
 
-            textFields.add(insertMM);
-            textFields.add(insertYY);
-            textFields.add(insertcvc);
-
-        PaymentDataController.setDefaultTextFieldStyle(textFields);
+        // Impostazione del colore del testo a nero per tutti i label
+        for (Label label : labels) {
+            label.setTextFill(Color.BLACK);
+        }
 
 
         // Aggiunta di testo predefinito per alcuni text field
-            insertMM.setText("MM");
-            insertYY.setText("YY");
-            insertcvc.setText("1234");
+        insertMM.setText("MM");
+        insertYY.setText("YY");
+        insertcvc.setText("1234");
 
         GridPane dataInput = new GridPane();
         dataInput.setAlignment(Pos.TOP_LEFT);
@@ -70,17 +86,20 @@ public class PaymentDataM2View extends Application {
 
 
         BorderPane root = new BorderPane();
+        root.setStyle("-fx-background-color: rgb(255,255,255)");
         root.setPadding(new Insets(10));
         root.setCenter(dataInput);
         root.setBottom(forwardButton);
         BorderPane.setAlignment(forwardButton, Pos.BOTTOM_RIGHT);
 
-        Scene scene = new Scene(root, 1080, 600);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Inserimento Dati Carta di Credito");
-        primaryStage.show();
+        BorderPane layout= new BorderPane();
+        layout.setStyle("-fx-background-color: rgb(27,84,161)");
+        layout.setCenter(root);
+        layout.setBottom(LowerBar.getInstance());
+        layout.setTop(ManagerUpperBar.getIstance());
+        setRoot(layout);
 
-        PaymentDataController.addListeners(insertMM, insertYY, insertcvc, insertNC, forwardButton);
-        PaymentDataController.addTextChangeListeners(insertMM, insertYY, insertcvc);
+
+
     }
 }

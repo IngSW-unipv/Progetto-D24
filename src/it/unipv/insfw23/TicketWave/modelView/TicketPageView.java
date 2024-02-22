@@ -1,6 +1,10 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
 import javafx.application.Application;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import javafx.application.Application;
@@ -9,52 +13,61 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class TicketPageView extends Application {
-    public static void main(String[] args) {launch(args);}
+import java.util.ArrayList;
+import java.util.List;
+
+public class TicketPageView extends Scene {
+    private static final Label eventNameLabel = new Label("Nome Evento:");
+    private static final Label eventDescriptionLabel = new Label("Descrizione Evento:");
+    private static final Label ticketsLabel = new Label("Biglietti disponibili per tipo:");
+    private static  Button buyButton = new Button();
+
+    // campi riempiti dal controller
+    private static final Label eventNameTextField = new Label();
+    private static final Label eventDescriptionTextField = new Label();
+    private static final Label ticketBaseLabel = new Label("Base Tickets:");
+    private static final Label ticketPremiumLabel = new Label("Premium Tickets:");
+    private static final Label ticketVipLabel = new Label("Vip Tickets:");
+    private static List<Label> labels = new ArrayList<>();
+    private Scene scene;
 
 
-    @Override
-    public void start(Stage primaryStage) {    // la classe contiene unicamente label poichè è solo una pagina di visualizzazione, il cliente non può scriverci sopra
-        // Creazione dei nodi dell'interfaccia utente
-        Label titleLabel = new Label("TicketWave");
-        Label eventNameLabel = new Label("Nome Evento:");
-        Label eventDescriptionLabel = new Label("Descrizione Evento:");
-        Label ticketsLabel = new Label("Biglietti disponibili per tipo:");
-        Button buyButton = new Button("Acquista Ora");
+    public TicketPageView(){
+        super(new BorderPane(), 1080, 600);
+        initComponents();
 
-        // campi riempiti dal controller
-        Label eventNameTextField = new Label();
-        Label eventDescriptionTextField = new Label();
-        Label ticketBaseLabel = new Label("Base Tickets:");
-        Label ticketPremiumLabel = new Label("Premium Tickets:");
-        Label ticketVipLabel = new Label("Vip Tickets:");
-        /*
-        // Caricamento dell'immagine del logo
-        Image logoImage = new Image("logo.png");
-        ImageView logoImageView = new ImageView(logoImage);
-        */
+    }
+
+    private void initComponents() {    // la classe contiene unicamente label poichè è solo una pagina di visualizzazione, il cliente non può scriverci sopra
 
         // Layout dell'interfaccia utente
-        BorderPane root = new BorderPane();
-        HBox topBox = new HBox(titleLabel);
-        topBox.setPadding(new Insets(10));
-        topBox.setSpacing(10);
-        root.setTop(topBox);
+        BorderPane internalgrid = new BorderPane();
 
+        labels.add(eventNameLabel);
+        labels.add(eventDescriptionLabel);
+        labels.add(ticketsLabel);
+        labels.add(ticketBaseLabel);
+        labels.add(ticketPremiumLabel);
+        labels.add(ticketVipLabel);
+
+
+        for (Label label : labels) {
+            label.setTextFill(Color.BLACK);
+        }
 
         HBox buttonbox= new HBox(buyButton);
         buttonbox.setPadding(new Insets(10));
         buttonbox.setAlignment(Pos.BOTTOM_RIGHT);
-        buttonbox.setSpacing(10);
+        buttonbox.setSpacing(50);
 
-
-
+        Image BuyButtonlogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/buyButton.png");
+        buyButton.setGraphic(new ImageView(BuyButtonlogo));
+        buyButton.setPrefWidth(buyButton.getWidth());
+        buyButton.setPrefHeight(buyButton.getHeight());
+        buyButton.setPadding(new Insets(0));
+        buyButton.setStyle("-fx-background-color: rgb(255,255,255)");
 
         GridPane centerGrid = new GridPane();
         centerGrid.setPadding(new Insets(10));
@@ -64,7 +77,8 @@ public class TicketPageView extends Application {
         centerGrid.add(eventNameTextField, 1, 0);
         centerGrid.add(eventDescriptionLabel, 0, 1);
         centerGrid.add(eventDescriptionTextField, 1, 1);
-        root.setCenter(centerGrid);
+
+        internalgrid.setCenter(centerGrid);
 
         GridPane bottomGrid = new GridPane();
         bottomGrid.setPadding(new Insets(20));
@@ -75,25 +89,28 @@ public class TicketPageView extends Application {
         bottomGrid.add(ticketPremiumLabel, 0, 2);
         bottomGrid.add(ticketVipLabel, 0, 3);
 
-        //bottomGrid.add(buyButton, 45, 2);
-        root.setBottom(bottomGrid);
 
-        // StackPane per contenere root e ImageView del logo
-        StackPane stackPane = new StackPane();
-        stackPane.getChildren().addAll(root,buttonbox);
-        // StackPane.setAlignment(logoImageView, Pos.TOP_RIGHT); // Ancora l'immagine in alto a destra
-        StackPane.setAlignment(buyButton, Pos.BOTTOM_RIGHT);
+        internalgrid.setBottom(bottomGrid);
+
+        BorderPane root=new BorderPane();
+        root.setCenter(internalgrid);
+        root.setStyle("-fx-background-color: rgb(255,255,255)");
+        root.setBottom(buttonbox);
+        BorderPane.setMargin(buttonbox, new Insets(30));
+        BorderPane.setAlignment(buttonbox, Pos.BOTTOM_RIGHT);
+
         // Creazione e visualizzazione della scena
-        Scene scene = new Scene(stackPane, 800, 600);
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("TicketWave");
-        primaryStage.show();
+         scene = new Scene(root, 1080, 600);
 
-
+        BorderPane layout= new BorderPane();
+        layout.setCenter(root);
+        layout.setBottom(LowerBar.getInstance());
+        layout.setTop(CustomerUpperBar.getIstance());
+        setRoot(layout);
 
     }
 
-
 }
+
 
 
