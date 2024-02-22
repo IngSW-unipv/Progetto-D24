@@ -110,6 +110,13 @@ public class TicketPageView extends Scene {
 
     }
 
+    public static Button getBuyButton() {
+        return buyButton;
+    }
+
+    public Scene getScene() {
+        return scene;
+    }
 }
 
 

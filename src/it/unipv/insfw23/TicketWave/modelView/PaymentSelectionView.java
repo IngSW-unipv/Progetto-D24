@@ -64,7 +64,9 @@ public class PaymentSelectionView extends Scene {
         nextarrow.setPreserveRatio(true);
 
         nextButton.setGraphic(nextarrow);
+        nextButton.setStyle("-fx-background-color: rgb(255,255,255)");
         backButton.setGraphic(backarrow);
+        backButton.setStyle("-fx-background-color: rgb(255,255,255)");
 
         // da mettere nei controller!!!!!!
         /*
@@ -118,5 +120,29 @@ public class PaymentSelectionView extends Scene {
         layout.setBottom(LowerBar.getInstance());
         layout.setTop(CustomerUpperBar.getIstance());
         setRoot(layout);
+    }
+
+    public static RadioButton getMethod1Button() {
+        return method1Button;
+    }
+
+    public static RadioButton getMethod2Button() {
+        return method2Button;
+    }
+
+    public static Button getNextButton() {
+        return nextButton;
+    }
+
+    public static Button getBackButton() {
+        return backButton;
+    }
+
+    public static List<Label> getLabels() {
+        return labels;
+    }
+
+    public Scene getScene() {
+        return scene;
     }
 }
