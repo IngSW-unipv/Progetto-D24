@@ -12,10 +12,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.CornerRadii;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -24,6 +21,7 @@ public class GenreStatsView extends Scene {
     private String genre;
     private Button backButton;
     private XYChart<String, Number> genreSerie;
+    private ArtistStatsView artistPane;
 
     public GenreStatsView(){
         super(new BorderPane(), 1080, 600);
@@ -63,15 +61,16 @@ public class GenreStatsView extends Scene {
         barChart.getData().add(series);
 
         for(Node n:barChart.lookupAll(".default-color0.chart-bar")) {
-            n.setStyle("-fx-bar-fill: rgba(210,95,27,0.99);");
+            n.setStyle("-fx-bar-fill: rgba(238,109,33,0.99);");
         }
+
 
         Button backButton = new Button();
         ImageView backbuttonicon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/back2.png");
         backButton.setStyle("-fx-background-color: rgb(27,84,161)");
         backbuttonicon.setFitHeight(28);
         backbuttonicon.setFitWidth(30);
-        backButton.setGraphic(backbuttonicon);
+//      backButton.setGraphic(backbuttonicon);
 
 
 
@@ -85,8 +84,17 @@ public class GenreStatsView extends Scene {
 
         BorderPane contenuto = new BorderPane();
 
+        Region spacer = new Region();
+        spacer.setMinHeight(40);
+        contenuto.setBottom(spacer);
         contenuto.setTop(backButton);
-        contenuto.setCenter(paneGraph2);
+        contenuto.setLeft(paneGraph2);
+        contenuto.setPadding(new Insets(20));
+
+        ArtistStatsView artistPane = new ArtistStatsView();
+        this.artistPane=artistPane;
+        contenuto.setRight(artistPane);
+
         BorderPane.setAlignment(backButton, Pos.TOP_RIGHT);
         BorderPane.setMargin(backButton, new Insets(10));
         this.backButton = backButton;
@@ -94,12 +102,6 @@ public class GenreStatsView extends Scene {
         layout.setTop(ManagerUpperBar.getIstance());
         layout.setCenter(contenuto);
         layout.setBottom(LowerBar.getInstance());
-
-
-
-
-
-
 
     }
 
@@ -113,5 +115,9 @@ public class GenreStatsView extends Scene {
 
     public Button getBackButton(){
         return backButton;
+    }
+
+    public ArtistStatsView getArtistPane() {
+        return artistPane;
     }
 }

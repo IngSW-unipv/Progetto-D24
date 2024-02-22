@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -8,24 +9,18 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.CornerRadii;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class ArtistStatsView extends Application {
+public class ArtistStatsView extends BorderPane {
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    private XYChart.Series<String, Number> artistSerie;
 
-    @Override
-    public void start(Stage primaryStage) {
-
-        primaryStage.show();
-
-        primaryStage.setTitle("TicketWave");
-        Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
-        primaryStage.getIcons().add(icon);
-        //primaryStage.setScene(scene);
-
+    public ArtistStatsView() {
 
         final NumberAxis yAxis = new NumberAxis(0, 100, 10);
         final CategoryAxis xAxis = new CategoryAxis();
@@ -34,14 +29,13 @@ public class ArtistStatsView extends Application {
 
         final BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
         barChart.setStyle("-fx-bar-fill: #ea8928;");
-        barChart.setTitle("Statistiche sugli artisti degli eventi");
+        barChart.setTitle("Statistiche sugli Artisti degli eventi");
 
         barChart.setCategoryGap(45);
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
-
+        this.artistSerie=series;
         barChart.setLegendVisible(false);
-        //series.setName("Biglietti venduti");
 
         // Aggiunta dei dati alla serie
         series.getData().add(new XYChart.Data<>("Categoria 1", 56));
@@ -54,15 +48,18 @@ public class ArtistStatsView extends Application {
         barChart.getData().add(series);
 
         for(Node n:barChart.lookupAll(".default-color0.chart-bar")) {
-            n.setStyle("-fx-bar-fill: #ea8928;");
+            n.setStyle("-fx-bar-fill: rgba(238,109,33,0.99);");
         }
 
-        Scene scene = new Scene(barChart, 600, 400);
-
-        primaryStage.setScene(scene);
-
+        setCenter(barChart);
+        setBackground((new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY))));
+        setMaxWidth(600);
+        setMaxHeight(400);
 
     }
 
+    public XYChart.Series<String, Number> getArtistSerie(){
+        return artistSerie;
+    }
 
 }
