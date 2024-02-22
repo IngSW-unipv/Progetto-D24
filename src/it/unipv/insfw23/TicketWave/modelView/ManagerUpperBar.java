@@ -17,6 +17,7 @@ import javafx.scene.text.FontWeight;
 public class ManagerUpperBar extends HBox {
     // variabile che memorizza l'unica istanza
     private Button statsButton;
+    private Button searchButton;
     private static ManagerUpperBar istance;
     // costruttore privato per singleton
     private ManagerUpperBar() {
@@ -38,6 +39,9 @@ public class ManagerUpperBar extends HBox {
 
         Button statsButton = new Button();
         this.statsButton = statsButton;
+
+        Button searchButton = new Button();
+        this.searchButton = statsButton;
         /*****************************
         statsButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
@@ -47,7 +51,6 @@ public class ManagerUpperBar extends HBox {
         });
         */
 
-        Button searchButton = new Button();
         searchButton.setStyle("-fx-background-color: #80C1E2");
         ImageView searchIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/search_glass.png");
         searchIcon.setFitHeight(25);
@@ -92,4 +95,6 @@ public class ManagerUpperBar extends HBox {
     public Button getStatsButton() {
         return statsButton;
     }
+
+    public Button getSearchButton() { return searchButton; }
 }

@@ -29,14 +29,20 @@ import javafx.scene.control.CheckMenuItem;
 import java.awt.*;
 import java.util.Observable;
 
-public class ResearchView extends Application{
+public class ResearchView extends Scene{
 
-    @Override
-    public void start(Stage primaryStage) {
+    private Button searchButton;
+    // costruttore
+    public ResearchView() {
+        super(new Pane(), 1080, 600);
+        scenaResearch();
+    }
+
+    public void scenaResearch(){
         // Barra dei filtri
-        MenuBar barra = new MenuBar();
-        Menu generi = new Menu("Generi");
-        Menu province = new Menu("Provincia");
+        final MenuBar barra = new MenuBar();
+        final Menu generi = new Menu("Generi");
+        final Menu province = new Menu("Provincia");
 
         // check menu filtri musica
         CheckMenuItem cmi = new CheckMenuItem("ROCK");
@@ -51,11 +57,11 @@ public class ResearchView extends Application{
         barra.getMenus().addAll(generi, province);
 
         // Bottone per accedere al profilo
-        ImageView imv2 = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/user.png");
+        final ImageView imv2 = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/user.png");
         imv2.setFitHeight(25);
         imv2.setFitWidth(24);
 
-        Button profileButton = new Button("Profile", imv2);
+        final Button profileButton = new Button("Profile", imv2);
         profileButton.setOnAction(event -> {
             // mettere la logica dietro l'azione della pressione dell'immagine di profilo
         });
@@ -73,9 +79,9 @@ public class ResearchView extends Application{
         imv.setFitWidth(18);
 
         // Button per l'invio della ricerca
-        Button searchButton = new Button("Search", imv);
+        final Button searchButton = new Button("Search", imv);
         searchButton.setOnAction(event -> {
-            // Devo mettere una query al DB !!!!!!!
+            // Devo mettere una query al DB !!!!!!! in generale tutta la logica che mi serve
             String searchTerm = searchBar.getText();
             System.out.println("Searching for: " + searchTerm);
         });
@@ -100,7 +106,12 @@ public class ResearchView extends Application{
         hb2.setStyle("-fx-background-color: rgb(27,84,161)");
         vb1.setStyle("-fx-background-color: rgb(27,84,161)");
 
-        // Creazione scene
-        Scene research = new Scene(vb1, 500, 400);
+        this.searchButton = searchButton;
+
+    /*  // Creazione scene
+        Scene research = new Scene(vb1, 1080, 600);             */
     }
+    public Button getSearchButton() { return searchButton; } // lo chiamo nel ResearchController
+
 }
+
