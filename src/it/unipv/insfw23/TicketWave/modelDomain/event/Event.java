@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.modelDomain.event;
 
 import java.lang.String;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 public abstract class Event implements EventType {
@@ -138,10 +139,4 @@ public abstract class Event implements EventType {
         }
         return result;
     }
-
-    public void getGenreNameArray() { // ritorna l'array con i nomi in coincidenza con i generi
-
-
-    }
-    
 }

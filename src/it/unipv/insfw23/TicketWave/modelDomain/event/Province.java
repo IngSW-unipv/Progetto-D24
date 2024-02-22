@@ -114,13 +114,22 @@ public enum Province {
  *   puoi copiare il procedimento nel pezzo di codice di interesse, anche se secondo me avere un metodo qua e' meglio
  *   perche' cosi' si ha un  metodo sempre usabile e non si deve implementare ogni volta
  */ 
- 	public static String[] getNames() {
+ 	public static String[] getProvinceNameArray() {
  		String[] prnames = new String[Province.values().length];
  		for(Province x : Province.values()) {
  			prnames[x.ordinal()] = String.valueOf(x);
  		}
  		return prnames;
  	}
+
+     // metodo che ritorna un'array di interi associati ai nomi della enum
+    public static int[] getProvinceCodeArray() {
+        int[] provinceCode = new int[Province.values().length];
+        for(Province x : Province.values()) {
+            provinceCode[x.ordinal()] = x.ordinal();
+        }
+        return provinceCode;
+    }
  	
 }
 
