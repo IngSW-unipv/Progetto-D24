@@ -21,12 +21,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Priority;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.VBox;
 import javafx.scene.control.CheckMenuItem;
 
 import java.awt.*;
@@ -42,12 +39,12 @@ public class ResearchView extends Application{
         Menu province = new Menu("Provincia");
 
         // check menu filtri musica
-        CheckMenuItem cmi = new CheckMenuItem("Rock");
-        CheckMenuItem cmi1 = new CheckMenuItem("Punk");
+        CheckMenuItem cmi = new CheckMenuItem("ROCK");
+        CheckMenuItem cmi1 = new CheckMenuItem("PUNK");
         // check menu filtro provincia
-        CheckMenuItem pr = new CheckMenuItem("PV");
-        CheckMenuItem pr1 = new CheckMenuItem("PR");
-        CheckMenuItem pr2 = new CheckMenuItem("MI");
+        CheckMenuItem pr = new CheckMenuItem("PAVIA");
+        CheckMenuItem pr1 = new CheckMenuItem("PARMA");
+        CheckMenuItem pr2 = new CheckMenuItem("MILANO");
         // aggiungo i miei check menu alla menu bar
         generi.getItems().addAll(cmi, cmi1);
         province.getItems().addAll(pr, pr1, pr2);
@@ -78,12 +75,12 @@ public class ResearchView extends Application{
         // Button per l'invio della ricerca
         Button searchButton = new Button("Search", imv);
         searchButton.setOnAction(event -> {
-            // Devo rimpiazzare sta roba con la logica di ricerca !!!!!!!
+            // Devo mettere una query al DB !!!!!!!
             String searchTerm = searchBar.getText();
             System.out.println("Searching for: " + searchTerm);
         });
 
-        // Creo un'HBOX che contiene barra + bottone di ricerca HBox = disposizione orizzontale
+       // Creo un'HBOX che contiene barra + bottone di ricerca HBox = disposizione orizzontale
         HBox hb1 = new HBox();
         hb1.setSpacing(10);
         hb1.getChildren().add(searchBar);
@@ -99,18 +96,11 @@ public class ResearchView extends Application{
         hb2.setAlignment(Pos.TOP_RIGHT);
         hb1.setAlignment(Pos.TOP_CENTER);
 
+        hb1.setStyle("-fx-background-color: rgb(27,84,161)");
+        hb2.setStyle("-fx-background-color: rgb(27,84,161)");
+        vb1.setStyle("-fx-background-color: rgb(27,84,161)");
+
         // Creazione scene
-        Scene scene = new Scene(vb1, 500, 400);
-
-        // Setto lo stage
-        primaryStage.setTitle("Search Bar Example");
-        primaryStage.setScene(scene);
-
-        // Mostro lo stage
-        primaryStage.show();
-    }
-
-    public static void main(String[] args) {
-        launch(args);
+        Scene research = new Scene(vb1, 500, 400);
     }
 }
