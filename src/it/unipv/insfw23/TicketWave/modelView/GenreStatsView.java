@@ -12,30 +12,26 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-public class GenreStatsView extends Application {
+public class GenreStatsView extends Scene {
 
-    Scene genreScene;
-    String genre;
+    private String genre;
+    private Button backButton;
+    private XYChart<String, Number> genreSerie;
+    private ArtistStatsView artistPane;
 
-    Button backButton;
-
-    public static void main(String[] args) {
-        launch(args);
+    public GenreStatsView(){
+        super(new BorderPane(), 1080, 600);
+        init();
     }
+    private void init() {
 
-    @Override
-    public void start(Stage primaryStage) {
+        BorderPane layout = (BorderPane) getRoot();
 
-       // primaryStage.show();
-
-        primaryStage.setTitle("TicketWave2");
-        Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
-        primaryStage.getIcons().add(icon);
-        //primaryStage.setScene(scene);
-
+        layout.setStyle("-fx-background-color: rgb(27,84,161)");
 
         final NumberAxis yAxis = new NumberAxis(0, 100, 10);
         final CategoryAxis xAxis = new CategoryAxis();
@@ -65,30 +61,52 @@ public class GenreStatsView extends Application {
         barChart.getData().add(series);
 
         for(Node n:barChart.lookupAll(".default-color0.chart-bar")) {
-            n.setStyle("-fx-bar-fill: #b381fa;");
+            n.setStyle("-fx-bar-fill: rgba(238,109,33,0.99);");
         }
 
+
         Button backButton = new Button();
-        ImageView backbuttonicon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/back.png");
-        backbuttonicon.setFitHeight(16);
-        backbuttonicon.setFitWidth(20);
-        backButton.setGraphic(backbuttonicon);
-        BorderPane layout = new BorderPane();
-        layout.setTop(backButton);
-        layout.setCenter(barChart);
+        ImageView backbuttonicon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/back2.png");
+        backButton.setStyle("-fx-background-color: rgb(27,84,161)");
+        backbuttonicon.setFitHeight(28);
+        backbuttonicon.setFitWidth(30);
+//      backButton.setGraphic(backbuttonicon);
+
+
+
+        BorderPane paneGraph2 = new BorderPane();
+        paneGraph2.setBackground((new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY))));
+        //paneGraph2.setPadding(new Insets(20));
+        paneGraph2.setCenter(barChart);
+
+        paneGraph2.setMaxWidth(600);
+        paneGraph2.setMaxHeight(400);
+
+        BorderPane contenuto = new BorderPane();
+
+        Region spacer = new Region();
+        spacer.setMinHeight(40);
+        contenuto.setBottom(spacer);
+        contenuto.setTop(backButton);
+        contenuto.setLeft(paneGraph2);
+        contenuto.setPadding(new Insets(20));
+
+        ArtistStatsView artistPane = new ArtistStatsView();
+        this.artistPane=artistPane;
+        contenuto.setRight(artistPane);
+
         BorderPane.setAlignment(backButton, Pos.TOP_RIGHT);
         BorderPane.setMargin(backButton, new Insets(10));
         this.backButton = backButton;
 
-        Scene sceneGenre = new Scene(layout, 600, 400);
-        this.genreScene = sceneGenre;
-        primaryStage.setScene(sceneGenre);
-
+        layout.setTop(ManagerUpperBar.getIstance());
+        layout.setCenter(contenuto);
+        layout.setBottom(LowerBar.getInstance());
 
     }
 
-    public Scene getScene(){
-        return genreScene;
+    public XYChart<String, Number> getGenreSerie() {
+        return genreSerie;
     }
 
     public void setGenre(String genre) {
@@ -97,5 +115,9 @@ public class GenreStatsView extends Application {
 
     public Button getBackButton(){
         return backButton;
+    }
+
+    public ArtistStatsView getArtistPane() {
+        return artistPane;
     }
 }
