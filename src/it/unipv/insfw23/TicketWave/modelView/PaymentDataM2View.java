@@ -31,6 +31,9 @@ public class PaymentDataM2View extends Scene {
     private static final  TextField insertMM = new TextField();
     private static final  TextField insertYY = new TextField();
     private static final  TextField insertcvc = new TextField();
+    private static  Button backButton = new Button();
+    private static Button forwardButton = new Button();
+
     private static  List<TextField> textFields = new ArrayList<>();
     private static  List<Label> labels = new ArrayList<>();
     private Scene scene;
@@ -44,12 +47,18 @@ public class PaymentDataM2View extends Scene {
     private void initComponents() {
 
         Image forwardarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/nextArrow.png");
-        Button forwardButton = new Button();
         forwardButton.setGraphic(new ImageView(forwardarrowlogo));
         forwardButton.setPrefWidth(forwardarrowlogo.getWidth());
         forwardButton.setPrefHeight(forwardarrowlogo.getHeight());
         forwardButton.setPadding(new Insets(0));
         forwardButton.setStyle("-fx-background-color: rgb(255,255,255)");
+
+        Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/backArrow.png");
+        backButton.setGraphic(new ImageView(backarrowlogo));
+        backButton.setPrefWidth(backarrowlogo.getWidth());
+        backButton.setPrefHeight(backarrowlogo.getHeight());
+        backButton.setPadding(new Insets(0));
+        backButton.setStyle("-fx-background-color: rgb(255,255,255)");
 
         textFields.add(insertMM);
         textFields.add(insertYY);
@@ -89,8 +98,11 @@ public class PaymentDataM2View extends Scene {
         root.setStyle("-fx-background-color: rgb(255,255,255)");
         root.setPadding(new Insets(10));
         root.setCenter(dataInput);
-        root.setBottom(forwardButton);
+        root.setRight(forwardButton);
+        root.setLeft(backButton);
         BorderPane.setAlignment(forwardButton, Pos.BOTTOM_RIGHT);
+        BorderPane.setAlignment(backButton,Pos.BOTTOM_LEFT);
+
 
         BorderPane layout= new BorderPane();
         layout.setStyle("-fx-background-color: rgb(27,84,161)");
@@ -101,5 +113,10 @@ public class PaymentDataM2View extends Scene {
 
 
 
+    }
+
+
+    public static Button getBackButton() {
+        return backButton;
     }
 }
