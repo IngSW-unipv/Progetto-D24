@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
 
+import static it.unipv.insfw23.TicketWave.modelDomain.event.Genre.getGenreCodeArray;
+import static it.unipv.insfw23.TicketWave.modelDomain.event.Genre.getGenreNameArray;
+
 public class StatisticsHandlerArrayList {
 
     public WrapType typeStats(Manager manager) {
@@ -169,17 +172,17 @@ public class StatisticsHandlerArrayList {
     public double[] genreStats(int typeCode, Manager manager) {
 
         ArrayList<Event> eventList = manager.getEventlist();
-        int genreCodeArray[] = list[0].getGenreCodeArray();
-        double results[];
+        int[] genreCodeArray= getGenreCodeArray();
+        double[] results = new double[genreCodeArray.length];
         int eventCounter = 0;
 
         for (int j=0; j<Array.getLength(genreCodeArray); j++) {
-            for (int i=0; i<Array.getLength(list); i++) {
+            for (Event currentEvent: eventList) {
 
-                if(list[i].getTypeCode() == typeCode) {
+                if(currentEvent.getKeyCode() == typeCode) {
 
-                    int maxn = list[i].getMaxNumberOfSeats();
-                    int soldn = list[i].getTicketSoldNumber();
+                    int maxn = currentEvent.getMaxNumberOfSeats();
+                    int soldn = currentEvent.getTicketSoldNumber();
 
                     double percResult = (soldn/maxn)*100;
                     eventCounter++;
@@ -190,16 +193,17 @@ public class StatisticsHandlerArrayList {
             results[j] = results[j]/eventCounter;
             eventCounter = 0;
         }
+        WrapType resReturn = new WrapType(results, getGenreNameArray());
         return results;
     }
 
-
+/*
     public String[] getGenreNameArray(Manager manager) {
         Event events[] = manager.getEvent();
         return events[0].getGenreNameArray();
     }
 
-
+*/
 
 
 

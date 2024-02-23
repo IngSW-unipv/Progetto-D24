@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Cambiamento UI+ Controller per TicketPage e PaySelectionData">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/statistics/StatisticsHandlerArrayList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/statistics/StatisticsHandlerArrayList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +97,7 @@
       <recent name="it.unipv.insfw23.TicketWave.modelDomain.user" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ProvaRun">
+  <component name="RunManager" selected="Application.MainStageView">
     <configuration name="ArtistStatsView" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.ArtistStatsView" />
       <module name="Progetto-D24" />
@@ -222,8 +223,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ProvaRun" />
         <item itemvalue="Application.MainStageView" />
+        <item itemvalue="Application.ProvaRun" />
         <item itemvalue="Application.Prova" />
         <item itemvalue="Application.TicketPageView" />
         <item itemvalue="Application.ResearchView" />
