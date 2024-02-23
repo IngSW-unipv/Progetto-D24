@@ -4,6 +4,7 @@ import it.unipv.insfw23.TicketWave.modelView.ManagerUpperBar;
 import it.unipv.insfw23.TicketWave.modelView.ResearchGUI.ResearchNodesView;
 import it.unipv.insfw23.TicketWave.modelView.ResearchGUI.ResearchView;
 import it.unipv.insfw23.TicketWave.modelView.ResearchGUI.ResultResearchView;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -43,6 +44,16 @@ public class ResearchController {
                 System.out.println("Faccio la query di ricerca");
                 ResearchView rv = new ResearchView();
                 mainStage.setScene(rv);
+            }
+        };
+        rnv.getSearchButton().setOnAction(actionEvent -> {
+            // logica di ricerca con query SQL
+        });
+        // filtri del genere musicale
+        EventHandler<ActionEvent> genreFilterHandler = new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+
             }
         };
         rnv.getSearchButton().setOnAction(actionEvent -> {

@@ -4,13 +4,17 @@ import javafx.scene.Node;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
+import java.util.ArrayList;
+
 public class ResearchNodesView extends Node { //  questo mi serve per avere solo uno di ogni nodes, in tal modo ho tutti i button,... comuni tra le scene ResearchView e ResultResearchView
 
         // variabile che memorizza l'unica istanza
         private Button searchButton;
-        private MenuBar barra;
+        private MenuBar bar;
         private Menu genre;
         private Menu province;
+        private ArrayList <CheckMenuItem> prv; // vettore per poter gestire i CheckMenu di province nel controller
+        private ArrayList <CheckMenuItem> genv; // vettore per poter gestire i CheckMenu di generi nel controller
 
         private TextField searchBar;
         private static ResearchNodesView istance;
@@ -22,8 +26,8 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
             Button searchButton = new Button();
             this.searchButton = searchButton;
 
-            MenuBar barra = new MenuBar();
-            this.barra = barra;
+            MenuBar bar = new MenuBar();
+            this.bar = bar;
 
             Menu genre = new Menu("Generi");
             this.genre = genre;
@@ -42,7 +46,27 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
 
             // creo  la MenuBar con i filtri
             // check menu filtri musica
-            CheckMenuItem cmi = new CheckMenuItem("ROCK");
+            genv = new ArrayList<CheckMenuItem>(); // vettore per poter gestire i CheckMenu di generi nel controller
+            String [] gen = {"ROCK", "PUNK"}; // stringa di generi
+            int i = 0;
+            for (String s : gen) { // butto dentro il Menu genre, uno per volta, i CheckBox dei generi contenuti nella stringa
+                CheckMenuItem cmi = new CheckMenuItem(s);
+                genv.set(i, new CheckMenuItem(s));
+                i++;
+                genre.getItems().add(cmi); // aggiungo al Menu genre i vari CheckMenuItem
+            }
+            // check menu filtri provincia
+            prv = new ArrayList<CheckMenuItem>(); // vettore per poter gestire i CheckMenu di province nel controller
+            String [] pr = {"PAVIA", "PARMA", "MILANO"}; // stringa di generi
+            i = 0;
+            for (String s : pr) { // butto dentro il Menu genre, uno per volta, i CheckBox dei generi contenuti nella stringa
+                CheckMenuItem cmi = new CheckMenuItem(s);
+                prv.set(i, new CheckMenuItem(s));
+                i++;
+                province.getItems().add(cmi); // aggiungo al Menu province i vari CheckMenuItem
+            }
+
+            /* CheckMenuItem cmi = new CheckMenuItem("ROCK");  VEDIAMO SE FUNZIONA, SE FUNZIONA BUTTO VIA STO BLOCCO DI CODICE
             CheckMenuItem cmi1 = new CheckMenuItem("PUNK");
             // check menu filtro provincia
             CheckMenuItem pr = new CheckMenuItem("PAVIA");
@@ -50,11 +74,9 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
             CheckMenuItem pr2 = new CheckMenuItem("MILANO");
             // aggiungo i miei check menu alla menu bar
             genre.getItems().addAll(cmi, cmi1);
-            province.getItems().addAll(pr, pr1, pr2);
-            barra.getMenus().addAll(genre, province);
-            barra.setStyle("-fx-background-color: #ffffff");
-
-
+            province.getItems().addAll(pr, pr1, pr2); */
+            bar.getMenus().addAll(genre, province);
+            bar.setStyle("-fx-background-color: #ffffff");
         }
 
         //Metodo statico per ottenere l'unica istanza
@@ -72,7 +94,7 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
     public Button getSearchButton() { return searchButton; } // lo chiamo nel ResearchController
 
     public MenuBar getBarra() {
-        return barra;
+        return bar;
     }
 
     public Menu getGenre() {
@@ -81,6 +103,14 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
 
     public Menu getProvince() {
         return province;
+    }
+
+    public ArrayList<CheckMenuItem> getPrv() {
+        return prv;
+    }
+
+    public ArrayList<CheckMenuItem> getGenv() {
+        return genv;
     }
 }
 
