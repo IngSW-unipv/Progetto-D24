@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Cambiamento UI+ Controller per TicketPage e PaySelectionData">
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Commit Stats domain">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/ResearchController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/ResearchController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResearchGUI/ResearchNodesView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResearchGUI/ResearchNodesView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResearchGUI/ResearchView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResearchGUI/ResearchView.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResearchGUI/ResultResearchView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResearchGUI/ResultResearchView.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/statistics/StatisticsHandlerArrayList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/statistics/StatisticsHandlerArrayList.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ResearchGUI/ResearchView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ResearchGUI/ResearchView.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -130,7 +135,7 @@
     <configuration name="MainStageView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.MainStageView" />
       <module name="Progetto-D24" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\claud\OneDrive\Desktop\JAVAFX21 SDK\javafx-sdk-21.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\david\Documents\openjfx-21.0.2_windows-x64_bin-sdk\javafx-sdk-21.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.unipv.insfw23.TicketWave.modelView.*" />
@@ -545,7 +550,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708643650457</updated>
     </task>
-    <option name="localTasksCounter" value="34" />
+    <task id="LOCAL-00034" summary="Commit Stats domain">
+      <option name="closed" value="true" />
+      <created>1708725238117</created>
+      <option name="number" value="00034" />
+      <option name="presentableId" value="LOCAL-00034" />
+      <option name="project" value="LOCAL" />
+      <updated>1708725238117</updated>
+    </task>
+    <option name="localTasksCounter" value="35" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -581,6 +594,7 @@
     <MESSAGE value="Commit Statistics controller for Genre" />
     <MESSAGE value="Commit UI: pagina descrizione ticket,seleziona metodo di pagamento e inserimento dati carta" />
     <MESSAGE value="Cambiamento UI+ Controller per TicketPage e PaySelectionData" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cambiamento UI+ Controller per TicketPage e PaySelectionData" />
+    <MESSAGE value="Commit Stats domain" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit Stats domain" />
   </component>
 </project>
