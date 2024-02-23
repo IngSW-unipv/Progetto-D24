@@ -42,7 +42,8 @@ public class Customer extends User {
     // metodo per acquisto biglietto con controllo su paymentmethod e usepoints
 
     public void buyticket(IPaymentAdapter pay,Event event,TicketType type ,int usePoints){
-        if(pay.paymentMethod() == true && usePoints == 1 ){
+
+        if(pay.paymentMethod(event.getPrice(type)) == true && usePoints == 1 ){
                 Ticket ticket= TicketHandler.getIstance().createTicket(event,type);
                 double price = ticket.getPrice() - (points* 0.25);
                 points=0;
@@ -50,13 +51,13 @@ public class Customer extends User {
                 points= points + (price/10);
                 addTickets(ticket);
 
-            } else if (pay.paymentMethod() == true && usePoints == 0) {
+            } else if (pay.paymentMethod(event.getPrice(type)) == true && usePoints == 0) {
                 Ticket ticket= TicketHandler.getIstance().createTicket(event,type);
                 double price = ticket.getPrice();
                 System.out.println( "L'acquisto del tuo biglietto per " + event + "è andato a buon fine ");
                 points= points + (price/10);
                 addTickets(ticket);
-            } else if (pay.paymentMethod() == false) {
+            } else if (pay.paymentMethod(event.getPrice(type)) == false) {
                 System.out.println( "L'acquisto del tuo biglietto per " + event + "non è andato a buon fine ");
             }
     }

@@ -14,6 +14,7 @@ public class SignUpView extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(20, 20, 20, 20));
         grid.setVgap(20);
@@ -95,6 +96,24 @@ public class SignUpView extends Application {
 
         Button signUpButton = new Button("Registrati");
         GridPane.setConstraints(signUpButton, 1, 5);
+
+        // controllo sulle password
+        Label errorLabel = new Label();
+        errorLabel.setTextFill(javafx.scene.paint.Color.RED);
+        GridPane.setColumnSpan(errorLabel, 2);
+        GridPane.setConstraints(errorLabel, 2, 5);
+
+        signUpButton.setOnAction(event -> {
+            // Check if passwords match
+            if (!passwordField.getText().equals(confirmPasswordField.getText())) {
+                errorLabel.setText("Le password non corrispondono");
+            } else {
+                // Perform sign-up action
+                errorLabel.setText(""); // Clear error message
+                // Your sign-up logic here...
+            }
+        });
+
 
         grid.getChildren().addAll(
                 nameLabel, nameField, surnameLabel, surnameField, dateLabel, datePicker,

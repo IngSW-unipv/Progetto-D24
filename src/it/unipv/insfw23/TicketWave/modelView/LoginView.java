@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -29,6 +30,14 @@ public class LoginView extends Application {
         grid.setHgap(30);
         grid.setAlignment(Pos.CENTER);
         grid.setStyle("-fx-background-color: White;");
+
+        BorderPane root = new BorderPane();
+        UpperBar upperBar= UpperBar.getIstance();
+        LowerBar lowerBar = LowerBar.getInstance();
+        root.setBottom(lowerBar);
+        root.setTop(upperBar);
+        root.setCenter(grid);
+
 
         // imposto campo email
         Label emailnameLabel = new Label("Email:");
@@ -70,7 +79,8 @@ public class LoginView extends Application {
         Button regButton = new Button("Registrati");
         GridPane.setConstraints(regButton, 1, 6);
 
-        loginButton.setOnAction(e -> {
+       /* loginButton.setOnAction(e -> {
+
             String email = emailField.getText();
             String password = passwordField.getText();
             if (customerRadioButton.isSelected()) {
@@ -78,30 +88,36 @@ public class LoginView extends Application {
             } else if (managerRadioButton.isSelected()) {
                 System.out.println("Login come gestore con username: " + email + " e password: " + password);
             }
-        });
+        });*/
 
         // aggiungo signupview al bottone registrati
-        loginButton.setOnAction(e -> {
+       /* loginButton.setOnAction(e -> {
             CustomerView customerView = new CustomerView();
             try {
                 customerView.start(new Stage());
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-        });
+        });*/
 
-        regButton.setOnAction(e -> {
+       /* regButton.setOnAction(e -> {
             SignUpView signUpView = new SignUpView();
             try {
                 signUpView.start(new Stage());
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-        });
+        });*/
+
+
+
 
         grid.getChildren().addAll(emailnameLabel, emailField, passwordLabel, passwordField, customerRadioButton, managerRadioButton, loginButton,signupLabel,regButton);
 
-        Scene scene = new Scene(grid, 500, 500);
+
+
+
+        Scene scene = new Scene(root, 500, 500);
         primaryStage.setScene(scene);
 
         primaryStage.setTitle("TicketWave");

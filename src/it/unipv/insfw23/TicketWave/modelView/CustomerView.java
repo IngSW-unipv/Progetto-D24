@@ -20,11 +20,26 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 public class CustomerView extends Application {
-
+    private CustomerUpperBar customerUpperBar;
+    private  LowerBar   lowerBar;
     @Override
     public void start(Stage primaryStage) {
+
+
+
+
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root, 800, 600);
+
+        lowerBar = LowerBar.getInstance();
+        root.setBottom(lowerBar);
+
+        customerUpperBar = CustomerUpperBar.getIstance();
+        root.setTop(customerUpperBar);
+
+        // Creazione del bordo superiore e inferiore
+
+
 
         // Sezione Notifiche
         VBox notifyBox = new VBox();
@@ -38,7 +53,7 @@ public class CustomerView extends Application {
 
         // Sezione Biglietti Acquistati
         VBox ticketBox = new VBox();
-        ticketBox.setSpacing(10);
+        ticketBox.setSpacing(20);
         ticketBox.setPadding(new Insets(10));
         ticketBox.getChildren().add(new Label("Biglietti Acquistati"));
         ticketBox.setStyle("-fx-background-color: lightyellow;");
@@ -46,9 +61,9 @@ public class CustomerView extends Application {
         root.setCenter(ticketBox);
 
         // Barra di Ricerca
-        TextField risearchField = new TextField();
-        risearchField.setPromptText("Cerca");
-        root.setTop(risearchField);
+        TextField searchField = new TextField();
+        searchField.setPromptText("Cerca");
+
 
         // Sezione Punti Accumulati
         VBox pointsBox = new VBox();
@@ -58,14 +73,19 @@ public class CustomerView extends Application {
         // Aggiungi visualizzazione dei punti
         root.setLeft(pointsBox);
 
+
+
         Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
         primaryStage.getIcons().add(icon);
         primaryStage.setWidth(1080);
         primaryStage.setHeight(600);
+
         primaryStage.setScene(scene);
         primaryStage.setTitle("TicketWave");
         primaryStage.show();
     }
+
+
     /*
      private void addNotify(VBox notificheBox, String testoNotifica) {
     Label notifyLabel = new Label(testoNotifica);
