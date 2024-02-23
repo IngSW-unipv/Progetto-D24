@@ -1,25 +1,20 @@
 package it.unipv.insfw23.TicketWave.modelController;
 
 import it.unipv.insfw23.TicketWave.modelView.GenreStatsView;
-import it.unipv.insfw23.TicketWave.modelView.MainStageView;
 import it.unipv.insfw23.TicketWave.modelView.TypeStatsView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.chart.XYChart;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
-public class StatisticsController {
+public class StatisticControllerType {
     private Stage mainStage;
     private TypeStatsView typeView;
-    private GenreStatsView genreView;
 
-    public StatisticsController(Stage mainStage, TypeStatsView typeView){
+    public StatisticControllerType(Stage mainStage, TypeStatsView typeView){
         this.mainStage=mainStage;
         this.typeView=typeView;
-        //this.genreView = new GenreStatsView();
         initComponents();
     }
 
@@ -30,6 +25,7 @@ public class StatisticsController {
             public void handle(MouseEvent actionEvent){
                 System.out.println("PASSO AI GENERI E ARTISTI");
                 GenreStatsView genreView = new GenreStatsView();
+                StatisticControllerGenreArt artStat = new StatisticControllerGenreArt(mainStage, genreView);
                 mainStage.setScene(genreView);
             }
         };
@@ -46,7 +42,7 @@ public class StatisticsController {
             }
         };
         genreView.getBackButton().setOnAction(backToTypeHandler);
-
 */
+
     }
 }
