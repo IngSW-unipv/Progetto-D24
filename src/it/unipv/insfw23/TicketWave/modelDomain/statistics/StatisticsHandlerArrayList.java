@@ -17,7 +17,7 @@ public class StatisticsHandlerArrayList {
         int eventCounter = 0;
         ArrayList<Event> eventList = manager.getEventlist();
 
-        int[] typeCodeArray = eventList.get(0).getTypeCodeArray();
+        int[] typeCodeArray = manager.getTypeCodeArray();
 
         int typeCodeArrayLenght = Array.getLength(typeCodeArray);
         double[] results = new double[typeCodeArrayLenght];
@@ -118,7 +118,7 @@ public class StatisticsHandlerArrayList {
         int index = -1;
         for (String currentValue: vettore) {
             if (currentValue == parola) {
-                return currentValue.get;
+                return currentValue.indexOf();
             }
         }
 
