@@ -1,6 +1,8 @@
-package it.unipv.insfw23.TicketWave.modelView;
+package it.unipv.insfw23.TicketWave.modelView.ResearchGUI;
 
 import com.sun.javafx.scene.control.GlobalMenuAdapter;
+import it.unipv.insfw23.TicketWave.modelView.LowerBar;
+import it.unipv.insfw23.TicketWave.modelView.ManagerUpperBar;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,8 +32,7 @@ import java.awt.*;
 import java.util.Observable;
 
 public class ResearchView extends Scene{
-
-    private Button searchButton;
+    private ResearchNodesView rnv;
     // costruttore
     public ResearchView() {
         super(new Pane(), 1080, 600);
@@ -39,7 +40,26 @@ public class ResearchView extends Scene{
     }
 
     public void scenaResearch(){
-        // Barra dei filtri
+        // Creo un'HBOX che contiene barra + bottone di ricerca HBox = disposizione orizzontale
+        HBox contenuto = new HBox();
+        contenuto.setSpacing(10);
+        contenuto.getChildren().add(rnv.getSearchBar());
+        contenuto.getChildren().add(rnv.getSearchButton());
+        contenuto.getChildren().add(rnv.getBarra());
+
+        // Creo il VBox che contiene gli HBox, l'Upper Bar e la Lower Bar
+        VBox vb1 = new VBox();
+        vb1.getChildren().addAll(ManagerUpperBar.getIstance(), contenuto, LowerBar.getInstance());
+        // Allineo gli HBox nel VBox
+        VBox.setMargin(ManagerUpperBar.getIstance(), new Insets(10.0d));
+        VBox.setMargin(contenuto, new Insets(10.0d));
+        VBox.setMargin(LowerBar.getInstance(), new Insets(10.0d));
+
+        ManagerUpperBar.getIstance().setAlignment(Pos.TOP_CENTER);
+        contenuto.setAlignment(Pos.TOP_CENTER);
+        LowerBar.getInstance().setAlignment(Pos.BOTTOM_CENTER);
+
+/*        // Barra dei filtri
         final MenuBar barra = new MenuBar();
         final Menu generi = new Menu("Generi");
         final Menu province = new Menu("Provincia");
@@ -57,7 +77,7 @@ public class ResearchView extends Scene{
         barra.getMenus().addAll(generi, province);
 
         // Bottone per accedere al profilo
-        final ImageView imv2 = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/user.png");
+        ImageView imv2 = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/user.png");
         imv2.setFitHeight(25);
         imv2.setFitWidth(24);
 
@@ -107,11 +127,10 @@ public class ResearchView extends Scene{
         vb1.setStyle("-fx-background-color: rgb(27,84,161)");
 
         this.searchButton = searchButton;
+        this.profileButton = profileButton;
 
-    /*  // Creazione scene
+        // Creazione scene
         Scene research = new Scene(vb1, 1080, 600);             */
     }
-    public Button getSearchButton() { return searchButton; } // lo chiamo nel ResearchController
-
 }
 
