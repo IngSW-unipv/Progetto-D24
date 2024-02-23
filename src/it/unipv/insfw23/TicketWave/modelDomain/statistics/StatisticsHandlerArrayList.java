@@ -18,6 +18,7 @@ public class StatisticsHandlerArrayList {
         ArrayList<Event> eventList = manager.getEventlist();
 
         int[] typeCodeArray = manager.getTypeCodeArray();
+        ArrayList<String> typeNameArray = new ArrayList<>();
 
         int typeCodeArrayLenght = Array.getLength(typeCodeArray);
         double[] results = new double[typeCodeArrayLenght];
@@ -25,8 +26,8 @@ public class StatisticsHandlerArrayList {
         for (int j = 0; j< Array.getLength(typeCodeArray); j++) {
             for (Event currentEvent: eventList) {
 
-                if(currentEvent.getTypeCode() == typeCodeArray[j]) {
-
+                if(currentEvent.getKeyCode() == typeCodeArray[j]) {
+                    typeNameArray.add(j, currentEvent.getClassName());
                     int maxn = currentEvent.getMaxNumberOfSeats();
                     int soldn = currentEvent.getTicketSoldNumber();
 
@@ -38,16 +39,17 @@ public class StatisticsHandlerArrayList {
             results[j] = results[j]/eventCounter;
             eventCounter = 0;
         }
-        WrapType returnClass = new WrapType(results, typeCodeArray);
+        WrapType returnClass = new WrapType(results, typeNameArray);
         return returnClass;
     }
 
-
+/*
     // la UI non ne ha bisogno se utilizzo nel metodo la classe Wrapper
     public String[] getTypeNameArray(Manager manager) {
         ArrayList<Event> eventList = manager.getEventlist();
         return eventList.get(0).getTypeNameArray();
     }
+*/
 
 
 
@@ -166,7 +168,7 @@ public class StatisticsHandlerArrayList {
 
     public double[] genreStats(int typeCode, Manager manager) {
 
-        Event list[] = manager.getEvent();
+        ArrayList<Event> eventList = manager.getEventlist();
         int genreCodeArray[] = list[0].getGenreCodeArray();
         double results[];
         int eventCounter = 0;
@@ -239,19 +241,19 @@ public class StatisticsHandlerArrayList {
 
 
 class WrapType{
-    private String[] typeNameArray;
-    private Double[] typeResults;
+    private ArrayList<String> typeNameArray;
+    private double[] typeResults;
 
-    public WrapType(double[] results, int[] typeCodeArray) {
+    public WrapType(double[] results, ArrayList<String> typeNameArray) {
         this.typeNameArray = typeNameArray;
-        this.typeResults = typeResults;
+        this.typeResults = results;
     }
 
-    public String[] getNameArrayType(){
+    public ArrayList<String> getNameArrayType(){
         return typeNameArray;
     }
 
-    public Double[] getTypeRes(){
+    public double[] getTypeRes(){
         return typeResults;
     }
 }
