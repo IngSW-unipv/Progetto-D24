@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Cambiamento UI+ Controller per TicketPage e PaySelectionData" />
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Cambiamento UI+ Controller per TicketPage e PaySelectionData">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -275,7 +277,8 @@
       <workItem from="1708590862043" duration="11049000" />
       <workItem from="1708637932234" duration="263000" />
       <workItem from="1708638208252" duration="69000" />
-      <workItem from="1708638400493" duration="5136000" />
+      <workItem from="1708638400493" duration="5269000" />
+      <workItem from="1708710867048" duration="638000" />
     </task>
     <task id="LOCAL-00001" summary="Prova int posti su concerto">
       <option name="closed" value="true" />
@@ -533,7 +536,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708643553265</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="Cambiamento UI+ Controller per TicketPage e PaySelectionData">
+      <option name="closed" value="true" />
+      <created>1708643650457</created>
+      <option name="number" value="00033" />
+      <option name="presentableId" value="LOCAL-00033" />
+      <option name="project" value="LOCAL" />
+      <updated>1708643650457</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
