@@ -55,11 +55,12 @@ public class LocationStatsView extends Scene {
 
         // Back button
         Button backButton = new Button();
+        this.backButton = backButton;
         ImageView backbuttonicon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/back2.png");
         backButton.setStyle("-fx-background-color: rgb(27,84,161)");
         backbuttonicon.setFitHeight(28);
         backbuttonicon.setFitWidth(30);
-//      backButton.setGraphic(backbuttonicon);
+        backButton.setGraphic(backbuttonicon);
 
         // Pane che contiene il LineChart
         BorderPane paneGraph3 = new BorderPane();
@@ -68,26 +69,23 @@ public class LocationStatsView extends Scene {
         paneGraph3.setCenter(lineChart);
         paneGraph3.setMaxWidth(600);
         paneGraph3.setMaxHeight(400);
-/*
+
+
         BorderPane contenuto = new BorderPane();
 
         Region spacer = new Region();
         spacer.setMinHeight(40);
         contenuto.setBottom(spacer);
         contenuto.setTop(backButton);
-        contenuto.setLeft(paneGraph2);
-        contenuto.setPadding(new Insets(20));
+        contenuto.setCenter(paneGraph3);
 
-        ArtistStatsView artistPane = new ArtistStatsView();
-        this.artistPane=artistPane;
-        contenuto.setLeft(artistPane); // o rimetto SetRight????
-*/
+        contenuto.setPadding(new Insets(20));
         BorderPane.setAlignment(backButton, Pos.TOP_RIGHT);
         BorderPane.setMargin(backButton, new Insets(10));
-        this.backButton = backButton;
+
 
         layout.setTop(ManagerUpperBar.getIstance());
-        layout.setCenter(paneGraph3);
+        layout.setCenter(contenuto);
         layout.setBottom(LowerBar.getInstance());
 
     }

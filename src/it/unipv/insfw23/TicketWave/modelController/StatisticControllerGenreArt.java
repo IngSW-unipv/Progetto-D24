@@ -23,6 +23,7 @@ public class StatisticControllerGenreArt {
             public void handle(MouseEvent actionEvent){
                 System.out.println("PASSO ALLE LOCALITA'");
                 LocationStatsView locationView = new LocationStatsView("Lazza");
+                StatisticControllerLocation locStatController = new StatisticControllerLocation(mainStage, genreView, locationView);
                 mainStage.setScene(locationView);
             }
         };
