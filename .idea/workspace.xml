@@ -4,10 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Commit Stats domain">
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Cambiamento UI+ Controller per TicketPage e PaySelectionData">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/event/Event.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/event/Event.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/statistics/StatisticsHandlerArrayList.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain/statistics/StatisticsHandlerArrayList.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -98,7 +96,7 @@
       <recent name="it.unipv.insfw23.TicketWave.modelDomain.user" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainStageView">
+  <component name="RunManager" selected="Application.ProvaRun">
     <configuration name="ArtistStatsView" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.ArtistStatsView" />
       <module name="Progetto-D24" />
@@ -131,7 +129,7 @@
     <configuration name="MainStageView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.MainStageView" />
       <module name="Progetto-D24" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\david\Documents\openjfx-21.0.2_windows-x64_bin-sdk\javafx-sdk-21.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\claud\OneDrive\Desktop\JAVAFX21 SDK\javafx-sdk-21.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.unipv.insfw23.TicketWave.modelView.*" />
@@ -224,8 +222,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainStageView" />
         <item itemvalue="Application.ProvaRun" />
+        <item itemvalue="Application.MainStageView" />
         <item itemvalue="Application.Prova" />
         <item itemvalue="Application.TicketPageView" />
         <item itemvalue="Application.ResearchView" />
@@ -279,7 +277,8 @@
       <workItem from="1708590862043" duration="11049000" />
       <workItem from="1708637932234" duration="263000" />
       <workItem from="1708638208252" duration="69000" />
-      <workItem from="1708638400493" duration="5136000" />
+      <workItem from="1708638400493" duration="5269000" />
+      <workItem from="1708710867048" duration="638000" />
     </task>
     <task id="LOCAL-00001" summary="Prova int posti su concerto">
       <option name="closed" value="true" />
@@ -537,31 +536,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708643553265</updated>
     </task>
-    <task id="LOCAL-00033" summary="Commit Stats controller+view for Località">
+    <task id="LOCAL-00033" summary="Cambiamento UI+ Controller per TicketPage e PaySelectionData">
       <option name="closed" value="true" />
-      <created>1708701035961</created>
+      <created>1708643650457</created>
       <option name="number" value="00033" />
       <option name="presentableId" value="LOCAL-00033" />
       <option name="project" value="LOCAL" />
-      <updated>1708701035961</updated>
+      <updated>1708643650457</updated>
     </task>
-    <task id="LOCAL-00034" summary="Commit Stats controller+view for Località">
-      <option name="closed" value="true" />
-      <created>1708702380012</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1708702380012</updated>
-    </task>
-    <task id="LOCAL-00035" summary="Commit Stats domain">
-      <option name="closed" value="true" />
-      <created>1708705293815</created>
-      <option name="number" value="00035" />
-      <option name="presentableId" value="LOCAL-00035" />
-      <option name="project" value="LOCAL" />
-      <updated>1708705293815</updated>
-    </task>
-    <option name="localTasksCounter" value="36" />
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -597,8 +580,6 @@
     <MESSAGE value="Commit Statistics controller for Genre" />
     <MESSAGE value="Commit UI: pagina descrizione ticket,seleziona metodo di pagamento e inserimento dati carta" />
     <MESSAGE value="Cambiamento UI+ Controller per TicketPage e PaySelectionData" />
-    <MESSAGE value="Commit Stats controller+view for Località" />
-    <MESSAGE value="Commit Stats domain" />
-    <option name="LAST_COMMIT_MESSAGE" value="Commit Stats domain" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cambiamento UI+ Controller per TicketPage e PaySelectionData" />
   </component>
 </project>

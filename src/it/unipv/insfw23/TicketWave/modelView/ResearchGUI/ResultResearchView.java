@@ -20,6 +20,7 @@ import javafx.stage.Stage;
 
 public class ResultResearchView extends Scene {
     private ResearchNodesView rnv;
+    private ObservableList<String> result; // dove metto i risultati della query, eseguita nel ResearchController
     // costruttore
     public ResultResearchView() {
         super(new Pane(), 1080, 600);
@@ -28,7 +29,7 @@ public class ResultResearchView extends Scene {
     public void scenaResultResearch(){
         // List view per elencare i risultati della ricerca
         ListView<String> list = new ListView<String>();
-        ObservableList<String> result = FXCollections.observableArrayList("Festival1", "Concerto1", "Festival3");
+        ObservableList<String> result = FXCollections.observableArrayList("Festival1", "Concerto1", "Festival3"); // questo andrà tolto una volta fatta la logica nel ResearchController
         list.setPrefSize(400, 600);
         list.setEditable(false);
         list.setItems(result);
@@ -38,7 +39,7 @@ public class ResultResearchView extends Scene {
         contenuto.setSpacing(10);
         contenuto.getChildren().add(rnv.getSearchBar());
         contenuto.getChildren().add(rnv.getSearchButton());
-        contenuto.getChildren().add(rnv.getBarra());
+        contenuto.getChildren().add(rnv.getBar());
 
         HBox resultResearch = new HBox();
         resultResearch.setSpacing(10);
@@ -131,5 +132,13 @@ public class ResultResearchView extends Scene {
         // Creazione scene
         Scene resultResearch = new Scene(vb1, 1080, 600); */
     }
+
+    public ObservableList<String> getResult() {
+        return result;
+    } // lo uso nel ResearchController
+
+    public void setResult(ObservableList<String> result) {
+        this.result = result;
+    } // lo uso nel ResearchController
 }
 
