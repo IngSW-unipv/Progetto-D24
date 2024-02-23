@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelController;
 
 import it.unipv.insfw23.TicketWave.modelView.GenreStatsView;
+import it.unipv.insfw23.TicketWave.modelView.ManagerUpperBar;
 import it.unipv.insfw23.TicketWave.modelView.ResearchView;
 import it.unipv.insfw23.TicketWave.modelView.ResultResearchView;
 import javafx.event.ActionEvent;
@@ -13,14 +14,16 @@ import javafx.stage.Stage;
 public class ResearchController {
     private Stage mainStage;
     // le mie view
+    private ManagerUpperBar mub;
     private ResearchView rv;
     private ResultResearchView rrv;
 
     // costruttore
-    public ResearchController(Stage mainStage, ResearchView rv, ResultResearchView rrv) {
+    public ResearchController(Stage mainStage, ResearchView rv, ResultResearchView rrv, ManagerUpperBar mub) {
         this.mainStage = mainStage;
         this.rv = rv;
         this.rrv = rrv;
+        this.mub = mub;
         setResearchListener();
     }
 
@@ -34,7 +37,7 @@ public class ResearchController {
                 mainStage.setScene(rv);
             }
         };
-        rv.getSearchButton().setOnMouseClicked(researchPressHandler);
+        mub.getSearchButton().setOnMouseClicked(researchPressHandler);
     }
 
 }

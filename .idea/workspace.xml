@@ -4,13 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Cercando di fare i controller e collegare le scene al main stage">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResultResearchView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResultResearchView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ManagerUpperBar.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ManagerUpperBar.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ResearchView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ResearchView.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ResultResearchView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ResultResearchView.java" afterDir="false" />
-    </list>
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Controller SearchButton MainStage" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -539,7 +533,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708627406524</updated>
     </task>
-    <option name="localTasksCounter" value="31" />
+    <task id="LOCAL-00031" summary="Controller SearchButton MainStage">
+      <option name="closed" value="true" />
+      <created>1708673318088</created>
+      <option name="number" value="00031" />
+      <option name="presentableId" value="LOCAL-00031" />
+      <option name="project" value="LOCAL" />
+      <updated>1708673318088</updated>
+    </task>
+    <option name="localTasksCounter" value="32" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -575,6 +577,7 @@
     <MESSAGE value="Commit CustomerUpperBar and ManagerUpperBar" />
     <MESSAGE value="Commit Statistics controller for Genre" />
     <MESSAGE value="Cercando di fare i controller e collegare le scene al main stage" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cercando di fare i controller e collegare le scene al main stage" />
+    <MESSAGE value="Controller SearchButton MainStage" />
+    <option name="LAST_COMMIT_MESSAGE" value="Controller SearchButton MainStage" />
   </component>
 </project>
