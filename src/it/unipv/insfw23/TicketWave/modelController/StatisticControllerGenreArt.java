@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelController;
 
 import it.unipv.insfw23.TicketWave.modelView.GenreStatsView;
+import it.unipv.insfw23.TicketWave.modelView.LocationStatsView;
 import javafx.event.EventHandler;
 import javafx.scene.chart.XYChart;
 import javafx.scene.input.MouseEvent;
@@ -21,8 +22,8 @@ public class StatisticControllerGenreArt {
             @Override
             public void handle(MouseEvent actionEvent){
                 System.out.println("PASSO ALLE LOCALITA'");
-                //GenreStatsView genreView = new GenreStatsView();
-                //mainStage.setScene(genreView);
+                LocationStatsView locationView = new LocationStatsView("Lazza");
+                mainStage.setScene(locationView);
             }
         };
 

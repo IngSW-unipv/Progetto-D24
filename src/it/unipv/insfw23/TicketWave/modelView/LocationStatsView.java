@@ -1,6 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
-import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
+//import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
@@ -12,13 +12,14 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 public class LocationStatsView extends Scene {
-    private String event;
+    private String artistTitle;
     private Button backButton;
     private XYChart<String, Number> LocationSerie;
-    private ArtistStatsView artistPane;
+    //private ArtistStatsView artistPane;
 
-    public LocationStatsView() {
+    public LocationStatsView(String artistTitle) {
         super(new BorderPane(), 1080, 600);
+        this.artistTitle=artistTitle;
         init();
     }
 
@@ -32,11 +33,11 @@ public class LocationStatsView extends Scene {
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
         xAxis.setLabel("Località");
-        yAxis.setLabel("Eventi");
+        yAxis.setLabel("Percentuale");
 
         final LineChart<String, Number> lineChart = new LineChart<String, Number> (xAxis, yAxis);
         lineChart.setStyle("-fx-bar-fill: #ea8928;");
-        lineChart.setTitle("Statistiche sugli eventi nelle varie località");
+        lineChart.setTitle("Statistiche sui biglietti venduti per località:  "+artistTitle);
 
         XYChart.Series<String,Number> series = new XYChart.Series<>();
 
@@ -61,13 +62,13 @@ public class LocationStatsView extends Scene {
 //      backButton.setGraphic(backbuttonicon);
 
         // Pane che contiene il LineChart
-        BorderPane paneGraph2 = new BorderPane();
-        paneGraph2.setBackground((new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY))));
+        BorderPane paneGraph3 = new BorderPane();
+        paneGraph3.setBackground((new Background(new BackgroundFill(Color.WHITE, new CornerRadii(10), Insets.EMPTY))));
         //paneGraph2.setPadding(new Insets(20));
-        paneGraph2.setCenter(lineChart);
-        paneGraph2.setMaxWidth(600);
-        paneGraph2.setMaxHeight(400);
-
+        paneGraph3.setCenter(lineChart);
+        paneGraph3.setMaxWidth(600);
+        paneGraph3.setMaxHeight(400);
+/*
         BorderPane contenuto = new BorderPane();
 
         Region spacer = new Region();
@@ -80,21 +81,13 @@ public class LocationStatsView extends Scene {
         ArtistStatsView artistPane = new ArtistStatsView();
         this.artistPane=artistPane;
         contenuto.setLeft(artistPane); // o rimetto SetRight????
-
+*/
         BorderPane.setAlignment(backButton, Pos.TOP_RIGHT);
         BorderPane.setMargin(backButton, new Insets(10));
         this.backButton = backButton;
 
         layout.setTop(ManagerUpperBar.getIstance());
-        layout.setCenter(contenuto);
-        layout.setBottom(LowerBar.getInstance());
-
-        BorderPane.setAlignment(backButton, Pos.TOP_RIGHT);
-        BorderPane.setMargin(backButton, new Insets(10));
-        this.backButton = backButton;
-
-        layout.setTop(ManagerUpperBar.getIstance());
-        layout.setCenter(contenuto);
+        layout.setCenter(paneGraph3);
         layout.setBottom(LowerBar.getInstance());
 
     }
@@ -103,15 +96,7 @@ public class LocationStatsView extends Scene {
         return LocationSerie;
     }
 
-    public void setEvent(String event) {
-        this.event = event;
-    }
-
     public Button getBackButton(){
         return backButton;
-    }
-
-    public ArtistStatsView getArtistPane() {
-        return artistPane;
     }
 }
