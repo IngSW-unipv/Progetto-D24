@@ -87,30 +87,20 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
             return istance;
         }
 
+    public MenuBar getBar() {
+        return bar;
+    } // usato dalla ResultResearchView
     public TextField getSearchBar() {
         return searchBar;
-    }
-
+    } // lo chiamo nel ResearchController
     public Button getSearchButton() { return searchButton; } // lo chiamo nel ResearchController
-
-    public MenuBar getBarra() {
-        return bar;
-    }
-
-    public Menu getGenre() {
-        return genre;
-    }
-
-    public Menu getProvince() {
-        return province;
-    }
 
     public ArrayList<CheckMenuItem> getPrv() {
         return prv;
-    }
+    } // lo chiamo nel ResearchController
 
     public ArrayList<CheckMenuItem> getGenv() {
         return genv;
-    }
+    } // lo chiamo nel ResearchController
 }
 
