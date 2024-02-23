@@ -8,10 +8,11 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.*;
 public class NotificationHandler implements INotification{
 	
 	private static NotificationHandler istance = null;
-	private int counterNotification;
 	final String msg2 = "E' disponibile un nuovo evento nella tua provincia";
 	final String msg3 = "E' disponibile un nuovo evento del tuo genere preferito";
 	final String msg4 = "E' disponibile un nuovo evento del tuo genere preferito nella tua provincia";
+	private int counterNotification;
+
 	
 	private NotificationHandler(int counterNotification) { //counterNotification -> num di notifiche create finora (sul db)
 		this.counterNotification = counterNotification;
