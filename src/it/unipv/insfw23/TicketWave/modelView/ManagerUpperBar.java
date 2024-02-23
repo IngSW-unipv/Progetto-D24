@@ -41,7 +41,7 @@ public class ManagerUpperBar extends HBox {
         this.statsButton = statsButton;
 
         Button searchButton = new Button();
-        this.searchButton = statsButton;
+        this.searchButton = searchButton;
         /*****************************
         statsButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
