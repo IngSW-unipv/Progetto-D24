@@ -1,6 +1,8 @@
 package it.unipv.insfw23.TicketWave.modelDomain.event;
 
 import java.lang.String;
+import java.util.ArrayList;
+
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 
@@ -16,10 +18,11 @@ public abstract class Event implements EventType {
     private int [] price; // vettore prezzi per i vari tipi di biglietto, es: Vip = 40€, Base = 15€...
     private Genre genre;
     private Manager creator;
+    private ArrayList<String> [] artists;
 
     // costruttore
 
-    public Event(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator) {
+    public Event(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String>[] artists) {
         this.idEvent = idEvent;
         this.name = name;
         this.city = city;
@@ -30,6 +33,7 @@ public abstract class Event implements EventType {
         this.price = price;
         this.genre = genre;
         this.creator = creator;
+        this.artists = artists;
     }
 
 
@@ -140,4 +144,7 @@ public abstract class Event implements EventType {
         return result;
     }
 
+    public ArrayList<String>[] getArtists() {
+        return artists;
+    }
 }

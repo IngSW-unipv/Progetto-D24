@@ -52,9 +52,7 @@ public class ResearchController {
                 mainStage.setScene(rrv);
             }
         };
-        rnv.getSearchButton().setOnAction(actionEvent -> {
-            // logica di ricerca con query SQL
-        });
+        rnv.getSearchButton().setOnMouseClicked(researchPressHandlerResearchView);
         // filtri del genere musicale
         EventHandler<ActionEvent> genreFilterHandler = new EventHandler<ActionEvent>() {
             @Override
