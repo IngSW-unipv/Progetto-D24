@@ -31,7 +31,7 @@ public void initComponents() {
             // Azione da eseguire quando il pulsante viene premuto
             System.out.println("Hai cliccato il bottone Acquista");
             PaymentSelectionView paymentSelectionView = new PaymentSelectionView();
-            PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainStage,paymentSelectionView);
+            PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainStage,paymentSelectionView,ticketPage);
             mainStage.setScene(paymentSelectionView);
         }
 

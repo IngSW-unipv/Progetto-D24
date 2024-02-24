@@ -32,6 +32,8 @@ public class TicketPageView extends Scene {
     private static final Label ticketVipLabel = new Label("Vip Tickets:");
     private static List<Label> labels = new ArrayList<>();
     private Scene scene;
+    private BorderPane layout;
+    private BorderPane root;
 
 
     public TicketPageView(){
@@ -99,6 +101,8 @@ public class TicketPageView extends Scene {
         BorderPane.setMargin(buttonbox, new Insets(30));
         BorderPane.setAlignment(buttonbox, Pos.BOTTOM_RIGHT);
 
+        this.root=root;
+
         // Creazione e visualizzazione della scena
          scene = new Scene(root, 1080, 600);
 
@@ -107,6 +111,10 @@ public class TicketPageView extends Scene {
         layout.setBottom(LowerBar.getInstance());
         layout.setTop(CustomerUpperBar.getIstance());
         setRoot(layout);
+
+        this.layout=layout;
+
+
 
     }
 
@@ -117,6 +125,15 @@ public class TicketPageView extends Scene {
     public Scene getScene() {
         return scene;
     }
+
+    public void reSetBars(){
+        BorderPane temp = new BorderPane();
+        setRoot(temp);
+        layout.setTop(CustomerUpperBar.getIstance());
+        layout.setBottom(LowerBar.getInstance());
+        setRoot(layout);
+    }
+
 }
 
 
