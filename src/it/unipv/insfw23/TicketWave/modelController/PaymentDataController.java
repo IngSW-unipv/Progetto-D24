@@ -20,10 +20,12 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class PaymentDataController {
     private Stage mainStage;
     private PaymentDataM2View paymentDataPage;
+    private TicketPageView ticketpage;
     private PaymentSelectionView paymentPage;
 
-    public PaymentDataController(Stage mainStage, PaymentDataM2View paymentDataPage) {
+    public PaymentDataController(Stage mainStage, PaymentDataM2View paymentDataPage,PaymentSelectionView paymentPage) {
         this.paymentDataPage = paymentDataPage;
+        this.paymentPage=paymentPage;
         this.mainStage = mainStage;
         initComponents();
     }
@@ -37,8 +39,7 @@ public class PaymentDataController {
             public void handle(MouseEvent actionEvent) {
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("Sei ritornato indietro alla paymentSelectionPage");
-                PaymentSelectionView paymentPage= new PaymentSelectionView();
-                PaymentSelectionController paymentSelectionController = new PaymentSelectionController(mainStage,paymentPage);
+                paymentPage.reSetBars();
                 mainStage.setScene(paymentPage);
             }
         };

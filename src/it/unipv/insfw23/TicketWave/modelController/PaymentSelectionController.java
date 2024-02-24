@@ -15,26 +15,16 @@ public class PaymentSelectionController {
     private PaymentSelectionView paymentPage;
     private TicketPageView ticketPage;
 
-    public PaymentSelectionController(Stage mainStage, PaymentSelectionView PaymentPage) {
+    private PaymentDataM2View paymentDataM2View;
+
+    public PaymentSelectionController(Stage mainStage, PaymentSelectionView PaymentPage,TicketPageView ticketPage) {
         this.mainStage = mainStage;
         this.paymentPage = PaymentPage;
+        this.ticketPage=ticketPage;
         initComponents();
     }
 
     public void initComponents(){
-        EventHandler<MouseEvent> turnBackToTicketPage = new EventHandler<>() {
-
-            @Override
-            public void handle(MouseEvent actionEvent) {
-                // Azione da eseguire quando il pulsante viene premuto
-                System.out.println("Sei ritornato indietro alla TicketPage");
-                TicketPageView ticketPage = new TicketPageView();
-                BuyTicketController Buyticket = new BuyTicketController(mainStage,ticketPage);
-                mainStage.setScene(ticketPage);
-            }
-        };
-
-        paymentPage.getBackButton().setOnMouseClicked(turnBackToTicketPage);
 
         EventHandler<MouseEvent> goToPaymentDataPage= new EventHandler<>() {
 
@@ -42,13 +32,28 @@ public class PaymentSelectionController {
             public void handle(MouseEvent actionEvent) {
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("Stai andando alla PaymentDataPage");
-                PaymentDataM2View paymentDataPage = new PaymentDataM2View();
-               PaymentDataController paymentDataController = new PaymentDataController(mainStage,paymentDataPage);
+                PaymentDataM2View paymentDataPage=new PaymentDataM2View();
+                PaymentDataController paymentDataController = new PaymentDataController(mainStage,paymentDataPage,paymentPage);
                 mainStage.setScene(paymentDataPage);
             }
         };
-
         paymentPage.getNextButton().setOnMouseClicked(goToPaymentDataPage);
+        EventHandler<MouseEvent> turnBackToTicketPage = new EventHandler<>() {
+
+            @Override
+            public void handle(MouseEvent actionEvent) {
+                // Azione da eseguire quando il pulsante viene premuto
+                System.out.println("Sei ritornato indietro alla TicketPage");
+              ticketPage.reSetBars();
+                mainStage.setScene(ticketPage);
+            }
+        };
+
+        paymentPage.getBackButton().setOnMouseClicked(turnBackToTicketPage);
+
+
+
+
     }
 }
 

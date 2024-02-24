@@ -30,6 +30,8 @@ public class PaymentSelectionView extends Scene {
     private static final Label totalAmountLabel = new Label();
     private static List<Label> labels = new ArrayList<>();
     private Scene scene;
+    private BorderPane layout;
+    private Pane root;
 
     public PaymentSelectionView(){
         super(new BorderPane(), 1080, 600);
@@ -120,7 +122,19 @@ public class PaymentSelectionView extends Scene {
         layout.setBottom(LowerBar.getInstance());
         layout.setTop(CustomerUpperBar.getIstance());
         setRoot(layout);
+        this.layout=layout;
+        this.root=root;
     }
+
+    public void reSetBars(){
+        BorderPane temp = new BorderPane();
+        setRoot(temp);
+        layout.setTop(CustomerUpperBar.getIstance());
+        layout.setBottom(LowerBar.getInstance());
+        setRoot(layout);
+    }
+
+
 
     public static RadioButton getMethod1Button() {
         return method1Button;
