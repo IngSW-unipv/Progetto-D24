@@ -1,12 +1,18 @@
 package it.unipv.insfw23.TicketWave.modelDomain.statistics;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
+
+import static it.unipv.insfw23.TicketWave.modelDomain.event.Genre.getGenreCodeArray;
+import static it.unipv.insfw23.TicketWave.modelDomain.event.Genre.getGenreNameArray;
+import static it.unipv.insfw23.TicketWave.modelDomain.event.Province.getProvinceCodeArray;
+import static it.unipv.insfw23.TicketWave.modelDomain.event.Province.valueOf;
 
 public class StatisticsHandlerArrayList {
 
@@ -17,7 +23,8 @@ public class StatisticsHandlerArrayList {
         int eventCounter = 0;
         ArrayList<Event> eventList = manager.getEventlist();
 
-        int[] typeCodeArray = eventList.get(0).getTypeCodeArray();
+        int[] typeCodeArray = manager.getTypeCodeArray();
+        ArrayList<String> typeNameArray = new ArrayList<>();
 
         int typeCodeArrayLenght = Array.getLength(typeCodeArray);
         double[] results = new double[typeCodeArrayLenght];
@@ -25,8 +32,8 @@ public class StatisticsHandlerArrayList {
         for (int j = 0; j< Array.getLength(typeCodeArray); j++) {
             for (Event currentEvent: eventList) {
 
-                if(currentEvent.getTypeCode() == typeCodeArray[j]) {
-
+                if(currentEvent.getKeyCode() == typeCodeArray[j]) {
+                    typeNameArray.add(j, currentEvent.getClassName());
                     int maxn = currentEvent.getMaxNumberOfSeats();
                     int soldn = currentEvent.getTicketSoldNumber();
 
@@ -38,16 +45,17 @@ public class StatisticsHandlerArrayList {
             results[j] = results[j]/eventCounter;
             eventCounter = 0;
         }
-        WrapType returnClass = new WrapType(results, typeCodeArray);
+        WrapType returnClass = new WrapType(results, typeNameArray);
         return returnClass;
     }
 
-
+/*
     // la UI non ne ha bisogno se utilizzo nel metodo la classe Wrapper
     public String[] getTypeNameArray(Manager manager) {
         ArrayList<Event> eventList = manager.getEventlist();
         return eventList.get(0).getTypeNameArray();
     }
+*/
 
 
 
@@ -67,7 +75,7 @@ public class StatisticsHandlerArrayList {
 
         for (Event currentEvent: eventList) {
 
-            if(currentEvent.getTypeCode() == typeCode) {
+            if(currentEvent.getKeyCode() == typeCode) {
                 int index = artistNames.indexOf(currentEvent.getArtist);
 
                 if(index >= 0) {
@@ -112,19 +120,19 @@ public class StatisticsHandlerArrayList {
     }
 
 
-
+/*
     //Al suo posto uso il metodo di ArrayList ".indexOf"
     public int ricercaStringa(ArrayList<String> vettore, String parola) {
         int index = -1;
         for (String currentValue: vettore) {
             if (currentValue == parola) {
-                return currentValue.get;
+                return currentValue.indexOf();
             }
         }
 
         return index;
     }
-
+*/
 
 
     public double[] artistStats2(int typeCode, Manager manager) {
@@ -166,18 +174,18 @@ public class StatisticsHandlerArrayList {
 
     public double[] genreStats(int typeCode, Manager manager) {
 
-        Event list[] = manager.getEvent();
-        int genreCodeArray[] = list[0].getGenreCodeArray();
-        double results[];
+        ArrayList<Event> eventList = manager.getEventlist();
+        int[] genreCodeArray= getGenreCodeArray();
+        double[] results = new double[genreCodeArray.length];
         int eventCounter = 0;
 
         for (int j=0; j<Array.getLength(genreCodeArray); j++) {
-            for (int i=0; i<Array.getLength(list); i++) {
+            for (Event currentEvent: eventList) {
 
-                if(list[i].getTypeCode() == typeCode) {
+                if(currentEvent.getKeyCode() == typeCode) {
 
-                    int maxn = list[i].getMaxNumberOfSeats();
-                    int soldn = list[i].getTicketSoldNumber();
+                    int maxn = currentEvent.getMaxNumberOfSeats();
+                    int soldn = currentEvent.getTicketSoldNumber();
 
                     double percResult = (soldn/maxn)*100;
                     eventCounter++;
@@ -188,70 +196,113 @@ public class StatisticsHandlerArrayList {
             results[j] = results[j]/eventCounter;
             eventCounter = 0;
         }
+        WrapType2 resReturn = new WrapType2(results, getGenreNameArray());
         return results;
     }
 
-
+/*
     public String[] getGenreNameArray(Manager manager) {
         Event events[] = manager.getEvent();
         return events[0].getGenreNameArray();
     }
 
+*/
 
 
 
-
-    public double[] provinceStats(int typeCode, String artistName, Manager manager) {
-        Event list[] = manager.getEvent();
-        int provinceCodeArray[] = list[0].getProvinceCodeArray();
+    public WrapType3 provinceStats(int typeCode, String artistName, Manager manager) {
+        ArrayList<Event> eventList = manager.getEventlist();
+        int[] provinceCodeArray = getProvinceCodeArray();
         int eventCounter = 0;
-        double results[];
-        Arrays.fill(results, -1.0);
+        ArrayList<Double> results = new ArrayList<>();
+        ArrayList<String> namesRes = new ArrayList<>();
 
         for(int j=0; j<Array.getLength(provinceCodeArray); j++) {
-            for (int i=0; i<Array.getLength(list); i++) {
-                if (list[i].getTypeCode() == typeCode) {
-                    if(list[i].getArtist() == artistName) {
+            for (Event currentEvent: eventList) {
+                if (currentEvent.getKeyCode() == typeCode) {
+                    if(currentEvent.getArtist() == artistName) {
 
-                        int maxn = list[i].getMaxNumberOfSeats();
-                        int soldn = list[i].getTicketSoldNumber();
+                        Province province = currentEvent.getProvince();
+                        if(namesRes.indexOf(province.name())<0){
+                            namesRes.add(province.name());
+                        }
+                        int index = namesRes.indexOf(province.name());
+
+                        int maxn = currentEvent.getMaxNumberOfSeats();
+                        int soldn = currentEvent.getTicketSoldNumber();
 
                         double percResult = (soldn/maxn)*100;
                         eventCounter++;
-                        results[j] = results[j] + percResult;
+                        results.set(index, (results.get(index) + percResult)); //= results.get(index) + percResult;
                     }
                 }
             }
-            results[j] = results[j]/eventCounter;
+            results.set(j, results.get(j)/eventCounter);
             eventCounter = 0;
         }
-        return results;
+        WrapType3 resLocation = new WrapType3(results, namesRes);
+        return resLocation;
     }
 
-
+/*
     public String[] getProvinceNameArray(Manager manager) {
         Event events[] = manager.getEvent();
         return events[0].getProvinceNameArray();
     }
-
+*/
 }
 
 
 
-class WrapType{
-    private String[] typeNameArray;
-    private Double[] typeResults;
+class WrapType {
+    private ArrayList<String> typeNameArray;
+    private double[] typeResults;
 
-    public WrapType(double[] results, int[] typeCodeArray) {
+    public WrapType(double[] results, ArrayList<String> typeNameArray) {
         this.typeNameArray = typeNameArray;
-        this.typeResults = typeResults;
+        this.typeResults = results;
     }
 
+    public ArrayList<String> getNameArrayType() {
+        return typeNameArray;
+    }
+
+    public double[] getTypeRes() {
+        return typeResults;
+    }
+}
+
+class WrapType2{
+    private String[] typeNameArray;
+    private double[] typeResults;
+
+    public WrapType2(double[] results, String[] typeNameArray) {
+        this.typeNameArray = typeNameArray;
+        this.typeResults = results;
+    }
     public String[] getNameArrayType(){
         return typeNameArray;
     }
 
-    public Double[] getTypeRes(){
+    public double[] getTypeRes(){
+        return typeResults;
+    }
+}
+
+
+class WrapType3{
+    private ArrayList<String> typeNameArray;
+    private ArrayList<Double> typeResults;
+
+    public WrapType3(ArrayList<Double> results, ArrayList<String> typeNameArray) {
+        this.typeNameArray = typeNameArray;
+        this.typeResults = results;
+    }
+    public ArrayList<String> getNameArrayType(){
+        return typeNameArray;
+    }
+
+    public ArrayList<Double> getTypeRes(){
         return typeResults;
     }
 }

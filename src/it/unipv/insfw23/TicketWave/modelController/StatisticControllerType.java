@@ -25,7 +25,7 @@ public class StatisticControllerType {
             public void handle(MouseEvent actionEvent){
                 System.out.println("PASSO AI GENERI E ARTISTI");
                 GenreStatsView genreView = new GenreStatsView();
-                StatisticControllerGenreArt artStat = new StatisticControllerGenreArt(mainStage, genreView);
+                StatisticControllerGenreArt artStat = new StatisticControllerGenreArt(mainStage, typeView, genreView);
                 mainStage.setScene(genreView);
             }
         };

@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.modelController;
 
 import it.unipv.insfw23.TicketWave.modelView.GenreStatsView;
 import it.unipv.insfw23.TicketWave.modelView.LocationStatsView;
+import it.unipv.insfw23.TicketWave.modelView.TypeStatsView;
 import javafx.event.EventHandler;
 import javafx.scene.chart.XYChart;
 import javafx.scene.input.MouseEvent;
@@ -9,10 +10,12 @@ import javafx.stage.Stage;
 
 public class StatisticControllerGenreArt {
     private Stage mainStage;
+    private TypeStatsView typeView;
     private GenreStatsView genreView;
 
-    public StatisticControllerGenreArt(Stage mainStage, GenreStatsView genreView){
+    public StatisticControllerGenreArt(Stage mainStage, TypeStatsView typeView, GenreStatsView genreView){
         this.mainStage=mainStage;
+        this.typeView = typeView;
         this.genreView=genreView;
         initComponents();
     }
@@ -31,6 +34,17 @@ public class StatisticControllerGenreArt {
         for(XYChart.Data<String, Number> data: genreView.getArtistPane().getArtistSerie().getData()){
             data.getNode().setOnMouseClicked(artistBarButtonHandler);
         }
+
+        EventHandler<MouseEvent> backToTypeButtonHandler = new EventHandler<>(){
+            @Override
+            public void handle(MouseEvent actionEvent){
+                System.out.println("TORNO AI TIPI");
+                typeView.reSetBars();
+                mainStage.setScene(typeView);
+            }
+        };
+
+        genreView.getBackButton().setOnMouseClicked(backToTypeButtonHandler);
     }
 
 }
