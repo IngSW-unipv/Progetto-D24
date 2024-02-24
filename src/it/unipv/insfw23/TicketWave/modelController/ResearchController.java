@@ -13,22 +13,21 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class ResearchController {
-    private Stage mainStage;
+    private final Stage mainStage;
     // le mie view
-    private ManagerUpperBar mub;
-    private ResearchNodesView rnv;
     private ResultResearchView rrv;
+    private final ResearchView rv;
 
     // costruttore
-    public ResearchController(Stage mainStage, ResearchNodesView rnv, ResultResearchView rrv, ManagerUpperBar mub) {
+    public ResearchController(Stage mainStage, ResearchView rv) {
         this.mainStage = mainStage;
-        this.rnv = rnv;
-        this.rrv = rrv;
-        this.mub = mub;
+        this.rv = rv;
         setResearchListener();
     }
 
     public void setResearchListener(){
+        ManagerUpperBar mub = ManagerUpperBar.getIstance();
+        ResearchNodesView rnv = ResearchNodesView.getIstance();
         // Pressione del tasto della lente di ingrandimento sul Main Stage
         EventHandler<MouseEvent> researchPressHandlerMainStage = new EventHandler<>(){
             @Override

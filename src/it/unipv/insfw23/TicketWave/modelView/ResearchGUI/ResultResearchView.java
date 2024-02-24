@@ -18,6 +18,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import static javafx.application.Application.launch;
+
 public class ResultResearchView extends Scene {
     private ResearchNodesView rnv;
     private ObservableList<String> result; // dove metto i risultati della query, eseguita nel ResearchController
@@ -27,7 +29,7 @@ public class ResultResearchView extends Scene {
         scenaResultResearch();
     }
     public void scenaResultResearch(){
-        // List view per elencare i risultati della ricerca
+        // List view per elencare i risultati della ricerca FACCIO TABLE VIEW!!!!!!!!!!!
         ListView<String> list = new ListView<String>();
         ObservableList<String> result = FXCollections.observableArrayList("Festival1", "Concerto1", "Festival3"); // questo andrà tolto una volta fatta la logica nel ResearchController
         list.setPrefSize(400, 600);
