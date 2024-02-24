@@ -27,10 +27,10 @@ public class PaymentDataM2View extends Scene {
     private static Label cvcLabel = new Label("CVC:");
     private static  final TextField insertName = new TextField();
     private static  final TextField insertSurname = new TextField();
-    private static final TextField insertNC = new TextField();
-    private static final  TextField insertMM = new TextField();
-    private static final  TextField insertYY = new TextField();
-    private static final  TextField insertcvc = new TextField();
+    private static TextField insertNC = new TextField();
+    private static  TextField insertMM = new TextField();
+    private static   TextField insertYY = new TextField();
+    private static  TextField insertcvc = new TextField();
     private static  Button backButton = new Button();
     private static Button forwardButton = new Button();
 
@@ -77,11 +77,8 @@ public class PaymentDataM2View extends Scene {
         }
 
 
-        // Aggiunta di testo predefinito per alcuni text field
-        insertMM.setText("MM");
-        insertYY.setText("YY");
-        insertcvc.setText("1234");
-
+        
+        
         GridPane dataInput = new GridPane();
         dataInput.setAlignment(Pos.TOP_LEFT);
         dataInput.setHgap(10);
@@ -118,5 +115,57 @@ public class PaymentDataM2View extends Scene {
 
     public static Button getBackButton() {
         return backButton;
+    }
+
+    public static Label getCvcLabel() {
+        return cvcLabel;
+    }
+
+    public static Label getNameLabel() {
+        return nameLabel;
+    }
+
+    public static Label getSurnameLabel() {
+        return surnameLabel;
+    }
+
+    public static Label getNcLabel() {
+        return ncLabel;
+    }
+
+    public static Label getExpirationLabel() {
+        return expirationLabel;
+    }
+
+    public static Button getForwardButton() {
+        return forwardButton;
+    }
+
+    public static List<TextField> getTextFields() {
+        return textFields;
+    }
+
+    public static List<Label> getLabels() {
+        return labels;
+    }
+
+    public Scene getScene() {
+        return scene;
+    }
+
+    public static TextField getInsertcvc() {
+        return insertcvc;
+    }
+
+    public static TextField getInsertNC() {
+        return insertNC;
+    }
+
+    public static TextField getInsertMM() {
+        return insertMM;
+    }
+
+    public static TextField getInsertYY() {
+        return insertYY;
     }
 }

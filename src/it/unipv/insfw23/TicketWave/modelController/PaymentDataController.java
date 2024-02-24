@@ -10,9 +10,12 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import javafx.scene.control.TextField;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
+
+
 
 public class PaymentDataController {
     private Stage mainStage;
@@ -33,7 +36,7 @@ public class PaymentDataController {
             @Override
             public void handle(MouseEvent actionEvent) {
                 // Azione da eseguire quando il pulsante viene premuto
-                System.out.println("Sei ritornato indietro alla paymentPage");
+                System.out.println("Sei ritornato indietro alla paymentSelectionPage");
                 PaymentSelectionView paymentPage= new PaymentSelectionView();
                 PaymentSelectionController paymentSelectionController = new PaymentSelectionController(mainStage,paymentPage);
                 mainStage.setScene(paymentPage);
@@ -44,8 +47,38 @@ public class PaymentDataController {
 
 
 
-    }
+
+        addCharacterLimit(paymentDataPage.getInsertNC(), 16);
+        addCharacterLimit(paymentDataPage.getInsertMM(), 2);
+        addCharacterLimit(paymentDataPage.getInsertYY(), 2);
+        addCharacterLimit(paymentDataPage.getInsertcvc(), 4);
 
 
     }
+
+    // Metodo per aggiungere il limite di caratteri a un TextField
+    private void addCharacterLimit(TextField textField, int limit) {  // metodo che mi permette di avere un limite sui textfields
+        textField.textProperty().addListener(new ChangeListener<String>() {
+            @Override
+            public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+                if (newValue.length() > limit) {
+                    textField.setText(oldValue); // Revert back to old value
+                }
+            }
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+    }
+
+
+
 

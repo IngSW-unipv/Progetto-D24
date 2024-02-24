@@ -14,13 +14,13 @@ public class ProvaRun extends Application {
 
         try {
             // Istanzia la TicketPageView
-            PaymentSelectionView paymentSelectionView=new PaymentSelectionView();
+            TicketPageView ticketPageView=new TicketPageView();
+            BuyTicketController buyTicketController=new BuyTicketController(primaryStage,ticketPageView);
 
-            PaymentSelectionController paymentSelectionController=new PaymentSelectionController(primaryStage,paymentSelectionView);
-           paymentSelectionController.initComponents(); // Inizializza i componenti del controller
+           buyTicketController.initComponents(); // Inizializza i componenti del controller
 
             // Crea la scena principale utilizzando la TicketPageView
-            Scene scene = paymentSelectionView;
+            Scene scene = ticketPageView;
 
             // Imposta la scena principale sullo stage e mostra lo stage
             primaryStage.setScene(scene);
