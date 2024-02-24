@@ -28,7 +28,7 @@ public class ResearchController {
     public void setResearchListener(){
         ManagerUpperBar mub = ManagerUpperBar.getIstance();
         ResearchNodesView rnv = ResearchNodesView.getIstance();
-        // Pressione del tasto della lente di ingrandimento sul Main Stage
+ /*       // Pressione del tasto della lente di ingrandimento sul Main Stage
         EventHandler<MouseEvent> researchPressHandlerMainStage = new EventHandler<>(){
             @Override
             public void handle(MouseEvent actionEvent){
@@ -37,7 +37,7 @@ public class ResearchController {
                 mainStage.setScene(rv);
             }
         };
-        mub.getSearchButton().setOnMouseClicked(researchPressHandlerMainStage);
+        mub.getSearchButton().setOnMouseClicked(researchPressHandlerMainStage); */
 
         // click ricerca sulla ResearchNodesView
         EventHandler<MouseEvent> researchPressHandlerResearchView = new EventHandler<>(){
@@ -45,9 +45,6 @@ public class ResearchController {
             public void handle(MouseEvent actionEvent){
                 System.out.println("Faccio la query di ricerca");
                 ResultResearchView rrv = new ResultResearchView(); // vado nella scena della ResultResearchView
-                ResearchNodesView rnv = ResearchNodesView.getIstance(); // prendo l'unica istanza del Singleton
-                // rnv.getSearchBar()
-
                 mainStage.setScene(rrv);
             }
         };

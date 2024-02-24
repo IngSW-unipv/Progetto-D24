@@ -54,8 +54,6 @@ public class ResearchView extends Scene{
         box1.getChildren().add(rnv.getSearchBar());
         box1.getChildren().add(rnv.getSearchButton());
 
-        //contenuto.getChildren().add(rnv.getBarra());
-
         // Creo il VBox che contiene gli HBox, l'Upper Bar e la Lower Bar
         VBox vb1 = new VBox();
         vb1.getChildren().addAll(ManagerUpperBar.getIstance(), box1, LowerBar.getInstance());
