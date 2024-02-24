@@ -63,7 +63,7 @@ public class StatisticsHandlerArrayList {
 
 
 
-    public ArrayList<Double> artistStats(int typeCode, Manager manager) {
+    public WrapType3 artistStats(int typeCode, Manager manager) {
 
         ArrayList<Event> eventList = manager.getEventlist();
         ArrayList<String> artistNames = new ArrayList<>();
@@ -100,14 +100,15 @@ public class StatisticsHandlerArrayList {
                     int soldn = currentEvent.getTicketSoldNumber();
 
                     double percResult = (soldn/maxn)*100;
-                    artistCounter.add(newindex, 1);
-                    //artistCounter.set(newindex, artistCounter.get(newindex) + 1);
-                    results.add(newindex,results.get(index) + percResult);
+                    //artistCounter.add(newindex, 1);
+                    artistCounter.set(newindex, artistCounter.get(newindex) + 1);
+                    results.add(newindex, percResult);
                     //results.get(index) = results.get(index) + percResult;
                 }
             }
         }
-        if (artistNames.lastIndexOf() == results.lastIndexOf()) {
+    /*
+        if (artistNames.size() == results.size()) {
             for (int indexMod=0; indexMod<Array.getLength(results); indexMod++ ) {
                 for (Integer currentArtistCount : artistCounter) {
 
@@ -116,7 +117,14 @@ public class StatisticsHandlerArrayList {
                 }
             }
         }
-        return results;   //classe wrapper per restituire due array ceh servono, ovvero artistNames creata, e results
+    */
+        if (artistNames.size() == results.size()){
+            for (int indexMod = 0; indexMod < artistNames.size(); indexMod++){
+                results.set(indexMod, (results.get(indexMod)/ artistCounter.get(indexMod)));
+            }
+        }
+        WrapType3 wrapRes = new WrapType3(results, artistNames);
+        return wrapRes;   //classe wrapper per restituire due array ceh servono, ovvero artistNames creata, e results
     }
 
 
@@ -129,12 +137,11 @@ public class StatisticsHandlerArrayList {
                 return currentValue.indexOf();
             }
         }
-
         return index;
     }
 */
 
-
+/*
     public double[] artistStats2(int typeCode, Manager manager) {
         Event list[] = manager.getEvent();
         String artistNames[];
@@ -169,7 +176,7 @@ public class StatisticsHandlerArrayList {
         return results;
     }
 
-
+*/
 
 
     public double[] genreStats(int typeCode, Manager manager) {
