@@ -173,9 +173,7 @@ public class StatisticsHandlerArrayList {
         }
         return results;
     }
-
 */
-
 
     public double[] genreStats(int typeCode, Manager manager) {
 
