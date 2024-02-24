@@ -19,14 +19,20 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class CustomerView extends Application {
+public class CustomerView extends Scene {
     private CustomerUpperBar customerUpperBar;
     private  LowerBar   lowerBar;
-    @Override
-    public void start(Stage primaryStage) {
 
 
+    // private final
+    public CustomerView() {
+        super(new BorderPane(), 1080, 600);
+        initComponents();
 
+    }
+
+
+    private void initComponents(){
 
         BorderPane root = new BorderPane();
         Scene scene = new Scene(root, 800, 600);
@@ -75,15 +81,15 @@ public class CustomerView extends Application {
 
 
 
-        Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
+       /*mage icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
         primaryStage.getIcons().add(icon);
         primaryStage.setWidth(1080);
         primaryStage.setHeight(600);
 
         primaryStage.setScene(scene);
         primaryStage.setTitle("TicketWave");
-        primaryStage.show();
-    }
+        primaryStage.show();*/
+
 
 
     /*
@@ -91,8 +97,6 @@ public class CustomerView extends Application {
     Label notifyLabel = new Label(testoNotifica);
     notifyBox.getChildren().add(notificaLabel);
 }*/
-    public static void main(String[] args) {
-        launch(args);
-    }
-}
+
+}}
 

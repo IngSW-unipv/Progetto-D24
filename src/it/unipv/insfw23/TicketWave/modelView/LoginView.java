@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
+import it.unipv.insfw23.TicketWave.modelController.LoginController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -19,9 +20,18 @@ import javafx.scene.text.Font;
 
 
 public class LoginView extends Application {
+    private Button loginButton = new Button("Login");
+    private Button regButton = new Button("Registrati");
+    private SignUpView signUpView= new SignUpView();
+    private CustomerView customerView= new CustomerView();
+
+    public Button getRegButton() {
+        return regButton;
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+
 
 
         GridPane grid = new GridPane();
@@ -71,12 +81,12 @@ public class LoginView extends Application {
         managerRadioButton.setToggleGroup(accountTypeToggleGroup);
         GridPane.setConstraints(managerRadioButton, 1, 0);
 
-        Button loginButton = new Button("Login");
+
         GridPane.setConstraints(loginButton, 1, 5);
 
 
 
-        Button regButton = new Button("Registrati");
+
         GridPane.setConstraints(regButton, 1, 6);
 
        /* loginButton.setOnAction(e -> {
@@ -123,10 +133,16 @@ public class LoginView extends Application {
         primaryStage.setTitle("TicketWave");
 
         Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
+
+        LoginController loginController = new LoginController(primaryStage, signUpView, customerView, this);
         primaryStage.getIcons().add(icon);
         primaryStage.setWidth(1080);
         primaryStage.setHeight(600);
         primaryStage.show();
+    }
+
+    public Button getLoginButton() {
+        return loginButton;
     }
 
     public static void main(String[] args) {
