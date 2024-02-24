@@ -233,11 +233,11 @@ public class StatisticsHandlerArrayList {
 
                         double percResult = (soldn/maxn)*100;
                         eventCounter++;
-                        results.get(index) += percResult;
+                        results.set(index, (results.get(index) + percResult)); //= results.get(index) + percResult;
                     }
                 }
             }
-            results.get(j) = results.get(j)/eventCounter;
+            results.set(j, results.get(j)/eventCounter);
             eventCounter = 0;
         }
         WrapType3 resLocation = new WrapType3(results, namesRes);
