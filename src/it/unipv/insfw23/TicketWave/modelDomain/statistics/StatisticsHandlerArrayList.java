@@ -170,7 +170,6 @@ public class StatisticsHandlerArrayList {
                     j++;
                 }
             }
-
         }
         return results;
     }
