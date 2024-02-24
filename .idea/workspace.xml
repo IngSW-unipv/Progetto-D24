@@ -4,27 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Cambiamento UI+ Controller per TicketPage e PaySelectionData">
-      <change afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelController/PaymentSelectionController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Progetto-D24.iml" beforeDir="false" afterPath="$PROJECT_DIR$/Progetto-D24.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/BuyTicketController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/BuyTicketController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/PaymentDataController$LimitedNumberTextFieldListener.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/PaymentDataController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/PaymentDataController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/ResearchController$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/ResearchController$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/ResearchController$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/ResearchController$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/ResearchController.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/ResearchController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/StatisticControllerLocation$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelController/StatisticControllerLocation$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ProvaRun.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ProvaRun.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResearchGUI/ResearchNodesView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResearchGUI/ResearchNodesView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResearchGUI/ResearchView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResearchGUI/ResearchView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResearchGUI/ResultResearchView.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/Progetto-D24/it/unipv/insfw23/TicketWave/modelView/ResearchGUI/ResultResearchView.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelController/BuyTicketController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelController/BuyTicketController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelController/PaymentDataController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelController/PaymentDataController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/PaymentDataM2View.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/PaymentDataM2View.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ProvaRun.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ProvaRun.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ResearchGUI/ResearchView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ResearchGUI/ResearchView.java" afterDir="false" />
-    </list>
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Cambiamento UI+ Controller per TicketPage e PaySelectionData" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -614,6 +594,7 @@
     <MESSAGE value="Commit Statistics controller for Genre" />
     <MESSAGE value="Commit UI: pagina descrizione ticket,seleziona metodo di pagamento e inserimento dati carta" />
     <MESSAGE value="Cambiamento UI+ Controller per TicketPage e PaySelectionData" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cambiamento UI+ Controller per TicketPage e PaySelectionData" />
+    <MESSAGE value="Cambiamento UI+cambio scena controller" />
+    <option name="LAST_COMMIT_MESSAGE" value="Cambiamento UI+cambio scena controller" />
   </component>
 </project>
