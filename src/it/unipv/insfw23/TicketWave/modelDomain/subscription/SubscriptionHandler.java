@@ -19,6 +19,7 @@ public class SubscriptionHandler {
 
 		if (checkPayment == true) {
 			manager.setSubscription(subscription);
+			//manager.setDataSub(timestamp);
 		}
 		else {
 			manager.setSubscription(-1);
