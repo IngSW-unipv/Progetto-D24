@@ -77,5 +77,6 @@ public abstract class User {
 		notifications.add(n);
 	}
 
-	
+
+	public abstract boolean paymentMethod(User user);
 }

@@ -22,6 +22,8 @@ public class GenreStatsView extends Scene {
     private Button backButton;
     private XYChart<String, Number> genreSerie;
     private ArtistStatsView artistPane;
+    private BorderPane layout;
+    private BorderPane contenuto;
 
     public GenreStatsView(){
         super(new BorderPane(), 1080, 600);
@@ -70,7 +72,7 @@ public class GenreStatsView extends Scene {
         backButton.setStyle("-fx-background-color: rgb(27,84,161)");
         backbuttonicon.setFitHeight(28);
         backbuttonicon.setFitWidth(30);
-//      backButton.setGraphic(backbuttonicon);
+        backButton.setGraphic(backbuttonicon);
 
 
 
@@ -91,6 +93,8 @@ public class GenreStatsView extends Scene {
         contenuto.setLeft(paneGraph2);
         contenuto.setPadding(new Insets(20));
 
+        this.contenuto = contenuto;
+
         ArtistStatsView artistPane = new ArtistStatsView();
         this.artistPane=artistPane;
         contenuto.setRight(artistPane);
@@ -102,6 +106,7 @@ public class GenreStatsView extends Scene {
         layout.setTop(ManagerUpperBar.getIstance());
         layout.setCenter(contenuto);
         layout.setBottom(LowerBar.getInstance());
+        this.layout = layout;
 
     }
 
@@ -119,5 +124,14 @@ public class GenreStatsView extends Scene {
 
     public ArtistStatsView getArtistPane() {
         return artistPane;
+    }
+
+    public void reSetBars(){
+        BorderPane temp = new BorderPane();
+        setRoot(temp);
+        layout.setTop(ManagerUpperBar.getIstance());
+        layout.setCenter(contenuto);
+        layout.setBottom(LowerBar.getInstance());
+        setRoot(layout);
     }
 }

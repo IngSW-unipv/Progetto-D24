@@ -24,7 +24,8 @@ public class StatisticControllerLocation {
                 @Override
                 public void handle(MouseEvent actionEvent){
                     System.out.println("TORNO AI GENERI E ARTISTI");
-                    //mainStage.setScene(genreView);
+                    genreView.reSetBars();
+                    mainStage.setScene(genreView);
                 }
             };
 

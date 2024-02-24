@@ -7,16 +7,16 @@ import java.util.ArrayList;
 import java.lang.String;
 
 public class Manager extends User {
-    private String iban;
+    private int [] creditCard= new int[16];
     private  int maxNumberofEvents;
     private   int subscription;
     private ArrayList <Event> event;
 
     private int CounterCreatedEvents;
 
-    public Manager( String name, String surname,String dateOfBirth,String email,String password,int provinceOfResidence, String iban,ArrayList <Event> event , int maxNumberofEvents){
+    public Manager( String name, String surname,String dateOfBirth,String email,String password,int provinceOfResidence, int [] creditCard,ArrayList <Event> event , int maxNumberofEvents){
         super (name,surname,dateOfBirth,email,password,provinceOfResidence);
-        this.iban=iban;
+        this.creditCard=creditCard;
         this.event=event;
         this.maxNumberofEvents=maxNumberofEvents;
         this.subscription=0;
@@ -29,15 +29,6 @@ public class Manager extends User {
     }
 
     //getters and setters
-
-    public String getIban() {
-        return iban;
-    }
-
-    public void setIban(String iban) {
-        this.iban = iban;
-    }
-
 
     public int getMaxNumberofEvents() {
         return maxNumberofEvents;
@@ -55,7 +46,9 @@ public class Manager extends User {
         this.subscription = subscription;
     }
 
-
+    public int[] getCreditCard() {
+        return creditCard;
+    }
 
     public void setEvent(ArrayList<Event> event) {
         this.event = event;
@@ -118,31 +111,17 @@ public class Manager extends User {
         return event;
     }
 
+    public int[] getTypeCodeArray(){
+        int[] array = {1, 2, 3, 4};
+        return array;
+    }
+/*
     @Override
     public boolean paymentMethod(User user) {
         return true;
     }
+*/
 
-
-    // segue il metodo notify, ma si rifà al metodo di object..override o cambio nome? tipo "notifyM"?
-//tipo notifyM?
-
-    /*
-    public void notify(){
-
-        if (subscription==1) {
-
-            baseNotify();
-        }
-        else {
-            if (subscription==2){
-                premiumNotify();
-            }
-            //come dobbiamo gestire se l'abbonamento è scaduto? subscription=3, mandiamo exception?
-        }
-    }
-
-     */
 
 
 }

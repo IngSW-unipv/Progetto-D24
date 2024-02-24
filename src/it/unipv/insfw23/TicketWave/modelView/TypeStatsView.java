@@ -27,6 +27,8 @@ public class TypeStatsView extends Scene {
 
     private BarChart barChart;
     private XYChart.Series<Number, String> serie;
+    private BorderPane layout;
+    private Pane contenuto;
    // private Object ManagerUpperBar;
 
     public TypeStatsView(){
@@ -74,11 +76,12 @@ public class TypeStatsView extends Scene {
         graphPane.setMaxWidth(600);
         graphPane.setMaxHeight(400);
 
+        this.contenuto = graphPane;
 
         layout.setCenter(graphPane);
         layout.setBottom(LowerBar.getInstance());
         layout.setTop(ManagerUpperBar.getIstance());
-
+        this.layout = layout;
         setRoot(layout);
 
     }
@@ -89,5 +92,14 @@ public class TypeStatsView extends Scene {
 
     public XYChart.Series<Number, String> getSerie() {
         return serie;
+    }
+
+    public void reSetBars(){
+        BorderPane temp = new BorderPane();
+        setRoot(temp);
+        layout.setTop(ManagerUpperBar.getIstance());
+        layout.setCenter(contenuto);
+        layout.setBottom(LowerBar.getInstance());
+        setRoot(layout);
     }
 }

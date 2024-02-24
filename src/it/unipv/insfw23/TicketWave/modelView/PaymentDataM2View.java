@@ -27,10 +27,13 @@ public class PaymentDataM2View extends Scene {
     private static Label cvcLabel = new Label("CVC:");
     private static  final TextField insertName = new TextField();
     private static  final TextField insertSurname = new TextField();
-    private static final TextField insertNC = new TextField();
-    private static final  TextField insertMM = new TextField();
-    private static final  TextField insertYY = new TextField();
-    private static final  TextField insertcvc = new TextField();
+    private static TextField insertNC = new TextField();
+    private static  TextField insertMM = new TextField();
+    private static   TextField insertYY = new TextField();
+    private static  TextField insertcvc = new TextField();
+    private static  Button backButton = new Button();
+    private static Button forwardButton = new Button();
+
     private static  List<TextField> textFields = new ArrayList<>();
     private static  List<Label> labels = new ArrayList<>();
     private Scene scene;
@@ -44,12 +47,18 @@ public class PaymentDataM2View extends Scene {
     private void initComponents() {
 
         Image forwardarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/nextArrow.png");
-        Button forwardButton = new Button();
         forwardButton.setGraphic(new ImageView(forwardarrowlogo));
         forwardButton.setPrefWidth(forwardarrowlogo.getWidth());
         forwardButton.setPrefHeight(forwardarrowlogo.getHeight());
         forwardButton.setPadding(new Insets(0));
         forwardButton.setStyle("-fx-background-color: rgb(255,255,255)");
+
+        Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/backArrow.png");
+        backButton.setGraphic(new ImageView(backarrowlogo));
+        backButton.setPrefWidth(backarrowlogo.getWidth());
+        backButton.setPrefHeight(backarrowlogo.getHeight());
+        backButton.setPadding(new Insets(0));
+        backButton.setStyle("-fx-background-color: rgb(255,255,255)");
 
         textFields.add(insertMM);
         textFields.add(insertYY);
@@ -68,11 +77,8 @@ public class PaymentDataM2View extends Scene {
         }
 
 
-        // Aggiunta di testo predefinito per alcuni text field
-        insertMM.setText("MM");
-        insertYY.setText("YY");
-        insertcvc.setText("1234");
-
+        
+        
         GridPane dataInput = new GridPane();
         dataInput.setAlignment(Pos.TOP_LEFT);
         dataInput.setHgap(10);
@@ -89,8 +95,11 @@ public class PaymentDataM2View extends Scene {
         root.setStyle("-fx-background-color: rgb(255,255,255)");
         root.setPadding(new Insets(10));
         root.setCenter(dataInput);
-        root.setBottom(forwardButton);
+        root.setRight(forwardButton);
+        root.setLeft(backButton);
         BorderPane.setAlignment(forwardButton, Pos.BOTTOM_RIGHT);
+        BorderPane.setAlignment(backButton,Pos.BOTTOM_LEFT);
+
 
         BorderPane layout= new BorderPane();
         layout.setStyle("-fx-background-color: rgb(27,84,161)");
@@ -101,5 +110,62 @@ public class PaymentDataM2View extends Scene {
 
 
 
+    }
+
+
+    public static Button getBackButton() {
+        return backButton;
+    }
+
+    public static Label getCvcLabel() {
+        return cvcLabel;
+    }
+
+    public static Label getNameLabel() {
+        return nameLabel;
+    }
+
+    public static Label getSurnameLabel() {
+        return surnameLabel;
+    }
+
+    public static Label getNcLabel() {
+        return ncLabel;
+    }
+
+    public static Label getExpirationLabel() {
+        return expirationLabel;
+    }
+
+    public static Button getForwardButton() {
+        return forwardButton;
+    }
+
+    public static List<TextField> getTextFields() {
+        return textFields;
+    }
+
+    public static List<Label> getLabels() {
+        return labels;
+    }
+
+    public Scene getScene() {
+        return scene;
+    }
+
+    public static TextField getInsertcvc() {
+        return insertcvc;
+    }
+
+    public static TextField getInsertNC() {
+        return insertNC;
+    }
+
+    public static TextField getInsertMM() {
+        return insertMM;
+    }
+
+    public static TextField getInsertYY() {
+        return insertYY;
     }
 }
