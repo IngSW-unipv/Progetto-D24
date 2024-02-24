@@ -1,29 +1,23 @@
 package it.unipv.insfw23.TicketWave.modelController;
 
-import it.unipv.insfw23.TicketWave.modelView.PaymentDataM2View;
+import it.unipv.insfw23.TicketWave.modelView.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.TicketPageView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
-
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 
-
-public class PaymentDataController {
+public class PaymentDataMController {
     private Stage mainStage;
-    private PaymentDataM2View paymentDataPage;
+    private PaymentDataMView paymentDataPage;
     private TicketPageView ticketpage;
     private PaymentSelectionView paymentPage;
 
-    public PaymentDataController(Stage mainStage, PaymentDataM2View paymentDataPage,PaymentSelectionView paymentPage) {
+    public PaymentDataMController(Stage mainStage, PaymentDataMView paymentDataPage, PaymentSelectionView paymentPage) {
         this.paymentDataPage = paymentDataPage;
         this.paymentPage=paymentPage;
         this.mainStage = mainStage;
@@ -57,7 +51,6 @@ public class PaymentDataController {
 
     }
 
-    // Metodo per aggiungere il limite di caratteri a un TextField
     private void addCharacterLimit(TextField textField, int limit) {  // metodo che mi permette di avere un limite sui textfields
         textField.textProperty().addListener(new ChangeListener<String>() {
             @Override
