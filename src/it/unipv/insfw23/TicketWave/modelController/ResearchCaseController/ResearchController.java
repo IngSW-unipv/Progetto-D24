@@ -28,16 +28,6 @@ public class ResearchController {
     public void setResearchListener(){
         ManagerUpperBar mub = ManagerUpperBar.getIstance();
         ResearchNodesView rnv = ResearchNodesView.getIstance();
- /*       // Pressione del tasto della lente di ingrandimento sul Main Stage
-        EventHandler<MouseEvent> researchPressHandlerMainStage = new EventHandler<>(){
-            @Override
-            public void handle(MouseEvent actionEvent){
-                System.out.println("Vado alla tab della ricerca");
-                ResearchView rv = new ResearchView();
-                mainStage.setScene(rv);
-            }
-        };
-        mub.getSearchButton().setOnMouseClicked(researchPressHandlerMainStage); */
 
         // click ricerca sulla ResearchNodesView
         EventHandler<MouseEvent> researchPressHandlerResearchView = new EventHandler<>(){
@@ -62,36 +52,6 @@ public class ResearchController {
                 }
             }
         };
-
-        // filtri per provincia HO IL CONTROLLER A PARTE PER LA SUA GESTIONE
-     /*   EventHandler<ActionEvent> provinceFilterHandler = new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                CheckMenuItem checkMenuItem = new CheckMenuItem();
-                int i = 0;
-                checkMenuItem = rnv.getPrv().get(i);
-                // Custom logic for handling the CheckMenuItem's event
-                if (checkMenuItem.isSelected()) {
-                    System.out.println(checkMenuItem.getText() + " is selected");
-                } else {
-                    System.out.println(checkMenuItem.getText() + " is deselected");
-                }
-                /*ResearchNodesView rnv = ResearchNodesView.getIstance(); // prendo l'unica istanza del Singleton
-                int i = 0;
-                for (CheckMenuItem cmi : rnv.getPrv()) { // checko i checkMenuItem selezionati per la query filtrata per provincia/e
-                    int finalI = i;
-                    rnv.getPrv().get(i).setOnAction(event -> handleCheckMenuItem(rnv.getPrv().get(finalI)));
-                    i++;
-                }*/
-   /*         }
-        };
-        int i = 0;
-        for (CheckMenuItem cmi : rnv.getPrv()) { // checko i checkMenuItem selezionati per la query filtrata per provincia/e
-            rnv.getPrv().get(i).setOnAction(provinceFilterHandler);
-            i++;
-        }
-        */
-
 
         EventHandler<ActionEvent> ResultResearchHandler = new EventHandler<ActionEvent>() {
             ObservableList<String> azzeratore = FXCollections.observableArrayList(" ");
