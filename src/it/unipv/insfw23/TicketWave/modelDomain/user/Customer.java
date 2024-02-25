@@ -81,7 +81,4 @@ public class Customer extends User {
         return favoriteGenre;
     }
 
-
-
-
 }
