@@ -1,6 +1,9 @@
 package it.unipv.insfw23.TicketWave.modelView.ResearchGUI;
-
+/*****************************
+        QUI VA TUTTO, DEVO ABBELLIRE I TASTI
+ ****************************/
 import javafx.scene.Node;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
@@ -15,11 +18,11 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
         private Menu province;
         private ArrayList <CheckMenuItem> prv; // vettore per poter gestire i CheckMenu di province nel controller
         private ArrayList <CheckMenuItem> genv; // vettore per poter gestire i CheckMenu di generi nel controller
-
         private TextField searchBar;
         private static ResearchNodesView istance;
         // costruttore privato per singleton
         private ResearchNodesView() {
+            // Creazione bottoni,... in comune per la ResearchView
             TextField searchBar = new TextField();
             this.searchBar = searchBar;
 
@@ -35,48 +38,43 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
             Menu province = new Menu("Provincia");
             this.province = province;
 
-            searchBar.setStyle("-fx-background-color: #ffffff");
+            // Estetica
+            searchBar.setStyle("-fx-background-color: #ffff");
             searchBar.setPromptText("Enter your search...");
 
-            searchButton.setStyle("-fx-background-color: #80C1E2");
+            searchButton.setStyle("-fx-background-color: #ffff");
             ImageView searchIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/search_glass.png");
             searchIcon.setFitHeight(25);
             searchIcon.setFitWidth(29);
             searchButton.setGraphic(searchIcon);
 
+            bar.setStyle("-fx-background-color: #ffff");
+            genre.setStyle("-fx-background-color: #80C1E2");
+            province.setStyle("-fx-background-color: #80C1E2");
+
             // creo  la MenuBar con i filtri
             // check menu filtri musica
             genv = new ArrayList<CheckMenuItem>(); // vettore per poter gestire i CheckMenu di generi nel controller
             String [] gen = {"ROCK", "PUNK"}; // stringa di generi
-            int i = 0;
-            for (String s : gen) { // butto dentro il Menu genre, uno per volta, i CheckBox dei generi contenuti nella stringa
+
+            for (String s : gen) { // Arraylist di CheckMenuItems che popolo
                 CheckMenuItem cmi = new CheckMenuItem(s);
-                genv.set(i, new CheckMenuItem(s));
-                i++;
-                genre.getItems().add(cmi); // aggiungo al Menu genre i vari CheckMenuItem
+                genv.add(cmi);
             }
+            genre.getItems().addAll(genv); // Creo il Menu con i CheckMenuItems da mettere dentro la MenuBar
+
             // check menu filtri provincia
             prv = new ArrayList<CheckMenuItem>(); // vettore per poter gestire i CheckMenu di province nel controller
-            String [] pr = {"PAVIA", "PARMA", "MILANO"}; // stringa di generi
-            i = 0;
-            for (String s : pr) { // butto dentro il Menu genre, uno per volta, i CheckBox dei generi contenuti nella stringa
-                CheckMenuItem cmi = new CheckMenuItem(s);
-                prv.set(i, new CheckMenuItem(s));
-                i++;
-                province.getItems().add(cmi); // aggiungo al Menu province i vari CheckMenuItem
-            }
+            String [] pr = {"PAVIA", "PARMA", "MILANO"}; // stringa delle province
 
-            /* CheckMenuItem cmi = new CheckMenuItem("ROCK");  VEDIAMO SE FUNZIONA, SE FUNZIONA BUTTO VIA STO BLOCCO DI CODICE
-            CheckMenuItem cmi1 = new CheckMenuItem("PUNK");
-            // check menu filtro provincia
-            CheckMenuItem pr = new CheckMenuItem("PAVIA");
-            CheckMenuItem pr1 = new CheckMenuItem("PARMA");
-            CheckMenuItem pr2 = new CheckMenuItem("MILANO");
-            // aggiungo i miei check menu alla menu bar
-            genre.getItems().addAll(cmi, cmi1);
-            province.getItems().addAll(pr, pr1, pr2); */
+            for (String s : pr) { // Arraylist di CheckMenuItems che popolo
+                CheckMenuItem cmi = new CheckMenuItem(s);
+                prv.add(cmi);
+            }
+            province.getItems().addAll(prv); // Creo il Menu con i CheckMenuItems da mettere dentro la MenuBar
+
             bar.getMenus().addAll(genre, province);
-            bar.setStyle("-fx-background-color: #ffffff");
+            bar.setStyle("-fx-background-color: #ffff");
         }
 
         //Metodo statico per ottenere l'unica istanza
@@ -102,5 +100,13 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
     public ArrayList<CheckMenuItem> getGenv() {
         return genv;
     } // lo chiamo nel ResearchController
+
+    public Menu getGenre() {
+        return genre;
+    }
+
+    public Menu getProvince() {
+        return province;
+    }
 }
 

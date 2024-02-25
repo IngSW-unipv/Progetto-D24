@@ -1,6 +1,10 @@
 package it.unipv.insfw23.TicketWave.modelView.ResearchGUI;
+/*****************************************
+        QUI VA TUTTO, DEVO ABBELLIRE LA DISPOSIZIONE
+ *****************************************/
 
 import com.sun.javafx.scene.control.GlobalMenuAdapter;
+import it.unipv.insfw23.TicketWave.modelController.MainController;
 import it.unipv.insfw23.TicketWave.modelView.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.ManagerUpperBar;
 import javafx.application.Application;
@@ -31,8 +35,10 @@ import javafx.scene.control.CheckMenuItem;
 import java.awt.*;
 import java.util.Observable;
 
+import static javafx.application.Application.launch;
+
+// Estende Scene, in maniera da poter visualizzare i nodes comuni della ResearchNodesView
 public class ResearchView extends Scene{
-    private ResearchNodesView rnv;
     // costruttore
     public ResearchView() {
         super(new Pane(), 1080, 600);
@@ -40,97 +46,35 @@ public class ResearchView extends Scene{
     }
 
     public void scenaResearch(){
+        ResearchNodesView rnv = ResearchNodesView.getIstance();
         // Creo un'HBOX che contiene barra + bottone di ricerca HBox = disposizione orizzontale
-        HBox contenuto = new HBox();
-        contenuto.setSpacing(10);
-        contenuto.getChildren().add(rnv.getSearchBar());
-        contenuto.getChildren().add(rnv.getSearchButton());
-        //contenuto.getChildren().add(rnv.getBarra());
+        HBox box1 = new HBox();
+        box1.setSpacing(10);
+        box1.getChildren().add(rnv.getBar());
+        box1.getChildren().add(rnv.getSearchBar());
+        box1.getChildren().add(rnv.getSearchButton());
 
         // Creo il VBox che contiene gli HBox, l'Upper Bar e la Lower Bar
         VBox vb1 = new VBox();
-        vb1.getChildren().addAll(ManagerUpperBar.getIstance(), contenuto, LowerBar.getInstance());
-        // Allineo gli HBox nel VBox
-        VBox.setMargin(ManagerUpperBar.getIstance(), new Insets(10.0d));
-        VBox.setMargin(contenuto, new Insets(10.0d));
-        VBox.setMargin(LowerBar.getInstance(), new Insets(10.0d));
+        vb1.getChildren().addAll(ManagerUpperBar.getIstance(), box1, LowerBar.getInstance());
 
-        ManagerUpperBar.getIstance().setAlignment(Pos.TOP_CENTER);
-        contenuto.setAlignment(Pos.TOP_CENTER);
-        LowerBar.getInstance().setAlignment(Pos.BOTTOM_CENTER);
-
-/*        // Barra dei filtri
-        final MenuBar barra = new MenuBar();
-        final Menu generi = new Menu("Generi");
-        final Menu province = new Menu("Provincia");
-
-        // check menu filtri musica
-        CheckMenuItem cmi = new CheckMenuItem("ROCK");
-        CheckMenuItem cmi1 = new CheckMenuItem("PUNK");
-        // check menu filtro provincia
-        CheckMenuItem pr = new CheckMenuItem("PAVIA");
-        CheckMenuItem pr1 = new CheckMenuItem("PARMA");
-        CheckMenuItem pr2 = new CheckMenuItem("MILANO");
-        // aggiungo i miei check menu alla menu bar
-        generi.getItems().addAll(cmi, cmi1);
-        province.getItems().addAll(pr, pr1, pr2);
-        barra.getMenus().addAll(generi, province);
-
-        // Bottone per accedere al profilo
-        ImageView imv2 = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/user.png");
-        imv2.setFitHeight(25);
-        imv2.setFitWidth(24);
-
-        final Button profileButton = new Button("Profile", imv2);
-        profileButton.setOnAction(event -> {
-            // mettere la logica dietro l'azione della pressione dell'immagine di profilo
-        });
-        // Creo la HBox che contiene l'immagine di profilo
-        HBox hb2 = new HBox();
-        hb2.getChildren().add(profileButton);
-
-        // Area di testo = barra di ricerca
-        TextField searchBar = new TextField();
-        searchBar.setPromptText("Enter your search...");
-
-        // Immagine lente di ingrandimento
-        ImageView imv = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/search_glass.png");
-        imv.setFitHeight(20);
-        imv.setFitWidth(18);
-
-        // Button per l'invio della ricerca
-        final Button searchButton = new Button("Search", imv);
-        searchButton.setOnAction(event -> {
-            // Devo mettere una query al DB !!!!!!! in generale tutta la logica che mi serve
-            String searchTerm = searchBar.getText();
-            System.out.println("Searching for: " + searchTerm);
-        });
-
-       // Creo un'HBOX che contiene barra + bottone di ricerca HBox = disposizione orizzontale
-        HBox hb1 = new HBox();
-        hb1.setSpacing(10);
-        hb1.getChildren().add(searchBar);
-        hb1.getChildren().add(searchButton);
-        hb1.getChildren().add(barra);
-
-        // Creo il VBox che contiene gli HBox
-        VBox vb1 = new VBox();
-        vb1.getChildren().addAll(hb2, hb1);
-        // Allineo gli HBox nel VBox
-        VBox.setMargin(hb2, new Insets(10.0d));
-        VBox.setMargin(hb1, new Insets(10.0d));
-        hb2.setAlignment(Pos.TOP_RIGHT);
-        hb1.setAlignment(Pos.TOP_CENTER);
-
-        hb1.setStyle("-fx-background-color: rgb(27,84,161)");
-        hb2.setStyle("-fx-background-color: rgb(27,84,161)");
+        // Estetica
+        box1.setStyle("-fx-background-color: rgb(27,84,161)");
         vb1.setStyle("-fx-background-color: rgb(27,84,161)");
 
-        this.searchButton = searchButton;
-        this.profileButton = profileButton;
+        // Allineo gli HBox nel VBox
+        VBox.setMargin(ManagerUpperBar.getIstance(), new Insets(10.0d));
+        VBox.setMargin(box1, new Insets(10.0d));
+        VBox.setMargin(LowerBar.getInstance(), new Insets(10.0d));
 
-        // Creazione scene
-        Scene research = new Scene(vb1, 1080, 600);             */
+        box1.setAlignment(Pos.CENTER); // mi serve per avere vb1 centrato nel BorderPane seguente
+
+        BorderPane layout = new BorderPane();
+
+        layout.setCenter(vb1);
+        layout.setBottom(LowerBar.getInstance());
+        layout.setTop(ManagerUpperBar.getIstance());
+        setRoot(layout);
     }
 }
 

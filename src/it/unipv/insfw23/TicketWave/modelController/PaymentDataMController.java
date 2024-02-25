@@ -1,29 +1,29 @@
 package it.unipv.insfw23.TicketWave.modelController;
 
-import it.unipv.insfw23.TicketWave.modelView.PaymentDataM2View;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import it.unipv.insfw23.TicketWave.modelView.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.TicketPageView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.scene.control.TextField;
-
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 
-
-public class PaymentDataController {
+public class PaymentDataMController {
     private Stage mainStage;
-    private PaymentDataM2View paymentDataPage;
+    private Customer customer;
+    private Manager manager;
+    private PaymentDataMView paymentDataPage;
+    private TicketPageView ticketpage;
     private PaymentSelectionView paymentPage;
 
-    public PaymentDataController(Stage mainStage, PaymentDataM2View paymentDataPage) {
+    public PaymentDataMController(Stage mainStage, PaymentDataMView paymentDataPage, PaymentSelectionView paymentPage) {
         this.paymentDataPage = paymentDataPage;
+        this.paymentPage=paymentPage;
         this.mainStage = mainStage;
         initComponents();
     }
@@ -37,8 +37,7 @@ public class PaymentDataController {
             public void handle(MouseEvent actionEvent) {
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("Sei ritornato indietro alla paymentSelectionPage");
-                PaymentSelectionView paymentPage= new PaymentSelectionView();
-                PaymentSelectionController paymentSelectionController = new PaymentSelectionController(mainStage,paymentPage);
+                paymentPage.reSetBars();
                 mainStage.setScene(paymentPage);
             }
         };
@@ -56,7 +55,6 @@ public class PaymentDataController {
 
     }
 
-    // Metodo per aggiungere il limite di caratteri a un TextField
     private void addCharacterLimit(TextField textField, int limit) {  // metodo che mi permette di avere un limite sui textfields
         textField.textProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -67,8 +65,24 @@ public class PaymentDataController {
             }
         });
     }
+/*
+    EventHandler<MouseEvent> buyTicketEventHandler = new EventHandler<>() {
+        @Override
+        public void handle(MouseEvent actionEvent) {
+            // Azione da eseguire quando il pulsante "Next" viene premuto
+            System.out.println("Hai Acquistato il biglietto");
 
+            // Esegui l'acquisto del biglietto
+            customer.buyticket(); // ???? cosa dovrei passare a questo punto??
 
+            // Chiudi la schermata corrente
+            mainStage.close();
+        }
+    };
+
+        paymentDataPage.getNextButton().setOnMouseClicked(buyTicketEventHandler);
+
+*/
 
 
 
