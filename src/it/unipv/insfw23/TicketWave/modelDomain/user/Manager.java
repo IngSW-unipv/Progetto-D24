@@ -5,12 +5,16 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import java.util.ArrayList;
 
 import java.lang.String;
+import java.time.LocalDate;
 
 public class Manager extends User {
     private int [] creditCard= new int[16];
     private  int maxNumberofEvents;
     private   int subscription;
     private ArrayList <Event> event;
+
+    private LocalDate subscriptionDate;
+
 
     private int CounterCreatedEvents;
 
@@ -20,7 +24,9 @@ public class Manager extends User {
         this.event=event;
         this.maxNumberofEvents=maxNumberofEvents;
         this.subscription=0;
-        this.CounterCreatedEvents=0; //contatore per eventi creati impostato a 0 dal momento che si istanzia il Manager
+        this.CounterCreatedEvents=0;
+        this.subscriptionDate = null;
+        //contatore per eventi creati impostato a 0 dal momento che si istanzia il Manager
         //imposto subscription=0 di default,in modo tale che non appena viene creato non presenta nessun abbonamento
         // poi gli viene assegnanto dai metodi di SubscriptionHandler
         //in più il subscriptionHandler deve anche impostare il maxnumberofevents per subscription =1 o 2
@@ -106,6 +112,24 @@ public class Manager extends User {
     }
 
 
+    public void setSubscriptionDate(LocalDate date) {
+        this.subscriptionDate = date;
+    }
+
+
+    public boolean OneMonthPassed() {
+        if (subscriptionDate == null) {
+            return false;
+        }
+
+        LocalDate currentDate = LocalDate.now();
+        LocalDate oneMonthLater = subscriptionDate.plusMonths(1);
+
+        return currentDate.isAfter(oneMonthLater) || currentDate.isEqual((oneMonthLater));
+
+    }
+
+
     public ArrayList<Event> getEventlist() {
 
         return event;
@@ -115,6 +139,8 @@ public class Manager extends User {
         int[] array = {1, 2, 3, 4};
         return array;
     }
+
+
 /*
     @Override
     public boolean paymentMethod(User user) {

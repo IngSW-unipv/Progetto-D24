@@ -1,5 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelController;
 
+import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.TicketPageView;
@@ -13,6 +15,8 @@ import javafx.stage.Stage;
 
 public class PaymentDataMController {
     private Stage mainStage;
+    private Customer customer;
+    private Manager manager;
     private PaymentDataMView paymentDataPage;
     private TicketPageView ticketpage;
     private PaymentSelectionView paymentPage;
@@ -61,8 +65,24 @@ public class PaymentDataMController {
             }
         });
     }
+/*
+    EventHandler<MouseEvent> buyTicketEventHandler = new EventHandler<>() {
+        @Override
+        public void handle(MouseEvent actionEvent) {
+            // Azione da eseguire quando il pulsante "Next" viene premuto
+            System.out.println("Hai Acquistato il biglietto");
 
+            // Esegui l'acquisto del biglietto
+            customer.buyticket(); // ???? cosa dovrei passare a questo punto??
 
+            // Chiudi la schermata corrente
+            mainStage.close();
+        }
+    };
+
+        paymentDataPage.getNextButton().setOnMouseClicked(buyTicketEventHandler);
+
+*/
 
 
 
