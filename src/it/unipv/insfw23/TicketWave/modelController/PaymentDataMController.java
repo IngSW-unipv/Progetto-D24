@@ -13,7 +13,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 
-public class PaymentDataM1Controller {
+public class PaymentDataMController {
     private Stage mainStage;
     private Customer customer;
     private Manager manager;
@@ -21,7 +21,7 @@ public class PaymentDataM1Controller {
     private TicketPageView ticketpage;
     private PaymentSelectionView paymentPage;
 
-    public PaymentDataM1Controller(Stage mainStage, PaymentDataMView paymentDataPage, PaymentSelectionView paymentPage) {
+    public PaymentDataMController(Stage mainStage, PaymentDataMView paymentDataPage, PaymentSelectionView paymentPage) {
         this.paymentDataPage = paymentDataPage;
         this.paymentPage=paymentPage;
         this.mainStage = mainStage;
