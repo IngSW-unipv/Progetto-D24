@@ -1,0 +1,34 @@
+Index: src/it/unipv/insfw23/TicketWave/modelView/loginView/LoginView.java
+===================================================================
+diff --git a/src/it/unipv/insfw23/TicketWave/modelView/loginView/LoginView.java b/src/it/unipv/insfw23/TicketWave/modelView/loginView/LoginView.java
+deleted file mode 100644
+--- a/src/it/unipv/insfw23/TicketWave/modelView/loginView/LoginView.java	(revision aa6a933562e7cec0bd38d769feb045389eb43de7)
++++ /dev/null	(revision aa6a933562e7cec0bd38d769feb045389eb43de7)
+@@ -1,27 +0,0 @@
+-package it.unipv.insfw23.TicketWave.modelView.loginView;
+-
+-import javafx.application.Application;
+-import javafx.scene.Scene;
+-import javafx.scene.layout.StackPane;
+-import javafx.stage.Stage;
+-
+-import java.awt.*;
+-
+-public class LoginView extends Application {
+-    Button button;
+-    public static void main(String[] args) {
+-        launch(args);
+-    }
+-
+-    @Override
+-    public void start(Stage primaryStage) {
+-        primaryStage.setTitle("TicketWave");
+-        button= new Button();
+-        button.setText("click");
+-
+-        StackPane layout= new StackPane();
+-        layout.getChildren().add(button);
+-
+-        Scene scene = new Scene(layout, 300, 200);
+-    }
+-}
