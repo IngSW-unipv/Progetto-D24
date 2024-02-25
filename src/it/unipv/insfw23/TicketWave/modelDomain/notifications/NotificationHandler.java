@@ -58,11 +58,11 @@ public class NotificationHandler implements INotification{
 		String msg3 = "E' disponibile un nuovo evento del tuo genere preferito";
 		String msg4 = "E' disponibile un nuovo evento del tuo genere preferito nella tua provincia";
 		int subscription_creator = ev.getCreator().getSubscription();
-		ArrayList <Customer> customernear; //select al db where province = province
+		ArrayList <Customer> customernear = new ArrayList<>(); //select al db where province = province
 		
 		switch(subscription_creator) {
 		case 2:
-			ArrayList <Customer> customerfavgen; //select al db where favgen = favgen
+			ArrayList <Customer> customerfavgen = new ArrayList<>(); //select al db where favgen = favgen
 			for(Customer cfav : customerfavgen) {
 				for(Customer cprov : customernear) {
 					if(cfav.getEmail().equals(cprov.getEmail())) {
