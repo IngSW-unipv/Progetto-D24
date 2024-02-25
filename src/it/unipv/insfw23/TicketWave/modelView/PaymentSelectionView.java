@@ -10,6 +10,7 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,9 +23,11 @@ public class PaymentSelectionView extends Scene {
 
     private static final  Label titleLabel = new Label("TicketWave");
     private static final Label totalStringLabel = new Label("Totale:");
-    private static final Label paySelectionLabel = new Label("Seleziona il metodo di pagamento:");
+    private static final Label paySelectionLabel = new Label("Scegli un metodo con cui pagare:");
     private static final Label totalAmountLabel = new Label();
     private static List<Label> labels = new ArrayList<>();
+
+    private static Text errmessage = new Text("Devi prima selezionare un metodo di pagamento!");
     private Scene scene;
     private BorderPane layout;
     private Pane root;
@@ -66,6 +69,9 @@ public class PaymentSelectionView extends Scene {
         backButton.setGraphic(backarrow);
         backButton.setStyle("-fx-background-color: rgb(255,255,255)");
 
+        errmessage.setOpacity(0);
+        errmessage.setFill(javafx.scene.paint.Color.RED);
+
         // da mettere nei controller!!!!!!
         /*
         private void setTextFieldsTextColor(){
@@ -100,6 +106,9 @@ public class PaymentSelectionView extends Scene {
         gridPane.add(paypalImage, 1, 3);
         gridPane.add(mastercardButton, 0, 4);
         gridPane.add(mastercardImage, 1, 4);
+        gridPane.add(errmessage,0,6);
+
+
 
         BorderPane.setMargin(backButtonBox, new Insets(0, 10, 10, 10)); // Margine a sinistra
         BorderPane.setMargin(nextButtonBox, new Insets(0, 10, 10, 10)); // Margine a destra
@@ -116,7 +125,7 @@ public class PaymentSelectionView extends Scene {
         layout.setStyle("-fx-background-color: rgb(27,84,161)");
         layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
-        layout.setTop(CustomerUpperBar.getIstance());
+        layout.setTop(UpperBar.getIstance());
         setRoot(layout);
         this.layout=layout;
         this.root=root;
@@ -125,7 +134,7 @@ public class PaymentSelectionView extends Scene {
     public void reSetBars(){
         BorderPane temp = new BorderPane();
         setRoot(temp);
-        layout.setTop(CustomerUpperBar.getIstance());
+        layout.setTop(UpperBar.getIstance());
         layout.setBottom(LowerBar.getInstance());
         setRoot(layout);
     }
@@ -154,5 +163,9 @@ public class PaymentSelectionView extends Scene {
 
     public Scene getScene() {
         return scene;
+    }
+
+    public static Text getErrmessage() {
+        return errmessage;
     }
 }

@@ -5,6 +5,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -12,7 +13,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.*;
 
-public class PaymentDataPview extends Scene {
+public class PaymentDataPView extends Scene {
 
     private static Label emailLabel = new Label("Inserisci la tua E-mail:");
     private TextField inserEmail=new TextField();
@@ -21,12 +22,14 @@ public class PaymentDataPview extends Scene {
     private static Button nextButton =new Button("Avanti");
     private static  Button backButton = new Button();
 
+    private static RadioButton usePointsButton= new RadioButton("Utilizza i tuoi WavePoints");
+
     private BorderPane layout;
 
     private BorderPane root;
 
 
-    public PaymentDataPview(){
+    public PaymentDataPView(){
         super(new BorderPane(), 1080, 600);
         initComponents();
 
@@ -34,12 +37,14 @@ public class PaymentDataPview extends Scene {
 
     private void initComponents(){
 
-        VBox textBox= new VBox(emailLabel,inserEmail,nextButton);
+        VBox textBox= new VBox(emailLabel,inserEmail,nextButton,usePointsButton);
         textBox.setStyle("-fx-font-size: 14px;");
         textBox.setPadding(new Insets(10));
         textBox.setAlignment(Pos.CENTER);
         textBox.setSpacing(50);
         inserEmail.setMaxWidth(200);
+        usePointsButton.setAlignment(Pos.BOTTOM_CENTER);
+
 
         HBox buttonBox= new HBox(backButton);
         buttonBox.setPadding(new Insets(10));
@@ -56,6 +61,7 @@ public class PaymentDataPview extends Scene {
         BorderPane.setAlignment(emailLabel, Pos.TOP_CENTER);
         BorderPane.setAlignment(inserEmail, Pos.CENTER);
 
+
         Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/backArrow.png");
         ImageView backarrow = new ImageView(backarrowlogo);
         backarrow.setFitWidth(50);
@@ -69,7 +75,7 @@ public class PaymentDataPview extends Scene {
         BorderPane layout= new BorderPane();
         layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
-        layout.setTop(CustomerUpperBar.getIstance());
+        layout.setTop(UpperBar.getIstance());
 
         setRoot(layout);
 
@@ -95,10 +101,14 @@ public class PaymentDataPview extends Scene {
         return scene;
     }
 
+    public static RadioButton getUsePointsButton() {
+        return usePointsButton;
+    }
+
     public void reSetBars(){
         BorderPane temp = new BorderPane();
         scene.setRoot(temp);
-        layout.setTop(CustomerUpperBar.getIstance());
+        layout.setTop(UpperBar.getIstance());
         layout.setBottom(LowerBar.getInstance());
         setRoot(layout);
     }

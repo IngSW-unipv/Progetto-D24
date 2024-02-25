@@ -6,6 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -34,6 +35,7 @@ public class PaymentDataMView extends Scene {
     private static  Button backButton = new Button();
     private static Button forwardButton = new Button();
 
+    private static RadioButton usePointsButton= new RadioButton("Utilizza i tuoi WavePoints");
     private static  List<TextField> textFields = new ArrayList<>();
     private static  List<Label> labels = new ArrayList<>();
     private Scene scene;
@@ -78,7 +80,6 @@ public class PaymentDataMView extends Scene {
 
 
         
-        
         GridPane dataInput = new GridPane();
         dataInput.setAlignment(Pos.TOP_LEFT);
         dataInput.setHgap(10);
@@ -89,6 +90,7 @@ public class PaymentDataMView extends Scene {
         dataInput.addRow(2, ncLabel, insertNC);
         dataInput.addRow(3, expirationLabel, insertMM, insertYY);
         dataInput.addRow(4, cvcLabel, insertcvc);
+        dataInput.addRow(6,usePointsButton);
 
 
         BorderPane root = new BorderPane();
@@ -105,7 +107,7 @@ public class PaymentDataMView extends Scene {
         layout.setStyle("-fx-background-color: rgb(27,84,161)");
         layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
-        layout.setTop(ManagerUpperBar.getIstance());
+        layout.setTop(UpperBar.getIstance());
         setRoot(layout);
 
 
@@ -167,5 +169,9 @@ public class PaymentDataMView extends Scene {
 
     public static TextField getInsertYY() {
         return insertYY;
+    }
+
+    public static RadioButton getUsePointsButton() {
+        return usePointsButton;
     }
 }
