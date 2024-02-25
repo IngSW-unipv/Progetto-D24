@@ -36,6 +36,7 @@ public class NotificationHandler implements INotification{
 		creator.addNotification(n1);
 	}
 	
+	
 	//notifica creazione nuovo evento nella stessa provincia
 /*	public void sendNotificationNewEvent(Event ev) {
 		Province province;
