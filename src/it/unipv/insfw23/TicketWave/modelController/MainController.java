@@ -1,7 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelController;
 
+import it.unipv.insfw23.TicketWave.modelController.ResearchCaseController.ResearchController;
 import it.unipv.insfw23.TicketWave.modelView.ManagerUpperBar;
-import it.unipv.insfw23.TicketWave.modelView.ResearchGUI.ResearchNodesView;
 import it.unipv.insfw23.TicketWave.modelView.ResearchGUI.ResearchView;
 import it.unipv.insfw23.TicketWave.modelView.TypeStatsView;
 import javafx.event.*;
