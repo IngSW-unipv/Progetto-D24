@@ -1,5 +1,5 @@
 package it.unipv.insfw23.TicketWave.modelView;
-
+/*
 import it.unipv.insfw23.TicketWave.modelController.BuyTicketController;
 import it.unipv.insfw23.TicketWave.modelController.LoginController;
 import javafx.application.Application;
@@ -24,3 +24,4 @@ public class Provacontroller extends Application {
 
     }}
 
+*/
