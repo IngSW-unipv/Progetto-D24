@@ -34,7 +34,7 @@ public class PaymentSelectionController {
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("Stai andando alla PaymentDataMPage");
                 paymentDataMPage=new PaymentDataMView();
-               PaymentDataMController paymentDataMController = new PaymentDataMController(mainStage,paymentDataMPage,paymentPage);
+               PaymentDataM1Controller paymentDataMController = new PaymentDataM1Controller(mainStage,paymentDataMPage,paymentPage);
                 mainStage.setScene(paymentDataMPage);
             } else if (paymentPage.getPaypalButton().isSelected()) {
                     System.out.println("Stai andando alla PaymentDataPPage");

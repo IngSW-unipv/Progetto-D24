@@ -85,6 +85,8 @@ public class Customer extends User {
     }
 
 
-
-
+    @Override
+    public boolean paymentMethod(User user) {
+        return false;
+    }
 }
