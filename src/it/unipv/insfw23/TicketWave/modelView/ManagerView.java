@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.modelView;
 
 import java.awt.Dimension;
 
+import it.unipv.insfw23.TicketWave.modelController.ManagerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import javafx.application.Application;
@@ -27,6 +28,10 @@ import javafx.stage.Stage;
 public class ManagerView extends Application{
 	
 	Stage window;
+	
+	Button logoutButton;
+	ManagerUpperBar upperbar;
+	LowerBar lowerbar;
 
 	@Override
 	public void start(Stage primarystage) throws Exception {
@@ -50,8 +55,11 @@ public class ManagerView extends Application{
 		GridPane.setHalignment(nome, HPos.CENTER);
 		GridPane.setHgrow(nome, Priority.SOMETIMES);
 		
-//		Button stats = new Button("visualizza statistiche");
-//		GridPane.setConstraints(stats, 1, 1);
+		logoutButton = new Button("Logout");
+		GridPane.setConstraints(logoutButton, 1, 1, 2, 1);
+		GridPane.setHalignment(logoutButton, HPos.CENTER);
+		GridPane.setHgrow(logoutButton, Priority.SOMETIMES);
+		
 		
 		
 		Label not = new Label("Notifiche");
@@ -119,14 +127,19 @@ public class ManagerView extends Application{
 		tabnot.setItems(nots);
 //		tabnot.setPrefWidth(400);
 		
-		grid.getChildren().addAll(nome, tabnot, tabev, not, ev);
+		grid.getChildren().addAll(nome, logoutButton, tabnot, tabev, not, ev);
 		
 		
+		
+		upperbar = ManagerUpperBar.getIstance();
+		lowerbar = LowerBar.getInstance();
+		
+		layout.setTop(upperbar);
 		layout.setCenter(grid);
+		layout.setBottom(lowerbar);
 		
 		
-
-		
+		ManagerController m = new ManagerController(window, this);
 
 //		window.sizeToScene();
 		window.setMinHeight(400);
@@ -142,6 +155,21 @@ public class ManagerView extends Application{
 	
 	
 	
+	public Button getLogoutButton() {
+		return logoutButton;
+	}
+	
+	public Button getNewEventButton() {
+		return upperbar.getEventPlusButton();
+	}
+	
+	public Button getStatsButton() {
+		return upperbar.getStatsButton();
+	}
+	
+	public Button getSearchButton() {
+		return upperbar.getSearchButton();
+	}
 	
 	public static void main(String[] args) {
 		launch(args);

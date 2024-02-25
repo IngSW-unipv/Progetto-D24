@@ -18,6 +18,8 @@ public class ManagerUpperBar extends HBox {
     // variabile che memorizza l'unica istanza
     private Button statsButton;
     private Button searchButton;
+    private Button eventPlusButton;
+    private Button profileButton;
     private static ManagerUpperBar istance;
     // costruttore privato per singleton
     private ManagerUpperBar() {
@@ -65,6 +67,7 @@ public class ManagerUpperBar extends HBox {
         statsButton.setGraphic(statsIcon);
 
         Button profileButton = new Button();
+        this.profileButton = profileButton;
         profileButton.setStyle("-fx-background-color: #80C1E2");
         ImageView profileIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/user.png");
         profileIcon.setFitHeight(25);
@@ -72,12 +75,14 @@ public class ManagerUpperBar extends HBox {
         profileButton.setGraphic(profileIcon);
 
         Button eventPlusButton = new Button();
+        this.eventPlusButton = eventPlusButton;
         eventPlusButton.setStyle("-fx-background-color: #80C1E2");
         ImageView eventPlusIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/plus.png");
         eventPlusIcon.setFitHeight(25);
         eventPlusIcon.setFitWidth(29);
         eventPlusButton.setGraphic(eventPlusIcon);
-
+		
+		
         Region spacer = new Region();
         setHgrow(spacer, Priority.ALWAYS);
         getChildren().addAll(titolo, iconLogo, spacer,searchButton, eventPlusButton, statsButton, profileButton);
@@ -96,5 +101,15 @@ public class ManagerUpperBar extends HBox {
         return statsButton;
     }
 
-    public Button getSearchButton() { return searchButton; }
+    public Button getSearchButton() { 
+    	return searchButton; 
+    }
+    
+    public Button getEventPlusButton() {
+    	return eventPlusButton;
+    }
+    
+    public Button getProfileButton() {
+    	return profileButton;
+    }
 }
