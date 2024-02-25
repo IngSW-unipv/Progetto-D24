@@ -29,7 +29,7 @@ public class TicketHandler {
 			if(event.getSeatsRemaining() == 0) {
 				Manager creator;
 				creator = event.getCreator();
-				NotificationHandler.getIstance().sendNotificationSoldOut(event, creator); //NotifHand e' l'istanza del NotificationHandler
+				NotificationHandler.getIstance().sendNotificationSoldOut(event); //NotifHand e' l'istanza del NotificationHandler
 			}
 			return t;
 		}
