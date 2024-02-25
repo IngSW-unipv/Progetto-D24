@@ -8,24 +8,22 @@ import java.util.ArrayList;
 
 
 public class Customer extends User {
-    private int [] creditCard= new int[16];
+
     private ArrayList<Ticket> ticketsList= new ArrayList<>();
     private Event event;
     private double points;
     private Genre [] favoriteGenre ;
 
 
-    public Customer(String name, String surname, String dateOfBirth, String email, String password, int provinceOfResidence,int [] creditCard,Genre [] favoriteGenre ) {
+    public Customer(String name, String surname, String dateOfBirth, String email, String password, int provinceOfResidence,Genre [] favoriteGenre ) {
         super(name,surname, dateOfBirth, email,password, provinceOfResidence);
-        this.creditCard= creditCard;
+
 
         this.favoriteGenre= favoriteGenre;
     }
 
 
-    public int [] getCreditCard() {
-        return creditCard;
-    }
+
 
     public ArrayList<Ticket> getTicketsList() {
         return ticketsList;
