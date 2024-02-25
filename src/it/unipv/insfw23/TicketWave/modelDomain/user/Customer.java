@@ -8,24 +8,22 @@ import java.util.ArrayList;
 
 
 public class Customer extends User {
-    private int [] creditCard= new int[16];
+
     private ArrayList<Ticket> ticketsList= new ArrayList<>();
     private Event event;
     private double points;
     private Genre [] favoriteGenre ;
 
 
-    public Customer(String name, String surname, String dateOfBirth, String email, String password, int provinceOfResidence,int [] creditCard,Genre [] favoriteGenre ) {
+    public Customer(String name, String surname, String dateOfBirth, String email, String password, int provinceOfResidence,Genre [] favoriteGenre ) {
         super(name,surname, dateOfBirth, email,password, provinceOfResidence);
-        this.creditCard= creditCard;
+
 
         this.favoriteGenre= favoriteGenre;
     }
 
 
-    public int [] getCreditCard() {
-        return creditCard;
-    }
+
 
     public ArrayList<Ticket> getTicketsList() {
         return ticketsList;
@@ -43,22 +41,20 @@ public class Customer extends User {
 
     public void buyticket(IPaymentAdapter pay,Event event,TicketType type ,int usePoints){
         Customer customer;
-        customer= new Customer(getName(),getSurname(),getDateOfBirth(),getEmail(),getPassword(),getProvinceOfResidence(),getCreditCard(),getFavoriteGenre());
-        if(pay.paymentMethod(customer) == true && usePoints == 1 ){
-                Ticket ticket= TicketHandler.getIstance().createTicket(event,type);
+        Ticket ticket= TicketHandler.getIstance().createTicket(event,type);
+        if(pay.paymentMethod(ticket.getPrice()) == true && usePoints == 1 ){
                 double price = ticket.getPrice() - (points* 0.25);
                 points=0;
                 System.out.println( "L'acquisto del tuo biglietto per " + event + " è andato a buon fine ");
                 points= points + (price/10);
                 addTickets(ticket);
 
-            } else if (pay.paymentMethod(customer) == true && usePoints == 0) {
-                Ticket ticket= TicketHandler.getIstance().createTicket(event,type);
+            } else if (pay.paymentMethod(ticket.getPrice()) == true && usePoints == 0) {
                 double price = ticket.getPrice();
                 System.out.println( "L'acquisto del tuo biglietto per " + event + "è andato a buon fine ");
                 points= points + (price/10);
                 addTickets(ticket);
-            } else if (pay.paymentMethod(customer) == false) {
+            } else if (pay.paymentMethod(ticket.getPrice()) == false) {
                 System.out.println( "L'acquisto del tuo biglietto per " + event + "non è andato a buon fine ");
             }
     }
