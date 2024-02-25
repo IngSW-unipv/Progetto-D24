@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Cambiamento UI+cambio scena controller" />
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Commit Stats domain fix" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -94,7 +94,7 @@
       <recent name="it.unipv.insfw23.TicketWave.modelDomain.user" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ProvaRun">
+  <component name="RunManager" selected="Application.MainStageView">
     <configuration name="ArtistStatsView" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.ArtistStatsView" />
       <module name="Progetto-D24" />
@@ -127,7 +127,7 @@
     <configuration name="MainStageView" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="it.unipv.insfw23.TicketWave.modelView.MainStageView" />
       <module name="Progetto-D24" />
-      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\claud\OneDrive\Desktop\JAVAFX21 SDK\javafx-sdk-21.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
+      <option name="VM_PARAMETERS" value="--module-path &quot;C:\Users\david\Documents\openjfx-21.0.2_windows-x64_bin-sdk\javafx-sdk-21.0.2\lib&quot; --add-modules javafx.controls,javafx.fxml" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="it.unipv.insfw23.TicketWave.modelView.*" />
@@ -228,8 +228,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.ProvaRun" />
         <item itemvalue="Application.MainStageView" />
+        <item itemvalue="Application.ProvaRun" />
         <item itemvalue="Application.Prova" />
         <item itemvalue="Application.TicketPageView" />
         <item itemvalue="Application.ResearchView" />
@@ -574,7 +574,23 @@
       <option name="project" value="LOCAL" />
       <updated>1708738149378</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Commit Stats domain fix">
+      <option name="closed" value="true" />
+      <created>1708772270276</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1708772270276</updated>
+    </task>
+    <task id="LOCAL-00038" summary="Commit Stats domain fix">
+      <option name="closed" value="true" />
+      <created>1708799097026</created>
+      <option name="number" value="00038" />
+      <option name="presentableId" value="LOCAL-00038" />
+      <option name="project" value="LOCAL" />
+      <updated>1708799097026</updated>
+    </task>
+    <option name="localTasksCounter" value="39" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -611,6 +627,7 @@
     <MESSAGE value="Commit UI: pagina descrizione ticket,seleziona metodo di pagamento e inserimento dati carta" />
     <MESSAGE value="Cambiamento UI+ Controller per TicketPage e PaySelectionData" />
     <MESSAGE value="Cambiamento UI+cambio scena controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cambiamento UI+cambio scena controller" />
+    <MESSAGE value="Commit Stats domain fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit Stats domain fix" />
   </component>
 </project>
