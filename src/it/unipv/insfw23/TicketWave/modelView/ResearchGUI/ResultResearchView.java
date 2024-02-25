@@ -8,10 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -32,11 +29,23 @@ public class ResultResearchView extends Scene {
     public void scenaResultResearch(){
         ResearchNodesView rnv = ResearchNodesView.getIstance();
         // List view per elencare i risultati della ricerca FACCIO TABLE VIEW!!!!!!!!!!!
-        ListView<String> list = new ListView<String>();
+        TableView<String> table = new TableView<>();
+
+        TableColumn tcEvent = new TableColumn<>("Evento");
+        TableColumn tcLocation = new TableColumn<>("Località");
+        TableColumn tcProvince = new TableColumn<>("Provincia");
+        ObservableList<String> result = FXCollections.observableArrayList("Festival1", "Concerto1", "Festival3");
+
+
+
+        table.getColumns().addAll(tcEvent, tcLocation, tcProvince);
+        table.setPlaceholder( new Label("Nessun evento trovato, sii più specifico"));
+
+      /*  ListView<String> list = new ListView<String>();
         ObservableList<String> result = FXCollections.observableArrayList("Festival1", "Concerto1", "Festival3"); // questo andrà tolto una volta fatta la logica nel ResearchController
         list.setPrefSize(400, 600);
         list.setEditable(false);
-        list.setItems(result);
+        list.setItems(result); */
 
         // Creo un'HBOX che contiene barra + bottone di ricerca HBox = disposizione orizzontale
         HBox box1 = new HBox();
@@ -47,7 +56,7 @@ public class ResultResearchView extends Scene {
 
         HBox box2 = new HBox();
         box2.setSpacing(10);
-        box2.getChildren().add(list);
+        box2.getChildren().add(table);
 
         // Creo il VBox che contiene gli HBox, l'Upper Bar e la Lower Bar
         VBox vb1 = new VBox();

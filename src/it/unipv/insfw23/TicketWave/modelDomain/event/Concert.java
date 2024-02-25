@@ -21,7 +21,4 @@ public class Concert extends Event{
         return 1; // 1 = Concert
     }
 
-    public String getArtist() { // getArtista
-        return artist;
-    }
 }

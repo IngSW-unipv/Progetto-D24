@@ -57,6 +57,7 @@ public class ResearchController {
                 for (CheckMenuItem cmi : rnv.getGenv()) { // checko i checkMenuItem selezionati per la query filtrata per genere
                     if (cmi.isSelected()){
                         // logica per fare la query filtrata per genere
+                        System.out.println("Filtro di genere musicale selezionato");
                     }
                 }
             }
@@ -67,10 +68,14 @@ public class ResearchController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 ResearchNodesView rnv = ResearchNodesView.getIstance(); // prendo l'unica istanza del Singleton
+                int i = 0;
                 for (CheckMenuItem cmi : rnv.getPrv()) { // checko i checkMenuItem selezionati per la query filtrata per provincia/e
+                    cmi = rnv.getPrv().get(i);
                     if (cmi.isSelected()){
                         // logica per fare la query filtrata per provincia
+                        System.out.println("Filtro sulla provincia selezionato");
                     }
+                    i++;
                 }
             }
         };

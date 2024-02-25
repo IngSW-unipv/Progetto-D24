@@ -39,16 +39,16 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
             this.province = province;
 
             // Estetica
-            searchBar.setStyle("-fx-background-color: #ffffff");
+            searchBar.setStyle("-fx-background-color: #ffff");
             searchBar.setPromptText("Enter your search...");
 
-            searchButton.setStyle("-fx-background-color: #80C1E2");
+            searchButton.setStyle("-fx-background-color: #ffff");
             ImageView searchIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/search_glass.png");
             searchIcon.setFitHeight(25);
             searchIcon.setFitWidth(29);
             searchButton.setGraphic(searchIcon);
 
-            bar.setStyle("-fx-background-color: #80C1E2");
+            bar.setStyle("-fx-background-color: #ffff");
             genre.setStyle("-fx-background-color: #80C1E2");
             province.setStyle("-fx-background-color: #80C1E2");
 
@@ -65,7 +65,7 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
 
             // check menu filtri provincia
             prv = new ArrayList<CheckMenuItem>(); // vettore per poter gestire i CheckMenu di province nel controller
-            String [] pr = {"PAVIA", "PARMA", "MILANO"}; // stringa di generi
+            String [] pr = {"PAVIA", "PARMA", "MILANO"}; // stringa delle province
 
             for (String s : pr) { // Arraylist di CheckMenuItems che popolo
                 CheckMenuItem cmi = new CheckMenuItem(s);
@@ -74,7 +74,7 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
             province.getItems().addAll(prv); // Creo il Menu con i CheckMenuItems da mettere dentro la MenuBar
 
             bar.getMenus().addAll(genre, province);
-            bar.setStyle("-fx-background-color: #ffffff");
+            bar.setStyle("-fx-background-color: #ffff");
         }
 
         //Metodo statico per ottenere l'unica istanza
@@ -100,5 +100,13 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
     public ArrayList<CheckMenuItem> getGenv() {
         return genv;
     } // lo chiamo nel ResearchController
+
+    public Menu getGenre() {
+        return genre;
+    }
+
+    public Menu getProvince() {
+        return province;
+    }
 }
 
