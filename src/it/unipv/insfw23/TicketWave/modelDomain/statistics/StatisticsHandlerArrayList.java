@@ -63,10 +63,10 @@ public class StatisticsHandlerArrayList {
 
 
 
-    public WrapType3 artistStats(int typeCode, Manager manager) {
+    public WrapArtist artistStats(int typeCode, Manager manager) {
 
         ArrayList<Event> eventList = manager.getEventlist();
-        ArrayList<String> artistNames = new ArrayList<>();
+        ArrayList<ArrayList<String>> artistNames = new ArrayList<>();
         ArrayList<Double> results = new ArrayList<>();
 
         ArrayList<Integer> artistCounter = new ArrayList<>();
@@ -76,7 +76,7 @@ public class StatisticsHandlerArrayList {
         for (Event currentEvent: eventList) {
 
             if(currentEvent.getKeyCode() == typeCode) {
-                int index = artistNames.indexOf(currentEvent.getArtist());
+                int index = artistNames.indexOf(currentEvent.getArtists());
 
                 if(index >= 0) {
 
@@ -89,8 +89,8 @@ public class StatisticsHandlerArrayList {
                 }
 
                 else {
-                    artistNames.add(currentEvent.getArtist());
-                    int newindex = artistNames.indexOf(currentEvent.getArtist());
+                    artistNames.add(currentEvent.getArtists());
+                    int newindex = artistNames.indexOf(currentEvent.getArtists());
 
                     //come prelevo l'artista se sto scorrendo un vettore di eventi?
                     //possiamo fare un interfaccia con il metodo get artist e quindi poi
@@ -123,7 +123,7 @@ public class StatisticsHandlerArrayList {
                 results.set(indexMod, (results.get(indexMod)/ artistCounter.get(indexMod)));
             }
         }
-        WrapType3 wrapRes = new WrapType3(results, artistNames);
+        WrapArtist wrapRes = new WrapArtist(results, artistNames);
         return wrapRes;   //classe wrapper per restituire due array ceh servono, ovvero artistNames creata, e results
     }
 
@@ -175,7 +175,7 @@ public class StatisticsHandlerArrayList {
     }
 */
 
-    public double[] genreStats(int typeCode, Manager manager) {
+    public WrapGenre genreStats(int typeCode, Manager manager) {
 
         ArrayList<Event> eventList = manager.getEventlist();
         int[] genreCodeArray= getGenreCodeArray();
@@ -199,8 +199,8 @@ public class StatisticsHandlerArrayList {
             results[j] = results[j]/eventCounter;
             eventCounter = 0;
         }
-        WrapType2 resReturn = new WrapType2(results, getGenreNameArray());
-        return results;
+        WrapGenre resReturn = new WrapGenre(results, getGenreNameArray());
+        return resReturn;
     }
 
 /*
@@ -213,7 +213,7 @@ public class StatisticsHandlerArrayList {
 
 
 
-    public WrapType3 provinceStats(int typeCode, String artistName, Manager manager) {
+    public WrapProvince provinceStats(int typeCode, ArrayList<String> artistName, Manager manager) {
         ArrayList<Event> eventList = manager.getEventlist();
         int[] provinceCodeArray = getProvinceCodeArray();
         int eventCounter = 0;
@@ -223,10 +223,10 @@ public class StatisticsHandlerArrayList {
         for(int j=0; j<Array.getLength(provinceCodeArray); j++) {
             for (Event currentEvent: eventList) {
                 if (currentEvent.getKeyCode() == typeCode) {
-                    if(currentEvent.getArtist() == artistName) {
+                    if(currentEvent.getArtists() == artistName) {
 
                         Province province = currentEvent.getProvince();
-                        if(namesRes.indexOf(province.name())<0){
+                        if(namesRes.indexOf(province.name()) < 0){
                             namesRes.add(province.name());
                         }
                         int index = namesRes.indexOf(province.name());
@@ -243,7 +243,7 @@ public class StatisticsHandlerArrayList {
             results.set(j, results.get(j)/eventCounter);
             eventCounter = 0;
         }
-        WrapType3 resLocation = new WrapType3(results, namesRes);
+        WrapProvince resLocation = new WrapProvince(results, namesRes);
         return resLocation;
     }
 
@@ -275,37 +275,54 @@ class WrapType {
     }
 }
 
-class WrapType2{
+class WrapGenre{
     private String[] typeNameArray;
     private double[] typeResults;
 
-    public WrapType2(double[] results, String[] typeNameArray) {
+    public WrapGenre(double[] results, String[] typeNameArray) {
         this.typeNameArray = typeNameArray;
         this.typeResults = results;
     }
-    public String[] getNameArrayType(){
+    public String[] getNameArrayGenre(){
         return typeNameArray;
     }
 
-    public double[] getTypeRes(){
+    public double[] getGenreRes(){
         return typeResults;
     }
 }
 
 
-class WrapType3{
-    private ArrayList<String> typeNameArray;
+class WrapArtist{
+    private ArrayList<ArrayList<String>> typeNameArray;
     private ArrayList<Double> typeResults;
 
-    public WrapType3(ArrayList<Double> results, ArrayList<String> typeNameArray) {
+    public WrapArtist(ArrayList<Double> results, ArrayList<ArrayList<String>> typeNameArray) {
         this.typeNameArray = typeNameArray;
         this.typeResults = results;
     }
-    public ArrayList<String> getNameArrayType(){
+    public ArrayList<ArrayList<String>> getNameArrayArtist(){
         return typeNameArray;
     }
 
-    public ArrayList<Double> getTypeRes(){
+    public ArrayList<Double> getArtistRes(){
         return typeResults;
+    }
+}
+
+class WrapProvince{
+    private ArrayList<String> prNameArray;
+    private ArrayList<Double> numberResults;
+
+    public WrapProvince(ArrayList<Double> results, ArrayList<String> typeNameArray) {
+        this.prNameArray = typeNameArray;
+        this.numberResults = results;
+    }
+    public ArrayList<String> getNameArrayProvince(){
+        return prNameArray;
+    }
+
+    public ArrayList<Double> getProvinceRes(){
+        return numberResults;
     }
 }
