@@ -78,5 +78,5 @@ public abstract class User {
 	}
 
 
-	public abstract boolean paymentMethod(User user);
+	//public abstract boolean paymentMethod(User user);
 }

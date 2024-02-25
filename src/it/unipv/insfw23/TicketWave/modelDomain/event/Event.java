@@ -147,4 +147,9 @@ public abstract class Event implements EventType {
     public ArrayList<String>[] getArtists() {
         return artists;
     }
+
+    public String getArtist(){
+        String s = new String("Artista");
+        return s;
+    }
 }
