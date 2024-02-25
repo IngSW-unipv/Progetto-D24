@@ -82,8 +82,8 @@ public class ManagerView extends Application{
 		tabev.getColumns().addAll(codevcol, evnomecol);
 		
 		ObservableList<Event> evs = FXCollections.observableArrayList();
-		evs.add(new Event(1,"nome1"));
-		evs.add(new Event(3,"nome2"));
+//		evs.add(new Event(1,"nome1"));
+//		evs.add(new Event(3,"nome2"));
 		tabev.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
 		tabev.setItems(evs);
 //		tabev.setPrefWidth(400);
@@ -113,8 +113,8 @@ public class ManagerView extends Application{
 		tabnot.getColumns().addAll(codcol, s1col, s2col);
 		
 		ObservableList<Notification> nots = FXCollections.observableArrayList();
-		nots.add(new Notification(1,"str1","str2"));
-		nots.add(new Notification(3,"str3","str4"));
+//		nots.add(new Notification(1,"str1","str2"));
+//		nots.add(new Notification(3,"str3","str4"));
 		tabnot.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 		tabnot.setItems(nots);
 //		tabnot.setPrefWidth(400);

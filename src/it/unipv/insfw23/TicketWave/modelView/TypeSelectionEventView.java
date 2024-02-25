@@ -22,6 +22,7 @@ import javafx.stage.Stage;
 public class TypeSelectionEventView extends Application{
 	
 
+	
 	@Override
 	public void start(Stage primarystage) throws Exception {     
   

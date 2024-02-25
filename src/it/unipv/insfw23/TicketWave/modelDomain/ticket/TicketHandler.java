@@ -6,6 +6,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.notifications.*;
 
 public class TicketHandler {
 		
+	
 		private static TicketHandler istance;
 	
 		private TicketHandler() {
