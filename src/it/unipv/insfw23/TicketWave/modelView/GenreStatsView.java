@@ -35,7 +35,7 @@ public class GenreStatsView extends Scene {
 
         BorderPane layout = (BorderPane) getRoot();
 
-        layout.setStyle("-fx-background-color: rgb(27,84,161)");
+        layout.setStyle("-fx-background-color:#def1fa");
 
         final NumberAxis yAxis = new NumberAxis(0, 100, 10);
         final CategoryAxis xAxis = new CategoryAxis();

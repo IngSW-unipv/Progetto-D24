@@ -46,7 +46,7 @@ public class CustomerView extends Scene {
         BorderPane layout = (BorderPane) getRoot();
         this.layout = layout;
 
-
+        layout.setStyle("-fx-background-color: #def1fa;");
         layout.setBottom(LowerBar.getInstance());
         layout.setTop(CustomerUpperBar.getIstance());
         layout.setCenter(grid);
