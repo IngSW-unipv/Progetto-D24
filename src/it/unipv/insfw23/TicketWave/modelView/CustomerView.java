@@ -149,4 +149,3 @@ public class CustomerView extends Scene {
         setRoot(layout);
     }
 }
-

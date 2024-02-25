@@ -32,7 +32,7 @@ public class LoginView extends Application {
     private Scene scene ;
     private GridPane grid = new GridPane();
     private  RadioButton customerRadioButton;
-   private RadioButton managerRadioButton;
+    private RadioButton managerRadioButton;
 
 
 

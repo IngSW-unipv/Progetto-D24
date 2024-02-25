@@ -1,4 +1,3 @@
-
 package it.unipv.insfw23.TicketWave.modelView;
 
 import javafx.geometry.Insets;
@@ -14,6 +13,8 @@ import javafx.scene.text.FontWeight;
 
 public class UpperBar extends HBox {
     // variabile che memorizza l'unica istanza
+    private Button statsButton;
+    private Button searchButton;
     private static UpperBar istance;
     // costruttore privato per singleton
     private UpperBar() {
@@ -34,6 +35,21 @@ public class UpperBar extends HBox {
         setAlignment(Pos.CENTER_LEFT);
 
 
+        /*****************************
+         statsButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
+        @Override
+        public void handle(MouseEvent mouseEvent) {
+        System.out.println("Cliccato statistche");
+        }
+        });
+         */
+
+
+
+
+
+
+
 
         Region spacer = new Region();
         setHgrow(spacer, Priority.ALWAYS);
@@ -48,5 +64,5 @@ public class UpperBar extends HBox {
         }
         return istance;
     }
-
 }
+
