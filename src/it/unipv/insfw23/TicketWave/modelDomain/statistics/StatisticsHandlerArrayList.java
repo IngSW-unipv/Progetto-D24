@@ -76,7 +76,7 @@ public class StatisticsHandlerArrayList {
         for (Event currentEvent: eventList) {
 
             if(currentEvent.getKeyCode() == typeCode) {
-                int index = artistNames.indexOf(currentEvent.getArtist);
+                int index = artistNames.indexOf(currentEvent.getArtist());
 
                 if(index >= 0) {
 
@@ -90,7 +90,7 @@ public class StatisticsHandlerArrayList {
 
                 else {
                     artistNames.add(currentEvent.getArtist());
-                    int newindex = artistNames.indexOf(currentEvent.getArtist);
+                    int newindex = artistNames.indexOf(currentEvent.getArtist());
 
                     //come prelevo l'artista se sto scorrendo un vettore di eventi?
                     //possiamo fare un interfaccia con il metodo get artist e quindi poi

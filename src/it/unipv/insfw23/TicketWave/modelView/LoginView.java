@@ -1,5 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
+import it.unipv.insfw23.TicketWave.modelController.LoginController;
+import it.unipv.insfw23.TicketWave.modelController.SignUpController;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -8,6 +10,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -17,18 +20,49 @@ import java.awt.*;
 import javafx.scene.text.Font;
 
 
+
+
+
 public class LoginView extends Application {
+    private Button loginButton = new Button("Login");
+    private Button regButton = new Button("Registrati");
+    private SignUpView signUpView= new SignUpView();
+    private CustomerView customerView= new CustomerView();
+    private BorderPane root ;
+    private Scene scene ;
+    private GridPane grid = new GridPane();
+    private  RadioButton customerRadioButton;
+   private RadioButton managerRadioButton;
+
+
 
     @Override
     public void start(Stage primaryStage) throws Exception{
 
+        BorderPane root= new BorderPane();
+        this.root=root;
 
-        GridPane grid = new GridPane();
+
+        GridPane grid= new GridPane();
+        this.grid=grid;
+
         grid.setPadding(new Insets(20, 20, 20, 20));
         grid.setVgap(10);
         grid.setHgap(30);
         grid.setAlignment(Pos.CENTER);
         grid.setStyle("-fx-background-color: White;");
+
+
+
+
+        UpperBar upperBar= UpperBar.getIstance();
+        LowerBar lowerBar = LowerBar.getInstance();
+        root.setBottom(lowerBar);
+        root.setTop(upperBar);
+        root.setCenter(grid);
+
+
+
 
         // imposto campo email
         Label emailnameLabel = new Label("Email:");
@@ -52,24 +86,29 @@ public class LoginView extends Application {
         ToggleGroup accountTypeToggleGroup = new ToggleGroup();
 
         RadioButton customerRadioButton = new RadioButton("Cliente");
+        this.customerRadioButton=customerRadioButton;
         customerRadioButton.setFont(Font.font("Arial", 14));
         customerRadioButton.setToggleGroup(accountTypeToggleGroup);
         customerRadioButton.setSelected(true);
         GridPane.setConstraints(customerRadioButton, 0, 0);
 
         RadioButton managerRadioButton = new RadioButton("Gestore");
+        this.managerRadioButton=managerRadioButton;
+
         managerRadioButton.setFont(Font.font("Arial", 14));
         managerRadioButton.setToggleGroup(accountTypeToggleGroup);
         GridPane.setConstraints(managerRadioButton, 1, 0);
 
-        Button loginButton = new Button("Login");
+
         GridPane.setConstraints(loginButton, 1, 5);
 
 
-        Button regButton = new Button("Registrati");
+
+
         GridPane.setConstraints(regButton, 1, 6);
 
-        loginButton.setOnAction(e -> {
+       /* loginButton.setOnAction(e -> {
+
             String email = emailField.getText();
             String password = passwordField.getText();
             if (customerRadioButton.isSelected()) {
@@ -77,19 +116,80 @@ public class LoginView extends Application {
             } else if (managerRadioButton.isSelected()) {
                 System.out.println("Login come gestore con username: " + email + " e password: " + password);
             }
-        });
+        });*/
+
+        // aggiungo signupview al bottone registrati
+       /* loginButton.setOnAction(e -> {
+            CustomerView customerView = new CustomerView();
+            try {
+                customerView.start(new Stage());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });*/
+
+       /* regButton.setOnAction(e -> {
+            SignUpView signUpView = new SignUpView();
+            try {
+                signUpView.start(new Stage());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });*/
+
+
+
 
         grid.getChildren().addAll(emailnameLabel, emailField, passwordLabel, passwordField, customerRadioButton, managerRadioButton, loginButton,signupLabel,regButton);
 
-        Scene scene = new Scene(grid, 500, 500);
+
+
+
+        Scene scene= new Scene(root, 500, 500);
+        this.scene=scene;
         primaryStage.setScene(scene);
 
         primaryStage.setTitle("TicketWave");
 
+        Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
 
+
+        LoginController loginController = new LoginController(primaryStage, signUpView, customerView, this);
+
+        //SignUpController signUpController= new SignUpController(primaryStage,signUpView,customerView,this);
+
+        primaryStage.getIcons().add(icon);
+        primaryStage.setWidth(1080);
+        primaryStage.setHeight(600);
         primaryStage.show();
     }
 
+    public RadioButton getCustomerRadioButton() {
+        return customerRadioButton;
+    }
+
+    public RadioButton getManagerRadioButton() {
+        return managerRadioButton;
+    }
+
+    public Button getLoginButton() {
+        return loginButton;
+    }
+    public void reSetBars(){
+        BorderPane temp = new BorderPane();
+        scene.setRoot(temp);
+        root.setTop(UpperBar.getIstance());
+        root.setCenter(grid);
+        root.setBottom(LowerBar.getInstance());
+        scene.setRoot(root);
+    }
+    public Button getRegButton() {
+        return regButton;
+    }
+
+    public Scene getScene() {
+        return scene;
+    }
     public static void main(String[] args) {
         launch(args);
     }
