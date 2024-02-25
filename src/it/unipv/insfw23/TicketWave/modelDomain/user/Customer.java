@@ -84,9 +84,4 @@ public class Customer extends User {
         return favoriteGenre;
     }
 
-
-    @Override
-    public boolean paymentMethod(User user) {
-        return false;
-    }
 }
