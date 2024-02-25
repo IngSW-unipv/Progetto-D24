@@ -1,13 +1,8 @@
 package it.unipv.insfw23.TicketWave.modelView.ResearchGUI;
 
-import it.unipv.insfw23.TicketWave.modelDomain.event.Festival;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
-import it.unipv.insfw23.TicketWave.modelView.Event;
 import it.unipv.insfw23.TicketWave.modelView.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.ManagerUpperBar;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -15,17 +10,14 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.stage.Stage;
-
-import java.util.ArrayList;
 
 import static javafx.application.Application.launch;
 
 public class ResultResearchView extends Scene {
     private ResearchNodesView rnv;
     private ObservableList<String> result; // dove metto i risultati della query, eseguita nel ResearchController
+
     // costruttore
     public ResultResearchView() {
         super(new Pane(), 1080, 600);
@@ -35,38 +27,40 @@ public class ResultResearchView extends Scene {
         ResearchNodesView rnv = ResearchNodesView.getIstance();
 
         // Tableview per elencare i risultati della ricerca
-        TableView<it.unipv.insfw23.TicketWave.modelView.Event> table = new TableView<>();
+        TableView<it.unipv.insfw23.TicketWave.modelDomain.event.Event> table = new TableView<>();
 
-        TableColumn <it.unipv.insfw23.TicketWave.modelView.Event, Integer> tcEvent = new TableColumn<>("Evento");
-        tcEvent.setCellValueFactory(new PropertyValueFactory<>("cod"));
+        TableColumn <it.unipv.insfw23.TicketWave.modelDomain.event.Event, String> tcEvent = new TableColumn<>("Evento");
+        tcEvent.setCellValueFactory(new PropertyValueFactory<>("Name"));
         tcEvent.setStyle("-fx-alignment: CENTER");
 
-        TableColumn <it.unipv.insfw23.TicketWave.modelView.Event, String> tcLocation = new TableColumn<>("Località");
-        tcLocation.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        TableColumn <it.unipv.insfw23.TicketWave.modelDomain.event.Event, String> tcCity = new TableColumn<>("Città");
+        tcCity.setCellValueFactory(new PropertyValueFactory<>("City"));
+        tcCity.setStyle("-fx-alignment: CENTER");
+
+        TableColumn <it.unipv.insfw23.TicketWave.modelDomain.event.Event, String> tcLocation = new TableColumn<>("Luogo");
+        tcLocation.setCellValueFactory(new PropertyValueFactory<>("Location"));
         tcLocation.setStyle("-fx-alignment: CENTER");
 
-      //  TableColumn <it.unipv.insfw23.TicketWave.modelView.Event, String> tcProvince = new TableColumn<>("Provincia");
-      //  tcProvince.setCellValueFactory(new PropertyValueFactory<>("Province"));
-      //  tcProvince.setStyle("-fx-alignment: CENTER");
+        TableColumn <it.unipv.insfw23.TicketWave.modelDomain.event.Event, Province> tcProvince = new TableColumn<>("Provincia");
+        tcProvince.setCellValueFactory(new PropertyValueFactory<>("Province"));
+        tcProvince.setStyle("-fx-alignment: CENTER");
 
-        table.getColumns().addAll(tcEvent, tcLocation);
+        table.getColumns().addAll(tcEvent, tcCity, tcLocation, tcProvince);
         table.setPlaceholder( new Label("Nessun evento trovato, sii più specifico"));
 
-        ObservableList<it.unipv.insfw23.TicketWave.modelView.Event> evs = FXCollections.observableArrayList(
-                new Event(1, "paolo")
-        );
+        ObservableList<it.unipv.insfw23.TicketWave.modelDomain.event.Event> evs = FXCollections.observableArrayList();   // ESEMPIO CHE HO USATO PER VEDERE IL FUNZIONAMENTO */
 
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         table.setItems(evs);
         table.setEditable(true);
 
-        // Rendo Le righe cliccabili // CAPIRE BENE CON LORIS SE USARE EVENT del dominio o EVENT di VIEW
+        // Rendo Le righe cliccabili (mando alla pagina dell'evento giusto, rimango su UI, per cui non creo un controller)
         table.setRowFactory(tv -> {
-            javafx.scene.control.TableRow<it.unipv.insfw23.TicketWave.modelView.Event> row = new javafx.scene.control.TableRow<>();
+            javafx.scene.control.TableRow<it.unipv.insfw23.TicketWave.modelDomain.event.Event> row = new javafx.scene.control.TableRow<>();
             row.setOnMouseClicked(event -> {
                 if (event.getClickCount() == 1 && (!row.isEmpty())) {
-                    it.unipv.insfw23.TicketWave.modelView.Event rowData = row.getItem();
-                    System.out.println("Clicked on: " + rowData.getCodice() + " " + rowData.getNome());
+                    it.unipv.insfw23.TicketWave.modelDomain.event.Event rowData = row.getItem();
+                    System.out.println("Clicked on: " + rowData.getName() + " " + rowData.getCity() + " " + rowData.getLocation() + " " + rowData.getProvince() );
                     // Add your logic for handling the row click here
                 }
             });
