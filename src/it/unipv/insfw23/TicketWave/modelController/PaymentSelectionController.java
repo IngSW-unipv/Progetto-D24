@@ -1,54 +1,73 @@
 package it.unipv.insfw23.TicketWave.modelController;
 
-import it.unipv.insfw23.TicketWave.modelView.PaymentDataM2View;
+import it.unipv.insfw23.TicketWave.modelView.PaymentDataMView;
+import it.unipv.insfw23.TicketWave.modelView.PaymentDataPview;
 import it.unipv.insfw23.TicketWave.modelView.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.TicketPageView;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 
 public class PaymentSelectionController {
 
     private Stage mainStage;
     private PaymentSelectionView paymentPage;
     private TicketPageView ticketPage;
+    private PaymentDataPview paymentDataPPage;
 
-    public PaymentSelectionController(Stage mainStage, PaymentSelectionView PaymentPage) {
+    private PaymentDataMView paymentDataMPage;
+
+    public PaymentSelectionController(Stage mainStage, PaymentSelectionView PaymentPage,TicketPageView ticketPage) {
         this.mainStage = mainStage;
         this.paymentPage = PaymentPage;
+        this.ticketPage=ticketPage;
         initComponents();
     }
 
     public void initComponents(){
+
+        EventHandler<MouseEvent> goToPaymentDataPage= new EventHandler<>() {
+
+            @Override
+            public void handle(MouseEvent actionEvent) {
+                if(paymentPage.getMastercardButton().isSelected()){
+                // Azione da eseguire quando il pulsante viene premuto
+                System.out.println("Stai andando alla PaymentDataMPage");
+                paymentDataMPage=new PaymentDataMView();
+               PaymentDataMController paymentDataMController = new PaymentDataMController(mainStage,paymentDataMPage,paymentPage);
+                mainStage.setScene(paymentDataMPage);
+            } else if (paymentPage.getPaypalButton().isSelected()) {
+                    System.out.println("Stai andando alla PaymentDataPPage");
+                    paymentDataPPage=new PaymentDataPview();
+                    PaymentDataPController paymentDataPController=new PaymentDataPController(mainStage,paymentDataPPage,paymentPage);
+                    mainStage.setScene(paymentDataPPage);
+                }else {
+                    System.out.println("Seleziona un Metodo di Pagamento");
+
+                }
+
+                }
+            };
+        paymentPage.getNextButton().setOnMouseClicked(goToPaymentDataPage);
+
+
         EventHandler<MouseEvent> turnBackToTicketPage = new EventHandler<>() {
 
             @Override
             public void handle(MouseEvent actionEvent) {
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("Sei ritornato indietro alla TicketPage");
-                TicketPageView ticketPage = new TicketPageView();
-                BuyTicketController Buyticket = new BuyTicketController(mainStage,ticketPage);
+              ticketPage.reSetBars();
                 mainStage.setScene(ticketPage);
             }
         };
 
         paymentPage.getBackButton().setOnMouseClicked(turnBackToTicketPage);
 
-        EventHandler<MouseEvent> goToPaymentDataPage= new EventHandler<>() {
 
-            @Override
-            public void handle(MouseEvent actionEvent) {
-                // Azione da eseguire quando il pulsante viene premuto
-                System.out.println("Stai andando alla PaymentDataPage");
-                PaymentDataM2View paymentDataPage = new PaymentDataM2View();
-               PaymentDataController paymentDataController = new PaymentDataController(mainStage,paymentDataPage);
-                mainStage.setScene(paymentDataPage);
-            }
-        };
 
-        paymentPage.getNextButton().setOnMouseClicked(goToPaymentDataPage);
+
+
     }
 }
 

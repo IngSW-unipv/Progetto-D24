@@ -18,7 +18,7 @@ import java.util.List;
 
 import static javafx.application.Application.launch;
 
-public class PaymentDataM2View extends Scene {
+public class PaymentDataMView extends Scene {
 
     private static  Label nameLabel = new Label("Nome Intestatario Carta:");
     private static  Label surnameLabel = new Label("Cognome Intestatario Carta:");
@@ -38,7 +38,7 @@ public class PaymentDataM2View extends Scene {
     private static  List<Label> labels = new ArrayList<>();
     private Scene scene;
 
-    public PaymentDataM2View(){
+    public PaymentDataMView(){
         super(new BorderPane(), 1080, 600);
         initComponents();
     }

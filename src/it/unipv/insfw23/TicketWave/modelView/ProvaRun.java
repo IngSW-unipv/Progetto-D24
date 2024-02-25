@@ -1,7 +1,5 @@
 package it.unipv.insfw23.TicketWave.modelView;
 import it.unipv.insfw23.TicketWave.modelController.BuyTicketController;
-import it.unipv.insfw23.TicketWave.modelController.PaymentDataController;
-import it.unipv.insfw23.TicketWave.modelController.PaymentSelectionController;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -14,10 +12,13 @@ public class ProvaRun extends Application {
 
         try {
             // Istanzia la TicketPageView
+
             TicketPageView ticketPageView=new TicketPageView();
             BuyTicketController buyTicketController=new BuyTicketController(primaryStage,ticketPageView);
 
-           buyTicketController.initComponents(); // Inizializza i componenti del controller
+            buyTicketController.initComponents();
+
+           //buyTicketController.initComponents(); // Inizializza i componenti del controller
 
             // Crea la scena principale utilizzando la TicketPageView
             Scene scene = ticketPageView;
@@ -50,5 +51,12 @@ Scene scene = paymentDataPage;
         primaryStage.setTitle("TicketPage");
         primaryStage.setScene(scene);
         primaryStage.show();
+
+
+                    TicketPageView ticketPageView=new TicketPageView();
+            BuyTicketController buyTicketController=new BuyTicketController(primaryStage,ticketPageView);
+
+           buyTicketController.initComponents(); // Inizializza i componenti del controller
+
 
  */
