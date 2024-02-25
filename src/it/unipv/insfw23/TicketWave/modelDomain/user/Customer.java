@@ -81,6 +81,8 @@ public class Customer extends User {
     }
 
 
-
-
+    @Override
+    public boolean isCustomer() {
+        return true;
+    }
 }

@@ -77,5 +77,7 @@ public abstract class User {
 		notifications.add(n);
 	}
 
+	public abstract boolean isCustomer();
+
 
 }
