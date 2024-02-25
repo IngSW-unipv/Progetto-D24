@@ -6,6 +6,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.notifications.*;
 
 public class TicketHandler {
 		
+	
 		private static TicketHandler istance;
 	
 		private TicketHandler() {
@@ -29,7 +30,7 @@ public class TicketHandler {
 			if(event.getSeatsRemaining() == 0) {
 				Manager creator;
 				creator = event.getCreator();
-				NotificationHandler.getIstance().sendNotificationSoldOut(event, creator); //NotifHand e' l'istanza del NotificationHandler
+				NotificationHandler.getIstance().sendNotificationSoldOut(event); //NotifHand e' l'istanza del NotificationHandler
 			}
 			return t;
 		}
