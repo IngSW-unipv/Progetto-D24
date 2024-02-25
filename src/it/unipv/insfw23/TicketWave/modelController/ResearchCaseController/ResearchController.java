@@ -1,4 +1,4 @@
-package it.unipv.insfw23.TicketWave.modelController;
+package it.unipv.insfw23.TicketWave.modelController.ResearchCaseController;
 
 import it.unipv.insfw23.TicketWave.modelView.ManagerUpperBar;
 import it.unipv.insfw23.TicketWave.modelView.ResearchGUI.ResearchNodesView;
@@ -63,22 +63,35 @@ public class ResearchController {
             }
         };
 
-        // filtri per provincia
-        EventHandler<ActionEvent> provinceFilterHandler = new EventHandler<ActionEvent>() {
+        // filtri per provincia HO IL CONTROLLER A PARTE PER LA SUA GESTIONE
+     /*   EventHandler<ActionEvent> provinceFilterHandler = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                ResearchNodesView rnv = ResearchNodesView.getIstance(); // prendo l'unica istanza del Singleton
+                CheckMenuItem checkMenuItem = new CheckMenuItem();
+                int i = 0;
+                checkMenuItem = rnv.getPrv().get(i);
+                // Custom logic for handling the CheckMenuItem's event
+                if (checkMenuItem.isSelected()) {
+                    System.out.println(checkMenuItem.getText() + " is selected");
+                } else {
+                    System.out.println(checkMenuItem.getText() + " is deselected");
+                }
+                /*ResearchNodesView rnv = ResearchNodesView.getIstance(); // prendo l'unica istanza del Singleton
                 int i = 0;
                 for (CheckMenuItem cmi : rnv.getPrv()) { // checko i checkMenuItem selezionati per la query filtrata per provincia/e
-                    cmi = rnv.getPrv().get(i);
-                    if (cmi.isSelected()){
-                        // logica per fare la query filtrata per provincia
-                        System.out.println("Filtro sulla provincia selezionato");
-                    }
+                    int finalI = i;
+                    rnv.getPrv().get(i).setOnAction(event -> handleCheckMenuItem(rnv.getPrv().get(finalI)));
                     i++;
-                }
-            }
+                }*/
+   /*         }
         };
+        int i = 0;
+        for (CheckMenuItem cmi : rnv.getPrv()) { // checko i checkMenuItem selezionati per la query filtrata per provincia/e
+            rnv.getPrv().get(i).setOnAction(provinceFilterHandler);
+            i++;
+        }
+        */
+
 
         EventHandler<ActionEvent> ResultResearchHandler = new EventHandler<ActionEvent>() {
             ObservableList<String> azzeratore = FXCollections.observableArrayList(" ");

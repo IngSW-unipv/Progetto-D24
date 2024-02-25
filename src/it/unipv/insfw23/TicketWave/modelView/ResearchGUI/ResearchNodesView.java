@@ -2,8 +2,8 @@ package it.unipv.insfw23.TicketWave.modelView.ResearchGUI;
 /*****************************
         QUI VA TUTTO, DEVO ABBELLIRE I TASTI
  ****************************/
+import it.unipv.insfw23.TicketWave.modelController.ResearchCaseController.ProvinceFilterController;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 
@@ -69,6 +69,10 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
 
             for (String s : pr) { // Arraylist di CheckMenuItems che popolo
                 CheckMenuItem cmi = new CheckMenuItem(s);
+
+                ProvinceFilterController pfc = new ProvinceFilterController(cmi); // Controller per vedere se viene selezionato o meno un certo CheckMenuBox, cioè una provincia in questo caso
+                cmi.setOnAction(pfc);
+
                 prv.add(cmi);
             }
             province.getItems().addAll(prv); // Creo il Menu con i CheckMenuItems da mettere dentro la MenuBar
@@ -108,5 +112,17 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
     public Menu getProvince() {
         return province;
     }
+
+    /*
+    private void handleCheckMenuItem(CheckMenuItem checkMenuItem) {
+        // Custom logic for handling the CheckMenuItem's event
+        if (checkMenuItem.isSelected()) {
+            System.out.println(checkMenuItem.getText() + " is selected");
+        } else {
+            System.out.println(checkMenuItem.getText() + " is deselected");
+        }
+    }
+
+     */
 }
 
