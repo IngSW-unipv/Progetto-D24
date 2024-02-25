@@ -46,15 +46,15 @@ public abstract class Event implements EventType {
 
     public String getName() {
         return name;
-    }
+    } // mi serve nel ResultResearchView per la TableView
 
     public String getCity() {
         return city;
-    }
+    } // mi serve nel ResultResearchView per la TableView
 
     public String getLocation() {
         return location;
-    }
+    } // mi serve nel ResultResearchView per la TableView
 
     public Province getProvince() {
         return province;

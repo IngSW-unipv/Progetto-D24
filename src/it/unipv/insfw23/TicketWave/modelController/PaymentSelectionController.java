@@ -1,7 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelController;
 
 import it.unipv.insfw23.TicketWave.modelView.PaymentDataMView;
-import it.unipv.insfw23.TicketWave.modelView.PaymentDataPview;
+import it.unipv.insfw23.TicketWave.modelView.PaymentDataPView;
 import it.unipv.insfw23.TicketWave.modelView.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.TicketPageView;
 import javafx.event.EventHandler;
@@ -13,7 +13,7 @@ public class PaymentSelectionController {
     private Stage mainStage;
     private PaymentSelectionView paymentPage;
     private TicketPageView ticketPage;
-    private PaymentDataPview paymentDataPPage;
+    private PaymentDataPView paymentDataPPage;
 
     private PaymentDataMView paymentDataMPage;
 
@@ -38,10 +38,11 @@ public class PaymentSelectionController {
                 mainStage.setScene(paymentDataMPage);
             } else if (paymentPage.getPaypalButton().isSelected()) {
                     System.out.println("Stai andando alla PaymentDataPPage");
-                    paymentDataPPage=new PaymentDataPview();
+                    paymentDataPPage=new PaymentDataPView();
                     PaymentDataPController paymentDataPController=new PaymentDataPController(mainStage,paymentDataPPage,paymentPage);
                     mainStage.setScene(paymentDataPPage);
                 }else {
+                    paymentPage.getErrmessage().setOpacity(100);
                     System.out.println("Seleziona un Metodo di Pagamento");
 
                 }

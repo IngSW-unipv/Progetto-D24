@@ -141,5 +141,8 @@ public class Manager extends User {
     }
 
 
-
+    @Override
+    public boolean isCustomer() {
+        return false;
+    }
 }

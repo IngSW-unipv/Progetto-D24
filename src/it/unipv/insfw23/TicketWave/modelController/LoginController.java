@@ -18,11 +18,12 @@ public class LoginController {
 
     private ManagerView managerView;
 
-    public LoginController(Stage mainstage,SignUpView signUpView, CustomerView customerView, LoginView loginView){
-        this.mainstage= mainstage;
-        this.signUpView= signUpView;
-        this.customerview= customerView;
-        this.loginView= loginView;
+    public LoginController(Stage mainstage, SignUpView signUpView, CustomerView customerView, LoginView loginView, ManagerView managerView) {
+        this.mainstage = mainstage;
+        this.signUpView = signUpView;
+        this.customerview = customerView;
+        this.loginView = loginView;
+        this.managerView = managerView;
         initComponents();
     }
 
@@ -35,8 +36,8 @@ public class LoginController {
 
                 // Azione da eseguire quando il pulsante "Registrati" viene premuto
                 System.out.println("Hai cliccato il pulsante Registrati");
-                SignUpView signUpView= new SignUpView();
-                SignUpController signUpController= new SignUpController(mainstage, signUpView,customerview,loginView);
+                signUpView = new SignUpView();
+                SignUpController signUpController = new SignUpController(mainstage, signUpView, customerview, loginView);
                 signUpView.reSetBars();
                 mainstage.setScene(signUpView); // Imposta la scena SignUpView sulla stage principale
             }
@@ -47,25 +48,33 @@ public class LoginController {
             @Override
             public void handle(ActionEvent actionEvent) {
 
-                if(loginView.getCustomerRadioButton().isSelected()){
+                if (loginView.getCustomerRadioButton().isSelected()) {
 
 
                     System.out.println("Hai cliccato il pulsante Login come cliente");
-                    CustomerView customerView= new CustomerView();
-                    CustomerController customerController= new CustomerController();
+                    customerview = new CustomerView();
+                    CustomerController customerController = new CustomerController();
                     customerview.reSetBars();
                     mainstage.setScene(customerview); // Imposta la scena SignUpView sulla stage principale
-                }/* else ifloginView.getManagerRadioButton().isSelected()){
+                }
+                /*else if (loginView.getManagerRadioButton().isSelected()) {
 
 
-                // Azione da eseguire quando il pulsante "Registrati" viene premuto
-                System.out.println("Hai cliccato il pulsante Login come gestore");
-                customerview.reSetBars();
-                mainstage.setScene(managerview); // Imposta la scena SignUpView sulla stage principale }*/
-            }// devi mettere managerview anche all'interno del costruttore
-        };
+                    // Azione da eseguire quando il pulsante "Registrati" viene premuto
+                    System.out.println("Hai cliccato il pulsante Login come gestore");
+                    managerView = new ManagerView();
+                    mainstage.setScene(managerView); // Imposta la scena SignUpView sulla stage principale }*/
+            }// devi mettere managerview anche all'interno del costruttore*/
 
-        loginView.getLoginButton().setOnAction(goToCustomerView); // Imposta l'handler sull'azione del pulsante "Registrati"
+
+
+        // Imposta l'handler sull'azione del pulsante "Registrati"
     }
 
+    ;
+        loginView.getLoginButton().
+
+    setOnAction(goToCustomerView);
+
+}
 }

@@ -30,7 +30,7 @@ public class SubscriptionSelectionView extends Scene {
     public void init(){
 
         BorderPane contenuto = new BorderPane();
-        contenuto.setStyle("-fx-background-color: rgb(27,84,161)");
+       // contenuto.setStyle("-fx-background-color: rgb(27,84,161)");
 
         BorderPane primaSub = new BorderPane();
         primaSub.setStyle("-fx-background-color: rgba(103,186,255); -fx-background-radius: 20;");
@@ -113,9 +113,9 @@ public class SubscriptionSelectionView extends Scene {
         secondaSub.setMaxSize(300, 250);
         terzaSub.setMaxSize(300, 250);
 
-        StackPane bottonePrimaSub = new StackPane(primaSub);
-        StackPane bottoneSecondaSub = new StackPane(secondaSub);
-        StackPane bottoneTerzaSub = new StackPane(terzaSub);
+       bottonePrimaSub = new StackPane(primaSub);
+       bottoneSecondaSub = new StackPane(secondaSub);
+       bottoneTerzaSub = new StackPane(terzaSub);
 
         bottonePrimaSub.setPadding(new Insets(20));
         bottoneSecondaSub.setPadding(new Insets(20));
@@ -131,7 +131,7 @@ public class SubscriptionSelectionView extends Scene {
 
 
         BorderPane layout = new BorderPane();
-        // layout.setTop(upperBarVuota);
+        layout.setTop(UpperBar.getIstance());
         layout.setCenter(contenuto);
         layout.setBottom(LowerBar.getInstance());
 
@@ -148,7 +148,7 @@ public class SubscriptionSelectionView extends Scene {
 
         BorderPane temp = new BorderPane();
         setRoot(temp);
-        //layout.setTop(Barra Vuota);
+        layout.setTop(UpperBar.getIstance());
         layout.setCenter(contenuto);
         layout.setBottom(LowerBar.getInstance());
         setRoot(layout);
@@ -166,5 +166,8 @@ public class SubscriptionSelectionView extends Scene {
     public StackPane getBottoneTerzaSub() {
         return bottoneTerzaSub;
     }
+
 }
+
+
 

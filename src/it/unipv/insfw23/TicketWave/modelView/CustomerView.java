@@ -44,7 +44,6 @@ public class CustomerView extends Scene {
         // Creazione del bordo superiore e inferiore
 
         BorderPane layout = (BorderPane) getRoot();
-
         this.layout = layout;
 
 
