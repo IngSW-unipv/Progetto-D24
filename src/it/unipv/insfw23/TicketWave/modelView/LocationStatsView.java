@@ -28,7 +28,7 @@ public class LocationStatsView extends Scene {
 
         BorderPane layout = (BorderPane) getRoot();
 
-        layout.setStyle("-fx-background-color: rgb(27,84,161)");
+        layout.setStyle("-fx-background-color:#def1fa");
 
         // Creazioni assi X e Y (scheletro)
         final CategoryAxis xAxis = new CategoryAxis();

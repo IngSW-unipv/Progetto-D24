@@ -40,7 +40,7 @@ public class TypeStatsView extends Scene {
     private void init() {
 
         BorderPane layout = new BorderPane();
-        layout.setStyle("-fx-background-color: rgb(27,84,161)");
+        layout.setStyle("-fx-background-color: #def1fa;");
 
 
         final NumberAxis xAxis = new NumberAxis(0, 100, 10);

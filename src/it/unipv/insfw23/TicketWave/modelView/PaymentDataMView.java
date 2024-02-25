@@ -53,14 +53,14 @@ public class PaymentDataMView extends Scene {
         forwardButton.setPrefWidth(forwardarrowlogo.getWidth());
         forwardButton.setPrefHeight(forwardarrowlogo.getHeight());
         forwardButton.setPadding(new Insets(0));
-        forwardButton.setStyle("-fx-background-color: rgb(255,255,255)");
+       // forwardButton.setStyle("-fx-background-color: rgb(255,255,255)");
 
         Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/backArrow.png");
         backButton.setGraphic(new ImageView(backarrowlogo));
         backButton.setPrefWidth(backarrowlogo.getWidth());
         backButton.setPrefHeight(backarrowlogo.getHeight());
         backButton.setPadding(new Insets(0));
-        backButton.setStyle("-fx-background-color: rgb(255,255,255)");
+      //  backButton.setStyle("-fx-background-color: rgb(255,255,255)");
 
         textFields.add(insertMM);
         textFields.add(insertYY);
@@ -94,7 +94,7 @@ public class PaymentDataMView extends Scene {
 
 
         BorderPane root = new BorderPane();
-        root.setStyle("-fx-background-color: rgb(255,255,255)");
+        //root.setStyle("-fx-background-color: #def1fa;");
         root.setPadding(new Insets(10));
         root.setCenter(dataInput);
         root.setRight(forwardButton);
@@ -104,7 +104,7 @@ public class PaymentDataMView extends Scene {
 
 
         BorderPane layout= new BorderPane();
-        layout.setStyle("-fx-background-color: rgb(27,84,161)");
+        layout.setStyle("-fx-background-color: #def1fa;");
         layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
         layout.setTop(UpperBar.getIstance());

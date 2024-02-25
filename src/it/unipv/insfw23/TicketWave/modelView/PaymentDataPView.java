@@ -52,7 +52,7 @@ public class PaymentDataPView extends Scene {
 
 
         BorderPane root= new BorderPane();
-        root.setStyle("-fx-background-color: rgb(255,255,255)");
+        root.setStyle("-fx-background-color: #def1fa;");
         root.setPadding(new Insets(10));
         root.setCenter(textBox);
         root.setBottom(buttonBox);
@@ -67,7 +67,7 @@ public class PaymentDataPView extends Scene {
         backarrow.setFitWidth(50);
         backarrow.setPreserveRatio(true);
         backButton.setGraphic(backarrow);
-        backButton.setStyle("-fx-background-color: rgb(255,255,255)");
+       // backButton.setStyle("-fx-background-color: rgb(255,255,255)");
 
 
         scene = new Scene(root, 1080, 600);

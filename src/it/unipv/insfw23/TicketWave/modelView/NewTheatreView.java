@@ -25,7 +25,7 @@ public class NewTheatreView extends Application{
 Stage window = primarystage;
 		
 		BorderPane layout = new BorderPane();
-		
+		layout.setStyle("-fx-background-color: #def1fa;");
 		GridPane grid = new GridPane();
 		
 		grid.setPadding(new Insets(50, 50, 50, 50));

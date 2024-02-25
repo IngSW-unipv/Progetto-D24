@@ -58,7 +58,7 @@ public class SignUpView extends Scene {
         // creazione borderpane e setto upper e lower bar
 
         BorderPane layout= (BorderPane) getRoot();
-
+        layout.setStyle("-fx-background-color: #def1fa;");
         this.layout= layout;
 
 
@@ -77,7 +77,7 @@ public class SignUpView extends Scene {
         grid.setVgap(20);
         grid.setHgap(10);
         grid.setAlignment(Pos.CENTER);
-        grid.setStyle("-fx-background-color: White;");
+        grid.setStyle("-fx-background-color: #def1fa;");
 
         Font labelFont = Font.font("Arial", 18); // imposto font di tutta la pagina
 
