@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="logincontroller e signupview" />
+    <list default="true" id="a785d0e6-0e4a-4ecd-80c7-ba4857708bc8" name="Changes" comment="Commit Stats domain fix">
+      <change beforePath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_02_2024_15_38__Changes_.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/shelf/Uncommitted_changes_before_Update_at_20_02_2024_15_38__Changes_.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TypeStatsView.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TypeStatsView.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -591,7 +594,15 @@
       <option name="project" value="LOCAL" />
       <updated>1708738149378</updated>
     </task>
-    <option name="localTasksCounter" value="37" />
+    <task id="LOCAL-00037" summary="Commit Stats domain fix">
+      <option name="closed" value="true" />
+      <created>1708861365812</created>
+      <option name="number" value="00037" />
+      <option name="presentableId" value="LOCAL-00037" />
+      <option name="project" value="LOCAL" />
+      <updated>1708861365812</updated>
+    </task>
+    <option name="localTasksCounter" value="38" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -628,6 +639,7 @@
     <MESSAGE value="Commit UI: pagina descrizione ticket,seleziona metodo di pagamento e inserimento dati carta" />
     <MESSAGE value="Cambiamento UI+ Controller per TicketPage e PaySelectionData" />
     <MESSAGE value="Cambiamento UI+cambio scena controller" />
-    <option name="LAST_COMMIT_MESSAGE" value="Cambiamento UI+cambio scena controller" />
+    <MESSAGE value="Commit Stats domain fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="Commit Stats domain fix" />
   </component>
 </project>
