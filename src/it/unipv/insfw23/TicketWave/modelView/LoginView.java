@@ -28,6 +28,7 @@ public class LoginView extends Application {
     private Button regButton = new Button("Registrati");
     private SignUpView signUpView= new SignUpView();
     private CustomerView customerView= new CustomerView();
+    private ManagerView managerView= new ManagerView();
     private BorderPane root ;
     private Scene scene ;
     private GridPane grid = new GridPane();
@@ -43,6 +44,7 @@ public class LoginView extends Application {
         this.root=root;
 
 
+
         GridPane grid= new GridPane();
         this.grid=grid;
 
@@ -50,7 +52,7 @@ public class LoginView extends Application {
         grid.setVgap(10);
         grid.setHgap(30);
         grid.setAlignment(Pos.CENTER);
-        grid.setStyle("-fx-background-color: White;");
+       // grid.setStyle("-fx-background-color: White;");
 
 
 
@@ -154,7 +156,7 @@ public class LoginView extends Application {
         Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
 
 
-        LoginController loginController = new LoginController(primaryStage, signUpView, customerView, this);
+        LoginController loginController = new LoginController(primaryStage, signUpView, customerView, this,managerView);
 
         //SignUpController signUpController= new SignUpController(primaryStage,signUpView,customerView,this);
 

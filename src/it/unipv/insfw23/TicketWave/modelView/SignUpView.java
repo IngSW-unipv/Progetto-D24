@@ -62,6 +62,7 @@ public class SignUpView extends Scene {
         this.layout= layout;
 
 
+
         layout.setBottom(LowerBar.getInstance());
         layout.setTop(UpperBar.getIstance());
 
