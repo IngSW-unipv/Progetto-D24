@@ -16,16 +16,16 @@ public class Manager extends User {
     private LocalDate subscriptionDate;
 
 
-    private int counterCreatedEvents;
+    private int CounterCreatedEvents;
 
-    public Manager( String name, String surname,String dateOfBirth,String email,String password,int provinceOfResidence, int [] creditCard,ArrayList <Event> event , int maxNumberofEvents,int subscription,int counterCreatedEvents,LocalDate subscriptionDate){
+    public Manager( String name, String surname,String dateOfBirth,String email,String password,int provinceOfResidence, int [] creditCard,ArrayList <Event> event , int maxNumberofEvents){
         super (name,surname,dateOfBirth,email,password,provinceOfResidence);
         this.creditCard=creditCard;
         this.event=event;
         this.maxNumberofEvents=maxNumberofEvents;
-        this.subscription=subscription; // settato da signunp controller
-        this.counterCreatedEvents=counterCreatedEvents;  // settato da signup controller
-        this.subscriptionDate =subscriptionDate;  // settato da signup controller
+        this.subscription=0;
+        this.CounterCreatedEvents=0;
+        this.subscriptionDate = null;
         //contatore per eventi creati impostato a 0 dal momento che si istanzia il Manager
         //imposto subscription=0 di default,in modo tale che non appena viene creato non presenta nessun abbonamento
         // poi gli viene assegnanto dai metodi di SubscriptionHandler
@@ -62,48 +62,48 @@ public class Manager extends User {
 
 
     //seguono dei metodi di crea Festival, Concerto ecc..
-    public void createFestival(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String>[] artists, int artistsNumber) throws Exception {
-        if(subscription==1 || subscription==2 && counterCreatedEvents<maxNumberofEvents ) {
+    public void createFestival(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String> artists, int artistsNumber) throws Exception {
+        if(subscription==1 || subscription==2 && CounterCreatedEvents<maxNumberofEvents ) {
 
             Event festival = new Festival(idEvent, name, city, location, province, maxNumberOfSeats,typeOfSeats, price, genre,creator, artists, artistsNumber);
             event.add(festival);
-            counterCreatedEvents++;
+            CounterCreatedEvents++;
         }
         else {
             throw new Exception("Impossibile Creare l'evento:" + name + ".Non puoi creare altri Eventi");
         }
     }
 
-    public void createConcert(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String>[] artists, String artist) throws Exception{
-        if(subscription==1 || subscription==2 && counterCreatedEvents<maxNumberofEvents ) {
+    public void createConcert(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String> artists, String artist) throws Exception{
+        if(subscription==1 || subscription==2 && CounterCreatedEvents<maxNumberofEvents ) {
 
             Event concert= new Concert(idEvent,name,city,location,province,maxNumberOfSeats,typeOfSeats,price,genre,creator,artists,artist);
             event.add(concert);
-            counterCreatedEvents++;
+            CounterCreatedEvents++;
         }
         else {
             throw new Exception("Impossibile Creare l'evento:" + name + ".Non puoi creare altri Eventi");
         }
     }
 
-    public void createTheater(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String>[] artists, String theatreCompany, String authorName)throws Exception {
-        if(subscription==1 || subscription==2 && counterCreatedEvents<maxNumberofEvents ) {
+    public void createTheater(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String> artists, String theatreCompany, String authorName)throws Exception {
+        if(subscription==1 || subscription==2 && CounterCreatedEvents<maxNumberofEvents ) {
 
             Event theater = new Theater(idEvent, name, city, location, province, maxNumberOfSeats,typeOfSeats, price, genre, creator,artists,theatreCompany, authorName);
             event.add(theater);
-            counterCreatedEvents++;
+            CounterCreatedEvents++;
         }
         else {
             throw new Exception("Impossibile Creare l'evento:" + name + ".Non puoi creare altri Eventi");
         }
     }
 
-    public void createOther(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String>[] artists, String description)throws Exception{
-        if(subscription==1 || subscription==2 && counterCreatedEvents<maxNumberofEvents ) {
+    public void createOther(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String> artists, String description)throws Exception{
+        if(subscription==1 || subscription==2 && CounterCreatedEvents<maxNumberofEvents ) {
 
                 Event other = new Other(idEvent, name, city, location, province, maxNumberOfSeats,typeOfSeats, price,genre,creator,artists,description);
                 event.add(other);
-                counterCreatedEvents++;
+                CounterCreatedEvents++;
             }
             else {
                 throw new Exception("Impossibile Creare l'evento:" + name + ".Non puoi creare altri Eventi");
@@ -141,8 +141,5 @@ public class Manager extends User {
     }
 
 
-    @Override
-    public boolean isCustomer() {
-        return false;
-    }
+
 }

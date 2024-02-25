@@ -1,10 +1,9 @@
 package it.unipv.insfw23.TicketWave.modelController;
 
+//import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
+//import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
-import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.TicketPageView;
@@ -18,14 +17,15 @@ import javafx.stage.Stage;
 
 public class PaymentDataMController {
     private Stage mainStage;
-    private User user;
-    private PaymentDataMView paymentDataMView;
+    private Customer customer;
+    private Manager manager;
+    private PaymentDataMView paymentDataPage;
     private TicketPageView ticketpage;
-    private PaymentSelectionView paymentSelectionView;
+    private PaymentSelectionView paymentPage;
 
-    public PaymentDataMController(Stage mainStage, PaymentDataMView paymentDataMView, PaymentSelectionView paymentSelectionView) {
-        this.paymentDataMView = paymentDataMView;
-        this.paymentSelectionView = paymentSelectionView;
+    public PaymentDataMController(Stage mainStage, PaymentDataMView paymentDataPage, PaymentSelectionView paymentPage) {
+        this.paymentDataPage = paymentDataPage;
+        this.paymentPage=paymentPage;
         this.mainStage = mainStage;
         initComponents();
     }
@@ -39,29 +39,21 @@ public class PaymentDataMController {
             public void handle(MouseEvent actionEvent) {
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("Sei ritornato indietro alla paymentSelectionPage");
-                paymentSelectionView.reSetBars();
-                mainStage.setScene(paymentSelectionView);
+                paymentPage.reSetBars();
+                mainStage.setScene(paymentPage);
             }
         };
 
-        paymentDataMView.getBackButton().setOnMouseClicked(turnBackPaymentPage);
+        paymentDataPage.getBackButton().setOnMouseClicked(turnBackPaymentPage);
 
 
 
 
-        addCharacterLimit(paymentDataMView.getInsertNC(), 16);
-        addCharacterLimit(paymentDataMView.getInsertMM(), 2);
-        addCharacterLimit(paymentDataMView.getInsertYY(), 2);
-        addCharacterLimit(paymentDataMView.getInsertcvc(), 4);
+        addCharacterLimit(paymentDataPage.getInsertNC(), 16);
+        addCharacterLimit(paymentDataPage.getInsertMM(), 2);
+        addCharacterLimit(paymentDataPage.getInsertYY(), 2);
+        addCharacterLimit(paymentDataPage.getInsertcvc(), 4);
 
-
-        if (!user.isCustomer()) {
-            paymentDataMView.getUsePointsButton().setOpacity(0);
-            paymentDataMView.getUsePointsButton().setDisable(true);
-        } else {
-            // Se l'utente è un Customer, lascia il bottone "Use Points" visibile
-            paymentDataMView.getUsePointsButton().setOpacity(1);
-        }
 
     }
 
@@ -75,13 +67,7 @@ public class PaymentDataMController {
             }
         });
     }
-
-
-
-
-
-    /*
-
+/*
     EventHandler<MouseEvent> buyTicketEventHandler = new EventHandler<>() {
         @Override
         public void handle(MouseEvent actionEvent) {
@@ -89,18 +75,17 @@ public class PaymentDataMController {
             System.out.println("Hai Acquistato il biglietto");
 
             // Esegui l'acquisto del biglietto
-            customer.buyticket(    );
-
+            customer.buyticket(); // ???? cosa dovrei passare a questo punto??
 
             // Chiudi la schermata corrente
             mainStage.close();
         }
     };
 
-        paymentDataMView.getNextButton().setOnMouseClicked(buyTicketEventHandler);
-
+        paymentDataPage.getNextButton().setOnMouseClicked(buyTicketEventHandler);
 
 */
+
 
 
 

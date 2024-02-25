@@ -80,5 +80,4 @@ public abstract class User {
 	public abstract boolean isCustomer();
 
 
-	//public abstract boolean paymentMethod(User user);
 }
