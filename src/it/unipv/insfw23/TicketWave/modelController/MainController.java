@@ -23,7 +23,11 @@ public class MainController {
         EventHandler<ActionEvent> statsButtonHandler = new EventHandler<>(){
             @Override
             public void handle(ActionEvent actionEvent){
-                //System.out.println("STATISTICHE");
+                //mi viene passato il manager
+                //creo una nuova classe di statistiche, a cui passo il manager
+                //StatisticsHandlerArrayList statDominio = new StatisticsHandlerArrayList(sessionManager);
+                //WrapType typeRes = statDominio.typeStats();
+                //Al costruttore di type view, devo passare i risultati del metodo, e la classe di statistiche di dominio
                 TypeStatsView typeView = new TypeStatsView();
                 StatisticControllerType stat = new StatisticControllerType(mainStage, typeView);
                 mainStage.setScene(typeView);

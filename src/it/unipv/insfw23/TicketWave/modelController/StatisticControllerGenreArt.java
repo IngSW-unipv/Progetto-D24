@@ -25,6 +25,9 @@ public class StatisticControllerGenreArt {
             @Override
             public void handle(MouseEvent actionEvent){
                 System.out.println("PASSO ALLE LOCALITA'");
+                //mi arriva l'arraylist di artista con l'artista per cui fare le statistiche per località
+                //WrapLocalità localitaRes = statDominio.provinceStats(ArrayListArtista);
+                //al costruttore qui sotto passo il risultato delle località
                 LocationStatsView locationView = new LocationStatsView("Lazza");
                 StatisticControllerLocation locStatController = new StatisticControllerLocation(mainStage, genreView, locationView);
                 mainStage.setScene(locationView);

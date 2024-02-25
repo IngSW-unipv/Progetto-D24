@@ -30,8 +30,9 @@ public class TypeStatsView extends Scene {
     private XYChart.Series<Number, String> serie;
     private BorderPane layout;
     private Pane contenuto;
-   // private Object ManagerUpperBar;
 
+
+    // modifico il costruttore per ricevere i risultati (WrapType) e la classe di dominio statDominio (StatisticHandlerArrayList)
     public TypeStatsView(){
         super(new BorderPane(), 1080, 600);
         init();
@@ -56,6 +57,13 @@ public class TypeStatsView extends Scene {
         this.serie=series;
         barChart.setLegendVisible(false);
 
+
+        //aggiunta da dominio
+        /*
+        for(int i=0; i<typeNameArray.size(); i++){
+            series.getData().add(new XYChart.Data<>(results[i], typeNameArray.get(i));
+        }
+        */
         // Aggiunta dei dati alla serie
         series.getData().add(new XYChart.Data<>(0, "Categoria 1"));
         series.getData().add(new XYChart.Data<>(14, "Categoria 2"));

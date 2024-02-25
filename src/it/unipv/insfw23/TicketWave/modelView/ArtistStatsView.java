@@ -20,6 +20,7 @@ public class ArtistStatsView extends BorderPane {
 
     private XYChart.Series<String, Number> artistSerie;
 
+    //modifico il costruttore per ricevere wrapArtist
     public ArtistStatsView() {
 
         final NumberAxis yAxis = new NumberAxis(0, 100, 10);
@@ -36,6 +37,17 @@ public class ArtistStatsView extends BorderPane {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
         this.artistSerie=series;
         barChart.setLegendVisible(false);
+
+        //aggiunta da dominio
+        /*
+        for (int i=0; i<artistNameArray.size(); i++){
+            series.getData().add(new XYChart.Data<>("artistNameArray.get(i).concatenaStringhe()", artistResult.get(i));
+        }
+        Altrimenti
+        while (artistNamearrayIterator.hasNext() && artistResultIterator.hasNext()){
+            series.getData().add(new XYChart.Data<>("artistNameArrayIterator.next().concatenaStringhe()", artistResultIterator.next());
+        }
+         */
 
         // Aggiunta dei dati alla serie
         series.getData().add(new XYChart.Data<>("Categoria 1", 56));

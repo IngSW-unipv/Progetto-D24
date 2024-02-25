@@ -25,6 +25,8 @@ public class GenreStatsView extends Scene {
     private BorderPane layout;
     private BorderPane contenuto;
 
+    //modifico il costruttore per ricevere i due risultati WrapArtist e Wrap genre e la classe statDominio
+
     public GenreStatsView(){
         super(new BorderPane(), 1080, 600);
         init();
@@ -51,6 +53,11 @@ public class GenreStatsView extends Scene {
 
         barChart.setLegendVisible(false);
         //series.setName("Biglietti venduti");
+
+        //Aggiunta reale da dominio
+        /*
+        for (i=0; i<genreNameArray
+         */
 
         // Aggiunta dei dati alla serie
         series.getData().add(new XYChart.Data<>("Categoria 1", 56));
@@ -95,6 +102,7 @@ public class GenreStatsView extends Scene {
 
         this.contenuto = contenuto;
 
+        //passo i risultati artistRes
         ArtistStatsView artistPane = new ArtistStatsView();
         this.artistPane=artistPane;
         contenuto.setRight(artistPane);
