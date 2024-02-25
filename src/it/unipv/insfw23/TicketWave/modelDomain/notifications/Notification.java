@@ -15,4 +15,5 @@ public class Notification {
 			this.msg = msg;
 			time = LocalDateTime.now();
 		}
+		
 }
