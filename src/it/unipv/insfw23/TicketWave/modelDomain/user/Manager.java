@@ -62,7 +62,7 @@ public class Manager extends User {
 
 
     //seguono dei metodi di crea Festival, Concerto ecc..
-    public void createFestival(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String>[] artists, int artistsNumber) throws Exception {
+    public void createFestival(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String> artists, int artistsNumber) throws Exception {
         if(subscription==1 || subscription==2 && CounterCreatedEvents<maxNumberofEvents ) {
 
             Event festival = new Festival(idEvent, name, city, location, province, maxNumberOfSeats,typeOfSeats, price, genre,creator, artists, artistsNumber);
@@ -74,7 +74,7 @@ public class Manager extends User {
         }
     }
 
-    public void createConcert(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String>[] artists, String artist) throws Exception{
+    public void createConcert(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String> artists, String artist) throws Exception{
         if(subscription==1 || subscription==2 && CounterCreatedEvents<maxNumberofEvents ) {
 
             Event concert= new Concert(idEvent,name,city,location,province,maxNumberOfSeats,typeOfSeats,price,genre,creator,artists,artist);
@@ -86,7 +86,7 @@ public class Manager extends User {
         }
     }
 
-    public void createTheater(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String>[] artists, String theatreCompany, String authorName)throws Exception {
+    public void createTheater(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String> artists, String theatreCompany, String authorName)throws Exception {
         if(subscription==1 || subscription==2 && CounterCreatedEvents<maxNumberofEvents ) {
 
             Event theater = new Theater(idEvent, name, city, location, province, maxNumberOfSeats,typeOfSeats, price, genre, creator,artists,theatreCompany, authorName);
@@ -98,7 +98,7 @@ public class Manager extends User {
         }
     }
 
-    public void createOther(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String>[] artists, String description)throws Exception{
+    public void createOther(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String> artists, String description)throws Exception{
         if(subscription==1 || subscription==2 && CounterCreatedEvents<maxNumberofEvents ) {
 
                 Event other = new Other(idEvent, name, city, location, province, maxNumberOfSeats,typeOfSeats, price,genre,creator,artists,description);
@@ -141,5 +141,8 @@ public class Manager extends User {
     }
 
 
-
+    @Override
+    public boolean isCustomer() {
+        return false;
+    }
 }

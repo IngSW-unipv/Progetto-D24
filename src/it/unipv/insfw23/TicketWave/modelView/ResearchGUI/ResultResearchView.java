@@ -1,26 +1,23 @@
 package it.unipv.insfw23.TicketWave.modelView.ResearchGUI;
 
+import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelView.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.ManagerUpperBar;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.*;
 
 import static javafx.application.Application.launch;
 
 public class ResultResearchView extends Scene {
     private ResearchNodesView rnv;
     private ObservableList<String> result; // dove metto i risultati della query, eseguita nel ResearchController
+
     // costruttore
     public ResultResearchView() {
         super(new Pane(), 1080, 600);
@@ -28,24 +25,47 @@ public class ResultResearchView extends Scene {
     }
     public void scenaResultResearch(){
         ResearchNodesView rnv = ResearchNodesView.getIstance();
-        // List view per elencare i risultati della ricerca FACCIO TABLE VIEW!!!!!!!!!!!
-        TableView<String> table = new TableView<>();
 
-        TableColumn tcEvent = new TableColumn<>("Evento");
-        TableColumn tcLocation = new TableColumn<>("Località");
-        TableColumn tcProvince = new TableColumn<>("Provincia");
-        ObservableList<String> result = FXCollections.observableArrayList("Festival1", "Concerto1", "Festival3");
+        // Tableview per elencare i risultati della ricerca
+        TableView<it.unipv.insfw23.TicketWave.modelDomain.event.Event> table = new TableView<>();
 
+        TableColumn <it.unipv.insfw23.TicketWave.modelDomain.event.Event, String> tcEvent = new TableColumn<>("Evento");
+        tcEvent.setCellValueFactory(new PropertyValueFactory<>("Name"));
+        tcEvent.setStyle("-fx-alignment: CENTER");
 
+        TableColumn <it.unipv.insfw23.TicketWave.modelDomain.event.Event, String> tcCity = new TableColumn<>("Città");
+        tcCity.setCellValueFactory(new PropertyValueFactory<>("City"));
+        tcCity.setStyle("-fx-alignment: CENTER");
 
-        table.getColumns().addAll(tcEvent, tcLocation, tcProvince);
+        TableColumn <it.unipv.insfw23.TicketWave.modelDomain.event.Event, String> tcLocation = new TableColumn<>("Luogo");
+        tcLocation.setCellValueFactory(new PropertyValueFactory<>("Location"));
+        tcLocation.setStyle("-fx-alignment: CENTER");
+
+        TableColumn <it.unipv.insfw23.TicketWave.modelDomain.event.Event, Province> tcProvince = new TableColumn<>("Provincia");
+        tcProvince.setCellValueFactory(new PropertyValueFactory<>("Province"));
+        tcProvince.setStyle("-fx-alignment: CENTER");
+
+        table.getColumns().addAll(tcEvent, tcCity, tcLocation, tcProvince);
         table.setPlaceholder( new Label("Nessun evento trovato, sii più specifico"));
 
-      /*  ListView<String> list = new ListView<String>();
-        ObservableList<String> result = FXCollections.observableArrayList("Festival1", "Concerto1", "Festival3"); // questo andrà tolto una volta fatta la logica nel ResearchController
-        list.setPrefSize(400, 600);
-        list.setEditable(false);
-        list.setItems(result); */
+        ObservableList<it.unipv.insfw23.TicketWave.modelDomain.event.Event> evs = FXCollections.observableArrayList();   // ESEMPIO CHE HO USATO PER VEDERE IL FUNZIONAMENTO */
+
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+        table.setItems(evs);
+        table.setEditable(true);
+
+        // Rendo Le righe cliccabili (mando alla pagina dell'evento giusto, rimango su UI, per cui non creo un controller)
+        table.setRowFactory(tv -> {
+            javafx.scene.control.TableRow<it.unipv.insfw23.TicketWave.modelDomain.event.Event> row = new javafx.scene.control.TableRow<>();
+            row.setOnMouseClicked(event -> {
+                if (event.getClickCount() == 1 && (!row.isEmpty())) {
+                    it.unipv.insfw23.TicketWave.modelDomain.event.Event rowData = row.getItem();
+                    System.out.println("Clicked on: " + rowData.getName() + " " + rowData.getCity() + " " + rowData.getLocation() + " " + rowData.getProvince() );
+                    // Add your logic for handling the row click here
+                }
+            });
+            return row;
+        });
 
         // Creo un'HBOX che contiene barra + bottone di ricerca HBox = disposizione orizzontale
         HBox box1 = new HBox();

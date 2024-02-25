@@ -6,7 +6,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 public class Concert extends Event{
 
     // costruttore
-    public Concert(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String>[] artists, String artist) {
+    public Concert(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String> artists, String artist) {
         super(idEvent, name, city, location, province, maxNumberOfSeats, typeOfSeats, price, genre, creator, artists);
     }
 

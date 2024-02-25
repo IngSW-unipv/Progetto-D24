@@ -1,11 +1,9 @@
 package it.unipv.insfw23.TicketWave.modelController;
 
 
-import it.unipv.insfw23.TicketWave.modelView.MainStageView;
+
 import it.unipv.insfw23.TicketWave.modelView.TicketPageView;
 import it.unipv.insfw23.TicketWave.modelView.PaymentSelectionView;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
@@ -15,7 +13,7 @@ import javafx.event.EventHandler;
 public class BuyTicketController {
     private Stage mainStage;
     private TicketPageView ticketPage;
-    private Scene PaymentSelectionView;
+
 
     public BuyTicketController(Stage mainStage,TicketPageView ticketPage ) {
         this.mainStage = mainStage;

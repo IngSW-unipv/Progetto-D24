@@ -18,11 +18,11 @@ public abstract class Event implements EventType {
     private int [] price; // vettore prezzi per i vari tipi di biglietto, es: Vip = 40€, Base = 15€...
     private Genre genre;
     private Manager creator;
-    private ArrayList<String> [] artists;
+    private ArrayList<String> artists;
 
     // costruttore
 
-    public Event(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String>[] artists) {
+    public Event(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String> artists) {
         this.idEvent = idEvent;
         this.name = name;
         this.city = city;
@@ -46,15 +46,15 @@ public abstract class Event implements EventType {
 
     public String getName() {
         return name;
-    }
+    } // mi serve nel ResultResearchView per la TableView
 
     public String getCity() {
         return city;
-    }
+    } // mi serve nel ResultResearchView per la TableView
 
     public String getLocation() {
         return location;
-    }
+    } // mi serve nel ResultResearchView per la TableView
 
     public Province getProvince() {
         return province;
@@ -144,12 +144,15 @@ public abstract class Event implements EventType {
         return result;
     }
 
-    public ArrayList<String>[] getArtists() {
+    public ArrayList<String> getArtists() {
         return artists;
     }
 
+    /*
     public String getArtist(){
         String s = new String("Artista");
         return s;
     }
+
+     */
 }

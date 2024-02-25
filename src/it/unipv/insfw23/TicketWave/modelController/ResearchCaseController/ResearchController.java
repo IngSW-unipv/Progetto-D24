@@ -1,4 +1,4 @@
-package it.unipv.insfw23.TicketWave.modelController;
+package it.unipv.insfw23.TicketWave.modelController.ResearchCaseController;
 
 import it.unipv.insfw23.TicketWave.modelView.ManagerUpperBar;
 import it.unipv.insfw23.TicketWave.modelView.ResearchGUI.ResearchNodesView;
@@ -28,16 +28,6 @@ public class ResearchController {
     public void setResearchListener(){
         ManagerUpperBar mub = ManagerUpperBar.getIstance();
         ResearchNodesView rnv = ResearchNodesView.getIstance();
- /*       // Pressione del tasto della lente di ingrandimento sul Main Stage
-        EventHandler<MouseEvent> researchPressHandlerMainStage = new EventHandler<>(){
-            @Override
-            public void handle(MouseEvent actionEvent){
-                System.out.println("Vado alla tab della ricerca");
-                ResearchView rv = new ResearchView();
-                mainStage.setScene(rv);
-            }
-        };
-        mub.getSearchButton().setOnMouseClicked(researchPressHandlerMainStage); */
 
         // click ricerca sulla ResearchNodesView
         EventHandler<MouseEvent> researchPressHandlerResearchView = new EventHandler<>(){
@@ -49,37 +39,8 @@ public class ResearchController {
             }
         };
         rnv.getSearchButton().setOnMouseClicked(researchPressHandlerResearchView);
-        // filtri del genere musicale
-        EventHandler<ActionEvent> genreFilterHandler = new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                ResearchNodesView rnv = ResearchNodesView.getIstance(); // prendo l'unica istanza del Singleton
-                for (CheckMenuItem cmi : rnv.getGenv()) { // checko i checkMenuItem selezionati per la query filtrata per genere
-                    if (cmi.isSelected()){
-                        // logica per fare la query filtrata per genere
-                        System.out.println("Filtro di genere musicale selezionato");
-                    }
-                }
-            }
-        };
 
-        // filtri per provincia
-        EventHandler<ActionEvent> provinceFilterHandler = new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                ResearchNodesView rnv = ResearchNodesView.getIstance(); // prendo l'unica istanza del Singleton
-                int i = 0;
-                for (CheckMenuItem cmi : rnv.getPrv()) { // checko i checkMenuItem selezionati per la query filtrata per provincia/e
-                    cmi = rnv.getPrv().get(i);
-                    if (cmi.isSelected()){
-                        // logica per fare la query filtrata per provincia
-                        System.out.println("Filtro sulla provincia selezionato");
-                    }
-                    i++;
-                }
-            }
-        };
-
+        // Result Research ma non convince, la logica non va qui secondo me. va in un DAO controller
         EventHandler<ActionEvent> ResultResearchHandler = new EventHandler<ActionEvent>() {
             ObservableList<String> azzeratore = FXCollections.observableArrayList(" ");
             @Override

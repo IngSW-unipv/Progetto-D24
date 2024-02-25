@@ -20,6 +20,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.*;
 import javafx.scene.*;
 import javafx.scene.image.*;
+import it.unipv.insfw23.TicketWave.modelView.LowerBar;
 
 
 
