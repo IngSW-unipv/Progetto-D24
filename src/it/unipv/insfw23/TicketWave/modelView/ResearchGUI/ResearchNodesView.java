@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.modelView.ResearchGUI;
 /*****************************
         QUI VA TUTTO, DEVO ABBELLIRE I TASTI
  ****************************/
+import it.unipv.insfw23.TicketWave.modelController.ResearchCaseController.GenreFilterController;
 import it.unipv.insfw23.TicketWave.modelController.ResearchCaseController.ProvinceFilterController;
 import javafx.scene.Node;
 import javafx.scene.control.*;
@@ -59,6 +60,10 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
 
             for (String s : gen) { // Arraylist di CheckMenuItems che popolo
                 CheckMenuItem cmi = new CheckMenuItem(s);
+
+                GenreFilterController gfc = new GenreFilterController(cmi); // Controller per vedere se viene selezionato o meno un certo CheckMenuBox, cioè un genere in questo caso
+                cmi.setOnAction(gfc);
+
                 genv.add(cmi);
             }
             genre.getItems().addAll(genv); // Creo il Menu con i CheckMenuItems da mettere dentro la MenuBar

@@ -3,6 +3,29 @@
   <component name="CompilerConfiguration">
     <excludeFromCompile>
       <directory url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelDomain" includeSubdirectories="false" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelController/PaymentDataPController.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelController/PaymentSelectionController.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelController/BuyTicketController.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelController/CustomerController.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelController/LoginController.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelController/SignUpController.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelController/PaymentDataMController.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TicketPageView.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/LoginView.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ProvaRun.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Prova.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TypeStatsView.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/SubscriptionSelectionView.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Notification.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/ManagerView.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/PaymentDataPview.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/TypeSelectionEventView.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/NewConcertView.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Try.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/PaymentSelectionView.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/SignUpView.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/Provacontroller.java" />
+      <file url="file://$PROJECT_DIR$/src/it/unipv/insfw23/TicketWave/modelView/PaymentDataMView.java" />
     </excludeFromCompile>
   </component>
 </project>
