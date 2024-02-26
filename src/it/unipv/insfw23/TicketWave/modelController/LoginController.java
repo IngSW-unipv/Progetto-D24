@@ -15,13 +15,15 @@ public class LoginController {
     private SignUpView signUpView;
     private CustomerView customerview;
     private LoginView loginView;
+    private ManagerView managerView;
 
 
-    public LoginController(Stage mainstage, SignUpView signUpView, CustomerView customerView, LoginView loginView) {
+    public LoginController(Stage mainstage, SignUpView signUpView, CustomerView customerview, LoginView loginView,ManagerView managerView) {
         this.mainstage = mainstage;
         this.signUpView = signUpView;
-        this.customerview = customerView;
+        this.customerview = customerview;
         this.loginView = loginView;
+        this.managerView=managerView;
 
         initComponents();
     }
@@ -44,7 +46,7 @@ public class LoginController {
 
         loginView.getRegButton().setOnAction(goToSignUpView); // Imposta l'handler sull'azione del pulsante "Registrati"
 
-        EventHandler<ActionEvent> goToCustomerView = new EventHandler<ActionEvent>() {
+        EventHandler<ActionEvent> goToCustomerorManagerView = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
 
@@ -53,7 +55,7 @@ public class LoginController {
 
                     System.out.println("Hai cliccato il pulsante Login come cliente");
                     customerview = new CustomerView();
-                    CustomerController customerController = new CustomerController();
+                    CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
                     customerview.reSetBars();
                     mainstage.setScene(customerview); // Imposta la scena SignUpView sulla stage principale
                 }
@@ -75,7 +77,7 @@ public class LoginController {
 
         };
        
-        loginView.getLoginButton().setOnAction(goToCustomerView);
+        loginView.getLoginButton().setOnAction(goToCustomerorManagerView);
     }    
         
 }
