@@ -52,7 +52,7 @@ public class LoginView extends Application {
         grid.setVgap(10);
         grid.setHgap(30);
         grid.setAlignment(Pos.CENTER);
-       // grid.setStyle("-fx-background-color: White;");
+        // grid.setStyle("-fx-background-color: White;");
 
 
 

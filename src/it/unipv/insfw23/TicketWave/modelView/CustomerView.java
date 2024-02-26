@@ -66,7 +66,7 @@ public class CustomerView extends Scene {
         grid.setVgap(8);
         grid.setHgap(10);
 
-       logoutButton = new Button("Logout");
+        logoutButton = new Button("Logout");
         /*GridPane.setConstraints(logoutButton, 1, 1, 2, 1);
         GridPane.setHalignment(logoutButton, HPos.CENTER);
         GridPane.setHgrow(logoutButton, Priority.SOMETIMES);
