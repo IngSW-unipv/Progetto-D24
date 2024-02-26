@@ -35,6 +35,7 @@ public class ProfileDAO implements IProfileDAO{
         conn = ConnectionDB.startConnection(conn, schema);
         PreparedStatement statement1;
         ResultSet resultSet1;
+        Manager manager= new manager();
 
         try{
             String query="SELECT * FROM MANAGER WHERE (MAIL = ?) AND (PASSWORD = ?)";
@@ -46,7 +47,7 @@ public class ProfileDAO implements IProfileDAO{
             resultSet1 = statement1.executeQuery(query);
 
             if(resultSet1.next()){
-                Manager manager = new Manager(resultSet1.getString(1));
+               // Manager manager = new Manager(resultSet1.getString(1));
             }
 
         }catch (Exception e){e.printStackTrace();}
