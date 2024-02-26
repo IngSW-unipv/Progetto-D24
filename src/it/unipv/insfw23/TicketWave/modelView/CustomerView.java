@@ -3,6 +3,7 @@ package it.unipv.insfw23.TicketWave.modelView;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -27,8 +28,10 @@ public class CustomerView extends Scene {
     private Label wavePoints;
     private ListView notifyListView;
     private TableView ticket;
-    private Label welcome;
+    private Button logoutButton;
 
+    private CustomerUpperBar customerUpperBar;
+    private LowerBar lowerBar;
 
     // private final
     public CustomerView() {
@@ -36,6 +39,7 @@ public class CustomerView extends Scene {
         initComponents();
 
     }
+
 
 
     private void initComponents() {
@@ -46,9 +50,12 @@ public class CustomerView extends Scene {
         BorderPane layout = (BorderPane) getRoot();
         this.layout = layout;
 
+        customerUpperBar = CustomerUpperBar.getIstance();
+        lowerBar = LowerBar.getInstance();
+
         layout.setStyle("-fx-background-color: #def1fa;");
-        layout.setBottom(LowerBar.getInstance());
-        layout.setTop(CustomerUpperBar.getIstance());
+        layout.setBottom(lowerBar);
+        layout.setTop(customerUpperBar);
         layout.setCenter(grid);
 
 
@@ -58,6 +65,13 @@ public class CustomerView extends Scene {
         grid.setPadding(new Insets(20, 20, 20, 20));
         grid.setVgap(8);
         grid.setHgap(10);
+
+       logoutButton = new Button("Logout");
+        /*GridPane.setConstraints(logoutButton, 1, 1, 2, 1);
+        GridPane.setHalignment(logoutButton, HPos.CENTER);
+        GridPane.setHgrow(logoutButton, Priority.SOMETIMES);
+        GridPane.setConstraints(wavePoints, 1, 0);*/
+        GridPane.setConstraints(logoutButton, 2, 0);
 
         // Nome e Cognome
         name = new Label("Benvenuto, Mario");
@@ -89,9 +103,18 @@ public class CustomerView extends Scene {
         ticket.getColumns().addAll(eventoCol, tipoBigliettoCol, dataEventoCol, prezzoCol);
         GridPane.setConstraints(ticket, 1, 1);
 
-        grid.getChildren().addAll(name, wavePoints, notifyListView, ticket);
+        grid.getChildren().addAll(name, wavePoints, notifyListView, ticket,logoutButton);
 
 
+    }
+    public Button getLogoutButton() {
+        return logoutButton;
+    }
+    public Button getProfileButton() {
+        return customerUpperBar.getProfileButton();
+    }
+    public Button getSearchButton(){
+        return customerUpperBar.getSearchButton();
     }
 
     private ObservableList<Biglietto> getEsempioBiglietti() {
@@ -132,6 +155,8 @@ public class CustomerView extends Scene {
         public double getPrezzo() {
             return prezzo;
         }
+
+
     }
 
 
