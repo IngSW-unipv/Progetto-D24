@@ -38,8 +38,13 @@ public class NewConcertController {
 		EventHandler<MouseEvent> confirmButton = new EventHandler<>() {
 			
 			@Override
-			public void handle(MouseEvent event) {
-				System.out.println(newconcview.getNameTextField());
+			public void handle(MouseEvent event){
+				System.out.println(newconcview.getNamefield());
+				try {
+				System.out.println(newconcview.getPricebasefield());
+				}catch (NumberFormatException e){
+					System.out.println("parametri non validi");
+				}
 			}
 		};
 		
