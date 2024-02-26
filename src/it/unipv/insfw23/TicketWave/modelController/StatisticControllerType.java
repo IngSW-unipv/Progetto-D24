@@ -24,7 +24,7 @@ public class StatisticControllerType {
             @Override
             public void handle(MouseEvent actionEvent){
                 System.out.println("PASSO AI GENERI E ARTISTI");
-                //Wrapgenre genreRes = statDominio.genreStats();
+                //WrapGenreOrProv genreRes = statDominio.genreStats();
                 //WrapArtist artistRes = statDominio.artistStats();
                 //Al costruttore qui sotto passo il risultato dei generi, degli artisti e la statdomain
                 GenreStatsView genreView = new GenreStatsView();

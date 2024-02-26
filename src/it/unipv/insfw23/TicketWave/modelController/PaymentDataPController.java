@@ -36,6 +36,9 @@ public class PaymentDataPController {
 
        paymentDataPView.getBackButton().setOnMouseClicked(turnBackPaymentPage);
 
+
+
+       /*
        if (!user.isCustomer()) {
            paymentDataPView.getUsePointsButton().setOpacity(0);
            paymentDataPView.getUsePointsButton().setDisable(true);
@@ -43,6 +46,9 @@ public class PaymentDataPController {
            // Se l'utente è un Customer, lascia il bottone "Use Points" visibile
            paymentDataPView.getUsePointsButton().setOpacity(1);
        }
+
+       */
+
 
    }
 

@@ -8,6 +8,7 @@ import it.unipv.insfw23.TicketWave.modelView.TypeSelectionEventView;
 import it.unipv.insfw23.TicketWave.modelView.TypeStatsView;
 import it.unipv.insfw23.TicketWave.modelView.ResearchGUI.ResearchView;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -15,10 +16,14 @@ public class ManagerController {
 	
 	Stage window;
 	ManagerView managerview;
+	LoginView logview;
+//	Manager managerlogged;
 	
-	public ManagerController(Stage primarystage, ManagerView managerview) {
+	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview/*, Manager managerlogged*/) {
 		window = primarystage;
 		this.managerview = managerview;
+		this.logview = logview;
+//		this.managerlogged = managerlogged;
 		initComponents();
 	}
 	
@@ -32,7 +37,8 @@ public class ManagerController {
 //				LoginView logview = new LoginView();
 //				SignUpView signupview = new SignUpView();
 //				LoginController logcon = new LoginController(window, signupview, null, logview);
-//				window.setScene(logview);
+				logview.reSetBars();
+				window.setScene(logview.getScene());
 			}
 			
 		};
@@ -45,7 +51,7 @@ public class ManagerController {
 			public void handle(MouseEvent event) {
 				//crea controller per typeselectionevent
 				TypeSelectionEventView typesel = new TypeSelectionEventView();
-				TypeSelectionEventController typeselectioneventview = new TypeSelectionEventController(window, managerview, typesel);
+				TypeSelectionEventController typeselectioneventview = new TypeSelectionEventController(window, managerview, typesel/*, loggedmanager*/);
 				window.setScene(typesel);
 			}
 			
@@ -71,7 +77,7 @@ public class ManagerController {
 			@Override
 			public void handle(MouseEvent arg0) {
 				TypeStatsView typestatsview = new TypeStatsView();
-				StatisticControllerType statcontrtype = new StatisticControllerType(window, typestatsview);
+				StatisticControllerType statcontrtype = new StatisticControllerType(window, typestatsview/*, loggedmanager*/);
 				window.setScene(typestatsview);
 				
 			}
@@ -83,11 +89,13 @@ public class ManagerController {
 			
 			@Override
 			public void handle(MouseEvent event) {
-//				window.setScene(managerview);
+				managerview.reSetBars();
+				window.setScene(managerview);
 				
 			}
 		};
 		
+		managerview.getProfileButton().setOnMouseClicked(profileButton);
 	}
 	
 	

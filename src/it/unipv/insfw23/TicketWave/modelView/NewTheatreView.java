@@ -1,14 +1,17 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
+import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -17,14 +20,23 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class NewTheatreView extends Application{
+public class NewTheatreView extends Scene{
 	
-	@Override
-	public void start(Stage primarystage) throws Exception {
+	private Button abort;
+	private Button forward;
+	
+	public NewTheatreView() {
+		super(new BorderPane(), 1080, 600);
+		init();
+	}
+
+	public void init(){
 		
-Stage window = primarystage;
 		
-		BorderPane layout = new BorderPane();
+		
+		BorderPane layout = (BorderPane)  getRoot();
+		
+
 		layout.setStyle("-fx-background-color: #def1fa;");
 		GridPane grid = new GridPane();
 		
@@ -71,8 +83,8 @@ Stage window = primarystage;
 		GridPane.setVgrow(provincelabel, Priority.SOMETIMES);
 		GridPane.setHgrow(provincelabel, Priority.SOMETIMES);
 		
-		ChoiceBox<String> provincesbox = new ChoiceBox<>();
-		provincesbox.getItems().addAll("Milano", "Pavia", "Treviso", "Roma");
+		ComboBox<Province> provincesbox = new ComboBox<>();
+		provincesbox.getItems().addAll(Province.values());
 		GridPane.setConstraints(provincesbox, 2, 3);
 		GridPane.setVgrow(provincesbox, Priority.SOMETIMES);
 		GridPane.setHgrow(provincesbox, Priority.SOMETIMES);
@@ -195,11 +207,11 @@ Stage window = primarystage;
 		GridPane.setHgrow(pricepremiumfield, Priority.SOMETIMES);
 		
 		
-		Button forward = new Button("Conferma");
+		forward = new Button("Conferma");
 		GridPane.setConstraints(forward, 2, 16);
 		GridPane.setHalignment(forward, HPos.RIGHT);
 		
-		Button abort = new Button("Annulla");
+		abort = new Button("Annulla");
 		GridPane.setConstraints(abort, 0, 16);
 		
 		
@@ -248,26 +260,22 @@ Stage window = primarystage;
 									pricebaselabel, pricebasefield, priceviplabel, pricevipfield, pricepremiumlabel, pricepremiumfield, 
 									forward, abort);
 		
+		layout.setTop(ManagerUpperBar.getIstance());
 		layout.setCenter(grid);
-		
-		
-		window.setMinHeight(550);
-		window.setMinWidth(750);
-		window.setHeight(700);
-		window.setWidth(1200);
-		
-		
-		Scene scene = new Scene(layout, window.getWidth(), window.getHeight());		
-		
-		
-		window.setScene(scene);
-		window.show();
+		layout.setBottom(LowerBar.getInstance());
 		
 	}
-
-
-	public static void main(String[] args) {
-		launch(args);
+	
+	public Button getAbortButton() {
+		return abort;
 	}
+	
+	public Button getForwardButton() {
+		return forward;
+	}
+	
+	
+	
+
 	
 }
