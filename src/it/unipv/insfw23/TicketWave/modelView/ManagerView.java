@@ -50,7 +50,8 @@ public class ManagerView extends Scene{
 //		window = primarystage;
 //		window.setTitle("speriamo figa");
 		
-		layout = new BorderPane();
+		layout = (BorderPane) getRoot();
+		layout.setStyle("-fx-background-color: #def1fa;");
 
 		
 		grid = new GridPane();

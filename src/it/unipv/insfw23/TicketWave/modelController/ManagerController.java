@@ -17,11 +17,13 @@ public class ManagerController {
 	Stage window;
 	ManagerView managerview;
 	LoginView logview;
+//	Manager managerlogged;
 	
-	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview) {
+	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview/*, Manager managerlogged*/) {
 		window = primarystage;
 		this.managerview = managerview;
 		this.logview = logview;
+//		this.managerlogged = managerlogged;
 		initComponents();
 	}
 	
@@ -49,7 +51,7 @@ public class ManagerController {
 			public void handle(MouseEvent event) {
 				//crea controller per typeselectionevent
 				TypeSelectionEventView typesel = new TypeSelectionEventView();
-				TypeSelectionEventController typeselectioneventview = new TypeSelectionEventController(window, managerview, typesel);
+				TypeSelectionEventController typeselectioneventview = new TypeSelectionEventController(window, managerview, typesel/*, loggedmanager*/);
 				window.setScene(typesel);
 			}
 			
@@ -75,7 +77,7 @@ public class ManagerController {
 			@Override
 			public void handle(MouseEvent arg0) {
 				TypeStatsView typestatsview = new TypeStatsView();
-				StatisticControllerType statcontrtype = new StatisticControllerType(window, typestatsview);
+				StatisticControllerType statcontrtype = new StatisticControllerType(window, typestatsview/*, loggedmanager*/);
 				window.setScene(typestatsview);
 				
 			}

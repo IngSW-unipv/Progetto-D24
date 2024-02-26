@@ -26,7 +26,8 @@ import javafx.stage.Stage;
 public class NewConcertView extends Scene{
 	
 	private Button abort;
-	private Button forward;
+	private Button confirm;
+	private TextField namefield;
 
 	public NewConcertView() {
 		super(new BorderPane(), 1080, 600);
@@ -60,7 +61,7 @@ public class NewConcertView extends Scene{
 		GridPane.setVgrow(namelabel, Priority.SOMETIMES);
 		GridPane.setHgrow(namelabel, Priority.SOMETIMES);
 		
-		TextField namefield = new TextField();
+		namefield = new TextField();
 		GridPane.setConstraints(namefield, 0, 3);
 		GridPane.setVgrow(namefield, Priority.SOMETIMES);
 		GridPane.setHgrow(namefield, Priority.SOMETIMES);
@@ -206,9 +207,9 @@ public class NewConcertView extends Scene{
 		GridPane.setHgrow(pricepremiumfield, Priority.SOMETIMES);
 		
 		
-		forward = new Button("Conferma");
-		GridPane.setConstraints(forward, 2, 16);
-		GridPane.setHalignment(forward, HPos.RIGHT);
+		confirm = new Button("Conferma");
+		GridPane.setConstraints(confirm, 2, 16);
+		GridPane.setHalignment(confirm, HPos.RIGHT);
 		
 		abort = new Button("Annulla");
 		GridPane.setConstraints(abort, 0, 16);
@@ -257,7 +258,7 @@ public class NewConcertView extends Scene{
 								    addressfield,numtypeticketlabel, typesticketbox, genlabel, gensbox, artistlabel, artistfield, 
 									numbaselabel, numbasefield, numviplabel, numvipfield, numpremiumlabel, numpremiumfield,
 									pricebaselabel, pricebasefield, priceviplabel, pricevipfield, pricepremiumlabel, pricepremiumfield, 
-									forward, abort);
+									confirm, abort);
 		
 		layout.setTop(ManagerUpperBar.getIstance());
 		layout.setCenter(grid);
@@ -270,8 +271,12 @@ public class NewConcertView extends Scene{
 		return abort;
 	}
 	
-	public Button getForwardButton() {
-		return forward;
+	public Button getConfirmButton() {
+		return confirm;
+	}
+	
+	public String getNameTextField() {
+		return namefield.getText();
 	}
 	
 }

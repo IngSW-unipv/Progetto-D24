@@ -40,6 +40,7 @@ public class TypeSelectionEventView extends Scene{
 	
 	private void init() {
 		layout = (BorderPane) getRoot();
+		layout.setStyle("-fx-background-color: #def1fa;");
 		
 		grid = new GridPane();
 		grid.setPadding(new Insets(50, 30, 50, 30));
