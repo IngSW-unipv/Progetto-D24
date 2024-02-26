@@ -14,7 +14,10 @@ import javafx.scene.text.FontWeight;
 public class CustomerUpperBar extends HBox {
     // variabile che memorizza l'unica istanza
     private Button searchButton;
+    private Button profileButton;
     private static CustomerUpperBar istance;
+
+
     // costruttore privato per singleton
     private CustomerUpperBar() {
 
@@ -33,15 +36,14 @@ public class CustomerUpperBar extends HBox {
         iconLogo.setPreserveRatio(true);
         setAlignment(Pos.CENTER_LEFT);
 
-        Button searchButton = new Button();
-        this.searchButton = searchButton;
+        searchButton = new Button();
         searchButton.setStyle("-fx-background-color: #80C1E2");
         ImageView searchIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/search_glass.png");
         searchIcon.setFitHeight(25);
         searchIcon.setFitWidth(29);
         searchButton.setGraphic(searchIcon);
 
-        Button profileButton = new Button();
+        profileButton = new Button();
         profileButton.setStyle("-fx-background-color: #80C1E2");
         ImageView profileIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/user.png");
         profileIcon.setFitHeight(25);
@@ -53,6 +55,14 @@ public class CustomerUpperBar extends HBox {
         getChildren().addAll(titolo, iconLogo, spacer, searchButton, profileButton);
         setAlignment(Pos.CENTER_LEFT);
     }
+    public Button getSearchButton() {
+        return searchButton;
+    }
+
+    public Button getProfileButton() {
+        return profileButton;
+    }
+
 
     //Metodo statico per ottenere l'unica istanza
     public static CustomerUpperBar getIstance(){
@@ -62,7 +72,4 @@ public class CustomerUpperBar extends HBox {
         return istance;
     }
 
-    public Button getSearchButton() {
-        return searchButton;
-    }
 }
