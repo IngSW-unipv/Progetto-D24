@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -248,6 +249,7 @@ public class NewConcertView extends Scene{
 		
 		GridPane.setConstraints(errlabel, 1, 16);
 		errlabel.setFont(Font.font("Arial", 20));
+		errlabel.setTextFill(Color.web("#FF0400"));;
 		errlabel.setVisible(false);;
 		GridPane.setHalignment(errlabel, HPos.CENTER);
 		GridPane.setVgrow(errlabel, Priority.SOMETIMES);
