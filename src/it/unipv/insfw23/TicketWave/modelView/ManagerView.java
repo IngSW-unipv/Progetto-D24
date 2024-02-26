@@ -21,6 +21,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -44,6 +45,7 @@ public class ManagerView extends Scene{
 	private LowerBar lowerbar;
 	private BorderPane layout;
 	private GridPane grid;
+	private TableView<it.unipv.insfw23.TicketWave.modelView.Event> tabev;
 
 	
 	public void init(){
@@ -87,7 +89,7 @@ public class ManagerView extends Scene{
 		GridPane.setHgrow(ev, Priority.SOMETIMES);
 		
 		// tab eventi
-		TableView<it.unipv.insfw23.TicketWave.modelView.Event> tabev = new TableView<>();
+		tabev = new TableView<>();
 		GridPane.setConstraints(tabev, 2, 6, 2, 1);
 		GridPane.setHgrow(tabev, Priority.SOMETIMES);
 		GridPane.setVgrow(tabev, Priority.SOMETIMES);
@@ -201,6 +203,10 @@ public class ManagerView extends Scene{
         setRoot(layout);
     }
 
-	
+	public TableView<it.unipv.insfw23.TicketWave.modelView.Event> getTableev(){
+//		TableViewSelectionModel<it.unipv.insfw23.TicketWave.modelView.Event> a = tabev.getSelectionModel();
+//		return a.getSelectedItem();
+		return tabev;
+	}
 }
 
