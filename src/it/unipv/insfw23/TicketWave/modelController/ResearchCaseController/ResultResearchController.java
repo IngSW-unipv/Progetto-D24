@@ -17,8 +17,8 @@ import javafx.stage.Stage;
  *
  */
 public class ResultResearchController {
-    private final Stage mainStage;
-    private final ResultResearchView rrv;
+    private Stage mainStage;
+    private ResultResearchView rrv;
     public ResultResearchController(Stage mainStage, ResultResearchView rrv)  { // costruttore che prende il mainstage e la ticketpage dalla MainStageView
         this.mainStage = mainStage;
         this.rrv = rrv;

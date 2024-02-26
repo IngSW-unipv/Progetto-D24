@@ -55,14 +55,14 @@ public class SignUpController {
 
                     System.out.println("Hai cliccato il pulsante registrati  come cliente");
                     customerview = new CustomerView();
-                    CustomerController customerController = new CustomerController();
+                    CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
                     customerview.reSetBars();
                     mainstage.setScene(customerview);
                     // Imposta la scena SignUpView sulla stage principale
                 } else if (signUpView.getManagerRadioButton().isSelected()) {
 
 
-                    System.out.println("Hai cliccato il pulsante registrati  come cliente");
+                    System.out.println("Hai cliccato il pulsante registrati  come gestore");
                     subscriptionSelectionView = new SubscriptionSelectionView();
                     SubscriptionSelectionController subscriptionSelectionController = new SubscriptionSelectionController(mainstage,subscriptionSelectionView,paymentSelectionView);
 
