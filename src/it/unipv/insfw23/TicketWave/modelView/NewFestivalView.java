@@ -18,6 +18,9 @@ import javafx.scene.text.Font;
 
 public class NewFestivalView extends Scene{
 
+	Button abort;
+	Button forward;
+	
 	public NewFestivalView() {
 		super(new BorderPane(), 1080, 600);
         init();
@@ -196,11 +199,11 @@ public class NewFestivalView extends Scene{
 		GridPane.setHgrow(pricepremiumfield, Priority.SOMETIMES);
 		
 		
-		Button forward = new Button("Conferma");
+		forward = new Button("Conferma");
 		GridPane.setConstraints(forward, 2, 16);
 		GridPane.setHalignment(forward, HPos.RIGHT);
 		
-		Button abort = new Button("Annulla");
+		abort = new Button("Annulla");
 		GridPane.setConstraints(abort, 0, 16);
 		
 		
@@ -249,7 +252,19 @@ public class NewFestivalView extends Scene{
 									pricebaselabel, pricebasefield, priceviplabel, pricevipfield, pricepremiumlabel, pricepremiumfield, 
 									forward, abort);
 		
+		
+		layout.setTop(ManagerUpperBar.getIstance());
 		layout.setCenter(grid);
+		layout.setBottom(LowerBar.getInstance());
 		
 	}
+	
+	public Button getAbortButton() {
+		return abort;
+	}
+	
+	public Button getForwardButton() {
+		return forward;
+	}
+	
 }

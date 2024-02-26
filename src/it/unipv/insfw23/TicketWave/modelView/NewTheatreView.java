@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -17,14 +18,21 @@ import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
-public class NewTheatreView extends Application{
+public class NewTheatreView extends Scene{
 	
-	@Override
-	public void start(Stage primarystage) throws Exception {
+	private Button abort;
+	private Button forward;
+	
+	public NewTheatreView() {
+		super(new BorderPane(), 1080, 600);
+		init();
+	}
+
+	public void init(){
 		
-Stage window = primarystage;
 		
-		BorderPane layout = new BorderPane();
+		
+		BorderPane layout = (BorderPane)  getRoot();
 		
 		GridPane grid = new GridPane();
 		
@@ -195,11 +203,11 @@ Stage window = primarystage;
 		GridPane.setHgrow(pricepremiumfield, Priority.SOMETIMES);
 		
 		
-		Button forward = new Button("Conferma");
+		forward = new Button("Conferma");
 		GridPane.setConstraints(forward, 2, 16);
 		GridPane.setHalignment(forward, HPos.RIGHT);
 		
-		Button abort = new Button("Annulla");
+		abort = new Button("Annulla");
 		GridPane.setConstraints(abort, 0, 16);
 		
 		
@@ -248,26 +256,22 @@ Stage window = primarystage;
 									pricebaselabel, pricebasefield, priceviplabel, pricevipfield, pricepremiumlabel, pricepremiumfield, 
 									forward, abort);
 		
+		layout.setTop(ManagerUpperBar.getIstance());
 		layout.setCenter(grid);
-		
-		
-		window.setMinHeight(550);
-		window.setMinWidth(750);
-		window.setHeight(700);
-		window.setWidth(1200);
-		
-		
-		Scene scene = new Scene(layout, window.getWidth(), window.getHeight());		
-		
-		
-		window.setScene(scene);
-		window.show();
+		layout.setBottom(LowerBar.getInstance());
 		
 	}
-
-
-	public static void main(String[] args) {
-		launch(args);
+	
+	public Button getAbortButton() {
+		return abort;
 	}
+	
+	public Button getForwardButton() {
+		return forward;
+	}
+	
+	
+	
+
 	
 }

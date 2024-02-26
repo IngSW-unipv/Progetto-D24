@@ -29,6 +29,8 @@ public class TypeSelectionEventView extends Scene{
 	private RadioButton teatro;
 	private RadioButton altro;
 	private RadioButton choice;
+	private BorderPane layout;
+	private GridPane grid;
 
 	
 	public TypeSelectionEventView() {
@@ -37,9 +39,9 @@ public class TypeSelectionEventView extends Scene{
 	}
 	
 	private void init() {
-		BorderPane layout = (BorderPane) getRoot();
+		layout = (BorderPane) getRoot();
 		
-		GridPane grid = new GridPane();
+		grid = new GridPane();
 		grid.setPadding(new Insets(50, 30, 50, 30));
 		grid.setVgap(15);
 		grid.setHgap(90);
@@ -139,6 +141,17 @@ public class TypeSelectionEventView extends Scene{
 	public RadioButton getOtherRadioButton() {
 		return altro;
 	}
+	
+	
+	
+	public void reSetBars(){
+        BorderPane temp = new BorderPane();
+        setRoot(temp);
+        layout.setTop(ManagerUpperBar.getIstance());
+        layout.setCenter(grid);
+        layout.setBottom(LowerBar.getInstance());
+        setRoot(layout);
+    }
 
 /*	@Override
 	public void start(Stage primarystage) throws Exception {     

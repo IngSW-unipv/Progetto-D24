@@ -21,6 +21,9 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 public class NewConcertView extends Scene{
+	
+	private Button abort;
+	private Button forward;
 
 	public NewConcertView() {
 		super(new BorderPane(), 1080, 600);
@@ -200,11 +203,11 @@ public class NewConcertView extends Scene{
 		GridPane.setHgrow(pricepremiumfield, Priority.SOMETIMES);
 		
 		
-		Button forward = new Button("Conferma");
+		forward = new Button("Conferma");
 		GridPane.setConstraints(forward, 2, 16);
 		GridPane.setHalignment(forward, HPos.RIGHT);
 		
-		Button abort = new Button("Annulla");
+		abort = new Button("Annulla");
 		GridPane.setConstraints(abort, 0, 16);
 		
 		
@@ -260,6 +263,15 @@ public class NewConcertView extends Scene{
 		
 	}	
 	
+	public Button getAbortButton() {
+		return abort;
+	}
+	
+	public Button getForwardButton() {
+		return forward;
+	}
+	
+}
 
 /*
 	@Override
@@ -513,5 +525,5 @@ public class NewConcertView extends Scene{
 */	
 	
 	
-}	
+	
 

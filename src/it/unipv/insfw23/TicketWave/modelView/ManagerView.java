@@ -11,6 +11,7 @@ import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -25,18 +26,23 @@ import javafx.stage.Stage;
 
 
 
-public class ManagerView extends Application{
+public class ManagerView extends Scene{
 	
-	Stage window;
+//	Stage window;
 	
+	public ManagerView() {
+		super(new BorderPane(), 1080, 600);
+		init();
+	}
+
 	Button logoutButton;
 	ManagerUpperBar upperbar;
 	LowerBar lowerbar;
 
-	@Override
-	public void start(Stage primarystage) throws Exception {
-		window = primarystage;
-		window.setTitle("speriamo figa");
+	
+	public void init(){
+//		window = primarystage;
+//		window.setTitle("speriamo figa");
 		
 		BorderPane layout = new BorderPane();
 
@@ -139,18 +145,18 @@ public class ManagerView extends Application{
 		layout.setBottom(lowerbar);
 		
 		
-		ManagerController m = new ManagerController(window, this);
+//		ManagerController m = new ManagerController(window, this);
 
 //		window.sizeToScene();
-		window.setMinHeight(400);
-		window.setMinWidth(850);
-		window.setHeight(900);
-		window.setWidth(1200);
+//		window.setMinHeight(400);
+//		window.setMinWidth(850);
+//		window.setHeight(900);
+//		window.setWidth(1200);
 		
-		Scene scene = new Scene(layout, window.getWidth(), window.getHeight());		
+//		Scene scene = new Scene(layout, window.getWidth(), window.getHeight());		
 		
-		window.setScene(scene);
-		window.show();
+//		window.setScene(scene);
+//		window.show();
 	}
 	
 	
@@ -171,9 +177,7 @@ public class ManagerView extends Application{
 		return upperbar.getSearchButton();
 	}
 	
-	public static void main(String[] args) {
-		launch(args);
-	}
+
 	
 }
 

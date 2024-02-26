@@ -15,10 +15,12 @@ public class ManagerController {
 	
 	Stage window;
 	ManagerView managerview;
+	LoginView logview;
 	
-	public ManagerController(Stage primarystage, ManagerView managerview) {
+	public ManagerController(Stage primarystage, ManagerView managerview/*, LoginView logview*/) {
 		window = primarystage;
 		this.managerview = managerview;
+//		this.logview = logview;
 		initComponents();
 	}
 	
