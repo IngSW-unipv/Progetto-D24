@@ -13,6 +13,7 @@ import javafx.scene.text.FontWeight;
 
 public class CustomerUpperBar extends HBox {
     // variabile che memorizza l'unica istanza
+    private Button searchButton;
     private static CustomerUpperBar istance;
     // costruttore privato per singleton
     private CustomerUpperBar() {
@@ -33,6 +34,7 @@ public class CustomerUpperBar extends HBox {
         setAlignment(Pos.CENTER_LEFT);
 
         Button searchButton = new Button();
+        this.searchButton = searchButton;
         searchButton.setStyle("-fx-background-color: #80C1E2");
         ImageView searchIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/search_glass.png");
         searchIcon.setFitHeight(25);
@@ -60,4 +62,7 @@ public class CustomerUpperBar extends HBox {
         return istance;
     }
 
+    public Button getSearchButton() {
+        return searchButton;
+    }
 }

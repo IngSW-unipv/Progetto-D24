@@ -1,8 +1,10 @@
 package it.unipv.insfw23.TicketWave.modelView.ResearchGUI;
 
+import it.unipv.insfw23.TicketWave.modelController.MainController;
+import it.unipv.insfw23.TicketWave.modelController.ResearchCaseController.ResultResearchController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
-import it.unipv.insfw23.TicketWave.modelView.LowerBar;
-import it.unipv.insfw23.TicketWave.modelView.ManagerUpperBar;
+import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
+import it.unipv.insfw23.TicketWave.modelView.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
@@ -10,13 +12,17 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
+import javafx.stage.Stage;
 
 import static javafx.application.Application.launch;
 
 public class ResultResearchView extends Scene {
     private ResearchNodesView rnv;
     private ObservableList<String> result; // dove metto i risultati della query, eseguita nel ResearchController
+    private TableView<Event> table;
+    private ResultResearchController rrc;
 
     // costruttore
     public ResultResearchView() {
@@ -27,7 +33,22 @@ public class ResultResearchView extends Scene {
         ResearchNodesView rnv = ResearchNodesView.getIstance();
 
         // Tableview per elencare i risultati della ricerca
-        TableView<it.unipv.insfw23.TicketWave.modelDomain.event.Event> table = new TableView<>();
+        table = new TableView<>();
+
+        TableColumn <Event, String> tcEvent = new TableColumn<>("Evento");
+        tcEvent.setCellValueFactory(new PropertyValueFactory<>("Nome"));
+        tcEvent.setStyle("-fx-alignment: CENTER");
+
+        ObservableList<Event> evs = FXCollections.observableArrayList(
+                new Event(1, "PAOLO")
+        );
+        table.getColumns().addAll(tcEvent);
+
+
+        //table.setOnMouseClicked(new ResultResearchController(table));
+        //table.setOnMouseClicked(event -> System.out.println(table.getSelectionModel().getSelectedItem().getNome()));
+
+      /*  TableView<it.unipv.insfw23.TicketWave.modelDomain.event.Event> table = new TableView<>();
 
         TableColumn <it.unipv.insfw23.TicketWave.modelDomain.event.Event, String> tcEvent = new TableColumn<>("Evento");
         tcEvent.setCellValueFactory(new PropertyValueFactory<>("Name"));
@@ -48,24 +69,10 @@ public class ResultResearchView extends Scene {
         table.getColumns().addAll(tcEvent, tcCity, tcLocation, tcProvince);
         table.setPlaceholder( new Label("Nessun evento trovato, sii più specifico"));
 
-        ObservableList<it.unipv.insfw23.TicketWave.modelDomain.event.Event> evs = FXCollections.observableArrayList();   // ESEMPIO CHE HO USATO PER VEDERE IL FUNZIONAMENTO */
+        ObservableList<it.unipv.insfw23.TicketWave.modelDomain.event.Event> evs = FXCollections.observableArrayList();   */
 
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         table.setItems(evs);
-        table.setEditable(true);
-
-        // Rendo Le righe cliccabili (mando alla pagina dell'evento giusto, rimango su UI, per cui non creo un controller)
-        table.setRowFactory(tv -> {
-            javafx.scene.control.TableRow<it.unipv.insfw23.TicketWave.modelDomain.event.Event> row = new javafx.scene.control.TableRow<>();
-            row.setOnMouseClicked(event -> {
-                if (event.getClickCount() == 1 && (!row.isEmpty())) {
-                    it.unipv.insfw23.TicketWave.modelDomain.event.Event rowData = row.getItem();
-                    System.out.println("Clicked on: " + rowData.getName() + " " + rowData.getCity() + " " + rowData.getLocation() + " " + rowData.getProvince() );
-                    // Add your logic for handling the row click here
-                }
-            });
-            return row;
-        });
 
         // Creo un'HBOX che contiene barra + bottone di ricerca HBox = disposizione orizzontale
         HBox box1 = new HBox();
@@ -83,9 +90,9 @@ public class ResultResearchView extends Scene {
         vb1.getChildren().addAll(ManagerUpperBar.getIstance(), box1, box2, LowerBar.getInstance());
 
         // Estetica
-        box1.setStyle("-fx-background-color: rgb(27,84,161)");
-        box2.setStyle("-fx-background-color: rgb(27,84,161)");
-        vb1.setStyle("-fx-background-color: rgb(27,84,161)");
+        box1.setStyle("-fx-background-color: #def1fa");
+        box2.setStyle("-fx-background-color: #def1fa");
+        vb1.setStyle("-fx-background-color: #def1fa");
 
         // Allineo gli HBox nel VBox
         VBox.setMargin(ManagerUpperBar.getIstance(), new Insets(10.0d));
@@ -104,12 +111,8 @@ public class ResultResearchView extends Scene {
         setRoot(layout);
     }
 
-    public ObservableList<String> getResult() {
-        return result;
-    } // lo uso nel ResearchController
-
-    public void setResult(ObservableList<String> result) {
-        this.result = result;
-    } // lo uso nel ResearchController
+    public TableView<Event> getTable() {
+        return table;
+    } // lo uso nel ResultResearchController
 }
 
