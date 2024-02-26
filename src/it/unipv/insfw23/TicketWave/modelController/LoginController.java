@@ -53,7 +53,7 @@ public class LoginController {
 
                     System.out.println("Hai cliccato il pulsante Login come cliente");
                     customerview = new CustomerView();
-                    CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
+                    CustomerController customerController = new CustomerController();
                     customerview.reSetBars();
                     mainstage.setScene(customerview); // Imposta la scena SignUpView sulla stage principale
                 }

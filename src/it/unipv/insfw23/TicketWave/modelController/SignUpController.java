@@ -55,7 +55,7 @@ public class SignUpController {
 
                     System.out.println("Hai cliccato il pulsante registrati  come cliente");
                     customerview = new CustomerView();
-                    CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
+                    CustomerController customerController = new CustomerController();
                     customerview.reSetBars();
                     mainstage.setScene(customerview);
                     // Imposta la scena SignUpView sulla stage principale
