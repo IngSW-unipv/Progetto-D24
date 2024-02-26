@@ -8,6 +8,7 @@ import it.unipv.insfw23.TicketWave.modelView.TypeSelectionEventView;
 import it.unipv.insfw23.TicketWave.modelView.TypeStatsView;
 import it.unipv.insfw23.TicketWave.modelView.ResearchGUI.ResearchView;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -17,10 +18,10 @@ public class ManagerController {
 	ManagerView managerview;
 	LoginView logview;
 	
-	public ManagerController(Stage primarystage, ManagerView managerview/*, LoginView logview*/) {
+	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview) {
 		window = primarystage;
 		this.managerview = managerview;
-//		this.logview = logview;
+		this.logview = logview;
 		initComponents();
 	}
 	
@@ -34,7 +35,8 @@ public class ManagerController {
 //				LoginView logview = new LoginView();
 //				SignUpView signupview = new SignUpView();
 //				LoginController logcon = new LoginController(window, signupview, null, logview);
-//				window.setScene(logview);
+				logview.reSetBars();
+				window.setScene(logview.getScene());
 			}
 			
 		};

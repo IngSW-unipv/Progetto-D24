@@ -64,7 +64,7 @@ public class LoginController {
                     // Azione da eseguire quando il pulsante "Registrati" viene premuto
                     System.out.println("Hai cliccato il pulsante Login come gestore");
                     managerView = new ManagerView();
-                    ManagerController managerController = new ManagerController(mainstage, managerView);
+                    ManagerController managerController = new ManagerController(mainstage, managerView, loginView);
                     managerView.reSetBars();
                     mainstage.setScene(managerView); // Imposta la scena SignUpView sulla stage principale }
                 }// devi mettere managerview anche all'interno del costruttore
