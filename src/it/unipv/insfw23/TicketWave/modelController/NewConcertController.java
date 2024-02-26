@@ -39,11 +39,15 @@ public class NewConcertController {
 			
 			@Override
 			public void handle(MouseEvent event){
-				System.out.println(newconcview.getNamefield());
+				newconcview.getErrLabel().setVisible(false);
 				try {
-				System.out.println(newconcview.getPricebasefield());
+					System.out.println(newconcview.getPricebasefield());
+				//managerdacoontroller.addev(new event con i dati )
+				
 				}catch (NumberFormatException e){
-					System.out.println("parametri non validi");
+					newconcview.getErrLabel().setVisible(true);
+					
+					
 				}
 			}
 		};
