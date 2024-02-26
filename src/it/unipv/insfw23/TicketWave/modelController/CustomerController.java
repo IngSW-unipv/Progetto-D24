@@ -15,7 +15,7 @@ public class CustomerController {
 
     }
 
-    private void initcomponents(){
+ /*   private void initcomponents(){
 
         EventHandler<MouseEvent> searchButton = new EventHandler<>() {
 
@@ -29,6 +29,6 @@ public class CustomerController {
         };
 
         customerview.getSearchButton().setOnMouseClicked(searchButton);
-    }
+    } */
 
 }
