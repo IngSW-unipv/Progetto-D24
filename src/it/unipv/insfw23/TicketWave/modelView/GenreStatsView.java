@@ -25,7 +25,7 @@ public class GenreStatsView extends Scene {
     private BorderPane layout;
     private BorderPane contenuto;
 
-    //modifico il costruttore per ricevere i due risultati WrapArtist e Wrap genre e la classe statDominio
+    //modifico il costruttore per ricevere i due risultati WrapArtist e WrapGenreOrPorv e la classe statDominio
 
     public GenreStatsView(){
         super(new BorderPane(), 1080, 600);
@@ -56,7 +56,14 @@ public class GenreStatsView extends Scene {
 
         //Aggiunta reale da dominio
         /*
-        for (i=0; i<genreNameArray
+         creo due nuove arraylist che le prendono dal wrapGenreOrProv
+        ArrayList<Sring> genreName = classeinarrivo.getName...
+        ArrayList<Double> genreRes = classeinarrivo.getResult...
+        Iterator<String> genreNameIterator = genreName.iterator();
+        Iterator<Double> genreResIterator = genreRes.iterator();
+        while (genreNameIterator.hasNext() && genreResIterator.hasNext()){
+            series.getData().add(new XYChart.Data<>(genreNameIterator.next(), genreNameIterator.next());
+        }
          */
 
         // Aggiunta dei dati alla serie

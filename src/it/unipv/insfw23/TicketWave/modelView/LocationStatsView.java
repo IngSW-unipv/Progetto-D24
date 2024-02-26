@@ -17,7 +17,7 @@ public class LocationStatsView extends Scene {
     private XYChart<String, Number> LocationSerie;
     //private ArtistStatsView artistPane;
 
-    //modifico il costruttore oer ricevere wrapProvince e l'artista da filtrare
+    //modifico il costruttore oer ricevere wrapGenreOrProv e l'artista da filtrare
     public LocationStatsView(String artistTitle) {
         super(new BorderPane(), 1080, 600);
         this.artistTitle=artistTitle;
@@ -46,8 +46,12 @@ public class LocationStatsView extends Scene {
 
         //caricamento da dominio
         /*
-        while (artistNamearrayIterator.hasNext() && artistResultIterator.hasNext()){
-            series.getData().add(new XYChart.Data<>("artistNameArrayIterator.next().concatenaStringhe()", artistResultIterator.next());
+        ArrayList<Sring> provName = classeinarrivo.getName...
+        ArrayList<Double> provRes = classeinarrivo.getResult...
+        Iterator<String> provNameIterator = provName.iterator();
+        Iterator<Double> provResIterator = provRes.iterator();
+        while (provNameIterator.hasNext() && provResIterator.hasNext()){
+            series.getData().add(new XYChart.Data<>(provNameIterator.next(), provResIterator.next());
         }
          */
         // Aggiunta dei dati alla serie
