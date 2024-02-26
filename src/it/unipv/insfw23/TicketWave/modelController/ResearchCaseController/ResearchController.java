@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 public class ResearchController {
     private final Stage mainStage;
     // le mie view
-    private ResultResearchView rrv;
     private final ResearchView rv;
 
     // costruttore
@@ -26,7 +25,6 @@ public class ResearchController {
     }
 
     public void setResearchListener(){
-        ManagerUpperBar mub = ManagerUpperBar.getIstance();
         ResearchNodesView rnv = ResearchNodesView.getIstance();
 
         // click ricerca sulla ResearchNodesView
@@ -40,7 +38,7 @@ public class ResearchController {
         };
         rnv.getSearchButton().setOnMouseClicked(researchPressHandlerResearchView);
 
-        // Result Research ma non convince, la logica non va qui secondo me. va in un DAO controller
+    /*    // Result Research ma non convince, la logica non va qui secondo me. va in un DAO controller
         EventHandler<ActionEvent> ResultResearchHandler = new EventHandler<ActionEvent>() {
             ObservableList<String> azzeratore = FXCollections.observableArrayList(" ");
             @Override
@@ -55,7 +53,7 @@ public class ResearchController {
                 }
 
             }
-        };
+        }; */
 
     }
 
