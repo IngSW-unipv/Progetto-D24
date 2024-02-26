@@ -5,8 +5,13 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 
 public class ProfileDAO implements IProfileDAO{
 
+    public ProfileDAO(){
+        super();
+    }
+
     @Override
     public void insert(User user) {
+
 
     }
 
