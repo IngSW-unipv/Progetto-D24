@@ -44,6 +44,7 @@ public class LoginController {
         };
 
         loginView.getRegButton().setOnAction(goToSignUpView); // Imposta l'handler sull'azione del pulsante "Registrati"
+
         EventHandler<ActionEvent> goToCustomerView = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -57,24 +58,25 @@ public class LoginController {
                     customerview.reSetBars();
                     mainstage.setScene(customerview); // Imposta la scena SignUpView sulla stage principale
                 }
-                /*else if (loginView.getManagerRadioButton().isSelected()) {
+                else if (loginView.getManagerRadioButton().isSelected()) {
 
 
                     // Azione da eseguire quando il pulsante "Registrati" viene premuto
                     System.out.println("Hai cliccato il pulsante Login come gestore");
                     managerView = new ManagerView();
-                    mainstage.setScene(managerView); // Imposta la scena SignUpView sulla stage principale }*/
-            }// devi mettere managerview anche all'interno del costruttore*/
+                    ManagerController managerController = new ManagerController(mainstage, managerView);
+                    managerView.reSetBars();
+                    mainstage.setScene(managerView); // Imposta la scena SignUpView sulla stage principale }
+                }// devi mettere managerview anche all'interno del costruttore
 
 
 
         // Imposta l'handler sull'azione del pulsante "Registrati"
-    }
+            }
 
-    ;
-        loginView.getLoginButton().
-
-    setOnAction(goToCustomerView);
-
-}
+        };
+       
+        loginView.getLoginButton().setOnAction(goToCustomerView);
+    }    
+        
 }

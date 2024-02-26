@@ -35,19 +35,21 @@ public class ManagerView extends Scene{
 		init();
 	}
 
-	Button logoutButton;
-	ManagerUpperBar upperbar;
-	LowerBar lowerbar;
+	private Button logoutButton;
+	private ManagerUpperBar upperbar;
+	private LowerBar lowerbar;
+	private BorderPane layout;
+	private GridPane grid;
 
 	
 	public void init(){
 //		window = primarystage;
 //		window.setTitle("speriamo figa");
 		
-		BorderPane layout = new BorderPane();
+		layout = new BorderPane();
 
 		
-		GridPane grid = new GridPane();
+		grid = new GridPane();
 		grid.setPadding(new Insets(50, 100, 50, 100));
 		grid.setVgap(15);
 		grid.setHgap(90);
@@ -177,6 +179,14 @@ public class ManagerView extends Scene{
 		return upperbar.getSearchButton();
 	}
 	
+	public void reSetBars(){
+        BorderPane temp = new BorderPane();
+        setRoot(temp);
+        layout.setTop(ManagerUpperBar.getIstance());
+        layout.setCenter(grid);
+        layout.setBottom(LowerBar.getInstance());
+        setRoot(layout);
+    }
 
 	
 }

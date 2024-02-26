@@ -27,8 +27,9 @@ public class TypeSelectionEventController {
 			
 			@Override
 			public void handle(MouseEvent event) {
-//				window.setScene(managerview);
-				System.out.println("a");
+				managerview.reSetBars();
+				window.setScene(managerview);
+				
 			}
 		};
 		
