@@ -42,7 +42,10 @@ public class NewConcertController {
 				newconcview.getErrLabel().setVisible(false);
 				try {
 					System.out.println(newconcview.getPricebasefield());
-				//managerdacoontroller.addev(new event con i dati )
+					//Event newev = new (param presi dalla view)
+					//EventDao daoevent = new EventDao
+					//daoevent.insert(newev)
+					//loggedmanager.addev(newev )
 				
 				}catch (NumberFormatException e){
 					newconcview.getErrLabel().setVisible(true);
