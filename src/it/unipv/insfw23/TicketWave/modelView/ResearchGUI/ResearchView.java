@@ -59,8 +59,8 @@ public class ResearchView extends Scene{
         vb1.getChildren().addAll(ManagerUpperBar.getIstance(), box1, LowerBar.getInstance());
 
         // Estetica
-        box1.setStyle("-fx-background-color: rgb(27,84,161)");
-        vb1.setStyle("-fx-background-color: rgb(27,84,161)");
+        box1.setStyle("-fx-background-color: #def1fa");
+        vb1.setStyle("-fx-background-color: #def1fa");
 
         // Allineo gli HBox nel VBox
         VBox.setMargin(ManagerUpperBar.getIstance(), new Insets(10.0d));

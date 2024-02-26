@@ -4,11 +4,13 @@ import it.unipv.insfw23.TicketWave.modelController.ResearchCaseController.Resear
 import it.unipv.insfw23.TicketWave.modelView.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.ManagerView;
 import it.unipv.insfw23.TicketWave.modelView.SignUpView;
+import it.unipv.insfw23.TicketWave.modelView.TicketPageView;
 import it.unipv.insfw23.TicketWave.modelView.TypeSelectionEventView;
 import it.unipv.insfw23.TicketWave.modelView.TypeStatsView;
 import it.unipv.insfw23.TicketWave.modelView.ResearchGUI.ResearchView;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -96,6 +98,19 @@ public class ManagerController {
 		};
 		
 		managerview.getProfileButton().setOnMouseClicked(profileButton);
+		
+		EventHandler<MouseEvent> openevent = new EventHandler<>() {
+			
+			@Override
+			public void handle(MouseEvent event) {
+//				TableViewSelectionModel<it.unipv.insfw23.TicketWave.modelView.Event> tab = managerview.getTable().getSelectionModel();
+				System.out.println(managerview.getTableev().getSelectionModel().getSelectedItem());
+				TicketPageView tic = new TicketPageView();
+				window.setScene(tic);
+			}
+		};
+		
+		managerview.getTableev().setOnMouseClicked(openevent);;
 	}
 	
 	

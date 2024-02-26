@@ -1,6 +1,8 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
 import it.unipv.insfw23.TicketWave.modelController.MainController;
+import it.unipv.insfw23.TicketWave.modelController.ResearchCaseController.ResultResearchController;
+import it.unipv.insfw23.TicketWave.modelView.ResearchGUI.ResultResearchView;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
@@ -17,8 +19,9 @@ public class MainStageView extends Application {
 
     @Override
     public void start(Stage primaryStage) {
+        ResultResearchView rrv = new ResultResearchView();
 
-        MainController mainController= new MainController(primaryStage);
+        MainController mainController= new MainController(primaryStage); // MainController che crea gli altri controller
 
         this.primaryStage = primaryStage;
         primaryStage.show();
