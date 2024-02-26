@@ -52,6 +52,7 @@ public class NewConcertView extends Scene{
 	private TextField pricevipfield;
 	private final Label pricepremiumlabel = new Label("prezzo premium: ");
 	private TextField pricepremiumfield;
+	private final Label errlabel = new Label("Parametri non validi");
 	private Button abort;
 	private Button confirm;
 	
@@ -244,6 +245,15 @@ public class NewConcertView extends Scene{
 		GridPane.setConstraints(confirm, 2, 16);
 		GridPane.setHalignment(confirm, HPos.RIGHT);
 		
+		
+		GridPane.setConstraints(errlabel, 1, 16);
+		errlabel.setFont(Font.font("Arial", 20));
+		errlabel.setVisible(false);;
+		GridPane.setHalignment(errlabel, HPos.CENTER);
+		GridPane.setVgrow(errlabel, Priority.SOMETIMES);
+		GridPane.setHgrow(errlabel, Priority.SOMETIMES);
+		
+		
 		abort = new Button("Annulla");
 		GridPane.setConstraints(abort, 0, 16);
 		
@@ -291,7 +301,7 @@ public class NewConcertView extends Scene{
 								    addressfield,numtypeticketlabel, typesticketbox, genlabel, gensbox, artistlabel, artistfield, 
 									numbaselabel, numbasefield, numviplabel, numvipfield, numpremiumlabel, numpremiumfield,
 									pricebaselabel, pricebasefield, priceviplabel, pricevipfield, pricepremiumlabel, pricepremiumfield, 
-									confirm, abort);
+									confirm, errlabel,abort);
 		
 		layout.setTop(ManagerUpperBar.getIstance());
 		layout.setCenter(grid);
@@ -307,6 +317,7 @@ public class NewConcertView extends Scene{
 	}
 
 	public String getCityfield() {
+		
 		return cityfield.getText();
 	}
 
@@ -330,15 +341,15 @@ public class NewConcertView extends Scene{
 		return artistfield.getText();
 	}
 
-	public int getNumbasefield() {
+	public int getNumbasefield() throws NumberFormatException{
 		return Integer.parseInt(numbasefield.getText());
 	}
 
-	public int getNumvipfield() {
+	public int getNumvipfield() throws NumberFormatException{
 		return Integer.parseInt(numvipfield.getText());
 	}
 
-	public int getNumpremiumfield() {
+	public int getNumpremiumfield() throws NumberFormatException{
 		return Integer.parseInt(numpremiumfield.getText());
 	}
 
@@ -346,11 +357,11 @@ public class NewConcertView extends Scene{
 		return Double.parseDouble(pricebasefield.getText());
 	}
 
-	public double getPricevipfield() {
+	public double getPricevipfield() throws NumberFormatException{
 		return Double.parseDouble(pricevipfield.getText());
 	}
 
-	public double getPricepremiumfield() {
+	public double getPricepremiumfield() throws NumberFormatException{
 		return Double.parseDouble(pricepremiumfield.getText());
 	}
 
@@ -362,7 +373,9 @@ public class NewConcertView extends Scene{
 		return confirm;
 	}
 	
-	
+	public Label getErrLabel() {
+		return errlabel;
+	}
 	
 	
 	

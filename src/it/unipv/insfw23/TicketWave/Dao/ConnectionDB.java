@@ -1,50 +1,90 @@
 package it.unipv.insfw23.TicketWave.Dao;
 
-import it.unipv.insfw23.TicketWave.modelView.ManagerUpperBar;
-
+import java.io.FileInputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.Properties;
+
 
 public class ConnectionDB {
-    private static ConnectionDB istance;
 
-    // Costruttore privato (Singleton) per l'unica istanza di connessione al DB
-    private ConnectionDB() {
-        String driver = "com.mysql.cj.jdbc.Driver";
-        String url = " "; // url di connessione al DB MySQL
-        String username = "Java"; // user creato (su DB MySQL) per la connessione a Java
-        String password = "1234"; // password dello user sopra
-        Connection connection = null;
+    private static final String PROPERTYDBDRIVER = "DBDRIVER";
+    private static final String PROPERTYDBURL = "DBURL";
+    private static final String PROPERTYNAME = "db_usn";
+    private static final String PROPERTYPSW = "db_psw";
+    private static String username;
+    private static String password;
+    private static String dbDriver;
+    private static String dbURL;
+    private static ConnectionDB conn;
 
-        // try - catch per vedere se la connessione va a buon fine, altrimenti Exception
+    private static void init() {
+        Properties p = new Properties(System.getProperties());
         try {
-            connection = DriverManager.getConnection(url, username, password); // prova di connessione
+            p.load(new FileInputStream("it/unipv/insfw23/TicketWave/Dao/properties"));
+            username=p.getProperty(PROPERTYNAME);
+            password=p.getProperty(PROPERTYPSW);
+            dbDriver =p.getProperty(PROPERTYDBDRIVER);
+            dbURL =p.getProperty(PROPERTYDBURL);
 
-            if(connection != null){
-                System.out.println("Database connected!");
-            } else {
-                System.out.println("Can't connect to the Database!");
-            }
-        } catch (SQLException e) {
-            System.err.println("Database connection error: " + e.getMessage());
-        }
-
-        // chiusura della connessione, altrimenti Exception
-        try {
-            if (connection != null && !connection.isClosed()) {
-                    connection.close();
-                    System.out.println("Connection closed.");
-            }
-        } catch (SQLException e) {
-                System.err.println("Error closing the connection: " + e.getMessage());
+        }catch(Exception e) {
+            e.printStackTrace();
         }
     }
 
-    public static ConnectionDB getIstance(){ // metodo per richiamare l'unica istanza di connessione
-        if(istance == null){
-            istance = new ConnectionDB();
+    public static Connection startConnection(Connection conn, String schema)
+    {
+        init();
+        System.out.println(dbURL);
+
+
+
+        if ( isOpen(conn) )
+            closeConnection(conn);
+
+        try
+        {
+
+            dbURL=String.format(dbURL,schema);
+            System.out.println(dbURL);
+            Class.forName(dbDriver);
+
+            conn = DriverManager.getConnection(dbURL, username, password);// Apertura connessione
+
         }
-        return istance;
+        catch (Exception e)
+        {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+            return null;
+        }
+        return conn;
+    }
+
+    public static boolean isOpen(Connection conn)
+    {
+        if (conn == null)
+            return false;
+        else
+            return true;
+    }
+
+    public static Connection closeConnection(Connection conn)
+    {
+        if ( !isOpen(conn) )
+            return null;
+        try
+        {
+
+            conn.close();
+            conn = null;
+        }
+        catch (SQLException e)
+        {
+            e.printStackTrace();
+            return null;
+        }
+        return conn;
     }
 }
