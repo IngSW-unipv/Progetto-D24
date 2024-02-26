@@ -112,7 +112,7 @@ public class TypeSelectionEventView extends Scene{
 				
 		grid.getChildren().addAll(title, concerto, festival, teatro, altro, forwardbutton, abortbutton);
 		
-		
+		layout.setStyle("-fx-background-color: #def1fa;");
 		layout.setTop(ManagerUpperBar.getIstance());
 		layout.setCenter(grid);
 		layout.setBottom(LowerBar.getInstance());

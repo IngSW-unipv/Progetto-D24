@@ -30,7 +30,7 @@ public class SubscriptionSelectionView extends Scene {
     public void init(){
 
         BorderPane contenuto = new BorderPane();
-       // contenuto.setStyle("-fx-background-color: rgb(27,84,161)");
+       contenuto.setStyle("-fx-background-color: #def1fa;");
 
         BorderPane primaSub = new BorderPane();
         primaSub.setStyle("-fx-background-color: rgba(103,186,255); -fx-background-radius: 20;");

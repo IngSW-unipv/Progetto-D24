@@ -34,7 +34,7 @@ public class MainStageView extends Application {
         primaryStage.setFullScreen(true);
 
         BorderPane contenuto = new BorderPane();
-        contenuto.setStyle("-fx-background-color: rgb(27,84,161)");
+        contenuto.setStyle("-fx-background-color: #def1fa");
 
         BorderPane layout = new BorderPane();
         layout.setTop(ManagerUpperBar.getIstance());

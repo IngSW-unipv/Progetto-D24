@@ -31,9 +31,14 @@ public class NewTheatreView extends Scene{
 	public void init(){
 		
 		
+<<<<<<< HEAD
 		
 		BorderPane layout = (BorderPane)  getRoot();
 		
+=======
+		BorderPane layout = new BorderPane();
+		layout.setStyle("-fx-background-color: #def1fa;");
+>>>>>>> branch 'master' of https://github.com/IngSW-unipv/Progetto-D24.git
 		GridPane grid = new GridPane();
 		
 		grid.setPadding(new Insets(50, 50, 50, 50));

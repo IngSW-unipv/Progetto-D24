@@ -96,7 +96,7 @@ public class TicketPageView extends Scene {
 
         BorderPane root=new BorderPane();
         root.setCenter(internalgrid);
-        root.setStyle("-fx-background-color: rgb(255,255,255)");
+        root.setStyle("-fx-background-color: #def1fa;");
         root.setBottom(buttonbox);
         BorderPane.setMargin(buttonbox, new Insets(30));
         BorderPane.setAlignment(buttonbox, Pos.BOTTOM_RIGHT);

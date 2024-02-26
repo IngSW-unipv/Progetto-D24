@@ -42,7 +42,7 @@ public class LoginView extends Application {
 
         BorderPane root= new BorderPane();
         this.root=root;
-
+        root.setStyle("-fx-background-color: #def1fa;");
 
 
         GridPane grid= new GridPane();

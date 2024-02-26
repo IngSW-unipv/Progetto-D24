@@ -65,9 +65,9 @@ public class PaymentSelectionView extends Scene {
         nextarrow.setPreserveRatio(true);
 
         nextButton.setGraphic(nextarrow);
-        nextButton.setStyle("-fx-background-color: rgb(255,255,255)");
+       // nextButton.setStyle("-fx-background-color: rgb(255,255,255)");
         backButton.setGraphic(backarrow);
-        backButton.setStyle("-fx-background-color: rgb(255,255,255)");
+       // backButton.setStyle("-fx-background-color: rgb(255,255,255)");
 
         errmessage.setOpacity(0);
         errmessage.setFill(javafx.scene.paint.Color.RED);
@@ -114,7 +114,7 @@ public class PaymentSelectionView extends Scene {
         BorderPane.setMargin(nextButtonBox, new Insets(0, 10, 10, 10)); // Margine a destra
 
         BorderPane root = new BorderPane();
-        root.setStyle("-fx-background-color: rgb(255,255,255)");
+        root.setStyle("-fx-background-color: #def1fa;");
         root.setCenter(gridPane);
         root.setLeft(backButtonBox);
         root.setRight(nextButtonBox);
@@ -122,7 +122,7 @@ public class PaymentSelectionView extends Scene {
         scene = new Scene(root, 800, 400);
 
         BorderPane layout= new BorderPane();
-        layout.setStyle("-fx-background-color: rgb(27,84,161)");
+        layout.setStyle("-fx-background-color: #def1fa;");
         layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
         layout.setTop(UpperBar.getIstance());

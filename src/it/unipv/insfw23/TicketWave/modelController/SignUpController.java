@@ -11,6 +11,7 @@ public class SignUpController {
     // view da considerare
 
     private SignUpView signUpView;
+    private ManagerView managerView;
     private CustomerView customerview;
     private LoginView loginView;
     private SubscriptionSelectionView subscriptionSelectionView;
@@ -35,6 +36,8 @@ public class SignUpController {
             public void handle(ActionEvent actionEvent) {
                 // Azione da eseguire quando il pulsante "Torna Indietro" viene premuto
                 System.out.println("Hai cliccato il pulsante Torna Indietro");
+                loginView= new LoginView();
+                LoginController loginController= new LoginController(mainstage,signUpView,customerview,loginView,managerView);
                 mainstage.setScene(loginView.getScene()); // Imposta la scena LoginView sullo Stage principal
                 loginView.reSetBars();
             }
