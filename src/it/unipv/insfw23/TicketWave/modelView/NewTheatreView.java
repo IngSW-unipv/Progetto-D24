@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
+import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -81,8 +83,8 @@ public class NewTheatreView extends Scene{
 		GridPane.setVgrow(provincelabel, Priority.SOMETIMES);
 		GridPane.setHgrow(provincelabel, Priority.SOMETIMES);
 		
-		ChoiceBox<String> provincesbox = new ChoiceBox<>();
-		provincesbox.getItems().addAll("Milano", "Pavia", "Treviso", "Roma");
+		ComboBox<Province> provincesbox = new ComboBox<>();
+		provincesbox.getItems().addAll(Province.values());
 		GridPane.setConstraints(provincesbox, 2, 3);
 		GridPane.setVgrow(provincesbox, Priority.SOMETIMES);
 		GridPane.setHgrow(provincesbox, Priority.SOMETIMES);

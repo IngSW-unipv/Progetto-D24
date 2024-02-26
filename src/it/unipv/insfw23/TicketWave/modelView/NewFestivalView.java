@@ -1,5 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
+import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.HPos;
@@ -9,6 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
@@ -75,8 +78,8 @@ public class NewFestivalView extends Scene{
 		GridPane.setVgrow(provincelabel, Priority.SOMETIMES);
 		GridPane.setHgrow(provincelabel, Priority.SOMETIMES);
 		
-		ChoiceBox<String> provincesbox = new ChoiceBox<>();
-		provincesbox.getItems().addAll("Milano", "Pavia", "Treviso", "Roma");
+		ComboBox<Province> provincesbox = new ComboBox<>();
+		provincesbox.getItems().addAll(Province.values());
 		GridPane.setConstraints(provincesbox, 2, 3);
 		GridPane.setVgrow(provincesbox, Priority.SOMETIMES);
 		GridPane.setHgrow(provincesbox, Priority.SOMETIMES);
@@ -110,8 +113,8 @@ public class NewFestivalView extends Scene{
 		GridPane.setVgrow(genlabel, Priority.SOMETIMES);
 		GridPane.setHgrow(genlabel, Priority.SOMETIMES);
 		
-		ChoiceBox<String> gensbox = new ChoiceBox<>();
-		gensbox.getItems().addAll("Rock", "Punk", "Metal");
+		ComboBox<Genre> gensbox = new ComboBox<>();
+		gensbox.getItems().addAll(Genre.values());
 		GridPane.setConstraints(gensbox, 2, 6);
 		GridPane.setVgrow(gensbox, Priority.SOMETIMES);
 		GridPane.setHgrow(gensbox, Priority.SOMETIMES);
