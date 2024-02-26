@@ -62,7 +62,7 @@ public class SignUpController {
                 } else if (signUpView.getManagerRadioButton().isSelected()) {
 
 
-                    System.out.println("Hai cliccato il pulsante registrati  come gestore");
+                    System.out.println("Hai cliccato il pulsante registrati  come cliente");
                     subscriptionSelectionView = new SubscriptionSelectionView();
                     SubscriptionSelectionController subscriptionSelectionController = new SubscriptionSelectionController(mainstage,subscriptionSelectionView,paymentSelectionView);
 

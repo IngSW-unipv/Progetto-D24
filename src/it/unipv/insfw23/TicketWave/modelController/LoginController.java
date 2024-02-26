@@ -15,15 +15,13 @@ public class LoginController {
     private SignUpView signUpView;
     private CustomerView customerview;
     private LoginView loginView;
-    private ManagerView managerView;
 
 
-    public LoginController(Stage mainstage, SignUpView signUpView, CustomerView customerview, LoginView loginView,ManagerView managerView) {
+    public LoginController(Stage mainstage, SignUpView signUpView, CustomerView customerView, LoginView loginView) {
         this.mainstage = mainstage;
         this.signUpView = signUpView;
-        this.customerview = customerview;
+        this.customerview = customerView;
         this.loginView = loginView;
-        this.managerView=managerView;
 
         initComponents();
     }
@@ -46,7 +44,7 @@ public class LoginController {
 
         loginView.getRegButton().setOnAction(goToSignUpView); // Imposta l'handler sull'azione del pulsante "Registrati"
 
-        EventHandler<ActionEvent> goToCustomerorManagerView = new EventHandler<ActionEvent>() {
+        EventHandler<ActionEvent> goToCustomerView = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
 
@@ -77,7 +75,7 @@ public class LoginController {
 
         };
        
-        loginView.getLoginButton().setOnAction(goToCustomerorManagerView);
+        loginView.getLoginButton().setOnAction(goToCustomerView);
     }    
         
 }

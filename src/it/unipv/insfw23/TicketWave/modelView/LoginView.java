@@ -87,14 +87,16 @@ public class LoginView extends Application {
 
         ToggleGroup accountTypeToggleGroup = new ToggleGroup();
 
-        customerRadioButton = new RadioButton("Cliente");
-
+        RadioButton customerRadioButton = new RadioButton("Cliente");
+        this.customerRadioButton=customerRadioButton;
         customerRadioButton.setFont(Font.font("Arial", 14));
         customerRadioButton.setToggleGroup(accountTypeToggleGroup);
         customerRadioButton.setSelected(true);
         GridPane.setConstraints(customerRadioButton, 0, 0);
 
-        managerRadioButton = new RadioButton("Gestore");
+        RadioButton managerRadioButton = new RadioButton("Gestore");
+        this.managerRadioButton=managerRadioButton;
+
         managerRadioButton.setFont(Font.font("Arial", 14));
         managerRadioButton.setToggleGroup(accountTypeToggleGroup);
         GridPane.setConstraints(managerRadioButton, 1, 0);
@@ -153,7 +155,7 @@ public class LoginView extends Application {
         Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
 
 
-        LoginController loginController = new LoginController(primaryStage, signUpView, customerView, this,managerView);
+        LoginController loginController = new LoginController(primaryStage, signUpView, customerView, this);
 
         //SignUpController signUpController= new SignUpController(primaryStage,signUpView,customerView,this);
 
