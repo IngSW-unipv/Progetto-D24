@@ -1,6 +1,6 @@
 package it.unipv.insfw23.TicketWave.Dao;
 
-import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+/*import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 
 import java.sql.Connection;
@@ -60,3 +60,4 @@ public class ProfileDAO implements IProfileDAO{
 
     }
 }
+*/
