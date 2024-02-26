@@ -40,8 +40,8 @@ public class LoginView extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        BorderPane root= new BorderPane();
-        this.root=root;
+        root= new BorderPane();
+
         root.setStyle("-fx-background-color: #def1fa;");
 
 
@@ -147,8 +147,7 @@ public class LoginView extends Application {
 
 
 
-        Scene scene= new Scene(root, 500, 500);
-        this.scene=scene;
+        scene= new Scene(root, 500, 500);
         primaryStage.setScene(scene);
 
         primaryStage.setTitle("TicketWave");
@@ -156,7 +155,7 @@ public class LoginView extends Application {
         Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
 
 
-        LoginController loginController = new LoginController(primaryStage, signUpView, customerView, this,managerView);
+        LoginController loginController = new LoginController(primaryStage, signUpView, customerView, this);
 
         //SignUpController signUpController= new SignUpController(primaryStage,signUpView,customerView,this);
 

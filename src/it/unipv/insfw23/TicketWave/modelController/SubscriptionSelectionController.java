@@ -26,21 +26,21 @@ public class SubscriptionSelectionController {
     }
 
     public void initComponents() {
-        EventHandler<MouseEvent> goToBuyTicketController = new EventHandler<MouseEvent>() {
+        EventHandler<MouseEvent> goToBuySubscription = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent actionEvent) {
                 System.out.println("Hai selezionato un abbonamento. Reindirizzamento alla pagina di pagamento.");
                 paymentPage= new PaymentSelectionView();
-                PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainstage,paymentPage,ticketPage);
+                PaymentSelectionSubcriptionController paymentSelectionSubcriptionController= new PaymentSelectionSubcriptionController(mainstage,paymentPage,ticketPage);
                 mainstage.setScene(paymentPage);
             }
         };
 
         // Imposta l'handler sull'azione del clic sui bottoni della sottoscrizione
 
-        subscriptionSelectionView.getBottonePrimaSub().setOnMouseClicked(goToBuyTicketController);
-        subscriptionSelectionView.getBottoneSecondaSub().setOnMouseClicked(goToBuyTicketController);
-        subscriptionSelectionView.getBottoneTerzaSub().setOnMouseClicked(goToBuyTicketController);
+        subscriptionSelectionView.getBottonePrimaSub().setOnMouseClicked(goToBuySubscription);
+        subscriptionSelectionView.getBottoneSecondaSub().setOnMouseClicked(goToBuySubscription);
+        subscriptionSelectionView.getBottoneTerzaSub().setOnMouseClicked(goToBuySubscription);
     }
     }
 

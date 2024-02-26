@@ -16,14 +16,13 @@ public class LoginController {
     private CustomerView customerview;
     private LoginView loginView;
 
-    private ManagerView managerView;
 
-    public LoginController(Stage mainstage, SignUpView signUpView, CustomerView customerView, LoginView loginView, ManagerView managerView) {
+    public LoginController(Stage mainstage, SignUpView signUpView, CustomerView customerView, LoginView loginView) {
         this.mainstage = mainstage;
         this.signUpView = signUpView;
         this.customerview = customerView;
         this.loginView = loginView;
-        this.managerView = managerView;
+
         initComponents();
     }
 
