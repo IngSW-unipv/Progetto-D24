@@ -85,11 +85,13 @@ public class ManagerController {
 			
 			@Override
 			public void handle(MouseEvent event) {
-//				window.setScene(managerview);
+				managerview.reSetBars();
+				window.setScene(managerview);
 				
 			}
 		};
 		
+		managerview.getProfileButton().setOnMouseClicked(profileButton);
 	}
 	
 	

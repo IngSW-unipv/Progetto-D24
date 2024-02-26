@@ -9,7 +9,7 @@ public class Event {
         nome = s;
     }
 
-    public int getCodice() {
+    public int getCod() {
         return cod;
     }
 
