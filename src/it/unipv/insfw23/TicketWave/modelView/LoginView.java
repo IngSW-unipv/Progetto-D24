@@ -52,7 +52,7 @@ public class LoginView extends Application {
         grid.setVgap(10);
         grid.setHgap(30);
         grid.setAlignment(Pos.CENTER);
-       // grid.setStyle("-fx-background-color: White;");
+        // grid.setStyle("-fx-background-color: White;");
 
 
 
@@ -87,16 +87,14 @@ public class LoginView extends Application {
 
         ToggleGroup accountTypeToggleGroup = new ToggleGroup();
 
-        RadioButton customerRadioButton = new RadioButton("Cliente");
-        this.customerRadioButton=customerRadioButton;
+        customerRadioButton = new RadioButton("Cliente");
+
         customerRadioButton.setFont(Font.font("Arial", 14));
         customerRadioButton.setToggleGroup(accountTypeToggleGroup);
         customerRadioButton.setSelected(true);
         GridPane.setConstraints(customerRadioButton, 0, 0);
 
-        RadioButton managerRadioButton = new RadioButton("Gestore");
-        this.managerRadioButton=managerRadioButton;
-
+        managerRadioButton = new RadioButton("Gestore");
         managerRadioButton.setFont(Font.font("Arial", 14));
         managerRadioButton.setToggleGroup(accountTypeToggleGroup);
         GridPane.setConstraints(managerRadioButton, 1, 0);
@@ -155,7 +153,7 @@ public class LoginView extends Application {
         Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
 
 
-        LoginController loginController = new LoginController(primaryStage, signUpView, customerView, this);
+        LoginController loginController = new LoginController(primaryStage, signUpView, customerView, this,managerView);
 
         //SignUpController signUpController= new SignUpController(primaryStage,signUpView,customerView,this);
 
