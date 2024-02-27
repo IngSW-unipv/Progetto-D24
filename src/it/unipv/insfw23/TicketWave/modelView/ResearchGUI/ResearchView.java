@@ -46,9 +46,8 @@ public class ResearchView extends Scene{
         scenaResearch();
     }
 
-    public void scenaResearch(){
+    public void scenaResearch() {
         rnv = ResearchNodesView.getIstance();
-        // if ( User collegato = Manager ) {
         // Creo un'HBOX che contiene barra + bottone di ricerca HBox = disposizione orizzontale
         HBox box1 = new HBox();
         box1.setSpacing(10);
@@ -58,61 +57,33 @@ public class ResearchView extends Scene{
 
         // Creo il VBox che contiene gli HBox, l'Upper Bar e la Lower Bar
         VBox vb1 = new VBox();
-        vb1.getChildren().addAll(/*ManagerUpperBar.getIstance(),*/ box1/*, LowerBar.getInstance()*/);
+        vb1.getChildren().addAll(box1);
 
         // Estetica
         box1.setStyle("-fx-background-color: #def1fa");
         vb1.setStyle("-fx-background-color: #def1fa");
 
         // Allineo gli HBox nel VBox
-        //ho tolto i margini perchè nelle altre view non ci sono
-//        VBox.setMargin(ManagerUpperBar.getIstance(), new Insets(10.0d));
         VBox.setMargin(box1, new Insets(10.0d));
-//        VBox.setMargin(LowerBar.getInstance(), new Insets(10.0d));
 
         box1.setAlignment(Pos.CENTER); // mi serve per avere vb1 centrato nel BorderPane seguente
 
         BorderPane layout = new BorderPane();
-
         layout.setCenter(vb1);
         layout.setBottom(LowerBar.getInstance());
+        /* if ( User == Manager) {
+               layout.setTop(ManagerUpperBar.getIstance());
+            }  else {
+                layout.setTop(CustomerUpperBar.getIstance());
+            }
+         */
         layout.setTop(ManagerUpperBar.getIstance());
         setRoot(layout);
-        // } else {
-        /*
-        HBox box1 = new HBox();
-        box1.setSpacing(10);
-        box1.getChildren().add(rnv.getBar());
-        box1.getChildren().add(rnv.getSearchBar());
-        box1.getChildren().add(rnv.getSearchButton());
-
-        // Creo il VBox che contiene gli HBox, l'Upper Bar e la Lower Bar
-        VBox vb1 = new VBox();
-        vb1.getChildren().addAll(CustomerUpperBar.getIstance(), box1, LowerBar.getInstance());
-
-        // Estetica
-        box1.setStyle("-fx-background-color: #def1fa");
-        vb1.setStyle("-fx-background-color: #def1fa");
-
-        // Allineo gli HBox nel VBox
-        VBox.setMargin(CustomerUpperBar.getIstance(), new Insets(10.0d));
-        VBox.setMargin(box1, new Insets(10.0d));
-        VBox.setMargin(LowerBar.getInstance(), new Insets(10.0d));
-
-        box1.setAlignment(Pos.CENTER); // mi serve per avere vb1 centrato nel BorderPane seguente
-
-        BorderPane layout = new BorderPane();
-
-        layout.setCenter(vb1);
-        layout.setBottom(LowerBar.getInstance());
-        layout.setTop(CustomerUpperBar.getIstance());
-        setRoot(layout);
-         */
     }
     
     public ResearchNodesView getresearchnodeview() {
     	return rnv;
     }
-    
+
 }
 

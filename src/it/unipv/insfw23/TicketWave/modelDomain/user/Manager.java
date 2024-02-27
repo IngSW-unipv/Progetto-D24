@@ -76,7 +76,7 @@ public class Manager extends User {
     public void createFestival(int idEvent, String name, String city, LocalDate date, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int [] seatsRemainedNumberForType, int[] price, Genre genre, Manager creator, ArrayList<String> artists) throws Exception {
         if(subscription==1 || subscription==2 && counterCreatedEvents <maxNumberofEvents ) {
 
-            Event festival = new Festival(idEvent, name, city, date, location, province, maxNumberOfSeats,typeOfSeats, seatsRemainedNumberForType, price, genre,creator, artists);
+            Event festival = new Festival(idEvent, name, city, location, date, province, maxNumberOfSeats,typeOfSeats, seatsRemainedNumberForType, price, genre,creator, artists);
             event.add(festival);
             counterCreatedEvents++;
         }

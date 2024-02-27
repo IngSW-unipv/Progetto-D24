@@ -86,13 +86,6 @@ public class ResultResearchView extends Scene {
         table.setItems(evs);
 //        table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE); // posso selezionare solo una riga per volta
 
-               /* table.setOnMouseClicked(event -> { // sta roba va ma non la posso usare
-                        Event selectedPerson = table.getSelectionModel().getSelectedItem();
-                        if (selectedPerson != null) {
-                        System.out.println("Clicked on: " + selectedPerson.getNome());
-                    }
-                }); */
-
         // Creo un'HBOX che contiene barra + bottone di ricerca HBox = disposizione orizzontale
         box1 = new HBox();
         box1.setSpacing(10);
@@ -104,10 +97,9 @@ public class ResultResearchView extends Scene {
         box2.setSpacing(10);
         box2.getChildren().add(table);
 
-        // if ( User collegato = Manager) {
         // Creo il VBox che contiene gli HBox, l'Upper Bar e la Lower Bar
         VBox vb1 = new VBox();
-        vb1.getChildren().addAll(/*ManagerUpperBar.getIstance(),*/ box1, box2/*, LowerBar.getInstance()*/);
+        vb1.getChildren().addAll(box1, box2);
 
         // Estetica
         box1.setStyle("-fx-background-color: #def1fa");
@@ -115,10 +107,8 @@ public class ResultResearchView extends Scene {
         vb1.setStyle("-fx-background-color: #def1fa");
 
         // Allineo gli HBox nel VBox
-//        VBox.setMargin(ManagerUpperBar.getIstance(), new Insets(10.0d));
         VBox.setMargin(box1, new Insets(10.0d));
         VBox.setMargin(box2, new Insets(10.0d));
-//        VBox.setMargin(LowerBar.getInstance(), new Insets(10.0d));
 
         box1.setAlignment(Pos.CENTER); // mi serve per avere vb1 centrato nel BorderPane seguente
         box2.setAlignment(Pos.CENTER);
@@ -127,34 +117,14 @@ public class ResultResearchView extends Scene {
 
         layout.setCenter(vb1);
         layout.setBottom(LowerBar.getInstance());
+        /* if ( User == Manager) {
+               layout.setTop(ManagerUpperBar.getIstance());
+            }  else {
+                layout.setTop(CustomerUpperBar.getIstance());
+            }
+         */
         layout.setTop(ManagerUpperBar.getIstance());
         setRoot(layout);
-        // } else {
-        /*
-            VBox vb1 = new VBox();
-        vb1.getChildren().addAll(CustomerUpperBar.getIstance(), box1, box2, LowerBar.getInstance());
-
-        // Estetica
-        box1.setStyle("-fx-background-color: #def1fa");
-        box2.setStyle("-fx-background-color: #def1fa");
-        vb1.setStyle("-fx-background-color: #def1fa");
-
-        // Allineo gli HBox nel VBox
-        VBox.setMargin(CustomerUpperBar.getIstance(), new Insets(10.0d));
-        VBox.setMargin(box1, new Insets(10.0d));
-        VBox.setMargin(box2, new Insets(10.0d));
-        VBox.setMargin(LowerBar.getInstance(), new Insets(10.0d));
-
-        box1.setAlignment(Pos.CENTER); // mi serve per avere vb1 centrato nel BorderPane seguente
-        box2.setAlignment(Pos.CENTER);
-
-        BorderPane layout = new BorderPane();
-
-        layout.setCenter(vb1);
-        layout.setBottom(LowerBar.getInstance());
-        layout.setTop(CustomerUpperBar.getIstance());
-        setRoot(layout);
-         */
     }
     public TableView<it.unipv.insfw23.TicketWave.modelDomain.event.Event> getTable() {
         return table;
