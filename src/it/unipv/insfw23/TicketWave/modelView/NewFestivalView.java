@@ -21,6 +21,12 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
 public class NewFestivalView extends Scene{
+	
+	
+//	private ManagerUpperBar upperbar;
+//	private LowerBar lowerbar;
+	private BorderPane layout;
+	private GridPane grid;
 
 	private final Label titlelabel = new Label("Compilare i seguenti campi per proseguire:");
 	private final Label namelabel = new Label("Nome: ");
@@ -60,9 +66,9 @@ public class NewFestivalView extends Scene{
 
 	public void init() {
 		
-		BorderPane layout = (BorderPane) getRoot();
+		layout = (BorderPane) getRoot();
 		layout.setStyle("-fx-background-color: #def1fa;");
-		GridPane grid = new GridPane();
+		grid = new GridPane();
 		
 		grid.setPadding(new Insets(50, 50, 50, 50));
 		grid.setVgap(10);
@@ -303,6 +309,7 @@ public class NewFestivalView extends Scene{
 									confirm, errlabel, abort);
 		
 		
+		
 		layout.setTop(ManagerUpperBar.getIstance());
 		layout.setCenter(grid);
 		layout.setBottom(LowerBar.getInstance());
@@ -373,6 +380,8 @@ public class NewFestivalView extends Scene{
 	public Label getErrLabel() {
 		return errlabel;
 	}
+	
+
 	
 	
 }

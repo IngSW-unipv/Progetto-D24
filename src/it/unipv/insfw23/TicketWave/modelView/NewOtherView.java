@@ -153,7 +153,7 @@ public class NewOtherView extends Scene{
 		GridPane.setHgrow(descrlabel, Priority.SOMETIMES);
 		
 		descrfield = new TextField();
-		GridPane.setConstraints(descrfield, 0, 9, 3, 1);
+		GridPane.setConstraints(descrfield, 0, 9, 2, 1);
 		GridPane.setVgrow(descrfield, Priority.SOMETIMES);
 		GridPane.setHgrow(descrfield, Priority.SOMETIMES);
 		

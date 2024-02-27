@@ -1,6 +1,15 @@
 package it.unipv.insfw23.TicketWave.modelController;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+
 import it.unipv.insfw23.TicketWave.modelController.ResearchCaseController.ResearchController;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Concert;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.ManagerView;
 import it.unipv.insfw23.TicketWave.modelView.SignUpView;
@@ -13,6 +22,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
 
 public class ManagerController {
 	
@@ -103,9 +113,23 @@ public class ManagerController {
 			
 			@Override
 			public void handle(MouseEvent event) {
-//				TableViewSelectionModel<it.unipv.insfw23.TicketWave.modelView.Event> tab = managerview.getTable().getSelectionModel();
+//				creo un manager finto per creare un evento finto
+				int[] card = {2,6,5,1};
+				ArrayList<Event> arraylistevent = new ArrayList<>();
+				LocalDate data = LocalDate.of(1980, 12, 20);
+				Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","passwd",2,card,arraylistevent,5,1,data,4);
+				int[] vettfalsoprice = {5};
+				ArrayList<String> arrfintoartista = new ArrayList<>();
+				arrfintoartista.add("califano");
+				Concert eventofinto = new Concert(12,"reunion","busto arstizio","via as",Province.LIVORNO,2,1,vettfalsoprice,Genre.INDIE,managerfinto,arrfintoartista,"califano");
 				System.out.println(managerview.getTableev().getSelectionModel().getSelectedItem());
+				//costruttore view
 				TicketPageView tic = new TicketPageView();
+				//costruttore controller
+				BuyTicketController buyticketcontroller = new BuyTicketController(window, tic, eventofinto);
+				//metodo che setta upperbar manager
+				//opacita
+				//
 				window.setScene(tic);
 			}
 		};
