@@ -80,7 +80,7 @@ public abstract class Event implements EventType {
         return price[type.ordinal()]; //ordinal torna la posizione di type nella enum
     }
     
-    public int[] getPrices() {
+    public double[] getPrices() {
     	return price;
     }
 
