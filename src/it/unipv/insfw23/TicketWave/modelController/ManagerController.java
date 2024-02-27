@@ -29,13 +29,13 @@ public class ManagerController {
 	Stage window;
 	ManagerView managerview;
 	LoginView logview;
-//	Manager managerlogged;
+	Manager managerlogged;
 	
-	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview/*, Manager managerlogged*/) {
+	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview, Manager managerlogged) {
 		window = primarystage;
 		this.managerview = managerview;
 		this.logview = logview;
-//		this.managerlogged = managerlogged;
+		this.managerlogged = managerlogged;
 		initComponents();
 	}
 	
@@ -114,15 +114,18 @@ public class ManagerController {
 			@Override
 			public void handle(MouseEvent event) {
 //				creo un manager finto per creare un evento finto
-				int[] card = {2,6,5,1};
-				int[] seduteRImaste = {20, 20};
-				ArrayList<Event> arraylistevent = new ArrayList<>();
-				LocalDate data = LocalDate.of(2024, 12, 20);
-				Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","passwd",2, "23245234324", arraylistevent,5,1,data,4);
-				int[] vettfalsoprice = {5};
-				ArrayList<String> arrfintoartista = new ArrayList<>();
-				arrfintoartista.add("califano");
-				Concert eventofinto = new Concert(12,"reunion","busto arstizio",data, "via dei matti ,0", Province.LIVORNO,2,1, seduteRImaste, vettfalsoprice,Genre.INDIE,managerfinto,arrfintoartista);
+				
+			/*	creazione di un finto manager e un finto evento
+			/	int[] card = {2,6,5,1};
+			/	int[] seduteRImaste = {20, 20};
+			/	ArrayList<Event> arraylistevent = new ArrayList<>();
+			/	LocalDate data = LocalDate.of(2024, 12, 20);
+			/	Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","passwd",2, "23245234324", arraylistevent,5,1,data,4);
+			/	int[] vettfalsoprice = {5};
+			/	ArrayList<String> arrfintoartista = new ArrayList<>();
+			/	arrfintoartista.add("califano");
+			/	Concert eventofinto = new Concert(12,"reunion","busto arstizio",data, "via dei matti ,0", Province.LIVORNO,2,1, seduteRImaste, vettfalsoprice,Genre.INDIE,managerfinto,arrfintoartista);
+			*/
 				System.out.println(managerview.getTableev().getSelectionModel().getSelectedItem());
 				//costruttore view
 				TicketPageView tic = new TicketPageView();

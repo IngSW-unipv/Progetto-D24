@@ -70,8 +70,7 @@ public class Manager extends User {
 
     public void setEvent(ArrayList<Event> event) {
         this.event = event;
-    }
-
+    } 
 
     //seguono dei metodi di crea Festival, Concerto ecc..
     public void createFestival(int idEvent, String name, String city, LocalDate date, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int [] seatsRemainedNumberForType, int[] price, Genre genre, Manager creator, ArrayList<String> artists) throws Exception {
