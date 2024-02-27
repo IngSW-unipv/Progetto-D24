@@ -64,7 +64,7 @@ public class LoginController {
 
                     // Azione da eseguire quando il pulsante "Registrati" viene premuto
                     System.out.println("Hai cliccato il pulsante Login come gestore");
-                    ManagerView managerView = new ManagerView();
+                    managerView = new ManagerView();
                     ManagerController managerController = new ManagerController(mainstage, managerView, loginView);
                     managerView.reSetBars();
                     mainstage.setScene(managerView); // Imposta la scena SignUpView sulla stage principale }
@@ -72,12 +72,12 @@ public class LoginController {
 
 
 
-        // Imposta l'handler sull'azione del pulsante "Registrati"
+                // Imposta l'handler sull'azione del pulsante "Registrati"
             }
 
         };
-       
+
         loginView.getLoginButton().setOnAction(goToCustomerorManagerView);
-    }    
-        
+    }
+
 }

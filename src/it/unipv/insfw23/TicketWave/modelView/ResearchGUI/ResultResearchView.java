@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelView.ResearchGUI;
 
 import it.unipv.insfw23.TicketWave.modelController.MainController;
+import it.unipv.insfw23.TicketWave.modelController.ResearchCaseController.ResearchController;
 import it.unipv.insfw23.TicketWave.modelController.ResearchCaseController.ResultResearchController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
@@ -38,17 +39,22 @@ public class ResultResearchView extends Scene {
         TableColumn <Event, String> tcEvent = new TableColumn<>("Evento");
         tcEvent.setCellValueFactory(new PropertyValueFactory<>("Nome"));
         tcEvent.setStyle("-fx-alignment: CENTER");
+        tcEvent.setSortable(false); // utile
 
         ObservableList<Event> evs = FXCollections.observableArrayList(
                 new Event(1, "PAOLO")
         );
         table.getColumns().addAll(tcEvent);
+        table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE); // posso selezionare solo una riga per volta
 
+       /* table.setOnMouseClicked(event -> { // sta roba va ma non la posso usare
+                Event selectedPerson = table.getSelectionModel().getSelectedItem();
+                if (selectedPerson != null) {
+                    System.out.println("Clicked on: " + selectedPerson.getNome());
+                }
+        }); */
 
-        //table.setOnMouseClicked(new ResultResearchController(table));
-        //table.setOnMouseClicked(event -> System.out.println(table.getSelectionModel().getSelectedItem().getNome()));
-
-      /*  TableView<it.unipv.insfw23.TicketWave.modelDomain.event.Event> table = new TableView<>();
+      /*  TableView<it.unipv.insfw23.TicketWave.modelDomain.event.Event> table = new TableView<>(); // STA ROBA E' QUELLA VERA
 
         TableColumn <it.unipv.insfw23.TicketWave.modelDomain.event.Event, String> tcEvent = new TableColumn<>("Evento");
         tcEvent.setCellValueFactory(new PropertyValueFactory<>("Name"));

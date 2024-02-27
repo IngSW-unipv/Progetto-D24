@@ -8,16 +8,20 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 
 
 public class BuyTicketController {
     private Stage mainStage;
     private TicketPageView ticketPage;
 
+    private Event event;
 
-    public BuyTicketController(Stage mainStage,TicketPageView ticketPage ) {
+
+    public BuyTicketController(Stage mainStage,TicketPageView ticketPage, Event event) {
         this.mainStage = mainStage;
         this.ticketPage = ticketPage;
+        this.event=event;
         initComponents();
 
     }
@@ -41,24 +45,3 @@ public void initComponents() {
 
 }
 
-
-
-/*
-    private void addButtonListener() {
-        Button buyButton = ticketPage.getBuyButton();
-        buyButton.setOnAction(event -> {
-            // Azione da eseguire quando il pulsante viene premuto
-            System.out.println("Hai cliccato il bottone Acquista");
-            // Cambia la scena per passare a PaymentSelectionView
-            goToPaymentSelectionView();
-        });
-    }
-
-     private void goToPaymentSelectionView(){
-         PaymentSelectionView paymentSelectionView = new PaymentSelectionView();
-         // Crea il controller per la vista di selezione del pagamento
-         mainStage.setScene(paymentSelectionView);
-        }
-    }
-
- */

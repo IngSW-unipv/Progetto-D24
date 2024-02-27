@@ -1,5 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
+import java.time.LocalDate;
+
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import javafx.application.Application;
@@ -14,12 +16,14 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -40,6 +44,8 @@ public class NewConcertView extends Scene{
 	private ComboBox<Genre> gensbox;
 	private final Label artistlabel = new Label("Artista: ");
 	private TextField artistfield;
+	private final Label datelabel = new Label("Data: ");
+	private DatePicker datepicker;
 	private final Label numbaselabel = new Label("n. biglietti base: ");
 	private TextField numbasefield;
 	private final Label numviplabel = new Label("n. biglietti vip: ");
@@ -164,6 +170,17 @@ public class NewConcertView extends Scene{
 		
 		
 		
+		GridPane.setConstraints(datelabel, 2, 8);
+		GridPane.setVgrow(datelabel, Priority.SOMETIMES);
+		GridPane.setHgrow(datelabel, Priority.SOMETIMES);
+		
+		datepicker = new DatePicker();
+		GridPane.setConstraints(datepicker, 2, 9);
+		GridPane.setVgrow(datepicker, Priority.SOMETIMES);
+		GridPane.setHgrow(datepicker, Priority.SOMETIMES);
+		
+		
+		
 		GridPane.setConstraints(numbaselabel, 0, 11);
 		numbaselabel.setVisible(false);
 		GridPane.setVgrow(numbaselabel, Priority.SOMETIMES);
@@ -248,6 +265,7 @@ public class NewConcertView extends Scene{
 		
 		GridPane.setConstraints(errlabel, 1, 16);
 		errlabel.setFont(Font.font("Arial", 20));
+		errlabel.setTextFill(Color.web("#FF0400"));;
 		errlabel.setVisible(false);;
 		GridPane.setHalignment(errlabel, HPos.CENTER);
 		GridPane.setVgrow(errlabel, Priority.SOMETIMES);
@@ -298,14 +316,15 @@ public class NewConcertView extends Scene{
 			
 		
 		grid.getChildren().addAll(titlelabel, namelabel, namefield,citylabel, cityfield, provincelabel, provincesbox, addresslabel, 
-								    addressfield,numtypeticketlabel, typesticketbox, genlabel, gensbox, artistlabel, artistfield, 
-									numbaselabel, numbasefield, numviplabel, numvipfield, numpremiumlabel, numpremiumfield,
+								    addressfield,numtypeticketlabel, typesticketbox, genlabel, gensbox, artistlabel, artistfield, datelabel,
+								    datepicker, numbaselabel, numbasefield, numviplabel, numvipfield, numpremiumlabel, numpremiumfield,
 									pricebaselabel, pricebasefield, priceviplabel, pricevipfield, pricepremiumlabel, pricepremiumfield, 
 									confirm, errlabel,abort);
 		
 		layout.setTop(ManagerUpperBar.getIstance());
 		layout.setCenter(grid);
 		layout.setBottom(LowerBar.getInstance());
+		
 		
 		
 	}
@@ -339,6 +358,10 @@ public class NewConcertView extends Scene{
 
 	public String getArtistfield() {
 		return artistfield.getText();
+	}
+	
+	public LocalDate getDatepicked() {
+		return datepicker.getValue();
 	}
 
 	public int getNumbasefield() throws NumberFormatException{

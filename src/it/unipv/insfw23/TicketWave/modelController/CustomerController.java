@@ -1,8 +1,10 @@
 package it.unipv.insfw23.TicketWave.modelController;
 
+import it.unipv.insfw23.TicketWave.modelController.ResearchCaseController.ResearchController;
 import it.unipv.insfw23.TicketWave.modelView.CustomerView;
 import it.unipv.insfw23.TicketWave.modelView.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.ManagerView;
+import it.unipv.insfw23.TicketWave.modelView.ResearchGUI.ResearchView;
 import it.unipv.insfw23.TicketWave.modelView.ResearchGUI.ResultResearchView;
 import it.unipv.insfw23.TicketWave.modelView.SignUpView;
 import javafx.event.ActionEvent;
@@ -17,10 +19,10 @@ public class CustomerController {
     private SignUpView signUpView;
     private ManagerView managerView;
 
-    public CustomerController(Stage mainstage,CustomerView customerView,LoginView loginView) {
+    public CustomerController(Stage mainstage, CustomerView customerView, LoginView loginView) {
         this.mainstage = mainstage;
-        this.customerView=customerView;
-        this.loginView=loginView;
+        this.customerView = customerView;
+        this.loginView = loginView;
         initComponents();
     }
 
@@ -40,19 +42,34 @@ public class CustomerController {
         };
 
         customerView.getLogoutButton().setOnMouseClicked(logoutButton);
-        EventHandler<ActionEvent> profileButton = new EventHandler<>() {
+        EventHandler<MouseEvent> profileButton = new EventHandler<>() {
 
             @Override
-            public void handle(ActionEvent event) {
-                System.out.println("profilo");
+            public void handle(MouseEvent event) {
+                System.out.println("vai al profilo");
                 customerView.reSetBars();
                 mainstage.setScene(customerView);
 
             }
         };
 
-        customerView.getProfileButton().setOnAction(profileButton);
-    }
+        customerView.getProfileButton().setOnMouseClicked(profileButton);
+
+        EventHandler<MouseEvent> searchButton = new EventHandler<>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+                System.out.println("vai alla ricerca");
+                ResearchView researchview = new ResearchView();
+                ResearchController rescontroller = new ResearchController(mainstage, researchview);
+                mainstage.setScene(researchview);
+            }
+        };
+        customerView.getSearchButton().setOnMouseClicked(searchButton);
+
 
     }
+}
+
+
 

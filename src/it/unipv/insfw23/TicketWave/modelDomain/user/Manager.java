@@ -56,6 +56,18 @@ public class Manager extends User {
         return creditCard;
     }
 
+    public LocalDate getSubscriptionDate() {
+        return subscriptionDate;
+    }
+
+    public ArrayList<Event> getEvent() {
+        return event;
+    }
+
+    public int getCounterCreatedEvents() {
+        return counterCreatedEvents;
+    }
+
     public void setEvent(ArrayList<Event> event) {
         this.event = event;
     }
