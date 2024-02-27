@@ -115,13 +115,14 @@ public class ManagerController {
 			public void handle(MouseEvent event) {
 //				creo un manager finto per creare un evento finto
 				int[] card = {2,6,5,1};
+				int[] seduteRImaste = {20, 20};
 				ArrayList<Event> arraylistevent = new ArrayList<>();
 				LocalDate data = LocalDate.of(1980, 12, 20);
-				Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","passwd",2,card,arraylistevent,5,1,data,4);
+				Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","passwd",2, "23245234324", arraylistevent,5,1,data,4);
 				int[] vettfalsoprice = {5};
 				ArrayList<String> arrfintoartista = new ArrayList<>();
 				arrfintoartista.add("califano");
-				Concert eventofinto = new Concert(12,"reunion","busto arstizio","via as",Province.LIVORNO,2,1,vettfalsoprice,Genre.INDIE,managerfinto,arrfintoartista,"califano");
+				Concert eventofinto = new Concert(12,"reunion","busto arstizio",data, "paolo", Province.LIVORNO,2,1, seduteRImaste, vettfalsoprice,Genre.INDIE,managerfinto,arrfintoartista);
 				System.out.println(managerview.getTableev().getSelectionModel().getSelectedItem());
 				//costruttore view
 				TicketPageView tic = new TicketPageView();
