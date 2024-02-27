@@ -5,11 +5,11 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 
 public interface IProfileDAO {
 
-    void insert(User user);
+    // void insert(User user);
 
     void update(User user);
 
-    User getManager(String mail, String password);
+    User get(String userClass, String mail, String password);
 
     void setSubscription(Manager manager);
 }

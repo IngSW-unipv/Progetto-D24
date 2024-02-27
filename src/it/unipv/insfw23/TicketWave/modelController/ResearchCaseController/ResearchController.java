@@ -38,23 +38,6 @@ public class ResearchController {
         };
         rnv.getSearchButton().setOnMouseClicked(researchPressHandlerResearchView);
 
-    /*    // Result Research ma non convince, la logica non va qui secondo me. va in un DAO controller
-        EventHandler<ActionEvent> ResultResearchHandler = new EventHandler<ActionEvent>() {
-            ObservableList<String> azzeratore = FXCollections.observableArrayList(" ");
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                ResultResearchView rrv = new ResultResearchView();
-                for (String s : rrv.getResult()){
-                    if (rrv.getResult() != null){ // posso ometterlo se lo fa in automatico
-                        rrv.setResult(azzeratore); // se leggo che sulla List view c'è qualcosa, la ripulisco e metto 0
-                    } else {
-                        // logica che mette i risultati nella ListView della ResultResearchView
-                    }
-                }
-
-            }
-        }; */
-
     }
 
 }
