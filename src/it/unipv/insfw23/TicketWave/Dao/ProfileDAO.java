@@ -1,4 +1,5 @@
 package it.unipv.insfw23.TicketWave.Dao;
+import it.unipv.insfw23.TicketWave.Dao.Research.IResearchDAO;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
@@ -11,7 +12,13 @@ import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
-public class ProfileDAO implements IProfileDAO{
+
+/*****
+ *
+ * COMPLETATA
+ *
+ */
+public class ProfileDAO implements IProfileDAO {
     private String schema;
     private Connection conn;
     public ProfileDAO(){
