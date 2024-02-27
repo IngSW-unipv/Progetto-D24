@@ -1,10 +1,14 @@
 package it.unipv.insfw23.TicketWave.Dao;
 
+import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 
 import java.sql.*;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 
@@ -20,6 +24,7 @@ public class ProfileDAO implements IProfileDAO{
         this.schema = "";
     }
 
+    // inserimenti
     @Override
     public Manager insertManager(Manager manager) {
         conn = ConnectionDB.startConnection(conn, schema);
@@ -99,7 +104,7 @@ public class ProfileDAO implements IProfileDAO{
     }
 
     @Override
-    public User get(String userClass, String mail, String password) {
+    public User getManager(String mail, String password) {
 
         conn = ConnectionDB.startConnection(conn, schema);
         PreparedStatement statement1;
@@ -116,7 +121,9 @@ public class ProfileDAO implements IProfileDAO{
             resultSet1 = statement1.executeQuery(query);
 
             if (resultSet1.next()) {
-                manager = new Manager(resultSet1.getString(1), resultSet1.getString(2));
+                manager = new Manager(resultSet1.getString("name"), resultSet1.getString("surname"), resultSet1.getString(3), resultSet1.getString(4),
+                                resultSet1.getString(5), resultSet1.getInt(6), resultSet1.getString(7), resultSet1.getString(8), resultSet1.getInt(9),
+                                resultSet1.getInt(10), resultSet1.getDate(11), resultSet1.getInt(12));
             }
 
         } catch (Exception e) {
@@ -124,6 +131,35 @@ public class ProfileDAO implements IProfileDAO{
         }
         ConnectionDB.closeConnection(conn);
         return manager;
+    }
+
+    public User getCustomer(String mail, String password){
+        conn = ConnectionDB.startConnection(conn, schema);
+        PreparedStatement statement1;
+        ResultSet resultSet1;
+
+        Customer customer = null;
+
+        try{
+            String query = "SELECT * FROM MANAGER WHERE (MAIL = ?) AND (PASSWORD = ?)";
+            statement1 = conn.prepareStatement(query);
+
+            statement1.setString(1, mail);
+            statement1.setString(2, password);
+
+            resultSet1 = statement1.executeQuery(query);
+
+            if (resultSet1.next()) {
+                customer = new Customer(resultSet1.getString("name"), resultSet1.getString("surname"), resultSet1.getString("dateofbirth"), resultSet1.getString(1),
+                        resultSet1.getString(2), resultSet1.getInt("provinceOfResidence"), Genre.valueOf(resultSet1.getString("Genre"))); // sto null qui non convince
+            }
+
+
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+        ConnectionDB.closeConnection(conn);
+        return customer;
     }
 
     @Override
