@@ -32,6 +32,9 @@ public class ResultResearchView extends Scene {
     private TableView<Event> table;
     private ResultResearchController rrc;
     private HBox box2;
+    private HBox box1;
+    private BorderPane layout;
+
 
     // costruttore
     public ResultResearchView() {
@@ -39,7 +42,7 @@ public class ResultResearchView extends Scene {
         scenaResultResearch();
     }
     public void scenaResultResearch(){
-        ResearchNodesView rnv = ResearchNodesView.getIstance();
+        rnv = ResearchNodesView.getIstance();
 
         // Tableview per elencare i risultati della ricerca
         table = new TableView<>(); // STA ROBA E' QUELLA VERA
@@ -65,7 +68,7 @@ public class ResultResearchView extends Scene {
         tcProvince.setSortable(false);
 
         table.getColumns().addAll(tcEvent, tcCity, tcLocation, tcProvince);
-        table.setPlaceholder( new Label("Nessun evento trovato, sii più specifico"));
+//        table.setPlaceholder( new Label("Nessun evento trovato, sii più specifico"));
 
         // ESEMPIO AL VOLO DA METTERE NELL'OBSERVABLE LIST
         LocalDate data = LocalDate.now();
@@ -81,7 +84,7 @@ public class ResultResearchView extends Scene {
 
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         table.setItems(evs);
-        table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE); // posso selezionare solo una riga per volta
+//        table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE); // posso selezionare solo una riga per volta
 
                /* table.setOnMouseClicked(event -> { // sta roba va ma non la posso usare
                         Event selectedPerson = table.getSelectionModel().getSelectedItem();
@@ -91,7 +94,7 @@ public class ResultResearchView extends Scene {
                 }); */
 
         // Creo un'HBOX che contiene barra + bottone di ricerca HBox = disposizione orizzontale
-        HBox box1 = new HBox();
+        box1 = new HBox();
         box1.setSpacing(10);
         box1.getChildren().add(rnv.getBar());
         box1.getChildren().add(rnv.getSearchBar());
@@ -104,7 +107,7 @@ public class ResultResearchView extends Scene {
         // if ( User collegato = Manager) {
         // Creo il VBox che contiene gli HBox, l'Upper Bar e la Lower Bar
         VBox vb1 = new VBox();
-        vb1.getChildren().addAll(ManagerUpperBar.getIstance(), box1, box2, LowerBar.getInstance());
+        vb1.getChildren().addAll(/*ManagerUpperBar.getIstance(),*/ box1, box2/*, LowerBar.getInstance()*/);
 
         // Estetica
         box1.setStyle("-fx-background-color: #def1fa");
@@ -112,15 +115,15 @@ public class ResultResearchView extends Scene {
         vb1.setStyle("-fx-background-color: #def1fa");
 
         // Allineo gli HBox nel VBox
-        VBox.setMargin(ManagerUpperBar.getIstance(), new Insets(10.0d));
+//        VBox.setMargin(ManagerUpperBar.getIstance(), new Insets(10.0d));
         VBox.setMargin(box1, new Insets(10.0d));
         VBox.setMargin(box2, new Insets(10.0d));
-        VBox.setMargin(LowerBar.getInstance(), new Insets(10.0d));
+//        VBox.setMargin(LowerBar.getInstance(), new Insets(10.0d));
 
         box1.setAlignment(Pos.CENTER); // mi serve per avere vb1 centrato nel BorderPane seguente
         box2.setAlignment(Pos.CENTER);
 
-        BorderPane layout = new BorderPane();
+        layout = new BorderPane();
 
         layout.setCenter(vb1);
         layout.setBottom(LowerBar.getInstance());

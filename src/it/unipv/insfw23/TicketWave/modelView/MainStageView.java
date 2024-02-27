@@ -19,7 +19,7 @@ public class MainStageView extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        ResultResearchView rrv = new ResultResearchView();
+//        ResultResearchView rrv = new ResultResearchView();
 
         MainController mainController= new MainController(primaryStage); // MainController che crea gli altri controller
 

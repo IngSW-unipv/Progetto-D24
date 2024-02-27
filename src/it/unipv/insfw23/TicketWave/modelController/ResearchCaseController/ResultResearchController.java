@@ -29,6 +29,7 @@ public class ResultResearchController {
         EventHandler<MouseEvent> openeventHandler = new EventHandler<>() {
             @Override
             public void handle(MouseEvent event) { // logica di quando schiaccio una riga sulla table
+            	System.out.println("a");
                 System.out.println(rrv.getTable().getSelectionModel().getSelectedItem());
                 TicketPageView tpv = new TicketPageView();
                 mainStage.setScene(tpv);
