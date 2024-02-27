@@ -13,6 +13,9 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
@@ -26,6 +29,7 @@ public class TicketPageView extends Scene {
     private static final Label eventDescriptionLabel = new Label("Descrizione Evento:");
     private static final Label ticketsLabel = new Label("Biglietti disponibili per tipo:");
     private static  Button buyButton = new Button();
+    private static  ToggleGroup priceselection = new ToggleGroup();
 
     // campi riempiti dal controller
     private static Label eventNameTextField = new Label();
@@ -37,6 +41,12 @@ public class TicketPageView extends Scene {
     private static Label ticketPremiumTextField = new Label();
     private static Label ticketVipTextField = new Label();
     private static List<Label> labels = new ArrayList<>();
+    private static Label basePriceTextField = new Label();
+    private static Label premiumPriceTextField = new Label();
+    private static Label vipPriceTextField = new Label();
+    private static final RadioButton basePricebutton = new RadioButton();
+    private static final RadioButton premiumPricebutton = new RadioButton();
+    private static final RadioButton vipPricebutton = new RadioButton();
     private Scene scene;
     private BorderPane layout;
     private BorderPane root;
@@ -51,29 +61,46 @@ public class TicketPageView extends Scene {
     
     //evento che setta le label dipendenti dall'evento prima di inizializzare la view
     //senno inizializza la view con i campi vuoti e aggiorna il valore di una label senza reinizializzare
-    public void setComponents(boolean ismanager, String typeofevent, String name, String città, String location, Province prov, LocalDate data,ArrayList<String> artist,
-    							int[] seatsRemainedNumberForType) {
+    public void setComponents(boolean isviewermanager, String typeofevent, String name, String città, String location, Province prov, LocalDate data,ArrayList<String> artist,
+    							int[] seatsRemainedNumberForType, int[] price) {
         //settaggio dei campi dei valori per un singolo evento
         System.out.println(artist);
         System.out.println(artist.toString());
-        typeofviewermanager = ismanager;
+        typeofviewermanager = isviewermanager;
         eventNameTextField = new Label(name);
-        eventDescriptionTextField = new Label("Il giorno "+data+" si terra un "+typeofevent+" a "+città+", "+location+" in provincia di "+prov+" tenuto da "
+        eventDescriptionTextField = new Label("Il giorno "+data+" si terra un "+typeofevent+" in "+location+" a "+città+" ,in provincia di "+prov+" tenuto da "
         										+artist.toString().substring(1, artist.toString().length()-1));
+        
         switch(seatsRemainedNumberForType.length) {
         case 1:
+        	ticketVipTextField = new Label("Non disponibili");
+        	vipPricebutton.setVisible(false);
+        	ticketPremiumTextField = new Label("Non disponibili");
+        	premiumPricebutton.setVisible(false);
         	ticketBaseTextField = new Label(String.valueOf(seatsRemainedNumberForType[0]));
+        	basePriceTextField = new Label("€"+price[0]);
         	break;
         case 2:
         	ticketVipTextField = new Label("Non disponibili");
+        	vipPricebutton.setVisible(false);
         	ticketBaseTextField = new Label(String.valueOf(seatsRemainedNumberForType[0]));
+        	basePriceTextField = new Label("€"+price[0]);
         	ticketPremiumTextField = new Label(String.valueOf(seatsRemainedNumberForType[1]));
+        	premiumPriceTextField = new Label("€"+price[1]);
+        	vipPricebutton.setVisible(false);
         	break;
         case 3:
         	ticketBaseTextField = new Label(String.valueOf(seatsRemainedNumberForType[0]));
+        	basePriceTextField = new Label("€"+price[0]);
         	ticketPremiumTextField = new Label(String.valueOf(seatsRemainedNumberForType[1]));
+        	premiumPriceTextField = new Label("€"+price[1]);
         	ticketVipTextField = new Label(String.valueOf(seatsRemainedNumberForType[2]));
+        	vipPriceTextField = new Label("€"+price[2]);
                 }
+        
+        if(isviewermanager) {
+        	buyButton.setVisible(false);
+        }
         //fine settaggio
         initComponents();
     }
@@ -131,6 +158,20 @@ public class TicketPageView extends Scene {
         bottomGrid.add(ticketBaseTextField, 1, 1);
         bottomGrid.add(ticketPremiumTextField, 1, 2);
         bottomGrid.add(ticketVipTextField, 1, 3);
+        //aggiunta dei prezzi
+        bottomGrid.add(basePriceTextField, 2, 1);
+        bottomGrid.add(premiumPriceTextField, 2, 2);
+        bottomGrid.add(vipPriceTextField, 2, 3);
+        //aggiunta dei bottoni di selezione
+        bottomGrid.add(basePricebutton, 3, 1);
+        bottomGrid.add(premiumPricebutton, 3, 2);
+        bottomGrid.add(vipPricebutton, 3, 3);
+        
+       
+        basePricebutton.setToggleGroup(priceselection);
+        premiumPricebutton.setToggleGroup(priceselection);
+        vipPricebutton.setToggleGroup(priceselection);
+        
 
 
         internalgrid.setBottom(bottomGrid);
@@ -164,6 +205,15 @@ public class TicketPageView extends Scene {
 
 
     }
+    
+    public int getWhichPriceSelected() {
+    	if(vipPricebutton.isSelected()) {
+    		return 2;
+    	}else if(premiumPricebutton.isSelected()) {
+    		return 1;
+    	}else
+    		return 0;
+    }
 
     public static Button getBuyButton() {
         return buyButton;
@@ -189,7 +239,9 @@ public class TicketPageView extends Scene {
         setRoot(layout);
     }
     
-
+    public Toggle getIfPriceSelected() {
+    	return priceselection.getSelectedToggle();
+    }
 
 
 }

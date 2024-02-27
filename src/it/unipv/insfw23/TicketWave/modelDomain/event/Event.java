@@ -79,6 +79,10 @@ public abstract class Event implements EventType {
     public int getPrice(TicketType type) {
         return price[type.ordinal()]; //ordinal torna la posizione di type nella enum
     }
+    
+    public int[] getPrices() {
+    	return price;
+    }
 
     public Genre getGenre() {
         return genre;

@@ -32,7 +32,7 @@ public void initComponents() {
 	//assegnazione dei campi dell'evento ai campi della ticketpageview
 	
 	ticketPage.setComponents(isviewermanager,event.getClassName(),event.getName(),event.getCity(),event.getLocation(),event.getProvince(),event.getDate(),
-			event.getArtists(),event.getSeatsRemainedNumberForType());
+			event.getArtists(),event.getSeatsRemainedNumberForType(),event.getPrices());
 	//fine assegnazione
 	//
 	//cambio scena
@@ -43,10 +43,15 @@ public void initComponents() {
         public void handle(MouseEvent actionEvent) {
 
             // Azione da eseguire quando il pulsante viene premuto
+        	if(ticketPage.getIfPriceSelected() != null) {
             System.out.println("Hai cliccato il bottone Acquista");
             PaymentSelectionView paymentSelectionView = new PaymentSelectionView();
+            paymentSelectionView.setComponents(event.getPrices()[ticketPage.getWhichPriceSelected()]);
             PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainStage,paymentSelectionView,ticketPage);
             mainStage.setScene(paymentSelectionView);
+        	}
+        	else
+        		System.out.println("non hai scelto una tipologia di biglietto");//da stampare a video o con eccezione
         }
 
     };
