@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelDomain.event;
 
 import java.lang.String;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
@@ -10,6 +11,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 public abstract class Event implements EventType {
     private int idEvent;
     private String name, city, location;
+    private LocalDate date;
     private Province province;
     private int maxNumberOfSeats;
     private int typeOfSeats; // indice dell'array ticketSoldNumberForType, serve per dire quante tipologie di posti ho: base + premium = 2, base = 1, base + premium + vip = 3 tipi di posti, mi server per scorrere l'array
@@ -22,10 +24,11 @@ public abstract class Event implements EventType {
 
     // costruttore
 
-    public Event(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String> artists) {
+    public Event(int idEvent, String name, String city, LocalDate date, String location, Province province, int maxNumberOfSeats, int typeOfSeats,int [] seatsRemainedNumberForType, int[] price, Genre genre, Manager creator, ArrayList<String> artists) {
         this.idEvent = idEvent;
         this.name = name;
         this.city = city;
+        this.date = date;
         this.location = location;
         this.province = province;
         this.maxNumberOfSeats = maxNumberOfSeats;
@@ -34,6 +37,7 @@ public abstract class Event implements EventType {
         this.genre = genre;
         this.creator = creator;
         this.artists = artists;
+        this.seatsRemainedNumberForType = seatsRemainedNumberForType;
     }
 
 
