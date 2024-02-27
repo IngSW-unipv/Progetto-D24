@@ -17,14 +17,14 @@ public abstract class Event implements EventType {
     private int typeOfSeats; // indice dell'array ticketSoldNumberForType, serve per dire quante tipologie di posti ho: base + premium = 2, base = 1, base + premium + vip = 3 tipi di posti, mi server per scorrere l'array
     private int [] seatsRemainedNumberForType;
     private int [] ticketsSoldNumberForType; // vettore biglietti venduti per tipo
-    private int [] price; // vettore prezzi per i vari tipi di biglietto, es: Vip = 40€, Base = 15€...
+    private double [] price; // vettore prezzi per i vari tipi di biglietto, es: Vip = 40€, Base = 15€...
     private Genre genre;
     private Manager creator;
     private ArrayList<String> artists;
 
     // costruttore
 
-    public Event(int idEvent, String name, String city, LocalDate date, String location, Province province, int maxNumberOfSeats, int typeOfSeats,int [] seatsRemainedNumberForType, int[] price, Genre genre, Manager creator, ArrayList<String> artists) {
+    public Event(int idEvent, String name, String city, LocalDate date, String location, Province province, int maxNumberOfSeats, int typeOfSeats,int [] seatsRemainedNumberForType, double[] price, Genre genre, Manager creator, ArrayList<String> artists) {
         this.idEvent = idEvent;
         this.name = name;
         this.city = city;
@@ -76,7 +76,7 @@ public abstract class Event implements EventType {
         return ticketsSoldNumberForType;
     }
 
-    public int getPrice(TicketType type) {
+    public double getPrice(TicketType type) {
         return price[type.ordinal()]; //ordinal torna la posizione di type nella enum
     }
 
@@ -128,7 +128,7 @@ public abstract class Event implements EventType {
         this.ticketsSoldNumberForType = ticketsSoldNumberForType;
     }
 
-    public void setPrice(int[] price) {
+    public void setPrice(double[] price) {
         this.price = price;
     }
 

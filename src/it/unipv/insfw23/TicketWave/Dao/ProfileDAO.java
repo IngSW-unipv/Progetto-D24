@@ -1,8 +1,5 @@
 package it.unipv.insfw23.TicketWave.Dao;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Concert;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
@@ -122,41 +119,43 @@ public class ProfileDAO implements IProfileDAO{
                     statement2 = conn.prepareStatement(query2);
                     statement2.setString(1, mail);
                     resultSet2 = statement2.executeQuery(query2);
+                    LocalDate ld = resultSet2.getDate(4).toLocalDate(); // converto data in LocalData
+
                     while(resultSet2.next()){
                         double[] price = {resultSet2.getDouble(12), resultSet2.getDouble(13), resultSet2.getDouble(14)};
                         int[] seatsremaining = {resultSet2.getInt(9), resultSet2.getInt(10), resultSet2.getInt(11)};
-                        switch (resultSet2.getInt(15)){
+                        switch (resultSet2.getInt("TYPE")){
                             case 0:
                                 Concert currentConcert = new Concert(resultSet2.getInt(1), resultSet2.getString(2),
-                                        resultSet2.getString(3), resultSet2.getDate(4),
+                                        resultSet2.getString(3), ld,
                                         resultSet2.getString(5), Province.valueOf(resultSet2.getString(6)),
                                         resultSet2.getInt(7), resultSet2.getInt(8), seatsremaining, price,
-                                        Genre.valueOf(resultSet2.getString(9)), manager, splitStringToArrayList(resultSet2.getString(10));
+                                        Genre.valueOf(resultSet2.getString(9)), manager, splitStringToArrayList(resultSet2.getString(10)));
                                 createdEvents.add(currentConcert);
                                 break;
                             case 1:
-                                Concert currentFestival = new Concert(resultSet2.getInt(1), resultSet2.getString(2),
-                                        resultSet2.getString(3), resultSet2.getDate(4),
+                                Concert currentFestival = new Festival(resultSet2.getInt(1), resultSet2.getString(2),
+                                        resultSet2.getString(3), ld,
                                         resultSet2.getString(5), resultSet2.getString(6),
                                         resultSet2.getInt(7), resultSet2.getInt(8),
-                                        resultSet2.getString(9), manager, splitStringToArrayList(resultSet2.getString(10));
+                                        resultSet2.getString(9), manager, splitStringToArrayList(resultSet2.getString(10)));
                                 createdEvents.add(currentFestival);
                                 break;
                             case 2:
                                 Concert currentTheatre = new Concert(resultSet2.getInt(1), resultSet2.getString(2),
-                                        resultSet2.getString(3), resultSet2.getDate(4),
+                                        resultSet2.getString(3), ld,
                                         resultSet2.getString(5), resultSet2.getString(6),
                                         resultSet2.getInt(7), resultSet2.getInt(8),
                                         resultSet2.getString(9), manager, splitStringToArrayList(resultSet2.getString(10), resultSet2.getString(19),
-                                        resultSet2.getString(20);
+                                        resultSet2.getString(20)));
                                 createdEvents.add(currentTheatre);
                                 break;
                             case 3:
                                 Concert currentOther = new Concert(resultSet2.getInt(1), resultSet2.getString(2),
-                                        resultSet2.getString(3), resultSet2.getDate(4),
+                                        resultSet2.getString(3), ld,
                                         resultSet2.getString(5), resultSet2.getString(6),
                                         resultSet2.getInt(7), resultSet2.getInt(8),
-                                        resultSet2.getString(9), manager, splitStringToArrayList(resultSet2.getString(10), resultSet2.getString(21);
+                                        resultSet2.getString(9), manager, splitStringToArrayList(resultSet2.getString(10), resultSet2.getString(21)));
                                 createdEvents.add(currentOther);
                                 break;
                         }
@@ -193,7 +192,7 @@ public class ProfileDAO implements IProfileDAO{
 
             if (resultSet1.next()) {
                 customer = new Customer(resultSet1.getString("NAME"), resultSet1.getString("SURNAME"), resultSet1.getString("BIRTHDATE"), resultSet1.getString(1),
-                        resultSet1.getString(2), resultSet1.getInt("PROVINCE"), splitStringToArrayListGenre(resultSet1.getString("GENRE")));
+                        resultSet1.getString(2), resultSet1.getInt("PROVINCE"), splitStringToArrayGenre(resultSet1.getString("GENRE")));
             }
         }catch(Exception e) {
             e.printStackTrace();
@@ -202,14 +201,17 @@ public class ProfileDAO implements IProfileDAO{
         return customer;
     }
 
-    private ArrayList<Genre> splitStringToArrayListGenre(String s){
+    private Genre[] splitStringToArrayGenre(String s){
         String[] arrayString = s.split(",");
-        ArrayList<Genre> resArrayList = new ArrayList<>();
+        Genre [] gr = new Genre[4];
         Genre g;
+        int i = 0;
+
         for (String st : arrayString){
             g = Genre.valueOf(st);
-            resArrayList.add(g);
+            gr[i]= g;
+            i++;
         }
-        return resArrayList;
+        return gr;
     }
 }
