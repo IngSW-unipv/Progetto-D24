@@ -16,16 +16,28 @@ public class BuyTicketController {
     private TicketPageView ticketPage;
 
     private Event event;
+    private boolean isviewermanager;
 
 
-    public BuyTicketController(Stage mainStage,TicketPageView ticketPage, Event event) {
+    public BuyTicketController(Stage mainStage,TicketPageView ticketPage, Event event, boolean isviewermanager) {
         this.mainStage = mainStage;
         this.ticketPage = ticketPage;
         this.event=event;
+        this.isviewermanager = isviewermanager;
         initComponents();
 
     }
 public void initComponents() {
+//	ticketPage = new TicketPageView();
+	//assegnazione dei campi dell'evento ai campi della ticketpageview
+	
+	ticketPage.setComponents(isviewermanager,event.getClassName(),event.getName(),event.getCity(),event.getLocation(),event.getProvince(),event.getDate(),
+			event.getArtists());
+	//fine assegnazione
+	//
+	//cambio scena
+	mainStage.setScene(ticketPage);
+	
     EventHandler<MouseEvent> goToPSelectionViewHandler = new EventHandler<>() {
         @Override
         public void handle(MouseEvent actionEvent) {

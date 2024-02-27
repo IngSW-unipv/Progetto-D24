@@ -15,8 +15,11 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 
 public class TicketPageView extends Scene {
     private static final Label eventNameLabel = new Label("Nome Evento:");
@@ -25,21 +28,40 @@ public class TicketPageView extends Scene {
     private static  Button buyButton = new Button();
 
     // campi riempiti dal controller
-    private static final Label eventNameTextField = new Label();
-    private static final Label eventDescriptionTextField = new Label();
+    private static Label eventNameTextField = new Label();
+    private static Label eventDescriptionTextField = new Label();
     private static final Label ticketBaseLabel = new Label("Base Tickets:");
     private static final Label ticketPremiumLabel = new Label("Premium Tickets:");
     private static final Label ticketVipLabel = new Label("Vip Tickets:");
+    private static Label ticketBaseTextField = new Label();
+    private static Label ticketPremiumTextField = new Label();
+    private static Label ticketVipTextField = new Label();
     private static List<Label> labels = new ArrayList<>();
     private Scene scene;
     private BorderPane layout;
     private BorderPane root;
+    private boolean typeofviewermanager = false;
 
 
     public TicketPageView(){
         super(new BorderPane(), 1080, 600);
-        initComponents();
+        //initComponents();
 
+    }
+    
+    //evento che setta le label dipendenti dall'evento prima di inizializzare la view
+    //senno inizializza la view con i campi vuoti e aggiorna il valore di una label senza reinizializzare
+    public void setComponents(boolean ismanager, String typeofevent, String name, String città, String location, Province prov, LocalDate data,ArrayList<String> artist) {
+        //settaggio dei campi dei valori per un singolo evento
+        System.out.println(artist);
+        System.out.println(artist.toString());
+        typeofviewermanager = ismanager;
+        eventNameTextField = new Label(name);
+        eventDescriptionTextField = new Label("Il giorno "+data+" si terra un "+typeofevent+" a "+città+", "+location+" in provincia di "+prov+" tenuto da "
+        										+artist.toString().substring(0, 0));
+        
+        //fine settaggio
+        initComponents();
     }
 
     private void initComponents() {    // la classe contiene unicamente label poichè è solo una pagina di visualizzazione, il cliente non può scriverci sopra
@@ -108,9 +130,15 @@ public class TicketPageView extends Scene {
          scene = new Scene(root, 1080, 600);
 
         BorderPane layout= new BorderPane();
+        //upperbar a seconda che sia managero user
+        if(typeofviewermanager) 
+        	layout.setTop(ManagerUpperBar.getIstance());
+        else
+        	layout.setTop(CustomerUpperBar.getIstance());
+        
         layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
-        layout.setTop(CustomerUpperBar.getIstance());
+        
         setRoot(layout);
 
         this.layout=layout;
@@ -142,6 +170,7 @@ public class TicketPageView extends Scene {
         layout.setBottom(LowerBar.getInstance());
         setRoot(layout);
     }
+    
 
 
 

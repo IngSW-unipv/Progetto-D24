@@ -59,6 +59,10 @@ public abstract class Event implements EventType {
     public String getLocation() {
         return location;
     } // mi serve nel ResultResearchView per la TableView
+    
+    public LocalDate getDate() {
+    	return date;
+    }
 
     public Province getProvince() {
         return province;
