@@ -9,7 +9,7 @@ public interface IProfileDAO {
 
     void update(User user);
 
-    User get(String userClass, String mail, String password);
+    User getManager(String mail, String password);
 
     void setSubscription(Manager manager);
 }
