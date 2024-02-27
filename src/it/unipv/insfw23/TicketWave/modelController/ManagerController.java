@@ -130,7 +130,7 @@ public class ManagerController {
 				//costruttore view
 				TicketPageView tic = new TicketPageView();
 				//costruttore controller
-				BuyTicketController buyticketcontroller = new BuyTicketController(window, tic, eventofinto, true);
+				BuyTicketController buyticketcontroller = new BuyTicketController(window, tic, managerview.getTableev().getSelectionModel().getSelectedItem(), true);
 				//metodo che setta upperbar manager
 				//opacita
 				//
