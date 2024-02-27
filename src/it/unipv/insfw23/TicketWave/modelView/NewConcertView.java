@@ -1,5 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
+import java.time.LocalDate;
+
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import javafx.application.Application;
@@ -324,6 +326,7 @@ public class NewConcertView extends Scene{
 		layout.setBottom(LowerBar.getInstance());
 		
 		
+		
 	}
 	
 	
@@ -355,6 +358,10 @@ public class NewConcertView extends Scene{
 
 	public String getArtistfield() {
 		return artistfield.getText();
+	}
+	
+	public LocalDate getDatepicked() {
+		return datepicker.getValue();
 	}
 
 	public int getNumbasefield() throws NumberFormatException{
