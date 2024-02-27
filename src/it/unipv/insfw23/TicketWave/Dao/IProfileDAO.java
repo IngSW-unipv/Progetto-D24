@@ -11,9 +11,11 @@ import java.util.ArrayList;
 
 public interface IProfileDAO {
 
-    public void insert(User user);
+    Manager insertManager(Manager manager);
+    Customer insertCustomer(Customer customer);
 
     void update(User user);
     User getManager(String mail, String password);
+    User getCustomer(String mail, String password);
     void setSubscription(Manager manager);
 }
