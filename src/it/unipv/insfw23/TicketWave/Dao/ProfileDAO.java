@@ -132,7 +132,6 @@ public class ProfileDAO implements IProfileDAO{
         return manager;
     }
 
-
     @Override
     public void setSubscription(Manager manager) {
 
