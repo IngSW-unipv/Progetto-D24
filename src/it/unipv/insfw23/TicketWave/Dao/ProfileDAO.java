@@ -127,35 +127,36 @@ public class ProfileDAO implements IProfileDAO{
                         switch (resultSet2.getInt("TYPE")){
                             case 0:
                                 Concert currentConcert = new Concert(resultSet2.getInt(1), resultSet2.getString(2),
-                                        resultSet2.getString(3), ld,
-                                        resultSet2.getString(5), Province.valueOf(resultSet2.getString(6)),
-                                        resultSet2.getInt(7), resultSet2.getInt(8), seatsremaining, price,
-                                        Genre.valueOf(resultSet2.getString(9)), manager, splitStringToArrayList(resultSet2.getString(10)));
+                                                                        resultSet2.getString(3), ld,
+                                                                        resultSet2.getString(5), Province.valueOf(resultSet2.getString(6)),
+                                                                        resultSet2.getInt(7), resultSet2.getInt(8), seatsremaining, price,
+                                                                        Genre.valueOf(resultSet2.getString(16)), manager, splitStringToArrayList(resultSet2.getString(18)));
                                 createdEvents.add(currentConcert);
                                 break;
                             case 1:
-                                Concert currentFestival = new Festival(resultSet2.getInt(1), resultSet2.getString(2),
-                                        resultSet2.getString(3), ld,
-                                        resultSet2.getString(5), resultSet2.getString(6),
-                                        resultSet2.getInt(7), resultSet2.getInt(8),
-                                        resultSet2.getString(9), manager, splitStringToArrayList(resultSet2.getString(10)));
+                                Festival currentFestival = new Festival(resultSet2.getInt(1), resultSet2.getString(2),
+                                                                        resultSet2.getString(3), ld,
+                                                                        resultSet2.getString(5), Province.valueOf(resultSet2.getString(6)),
+                                                                        resultSet2.getInt(7), resultSet2.getInt(8),
+                                                                        seatsremaining, price, Genre.valueOf(resultSet2.getString(16)),  manager, splitStringToArrayList(resultSet2.getString(18)));
                                 createdEvents.add(currentFestival);
                                 break;
                             case 2:
-                                Concert currentTheatre = new Concert(resultSet2.getInt(1), resultSet2.getString(2),
-                                        resultSet2.getString(3), ld,
-                                        resultSet2.getString(5), resultSet2.getString(6),
-                                        resultSet2.getInt(7), resultSet2.getInt(8),
-                                        resultSet2.getString(9), manager, splitStringToArrayList(resultSet2.getString(10), resultSet2.getString(19),
-                                        resultSet2.getString(20)));
+                                Theater currentTheatre = new Theater(resultSet2.getInt(1), resultSet2.getString(2),
+                                                                        resultSet2.getString(3), ld,
+                                                                        resultSet2.getString(5), Province.valueOf(resultSet2.getString(6)),
+                                                                        resultSet2.getInt(7), resultSet2.getInt(8),
+                                                                        seatsremaining, price, Genre.valueOf(resultSet2.getString(16)),  manager, splitStringToArrayList(resultSet2.getString(18)),
+                                                            null, resultSet2.getString(19));
                                 createdEvents.add(currentTheatre);
                                 break;
                             case 3:
-                                Concert currentOther = new Concert(resultSet2.getInt(1), resultSet2.getString(2),
-                                        resultSet2.getString(3), ld,
-                                        resultSet2.getString(5), resultSet2.getString(6),
-                                        resultSet2.getInt(7), resultSet2.getInt(8),
-                                        resultSet2.getString(9), manager, splitStringToArrayList(resultSet2.getString(10), resultSet2.getString(21)));
+                                Other currentOther = new Other(resultSet2.getInt(1), resultSet2.getString(2),
+                                                                    resultSet2.getString(3), ld,
+                                                                    resultSet2.getString(5), Province.valueOf(resultSet2.getString(6)),
+                                                                    resultSet2.getInt(7), resultSet2.getInt(8),
+                                                                    seatsremaining, price, Genre.valueOf(resultSet2.getString(16)),  manager, splitStringToArrayList(resultSet2.getString(18)),
+                                                                    resultSet2.getString(20));
                                 createdEvents.add(currentOther);
                                 break;
                         }
