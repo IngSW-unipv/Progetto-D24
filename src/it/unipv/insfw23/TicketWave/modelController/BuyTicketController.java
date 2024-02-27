@@ -32,7 +32,7 @@ public void initComponents() {
 	//assegnazione dei campi dell'evento ai campi della ticketpageview
 	
 	ticketPage.setComponents(isviewermanager,event.getClassName(),event.getName(),event.getCity(),event.getLocation(),event.getProvince(),event.getDate(),
-			event.getArtists());
+			event.getArtists(),event.getSeatsRemainedNumberForType());
 	//fine assegnazione
 	//
 	//cambio scena

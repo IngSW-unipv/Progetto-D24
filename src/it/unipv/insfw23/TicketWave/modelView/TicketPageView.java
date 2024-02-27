@@ -51,15 +51,29 @@ public class TicketPageView extends Scene {
     
     //evento che setta le label dipendenti dall'evento prima di inizializzare la view
     //senno inizializza la view con i campi vuoti e aggiorna il valore di una label senza reinizializzare
-    public void setComponents(boolean ismanager, String typeofevent, String name, String città, String location, Province prov, LocalDate data,ArrayList<String> artist) {
+    public void setComponents(boolean ismanager, String typeofevent, String name, String città, String location, Province prov, LocalDate data,ArrayList<String> artist,
+    							int[] seatsRemainedNumberForType) {
         //settaggio dei campi dei valori per un singolo evento
         System.out.println(artist);
         System.out.println(artist.toString());
         typeofviewermanager = ismanager;
         eventNameTextField = new Label(name);
         eventDescriptionTextField = new Label("Il giorno "+data+" si terra un "+typeofevent+" a "+città+", "+location+" in provincia di "+prov+" tenuto da "
-        										+artist.toString().substring(0, 0));
-        
+        										+artist.toString().substring(1, artist.toString().length()-1));
+        switch(seatsRemainedNumberForType.length) {
+        case 1:
+        	ticketBaseTextField = new Label(String.valueOf(seatsRemainedNumberForType[0]));
+        	break;
+        case 2:
+        	ticketVipTextField = new Label("Non disponibili");
+        	ticketBaseTextField = new Label(String.valueOf(seatsRemainedNumberForType[0]));
+        	ticketPremiumTextField = new Label(String.valueOf(seatsRemainedNumberForType[1]));
+        	break;
+        case 3:
+        	ticketBaseTextField = new Label(String.valueOf(seatsRemainedNumberForType[0]));
+        	ticketPremiumTextField = new Label(String.valueOf(seatsRemainedNumberForType[1]));
+        	ticketVipTextField = new Label(String.valueOf(seatsRemainedNumberForType[2]));
+                }
         //fine settaggio
         initComponents();
     }
@@ -113,6 +127,10 @@ public class TicketPageView extends Scene {
         bottomGrid.add(ticketBaseLabel, 0, 1);
         bottomGrid.add(ticketPremiumLabel, 0, 2);
         bottomGrid.add(ticketVipLabel, 0, 3);
+        //aggiunta dei campi riempiti dal controller
+        bottomGrid.add(ticketBaseTextField, 1, 1);
+        bottomGrid.add(ticketPremiumTextField, 1, 2);
+        bottomGrid.add(ticketVipTextField, 1, 3);
 
 
         internalgrid.setBottom(bottomGrid);
