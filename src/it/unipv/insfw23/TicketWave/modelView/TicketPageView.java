@@ -70,6 +70,7 @@ public class TicketPageView extends Scene {
         buyButton.setPrefHeight(buyButton.getHeight());
         buyButton.setPadding(new Insets(0));
         buyButton.setStyle("-fx-background-color: rgb(255,255,255)");
+        buyButton.setOpacity(1);
 
         GridPane centerGrid = new GridPane();
         centerGrid.setPadding(new Insets(10));
@@ -126,13 +127,23 @@ public class TicketPageView extends Scene {
         return scene;
     }
 
-    public void reSetBars(){
+    public void reSetBarsCustomer(){
         BorderPane temp = new BorderPane();
         setRoot(temp);
         layout.setTop(CustomerUpperBar.getIstance());
         layout.setBottom(LowerBar.getInstance());
         setRoot(layout);
     }
+
+    public void reSetBarsManager(){
+        BorderPane temp = new BorderPane();
+        setRoot(temp);
+        layout.setTop(ManagerUpperBar.getIstance());
+        layout.setBottom(LowerBar.getInstance());
+        setRoot(layout);
+    }
+
+
 
 }
 

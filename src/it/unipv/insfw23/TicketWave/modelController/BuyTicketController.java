@@ -45,24 +45,3 @@ public void initComponents() {
 
 }
 
-
-
-/*
-    private void addButtonListener() {
-        Button buyButton = ticketPage.getBuyButton();
-        buyButton.setOnAction(event -> {
-            // Azione da eseguire quando il pulsante viene premuto
-            System.out.println("Hai cliccato il bottone Acquista");
-            // Cambia la scena per passare a PaymentSelectionView
-            goToPaymentSelectionView();
-        });
-    }
-
-     private void goToPaymentSelectionView(){
-         PaymentSelectionView paymentSelectionView = new PaymentSelectionView();
-         // Crea il controller per la vista di selezione del pagamento
-         mainStage.setScene(paymentSelectionView);
-        }
-    }
-
- */

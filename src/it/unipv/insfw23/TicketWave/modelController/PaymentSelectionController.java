@@ -58,7 +58,7 @@ public class PaymentSelectionController {
             public void handle(MouseEvent actionEvent) {
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("Sei ritornato indietro alla TicketPage");
-              ticketPage.reSetBars();
+              ticketPage.reSetBarsCustomer();
                 mainStage.setScene(ticketPage);
             }
         };
