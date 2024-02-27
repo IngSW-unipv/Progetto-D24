@@ -75,7 +75,7 @@ public class ResultResearchView extends Scene {
         ArrayList<it.unipv.insfw23.TicketWave.modelDomain.event.Event> arraylistevent = new ArrayList<>();
         Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","passwd",2, "23245234324", arraylistevent,5,1,data,4);
         int intvett[] = {2,5};
-        int price[] = {30, 50};
+        double price[] = {30, 50};
         ArrayList<String> arrstr = new ArrayList<>();
 
         ObservableList<it.unipv.insfw23.TicketWave.modelDomain.event.Event> evs = FXCollections.observableArrayList(

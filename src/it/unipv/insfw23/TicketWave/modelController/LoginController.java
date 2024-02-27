@@ -81,14 +81,14 @@ public class LoginController {
         				Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","password1234",Province.CAGLIARI.ordinal(), "2324523432451420", arraylistevent,5,1,datasub,0);
         				
         				int[] seduteRImasteev1 = {200,100};
-        				int[] vettfalsopriceev1 = {5,320};
+        				double[] vettfalsopriceev1 = {5,320};
         				LocalDate dataev1 = LocalDate.of(2025, 03, 20);
         				ArrayList<String> arrfintoartista1 = new ArrayList<>();
         				arrfintoartista1.add("califano");
         				//Concert eventofinto1 = new Concert(12,"reunion","busto arstizio",dataev1, "via dei matti ,0", Province.LIVORNO,300,2, seduteRImasteev1, vettfalsopriceev1,Genre.INDIE,managerfinto,arrfintoartista1);
         				
         				int[] seduterimasteev2 = {100,80,12};
-        				int[] vettfalsopriceev2 = {11,250,500};
+        				double[] vettfalsopriceev2 = {11,250,500};
         				LocalDate dataev2 = LocalDate.of(2024, 10, 02);
         				ArrayList<String> arrfintoartista2 = new ArrayList<>();
         				arrfintoartista2.add("loredana berte");

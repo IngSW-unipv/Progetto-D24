@@ -8,7 +8,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 public class Provadaeliminare {
 	public static void main(String[] args) {
 		int intvett[] = {2,5};
-		int price[] = {30, 50};
+		double price [] = {30, 50};
 		ArrayList<Event> arrev = new ArrayList<>();
 		LocalDate date = LocalDate.now();
 		date = LocalDate.now();

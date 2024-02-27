@@ -11,5 +11,5 @@ import java.util.ArrayList;
 
 public interface IResearchDAO {
     public ArrayList<Event> searchParticularEvents(String search); // metodo della ricerca, esso fornisce i risultati
-    public ArrayList<Event> searchAllEvents(int idEvent, String name, String city, LocalDate date, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int [] seatsRemainedNumberForType, int[] price, Genre genre, Manager creator, ArrayList<String> artists); // Restituisco tutti gli eventi quando sul textField della ricerca non c'è nulla
+    public ArrayList<Event> searchAllEvents(); // Restituisco tutti gli eventi quando sul textField della ricerca non c'è nulla
 }

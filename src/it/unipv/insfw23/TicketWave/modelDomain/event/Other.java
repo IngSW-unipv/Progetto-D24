@@ -8,7 +8,7 @@ public class Other extends Event{
     String description;
 
     // costruttore
-    public Other(int idEvent, String name, String city, LocalDate date, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int [] seatsRemainedNumberForType,int[] price, Genre genre, Manager creator, ArrayList<String> artists, String description) {
+    public Other(int idEvent, String name, String city, LocalDate date, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int [] seatsRemainedNumberForType, double[] price, Genre genre, Manager creator, ArrayList<String> artists, String description) {
         super(idEvent, name, city, date, location, province, maxNumberOfSeats, typeOfSeats,seatsRemainedNumberForType, price, genre, creator, artists);
         this.description = description;
     }
