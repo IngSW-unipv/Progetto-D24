@@ -10,6 +10,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface IResearchDAO {
-    public ArrayList<Event> searchParticularEvents(String search); // metodo della ricerca, esso fornisce i risultati
+    public ArrayList<Event> searchFilteredEvents(String search); // metodo della ricerca, esso fornisce i risultati
     public ArrayList<Event> searchAllEvents(); // Restituisco tutti gli eventi quando sul textField della ricerca non c'è nulla
 }

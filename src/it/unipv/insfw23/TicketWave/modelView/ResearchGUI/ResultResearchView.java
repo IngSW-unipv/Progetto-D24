@@ -28,11 +28,8 @@ import static javafx.application.Application.launch;
 
 public class ResultResearchView extends Scene {
     private ResearchNodesView rnv;
-    private ObservableList<String> result; // dove metto i risultati della query, eseguita nel ResearchController
     private TableView<Event> table;
     private ResultResearchController rrc;
-    private HBox box2;
-    private HBox box1;
     private BorderPane layout;
 
 
@@ -87,13 +84,13 @@ public class ResultResearchView extends Scene {
 //        table.getSelectionModel().setSelectionMode(SelectionMode.SINGLE); // posso selezionare solo una riga per volta
 
         // Creo un'HBOX che contiene barra + bottone di ricerca HBox = disposizione orizzontale
-        box1 = new HBox();
+        HBox box1 = new HBox();
         box1.setSpacing(10);
         box1.getChildren().add(rnv.getBar());
         box1.getChildren().add(rnv.getSearchBar());
         box1.getChildren().add(rnv.getSearchButton());
 
-        box2 = new HBox();
+        HBox box2 = new HBox();
         box2.setSpacing(10);
         box2.getChildren().add(table);
 

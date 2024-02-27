@@ -28,14 +28,15 @@ public class ResearchDAO implements IResearchDAO{
         ArrayList<Event> result = new ArrayList<>();
 
         try{
-                result = getAllEvents(); // entro nel metodo che istanzia gli eventi
+            result = getAllEvents(); // entro nel metodo che istanzia gli eventi
         }catch (Exception e){
             e.printStackTrace();
         }
+        ConnectionDB.closeConnection(conn);
         return result;
     } // Quando sulla ResearchBar non ho nulla, allora restituisco tutti gli eventi
     @Override
-    public ArrayList<Event> searchParticularEvents(String search) { // Quando qualcuno scrive sulla ResearchBar (TextField) e usa o meno i filtri, allora uso questo metodo
+    public ArrayList<Event> searchFilteredEvents(String search) { // Quando qualcuno scrive sulla ResearchBar (TextField) e usa o meno i filtri, allora uso questo metodo
 
         return null;
     }
@@ -48,14 +49,15 @@ public class ResearchDAO implements IResearchDAO{
         ResultSet resultset1;
         ResultSet resultset2;
 
-        if (!ConnectionDB.isOpen(conn)){ // se non è aperta una connessione, allora aprila
-            ConnectionDB.startConnection(conn,schema);
+    try {
+        if (!ConnectionDB.isOpen(conn)) { // se non è aperta una connessione, allora aprila
+            ConnectionDB.startConnection(conn, schema);
         }
         String query = "SELECT * FROM EVENT_ WHERE MANAGER_ID = ?";
         statement1 = conn.prepareStatement(query);
         resultset1 = statement1.executeQuery(query);
 
-        while (resultset1.next()){
+        while (resultset1.next()) {
             LocalDate ld = resultset1.getDate("DATE_").toLocalDate();
             try {
                 String query2 = "SELECT * FROM MANAGER WHERE MAIL = ?";
@@ -63,18 +65,18 @@ public class ResearchDAO implements IResearchDAO{
                 resultset2 = statement2.executeQuery(query2);
                 LocalDate ld2 = resultset2.getDate("SUBSCRIPTION_DATE").toLocalDate();
 
-                if (resultset2.next()){
+                if (resultset2.next()) {
                     manager = new Manager(resultset2.getString("NAME"), resultset2.getString("SURNAME"), resultset2.getDate("BIRTHDATE").toString(),
-                                                    resultset2.getString("MAIL"), resultset2.getString("PWD"), resultset2.getInt("PROVINCE"),
-                                                    resultset2.getString("CARDNUMBER"), result, resultset2.getInt("MAXEVENTS"), resultset2.getInt("SUBSCRIPTION"),
-                                                    ld2, resultset2.getInt("COUNTER_CREATED_EVENTS"));
+                            resultset2.getString("MAIL"), resultset2.getString("PWD"), resultset2.getInt("PROVINCE"),
+                            resultset2.getString("CARDNUMBER"), result, resultset2.getInt("MAXEVENTS"), resultset2.getInt("SUBSCRIPTION"),
+                            ld2, resultset2.getInt("COUNTER_CREATED_EVENTS"));
                 }
 
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            double [] price  = {resultset1.getDouble("BASE_PRICE"), resultset1.getDouble("PREMIUM_PRICE"), resultset1.getDouble("VIP_PRICE") };
-            int [] seatsremaining = {resultset1.getInt("REMAINING_BASE_SEATS"), resultset1.getInt("REMAINING_PREMIUM_SEATS"), resultset1.getInt("REMAINING_VIP_SEATS")};
+            double[] price = {resultset1.getDouble("BASE_PRICE"), resultset1.getDouble("PREMIUM_PRICE"), resultset1.getDouble("VIP_PRICE")};
+            int[] seatsremaining = {resultset1.getInt("REMAINING_BASE_SEATS"), resultset1.getInt("REMAINING_PREMIUM_SEATS"), resultset1.getInt("REMAINING_VIP_SEATS")};
             switch (resultset1.getInt("TYPE")) {
                 case 0 -> {
                     Concert currentConcert = new Concert(resultset1.getInt("ID_EVENT"), resultset1.getString("NAME_"),
@@ -116,6 +118,9 @@ public class ResearchDAO implements IResearchDAO{
                 }
             }
         }
+    } catch (Exception e){
+        System.out.println("Hai swaggato troppo, chiudo e riapro");
+    }
         return result;
     } // Ritorna tutti gli eventi
 
