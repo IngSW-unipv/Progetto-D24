@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelDomain.event;
 
 import java.lang.String;
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -12,6 +13,7 @@ public abstract class Event implements EventType {
     private int idEvent;
     private String name, city, location;
     private LocalDate date;
+    private Time time;
     private Province province;
     private int maxNumberOfSeats;
     private int typeOfSeats; // indice dell'array ticketSoldNumberForType, serve per dire quante tipologie di posti ho: base + premium = 2, base = 1, base + premium + vip = 3 tipi di posti, mi server per scorrere l'array
@@ -20,15 +22,17 @@ public abstract class Event implements EventType {
     private double [] price; // vettore prezzi per i vari tipi di biglietto, es: Vip = 40€, Base = 15€...
     private Genre genre;
     private Manager creator;
-    private ArrayList<String> artists;
+    private String artists;
+    private String description; // tutti gli eventi hanno una descrizione
 
     // costruttore
 
-    public Event(int idEvent, String name, String city, LocalDate date, String location, Province province, int maxNumberOfSeats, int typeOfSeats,int [] seatsRemainedNumberForType, double[] price, Genre genre, Manager creator, ArrayList<String> artists) {
+    public Event(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, int maxNumberOfSeats, int typeOfSeats,int [] seatsRemainedNumberForType, double[] price, Genre genre, Manager creator, String artists, String description) {
         this.idEvent = idEvent;
         this.name = name;
         this.city = city;
         this.date = date;
+        this.time = time;
         this.location = location;
         this.province = province;
         this.maxNumberOfSeats = maxNumberOfSeats;
@@ -38,6 +42,7 @@ public abstract class Event implements EventType {
         this.creator = creator;
         this.artists = artists;
         this.seatsRemainedNumberForType = seatsRemainedNumberForType;
+        this.description = description;
     }
 
 
@@ -156,15 +161,51 @@ public abstract class Event implements EventType {
         return result;
     }
 
-    public ArrayList<String> getArtists() {
+    public String getArtists() {
         return artists;
     }
 
-    /*
-    public String getArtist(){
-        String s = new String("Artista");
-        return s;
+    public Time getTime() {
+        return time;
     }
 
-     */
+    public int getTypeOfSeats() {
+        return typeOfSeats;
+    }
+
+    public double[] getPrice() {
+        return price;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
+    }
+
+    public void setTypeOfSeats(int typeOfSeats) {
+        this.typeOfSeats = typeOfSeats;
+    }
+
+    public void setSeatsRemainedNumberForType(int[] seatsRemainedNumberForType) {
+        this.seatsRemainedNumberForType = seatsRemainedNumberForType;
+    }
+
+    public void setCreator(Manager creator) {
+        this.creator = creator;
+    }
+
+    public void setArtists(String artists) {
+        this.artists = artists;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
 }
