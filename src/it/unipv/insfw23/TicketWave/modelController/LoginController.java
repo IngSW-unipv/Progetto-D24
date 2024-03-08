@@ -59,6 +59,10 @@ public class LoginController {
             public void handle(ActionEvent actionEvent) {
 
                 if (loginView.getCustomerRadioButton().isSelected()) {
+                	
+                	/*creazione customer ed evento per poi creare vari biglietti e fare delle verifiche
+                	 * 
+                	 * */
 
 
                     System.out.println("Hai cliccato il pulsante Login come cliente");

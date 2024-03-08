@@ -62,7 +62,7 @@ public class TicketPageView extends Scene {
     //evento che setta le label dipendenti dall'evento prima di inizializzare la view
     //senno inizializza la view con i campi vuoti e aggiorna il valore di una label senza reinizializzare
     public void setComponents(boolean isviewermanager, String typeofevent, String name, String città, String location, Province prov, LocalDate data,ArrayList<String> artist,
-    							int[] seatsRemainedNumberForType, int[] price) {
+    							int[] seatsRemainedNumberForType, double[] price) {
         //settaggio dei campi dei valori per un singolo evento
         System.out.println(artist);
         System.out.println(artist.toString());
@@ -100,6 +100,9 @@ public class TicketPageView extends Scene {
         
         if(isviewermanager) {
         	buyButton.setVisible(false);
+        	basePricebutton.setVisible(false);
+        	premiumPricebutton.setVisible(false);
+        	vipPricebutton.setVisible(false);
         }
         //fine settaggio
         initComponents();
