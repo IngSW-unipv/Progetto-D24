@@ -117,5 +117,6 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
     public Menu getProvince() {
         return province;
     }
+
 }
 

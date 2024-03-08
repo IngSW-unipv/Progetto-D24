@@ -25,7 +25,6 @@ public class ResearchController {
     }
 
     public void setResearchListener(){
-//        ResearchNodesView rnv = ResearchNodesView.getIstance();
 
         // click ricerca sulla ResearchNodesView
         EventHandler<MouseEvent> researchPressHandlerResearchView = new EventHandler<>(){
@@ -37,8 +36,8 @@ public class ResearchController {
                 mainStage.setScene(rrv);
             }
         };
-//        rnv.getSearchButton().setOnMouseClicked(researchPressHandlerResearchView);
         rv.getresearchnodeview().getSearchButton().setOnMouseClicked(researchPressHandlerResearchView);
+
 
     }
 
