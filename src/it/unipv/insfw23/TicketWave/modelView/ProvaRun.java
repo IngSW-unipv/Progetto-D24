@@ -4,6 +4,9 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import static it.unipv.insfw23.TicketWave.modelDomain.event.Genre.ROCK;
+import static it.unipv.insfw23.TicketWave.modelDomain.event.Province.AGRIGENTO;
+
 public class ProvaRun extends Application {
 
     @Override
@@ -14,6 +17,7 @@ public class ProvaRun extends Application {
             // Istanzia la TicketPageView
 
             TicketPageView ticketPageView=new TicketPageView();
+            //Event event=new Event(1,"aa","bb","cc",AGRIGENTO,10,1,2,ROCK,manager,0);
             BuyTicketController buyTicketController=new BuyTicketController(primaryStage,ticketPageView);
 
             buyTicketController.initComponents();

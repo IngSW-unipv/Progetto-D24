@@ -25,7 +25,7 @@ public class ResearchController {
     }
 
     public void setResearchListener(){
-        ResearchNodesView rnv = ResearchNodesView.getIstance();
+//        ResearchNodesView rnv = ResearchNodesView.getIstance();
 
         // click ricerca sulla ResearchNodesView
         EventHandler<MouseEvent> researchPressHandlerResearchView = new EventHandler<>(){
@@ -33,27 +33,12 @@ public class ResearchController {
             public void handle(MouseEvent actionEvent){
                 System.out.println("Faccio la query di ricerca");
                 ResultResearchView rrv = new ResultResearchView(); // vado nella scena della ResultResearchView
+                ResultResearchController rrc = new ResultResearchController(mainStage, rrv);
                 mainStage.setScene(rrv);
             }
         };
-        rnv.getSearchButton().setOnMouseClicked(researchPressHandlerResearchView);
-
-    /*    // Result Research ma non convince, la logica non va qui secondo me. va in un DAO controller
-        EventHandler<ActionEvent> ResultResearchHandler = new EventHandler<ActionEvent>() {
-            ObservableList<String> azzeratore = FXCollections.observableArrayList(" ");
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                ResultResearchView rrv = new ResultResearchView();
-                for (String s : rrv.getResult()){
-                    if (rrv.getResult() != null){ // posso ometterlo se lo fa in automatico
-                        rrv.setResult(azzeratore); // se leggo che sulla List view c'è qualcosa, la ripulisco e metto 0
-                    } else {
-                        // logica che mette i risultati nella ListView della ResultResearchView
-                    }
-                }
-
-            }
-        }; */
+//        rnv.getSearchButton().setOnMouseClicked(researchPressHandlerResearchView);
+        rv.getresearchnodeview().getSearchButton().setOnMouseClicked(researchPressHandlerResearchView);
 
     }
 

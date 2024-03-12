@@ -24,8 +24,8 @@ public class MainController {
     }
 
     private void initComponents(){
-        ResultResearchView rrv = new ResultResearchView();
-        ResultResearchController rrc = new ResultResearchController(mainStage, rrv); // passo il primaryStage al ResultResearchController
+//        ResultResearchView rrv = new ResultResearchView();
+//        ResultResearchController rrc = new ResultResearchController(mainStage, rrv); // passo il primaryStage al ResultResearchController
         EventHandler<ActionEvent> statsButtonHandler = new EventHandler<>(){
             @Override
             public void handle(ActionEvent actionEvent){

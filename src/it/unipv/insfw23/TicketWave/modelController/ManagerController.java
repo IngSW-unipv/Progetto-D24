@@ -1,6 +1,15 @@
 package it.unipv.insfw23.TicketWave.modelController;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Date;
+
 import it.unipv.insfw23.TicketWave.modelController.ResearchCaseController.ResearchController;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Concert;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.ManagerView;
 import it.unipv.insfw23.TicketWave.modelView.SignUpView;
@@ -14,18 +23,19 @@ import javafx.scene.control.TableView.TableViewSelectionModel;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+
 public class ManagerController {
 	
 	Stage window;
 	ManagerView managerview;
 	LoginView logview;
-//	Manager managerlogged;
+	Manager managerlogged;
 	
-	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview/*, Manager managerlogged*/) {
+	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview, Manager managerlogged) {
 		window = primarystage;
 		this.managerview = managerview;
 		this.logview = logview;
-//		this.managerlogged = managerlogged;
+		this.managerlogged = managerlogged;
 		initComponents();
 	}
 	
@@ -103,10 +113,28 @@ public class ManagerController {
 			
 			@Override
 			public void handle(MouseEvent event) {
-//				TableViewSelectionModel<it.unipv.insfw23.TicketWave.modelView.Event> tab = managerview.getTable().getSelectionModel();
+//				creo un manager finto per creare un evento finto
+				
+			/*	creazione di un finto manager e un finto evento
+			/	int[] card = {2,6,5,1};
+			/	int[] seduteRImaste = {20, 20};
+			/	ArrayList<Event> arraylistevent = new ArrayList<>();
+			/	LocalDate data = LocalDate.of(2024, 12, 20);
+			/	Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","passwd",2, "23245234324", arraylistevent,5,1,data,4);
+			/	int[] vettfalsoprice = {5};
+			/	ArrayList<String> arrfintoartista = new ArrayList<>();
+			/	arrfintoartista.add("califano");
+			/	Concert eventofinto = new Concert(12,"reunion","busto arstizio",data, "via dei matti ,0", Province.LIVORNO,2,1, seduteRImaste, vettfalsoprice,Genre.INDIE,managerfinto,arrfintoartista);
+			*/
 				System.out.println(managerview.getTableev().getSelectionModel().getSelectedItem());
+				//costruttore view
 				TicketPageView tic = new TicketPageView();
-				window.setScene(tic);
+				//costruttore controller
+				BuyTicketController buyticketcontroller = new BuyTicketController(window, tic, managerview.getTableev().getSelectionModel().getSelectedItem(), true);
+				//metodo che setta upperbar manager
+				//opacita
+				//
+				//window.setScene(tic);
 			}
 		};
 		

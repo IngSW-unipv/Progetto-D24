@@ -24,7 +24,7 @@ public class PaymentSelectionView extends Scene {
     private static final  Label titleLabel = new Label("TicketWave");
     private static final Label totalStringLabel = new Label("Totale:");
     private static final Label paySelectionLabel = new Label("Scegli un metodo con cui pagare:");
-    private static final Label totalAmountLabel = new Label();
+    private static Label totalAmountLabel = new Label();
     private static List<Label> labels = new ArrayList<>();
 
     private static Text errmessage = new Text("Devi prima selezionare un metodo di pagamento!");
@@ -34,7 +34,12 @@ public class PaymentSelectionView extends Scene {
 
     public PaymentSelectionView(){
         super(new BorderPane(), 1080, 600);
-        initComponents();
+//        initComponents();
+    }
+    
+    public void setComponents(double price) {
+    	totalAmountLabel = new Label(String.valueOf(price));
+    	initComponents();
     }
 
     private void initComponents() {

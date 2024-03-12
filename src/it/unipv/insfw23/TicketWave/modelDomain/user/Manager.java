@@ -8,7 +8,7 @@ import java.lang.String;
 import java.time.LocalDate;
 
 public class Manager extends User {
-    private int [] creditCard= new int[16];
+    private String creditCard;
     private  int maxNumberofEvents;
     private   int subscription;
     private ArrayList <Event> event;
@@ -18,7 +18,7 @@ public class Manager extends User {
 
     private int counterCreatedEvents;
 
-    public Manager( String name, String surname,String dateOfBirth,String email,String password,int provinceOfResidence, int [] creditCard,ArrayList <Event> event , int maxNumberofEvents,int subscription,LocalDate subscriptionDate,int counterCreatedEvents){
+    public Manager( String name, String surname,String dateOfBirth,String email,String password,int provinceOfResidence, String creditCard,ArrayList <Event> event , int maxNumberofEvents,int subscription,LocalDate subscriptionDate,int counterCreatedEvents){
         super (name,surname,dateOfBirth,email,password,provinceOfResidence);
         this.creditCard=creditCard;
         this.event=event;
@@ -52,20 +52,31 @@ public class Manager extends User {
         this.subscription = subscription;
     }
 
-    public int[] getCreditCard() {
+    public String getCreditCard() {
         return creditCard;
+    }
+
+    public LocalDate getSubscriptionDate() {
+        return subscriptionDate;
+    }
+
+    public ArrayList<Event> getEvent() {
+        return event;
+    }
+
+    public int getCounterCreatedEvents() {
+        return counterCreatedEvents;
     }
 
     public void setEvent(ArrayList<Event> event) {
         this.event = event;
-    }
-
+    } 
 
     //seguono dei metodi di crea Festival, Concerto ecc..
-    public void createFestival(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String> artists, int artistsNumber) throws Exception {
+    public void createFestival(int idEvent, String name, String city, LocalDate date, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int [] seatsRemainedNumberForType, double[] price, Genre genre, Manager creator, ArrayList<String> artists) throws Exception {
         if(subscription==1 || subscription==2 && counterCreatedEvents <maxNumberofEvents ) {
 
-            Event festival = new Festival(idEvent, name, city, location, province, maxNumberOfSeats,typeOfSeats, price, genre,creator, artists, artistsNumber);
+            Event festival = new Festival(idEvent, name, city, date, location, province, maxNumberOfSeats,typeOfSeats, seatsRemainedNumberForType, price, genre,creator, artists);
             event.add(festival);
             counterCreatedEvents++;
         }
@@ -74,10 +85,10 @@ public class Manager extends User {
         }
     }
 
-    public void createConcert(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String> artists, String artist) throws Exception{
+    public void createConcert(int idEvent, String name, String city, LocalDate date, String location, Province province, int maxNumberOfSeats, int typeOfSeats,int[]seatsRemainedNumberForType, double[] price, Genre genre, Manager creator, ArrayList<String> artists) throws Exception{
         if(subscription==1 || subscription==2 && counterCreatedEvents <maxNumberofEvents ) {
 
-            Event concert= new Concert(idEvent,name,city,location,province,maxNumberOfSeats,typeOfSeats,price,genre,creator,artists,artist);
+            Event concert= new Concert(idEvent,name,city,date,location,province,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,price,genre,creator,artists);
             event.add(concert);
             counterCreatedEvents++;
         }
@@ -86,10 +97,10 @@ public class Manager extends User {
         }
     }
 
-    public void createTheater(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String> artists, String theatreCompany, String authorName)throws Exception {
+    public void createTheater(int idEvent, String name, String city, LocalDate date, String location, Province province, int maxNumberOfSeats, int typeOfSeats,int [] seatsRemainedNumberForType, double[] price, Genre genre, Manager creator, ArrayList<String> artists, String theatreCompany, String authorName)throws Exception {
         if(subscription==1 || subscription==2 && counterCreatedEvents <maxNumberofEvents ) {
 
-            Event theater = new Theater(idEvent, name, city, location, province, maxNumberOfSeats,typeOfSeats, price, genre, creator,artists,theatreCompany, authorName);
+            Event theater = new Theater(idEvent, name, city,date, location, province, maxNumberOfSeats,typeOfSeats, seatsRemainedNumberForType, price, genre, creator,artists,theatreCompany, authorName);
             event.add(theater);
             counterCreatedEvents++;
         }
@@ -98,10 +109,10 @@ public class Manager extends User {
         }
     }
 
-    public void createOther(int idEvent, String name, String city, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int[] price, Genre genre, Manager creator, ArrayList<String> artists, String description)throws Exception{
+    public void createOther(int idEvent, String name, String city, LocalDate date, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int [] seatsRemainedNumberForType,double[] price, Genre genre, Manager creator, ArrayList<String> artists, String description)throws Exception{
         if(subscription==1 || subscription==2 && counterCreatedEvents <maxNumberofEvents ) {
 
-                Event other = new Other(idEvent, name, city, location, province, maxNumberOfSeats,typeOfSeats, price,genre,creator,artists,description);
+                Event other = new Other(idEvent, name, city, date, location, province, maxNumberOfSeats,typeOfSeats, seatsRemainedNumberForType, price,genre,creator,artists,description);
                 event.add(other);
                 counterCreatedEvents++;
             }

@@ -8,6 +8,7 @@ import it.unipv.insfw23.TicketWave.modelController.ManagerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -45,7 +46,8 @@ public class ManagerView extends Scene{
 	private LowerBar lowerbar;
 	private BorderPane layout;
 	private GridPane grid;
-	private TableView<it.unipv.insfw23.TicketWave.modelView.Event> tabev;
+	private TableView<Event> tabev;
+	private ObservableList<Event> evs;
 
 	
 	public void init(){
@@ -94,19 +96,23 @@ public class ManagerView extends Scene{
 		GridPane.setHgrow(tabev, Priority.SOMETIMES);
 		GridPane.setVgrow(tabev, Priority.SOMETIMES);
 		
-		TableColumn<it.unipv.insfw23.TicketWave.modelView.Event, Integer> codevcol = new TableColumn<>("codice");
-		codevcol.setCellValueFactory(new PropertyValueFactory<>("cod"));
+		TableColumn<Event, Integer> codevcol = new TableColumn<>("ID");
+		codevcol.setCellValueFactory(new PropertyValueFactory<>("idEvent"));
 		codevcol.setStyle("-fx-alignment: CENTER");
 		
-		TableColumn<it.unipv.insfw23.TicketWave.modelView.Event, String> evnomecol = new TableColumn<>("nome");
-		evnomecol.setCellValueFactory(new PropertyValueFactory<>("nome"));
+		TableColumn<Event, String> evnomecol = new TableColumn<>("nome");
+		evnomecol.setCellValueFactory(new PropertyValueFactory<>("name"));
 		evnomecol.setStyle("-fx-alignment: CENTER");
 		
-		tabev.getColumns().addAll(codevcol, evnomecol);
+		TableColumn<Event, Integer> cityevcol = new TableColumn<>("città");
+		cityevcol.setCellValueFactory(new PropertyValueFactory<>("city"));
+		cityevcol.setStyle("-fx-alignment: CENTER");
 		
-		ObservableList<it.unipv.insfw23.TicketWave.modelView.Event> evs = FXCollections.observableArrayList();
-		evs.add(new it.unipv.insfw23.TicketWave.modelView.Event(1,"nome1"));
-		evs.add(new it.unipv.insfw23.TicketWave.modelView.Event(3,"nome2"));
+		tabev.getColumns().addAll(codevcol, evnomecol, cityevcol);
+		
+//		ObservableList<Event> evs = FXCollections.observableArrayList();
+//		evs.add(new it.unipv.insfw23.TicketWave.modelView.Event(1,"nome1"));
+//		evs.add(new it.unipv.insfw23.TicketWave.modelView.Event(3,"nome2"));
 		tabev.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
 		tabev.setItems(evs);
 //		tabev.setPrefWidth(400);
@@ -203,10 +209,15 @@ public class ManagerView extends Scene{
         setRoot(layout);
     }
 
-	public TableView<it.unipv.insfw23.TicketWave.modelView.Event> getTableev(){
+	public TableView<Event> getTableev(){
 //		TableViewSelectionModel<it.unipv.insfw23.TicketWave.modelView.Event> a = tabev.getSelectionModel();
 //		return a.getSelectedItem();
 		return tabev;
+	}
+	
+	public void setEventsforTableev(Manager manager) {
+		evs = FXCollections.observableArrayList(manager.getEventlist());
+		init();
 	}
 }
 

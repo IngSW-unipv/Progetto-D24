@@ -160,7 +160,7 @@ public class LoginView extends Application {
         primaryStage.getIcons().add(icon);
         primaryStage.setWidth(1080);
         primaryStage.setHeight(600);
-        primaryStage.setMinHeight(500);
+        primaryStage.setMinHeight(600);
         primaryStage.setMinWidth(800);
         primaryStage.show();
     }
