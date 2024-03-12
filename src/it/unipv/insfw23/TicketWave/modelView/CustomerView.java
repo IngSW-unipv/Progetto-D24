@@ -106,6 +106,7 @@ public class CustomerView extends Scene {
         grid.getChildren().addAll(name, wavePoints, notifyListView, ticket,logoutButton);
 
 
+
     }
     public Button getLogoutButton() {
         return logoutButton;
