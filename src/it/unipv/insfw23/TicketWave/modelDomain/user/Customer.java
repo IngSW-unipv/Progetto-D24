@@ -2,20 +2,23 @@ package it.unipv.insfw23.TicketWave.modelDomain.user;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.*;
 import java.util.ArrayList;
 
 
+
 public class Customer extends User {
 
     private ArrayList<Ticket> ticketsList= new ArrayList<>();
-    private Event event;
+
     private double points;
     private Genre [] favoriteGenre ;
+    int maxfavoriteGenre = 5;
 
 
-    public Customer(String name, String surname, String dateOfBirth, String email, String password, int provinceOfResidence,Genre [] favoriteGenre ) {
+    public Customer(String name, String surname, String dateOfBirth, String email, String password, int provinceOfResidence, Genre [] favoriteGenre ) {
         super(name,surname, dateOfBirth, email,password, provinceOfResidence);
 
 
@@ -29,17 +32,17 @@ public class Customer extends User {
         return ticketsList;
     }
 
-    public Event getEvent() {
-        return event;
-    }
+
 
     public double getPoints() {
 
         return points;
     }
-    // metodo per acquisto biglietto con controllo su paymentmethod e usepoints
 
-    public void buyticket(IPaymentAdapter pay,Event event,TicketType type ,int usePoints){
+
+    // metodo per acquisto biglietto con controllo su paymentmethod e usepoints, quest'ultima serve per dire se si vogliono o meno usare i punti finora accumulati
+
+    public void buyticket(IPaymentAdapter pay,Event event,TicketType type ,int usePoints) throws Exception {
         Customer customer;
         Ticket ticket= TicketHandler.getIstance().createTicket(event,type);
         if(pay.paymentMethod(ticket.getPrice()) == true && usePoints == 1 ){
@@ -55,17 +58,18 @@ public class Customer extends User {
                 points= points + (price/10);
                 addTickets(ticket);
             } else if (pay.paymentMethod(ticket.getPrice()) == false) {
-                System.out.println( "L'acquisto del tuo biglietto per " + event + "non è andato a buon fine ");
+
+            throw new Exception ( "L'acquisto del tuo biglietto per " + event + "non è andato a buon fine ");
             }
     }
 
     // setto generi preferiti
 
-    public void setFavoriteGenre(Genre [] favorite) {
+    public void setFavoriteGenre(Genre [] favorite) throws Exception {
         if (favorite.length > 5) {
-            System.out.println("Impossibile selezionere più di 5 generi");
+            throw new Exception ("Impossibile selezionere più di 5 generi");
         } else {
-            int maxfavoriteGenre = 5;
+
             for (int i = 0; i < maxfavoriteGenre; i++) {
                 favoriteGenre[i] = favorite[i];
 

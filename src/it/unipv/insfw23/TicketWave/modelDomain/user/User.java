@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelDomain.user;
 
+import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
 
@@ -69,9 +70,7 @@ public abstract class User {
 	public int getProvinceOfResidence() { return provinceOfResidence;
 	}
 
-	public void setProvinceOfResidence(int provinceOfResidence) {
-		this.provinceOfResidence = provinceOfResidence;
-	}
+
 	
 	public void addNotification(Notification n) {
 		notifications.add(n);
