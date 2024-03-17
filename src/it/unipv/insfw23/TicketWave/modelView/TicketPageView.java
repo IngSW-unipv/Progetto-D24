@@ -100,6 +100,9 @@ public class TicketPageView extends Scene {
         
         if(isviewermanager) {
         	buyButton.setVisible(false);
+        	basePricebutton.setVisible(false);
+        	premiumPricebutton.setVisible(false);
+        	vipPricebutton.setVisible(false);
         }
         //fine settaggio
         initComponents();
