@@ -47,7 +47,7 @@ public void initComponents() {
             System.out.println("Hai cliccato il bottone Acquista");
             PaymentSelectionView paymentSelectionView = new PaymentSelectionView();
             paymentSelectionView.setComponents(event.getPrices()[ticketPage.getWhichPriceSelected()]);
-            PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainStage,paymentSelectionView,ticketPage);
+            PaymentSelectionController paymentSelectionController= 0new PaymentSelectionController(mainStage,paymentSelectionView,ticketPage);
             mainStage.setScene(paymentSelectionView);
         	}
         	else
