@@ -17,7 +17,6 @@ public class SubscriptionHandler {
 
 		if (checkPayment == true) {  //se il pagamento va a buon fine, setto subscription, e la data nuova
 			manager.setSubscription(subscription);
-			manager.setSubscriptionDate(LocalDate.now());
 			System.out.println("Pagamento avvenuto con successo. Sottoscrizione e data corrente aggiornate.");
 
 		}

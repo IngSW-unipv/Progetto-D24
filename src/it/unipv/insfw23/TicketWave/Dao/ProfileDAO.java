@@ -1,5 +1,4 @@
 package it.unipv.insfw23.TicketWave.Dao;
-import it.unipv.insfw23.TicketWave.Dao.Research.IResearchDAO;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
@@ -7,7 +6,6 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.Date;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -46,7 +44,7 @@ public class ProfileDAO implements IProfileDAO {
             st1.setString(5, manager.getPassword());
             st1.setInt(6, manager.getProvinceOfResidence());
             st1.setString(7, manager.getCreditCard());
-            st1.setInt(8, manager.getMaxNumberofEvents());
+            st1.setInt(8, manager.getMaxNumberOfEvents());
             st1.setInt(9, manager.getSubscription());
             st1.setDate(10, Date.valueOf(manager.getSubscriptionDate()));;
             st1.setInt(11,manager.getCounterCreatedEvents());
