@@ -43,7 +43,7 @@ public class Customer extends User {
     // metodo per acquisto biglietto con controllo su paymentmethod e usepoints, quest'ultima serve per dire se si vogliono o meno usare i punti finora accumulati
 
     public void buyticket(IPaymentAdapter pay,Event event,TicketType type ,int usePoints) throws Exception {
-        Customer customer;
+
         Ticket ticket= TicketHandler.getIstance().createTicket(event,type);
         if(pay.paymentMethod(ticket.getPrice()) == true && usePoints == 1 ){
                 double price = ticket.getPrice() - (points* 0.25);

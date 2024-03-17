@@ -42,6 +42,13 @@ public class CustomerTest {
         customer.buyticket(pay,event,TicketType.BASE,0);
         assertEquals(1,customer.getTicketsList().size());
     }
+    // DA SISTEMARE BUY TICKET
+    @Test
+    public void testTicket(){
+        Ticket ticket= new Ticket("12345",50.00,TicketType.BASE);
+        customer.addTickets(ticket);
+        assertEquals(1,customer.getTicketsList().size());
+    }
 
     @Test
     public void testIsCustomer(){
