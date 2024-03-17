@@ -32,15 +32,7 @@ public class CustomerTest {
 
         Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
         customer=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",01,favoriteGenre);
-        /*LocalDate date;
 
-        // Inizializzazione della variabile LocalDate successivamente
-        date = LocalDate.now();
-        Time time;
-
-        // Inizializzazione della variabile Time successivamente
-        time = Time.valueOf("22:30:00");
-        Event concert = new Concert(1,"Cocacola event","Milano","Magazzini Generali",date,time, Province.MILANO,100,1,);*/
     }
 
 
