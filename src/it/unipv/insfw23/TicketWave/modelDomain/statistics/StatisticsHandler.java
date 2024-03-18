@@ -2,6 +2,9 @@ package it.unipv.insfw23.TicketWave.modelDomain.statistics;
 
 import it.unipv.insfw23.TicketWave.modelController.Factory.Statistics.IStatisticsHandler;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 
 import java.lang.reflect.Array;
@@ -33,7 +36,7 @@ public class StatisticsHandler implements IStatisticsHandler {
         int eventCounter = 0;
         ArrayList<Event> eventList = manager.getEventlist();
 
-        enumType[] typeArray = enumType.values();
+        Type[] typeArray = Type.values();
 
         int typeCodeArrayLenght = Array.getLength(typeArray);
         double[] results = new double[typeCodeArrayLenght];
@@ -60,7 +63,7 @@ public class StatisticsHandler implements IStatisticsHandler {
     }
 
     @Override
-    public WrapArtist artistStats(enumType typeCode, Manager manager){
+    public WrapArtist artistStats(Type typeCode, Manager manager){
 
         ArrayList<Event> eventList = manager.getEventlist();
         ArrayList<String> artistNames = new ArrayList<>();
@@ -109,12 +112,12 @@ public class StatisticsHandler implements IStatisticsHandler {
     }
 
     @Override
-    public WrapGenre genreStats(enumType typeCode, Manager manager) {
+    public WrapGenre genreStats(Type typeCode, Manager manager) {
 
         ArrayList<Event> eventList = manager.getEventlist();
-        enumGenre[] genreArray = enumGenre.values();
+        Genre[] genreArray = Genre.values();
 
-        ArrayList<enumGenre> genreArrayRes = new ArrayList<>();
+        ArrayList<Genre> genreArrayRes = new ArrayList<>();
         ArrayList<Double> results = new ArrayList<>();
 
         int eventCounter = 0;
@@ -161,12 +164,12 @@ public class StatisticsHandler implements IStatisticsHandler {
 
 
     @Override
-    public WrapProv provinceStats(enumType typeCode, String artistName, Manager manager) {
+    public WrapProv provinceStats(Type typeCode, String artistName, Manager manager) {
 
         ArrayList<Event> eventList = manager.getEventlist();
-        enumProvince[] provinceArray = enumProvince.values();
+        Province[] provinceArray = Province.values();
 
-        ArrayList<enumProvince> provinceArrayRes = new ArrayList<>();
+        ArrayList<Province> provinceArrayRes = new ArrayList<>();
         ArrayList<Double> results = new ArrayList<>();
 
         int eventCounter = 0;
@@ -214,15 +217,15 @@ public class StatisticsHandler implements IStatisticsHandler {
 }
 
 public class WrapType {
-    private enumType[] typeNameArray;
+    private Type[] typeNameArray;
     private double[] typeResults;
 
-    public WrapType(double[] results, enumType[] typeNameArray) {
+    public WrapType(double[] results, Type[] typeNameArray) {
         this.typeNameArray = typeNameArray;
         this.typeResults = results;
     }
 
-    public enumType[] getTypeArray() { return typeNameArray;}
+    public Type[] getTypeArray() { return typeNameArray;}
     public double[] getTypeResult() {
         return typeResults;
     }
@@ -246,14 +249,14 @@ public class WrapArtist{
 }
 
 public class WrapGenre{
-    private ArrayList<enumGenre> prNameArray;
+    private ArrayList<Genre> prNameArray;
     private ArrayList<Double> numberResults;
 
-    public WrapGenre(ArrayList<Double> results, ArrayList<enumGenre> typeNameArray) {
+    public WrapGenre(ArrayList<Double> results, ArrayList<Genre> typeNameArray) {
         this.prNameArray = typeNameArray;
         this.numberResults = results;
     }
-    public ArrayList<enumGenre> getGenreArray(){
+    public ArrayList<Genre> getGenreArray(){
         return prNameArray;
     }
 
@@ -263,14 +266,14 @@ public class WrapGenre{
 }
 
 public class WrapProv{
-    private ArrayList<enumProvince> prNameArray;
+    private ArrayList<Province> prNameArray;
     private ArrayList<Double> numberResults;
 
-    public WrapProv(ArrayList<Double> results, ArrayList<enumProvince> typeNameArray) {
+    public WrapProv(ArrayList<Double> results, ArrayList<Province> typeNameArray) {
         this.prNameArray = typeNameArray;
         this.numberResults = results;
     }
-    public ArrayList<enumProvince> getProvinceArray(){
+    public ArrayList<Province> getProvinceArray(){
             return prNameArray;
         }
     public ArrayList<Double> getProvResult(){ return numberResults; }
