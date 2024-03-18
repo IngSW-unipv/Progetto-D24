@@ -10,8 +10,8 @@ public class Other extends Event{
     // costruttore
 
 
-    public Other(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, double[] price, Genre genre, Manager creator, String artists, String description) {
-        super(idEvent, name, city, location, date, time, province, maxNumberOfSeats, typeOfSeats, seatsRemainedNumberForType, price, genre, creator, artists, description);
+    public Other(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type tipe, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description) {
+        super(idEvent, name, city, location, date, time, province, genre, tipe, maxNumberOfSeats, typeOfSeats, seatsRemainedNumberForType, ticketsSoldNumberForType, price, creator, artists, description);
     }
 
     // override metodi interfaccia EventType
