@@ -35,7 +35,7 @@ public class StatisticsHandlerFactory {
             try {
                 //Obtaining path for statisticsHandler
                 Properties p = new Properties(System.getProperties());
-                p.load(new FileInputStream("it/unipv/insfw23/TicketWave/Factory/Properties")); // path proprietaria
+                p.load(new FileInputStream("it/unipv/insfw23/TicketWave/properties")); // path proprietaria
                 statisticsHandlerClassName = p.getProperty(STATISTICSHANDLER_PROPERTYNAME);
 
 

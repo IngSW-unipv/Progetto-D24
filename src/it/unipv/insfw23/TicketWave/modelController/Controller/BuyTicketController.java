@@ -1,4 +1,4 @@
-package it.unipv.insfw23.TicketWave.modelController;
+package it.unipv.insfw23.TicketWave.modelController.Controller;
 
 
 

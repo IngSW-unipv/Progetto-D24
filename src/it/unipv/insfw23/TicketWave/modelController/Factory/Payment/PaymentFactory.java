@@ -1,5 +1,7 @@
-package it.unipv.insfw23.TicketWave.modelDomain.payment;
-import java.io.FileInputStream;
+package it.unipv.insfw23.TicketWave.modelController.Factory.Payment;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.MastercardAdapter;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.PayPalAdapter;
+
 import java.io.FileInputStream;
 import java.lang.reflect.Constructor;
 import java.util.Properties;
