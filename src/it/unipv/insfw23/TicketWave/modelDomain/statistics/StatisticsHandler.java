@@ -54,7 +54,7 @@ public class StatisticsHandler implements IStatisticsHandler {
                     results[j] = results[j] + percResult;
                 }
             }
-            results[j] = results[j] / eventCounter;
+            if (eventCounter != 0){ results[j] = results[j] / eventCounter;}
             eventCounter = 0;
         }
 
@@ -216,65 +216,10 @@ public class StatisticsHandler implements IStatisticsHandler {
     }
 }
 
-public class WrapType {
-    private Type[] typeNameArray;
-    private double[] typeResults;
-
-    public WrapType(double[] results, Type[] typeNameArray) {
-        this.typeNameArray = typeNameArray;
-        this.typeResults = results;
-    }
-
-    public Type[] getTypeArray() { return typeNameArray;}
-    public double[] getTypeResult() {
-        return typeResults;
-    }
-}
 
 
-public class WrapArtist{
-    private ArrayList<String> typeNameArray;
-    private ArrayList<Double> typeResults;
 
-    public WrapArtist(ArrayList<Double> results, ArrayList<String> typeNameArray) {
-        this.typeNameArray = typeNameArray;
-        this.typeResults = results;
-    }
-    public ArrayList<String> getArtistNameArray(){
-        return typeNameArray;
-    }
-    public ArrayList<Double> getArtistResult(){
-        return typeResults;
-    }
-}
 
-public class WrapGenre{
-    private ArrayList<Genre> prNameArray;
-    private ArrayList<Double> numberResults;
 
-    public WrapGenre(ArrayList<Double> results, ArrayList<Genre> typeNameArray) {
-        this.prNameArray = typeNameArray;
-        this.numberResults = results;
-    }
-    public ArrayList<Genre> getGenreArray(){
-        return prNameArray;
-    }
 
-    public ArrayList<Double> getGenreResult(){
-        return numberResults;
-    }
-}
 
-public class WrapProv{
-    private ArrayList<Province> prNameArray;
-    private ArrayList<Double> numberResults;
-
-    public WrapProv(ArrayList<Double> results, ArrayList<Province> typeNameArray) {
-        this.prNameArray = typeNameArray;
-        this.numberResults = results;
-    }
-    public ArrayList<Province> getProvinceArray(){
-            return prNameArray;
-        }
-    public ArrayList<Double> getProvResult(){ return numberResults; }
-}
