@@ -1,10 +1,12 @@
 package it.unipv.insfw23.TicketWave.modelDomain.ticket;
 
+import it.unipv.insfw23.TicketWave.modelController.Factory.Notifications.NotificationHandlerFactory;
+import it.unipv.insfw23.TicketWave.modelController.Factory.ticket.ITicketHandler;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.*;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.*;
 
-public class TicketHandler {
+public class TicketHandler implements ITicketHandler{
 		
 	
 		private static TicketHandler istance;
@@ -28,9 +30,9 @@ public class TicketHandler {
 			Ticket t = new Ticket(barcode, price, type);
 			//se non ci sono piu' biglietti notifica il creatore dell'evento
 			if(event.getSeatsRemaining() == 0) {
-				Manager creator;
-				creator = event.getCreator();
-				NotificationHandler.getIstance().sendNotificationSoldOut(event); //NotifHand e' l'istanza del NotificationHandler
+				//Manager creator;
+				//creator = event.getCreator();
+				NotificationHandlerFactory.getIstance().getNotificationHandler().sendNotificationSoldOut(event);
 			}
 			return t;
 		}

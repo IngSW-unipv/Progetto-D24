@@ -11,3 +11,5 @@ statisticshandler.class.name = it/unipv/insfw23/TicketWave/modelDomain/statistic
 subscriptionhandler.class.name = it/unipv/insfw23/TicketWave/modelDomain/subscription/SubscriptionHandler.java;
 
 notificationhandler.class.name = it/unipv/insfw23/TicketWave/modelDomain/notifications/NotificationHandler
+
+tickethandler.class.name = it/unipv/insfw23/TicketWave/modelDomain/ticket/TicketHandler
