@@ -10,7 +10,7 @@ public class StatisticsHandlerFactory {
 
 
     //Attributes
-    private static StatisticsHandler statisticsHandler;
+    private static IStatisticsHandler statisticsHandler;
     private static final String STATISTICSHANDLER_PROPERTYNAME = "statisticshandler.class.name";
     private static StatisticsHandlerFactory instance = null;
 
@@ -35,13 +35,13 @@ public class StatisticsHandlerFactory {
             try {
                 //Obtaining path for statisticsHandler
                 Properties p = new Properties(System.getProperties());
-                p.load(new FileInputStream("it/unipv/insfw23/TicketWave/properties")); // path proprietaria
+                p.load(new FileInputStream("src/it/unipv/insfw23/TicketWave/properties")); // path proprietaria
                 statisticsHandlerClassName = p.getProperty(STATISTICSHANDLER_PROPERTYNAME);
 
 
                 //JavaReflection
                 Constructor c = Class.forName(statisticsHandlerClassName).getConstructor();
-                statisticsHandler = (StatisticsHandler) c.newInstance();
+                statisticsHandler = (IStatisticsHandler) c.newInstance();
             } catch (Exception e) {
 
                 e.printStackTrace();

@@ -30,8 +30,6 @@ public class StatisticsHandler implements IStatisticsHandler {
 
     @Override
     public WrapType typeStats(Manager manager) {
-        int[] typeCode;
-        String[] typeName;
 
         int eventCounter = 0;
         ArrayList<Event> eventList = manager.getEventlist();
@@ -46,7 +44,7 @@ public class StatisticsHandler implements IStatisticsHandler {
 
                 if (currentEvent.getType() == typeArray[j]) {
 
-                    int maxn = currentEvent.getMaxNumberOfSeats();
+                    double maxn = (double) currentEvent.getMaxNumberOfSeats();
                     int soldn = currentEvent.getTicketSoldNumber();
 
                     double percResult = (soldn / maxn) * 100;
@@ -57,7 +55,6 @@ public class StatisticsHandler implements IStatisticsHandler {
             if (eventCounter != 0){ results[j] = results[j] / eventCounter;}
             eventCounter = 0;
         }
-
         WrapType returnClass = new WrapType(results, typeArray);
         return returnClass;
     }
@@ -78,34 +75,35 @@ public class StatisticsHandler implements IStatisticsHandler {
 
                 if (index >= 0) {
 
-                    int maxn = currentEvent.getMaxNumberOfSeats();
+                    double maxn = (double) currentEvent.getMaxNumberOfSeats();
                     int soldn = currentEvent.getTicketSoldNumber();
 
                     double percResult = (soldn / maxn) * 100;
 
                     artistCounter.set(index, artistCounter.get(index) + 1);
                     results.set(index, results.get(index) + percResult);
-                } else {
+                }
+                else {
                     artistNames.add(currentEvent.getArtists());
                     int newindex = artistNames.indexOf(currentEvent.getArtists());
 
-                    int maxn = currentEvent.getMaxNumberOfSeats();
+                    double maxn = (double) currentEvent.getMaxNumberOfSeats();
                     int soldn = currentEvent.getTicketSoldNumber();
 
                     double percResult = (soldn / maxn) * 100;
 
-                    artistCounter.set(newindex, 1);
+                    artistCounter.add(newindex, 1);
                     results.add(newindex, percResult);
-
                 }
             }
         }
 
-        if (artistNames.size() == results.size()) {
+        if (artistCounter.size() == results.size()) {
             for (int indexMod = 0; indexMod < artistNames.size(); indexMod++) {
                 results.set(indexMod, (results.get(indexMod) / artistCounter.get(indexMod)));
             }
         }
+        else {System.out.println("Problemiiiiiiii");}
 
         WrapArtist wrapRes = new WrapArtist(results, artistNames);
         return wrapRes;   //classe wrapper per restituire i due array che servono, ovvero artistNames creata, e results
