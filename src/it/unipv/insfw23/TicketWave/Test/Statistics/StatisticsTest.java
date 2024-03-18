@@ -7,7 +7,6 @@ import it.unipv.insfw23.TicketWave.modelDomain.statistics.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
