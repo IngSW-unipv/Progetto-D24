@@ -90,6 +90,10 @@ public abstract class Event implements EventType {
     	return price;
     }
 
+    public Type getTipe() {
+        return tipe;
+    }
+
     public Genre getGenre() {
         return genre;
     }
