@@ -5,18 +5,18 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import java.util.ArrayList;
 
 public class WrapGenre{
-    private ArrayList<Genre> prNameArray;
-    private ArrayList<Double> numberResults;
+    private ArrayList<Genre> genreNameArray;
+    private ArrayList<Double> genreResults;
 
     public WrapGenre(ArrayList<Double> results, ArrayList<Genre> typeNameArray) {
-        this.prNameArray = typeNameArray;
-        this.numberResults = results;
+        this.genreNameArray = typeNameArray;
+        this.genreResults = results;
     }
     public ArrayList<Genre> getGenreArray(){
-        return prNameArray;
+        return genreNameArray;
     }
 
     public ArrayList<Double> getGenreResult(){
-        return numberResults;
+        return genreResults;
     }
 }

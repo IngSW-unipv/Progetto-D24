@@ -5,15 +5,15 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import java.util.ArrayList;
 
 public class WrapProv{
-    private ArrayList<Province> prNameArray;
-    private ArrayList<Double> numberResults;
+    private ArrayList<Province> provNameArray;
+    private ArrayList<Double> provResults;
 
     public WrapProv(ArrayList<Double> results, ArrayList<Province> typeNameArray) {
-        this.prNameArray = typeNameArray;
-        this.numberResults = results;
+        this.provNameArray = typeNameArray;
+        this.provResults = results;
     }
     public ArrayList<Province> getProvinceArray(){
-        return prNameArray;
+        return provNameArray;
     }
-    public ArrayList<Double> getProvResult(){ return numberResults; }
+    public ArrayList<Double> getProvResult(){ return provResults; }
 }

@@ -54,7 +54,7 @@ public class StatisticsHandler implements IStatisticsHandler {
                     results[j] = results[j] + percResult;
                 }
             }
-            results[j] = results[j] / eventCounter;
+            if (eventCounter != 0){ results[j] = results[j] / eventCounter;}
             eventCounter = 0;
         }
 
