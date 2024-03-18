@@ -1,15 +1,26 @@
 package it.unipv.insfw23.TicketWave.modelDomain.subscription;
 
+import it.unipv.insfw23.TicketWave.modelDomain.FactoryHandler.Handler;
+import it.unipv.insfw23.TicketWave.modelDomain.notifications.NotificationHandler;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 
 import java.time.LocalDate;
 
-public class SubscriptionHandler {
+public class SubscriptionHandler implements Handler {
 
-		//costruttore di default
+	private static SubscriptionHandler istance = null; // Singleton
+	//costruttore di default
 
-	
+	private SubscriptionHandler() {
+	}
+	public static SubscriptionHandler getIstance() {
+		if(istance == null) {
+			istance = new SubscriptionHandler();
+		}
+		return istance;
+	}
+
 	public void buySub(Manager manager, int subscription, IPaymentAdapter payAdapter, double subPrice) {
 
 		boolean checkPayment = payAdapter.paymentMethod(subPrice);
@@ -24,5 +35,9 @@ public class SubscriptionHandler {
 			manager.setSubscription(-1);
 			System.out.println("Pagamento negato");
 		}
+	}
+
+	public void handle(){
+		System.out.println("Gestendo le sub");
 	}
 }
