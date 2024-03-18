@@ -130,16 +130,17 @@ public class StatisticsHandler implements IStatisticsHandler {
 
                     if (index >= 0) {
 
-                        int maxn = currentEvent.getMaxNumberOfSeats();
+                        double maxn = (double) currentEvent.getMaxNumberOfSeats();
                         int soldn = currentEvent.getTicketSoldNumber();
 
                         double percResult = (soldn / maxn) * 100;
                         results.set(index, results.get(index) + percResult);
-                    } else {
+                    }
+                    else {
                         genreArrayRes.add(currentEvent.getGenre());
                         int newindex = genreArrayRes.indexOf(currentEvent.getGenre());
 
-                        int maxn = currentEvent.getMaxNumberOfSeats();
+                        double maxn = (double) currentEvent.getMaxNumberOfSeats();
                         int soldn = currentEvent.getTicketSoldNumber();
 
                         double percResult = (soldn / maxn) * 100;
@@ -183,7 +184,7 @@ public class StatisticsHandler implements IStatisticsHandler {
 
                     if (index >= 0) {
 
-                        int maxn = currentEvent.getMaxNumberOfSeats();
+                        double maxn = (double) currentEvent.getMaxNumberOfSeats();
                         int soldn = currentEvent.getTicketSoldNumber();
 
                         double percResult = (soldn / maxn) * 100;
@@ -192,13 +193,12 @@ public class StatisticsHandler implements IStatisticsHandler {
                         provinceArrayRes.add(currentEvent.getProvince());
                         int newindex = provinceArrayRes.indexOf(currentEvent.getProvince());
 
-                        int maxn = currentEvent.getMaxNumberOfSeats();
+                        double maxn = (double) currentEvent.getMaxNumberOfSeats();
                         int soldn = currentEvent.getTicketSoldNumber();
 
                         double percResult = (soldn / maxn) * 100;
                         results.add(newindex, percResult);
                     }
-
                 }
             }
 

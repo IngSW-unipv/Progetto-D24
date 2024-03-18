@@ -100,14 +100,16 @@ public class StatisticsTest {
 
     @Test
     public void genreTest(){
-        statisticsHandler = StatisticsHandlerFactory.getInstance().getStatisticsHandler();
-        assertEquals(genreResultTest, statisticsHandler.genreStats(Type.FESTIVAL, manager));
+        statisticsHandler = StatisticsHandler.getIstance();
+        assertEquals(genreResultTest.getGenreArray(), statisticsHandler.genreStats(Type.FESTIVAL, manager).getGenreArray());
+        assertEquals(genreResultTest.getGenreResult(), statisticsHandler.genreStats(Type.FESTIVAL, manager).getGenreResult());
     }
 
     @Test
     public void ProvTest(){
-        statisticsHandler = StatisticsHandlerFactory.getInstance().getStatisticsHandler();
-        assertEquals(provResultTest, statisticsHandler.provinceStats(Type.FESTIVAL,"Rooler, Salmo, Nello Taver", manager));
+        statisticsHandler = StatisticsHandler.getIstance();
+        assertEquals(provResultTest.getProvinceArray(), statisticsHandler.provinceStats(Type.FESTIVAL,"Rooler, Salmo, Nello Taver", manager).getProvinceArray());
+        assertEquals(provResultTest.getProvResult(), statisticsHandler.provinceStats(Type.FESTIVAL,"Rooler, Salmo, Nello Taver", manager).getProvResult());
     }
 
 }
