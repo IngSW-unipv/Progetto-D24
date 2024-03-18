@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.modelDomain.user;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 
+import java.sql.Time;
 import java.util.ArrayList;
 
 import java.lang.String;
@@ -74,10 +75,10 @@ public class Manager extends User {
     }
 
     //seguono dei metodi di crea Festival, Concerto ecc..
-    public void createFestival(int idEvent, String name, String city, LocalDate date, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int [] seatsRemainedNumberForType, double[] price, Genre genre, Manager creator, ArrayList<String> artists) throws Exception {
+    public void createFestival(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type tipe, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, int artistsNumber) throws Exception {
         if(subscription==1 || subscription==2 && counterCreatedEvents < maxNumberOfEvents) {
 
-            Event festival = new Festival(idEvent, name, city, date, location, province, maxNumberOfSeats,typeOfSeats, seatsRemainedNumberForType, price, genre,creator, artists);
+            Event festival = new Festival(idEvent, name, city,location,date,time,province,genre,tipe,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,ticketsSoldNumberForType,price,creator,artists,description,artistsNumber);
             event.add(festival);
             counterCreatedEvents++;
         }
@@ -86,10 +87,10 @@ public class Manager extends User {
         }
     }
 
-    public void createConcert(int idEvent, String name, String city, LocalDate date, String location, Province province, int maxNumberOfSeats, int typeOfSeats,int[]seatsRemainedNumberForType, double[] price, Genre genre, Manager creator, ArrayList<String> artists) throws Exception{
+    public void createConcert(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type tipe, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description) throws Exception{
         if(subscription==1 || subscription==2 && counterCreatedEvents < maxNumberOfEvents) {
 
-            Event concert= new Concert(idEvent,name,city,date,location,province,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,price,genre,creator,artists);
+            Event concert= new Concert(idEvent,name,city,location,date,time,province,genre,tipe,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,ticketsSoldNumberForType,price,creator,artists,description);
             event.add(concert);
             counterCreatedEvents++;
         }
@@ -98,10 +99,10 @@ public class Manager extends User {
         }
     }
 
-    public void createTheater(int idEvent, String name, String city, LocalDate date, String location, Province province, int maxNumberOfSeats, int typeOfSeats,int [] seatsRemainedNumberForType, double[] price, Genre genre, Manager creator, ArrayList<String> artists, String theatreCompany, String authorName)throws Exception {
+    public void createTheater(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type tipe, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, String authorName)throws Exception {
         if(subscription==1 || subscription==2 && counterCreatedEvents < maxNumberOfEvents) {
 
-            Event theater = new Theater(idEvent, name, city,date, location, province, maxNumberOfSeats,typeOfSeats, seatsRemainedNumberForType, price, genre, creator,artists,theatreCompany, authorName);
+            Event theater = new Theater(idEvent, name, city, location,date,time, province,genre,tipe,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,ticketsSoldNumberForType,price,creator,artists,description,authorName);
             event.add(theater);
             counterCreatedEvents++;
         }
@@ -110,16 +111,16 @@ public class Manager extends User {
         }
     }
 
-    public void createOther(int idEvent, String name, String city, LocalDate date, String location, Province province, int maxNumberOfSeats, int typeOfSeats, int [] seatsRemainedNumberForType,double[] price, Genre genre, Manager creator, ArrayList<String> artists, String description)throws Exception{
+    public void createOther(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type tipe, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description)throws Exception{
         if(subscription==1 || subscription==2 && counterCreatedEvents < maxNumberOfEvents) {
 
-                Event other = new Other(idEvent, name, city, date, location, province, maxNumberOfSeats,typeOfSeats, seatsRemainedNumberForType, price,genre,creator,artists,description);
-                event.add(other);
-                counterCreatedEvents++;
-            }
-            else {
-                throw new Exception("Impossibile Creare l'evento:" + name + ".Non puoi creare altri Eventi");
-            }
+            Event other = new Other(idEvent, name, city, location, date,time,province,genre,tipe,maxNumberOfSeats,typeOfSeats, seatsRemainedNumberForType, ticketsSoldNumberForType,price, creator,artists,description);
+            event.add(other);
+            counterCreatedEvents++;
+        }
+        else {
+            throw new Exception("Impossibile Creare l'evento:" + name + ".Non puoi creare altri Eventi");
+        }
 
     }
 
