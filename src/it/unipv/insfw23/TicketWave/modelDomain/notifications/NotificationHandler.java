@@ -2,11 +2,11 @@ package it.unipv.insfw23.TicketWave.modelDomain.notifications;
 
 import java.util.ArrayList;
 
-import it.unipv.insfw23.TicketWave.modelDomain.FactoryHandler.Handler;
+import it.unipv.insfw23.TicketWave.modelController.Factory.Notifications.INotificationHandler;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.*;
 
-public class NotificationHandler implements INotification, Handler {
+public class NotificationHandler implements INotificationHandler {
 	
 	private static NotificationHandler istance = null;
 	final String msg2 = "E' disponibile un nuovo evento nella tua provincia";
@@ -15,14 +15,14 @@ public class NotificationHandler implements INotification, Handler {
 	private int counterNotification;
 
 	
-	private NotificationHandler(int counterNotification) { //counterNotification -> num di notifiche create finora (sul db)
-		this.counterNotification = counterNotification;
+	private NotificationHandler() { //counterNotification -> num di notifiche create finora (sul db)
+		//counterNotification = counterNotificationDao;
+		counterNotification = 0; //da modificare con il prelievo del numero di notifiche fatte finore presenti sul db con COUNT
 	}
 	
 	public static NotificationHandler getIstance() {
 		if(istance == null) {
-			int numNotific = 0; //da modificare con il prelievo del numero di notifiche fatte finore presenti sul db con COUNT
-			istance = new NotificationHandler(numNotific);
+			istance = new NotificationHandler();
 		}
 		return istance;
 	}
@@ -71,6 +71,8 @@ public class NotificationHandler implements INotification, Handler {
 						counterNotification += 1;
 						n2 = new Notification(counterNotification, cfav, msg4);
 						cfav.addNotification(n2);
+						// toglie il customer corrente dalla lista di quelli vicini dato che gli è già stata notificata la creazione dell'evento
+						customernear.remove(cprov);
 					}
 					else {
 						counterNotification += 1;
