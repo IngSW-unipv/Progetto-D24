@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
+import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -127,14 +128,8 @@ public class SignUpView extends Scene {
 
         provinceLabel.setFont(labelFont);
         GridPane.setConstraints(provinceLabel, 2, 2);
-        ComboBox<String> residenceComboBox = new ComboBox<>();
-        residenceComboBox.getItems().addAll(
-                "Roma",
-                "Milano",
-                "Pavia",
-                "Torino",
-                "Firenze"
-        );
+        ComboBox<Province> residenceComboBox = new ComboBox<>();
+        residenceComboBox.getItems().addAll(Province.values());
         GridPane.setConstraints(residenceComboBox, 3, 2);
 
 

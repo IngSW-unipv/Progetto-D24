@@ -1,4 +1,4 @@
-package it.unipv.insfw23.TicketWave.Dao.Research;
+/*package it.unipv.insfw23.TicketWave.Dao.Research;
 
 import it.unipv.insfw23.TicketWave.Dao.ConnectionDB;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
@@ -146,3 +146,4 @@ public class ResearchDAO implements IResearchDAO{
     }
 
 }
+*/

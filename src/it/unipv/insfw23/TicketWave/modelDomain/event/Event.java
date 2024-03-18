@@ -15,33 +15,34 @@ public abstract class Event implements EventType {
     private LocalDate date;
     private Time time;
     private Province province;
+    private Genre genre;
+    private Type tipe;
     private int maxNumberOfSeats;
     private int typeOfSeats; // indice dell'array ticketSoldNumberForType, serve per dire quante tipologie di posti ho: base + premium = 2, base = 1, base + premium + vip = 3 tipi di posti, mi server per scorrere l'array
-    private int [] seatsRemainedNumberForType;
-    private int [] ticketsSoldNumberForType; // vettore biglietti venduti per tipo
+    private int [] seatsRemainedNumberForType, ticketsSoldNumberForType; // vettore biglietti venduti per tipo
     private double [] price; // vettore prezzi per i vari tipi di biglietto, es: Vip = 40€, Base = 15€...
-    private Genre genre;
     private Manager creator;
-    private String artists;
-    private String description; // tutti gli eventi hanno una descrizione
+    private String artists, description; // tutti gli eventi hanno una descrizione
 
     // costruttore
 
-    public Event(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, int maxNumberOfSeats, int typeOfSeats,int [] seatsRemainedNumberForType, double[] price, Genre genre, Manager creator, String artists, String description) {
+    public Event(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type tipe, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description) {
         this.idEvent = idEvent;
         this.name = name;
         this.city = city;
+        this.location = location;
         this.date = date;
         this.time = time;
-        this.location = location;
         this.province = province;
+        this.genre = genre;
+        this.tipe = tipe;
         this.maxNumberOfSeats = maxNumberOfSeats;
         this.typeOfSeats = typeOfSeats;
+        this.seatsRemainedNumberForType = seatsRemainedNumberForType;
+        this.ticketsSoldNumberForType = ticketsSoldNumberForType;
         this.price = price;
-        this.genre = genre;
         this.creator = creator;
         this.artists = artists;
-        this.seatsRemainedNumberForType = seatsRemainedNumberForType;
         this.description = description;
     }
 
@@ -87,6 +88,10 @@ public abstract class Event implements EventType {
     
     public double[] getPrices() {
     	return price;
+    }
+
+    public Type getTipe() {
+        return tipe;
     }
 
     public Genre getGenre() {

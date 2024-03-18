@@ -2,10 +2,11 @@ package it.unipv.insfw23.TicketWave.modelDomain.notifications;
 
 import java.util.ArrayList;
 
+import it.unipv.insfw23.TicketWave.modelDomain.FactoryHandler.Handler;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.*;
 
-public class NotificationHandler implements INotification{
+public class NotificationHandler implements INotification, Handler {
 	
 	private static NotificationHandler istance = null;
 	final String msg2 = "E' disponibile un nuovo evento nella tua provincia";
@@ -87,6 +88,10 @@ public class NotificationHandler implements INotification{
 			
 		}
 		
+	}
+
+	public void handle (){ // metodo che devo implementare per l'Handler = interfaccia dei prodotti per Factory
+		System.out.println("Gestendo le notifiche");
 	}
 	
 	
