@@ -1,8 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelDomain.statistics;
 
-import it.unipv.insfw23.TicketWave.Factory.Statistics.IStatisticsHandler;
+import it.unipv.insfw23.TicketWave.modelController.Factory.Statistics.IStatisticsHandler;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
-import it.unipv.insfw23.TicketWave.modelDomain.subscription.SubscriptionHandler;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 
 import java.lang.reflect.Array;

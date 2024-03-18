@@ -1,4 +1,4 @@
-package it.unipv.insfw23.TicketWave.Factory.Statistics;
+package it.unipv.insfw23.TicketWave.modelController.Factory.Statistics;
 
 import it.unipv.insfw23.TicketWave.modelDomain.statistics.StatisticsHandler;
 
