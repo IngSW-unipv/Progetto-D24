@@ -16,7 +16,7 @@ public abstract class Event implements EventType {
     private Time time;
     private Province province;
     private Genre genre;
-    private Type tipe;
+    private Type type;
     private int maxNumberOfSeats;
     private int typeOfSeats; // indice dell'array ticketSoldNumberForType, serve per dire quante tipologie di posti ho: base + premium = 2, base = 1, base + premium + vip = 3 tipi di posti, mi server per scorrere l'array
     private int [] seatsRemainedNumberForType, ticketsSoldNumberForType; // vettore biglietti venduti per tipo
@@ -26,7 +26,7 @@ public abstract class Event implements EventType {
 
     // costruttore
 
-    public Event(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type tipe, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description) {
+    public Event(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type type, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description) {
         this.idEvent = idEvent;
         this.name = name;
         this.city = city;
@@ -35,7 +35,7 @@ public abstract class Event implements EventType {
         this.time = time;
         this.province = province;
         this.genre = genre;
-        this.tipe = tipe;
+        this.type = type;
         this.maxNumberOfSeats = maxNumberOfSeats;
         this.typeOfSeats = typeOfSeats;
         this.seatsRemainedNumberForType = seatsRemainedNumberForType;
@@ -90,8 +90,8 @@ public abstract class Event implements EventType {
     	return price;
     }
 
-    public Type getTipe() {
-        return tipe;
+    public Type getType() {
+        return type;
     }
 
     public Genre getGenre() {
