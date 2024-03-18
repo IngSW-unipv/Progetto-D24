@@ -7,3 +7,5 @@ mastercard.adapter.class.name=it/unipv/insfw23/TicketWave/modelDomain/payment/Ma
 paypal.adapter.class.name=it/unipv/insfw23/TicketWave/modelDomain/payment/PayPalAdapter.java
 
 statisticshandler.class.name = it/unipv/insfw23/TicketWave/modelDomain/statistics/StatisticsHandler.java;
+
+subscriptionhandler.class.name = it/unipv/insfw23/TicketWave/modelDomain/subscription/SubscriptionHandler.java;
