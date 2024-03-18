@@ -1,15 +1,25 @@
 package it.unipv.insfw23.TicketWave.modelDomain.subscription;
 
+import it.unipv.insfw23.TicketWave.modelController.Factory.Subscription.ISubscriptionHandlerFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 
-import java.time.LocalDate;
 
-public class SubscriptionHandler {
+public class SubscriptionHandler implements ISubscriptionHandlerFactory {
+	private static SubscriptionHandler istance;
 
-		//costruttore di default
 
-	
+	// costruttore privato per singleton
+	private SubscriptionHandler() {};
+
+	public static SubscriptionHandler getIstance(){
+		if (istance == null) {
+			istance = new SubscriptionHandler();
+		}
+		return istance;
+	}
+
+	@Override
 	public void buySub(Manager manager, int subscription, IPaymentAdapter payAdapter, double subPrice) {
 
 		boolean checkPayment = payAdapter.paymentMethod(subPrice);

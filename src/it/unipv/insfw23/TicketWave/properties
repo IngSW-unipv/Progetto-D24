@@ -2,5 +2,12 @@ PROPERTYNAME=utente
 PROPERTYPSW=1234
 PROPERTYDBDRIVER=com.mysql.cj.jdbc.Driver
 PROPERTYDBURL=jdbc:mysql://localhost:3306/TicketWave
+
 mastercard.adapter.class.name=it/unipv/insfw23/TicketWave/modelDomain/payment/MastercardAdapter
 paypal.adapter.class.name=it/unipv/insfw23/TicketWave/modelDomain/payment/PayPalAdapter.java
+
+statisticshandler.class.name = it/unipv/insfw23/TicketWave/modelDomain/statistics/StatisticsHandler.java;
+
+subscriptionhandler.class.name = it/unipv/insfw23/TicketWave/modelDomain/subscription/SubscriptionHandler.java;
+
+notificationhandler.class.name = it/unipv/insfw23/TicketWave/modelDomain/notifications/NotificationHandler
