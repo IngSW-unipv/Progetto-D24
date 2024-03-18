@@ -9,7 +9,18 @@ public enum Genre {
     TECHNO,
     RAP,
     TRAP,
-    POP;
+    POP,
+    STOP, // da qui in poi iniziano le opere teatrali
+    BALLETTO,
+    COMMEDIA,
+    MUSICAL,
+    OPERA,
+    OPERETTA,
+    SATIRA,
+    DRAMMA,
+    MONOLOGO,
+    SKETCH,
+    TRAGEDIA;
 
     // Ritorna un'array delle scritte associate ai valori della enum
     public static String[] getGenreNameArray() {
