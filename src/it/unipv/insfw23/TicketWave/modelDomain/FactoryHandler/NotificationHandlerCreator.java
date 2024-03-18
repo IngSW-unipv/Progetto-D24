@@ -6,8 +6,6 @@ public class NotificationHandlerCreator extends HandlerCreator{
 
     @Override
     public Handler createHandler() {
-        Handler h;
-        h = (Handler) NotificationHandler.getIstance();
-        return h;
+        return NotificationHandler.getIstance();
     }
 }
