@@ -6,6 +6,7 @@ public class MastercardAdapter implements IPaymentAdapter{
 
     private MastercardPayment mastercardPayment;
 
+
     public MastercardAdapter(MastercardPayment mPayment){
         this.mastercardPayment = mPayment;
     }
