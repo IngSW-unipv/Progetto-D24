@@ -8,7 +8,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.notifications.NotificationHandler
 
 public class NotificationHandlerFactory {
 
-	private static NotificationHandler notificationHandler;
+	private static INotificationHandler notificationHandler;
 	private static final String NOTIFICATIONHANDLER_PROPERTYNAME = "notificationhandler.class.name";
 	private static NotificationHandlerFactory istance = null;
 	
@@ -23,17 +23,18 @@ public class NotificationHandlerFactory {
 		return istance;
 	}
 	
-	public NotificationHandler getNotificationHandler() {
+	public INotificationHandler getNotificationHandler() {
 		if(notificationHandler == null) {
 			String notificationHandlerClassName;
 			
 			try {
 				Properties p = new Properties(System.getProperties());
-				p.load(new FileInputStream("it/unipv/insfw23/TicketWave/properties"));
+				p.load(new FileInputStream("src/it/unipv/insfw23/TicketWave/properties"));
 				notificationHandlerClassName = p.getProperty(NOTIFICATIONHANDLER_PROPERTYNAME);
 				
+				//java reflection
 				Constructor c = Class.forName(notificationHandlerClassName).getConstructor();
-				notificationHandler = (NotificationHandler)c.newInstance();
+				notificationHandler = (INotificationHandler)c.newInstance();
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
