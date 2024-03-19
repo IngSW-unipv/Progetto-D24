@@ -9,6 +9,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.*;
 public class NotificationHandler implements INotificationHandler {
 	
 	private static NotificationHandler istance = null;
+	final String msg1 = "Evento soldout";
 	final String msg2 = "E' disponibile un nuovo evento nella tua provincia";
 	final String msg3 = "E' disponibile un nuovo evento del tuo genere preferito";
 	final String msg4 = "E' disponibile un nuovo evento del tuo genere preferito nella tua provincia";
@@ -29,7 +30,6 @@ public class NotificationHandler implements INotificationHandler {
 	
 	//notifica evento sold out
 	public void sendNotificationSoldOut(Event ev) {
-		String msg1 = "Evento soldout";
 		Notification n1;
 		Manager creator = ev.getCreator();
 		counterNotification += 1;
@@ -56,9 +56,6 @@ public class NotificationHandler implements INotificationHandler {
 		Province province = ev.getProvince();
 		Genre genre = ev.getGenre();
 		Notification n2;
-		String msg2 = "E' disponibile un nuovo evento nella tua provincia";
-		String msg3 = "E' disponibile un nuovo evento del tuo genere preferito";
-		String msg4 = "E' disponibile un nuovo evento del tuo genere preferito nella tua provincia";
 		int subscription_creator = ev.getCreator().getSubscription();
 		ArrayList <Customer> customernear = new ArrayList<>(); //select al db where province = province
 		
@@ -90,10 +87,6 @@ public class NotificationHandler implements INotificationHandler {
 			
 		}
 		
-	}
-
-	public void handle (){ // metodo che devo implementare per l'Handler = interfaccia dei prodotti per Factory
-		System.out.println("Gestendo le notifiche");
 	}
 	
 	
