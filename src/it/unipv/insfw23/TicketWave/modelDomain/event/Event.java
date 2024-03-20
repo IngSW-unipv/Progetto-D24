@@ -105,7 +105,7 @@ public abstract class Event {
     public int getSeatsRemaining() {
     	int ntot = 0;
     	for(int x : seatsRemainedNumberForType) {
-    		ntot += seatsRemainedNumberForType[x];
+    		ntot += x;
     	}
     	return ntot;
     }
