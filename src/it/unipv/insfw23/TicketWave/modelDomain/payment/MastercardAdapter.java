@@ -4,6 +4,8 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 
 public class MastercardAdapter implements IPaymentAdapter{
 
+    public MastercardAdapter(){};
+
     private MastercardPayment mastercardPayment;
 
 
