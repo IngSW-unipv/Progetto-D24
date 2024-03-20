@@ -15,12 +15,11 @@ public class TestEvent {
     private Theater th;
     private Other ot;
     private ArrayList<Event> events = new ArrayList<>();
-    Manager mg;
+    Manager mg = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", 1, "1234567890123456",
+                            events, 5, 1, LocalDate.now(), 0);;
 
     @Test
     public void createFestival(){
-        mg = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", 1, "1234567890123456",
-                        events, 5, 1, LocalDate.now(), 0);
         int [] a = {20};
         int [] b = {2080};
         double [] p = {150};
@@ -31,8 +30,6 @@ public class TestEvent {
 
     @Test
     public void createConcert(){
-        mg = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", 1, "1234567890123456",
-                events, 5, 1, LocalDate.now(), 0);
         int [] a = {20, 10};
         int [] b = {1480, 490};
         double [] p = {150, 300};
@@ -42,8 +39,6 @@ public class TestEvent {
 
     @Test
     public void createTheater(){
-        mg = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", 1, "1234567890123456",
-                events, 5, 1, LocalDate.now(), 0);
         int [] a = {23, 10, 50};
         int [] b = {477, 490, 150};
         double [] p = {50, 300, 1000};
@@ -53,8 +48,6 @@ public class TestEvent {
 
     @Test
     public void createOther(){
-        mg = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", 1, "1234567890123456",
-                events, 5, 1, LocalDate.now(), 0);
         int [] a = {0};
         int [] b = {0};
         double [] p = {0};

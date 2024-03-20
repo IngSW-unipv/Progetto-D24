@@ -6,18 +6,8 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 
 
 public class SubscriptionHandler implements ISubscriptionHandlerFactory {
-	private static SubscriptionHandler istance;
 
-
-	// costruttore privato per singleton
-	private SubscriptionHandler() {};
-
-	public static SubscriptionHandler getIstance(){
-		if (istance == null) {
-			istance = new SubscriptionHandler();
-		}
-		return istance;
-	}
+	public SubscriptionHandler() {};
 
 	@Override
 	public void buySub(Manager manager, int subscription, IPaymentAdapter payAdapter, double subPrice) {
