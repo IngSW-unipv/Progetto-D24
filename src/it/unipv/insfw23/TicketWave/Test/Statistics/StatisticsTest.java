@@ -85,28 +85,28 @@ public class StatisticsTest {
 
     @Test
     public void typeTest(){
-        statisticsHandler = StatisticsHandler.getIstance();
+        statisticsHandler = StatisticsHandlerFactory.getInstance().getStatisticsHandler();
         assertEquals(typeResultTest.getTypeArray(), statisticsHandler.typeStats(manager).getTypeArray());
         assertArrayEquals(typeResultTest.getTypeResult(), statisticsHandler.typeStats(manager).getTypeResult(), 0.0001);
     }
 
     @Test
     public void ArtistTest(){
-        statisticsHandler = StatisticsHandler.getIstance();
+        statisticsHandler = StatisticsHandlerFactory.getInstance().getStatisticsHandler();
         assertEquals(artistResultTest.getArtistNameArray(), statisticsHandler.artistStats(Type.FESTIVAL, manager).getArtistNameArray());
         assertEquals(artistResultTest.getArtistResult(), statisticsHandler.artistStats(Type.FESTIVAL, manager).getArtistResult());
     }
 
     @Test
     public void genreTest(){
-        statisticsHandler = StatisticsHandler.getIstance();
+        statisticsHandler = StatisticsHandlerFactory.getInstance().getStatisticsHandler();
         assertEquals(genreResultTest.getGenreArray(), statisticsHandler.genreStats(Type.FESTIVAL, manager).getGenreArray());
         assertEquals(genreResultTest.getGenreResult(), statisticsHandler.genreStats(Type.FESTIVAL, manager).getGenreResult());
     }
 
     @Test
     public void ProvTest(){
-        statisticsHandler = StatisticsHandler.getIstance();
+        statisticsHandler = StatisticsHandlerFactory.getInstance().getStatisticsHandler();
         assertEquals(provResultTest.getProvinceArray(), statisticsHandler.provinceStats(Type.FESTIVAL,"Rooler, Salmo, Nello Taver", manager).getProvinceArray());
         assertEquals(provResultTest.getProvResult(), statisticsHandler.provinceStats(Type.FESTIVAL,"Rooler, Salmo, Nello Taver", manager).getProvResult());
     }

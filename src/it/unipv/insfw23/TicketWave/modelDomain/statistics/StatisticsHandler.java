@@ -14,19 +14,7 @@ import static it.unipv.insfw23.TicketWave.modelDomain.event.Province.valueOf;
 
 public class StatisticsHandler implements IStatisticsHandler {
 
-    private static StatisticsHandler istance;
-
-
-    // costruttore privato per singleton
-    private StatisticsHandler() {};
-
-    public static StatisticsHandler getIstance(){
-        if(istance == null){
-            istance = new StatisticsHandler();
-        }
-        return istance;
-    }
-
+    public StatisticsHandler(){};
 
     @Override
     public WrapType typeStats(Manager manager) {

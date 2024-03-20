@@ -15,15 +15,4 @@ public class Theater extends Event{
         super(idEvent, name, city, location, date, time, province, genre, tipe, maxNumberOfSeats, typeOfSeats, seatsRemainedNumberForType, ticketsSoldNumberForType, price, creator, artists, description);
         this.authorName = authorName;
     }
-
-    // override metodi interfaccia EventType
-    @Override
-    public String getClassName() {
-        return "Theater";
-    }
-
-    @Override
-    public int getKeyCode() {
-        return 3; // 3 = Theater
-    }
 }
