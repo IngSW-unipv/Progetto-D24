@@ -9,18 +9,22 @@ import it.unipv.insfw23.TicketWave.modelDomain.notifications.*;
 public class TicketHandler implements ITicketHandler{
 		
 	
-		private static TicketHandler istance;
-	
-		private TicketHandler() {
+//		private static TicketHandler istance;
+		
+		public TicketHandler() {
 			
 		}
-		
-		public static TicketHandler getIstance() {
-			if(istance == null) {
-				istance = new TicketHandler();
-			}
-			return istance;
-		}
+	
+//		private TicketHandler() {
+//			
+//		}
+//		
+//		public static TicketHandler getIstance() {
+//			if(istance == null) {
+//				istance = new TicketHandler();
+//			}
+//			return istance;
+//		}
 		
 		public Ticket createTicket(Event event,TicketType type) {
 			String barcode;

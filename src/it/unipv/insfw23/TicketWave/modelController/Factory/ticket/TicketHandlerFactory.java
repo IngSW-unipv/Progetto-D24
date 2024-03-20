@@ -32,6 +32,7 @@ public class TicketHandlerFactory {
 				//java reflection
 				Constructor c = Class.forName(ticketHandlerClassName).getConstructor();
 				ticketHandler = (ITicketHandler)c.newInstance();
+				
 			} catch (Exception e) {
 				// TODO: handle exception
 				e.printStackTrace();
