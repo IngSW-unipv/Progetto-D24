@@ -30,8 +30,10 @@ public class TicketHandlerFactory {
 				ticketHandlerClassName = p.getProperty(TICKETHANDLER_PROPERTYNAME);
 				
 				//java reflection
-				Constructor c = Class.forName(ticketHandlerClassName).getConstructor();
+				Constructor c = Class.forName(ticketHandlerClassName).getDeclaredConstructor();
+				c.setAccessible(true);
 				ticketHandler = (ITicketHandler)c.newInstance();
+				c.setAccessible(false);
 				
 			} catch (Exception e) {
 				// TODO: handle exception
