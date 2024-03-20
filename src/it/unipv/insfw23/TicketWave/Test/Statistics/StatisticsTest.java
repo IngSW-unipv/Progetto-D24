@@ -18,7 +18,7 @@ public class StatisticsTest {
     private IStatisticsHandler statisticsHandler;
     private ArrayList<Event> events;
     private Manager manager;
-
+    private Manager emptyManager;
     private WrapType typeResultTest;
     private WrapGenre genreResultTest;
     private WrapArtist artistResultTest;
@@ -55,6 +55,8 @@ public class StatisticsTest {
 
         manager = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", 1, "1234567890123456", events, 5, 1, LocalDate.now(), 0);
 
+        ArrayList<Event> emptyEvents = new ArrayList<>();
+        emptyManager = new Manager("Giorg", "Mastrota", "1990-01-01", "giorg@example.com", "eminflex", 1, "1234567890123456", emptyEvents, 5, 1, LocalDate.now(), 0);
 
         Type[] typeNameArray = {Type.FESTIVAL, Type.CONCERT, Type.THEATER, Type.OTHER};
         double[] typeResults = {50.0, 100.0, 0.0, 0.0};
@@ -88,6 +90,12 @@ public class StatisticsTest {
         statisticsHandler = StatisticsHandlerFactory.getInstance().getStatisticsHandler();
         assertEquals(typeResultTest.getTypeArray(), statisticsHandler.typeStats(manager).getTypeArray());
         assertArrayEquals(typeResultTest.getTypeResult(), statisticsHandler.typeStats(manager).getTypeResult(), 0.0001);
+    }
+
+    @Test
+    public void typeTestExeption(){
+        statisticsHandler = StatisticsHandlerFactory.getInstance().getStatisticsHandler();
+        statisticsHandler.typeStats(emptyManager);
     }
 
     @Test
