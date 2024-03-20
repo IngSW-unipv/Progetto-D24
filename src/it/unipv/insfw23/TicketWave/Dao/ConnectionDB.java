@@ -19,7 +19,8 @@ public class ConnectionDB {
     private static String dbURL;
     private static ConnectionDB conn;
 
-    private static void init() {
+    // Davide: ho cambiato il metodo init in un metodo costruttore pubblico così da poter usare il factory
+    public ConnectionDB() {
         Properties p = new Properties(System.getProperties());
         try {
             p.load(new FileInputStream("it/unipv/insfw23/TicketWave/properties"));
@@ -33,12 +34,11 @@ public class ConnectionDB {
         }
     }
 
+    //Davide: ho cancellato la chiamata al metodo init che era all'inizio del metodo startConnection, perchè quella parte
+    // di codice viene eseguita alla creazione della classe, quindi al momento della chimata di startConnection è già tutto inizializzato
     public static Connection startConnection(Connection conn, String schema)
     {
-        init();
         System.out.println(dbURL);
-
-
 
         if ( isOpen(conn) )
             closeConnection(conn);
