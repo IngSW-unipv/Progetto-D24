@@ -17,14 +17,4 @@ public class Festival extends Event {
         this.artistsNumber = artistsNumber;
     }
 
-    // override metodi interfaccia EventType
-    @Override
-    public String getClassName() {
-        return "Festival";
-    }
-
-    @Override
-    public int getKeyCode() {
-        return 2; // 2 = Festival
-    }
 }

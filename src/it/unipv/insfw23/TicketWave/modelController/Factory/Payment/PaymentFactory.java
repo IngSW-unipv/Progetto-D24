@@ -20,7 +20,7 @@ public class PaymentFactory {
 
     }
 
-    public static synchronized PaymentFactory getIstance(){  //Singleton
+    public static  PaymentFactory getIstance(){  //Singleton
         if(istance==null){
             istance = new PaymentFactory();
         }
@@ -33,7 +33,7 @@ public class PaymentFactory {
 
             try {
                 Properties prop = new Properties(System.getProperties());
-                prop.load(new FileInputStream("it/unipv/insfw23/TicketWave/properties"));
+                prop.load(new FileInputStream("src/it/unipv/insfw23/TicketWave/properties"));
                 mastercardAdaptClassName = prop.getProperty(M_PROPERTYNAME);
 
                 Constructor c = Class.forName(mastercardAdaptClassName).getConstructor();  //java reflection
@@ -52,7 +52,7 @@ public class PaymentFactory {
 
                 try{
                     Properties prop = new Properties(System.getProperties());
-                    prop.load(new FileInputStream("it/unipv/insfw23/TicketWave/properties"));
+                    prop.load(new FileInputStream("src/it/unipv/insfw23/TicketWave/properties"));
                     paypalAdaptClassName=prop.getProperty(P_PROPERTYNAME);
 
                     Constructor c= Class.forName(paypalAdaptClassName).getConstructor();

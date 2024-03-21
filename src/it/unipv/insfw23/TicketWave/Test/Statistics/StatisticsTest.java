@@ -7,18 +7,18 @@ import it.unipv.insfw23.TicketWave.modelDomain.statistics.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import org.junit.Before;
 import org.junit.Test;
-
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 
 public class StatisticsTest {
     private IStatisticsHandler statisticsHandler;
     private ArrayList<Event> events;
     private Manager manager;
-
+    private Manager emptyManager;
     private WrapType typeResultTest;
     private WrapGenre genreResultTest;
     private WrapArtist artistResultTest;
@@ -27,17 +27,19 @@ public class StatisticsTest {
     @Before
     public void setUp() {
         // Preparazione dei dati per i test
-        int [] af1 = {10};
-        int [] bf1 = {1040};
-        double [] pf1 = {75};
+        int [] af1 = {20};
+        int [] bf1 = {1125};
+        double [] pf1 = {50};
 
-        int [] af2 = {10};
-        int [] bf2 = {1040};
-        double [] pf2 = {75};
+        int [] af2 = {20};
+        int [] bf2 = {1125};
+        double [] pf2 = {50};
 
-        int [] ac1 = {0};
-        int [] bc1 = {0};
-        double [] pc1 = {0};
+        int [] ac1 = {20};
+        int [] bc1 = {2250};
+        double [] pc1 = {50};
+
+        events = new ArrayList<Event>();
 
         Festival f1 = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024,4,20), Time.valueOf("14:04:00"), Province.COMO, Genre.EDM, Type.FESTIVAL, 2250,
                 1, af1, bf1, pf1, manager, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", 3);
@@ -53,22 +55,24 @@ public class StatisticsTest {
 
         manager = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", 1, "1234567890123456", events, 5, 1, LocalDate.now(), 0);
 
+        ArrayList<Event> emptyEvents = new ArrayList<>();
+        emptyManager = new Manager("Giorg", "Mastrota", "1990-01-01", "giorg@example.com", "eminflex", 1, "1234567890123456", emptyEvents, 5, 1, LocalDate.now(), 0);
 
         Type[] typeNameArray = {Type.FESTIVAL, Type.CONCERT, Type.THEATER, Type.OTHER};
-        double[] typeResults = {50, 100, 0, 0};
+        double[] typeResults = {50.0, 100.0, 0.0, 0.0};
         typeResultTest = new WrapType(typeResults, typeNameArray);
+
+        ArrayList<String> artistNameArray = new ArrayList<>();
+        artistNameArray.add("Rooler, Salmo, Nello Taver");
+        ArrayList<Double> artistResults = new ArrayList<>();
+        artistResults.add(50.0);
+        artistResultTest = new WrapArtist(artistResults, artistNameArray);
 
         ArrayList<Genre> genreNameArray = new ArrayList<>();
         genreNameArray.add(Genre.EDM);
         ArrayList<Double> genreResults = new ArrayList<>();
         genreResults.add(50.0);
         genreResultTest = new WrapGenre(genreResults, genreNameArray);
-
-        ArrayList<String> artistNameArray = new ArrayList<>();
-        artistNameArray.add("Rooler, Salmo, Nello Taver");
-        ArrayList<Double> artistResults = new ArrayList<>();
-        genreResults.add(50.0);
-        artistResultTest = new WrapArtist(artistResults, artistNameArray);
 
         ArrayList<Province> provNameArray = new ArrayList<>();
         provNameArray.add(Province.COMO);
@@ -84,25 +88,35 @@ public class StatisticsTest {
     @Test
     public void typeTest(){
         statisticsHandler = StatisticsHandlerFactory.getInstance().getStatisticsHandler();
-        assertEquals(typeResultTest, statisticsHandler.typeStats(manager));
+        assertEquals(typeResultTest.getTypeArray(), statisticsHandler.typeStats(manager).getTypeArray());
+        assertArrayEquals(typeResultTest.getTypeResult(), statisticsHandler.typeStats(manager).getTypeResult(), 0.0001);
+    }
+
+    @Test
+    public void typeTestExeption(){
+        statisticsHandler = StatisticsHandlerFactory.getInstance().getStatisticsHandler();
+        statisticsHandler.typeStats(emptyManager);
     }
 
     @Test
     public void ArtistTest(){
         statisticsHandler = StatisticsHandlerFactory.getInstance().getStatisticsHandler();
-        assertEquals(artistResultTest, statisticsHandler.artistStats(Type.FESTIVAL, manager));
+        assertEquals(artistResultTest.getArtistNameArray(), statisticsHandler.artistStats(Type.FESTIVAL, manager).getArtistNameArray());
+        assertEquals(artistResultTest.getArtistResult(), statisticsHandler.artistStats(Type.FESTIVAL, manager).getArtistResult());
     }
 
     @Test
     public void genreTest(){
         statisticsHandler = StatisticsHandlerFactory.getInstance().getStatisticsHandler();
-        assertEquals(genreResultTest, statisticsHandler.genreStats(Type.FESTIVAL, manager));
+        assertEquals(genreResultTest.getGenreArray(), statisticsHandler.genreStats(Type.FESTIVAL, manager).getGenreArray());
+        assertEquals(genreResultTest.getGenreResult(), statisticsHandler.genreStats(Type.FESTIVAL, manager).getGenreResult());
     }
 
     @Test
     public void ProvTest(){
         statisticsHandler = StatisticsHandlerFactory.getInstance().getStatisticsHandler();
-        assertEquals(provResultTest, statisticsHandler.provinceStats(Type.FESTIVAL,"Rooler, Salmo, Nello Taver", manager));
+        assertEquals(provResultTest.getProvinceArray(), statisticsHandler.provinceStats(Type.FESTIVAL,"Rooler, Salmo, Nello Taver", manager).getProvinceArray());
+        assertEquals(provResultTest.getProvResult(), statisticsHandler.provinceStats(Type.FESTIVAL,"Rooler, Salmo, Nello Taver", manager).getProvResult());
     }
 
 }

@@ -9,7 +9,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
-public abstract class Event implements EventType {
+public abstract class Event {
     private int idEvent;
     private String name, city, location;
     private LocalDate date;
@@ -105,7 +105,7 @@ public abstract class Event implements EventType {
     public int getSeatsRemaining() {
     	int ntot = 0;
     	for(int x : seatsRemainedNumberForType) {
-    		ntot += seatsRemainedNumberForType[x];
+    		ntot += x;
     	}
     	return ntot;
     }
