@@ -20,6 +20,8 @@ public class CustomerTest {
     private IPaymentAdapter pay;
     private Event event;
     private Manager mg;
+    private ArrayList<Event> events = new ArrayList<>();
+    private Festival fs;
 
 
     private double points;
@@ -45,7 +47,7 @@ public class CustomerTest {
 
     @Test
     public void testBuy() throws Exception  {
-        customer.buyticket(pay,event,TicketType.BASE,0);
+        customer.buyticket(pay,fs,TicketType.BASE,0);
         assertEquals(1,customer.getTicketsList().size());
     }
     // DA SISTEMARE BUY TICKET
