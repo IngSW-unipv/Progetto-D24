@@ -13,7 +13,7 @@ public class Customer extends User {
 
     private ArrayList<Ticket> ticketsList= new ArrayList<>();
 
-    private double points;
+    private double points=0;
     private Genre [] favoriteGenre ;
     int maxfavoriteGenre = 5;
 
@@ -28,16 +28,7 @@ public class Customer extends User {
 
 
 
-    public ArrayList<Ticket> getTicketsList() {
-        return ticketsList;
-    }
 
-
-
-    public double getPoints() {
-
-        return points;
-    }
 
 
     // metodo per acquisto biglietto con controllo su paymentmethod e usepoints, quest'ultima serve per dire se si vogliono o meno usare i punti finora accumulati
@@ -45,6 +36,7 @@ public class Customer extends User {
     public void buyticket(IPaymentAdapter pay,Event event,TicketType type ,int usePoints) throws Exception {
 
         Ticket ticket= TicketHandler.getIstance().createTicket(event,type);
+
         if(pay.paymentMethod(ticket.getPrice()) == true && usePoints == 1 ){
                 double price = ticket.getPrice() - (points* 0.25);
                 points=0;
@@ -82,6 +74,15 @@ public class Customer extends User {
 
     public Genre[] getFavoriteGenre() {
         return favoriteGenre;
+    }
+
+    public ArrayList<Ticket> getTicketsList() {
+        return ticketsList;
+    }
+
+    public double getPoints() {
+
+        return points;
     }
 
 

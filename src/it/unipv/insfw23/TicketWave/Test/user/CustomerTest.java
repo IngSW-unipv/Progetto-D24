@@ -46,11 +46,16 @@ public class CustomerTest {
 
 
     @Test
-    public void testBuy() throws Exception  {
+    public void testBuyWithPoints() throws Exception  {
         customer.buyticket(pay,fs,TicketType.BASE,0);
         assertEquals(1,customer.getTicketsList().size());
     }
-    // DA SISTEMARE BUY TICKET
+    @Test
+    public void testBuyWithoutPoints() throws Exception  {
+        customer.buyticket(pay,fs,TicketType.BASE,1);
+        assertEquals(1,customer.getTicketsList().size());
+    }
+
     @Test
     public void testTicket(){
         Ticket ticket= new Ticket("12345",50.00,TicketType.BASE);
