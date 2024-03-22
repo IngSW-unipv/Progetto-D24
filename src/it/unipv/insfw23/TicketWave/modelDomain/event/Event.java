@@ -186,8 +186,14 @@ public abstract class Event {
         return description;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setDate(LocalDate date) { // controllo che la data sia ammissibile per essere messa in un evento
+        LocalDate d1 = LocalDate.of(2000, 1, 1);
+        LocalDate d2 = LocalDate.of(2050, 1, 1);
+        if (date.isBefore(d1) ||  date.isAfter(d2)){
+            System.out.println("Immettere una nuova data, data non valida");
+        } else {
+            this.date = date;
+        }
     }
 
     public void setTime(Time time) {
