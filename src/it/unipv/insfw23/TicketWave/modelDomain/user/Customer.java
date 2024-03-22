@@ -42,6 +42,8 @@ public class Customer extends User {
 
     // metodo per acquisto biglietto con controllo su paymentmethod e usepoints, quest'ultima serve per dire se si vogliono o meno usare i punti finora accumulati
 
+
+    /*
     public void buyticket(IPaymentAdapter pay,Event event,TicketType type ,int usePoints) throws Exception {
 
         Ticket ticket= TicketHandler.getIstance().createTicket(event,type);
@@ -62,7 +64,7 @@ public class Customer extends User {
             throw new Exception ( "L'acquisto del tuo biglietto per " + event + "non è andato a buon fine ");
             }
     }
-
+*/
     // setto generi preferiti
 
     public void setFavoriteGenre(Genre [] favorite) throws Exception {
