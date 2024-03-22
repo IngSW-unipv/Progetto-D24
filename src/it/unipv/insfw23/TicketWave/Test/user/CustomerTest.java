@@ -105,7 +105,7 @@ public class CustomerTest {
     }
 
     @Test
-    public void pointsex(){
+    public void pointex(){
         try {
             customer.setPoints(0);
             PayPalPayment paypal = new PayPalPayment();
