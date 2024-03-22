@@ -7,7 +7,7 @@ public class MastercardPayment implements IMastercardPayment{
     @Override
     public boolean msPaymentMethod(double obPrice){
 
-        if (obPrice > 0) {
+        if (obPrice >= 0) {
             return true;
         }
         else {
