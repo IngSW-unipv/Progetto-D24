@@ -21,6 +21,8 @@ public class Ticket {
 		return price;
 	}
 
+	public void setPrice(double price){this.price = price;}
+
 	public TicketType getType() {
 		return type;
 	}

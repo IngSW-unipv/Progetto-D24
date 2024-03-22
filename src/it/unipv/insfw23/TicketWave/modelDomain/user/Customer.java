@@ -13,15 +13,15 @@ public class Customer extends User {
 
     private ArrayList<Ticket> ticketsList= new ArrayList<>();
 
-    private double points=0;
+    private int points;
     private Genre [] favoriteGenre ;
     int maxfavoriteGenre = 5;
 
 
-    public Customer(String name, String surname, String dateOfBirth, String email, String password, int provinceOfResidence, Genre [] favoriteGenre ) {
+    public Customer(String name, String surname, String dateOfBirth, String email, String password, int provinceOfResidence, Genre [] favoriteGenre, int points) {
         super(name,surname, dateOfBirth, email,password, provinceOfResidence);
 
-
+        this.points = points;
         this.favoriteGenre= favoriteGenre;
     }
 
@@ -35,24 +35,37 @@ public class Customer extends User {
 
     public void buyticket(IPaymentAdapter pay,Event event,TicketType type ,int usePoints) throws Exception {
 
-        Ticket ticket= TicketHandler.getIstance().createTicket(event,type);
+        double startPrice = event.getPrice(type);
+        double endPrice;
+        if(usePoints == 1 ){
 
-        if(pay.paymentMethod(ticket.getPrice()) == true && usePoints == 1 ){
-                double price = ticket.getPrice() - (points* 0.25);
-                points=0;
-                System.out.println( "L'acquisto del tuo biglietto per " + event + " è andato a buon fine ");
-                points= points + (price/10);
+            endPrice = startPrice - (0.25 * usablePoints(startPrice, points));
+
+            if(pay.paymentMethod(endPrice) == true) {
+                points = points - usablePoints(startPrice, points);
+                System.out.println("L'acquisto del tuo biglietto per " + event + " è andato a buon fine ");
+                points = points + (int) (endPrice / 10);
+                Ticket ticket = TicketHandler.getIstance().createTicket(event, type);
+                ticket.setPrice(endPrice);
                 addTickets(ticket);
-
-            } else if (pay.paymentMethod(ticket.getPrice()) == true && usePoints == 0) {
-                double price = ticket.getPrice();
-                System.out.println( "L'acquisto del tuo biglietto per " + event + "è andato a buon fine ");
-                points= points + (price/10);
-                addTickets(ticket);
-            } else if (pay.paymentMethod(ticket.getPrice()) == false) {
-
-            throw new Exception ( "L'acquisto del tuo biglietto per " + event + "non è andato a buon fine ");
+            } else {
+                throw new Exception ( "L'acquisto del tuo biglietto per " + event + "non è andato a buon fine ");
             }
+
+        } else if (usePoints == 0) {
+            endPrice = startPrice;
+            if (pay.paymentMethod(endPrice) == true){
+                System.out.println( "L'acquisto del tuo biglietto per " + event + "è andato a buon fine ");
+                points = points + (int) (endPrice/10);
+                Ticket ticket= TicketHandler.getIstance().createTicket(event,type);
+                addTickets(ticket);
+            }  else {
+                throw new Exception ( "L'acquisto del tuo biglietto per " + event + "non è andato a buon fine ");
+            }
+        }
+        else {
+            throw new Exception("UsePoints problem");
+        }
     }
 
     // setto generi preferiti
@@ -76,6 +89,10 @@ public class Customer extends User {
         return favoriteGenre;
     }
 
+    public void setPoints(int points) {
+        this.points = points;
+    }
+
     public ArrayList<Ticket> getTicketsList() {
         return ticketsList;
     }
@@ -90,4 +107,17 @@ public class Customer extends User {
     public boolean isCustomer() {
         return true;
     }
+
+    private int usablePoints(double price, int points){
+
+        int maxusable = (int) price * 4;
+
+        if (maxusable > points){
+            return points;
+        }
+        else {
+            return maxusable;
+        }
+    }
+
 }

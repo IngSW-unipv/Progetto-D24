@@ -5,7 +5,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 public class PayPalPayment implements IPaypalPayment{
 
     public boolean ppPaymentMethod( double obPrice){
-        if(obPrice > 0){
+        if(obPrice >= 0){
             return true;
         }
         else {
