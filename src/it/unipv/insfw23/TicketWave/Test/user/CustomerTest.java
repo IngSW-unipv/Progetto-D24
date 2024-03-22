@@ -1,12 +1,13 @@
 package it.unipv.insfw23.TicketWave.Test.user;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Concert;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+import it.unipv.insfw23.TicketWave.modelController.Factory.Payment.PaymentFactory;
+import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.MastercardPayment;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.PayPalPayment;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -19,8 +20,12 @@ import static org.junit.Assert.*;
 public class CustomerTest {
     private Customer customer;
     private ArrayList<Ticket> ticketsList= new ArrayList<>();
-    private IPaymentAdapter pay;
+    private IPaymentAdapter paymentpaypal;
+    private IPaymentAdapter paymentmastercard;
     private Event event;
+    private Manager mg;
+    private ArrayList<Event> events = new ArrayList<>();
+    private Festival fs;
 
 
     private double points;
@@ -33,16 +38,33 @@ public class CustomerTest {
         Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
         customer=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",01,favoriteGenre);
 
+        mg = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", 1, "1234567890123456",
+                events, 5, 1, LocalDate.now(), 0);
+        int [] a = {20};
+        int [] b = {2080};
+        double [] p = {150};
+        fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024,4,20), Time.valueOf("14:04:00"), Province.COMO, Genre.EDM, Type.FESTIVAL, 3000,
+                1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", 3);
     }
 
 
 
     @Test
-    public void testBuy() throws Exception  {
-        customer.buyticket(pay,event,TicketType.BASE,0);
+    public void testBuyWithPoints() throws Exception  {
+        MastercardPayment mastercard= new MastercardPayment();
+        paymentmastercard = PaymentFactory.getMastercardAdapter(mastercard);
+
+        customer.buyticket(paymentmastercard,fs,TicketType.BASE,0);
         assertEquals(1,customer.getTicketsList().size());
     }
-    // DA SISTEMARE BUY TICKET
+    @Test
+    public void testBuyWithoutPoints() throws Exception  {
+        PayPalPayment paypal= new PayPalPayment();
+        paymentpaypal= PaymentFactory.getPaypalAdapter(paypal);
+        customer.buyticket(paymentpaypal,fs,TicketType.BASE,1);
+        assertEquals(1,customer.getTicketsList().size());
+    }
+
     @Test
     public void testTicket(){
         Ticket ticket= new Ticket("12345",50.00,TicketType.BASE);

@@ -9,28 +9,33 @@ import it.unipv.insfw23.TicketWave.modelDomain.notifications.*;
 public class TicketHandler implements ITicketHandler{
 		
 	
-//		private static TicketHandler istance;
+		private static TicketHandler istance;
 		
-		public TicketHandler() {
-			
-		}
-	
-//		private TicketHandler() {
+//		public TicketHandler() {
 //			
 //		}
-//		
-//		public static TicketHandler getIstance() {
-//			if(istance == null) {
-//				istance = new TicketHandler();
-//			}
-//			return istance;
-//		}
+	
+		private TicketHandler() {
+			
+		}
 		
-		public Ticket createTicket(Event event,TicketType type) {
+		public static TicketHandler getIstance() {
+			if(istance == null) {
+				istance = new TicketHandler();
+			}
+			return istance;
+		}
+		
+		public Ticket createTicket(Event event,TicketType type) throws Exception{
+			if(event.getSeatsRemaining() == 0)
+				throw new Exception("Evento soldout");
+			
 			String barcode;
 			double price;
 			price = event.getPrice(type);
-			barcode = createbarcode(event,type);			
+			barcode = createbarcode(event,type);
+			if(barcode == null)
+				return null;
 			Ticket t = new Ticket(barcode, price, type);
 			//se non ci sono piu' biglietti notifica il creatore dell'evento
 			if(event.getSeatsRemaining() == 0) {

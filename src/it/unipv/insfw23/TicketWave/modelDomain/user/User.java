@@ -25,6 +25,7 @@ public abstract class User {
 		this.password= password;
 		this.provinceOfResidence= provinceOfResidence;
 		//caricamento dell'arraylist delle notifiche dal db
+		notifications = new ArrayList<Notification>();
 	}
 
 	public String getName() {
@@ -70,7 +71,9 @@ public abstract class User {
 	public int getProvinceOfResidence() { return provinceOfResidence;
 	}
 
-
+	public ArrayList<Notification> getNotification(){
+		return notifications;
+	}
 	
 	public void addNotification(Notification n) {
 		notifications.add(n);

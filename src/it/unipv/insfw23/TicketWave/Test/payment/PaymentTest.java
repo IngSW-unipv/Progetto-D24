@@ -33,15 +33,16 @@ public class PaymentTest {
     @Test
     public void testGetMastercardAdapter() {
 
-        mastercardAdapter=PaymentFactory.getIstance().getMastercardAdapter();
-
+        MastercardPayment mastercard= new MastercardPayment();
+        mastercardAdapter=PaymentFactory.getIstance().getMastercardAdapter(mastercard);
         assertNotNull(mastercardAdapter);
 
     }
 
     @Test
     public void testGetPaypalAdapter() {
-        payPalAdapter= PaymentFactory.getIstance().getPaypalAdapter();
+        PayPalPayment paypal= new PayPalPayment();
+        payPalAdapter= PaymentFactory.getIstance().getPaypalAdapter(paypal);
 
         assertNotNull(payPalAdapter);
 
