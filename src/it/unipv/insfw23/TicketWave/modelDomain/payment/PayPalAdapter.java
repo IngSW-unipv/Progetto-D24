@@ -3,12 +3,10 @@ package it.unipv.insfw23.TicketWave.modelDomain.payment;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 
 public class PayPalAdapter implements IPaymentAdapter{
-
-    public PayPalAdapter(){};
     
-    private PayPalPayment paypalPayment;
+    private IPaypalPayment paypalPayment;
 
-    public PayPalAdapter(PayPalPayment ppPayment){
+    public PayPalAdapter(IPaypalPayment ppPayment){
         this.paypalPayment = ppPayment;
     }
     @Override

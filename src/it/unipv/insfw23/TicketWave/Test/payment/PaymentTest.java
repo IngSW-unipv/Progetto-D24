@@ -35,8 +35,7 @@ public class PaymentTest {
 
         MastercardPayment mastercard= new MastercardPayment();
         mastercardAdapter=PaymentFactory.getIstance().getMastercardAdapter(mastercard);
-
-        //assertNotNull(mastercardAdapter);
+        assertNotNull(mastercardAdapter);
 
     }
 

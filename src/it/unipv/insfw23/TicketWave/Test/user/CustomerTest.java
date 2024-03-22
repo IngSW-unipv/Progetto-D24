@@ -3,6 +3,7 @@ import it.unipv.insfw23.TicketWave.modelController.Factory.Payment.PaymentFactor
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.MastercardPayment;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.PayPalPayment;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
@@ -19,7 +20,8 @@ import static org.junit.Assert.*;
 public class CustomerTest {
     private Customer customer;
     private ArrayList<Ticket> ticketsList= new ArrayList<>();
-    private IPaymentAdapter pay;
+    private IPaymentAdapter paymentpaypal;
+    private IPaymentAdapter paymentmastercard;
     private Event event;
     private Manager mg;
     private ArrayList<Event> events = new ArrayList<>();
@@ -50,14 +52,16 @@ public class CustomerTest {
     @Test
     public void testBuyWithPoints() throws Exception  {
         MastercardPayment mastercard= new MastercardPayment();
-        pay = PaymentFactory.getMastercardAdapter(mastercard);
+        paymentmastercard = PaymentFactory.getMastercardAdapter(mastercard);
 
-        customer.buyticket(pay,fs,TicketType.BASE,0);
+        customer.buyticket(paymentmastercard,fs,TicketType.BASE,0);
         assertEquals(1,customer.getTicketsList().size());
     }
     @Test
     public void testBuyWithoutPoints() throws Exception  {
-        customer.buyticket(pay,fs,TicketType.BASE,1);
+        PayPalPayment paypal= new PayPalPayment();
+        paymentpaypal= PaymentFactory.getPaypalAdapter(paypal);
+        customer.buyticket(paymentpaypal,fs,TicketType.BASE,1);
         assertEquals(1,customer.getTicketsList().size());
     }
 
