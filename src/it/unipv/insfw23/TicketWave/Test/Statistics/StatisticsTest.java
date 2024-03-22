@@ -88,7 +88,7 @@ public class StatisticsTest {
     @Test
     public void typeTest(){
         statisticsHandler = StatisticsHandlerFactory.getInstance().getStatisticsHandler();
-        assertEquals(typeResultTest.getTypeArray(), statisticsHandler.typeStats(manager).getTypeArray());
+        assertArrayEquals(typeResultTest.getTypeArray(), statisticsHandler.typeStats(manager).getTypeArray());
         assertArrayEquals(typeResultTest.getTypeResult(), statisticsHandler.typeStats(manager).getTypeResult(), 0.0001);
     }
 

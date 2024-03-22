@@ -76,7 +76,7 @@ public class Manager extends User {
 
     //seguono dei metodi di crea Festival, Concerto ecc..
     public void createFestival(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type tipe, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, int artistsNumber) throws Exception {
-        if(subscription==1 || subscription==2 && counterCreatedEvents < maxNumberOfEvents) {
+        if(subscription==1 || subscription==2  && counterCreatedEvents < maxNumberOfEvents) {
 
             Event festival = new Festival(idEvent, name, city,location,date,time,province,genre,tipe,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,ticketsSoldNumberForType,price,creator,artists,description,artistsNumber);
             event.add(festival);
@@ -88,7 +88,7 @@ public class Manager extends User {
     }
 
     public void createConcert(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type tipe, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description) throws Exception{
-        if(subscription==1 || subscription==2 && counterCreatedEvents < maxNumberOfEvents) {
+        if(subscription==1 || (subscription==2 && counterCreatedEvents < maxNumberOfEvents)) {
 
             Event concert= new Concert(idEvent,name,city,location,date,time,province,genre,tipe,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,ticketsSoldNumberForType,price,creator,artists,description);
             event.add(concert);

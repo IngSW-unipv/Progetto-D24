@@ -1,4 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelController.Factory.Payment;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.IMastercardPayment;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaypalPayment;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.MastercardAdapter;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.PayPalAdapter;
 
@@ -27,7 +29,7 @@ public class PaymentFactory {
         return istance;
     }
 
-    public static MastercardAdapter getMastercardAdapter() {
+    public static MastercardAdapter getMastercardAdapter(IMastercardPayment payment) {
         if (mastercardAdapter == null) {
             String mastercardAdaptClassName;
 
@@ -36,8 +38,8 @@ public class PaymentFactory {
                 prop.load(new FileInputStream("src/it/unipv/insfw23/TicketWave/properties"));
                 mastercardAdaptClassName = prop.getProperty(M_PROPERTYNAME);
 
-                Constructor c = Class.forName(mastercardAdaptClassName).getConstructor();  //java reflection
-                mastercardAdapter = (MastercardAdapter) c.newInstance();
+                Constructor c = Class.forName(mastercardAdaptClassName).getConstructor(IMastercardPayment.class);  //java reflection
+                mastercardAdapter = (MastercardAdapter) c.newInstance(payment);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -46,7 +48,7 @@ public class PaymentFactory {
         return mastercardAdapter;
     }
 
-        public static PayPalAdapter getPaypalAdapter(){
+        public static PayPalAdapter getPaypalAdapter(IPaypalPayment payment){
             if(paypalAdapter==null){
                 String paypalAdaptClassName;
 
@@ -55,8 +57,8 @@ public class PaymentFactory {
                     prop.load(new FileInputStream("src/it/unipv/insfw23/TicketWave/properties"));
                     paypalAdaptClassName=prop.getProperty(P_PROPERTYNAME);
 
-                    Constructor c= Class.forName(paypalAdaptClassName).getConstructor();
-                    paypalAdapter=(PayPalAdapter)c.newInstance();
+                    Constructor c= Class.forName(paypalAdaptClassName).getConstructor(IPaypalPayment.class);
+                    paypalAdapter=(PayPalAdapter)c.newInstance(payment);
                 }
                 catch (Exception e) {
                     // TODO Auto-generated catch block

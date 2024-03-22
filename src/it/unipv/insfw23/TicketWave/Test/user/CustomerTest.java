@@ -1,6 +1,8 @@
 package it.unipv.insfw23.TicketWave.Test.user;
+import it.unipv.insfw23.TicketWave.modelController.Factory.Payment.PaymentFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.MastercardPayment;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
@@ -47,6 +49,9 @@ public class CustomerTest {
 
     @Test
     public void testBuyWithPoints() throws Exception  {
+        MastercardPayment mastercard= new MastercardPayment();
+        pay = PaymentFactory.getMastercardAdapter(mastercard);
+
         customer.buyticket(pay,fs,TicketType.BASE,0);
         assertEquals(1,customer.getTicketsList().size());
     }

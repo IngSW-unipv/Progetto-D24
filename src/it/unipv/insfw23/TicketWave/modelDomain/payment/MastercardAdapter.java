@@ -4,12 +4,13 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 
 public class MastercardAdapter implements IPaymentAdapter{
 
-    public MastercardAdapter(){};
+    //public MastercardAdapter(){};
 
     private MastercardPayment mastercardPayment;
 
 
     public MastercardAdapter(MastercardPayment mPayment){
+
         this.mastercardPayment = mPayment;
     }
     @Override
