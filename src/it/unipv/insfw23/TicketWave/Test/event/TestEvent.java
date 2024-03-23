@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class TestEvent {
     private Festival fs;
-    private Concert co, co1;
+    private Concert co;
     private Theater th;
     private Other ot;
     private ArrayList<Event> events, ev1;
@@ -79,25 +79,33 @@ public class TestEvent {
 
     // li lascio oppure no i test sotto a questo commento?
     @Test
-    public void createLimitCaseConcert(){
+    public void createNullLimitCaseConcert(){ // Le date non possono avere valore nullo
         try {
-            int[] a = {999999999, 999999999, 999999999};
-            int[] b = {999999999, 999999999, 999999999};
-            double[] p = {999999999, 999999999, 999999999};
             // caso minimo / nullo
             co = new Concert(0, null, null, null, null, null, null, null, null, 0,
                     0, null, null, null, null, null, null);
+            System.out.println(co);
+        } catch (IllegalArgumentException e) {
+            assertEquals("La data ha valore nullo, immettere una nuova data", e.getMessage());
+        }
+    }
 
+    @Test
+    public void createDataLimitCaseConcert(){ // Le date non possono né valori prima del 2000 né dopo il 2050
+        try {
+            int[] a = {999999999, 999999999, 999999999, 999999999};
+            int[] b = {999999999, 999999999, 999999999};
+            double[] p = {999999999, 999999999, 999999999};
             // caso con stringhe lunghe e valori al limite, numero di sedute > 3 che sono quelle rappresentabili
-            co1 = new Concert(100000, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+            co = new Concert(100000, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                     "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                     "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
                     LocalDate.of(10000, 10, 30), Time.valueOf("24:59:99"), Province.MILANO, Genre.EDM, Type.CONCERT, 999999999,
-                    4, a, b, p, mg, "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. ",
+                    3, a, b, p, mg, "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. ",
                     "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.");
-
-        } catch (Exception e) {
-            assertEquals("LimitCase error", e.getMessage());
+            System.out.println(co);
+        } catch (IllegalArgumentException e) {
+            assertEquals("Immettere una nuova data, data non valida", e.getMessage());
         }
     }
 
@@ -139,15 +147,21 @@ public class TestEvent {
     }
 
     @Test
-    public void ticketSoldNumberForTypeTest(){ // non fa un cazzo, devo capire cosa fargli fare
+    public void ticketSoldNumberForTypeTest(){ // controllo se i biglietti per tipo che prendo sono corretti e controllo la somma
         try {
-            int[] a = {20};
-            int[] b = {2080};
-            double[] p = {150};
+            int[] a = {20, 10};
+            int[] b = {1980, 990};
+            double[] p = {150, 270};
             fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), Time.valueOf("14:04:00"), Province.COMO, Genre.EDM, Type.FESTIVAL, 3000,
-                    1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", 3);
-            for(int i=0; i < 2079; i++){
-                System.out.println(fs.getTicketSoldNumber());
+                    2, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", 3);
+            int [] ticketSold;
+            ticketSold = fs.getTicketsSoldNumberForType();
+            int sum = 0;
+
+            for (int j : ticketSold) { // check
+                System.out.println(j);
+                sum += j;
+                System.out.println(sum);
             }
 
         } catch (Exception e) {
@@ -158,7 +172,6 @@ public class TestEvent {
     public void clear(){
         fs = null;
         co = null;
-        co1 = null;
         th = null;
         ot = null;
         events.clear();
