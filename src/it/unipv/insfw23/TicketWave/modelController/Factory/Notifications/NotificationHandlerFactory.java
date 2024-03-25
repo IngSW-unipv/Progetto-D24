@@ -33,8 +33,11 @@ public class NotificationHandlerFactory {
 				notificationHandlerClassName = p.getProperty(NOTIFICATIONHANDLER_PROPERTYNAME);
 				
 				//java reflection
-				Constructor c = Class.forName(notificationHandlerClassName).getConstructor();
+				Constructor c = Class.forName(notificationHandlerClassName).getDeclaredConstructor();
+				c.setAccessible(true);
 				notificationHandler = (INotificationHandler)c.newInstance();
+				c.setAccessible(false);
+				
 			} catch(Exception e) {
 				e.printStackTrace();
 			}

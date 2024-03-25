@@ -44,11 +44,15 @@ public abstract class Event {
         this.creator = creator;
         this.artists = artists;
         this.description = description;
+        setDate(date);
+        setTypeOfSeats(typeOfSeats);
+        setSeatsRemainedNumberForType(seatsRemainedNumberForType);
+        setTicketsSoldNumberForType(ticketsSoldNumberForType);
+        setPrice(price);
     }
 
 
-    // getter + setter
-
+    // Getter //
 
     public int getIdEvent() {
         return idEvent;
@@ -113,49 +117,12 @@ public abstract class Event {
     public Manager getCreator() {
     	return creator;
     }
-
-    public void setIdEvent(int idEvent) {
-        this.idEvent = idEvent;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void setCity(String city) {
-        this.city = city;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public void setProvince(Province province) {
-        this.province = province;
-    }
-
-    public void setMaxNumberOfSeats(int maxNumberOfSeats) {
-        this.maxNumberOfSeats = maxNumberOfSeats;
-    }
-
-    public void setTicketsSoldNumberForType(int[] ticketsSoldNumberForType) {
-        this.ticketsSoldNumberForType = ticketsSoldNumberForType;
-    }
-
-    public void setPrice(double[] price) {
-        this.price = price;
-    }
-
-    public void setGenre(Genre genre) {
-        this.genre = genre;
-    }
     
     public void updateSeatsRemainedAndTicketSoldForType(int type) {
     	seatsRemainedNumberForType[type]--;
     	ticketsSoldNumberForType[type]++;
     }
 
-    // ultimi getter richiesti
     public int getTicketSoldNumber () { // ritorna tutti i ticket venduti
         int i;
         int result = 0;
@@ -186,8 +153,45 @@ public abstract class Event {
         return description;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    // Setter //
+    public void setIdEvent(int idEvent) {
+        this.idEvent = idEvent;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public void setProvince(Province province) {
+        this.province = province;
+    }
+
+    public void setMaxNumberOfSeats(int maxNumberOfSeats) {
+        this.maxNumberOfSeats = maxNumberOfSeats;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
+    public void setDate(LocalDate date) { // controllo che la data sia ammissibile per essere messa in un evento
+        if (date != null){
+            if (date.isBefore(LocalDate.of(2000, 1, 1)) ||  date.isAfter(LocalDate.of(2050, 1, 1))){ // check sulla data, se la data è prima del 2000 o dopo il 2050 è impossibile creare l'evento
+                throw new IllegalArgumentException("Immettere una nuova data, data non valida");
+            } else {
+                this.date = date;
+            }
+        } else {
+            throw new IllegalArgumentException("La data ha valore nullo, immettere una nuova data");
+        }
     }
 
     public void setTime(Time time) {
@@ -195,11 +199,35 @@ public abstract class Event {
     }
 
     public void setTypeOfSeats(int typeOfSeats) {
-        this.typeOfSeats = typeOfSeats;
+        if(typeOfSeats > 2){
+            throw new IllegalArgumentException("In TicketWave si possono avere un massimo di 3 tipi di sedute/biglietti, immettere un valore valido");
+        } else {
+            this.typeOfSeats = typeOfSeats;
+        }
     }
 
     public void setSeatsRemainedNumberForType(int[] seatsRemainedNumberForType) {
-        this.seatsRemainedNumberForType = seatsRemainedNumberForType;
+        if(seatsRemainedNumberForType.length > 2){
+            throw new IllegalArgumentException("In TicketWave si possono avere un massimo di 3 tipi di sedute, reimmettere i valori riguardanti le sedute rimanenti");
+        } else {
+            this.seatsRemainedNumberForType = seatsRemainedNumberForType;
+        }
+    }
+
+    public void setTicketsSoldNumberForType(int[] ticketsSoldNumberForType) {
+        if(ticketsSoldNumberForType.length > 2){
+            throw new IllegalArgumentException("In TicketWave si possono avere un massimo di 3 tipi di ticket, reimmettere i valori riguardanti i ticket venduti per tipo");
+        } else {
+            this.ticketsSoldNumberForType = ticketsSoldNumberForType;
+        }
+    }
+
+    public void setPrice(double[] price) {
+        if(price.length > 2){
+            throw new IllegalArgumentException("In TicketWave si possono avere un massimo di 3 tipi di ticket, reimmettere i valori riguardanti i prezzi dei ticket");
+        } else {
+            this.price = price;
+        }
     }
 
     public void setCreator(Manager creator) {

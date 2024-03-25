@@ -42,8 +42,8 @@ public class TicketTest {
 		try {
 			
 			creator.createConcert(4,"Reunion","Firenze","via del palo",LocalDate.of(2024, 5, 23),Time.valueOf(LocalTime.of(20, 30)),Province.ASTI,Genre.METAL,
-								Type.CONCERT,150,2,seatsremainedfortypecorrectevent,ticketsoldfortypecorrectevent,pricecorrectevent,creator,"Califano","lalalala");
-		
+					Type.CONCERT,150,2,seatsremainedfortypecorrectevent,ticketsoldfortypecorrectevent,pricecorrectevent,creator,"Califano","lalalala");
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			System.out.println(e.getMessage());
@@ -157,6 +157,30 @@ public class TicketTest {
 									premiumticket = ticketHandler.createTicket(event, TicketType.PREMIUM);
 									});
 		assertEquals("Evento soldout", exception.getMessage());
+		
+	}
+	
+	@Test
+	public void lastTicketTest() {
+		int[] seatsremainedfortypeLastTicketevent = {0,0,1};
+		int[] ticketsoldfortypeLastTicketevent = {75,25,49};
+		Ticket vipticket = null;
+		
+		event.setSeatsRemainedNumberForType(seatsremainedfortypeLastTicketevent);
+		event.setTicketsSoldNumberForType(ticketsoldfortypeLastTicketevent);
+		
+		assertTrue(creator.getNotification().isEmpty());
+		//System.out.println(creator.getNotification()+"5");
+		try {
+			vipticket = ticketHandler.createTicket(event, TicketType.VIP);
+			}catch(Exception e) {
+				System.out.println(e.getMessage()); 
+			}
+		
+		assertFalse(creator.getNotification().isEmpty());
+		
+		
+		
 		
 	}
 

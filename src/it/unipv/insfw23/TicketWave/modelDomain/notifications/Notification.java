@@ -28,6 +28,14 @@ public class Notification {
 		public void setId(int id) {
 			this.id = id;
 		}
+		
+		public String getEmailReceiver() {
+			return emailreceiver;
+		}
+		
+		public void setEmailReceiver(String email) {
+			emailreceiver = email;
+		}
 
 		public String getMsg() {
 			return msg;
