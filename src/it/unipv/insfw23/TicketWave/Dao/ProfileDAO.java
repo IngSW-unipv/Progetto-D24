@@ -16,6 +16,7 @@ import java.util.Arrays;
  * COMPLETATA
  *
  */
+/*
 public class ProfileDAO implements IProfileDAO {
     private String schema;
     private Connection conn;
@@ -221,3 +222,5 @@ public class ProfileDAO implements IProfileDAO {
         return gr;
     }
 }
+
+ */

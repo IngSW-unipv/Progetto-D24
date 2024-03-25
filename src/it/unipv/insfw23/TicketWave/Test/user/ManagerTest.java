@@ -71,4 +71,6 @@ public class ManagerTest {
         boolean result = manager.OneMonthPassed();
         assertFalse(result); // Deve essere falso, poiché non è passato un mese
     }
+
+
 }

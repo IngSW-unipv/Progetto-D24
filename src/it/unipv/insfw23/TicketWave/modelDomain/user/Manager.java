@@ -143,12 +143,6 @@ public class Manager extends User {
         return event;
     }
 
-    public int[] getTypeCodeArray(){
-        int[] array = {1, 2, 3, 4};
-        return array;
-    }
-
-
     @Override
     public boolean isCustomer() {
         return false;
