@@ -20,7 +20,6 @@ public class Customer extends User {
 
     public Customer(String name, String surname, String dateOfBirth, String email, String password, int provinceOfResidence, Genre [] favoriteGenre, int points) {
         super(name,surname, dateOfBirth, email,password, provinceOfResidence);
-
         this.points = points;
         this.favoriteGenre= favoriteGenre;
     }
@@ -58,7 +57,7 @@ public class Customer extends User {
             }
         }
         else {
-            throw new Exception("UsePoints problem");
+            throw new Exception("Selezionare un numero valido");
         }
     }
 
