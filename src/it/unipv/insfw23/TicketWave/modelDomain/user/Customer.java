@@ -25,12 +25,6 @@ public class Customer extends User {
         this.favoriteGenre= favoriteGenre;
     }
 
-
-
-
-
-
-
     // metodo per acquisto biglietto con controllo su paymentmethod e usepoints, quest'ultima serve per dire se si vogliono o meno usare i punti finora accumulati
 
     public void buyticket(IPaymentAdapter pay,Event event,TicketType type ,int usePoints) throws Exception {
