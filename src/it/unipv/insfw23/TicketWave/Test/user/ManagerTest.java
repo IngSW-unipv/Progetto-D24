@@ -42,15 +42,15 @@ public class ManagerTest {
         assertEquals("Impossibile Creare l'evento:Festival Test.Non puoi creare altri Eventi", exception.getMessage());
     }
 
-/*
 
-commentato poichè manca di sistemare LA ENUM DEI GENERI
+
+
     @Test
     public void testCreateTheater() throws Exception {
-        manager.createTheater(3, "Theater Test", "City Test", "Location Test", LocalDate.now(), null, Province.AGRIGENTO, Genre.DRAMA, 300, 1, new int[]{300}, new int[]{0}, new double[]{150.0}, manager, new ArrayList<>(), "Description Test", "Author Test");
+        manager.createTheater(3, "Theater Test", "City Test", "Location Test", LocalDate.now(), null, Province.AGRIGENTO, Genre.DRAMMA, 300, 1, new int[]{300}, new int[]{0}, new double[]{150.0}, manager, new ArrayList<>(), "Description Test", "Author Test");
         assertEquals(1, manager.getEvent().size());
     }
-*/
+
 
     @Test
     public void testCreateConcert() throws Exception {
@@ -63,6 +63,8 @@ commentato poichè manca di sistemare LA ENUM DEI GENERI
         manager.createOther(4, "Other Test", "City Test", "Location Test", LocalDate.now(), null, Province.AGRIGENTO, Genre.ROCK, Type.OTHER, 400, 1, new int[]{400}, new int[]{0}, new double[]{200.0}, manager, "Comico", "Description Test");
         assertEquals(1, manager.getEvent().size());
     }
+
+
 
     @Test
     public void testOneMonthPassed() {
