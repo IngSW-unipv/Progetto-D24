@@ -4,6 +4,8 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
+import it.unipv.insfw23.TicketWave.modelDomain.subscription.SubscriptionHandler;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import org.junit.Before;
 import org.junit.Test;
@@ -76,12 +78,25 @@ public class ManagerTest {
     @Test public void testDontCreateFestival3(){ // caso limite utilizzo test con parametri nulli su data, non si può creare un evento con data nulla  DA SISTEMARE LO ISTANZIA ANCORA
         try {
             manager2.createFestival(1, null, "City Test", "Location Test", null,null, Province.AGRIGENTO, null, Type.FESTIVAL, 100, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Pino Daniele,Calcutta", "Description Test", 2);
-            assertEquals(2, manager.getEvent().size());
+            assertEquals(1, manager.getEvent().size());
         }
         catch(Exception e){
             // TODO: handle exception
             System.out.println(e.getMessage());
         }
+    }
+
+    @Test public void testSetSubscription(){
+
+        SubscriptionHandler subscriptionHandler= new SubscriptionHandler();
+        IPaymentAdapter paymentAdapter ;
+        double price=50.00;
+        subscriptionHandler.buySub(manager1,2,paymentAdapter.paymentMethod(price),price);
+        assertEquals(2,manager1.getSubscription());
+
+
+
+
     }
 
 
