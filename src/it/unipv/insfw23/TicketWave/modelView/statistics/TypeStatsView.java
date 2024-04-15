@@ -57,6 +57,7 @@ public class TypeStatsView extends Scene{
         barChart.setLegendVisible(false);
 
 
+
         XYChart.Series<Number, String> series = new XYChart.Series<>();
         this.typeSerie=series;
 
