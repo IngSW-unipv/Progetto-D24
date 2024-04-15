@@ -110,8 +110,6 @@ public class TicketPageView extends Scene {
             UpperBar.getIstance().setForCustomer();
         }
 
-
-
         //fine settaggio
         initComponents();
     }

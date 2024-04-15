@@ -28,6 +28,7 @@ public class ProvaRunTicketPageView extends Application {
         ticketPageView.setComponents(isViewManager, typeOfEvent, name, city, location, Province.AGRIGENTO, date, artists,
                 seatsRemainedNumberForType, prices);
 
+
         // Creazione della scena e impostazione del titolo della finestra
         Scene scene = ticketPageView.getScene();
         primaryStage.setTitle("TicketWave - Event Details");
