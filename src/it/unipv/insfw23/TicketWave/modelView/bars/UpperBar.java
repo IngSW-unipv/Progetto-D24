@@ -36,9 +36,9 @@ public class UpperBar extends HBox {
         setMinHeight(60);
         setBackground(new Background(new BackgroundFill(Color.web("#2E5984"), CornerRadii.EMPTY, Insets.EMPTY)));
 
-        Label titolo = new Label(" Ticket Wave ");
+        Label titolo = new Label(" Ticketwave ");
         titolo.setFont(Font.font("Berlin Sans FB", FontWeight.MEDIUM, 40));
-        titolo.setTextFill(Color.BLACK);
+        titolo.setTextFill(Color.WHITE);
 
         ImageView iconLogo = new ImageView("it/unipv/insfw23/TicketWave/modelView/imagesResources/logo.png");
         iconLogo.setFitHeight(60);
