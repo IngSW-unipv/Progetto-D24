@@ -1,16 +1,14 @@
 package it.unipv.insfw23.TicketWave.modelView.statistics;
 
-import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
-import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
+import it.unipv.insfw23.TicketWave.modelController.Controller.Statistics.TypeStatsController;
+import it.unipv.insfw23.TicketWave.modelController.Controller.UpperBar.UpperBarController;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 import static javafx.application.Application.launch;
 
-public class Starter extends Application {
+public class StarterDavide extends Application {
 
     private Stage primaryStage;
     public static void main(String[] args) {
@@ -47,8 +45,11 @@ public class Starter extends Application {
         //scene.setFill(Color.web("#FFC943"));
 
          */
+        UpperBarController ctrl = new UpperBarController(primaryStage);
         TypeStatsView scene = new TypeStatsView();
+        TypeStatsController controller = new TypeStatsController(primaryStage, scene);
         primaryStage.setScene(scene);
+
 
         primaryStage.show();
 

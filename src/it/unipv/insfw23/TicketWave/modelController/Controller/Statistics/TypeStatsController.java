@@ -1,4 +1,42 @@
 package it.unipv.insfw23.TicketWave.modelController.Controller.Statistics;
 
+import it.unipv.insfw23.TicketWave.modelView.statistics.GenreStatsView;
+import it.unipv.insfw23.TicketWave.modelView.statistics.TypeStatsView;
+import javafx.event.EventHandler;
+import javafx.scene.chart.XYChart;
+import javafx.scene.input.MouseEvent;
+import javafx.stage.Stage;
+
 public class TypeStatsController {
+    private Stage mainStage;
+    private TypeStatsView typeView;
+
+    public TypeStatsController(Stage mainStage, TypeStatsView typeView){
+        this.mainStage=mainStage;
+        this.typeView=typeView;
+        initComponents();
+    }
+
+    private void initComponents() {
+
+        EventHandler<MouseEvent> statsBarButtonHandler = new EventHandler<>() {
+            @Override
+            public void handle(MouseEvent actionEvent) {
+                System.out.println("PASSO AI GENERI E ARTISTI");
+
+                //WrapGenreOrProv genreRes = statDominio.genreStats();
+                //WrapArtist artistRes = statDominio.artistStats();
+                //Al costruttore qui sotto passo il risultato dei generi, degli artisti e la statdomain
+
+                GenreStatsView genreView = new GenreStatsView();
+                GenreArtStatsController artStat = new GenreArtStatsController(mainStage, typeView, genreView);
+                mainStage.setScene(genreView);
+            }
+        };
+
+        for (XYChart.Data<Number, String> data : typeView.getTypeSerie().getData()) {
+            data.getNode().setOnMouseClicked(statsBarButtonHandler);
+        }
+
+    }
 }

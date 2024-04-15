@@ -98,7 +98,7 @@ public class UpperBar extends HBox {
 		
         Region spacer = new Region();
         setHgrow(spacer, Priority.ALWAYS);
-        getChildren().addAll(titolo, iconLogo, spacer,searchButton, eventPlusButton, statsButton, profileButton);
+        getChildren().addAll(titolo, iconLogo, spacer, eventPlusButton, statsButton, searchButton, profileButton);
         setAlignment(Pos.CENTER_LEFT);
     }
 

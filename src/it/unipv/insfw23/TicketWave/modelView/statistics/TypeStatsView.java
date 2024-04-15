@@ -94,4 +94,22 @@ public class TypeStatsView extends Scene{
 
     }
 
+    public BarChart getBarChart() {
+        return barChart;
+    }
+
+    public XYChart.Series<Number, String> getTypeSerie() {
+        return typeSerie;
+    }
+
+    public void reSetBars(){
+        BorderPane temp = new BorderPane();
+        setRoot(temp);
+        UpperBar.getIstance().setForManager();
+        layout.setTop(UpperBar.getIstance());
+        layout.setCenter(contenuto);
+        layout.setBottom(LowerBar.getInstance());
+        setRoot(layout);
+    }
+
 }
