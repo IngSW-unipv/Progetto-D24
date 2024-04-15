@@ -1,5 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelView.user;
 
+import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
+import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -30,7 +32,7 @@ public class CustomerView extends Scene {
     private TableView ticket;
     private Button logoutButton;
 
-    private CustomerUpperBar customerUpperBar;
+    private UpperBar customerUpperBar;
     private LowerBar lowerBar;
 
     // private final
@@ -50,7 +52,7 @@ public class CustomerView extends Scene {
         BorderPane layout = (BorderPane) getRoot();
         this.layout = layout;
 
-        customerUpperBar = CustomerUpperBar.getIstance();
+        customerUpperBar = UpperBar.getIstance();
         lowerBar = LowerBar.getInstance();
 
         layout.setStyle("-fx-background-color: #def1fa;");
@@ -167,7 +169,7 @@ public class CustomerView extends Scene {
     public void reSetBars(){
         BorderPane temp = new BorderPane();
         setRoot(temp);
-        layout.setTop(CustomerUpperBar.getIstance());
+        layout.setTop(UpperBar.getIstance());
 
         layout.setBottom(LowerBar.getInstance());
         layout.setCenter(grid);

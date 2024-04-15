@@ -34,13 +34,13 @@ public class UpperBar extends HBox {
         ombraSup.setColor(Color.GRAY);
         setEffect(ombraSup);
         setMinHeight(60);
-        setBackground(new Background(new BackgroundFill(Color.web("#80C1E2"), CornerRadii.EMPTY, Insets.EMPTY)));
+        setBackground(new Background(new BackgroundFill(Color.web("#2E5984"), CornerRadii.EMPTY, Insets.EMPTY)));
 
-        Label titolo = new Label(" TicketWave  ");
-        titolo.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 40));
+        Label titolo = new Label(" Ticket Wave ");
+        titolo.setFont(Font.font("Berlin Sans FB", FontWeight.MEDIUM, 40));
         titolo.setTextFill(Color.BLACK);
 
-        ImageView iconLogo = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
+        ImageView iconLogo = new ImageView("it/unipv/insfw23/TicketWave/modelView/imagesResources/logo.png");
         iconLogo.setFitHeight(60);
         iconLogo.setPreserveRatio(true);
         setAlignment(Pos.CENTER_LEFT);
@@ -49,8 +49,8 @@ public class UpperBar extends HBox {
         //new event button
         Button eventPlusButton = new Button();
         this.eventPlusButton = eventPlusButton;
-        eventPlusButton.setStyle("-fx-background-color: #80C1E2");
-        ImageView eventPlusIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/plus.png");
+        eventPlusButton.setStyle("-fx-background-color: #2E5984");
+        ImageView eventPlusIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/imagesResources/plus.png");
         eventPlusIcon.setFitHeight(25);
         eventPlusIcon.setFitWidth(29);
         eventPlusButton.setGraphic(eventPlusIcon);
@@ -59,8 +59,8 @@ public class UpperBar extends HBox {
         //stats button
         Button statsButton = new Button();
         this.statsButton = statsButton;
-        statsButton.setStyle("-fx-background-color: #80C1E2");
-        ImageView statsIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/statistics.png");
+        statsButton.setStyle("-fx-background-color: #2E5984");
+        ImageView statsIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/imagesResources/statistics.png");
         statsIcon.setFitHeight(25);
         statsIcon.setFitWidth(29);
         statsButton.setGraphic(statsIcon);
@@ -77,8 +77,8 @@ public class UpperBar extends HBox {
             }
         });
         */
-        searchButton.setStyle("-fx-background-color: #80C1E2");
-        ImageView searchIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/search_glass.png");
+        searchButton.setStyle("-fx-background-color: #2E5984");
+        ImageView searchIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/imagesResources/search_glass.png");
         searchIcon.setFitHeight(25);
         searchIcon.setFitWidth(29);
         searchButton.setGraphic(searchIcon);
@@ -87,8 +87,8 @@ public class UpperBar extends HBox {
 
         Button profileButton = new Button();
         this.profileButton = profileButton;
-        profileButton.setStyle("-fx-background-color: #80C1E2");
-        ImageView profileIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/Resources/user.png");
+        profileButton.setStyle("-fx-background-color: #2E5984");
+        ImageView profileIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/imagesResources/user.png");
         profileIcon.setFitHeight(25);
         profileIcon.setFitWidth(29);
         profileButton.setGraphic(profileIcon);
@@ -137,5 +137,10 @@ public class UpperBar extends HBox {
     public void setForCustomer() {
     	eventPlusButton.setVisible(false);
     	statsButton.setVisible(false);
+    }
+
+    public void setForManager() {
+         eventPlusButton.setVisible(true);
+         statsButton.setVisible(true);
     }
 }

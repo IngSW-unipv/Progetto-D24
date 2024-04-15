@@ -17,7 +17,7 @@ public class LowerBar extends HBox{
         ombraInf.setColor(Color.GRAY);
         setEffect(ombraInf);
         setMinHeight(30);
-        setBackground(new Background(new BackgroundFill(Color.web("#80C1E2"), CornerRadii.EMPTY, Insets.EMPTY)));
+        setBackground(new Background(new BackgroundFill(Color.web("#1E3F66"), CornerRadii.EMPTY, Insets.EMPTY)));
     }
 
     public static LowerBar getInstance(){

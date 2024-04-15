@@ -1,6 +1,8 @@
 package it.unipv.insfw23.TicketWave.modelView;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
+import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
