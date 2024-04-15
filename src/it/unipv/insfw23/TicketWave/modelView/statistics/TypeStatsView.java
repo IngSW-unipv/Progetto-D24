@@ -27,7 +27,7 @@ public class TypeStatsView extends Scene{
     private BarChart barChart;
     private XYChart.Series<Number, String> typeSerie;
     private BorderPane layout;
-    private Pane contenuto;
+    private Pane content;
 
 
     // modifico il costruttore per ricevere i risultati (WrapType) e la classe
@@ -83,7 +83,7 @@ public class TypeStatsView extends Scene{
         graphPane.setMaxWidth(600);
         graphPane.setMaxHeight(400);
 
-        this.contenuto = graphPane;
+        this.content = graphPane;
 
         layout.setCenter(graphPane);
         layout.setBottom(LowerBar.getInstance());
@@ -107,7 +107,7 @@ public class TypeStatsView extends Scene{
         setRoot(temp);
         UpperBar.getIstance().setForManager();
         layout.setTop(UpperBar.getIstance());
-        layout.setCenter(contenuto);
+        layout.setCenter(content);
         layout.setBottom(LowerBar.getInstance());
         setRoot(layout);
     }

@@ -23,7 +23,7 @@ public class GenreStatsView extends Scene {
     private XYChart<String, Number> genreSerie;
     private ArtistStatsView artistPane;
     private BorderPane layout;
-    private BorderPane contenuto;
+    private BorderPane content;
 
     //modifico il costruttore per ricevere i due risultati WrapArtist e WrapGenreOrPorv e la classe statDominio
     public GenreStatsView(){
@@ -82,29 +82,29 @@ public class GenreStatsView extends Scene {
         paneGraph2.setMaxWidth(600);
         paneGraph2.setMaxHeight(400);
 
-        BorderPane contenuto = new BorderPane();
+        BorderPane content = new BorderPane();
 
         Region spacer = new Region();
         spacer.setMinHeight(40);
-        contenuto.setBottom(spacer);
-        contenuto.setTop(backButton);
-        contenuto.setLeft(paneGraph2);
-        contenuto.setPadding(new Insets(20));
+        content.setBottom(spacer);
+        content.setTop(backButton);
+        content.setLeft(paneGraph2);
+        content.setPadding(new Insets(20));
 
-        this.contenuto = contenuto;
+        this.content = content;
 
 
         //passo i risultati artistRes
         ArtistStatsView artistPane = new ArtistStatsView();
         this.artistPane=artistPane;
-        contenuto.setRight(artistPane);
+        content.setRight(artistPane);
 
         BorderPane.setAlignment(backButton, Pos.TOP_RIGHT);
         BorderPane.setMargin(backButton, new Insets(10));
         //this.backButton = backButton;
 
         layout.setTop(UpperBar.getIstance());
-        layout.setCenter(contenuto);
+        layout.setCenter(content);
         layout.setBottom(LowerBar.getInstance());
         //this.layout = layout;
 
@@ -132,7 +132,7 @@ public class GenreStatsView extends Scene {
         setRoot(temp);
         UpperBar.getIstance().setForManager();
         layout.setTop(UpperBar.getIstance());
-        layout.setCenter(contenuto);
+        layout.setCenter(content);
         layout.setBottom(LowerBar.getInstance());
         setRoot(layout);
     }

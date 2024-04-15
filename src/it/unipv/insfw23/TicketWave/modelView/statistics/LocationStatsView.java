@@ -71,21 +71,21 @@ public class LocationStatsView extends Scene {
         paneGraph3.setMaxWidth(600);
         paneGraph3.setMaxHeight(400);
 
-        BorderPane contenuto = new BorderPane();
+        BorderPane content = new BorderPane();
 
         Region spacer = new Region();
         spacer.setMinHeight(40);
-        contenuto.setBottom(spacer);
-        contenuto.setTop(backButton);
-        contenuto.setCenter(paneGraph3);
+        content.setBottom(spacer);
+        content.setTop(backButton);
+        content.setCenter(paneGraph3);
 
-        contenuto.setPadding(new Insets(20));
+        content.setPadding(new Insets(20));
         BorderPane.setAlignment(backButton, Pos.TOP_RIGHT);
         BorderPane.setMargin(backButton, new Insets(10));
 
 
         layout.setTop(UpperBar.getIstance());
-        layout.setCenter(contenuto);
+        layout.setCenter(content);
         layout.setBottom(LowerBar.getInstance());
     }
 
