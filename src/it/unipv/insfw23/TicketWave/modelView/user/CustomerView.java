@@ -53,9 +53,10 @@ public class CustomerView extends Scene {
         this.layout = layout;
 
         customerUpperBar = UpperBar.getIstance();
+        customerUpperBar.setForCustomer();
         lowerBar = LowerBar.getInstance();
 
-        layout.setStyle("-fx-background-color: #def1fa;");
+        layout.setStyle("-fx-background-color: #91bad6;");
         layout.setBottom(lowerBar);
         layout.setTop(customerUpperBar);
         layout.setCenter(grid);
@@ -77,13 +78,13 @@ public class CustomerView extends Scene {
 
         // Nome e Cognome
         name = new Label("Benvenuto, Mario");
-        name.setFont(Font.font("Arial Rounded MT Bold", 20));
+        name.setFont(Font.font("Helvetica", 20));
 
         GridPane.setConstraints(name, 0, 0);
 
         // Punti Accumulati
         wavePoints = new Label("Wave Points: 100"); // Esempio di punti accumulati
-        wavePoints.setFont(Font.font("Arial ", 20));
+        wavePoints.setFont(Font.font("Helvetica ", 20));
         GridPane.setConstraints(wavePoints, 1, 0);
 
         // ListView per le notifiche
@@ -169,9 +170,12 @@ public class CustomerView extends Scene {
     public void reSetBars(){
         BorderPane temp = new BorderPane();
         setRoot(temp);
-        layout.setTop(UpperBar.getIstance());
+        customerUpperBar = UpperBar.getIstance();
+        customerUpperBar.setForCustomer();
+        lowerBar = LowerBar.getInstance();
 
-        layout.setBottom(LowerBar.getInstance());
+        layout.setTop(customerUpperBar);
+        layout.setBottom(lowerBar);
         layout.setCenter(grid);
         setRoot(layout);
     }

@@ -31,6 +31,8 @@ public class SignUpView extends Scene {
     private Button backButton = new Button("Torna indietro");
     private RadioButton managerRadioButton;
     private RadioButton customerRadioButton;
+    private UpperBar upperBar;
+    private LowerBar lowerBar;
 
 
 
@@ -61,13 +63,16 @@ public class SignUpView extends Scene {
         // creazione borderpane e setto upper e lower bar
 
         BorderPane layout= (BorderPane) getRoot();
-        layout.setStyle("-fx-background-color: #def1fa;");
+        layout.setStyle("-fx-background-color: #91bad6;");
         this.layout= layout;
 
+        // posizione le barre sopra e sotto
+        lowerBar=LowerBar.getInstance();
+        layout.setBottom(lowerBar);
 
-
-        layout.setBottom(LowerBar.getInstance());
-        layout.setTop(UpperBar.getIstance());
+        upperBar=UpperBar.getIstance();
+        upperBar.setForNoLogged();
+        layout.setTop(upperBar);
 
         // creazione griglia dei campi di iscrizione
 
@@ -80,9 +85,9 @@ public class SignUpView extends Scene {
         grid.setVgap(20);
         grid.setHgap(10);
         grid.setAlignment(Pos.CENTER);
-        grid.setStyle("-fx-background-color: #def1fa;");
+        grid.setStyle("-fx-background-color: #91bad6;");
 
-        Font labelFont = Font.font("Arial", 18); // imposto font di tutta la pagina
+        Font labelFont = Font.font("Helvetica", 18); // imposto font di tutta la pagina
 
 
         nameLabel.setFont(labelFont);
@@ -140,14 +145,14 @@ public class SignUpView extends Scene {
 
         RadioButton customerRadioButton = new RadioButton("Cliente");
         this.customerRadioButton=customerRadioButton;
-        customerRadioButton.setFont(Font.font("Arial", 14));
+        customerRadioButton.setFont(Font.font("Helvetica", 14));
         customerRadioButton.setToggleGroup(accountTypeToggleGroup);
         customerRadioButton.setSelected(true);
         GridPane.setConstraints(customerRadioButton, 0, 0);
 
         RadioButton managerRadioButton = new RadioButton("Gestore");
         this.managerRadioButton=managerRadioButton;
-        managerRadioButton.setFont(Font.font("Arial", 14));
+        managerRadioButton.setFont(Font.font("Helvetica", 14));
         managerRadioButton.setToggleGroup(accountTypeToggleGroup);
         GridPane.setConstraints(managerRadioButton, 1, 0);
 
@@ -198,9 +203,15 @@ public class SignUpView extends Scene {
     public void reSetBars(){
         BorderPane temp = new BorderPane();
         setRoot(temp);
-        layout.setTop(UpperBar.getIstance());
+
+        lowerBar=LowerBar.getInstance();
+        upperBar=UpperBar.getIstance();
+        upperBar.setForNoLogged();
+
+        layout.setTop(upperBar);
+        layout.setBottom(lowerBar);
         layout.setCenter(grid);
-        layout.setBottom(LowerBar.getInstance());
+
         setRoot(layout);
     }
 
