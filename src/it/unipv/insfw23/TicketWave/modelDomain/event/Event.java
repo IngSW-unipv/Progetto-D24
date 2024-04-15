@@ -24,6 +24,8 @@ public abstract class Event {
     private Manager creator;
     private String artists, description; // tutti gli eventi hanno una descrizione
 
+    //private File photo;
+
     // costruttore
 
     public Event(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type type, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description) {
@@ -153,6 +155,8 @@ public abstract class Event {
         return description;
     }
 
+    // public File getPhoto() { return photo; }
+
     // Setter //
     public void setIdEvent(int idEvent) {
         this.idEvent = idEvent;
@@ -241,4 +245,6 @@ public abstract class Event {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    // public void setPhoto(File photo) { this.photo = photo};
 }
