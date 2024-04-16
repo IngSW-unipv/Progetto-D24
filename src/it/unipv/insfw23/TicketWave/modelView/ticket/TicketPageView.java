@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.modelView.ticket;
 
 import javafx.application.Application;
 
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
@@ -12,11 +13,6 @@ import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioButton;
-import javafx.scene.control.Toggle;
-import javafx.scene.control.ToggleGroup;
 import javafx.stage.Stage;
 
 import java.time.LocalDate;
@@ -116,8 +112,8 @@ public class TicketPageView extends Scene {
 
     private void initComponents() {    // la classe contiene unicamente label poichè è solo una pagina di visualizzazione, il cliente non può scriverci sopra
 
-        // Layout dell'interfaccia utente
-        BorderPane internalgrid = new BorderPane();
+        // BorderPane per struttura interna
+        BorderPane internalstructure = new BorderPane();
 
         labels.add(eventNameLabel);
         labels.add(eventDescriptionLabel);
@@ -131,19 +127,30 @@ public class TicketPageView extends Scene {
             label.setTextFill(Color.BLACK);
         }
 
+        //box per il bottone di acquistto
+
         HBox buttonbox= new HBox(buyButton);
         buttonbox.setPadding(new Insets(10));
         buttonbox.setAlignment(Pos.BOTTOM_RIGHT);
         buttonbox.setSpacing(50);
 
+        //import dell'immagine  di acquisto
+
         Image BuyButtonlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/NewBuyButton.png");
-        buyButton.setGraphic(new ImageView(BuyButtonlogo));
+        ImageView imageView=new ImageView();
+        imageView.setImage(BuyButtonlogo);
+        imageView.setFitHeight(120);
+        imageView.setFitWidth(200);
+
+        buyButton.setGraphic(imageView);
         buyButton.setPrefWidth(buyButton.getWidth());
         buyButton.setPrefHeight(buyButton.getHeight());
+
         buyButton.setPadding(new Insets(0));
-        buyButton.setStyle("-fx-background-color: rgb(255,255,255)");
+        buyButton.setStyle("-fx-background-color: #91BAD6");
         buyButton.setOpacity(1);
 
+        //Gridpane per sistemazione elementi centrali
         GridPane centerGrid = new GridPane();
         centerGrid.setPadding(new Insets(10));
         centerGrid.setVgap(10);
@@ -153,8 +160,7 @@ public class TicketPageView extends Scene {
         centerGrid.add(eventDescriptionLabel, 0, 1);
         centerGrid.add(eventDescriptionTextField, 1, 1);
 
-        internalgrid.setCenter(centerGrid);
-
+        // Gridpane per sistemazione elementi sul fine pagina
         GridPane bottomGrid = new GridPane();
 
         bottomGrid.setPadding(new Insets(20));
@@ -183,34 +189,28 @@ public class TicketPageView extends Scene {
         vipPricebutton.setToggleGroup(priceselection);
 
 
+        internalstructure.setCenter(centerGrid);
+        internalstructure.setBottom(bottomGrid);
 
-        internalgrid.setBottom(bottomGrid);
-
+        //Borderpane esterno per l'immissione di tutto al centro+ layout sopra e sotto
         BorderPane root=new BorderPane();
 
-        root.setCenter(internalgrid);
+        root.setCenter(internalstructure);
         root.setStyle("-fx-background-color: #91BAD6;");
         root.setBottom(buttonbox);
         BorderPane.setMargin(buttonbox, new Insets(30));
         BorderPane.setAlignment(buttonbox, Pos.BOTTOM_RIGHT);
 
-        this.root=root;
 
-        // Creazione e visualizzazione della scena
-        scene = new Scene(root, 1080, 600);
-
+        //BordePane layout per upperBar e lowerbar
         BorderPane layout= new BorderPane();
-        this.layout=layout;
+
         layout.setTop(UpperBar.getIstance());
         layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
-
+        this.root=root;
+        this.layout=layout;
         setRoot(layout);
-
-
-
-
-
     }
 
     public int getWhichPriceSelected() {
@@ -240,14 +240,14 @@ public class TicketPageView extends Scene {
         }
 
 
-        public void reSetBarsManager(){
-            BorderPane temp = new BorderPane();
-            setRoot(temp);
-            UpperBar.getIstance().setForManager();
-            layout.setTop(UpperBar.getIstance());
-            layout.setBottom(LowerBar.getInstance());
-            setRoot(layout);
-        }
+    public void reSetBarsManager(){
+        BorderPane temp = new BorderPane();
+        setRoot(temp);
+        UpperBar.getIstance().setForManager();
+        layout.setTop(UpperBar.getIstance());
+        layout.setBottom(LowerBar.getInstance());
+        setRoot(layout);
+    }
 
 
     public Toggle getIfPriceSelected() {
