@@ -24,6 +24,8 @@ public abstract class Event {
     private Manager creator;
     private String artists, description; // tutti gli eventi hanno una descrizione
 
+    //private File photo;
+
     // costruttore
 
     public Event(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type type, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description) {
@@ -49,6 +51,7 @@ public abstract class Event {
         setSeatsRemainedNumberForType(seatsRemainedNumberForType);
         setTicketsSoldNumberForType(ticketsSoldNumberForType);
         setPrice(price);
+        crossCheck(price, ticketsSoldNumberForType, seatsRemainedNumberForType, typeOfSeats);
     }
 
 
@@ -153,6 +156,8 @@ public abstract class Event {
         return description;
     }
 
+    // public File getPhoto() { return photo; }
+
     // Setter //
     public void setIdEvent(int idEvent) {
         this.idEvent = idEvent;
@@ -199,7 +204,7 @@ public abstract class Event {
     }
 
     public void setTypeOfSeats(int typeOfSeats) {
-        if(typeOfSeats > 2){
+        if(typeOfSeats > 3){
             throw new IllegalArgumentException("In TicketWave si possono avere un massimo di 3 tipi di sedute/biglietti, immettere un valore valido");
         } else {
             this.typeOfSeats = typeOfSeats;
@@ -207,7 +212,7 @@ public abstract class Event {
     }
 
     public void setSeatsRemainedNumberForType(int[] seatsRemainedNumberForType) {
-        if(seatsRemainedNumberForType.length > 2){
+        if(seatsRemainedNumberForType.length > 3){
             throw new IllegalArgumentException("In TicketWave si possono avere un massimo di 3 tipi di sedute, reimmettere i valori riguardanti le sedute rimanenti");
         } else {
             this.seatsRemainedNumberForType = seatsRemainedNumberForType;
@@ -215,7 +220,7 @@ public abstract class Event {
     }
 
     public void setTicketsSoldNumberForType(int[] ticketsSoldNumberForType) {
-        if(ticketsSoldNumberForType.length > 2){
+        if(ticketsSoldNumberForType.length > 3){
             throw new IllegalArgumentException("In TicketWave si possono avere un massimo di 3 tipi di ticket, reimmettere i valori riguardanti i ticket venduti per tipo");
         } else {
             this.ticketsSoldNumberForType = ticketsSoldNumberForType;
@@ -223,10 +228,17 @@ public abstract class Event {
     }
 
     public void setPrice(double[] price) {
-        if(price.length > 2){
+        if(price.length > 3){
             throw new IllegalArgumentException("In TicketWave si possono avere un massimo di 3 tipi di ticket, reimmettere i valori riguardanti i prezzi dei ticket");
         } else {
             this.price = price;
+        }
+    }
+
+    public void crossCheck(double[] price, int[] ticketsSoldNumberForType, int[] seatsRemainedNumberForType, int typeOfSeats){ // serve per controllare che il numero di campi inseriti negli array coincida
+        if((price.length != ticketsSoldNumberForType.length) || (ticketsSoldNumberForType.length != seatsRemainedNumberForType.length) || (price.length != seatsRemainedNumberForType.length)
+            || (price.length != typeOfSeats) || (ticketsSoldNumberForType.length != typeOfSeats) || (seatsRemainedNumberForType.length != typeOfSeats)){
+            throw new IllegalArgumentException("Si è provato a creare un evento in cui il numero di campi dei prezzi e dei posti è diverso, riprovare la creazione");
         }
     }
 
@@ -241,4 +253,6 @@ public abstract class Event {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    // public void setPhoto(File photo) { this.photo = photo};
 }

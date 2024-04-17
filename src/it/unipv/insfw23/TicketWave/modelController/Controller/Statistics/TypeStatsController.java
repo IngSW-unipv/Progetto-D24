@@ -29,7 +29,7 @@ public class TypeStatsController {
                 //Al costruttore qui sotto passo il risultato dei generi, degli artisti e la statdomain
 
                 GenreStatsView genreView = new GenreStatsView();
-                GenreArtStatsController artStat = new GenreArtStatsController(mainStage, typeView, genreView);
+                GenreArtStatsController artStats = new GenreArtStatsController(mainStage, typeView, genreView);
                 mainStage.setScene(genreView);
             }
         };

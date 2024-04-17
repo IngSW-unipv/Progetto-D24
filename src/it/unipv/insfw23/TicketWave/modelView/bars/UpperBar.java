@@ -30,15 +30,15 @@ public class UpperBar extends HBox {
     // costruttore privato per singleton
     private UpperBar() {
 
-        DropShadow ombraSup = new DropShadow();
-        ombraSup.setColor(Color.GRAY);
-        setEffect(ombraSup);
+        DropShadow shadowSup = new DropShadow();
+        shadowSup.setColor(Color.GRAY);
+        setEffect(shadowSup);
         setMinHeight(60);
         setBackground(new Background(new BackgroundFill(Color.web("#2E5984"), CornerRadii.EMPTY, Insets.EMPTY)));
 
-        Label titolo = new Label(" Ticketwave ");
-        titolo.setFont(Font.font("Berlin Sans FB", FontWeight.MEDIUM, 40));
-        titolo.setTextFill(Color.WHITE);
+        Label title = new Label(" Ticketwave ");
+        title.setFont(Font.font("Berlin Sans FB", FontWeight.MEDIUM, 40));
+        title.setTextFill(Color.WHITE);
 
         ImageView iconLogo = new ImageView("it/unipv/insfw23/TicketWave/modelView/imagesResources/logo.png");
         iconLogo.setFitHeight(60);
@@ -98,7 +98,7 @@ public class UpperBar extends HBox {
 		
         Region spacer = new Region();
         setHgrow(spacer, Priority.ALWAYS);
-        getChildren().addAll(titolo, iconLogo, spacer, eventPlusButton, statsButton, searchButton, profileButton);
+        getChildren().addAll(title, iconLogo, spacer, eventPlusButton, statsButton, searchButton, profileButton);
         setAlignment(Pos.CENTER_LEFT);
     }
 
