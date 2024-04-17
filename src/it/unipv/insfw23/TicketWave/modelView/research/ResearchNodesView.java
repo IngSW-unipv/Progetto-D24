@@ -4,10 +4,18 @@ package it.unipv.insfw23.TicketWave.modelView.research;
  ****************************/
 // import it.unipv.insfw23.TicketWave.modelController.ResearchCaseController.GenreFilterController;
 // import it.unipv.insfw23.TicketWave.modelController.ResearchCaseController.ProvinceFilterController;
+import it.unipv.insfw23.TicketWave.modelDomain.event.*;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
+import java.sql.Time;
+import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class ResearchNodesView extends Node { //  questo mi serve per avere solo uno di ogni nodes, in tal modo ho tutti i button,... comuni tra le scene ResearchView e ResultResearchView
@@ -20,6 +28,7 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
     private ArrayList <CheckMenuItem> prv; // vettore per poter gestire i CheckMenu di province nel controller
     private ArrayList <CheckMenuItem> genv; // vettore per poter gestire i CheckMenu di generi nel controller
     private TextField searchBar;
+    private TableView<Event> table;
     private static ResearchNodesView istance;
     // costruttore privato per singleton
     private ResearchNodesView() {
@@ -38,6 +47,9 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
 
         Menu province = new Menu("Provincia");
         this.province = province;
+
+        TableView<Event> table = new TableView<>();
+        this.table = table;
 
         // Estetica
         searchBar.setStyle("-fx-background-color: #ffff");
@@ -86,6 +98,46 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
 
         bar.getMenus().addAll(genre, province);
         bar.setStyle("-fx-background-color: #ffff");
+
+        // Creo la TableView per visualizzare i risultati della ricerca, essa va nascosta fino alla prima ricerca; quando avviene la prima ricerca diventa visibile (quando clicco sul SearchButton)
+        TableColumn<Event,String> tcEvent = new TableColumn<>("Evento");
+        tcEvent.setCellValueFactory(new PropertyValueFactory<>("name"));
+        tcEvent.setStyle("-fx-alignment: CENTER");
+        tcEvent.setSortable(false);
+
+        TableColumn<Event,String> tcCity = new TableColumn<>("Città");
+        tcCity.setCellValueFactory(new PropertyValueFactory<>("city"));
+        tcCity.setStyle("-fx-alignment: CENTER");
+        tcCity.setSortable(false);
+
+        TableColumn<Event,String> tcLocation = new TableColumn<>("Luogo");
+        tcLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
+        tcLocation.setStyle("-fx-alignment: CENTER");
+        tcLocation.setSortable(false);
+
+        TableColumn<Event,String> tcProvince = new TableColumn<>("Provincia");
+        tcProvince.setCellValueFactory(new PropertyValueFactory<>("province"));
+        tcProvince.setStyle("-fx-alignment: CENTER");
+        tcProvince.setSortable(false);
+
+        table.getColumns().addAll(tcEvent, tcCity, tcLocation, tcProvince);
+
+        // esempio al volo da mettere nella table view
+        LocalDate data = LocalDate.now();
+        ArrayList<Event> arraylistevent = new ArrayList<>();
+        Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","passwd",2, "23245234324", arraylistevent,5,1,data,4);
+        int intvett[] = {2,5,10};
+        int vett [] = {200, 3000, 20};
+        double price[] = {30, 50, 10};
+        Time time = null;
+
+        ObservableList<Event> evs = FXCollections.observableArrayList(
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui")
+        );
+
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+        table.setItems(evs);
+
     }
 
     //Metodo statico per ottenere l'unica istanza
@@ -103,6 +155,10 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
         return searchBar;
     } // lo chiamo nel ResearchController
     public Button getSearchButton() { return searchButton; } // lo chiamo nel ResearchController
+
+    public TableView<Event> getTable() {
+        return table;
+    }
 
     public ArrayList<CheckMenuItem> getPrv() {
         return prv;

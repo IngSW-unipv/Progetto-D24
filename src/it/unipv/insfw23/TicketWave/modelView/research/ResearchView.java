@@ -6,6 +6,7 @@ package it.unipv.insfw23.TicketWave.modelView.research;
 
 import com.sun.javafx.scene.control.GlobalMenuAdapter;
 // import it.unipv.insfw23.TicketWave.modelController.MainController;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import javafx.application.Application;
@@ -54,7 +55,7 @@ public class ResearchView extends Scene{
         GridPane gp = new GridPane();
         gp.setStyle("-fx-background-color: #91BAD6");
         gp.setAlignment(Pos.TOP_CENTER);
-        // gp.setGridLinesVisible(true);
+        gp.setGridLinesVisible(true);
         // decido qual'è la distanza da tutti i bordi
         gp.setPadding(new Insets(50,50,50,50));
 
@@ -62,7 +63,7 @@ public class ResearchView extends Scene{
         gp.add(rnv.getBar(), 0, 0, 1, 1);
         gp.add(rnv.getSearchBar(), 1, 0, 1,1);
         gp.add(rnv.getSearchButton(),2,0,1,1);
-
+        gp.add(rnv.getTable(),1,1,1,1);
         // decido di quanto spaziare gli elementi del gridPane
         gp.setHgap(20); // gap orizzontale
         gp.setVgap(20); // gap verticale
@@ -73,15 +74,23 @@ public class ResearchView extends Scene{
         gp.getColumnConstraints().add(column1);
         gp.getColumnConstraints().add(column2);
         // column1.setPercentWidth(15); // Non mi interessa regolare la grandezza della menubar in base a come ridimensiono la finestra
-        column2.setPercentWidth(30);
+        column2.setPercentWidth(33.4);
+        column2.setMinWidth(330.40);
+
+        // vincoli sulle righe
+        RowConstraints row1 = new RowConstraints();
+        RowConstraints row2 = new RowConstraints();
+        gp.getRowConstraints().add(row1);
+        gp.getRowConstraints().add(row2);
+        row2.setMinHeight(100);
 
         // allineo i vari nodi all'interno delle loro celle della gridpane
         GridPane.setHalignment(rnv.getBar(), HPos.CENTER);
         GridPane.setHalignment(rnv.getSearchBar(), HPos.CENTER);
         GridPane.setHalignment(rnv.getSearchButton(), HPos.CENTER);
+        GridPane.setHalignment(rnv.getTable(), HPos.CENTER);
 
         gp.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
-
 
         BorderPane layout = new BorderPane();
         layout.setCenter(gp);
