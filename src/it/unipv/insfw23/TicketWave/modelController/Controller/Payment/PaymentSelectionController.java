@@ -6,6 +6,7 @@ import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataPView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -14,14 +15,19 @@ public class PaymentSelectionController {
     private Stage mainStage;
     private PaymentSelectionView paymentPage;
     private TicketPageView ticketPage;
+    private Scene scene;
     private PaymentDataPView paymentDataPPage;
+    private
+    private boolean isviewermanager;
 
     private PaymentDataMView paymentDataMPage;
 
-    public PaymentSelectionController(Stage mainStage, PaymentSelectionView PaymentPage, TicketPageView ticketPage) {
+    public PaymentSelectionController(Stage mainStage, PaymentSelectionView PaymentPage, Scene scene, boolean isviewermanager) {
         this.mainStage = mainStage;
         this.paymentPage = PaymentPage;
-        this.ticketPage=ticketPage;
+        this.scene=scene;
+        this.isviewermanager=isviewermanager;
+
         initComponents();
     }
 
@@ -53,20 +59,24 @@ public class PaymentSelectionController {
         paymentPage.getNextButton().setOnMouseClicked(goToPaymentDataPage);
 
 
-        EventHandler<MouseEvent> turnBackToTicketPage = new EventHandler<>() {
+        EventHandler<MouseEvent> turnBack = new EventHandler<>() {
 
             @Override
             public void handle(MouseEvent actionEvent) {
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("Sei ritornato indietro alla TicketPage");
-               
-               	ticketPage.reSetBarsCustomer();
-               
-                mainStage.setScene(ticketPage);
+                if(isviewermanager){
+
+
+                }
+               else {
+                    ticketPage.reSetBarsCustomer();
+                }
+                mainStage.setScene(scene);
             }
         };
 
-        paymentPage.getBackButton().setOnMouseClicked(turnBackToTicketPage);
+        paymentPage.getBackButton().setOnMouseClicked(turnBack);
 
 
 

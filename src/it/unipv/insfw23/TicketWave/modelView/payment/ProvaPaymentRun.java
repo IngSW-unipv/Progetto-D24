@@ -11,9 +11,10 @@ public class ProvaPaymentRun extends Application {
 
         // Creazione di una nuova istanza della classe PaymentSelectionView
 
+
         TicketPageView ticketPageView=new TicketPageView();
         PaymentSelectionView paymentView = new PaymentSelectionView();
-        PaymentSelectionController paymentSelectionController=new PaymentSelectionController(primaryStage,paymentView,ticketPageView);
+        PaymentSelectionController paymentSelectionController=new PaymentSelectionController(primaryStage,paymentView,scene);
         PaymentDataPView paymentDataPView=new PaymentDataPView();
         primaryStage.setScene(paymentView);
         primaryStage.show();

@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelView.ticket;
 
+import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 import javafx.application.Application;
 
 import javafx.scene.control.*;
@@ -53,6 +54,8 @@ public class TicketPageView extends Scene {
     private boolean typeofviewermanager = false;
 
 
+
+
     public TicketPageView(){
         super(new BorderPane(), 1080, 600);
 
@@ -61,14 +64,14 @@ public class TicketPageView extends Scene {
 
     //evento che setta le label dipendenti dall'evento prima di inizializzare la view
     //senno inizializza la view con i campi vuoti e aggiorna il valore di una label senza reinizializzare
-    public void setComponents(boolean isviewermanager, String typeofevent, String name, String città, String location, Province prov, LocalDate data,ArrayList<String> artist,
+    public void setComponents(boolean isviewermanager, Type typeofevent, String name, String città, String location, Province prov, LocalDate data, String  artist,
                               int[] seatsRemainedNumberForType, double[] price) {
         //settaggio dei campi dei valori per un singolo evento
         System.out.println(artist);
         System.out.println(artist.toString());
         typeofviewermanager = isviewermanager;
         eventNameTextField = new Label(name);
-        eventDescriptionTextField = new Label("Il giorno "+data+" si terra un "+typeofevent+" in "+location+" a "+città+" ,in provincia di "+prov+" tenuto da "
+        eventDescriptionTextField = new Label("Il giorno "+data+" si terra un "+typeofevent.name()+" in "+location+" a "+città+" ,in provincia di "+prov+" tenuto da "
                 +artist.toString().substring(1, artist.toString().length()-1));
 
         switch(seatsRemainedNumberForType.length) {
