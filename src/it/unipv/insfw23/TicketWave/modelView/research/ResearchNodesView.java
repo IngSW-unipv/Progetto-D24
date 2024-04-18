@@ -121,6 +121,8 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
         tcProvince.setSortable(false);
 
         table.getColumns().addAll(tcEvent, tcCity, tcLocation, tcProvince);
+        table.setVisible(false); // fino al primo click del searchButton deve rimanere non visibile
+        table.setSelectionModel(null); // fino al primo click del searchButton deve rimanere non clickabile
 
         // esempio al volo da mettere nella table view
         LocalDate data = LocalDate.now();
