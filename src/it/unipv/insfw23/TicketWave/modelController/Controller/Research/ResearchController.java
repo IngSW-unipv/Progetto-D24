@@ -2,8 +2,8 @@ package it.unipv.insfw23.TicketWave.modelController.Controller.Research;
 
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchNodesView;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
-import javafx.scene.control.SelectionMode;
-import javafx.scene.control.SelectionModel;
+import javafx.event.ActionEvent;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -43,14 +43,25 @@ public class ResearchController {
         };
         rv.getresearchnodeview().getTable().setOnMouseClicked(eventPressHandler);
 
-        // click sui filtri della provincia
-        EventHandler<javafx.scene.input.MouseEvent> provincePressHandler = new EventHandler<>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                System.out.println(rv.getresearchnodeview().getTable().getSelectionModel().getSelectedItem()); // devo addare un listener alla tabella
+        // Click filtri per il genere
+        for (MenuItem mi : rv.getresearchnodeview().getGenv()){
+            if (mi instanceof CheckMenuItem){
+                CheckMenuItem cmi = (CheckMenuItem) mi;
+                if (cmi.isSelected()){
+                    cmi.setOnAction(this::genrePressHandler); // se viene premuto il checkmenuitem va a genrePressHandler
+                }
             }
-        };
-        rv.getresearchnodeview().getPrv().ge
+        }
 
+
+    }
+    private void genrePressHandler(ActionEvent event) {
+        CheckMenuItem cmi = (CheckMenuItem) event.getSource();
+        // click sui filtri del genere
+        if (cmi.isSelected()) {
+            System.out.println(cmi.getText() + " is selected");
+        } else {
+            System.out.println(cmi.getText() + " is deselected");
+        }
     }
 }

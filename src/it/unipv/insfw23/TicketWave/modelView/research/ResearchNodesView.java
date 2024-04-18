@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
+import java.sql.Array;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -42,10 +43,10 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
         MenuBar bar = new MenuBar();
         this.bar = bar;
 
-        Menu genre = new Menu("Generi");
+        Menu genre = new Menu("_Generi"); // con l'underscore davanti se premo ALT + G apre il menu dei filtri per genere
         this.genre = genre;
 
-        Menu province = new Menu("Provincia");
+        Menu province = new Menu("_Provincia");
         this.province = province;
 
         TableView<Event> table = new TableView<>();
@@ -69,8 +70,14 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
 
         // creo  la MenuBar con i filtri
         // check menu filtri musica
-        genv = new ArrayList<CheckMenuItem>(); // vettore per poter gestire i CheckMenu di generi nel controller
-        String [] gen = {"ROCK", "PUNK"}; // stringa di generi
+        Genre [] gnValues = Genre.values(); // ho un array con tutti i valori associati ai nomi della ENUM
+        ArrayList<String> gen = new ArrayList<>(); // stringa di generi
+        for (Genre value : gnValues) { // popolo la mia lista di generi (stringa) partendo dalla ENUM
+            if (value != Genre.START_THEATER) { // se la stringa è diversa dal separatore dei generi la metto nella successiva CheckBox, per cui la metto nell'array di stringhe
+                gen.add(value.toString());
+            }
+        }
+        genv = new ArrayList<CheckMenuItem>();  // array che contiene tutti i checkMenuItem da mettere nel Menu del genere
 
         for (String s : gen) { // Arraylist di CheckMenuItems che popolo
             CheckMenuItem cmi = new CheckMenuItem(s);
