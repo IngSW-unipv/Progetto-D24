@@ -18,7 +18,7 @@ public class Customer extends User {
     int maxfavoriteGenre = 5;
 
 
-    public Customer(String name, String surname, String dateOfBirth, String email, String password, int provinceOfResidence, Genre [] favoriteGenre, int points) {
+    public Customer(String name, String surname, String dateOfBirth, String email, String password, Province provinceOfResidence, Genre [] favoriteGenre, int points) {
         super(name,surname, dateOfBirth, email,password, provinceOfResidence);
         this.points = points;
         this.favoriteGenre= favoriteGenre;
