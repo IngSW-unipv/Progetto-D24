@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.modelView.user;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
@@ -29,19 +30,26 @@ import javafx.scene.text.Font;
 public class ManagerView extends Scene{
 	
 //	Stage window;
-	
-	public ManagerView() {
-		super(new BorderPane(), 1080, 600);
-		init();
-	}
 
 	private Button logoutButton;
 	private UpperBar upperbar;
 	private LowerBar lowerbar;
 	private BorderPane layout;
 	private GridPane grid;
-	private TableView<Event> tabev;
+	private TableView<Event> tabEv;
 	private ObservableList<Event> evs;
+	private TableView<Notification> tabNot;
+	private ObservableList<Notification> nots;
+	private Label name;
+	
+	
+	public ManagerView(String name, ArrayList<Notification> nots, ArrayList<Event> evs) {
+		super(new BorderPane(), 1080, 600);
+		this.name = new Label("Benvenuto, "+name);
+		this.nots = FXCollections.observableArrayList(nots);
+		this.evs = FXCollections.observableArrayList(evs);
+		init();
+	}
 
 	
 	public void init(){
@@ -60,11 +68,13 @@ public class ManagerView extends Scene{
 		grid.setAlignment(Pos.CENTER);
 		
 		
-		Label nome = new Label("Mario Rossi");
-		nome.setFont(Font.font("Arial", 40));
-		GridPane.setConstraints(nome, 1, 0, 2, 1);
-		GridPane.setHalignment(nome, HPos.CENTER);
-		GridPane.setHgrow(nome, Priority.SOMETIMES);
+		
+		name.setFont(Font.font("Arial", 40));
+		GridPane.setConstraints(name, 1, 0, 2, 1);
+		GridPane.setHalignment(name, HPos.CENTER);
+		GridPane.setHgrow(name, Priority.SOMETIMES);
+		
+		
 		
 		logoutButton = new Button("Logout");
 		GridPane.setConstraints(logoutButton, 1, 1, 2, 1);
@@ -85,10 +95,10 @@ public class ManagerView extends Scene{
 		GridPane.setHgrow(ev, Priority.SOMETIMES);
 		
 		// tab eventi
-		tabev = new TableView<>();
-		GridPane.setConstraints(tabev, 2, 6, 2, 1);
-		GridPane.setHgrow(tabev, Priority.SOMETIMES);
-		GridPane.setVgrow(tabev, Priority.SOMETIMES);
+		tabEv = new TableView<>();
+		GridPane.setConstraints(tabEv, 2, 6, 2, 1);
+		GridPane.setHgrow(tabEv, Priority.SOMETIMES);
+		GridPane.setVgrow(tabEv, Priority.SOMETIMES);
 		
 		TableColumn<Event, Integer> codevcol = new TableColumn<>("ID");
 		codevcol.setCellValueFactory(new PropertyValueFactory<>("idEvent"));
@@ -102,13 +112,13 @@ public class ManagerView extends Scene{
 		cityevcol.setCellValueFactory(new PropertyValueFactory<>("city"));
 		cityevcol.setStyle("-fx-alignment: CENTER");
 		
-		tabev.getColumns().addAll(codevcol, evnomecol, cityevcol);
+		tabEv.getColumns().addAll(codevcol, evnomecol, cityevcol);
 		
 //		ObservableList<Event> evs = FXCollections.observableArrayList();
 //		evs.add(new it.unipv.insfw23.TicketWave.modelView.Event(1,"nome1"));
 //		evs.add(new it.unipv.insfw23.TicketWave.modelView.Event(3,"nome2"));
-		tabev.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
-		tabev.setItems(evs);
+		tabEv.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+		tabEv.setItems(evs);
 //		tabev.setPrefWidth(400);
 		
 		
@@ -139,14 +149,14 @@ public class ManagerView extends Scene{
 		
 		tabnot.getColumns().addAll(codcol, msgcol, orariocol, datacol);
 		
-		ObservableList<Notification> nots = FXCollections.observableArrayList();
-		nots.add(new Notification(1,new Customer("f", "tf", "h", "d", "cf", Province.AGRIGENTO, null, 300),"str2"));
+//		ObservableList<Notification> nots = FXCollections.observableArrayList();
+//		nots.add(new Notification(1,new Customer("f", "tf", "h", "d", "cf", Province.AGRIGENTO, null, 300),"str2"));
 //		nots.add(new Notification(3,"str3","str4"));
 		tabnot.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 		tabnot.setItems(nots);
 //		tabnot.setPrefWidth(400);
 		
-		grid.getChildren().addAll(nome, logoutButton, tabnot, tabev, not, ev);
+		grid.getChildren().addAll(name, logoutButton, tabNot, tabEv, not, ev);
 		
 		
 		
@@ -205,14 +215,18 @@ public class ManagerView extends Scene{
         setRoot(layout);
     }
 
-	public TableView<Event> getTableev(){
+	public TableView<Event> getTableEv(){
 //		TableViewSelectionModel<it.unipv.insfw23.TicketWave.modelView.Event> a = tabev.getSelectionModel();
 //		return a.getSelectedItem();
-		return tabev;
+		return tabEv;
 	}
 	
-	public void setEventsforTableev(Manager manager) {
-		evs = FXCollections.observableArrayList(manager.getEventlist());
-		init();
+	public TableView<Notification> getTableNot(){
+		return tabNot;
 	}
+	
+//	public void setEventsforTableev(Manager manager) {
+//		evs = FXCollections.observableArrayList(manager.getEventlist());
+//		init();
+//	}
 }

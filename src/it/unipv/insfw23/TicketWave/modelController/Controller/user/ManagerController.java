@@ -49,8 +49,8 @@ public class ManagerController {
 			@Override
 			public void handle(MouseEvent event) {
 				//crea controller per typeselectionevent
-				TypeSelectionEventView typesel = new TypeSelectionEventView();
-				TypeSelectionEventController typeselectioneventview = new TypeSelectionEventController(window, managerview, typesel/*, loggedmanager*/);
+				SelectionNewEventTypeView typesel = new SelectionNewEventTypeView();
+				SelectionNewEventTypeController typeselectioneventview = new SelectionNewEventTypeController(window, managerview, typesel/*, loggedmanager*/);
 				window.setScene(typesel);
 			}
 			
@@ -113,7 +113,7 @@ public class ManagerController {
 			/	arrfintoartista.add("califano");
 			/	Concert eventofinto = new Concert(12,"reunion","busto arstizio",data, "via dei matti ,0", Province.LIVORNO,2,1, seduteRImaste, vettfalsoprice,Genre.INDIE,managerfinto,arrfintoartista);
 			*/
-				System.out.println(managerview.getTableev().getSelectionModel().getSelectedItem());
+				System.out.println(managerview.getTableEv().getSelectionModel().getSelectedItem());
 				//costruttore view
 				TicketPageView tic = new TicketPageView();
 				//costruttore controller
@@ -125,6 +125,6 @@ public class ManagerController {
 			}
 		};
 		
-		managerview.getTableev().setOnMouseClicked(openevent);;
+		managerview.getTableEv().setOnMouseClicked(openevent);;
 	}
 }
