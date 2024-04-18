@@ -2,7 +2,7 @@ package it.unipv.insfw23.TicketWave.modelController.Controller;
 
 
 
-import it.unipv.insfw23.TicketWave.modelView.TicketPageView;
+import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import it.unipv.insfw23.TicketWave.modelView.PaymentSelectionView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;

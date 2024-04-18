@@ -122,7 +122,8 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
 
         table.getColumns().addAll(tcEvent, tcCity, tcLocation, tcProvince);
         table.setVisible(false); // fino al primo click del searchButton deve rimanere non visibile
-        table.setSelectionModel(null); // fino al primo click del searchButton deve rimanere non clickabile
+        table.getSelectionModel().setSelectionMode(null); // fino al primo click del searchButton deve rimanere non clickabile
+        table.setPlaceholder(new Label("Nessun evento con quelle caratteristiche è stato trovato")); // mex che viene messo a display quando la ricerca non porta a nessun evento
 
         // esempio al volo da mettere nella table view
         LocalDate data = LocalDate.now();
