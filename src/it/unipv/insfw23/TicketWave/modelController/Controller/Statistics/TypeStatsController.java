@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelController.Controller.Statistics;
 
 import it.unipv.insfw23.TicketWave.modelView.statistics.GenreStatsView;
+import it.unipv.insfw23.TicketWave.modelView.statistics.NoMoreEventsPopup;
 import it.unipv.insfw23.TicketWave.modelView.statistics.TypeStatsView;
 import javafx.event.EventHandler;
 import javafx.scene.chart.XYChart;
@@ -28,9 +29,16 @@ public class TypeStatsController {
                 //WrapArtist artistRes = statDominio.artistStats();
                 //Al costruttore qui sotto passo il risultato dei generi, degli artisti e la statdomain
 
-                GenreStatsView genreView = new GenreStatsView();
-                GenreArtStatsController artStats = new GenreArtStatsController(mainStage, typeView, genreView);
-                mainStage.setScene(genreView);
+                //GenreStatsView genreView = new GenreStatsView();
+                //GenreArtStatsController artStats = new GenreArtStatsController(mainStage, typeView, genreView);
+
+
+                NoMoreEventsPopup.getIstance().setX(mainStage.getX() + mainStage.getWidth() - NoMoreEventsPopup.getIstance().getWidth() - 360);
+                NoMoreEventsPopup.getIstance().setY(mainStage.getY()+95);
+                NoMoreEventsPopup.getIstance().show(mainStage);
+
+
+                //mainStage.setScene(genreView);
             }
         };
 
