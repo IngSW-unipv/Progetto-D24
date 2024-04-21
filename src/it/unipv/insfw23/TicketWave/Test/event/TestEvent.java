@@ -22,7 +22,7 @@ public class TestEvent {
     @Before
     public void setup(){
         events = new ArrayList<Event>();
-        mg = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", 1, "1234567890123456",
+        mg = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", Province.CATANIA, "1234567890123456",
                             events, 5, 1, LocalDate.now(), 0);
     }
     @Test
@@ -134,7 +134,7 @@ public class TestEvent {
             ev1.add(theater);
             ev1.add(theater1);
             // creo il manager
-            mg1 = new Manager("Paolo", "Bisio", "1970-02-07", "Paolo@example.com", "dajeRoma", 2, "423432523523",
+            mg1 = new Manager("Paolo", "Bisio", "1970-02-07", "Paolo@example.com", "dajeRoma", Province.ROMA, "423432523523",
                     ev1, 10000000, 2, LocalDate.now(), 0);
             // check + stampa delle reference degli eventi
             assertEquals(5, mg1.getEvent().size()); // controllo che 6 sia la size dell'arrayList di eventi in manager

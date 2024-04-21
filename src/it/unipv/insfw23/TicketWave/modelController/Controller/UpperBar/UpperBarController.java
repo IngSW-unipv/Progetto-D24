@@ -34,5 +34,21 @@ public class UpperBarController {
         };
         UpperBar.getIstance().getStatsButton().setOnAction(statsButtonHandler);
 
+        EventHandler<ActionEvent> creationEventHandler = new EventHandler<>(){
+            @Override
+            public void handle(ActionEvent actionEvent){
+                /*
+                if (manager.anotherEvents){
+                    vai alla pagina di creazione dell'evento
+                }
+                else {
+                */
+
+            }
+        };
+        UpperBar.getIstance().getEventPlusButton().setOnAction(creationEventHandler);
+
+
+
     }
 }

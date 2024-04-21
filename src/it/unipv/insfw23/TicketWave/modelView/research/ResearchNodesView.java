@@ -13,6 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 
+import java.sql.Array;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDate;
@@ -42,10 +43,10 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
         MenuBar bar = new MenuBar();
         this.bar = bar;
 
-        Menu genre = new Menu("Generi");
+        Menu genre = new Menu("_Generi"); // con l'underscore davanti se premo ALT + G apre il menu dei filtri per genere
         this.genre = genre;
 
-        Menu province = new Menu("Provincia");
+        Menu province = new Menu("_Provincia");
         this.province = province;
 
         TableView<Event> table = new TableView<>();
@@ -69,8 +70,14 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
 
         // creo  la MenuBar con i filtri
         // check menu filtri musica
-        genv = new ArrayList<CheckMenuItem>(); // vettore per poter gestire i CheckMenu di generi nel controller
-        String [] gen = {"ROCK", "PUNK"}; // stringa di generi
+        Genre [] gnValues = Genre.values(); // ho un array con tutti i valori associati ai nomi della ENUM
+        ArrayList<String> gen = new ArrayList<>(); // stringa di generi
+        for (Genre value : gnValues) { // popolo la mia lista di generi (stringa) partendo dalla ENUM
+            if (value != Genre.START_THEATER) { // se la stringa è diversa dal separatore dei generi la metto nella successiva CheckBox, per cui la metto nell'array di stringhe
+                gen.add(value.toString());
+            }
+        }
+        genv = new ArrayList<CheckMenuItem>();  // array che contiene tutti i checkMenuItem da mettere nel Menu del genere
 
         for (String s : gen) { // Arraylist di CheckMenuItems che popolo
             CheckMenuItem cmi = new CheckMenuItem(s);
@@ -122,12 +129,13 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
 
         table.getColumns().addAll(tcEvent, tcCity, tcLocation, tcProvince);
         table.setVisible(false); // fino al primo click del searchButton deve rimanere non visibile
-        table.setSelectionModel(null); // fino al primo click del searchButton deve rimanere non clickabile
+        table.getSelectionModel().setSelectionMode(null); // fino al primo click del searchButton deve rimanere non clickabile
+        table.setPlaceholder(new Label("Nessun evento con quelle caratteristiche è stato trovato")); // mex che viene messo a display quando la ricerca non porta a nessun evento
 
         // esempio al volo da mettere nella table view
         LocalDate data = LocalDate.now();
         ArrayList<Event> arraylistevent = new ArrayList<>();
-        Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","passwd",2, "23245234324", arraylistevent,5,1,data,4);
+        Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","passwd",Province.AGRIGENTO, "23245234324", arraylistevent,5,1,data,4);
         int intvett[] = {2,5,10};
         int vett [] = {200, 3000, 20};
         double price[] = {30, 50, 10};
