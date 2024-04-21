@@ -46,6 +46,7 @@ public class StarterNicholas extends Application {
          */
         UpperBarController ctrl = new UpperBarController(primaryStage);
         ResearchView scene = new ResearchView();
+        scene.getStylesheets().add("it/unipv/insfw23/TicketWave/modelView/tableViewStyle.css");
         ResearchController controller = new ResearchController(primaryStage, scene);
         primaryStage.setScene(scene);
 
