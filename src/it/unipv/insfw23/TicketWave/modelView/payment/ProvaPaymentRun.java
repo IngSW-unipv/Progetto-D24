@@ -6,15 +6,19 @@ import javafx.application.Application;
 import javafx.stage.Stage;
 
 public class ProvaPaymentRun extends Application {
+
+    private boolean isviewermanager;
+
     @Override
     public void start(Stage primaryStage) throws Exception {
 
         // Creazione di una nuova istanza della classe PaymentSelectionView
 
 
+
         TicketPageView ticketPageView=new TicketPageView();
         PaymentSelectionView paymentView = new PaymentSelectionView();
-        PaymentSelectionController paymentSelectionController=new PaymentSelectionController(primaryStage,paymentView,scene);
+        PaymentSelectionController paymentSelectionController=new PaymentSelectionController(primaryStage,paymentView,ticketPageView,false);
         PaymentDataPView paymentDataPView=new PaymentDataPView();
         primaryStage.setScene(paymentView);
         primaryStage.show();
