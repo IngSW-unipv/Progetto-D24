@@ -1,7 +1,9 @@
 package it.unipv.insfw23.TicketWave.modelView.statistics;
 
+import it.unipv.insfw23.TicketWave.modelController.Controller.Research.ResearchController;
 import it.unipv.insfw23.TicketWave.modelController.Controller.Statistics.TypeStatsController;
 import it.unipv.insfw23.TicketWave.modelController.Controller.UpperBar.UpperBarController;
+import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -46,8 +48,9 @@ public class StarterDavide extends Application {
 
          */
         UpperBarController ctrl = new UpperBarController(primaryStage);
-        TypeStatsView scene = new TypeStatsView();
-        TypeStatsController controller = new TypeStatsController(primaryStage, scene);
+        ResearchView scene = new ResearchView();
+        ResearchController controller = new ResearchController(primaryStage, scene);
+        //TypeStatsController controller = new TypeStatsController(primaryStage, scene);
         primaryStage.setScene(scene);
 
 

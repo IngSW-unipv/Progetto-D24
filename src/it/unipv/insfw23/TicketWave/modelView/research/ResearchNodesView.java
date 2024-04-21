@@ -33,6 +33,7 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
     private static ResearchNodesView istance;
     // costruttore privato per singleton
     private ResearchNodesView() {
+
         // Creazione bottoni,... in comune per la ResearchView
         TextField searchBar = new TextField();
         this.searchBar = searchBar;
@@ -51,6 +52,8 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
 
         TableView<Event> table = new TableView<>();
         this.table = table;
+        table.setPrefWidth(1000);
+        table.setPrefHeight(1000);
 
         // Estetica
         searchBar.setStyle("-fx-background-color: #ffff");
@@ -135,18 +138,34 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
         // esempio al volo da mettere nella table view
         LocalDate data = LocalDate.now();
         ArrayList<Event> arraylistevent = new ArrayList<>();
-        Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","passwd",2, "23245234324", arraylistevent,5,1,data,4);
+        Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","passwd",Province.PAVIA, "23245234324", arraylistevent,5,1,data,4);
         int intvett[] = {2,5,10};
         int vett [] = {200, 3000, 20};
         double price[] = {30, 50, 10};
         Time time = null;
 
         ObservableList<Event> evs = FXCollections.observableArrayList(
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui")
-        );
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+        new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+        new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+        new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+        new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+        new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+        new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+        new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+        new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+        new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+        new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+        new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+        new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+        new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui")
+    );
 
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         table.setItems(evs);
+        ScrollPane scrollbar = new ScrollPane(table);
+
+
 
     }
 
