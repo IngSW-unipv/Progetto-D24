@@ -102,6 +102,7 @@ public class ResearchView extends Scene{
             }
          */
         layout.setTop(UpperBar.getIstance());
+        getStylesheets().add("it/unipv/insfw23/TicketWave/modelView/tableViewStyle.css");
         setRoot(layout);
     }
 
