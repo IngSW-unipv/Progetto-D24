@@ -19,7 +19,7 @@ public class Manager extends User {
 
     private int counterCreatedEvents;
 
-    public Manager(String name, String surname, String dateOfBirth, String email, String password, int provinceOfResidence, String creditCard, ArrayList <Event> event , int maxNumberOfEvents, int subscription, LocalDate subscriptionDate, int counterCreatedEvents){
+    public Manager(String name, String surname, String dateOfBirth, String email, String password, Province provinceOfResidence, String creditCard, ArrayList <Event> event , int maxNumberOfEvents, int subscription, LocalDate subscriptionDate, int counterCreatedEvents){
         super (name,surname,dateOfBirth,email,password,provinceOfResidence);
         this.creditCard=creditCard;
         this.event=event;

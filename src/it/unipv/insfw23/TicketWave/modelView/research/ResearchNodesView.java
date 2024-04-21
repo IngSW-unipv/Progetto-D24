@@ -135,7 +135,7 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
         // esempio al volo da mettere nella table view
         LocalDate data = LocalDate.now();
         ArrayList<Event> arraylistevent = new ArrayList<>();
-        Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","passwd",2, "23245234324", arraylistevent,5,1,data,4);
+        Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","passwd",Province.AGRIGENTO, "23245234324", arraylistevent,5,1,data,4);
         int intvett[] = {2,5,10};
         int vett [] = {200, 3000, 20};
         double price[] = {30, 50, 10};

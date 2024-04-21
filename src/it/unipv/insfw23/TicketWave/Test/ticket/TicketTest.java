@@ -33,7 +33,7 @@ public class TicketTest {
 		
 		ArrayList<Event> events = new ArrayList<>();
 		creator = new Manager("Maurizio","Merluzzo","1980-03-20","mauricemerluzz@gmail.com","123456789",
-								43,"3456785676954038",events,5,1,LocalDate.now(),0);
+				Province.COMO,"3456785676954038",events,5,1,LocalDate.now(),0);
 		
 		//evento corretto
 		int[] seatsremainedfortypecorrectevent = {60,20,25};
