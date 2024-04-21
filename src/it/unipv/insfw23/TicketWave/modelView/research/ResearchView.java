@@ -55,7 +55,7 @@ public class ResearchView extends Scene{
         GridPane gp = new GridPane();
         gp.setStyle("-fx-background-color: #91BAD6");
         gp.setAlignment(Pos.TOP_CENTER);
-        gp.setGridLinesVisible(true);
+        // gp.setGridLinesVisible(true);
         // decido qual'è la distanza da tutti i bordi
         gp.setPadding(new Insets(50,50,50,50));
 
@@ -102,6 +102,7 @@ public class ResearchView extends Scene{
             }
          */
         layout.setTop(UpperBar.getIstance());
+        getStylesheets().add("it/unipv/insfw23/TicketWave/modelView/tableViewStyle.css");
         setRoot(layout);
     }
 

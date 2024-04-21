@@ -53,10 +53,10 @@ public class StatisticsTest {
                 1, ac1, bc1, pc1, manager, "Salmo", "Festival di musica EDM");
         events.add(c1);
 
-        manager = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", 1, "1234567890123456", events, 5, 1, LocalDate.now(), 0);
+        manager = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", Province.COMO, "1234567890123456", events, 5, 1, LocalDate.now(), 0);
 
         ArrayList<Event> emptyEvents = new ArrayList<>();
-        emptyManager = new Manager("Giorg", "Mastrota", "1990-01-01", "giorg@example.com", "eminflex", 1, "1234567890123456", emptyEvents, 5, 1, LocalDate.now(), 0);
+        emptyManager = new Manager("Giorg", "Mastrota", "1990-01-01", "giorg@example.com", "eminflex", Province.PAVIA, "1234567890123456", emptyEvents, 5, 1, LocalDate.now(), 0);
 
         Type[] typeNameArray = {Type.FESTIVAL, Type.CONCERT, Type.THEATER, Type.OTHER};
         double[] typeResults = {50.0, 100.0, 0.0, 0.0};

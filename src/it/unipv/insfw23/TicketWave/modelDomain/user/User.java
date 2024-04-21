@@ -13,10 +13,10 @@ public abstract class User {
 	private String dateOfBirth;
 	private String email;
 	private String password;
-	private int provinceOfResidence;
+	private Province provinceOfResidence;
 	private ArrayList<Notification> notifications;
 	
-	public User(String name, String surname, String dateOfBirth, String email, String password, int provinceOfResidence) {
+	public User(String name, String surname, String dateOfBirth, String email, String password, Province provinceOfResidence) {
 		
 		this.name=name;
 		this.surname= surname;
@@ -68,7 +68,7 @@ public abstract class User {
 		this.password = password;
 	}
 
-	public int getProvinceOfResidence() { return provinceOfResidence;
+	public Province getProvinceOfResidence() { return provinceOfResidence;
 	}
 
 	public ArrayList<Notification> getNotification(){
