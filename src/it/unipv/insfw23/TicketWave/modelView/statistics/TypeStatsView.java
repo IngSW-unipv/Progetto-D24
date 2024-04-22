@@ -91,7 +91,6 @@ public class TypeStatsView extends Scene{
         layout.setTop(UpperBar.getIstance());
         this.layout = layout;
         setRoot(layout);
-
     }
 
     public BarChart getBarChart() {
