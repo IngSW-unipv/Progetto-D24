@@ -12,6 +12,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 
@@ -87,7 +88,7 @@ public class SignUpView extends Scene {
         grid.setAlignment(Pos.CENTER);
         grid.setStyle("-fx-background-color: #91bad6;");
 
-        Font labelFont = Font.font("Helvetica", 18); // imposto font di tutta la pagina
+        Font labelFont = Font.font("Helvetica", FontWeight.BOLD, 18); // imposto font di tutta la pagina
 
 
         nameLabel.setFont(labelFont);
@@ -145,14 +146,14 @@ public class SignUpView extends Scene {
 
         RadioButton customerRadioButton = new RadioButton("Cliente");
         this.customerRadioButton=customerRadioButton;
-        customerRadioButton.setFont(Font.font("Helvetica", 14));
+        customerRadioButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
         customerRadioButton.setToggleGroup(accountTypeToggleGroup);
         customerRadioButton.setSelected(true);
         GridPane.setConstraints(customerRadioButton, 0, 0);
 
         RadioButton managerRadioButton = new RadioButton("Gestore");
         this.managerRadioButton=managerRadioButton;
-        managerRadioButton.setFont(Font.font("Helvetica", 14));
+        managerRadioButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
         managerRadioButton.setToggleGroup(accountTypeToggleGroup);
         GridPane.setConstraints(managerRadioButton, 1, 0);
 

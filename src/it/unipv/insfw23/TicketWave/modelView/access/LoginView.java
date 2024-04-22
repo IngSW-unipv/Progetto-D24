@@ -3,9 +3,11 @@ package it.unipv.insfw23.TicketWave.modelView.access;
 
 //import it.unipv.insfw23.TicketWave.modelController.LoginController;
 //import it.unipv.insfw23.TicketWave.modelController.SignUpController;
+import it.unipv.insfw23.TicketWave.modelController.Controller.Access.LoginController;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
+import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -16,10 +18,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.text.Font;
 
 
@@ -31,7 +32,7 @@ public class LoginView extends Application {
     private Button regButton = new Button("Registrati");
     private SignUpView signUpView= new SignUpView();
     private CustomerView customerView= new CustomerView();
-    private ManagerView managerView= new ManagerView();
+    private ManagerView managerView;
     private BorderPane root ;
     private Scene scene ;
     private GridPane grid ;
@@ -75,20 +76,20 @@ public class LoginView extends Application {
 
         // imposto campo email
         Label emailnameLabel = new Label("Email:");
-        emailnameLabel.setFont(Font.font("Helvetica", 20));
+        emailnameLabel.setFont(Font.font("Helvetica", FontWeight.BOLD,20));
         GridPane.setConstraints(emailnameLabel, 0, 1);
         TextField emailField = new TextField();
         GridPane.setConstraints(emailField, 1, 1);
 
         // Imposto camp password
         Label passwordLabel = new Label("Password:");
-        passwordLabel.setFont(Font.font("Helvetica", 20));
+        passwordLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 20));
         GridPane.setConstraints(passwordLabel, 0, 2);
         PasswordField passwordField = new PasswordField();
         GridPane.setConstraints(passwordField, 1, 2);
 
         Label signupLabel = new Label("Non sei ancora iscritto ?");
-        signupLabel.setFont(Font.font("Helvetica", 14));
+        signupLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
         GridPane.setConstraints(signupLabel, 0, 6);
 
 
@@ -96,13 +97,13 @@ public class LoginView extends Application {
 
         customerRadioButton = new RadioButton("Cliente");
 
-        customerRadioButton.setFont(Font.font("Helvetica", 14));
+        customerRadioButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
         customerRadioButton.setToggleGroup(accountTypeToggleGroup);
         customerRadioButton.setSelected(true);
         GridPane.setConstraints(customerRadioButton, 0, 0);
 
         managerRadioButton = new RadioButton("Gestore");
-        managerRadioButton.setFont(Font.font("Helvetica", 14));
+        managerRadioButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
         managerRadioButton.setToggleGroup(accountTypeToggleGroup);
         GridPane.setConstraints(managerRadioButton, 1, 0);
 
@@ -148,19 +149,19 @@ public class LoginView extends Application {
 
 
 
-        scene= new Scene(root, 500, 500);
+        this.scene= new Scene(root, 500, 500);
         primaryStage.setScene(scene);
 
         primaryStage.setTitle("TicketWave");
 
-        Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/logo.png");
+      Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/logo.png");
 
 
-        //LoginController loginController = new LoginController(primaryStage, signUpView, customerView, this,managerView);
+        LoginController loginController = new LoginController(primaryStage, signUpView, customerView, this,managerView);
 
         //SignUpController signUpController= new SignUpController(primaryStage,signUpView,customerView,this);
 
-        primaryStage.getIcons().add(icon);
+       primaryStage.getIcons().add(icon);
         primaryStage.setWidth(1080);
         primaryStage.setHeight(600);
         primaryStage.setMinHeight(600);
@@ -180,6 +181,7 @@ public class LoginView extends Application {
         return loginButton;
     }
     public void reSetBars(){
+
         BorderPane temp = new BorderPane();
         scene.setRoot(temp);
 
@@ -190,6 +192,8 @@ public class LoginView extends Application {
         root.setBottom(lowerBar);
         root.setTop(upperBar);
         root.setCenter(grid);
+
+        scene.setRoot(root);
     }
     public Button getRegButton() {
         return regButton;

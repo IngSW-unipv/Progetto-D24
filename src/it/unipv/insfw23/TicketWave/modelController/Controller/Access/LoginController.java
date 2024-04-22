@@ -1,16 +1,21 @@
-package it.unipv.insfw23.TicketWave.modelController.Controller.access;
+package it.unipv.insfw23.TicketWave.modelController.Controller.Access;
 
+import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import it.unipv.insfw23.TicketWave.modelController.Controller.user.CustomerController;
+import it.unipv.insfw23.TicketWave.modelController.Controller.User.CustomerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
+import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
 import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
+import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
+import it.unipv.insfw23.TicketWave.modelController.Controller.User.ManagerController;
 import javafx.event.*;
 import javafx.stage.Stage;
 public class LoginController {
@@ -77,10 +82,10 @@ public class LoginController {
                      * */
 
 
-
+                    ArrayList<Notification> arrayListNotification = new ArrayList<>();
                     ArrayList<Event> arraylistevent = new ArrayList<>();
                     LocalDate datasub = LocalDate.of(2024, 02, 25);
-                    Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","password1234",Province.CAGLIARI.ordinal(), "2324523432451420", arraylistevent,5,1,datasub,0);
+                    Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","password1234",Province.CREMONA, "2324523432451420", arraylistevent,5,1,datasub,0);
 
                     int[] seduteRImasteev1 = {200,100};
                     double[] vettfalsopriceev1 = {5,320};
@@ -94,11 +99,12 @@ public class LoginController {
                     LocalDate dataev2 = LocalDate.of(2024, 10, 02);
                     ArrayList<String> arrfintoartista2 = new ArrayList<>();
                     arrfintoartista2.add("loredana berte");
+                    Time time = Time.valueOf("19:30:00");
                     //Concert eventofinto2 = new Concert(12,"reunion","busto arstizio",dataev2, "via dei matti ,0", Province.LIVORNO,300,2, seduterimasteev2, vettfalsopriceev2,Genre.INDIE,managerfinto,arrfintoartista2);
 
                     try {
-                        managerfinto.createConcert(12, "reunion", "busto arstizio", dataev1, "via dei matti ,o", Province.LIVORNO, 300, 2, seduteRImasteev1, vettfalsopriceev1, Genre.INDIE, managerfinto, arrfintoartista1);
-                        managerfinto.createConcert(14, "festino", "Rozzano", dataev2, "stadio dell'albero", Province.MILANO, 10000, 3, seduterimasteev2, vettfalsopriceev2, Genre.HOUSE, managerfinto, arrfintoartista2);
+                        managerfinto.createConcert(12, "reunion", "milano","discoteca",dataev1,time,Province.AGRIGENTO,Genre.HOUSE, Type.CONCERT,1000,1,seduterimasteev2,seduteRImasteev1,vettfalsopriceev2,managerfinto,"U2","BELLO");
+                                //managerfinto.createConcert(14, "festino", "Rozzano", dataev2, "stadio dell'albero", Province.MILANO, 10000, 3, seduterimasteev2, vettfalsopriceev2, Genre.HOUSE, managerfinto, arrfintoartista2);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -110,8 +116,8 @@ public class LoginController {
 
                     // Azione da eseguire quando il pulsante "Login" viene premuto
                     System.out.println("Hai cliccato il pulsante Login come gestore");
-                    managerView = new ManagerView();
-                    managerView.setEventsforTableev(managerfinto);
+                    managerView = new ManagerView("Marco",arrayListNotification,arraylistevent);
+                    //managerView.setEventsforTableev(managerfinto);
                     ManagerController managerController = new ManagerController(mainstage, managerView, loginView, managerfinto);
                     managerView.reSetBars();
                     mainstage.setScene(managerView); // Imposta la scena SignUpView sulla stage principale }
@@ -125,6 +131,8 @@ public class LoginController {
         };
 
         loginView.getLoginButton().setOnAction(goToCustomerorManagerView);
+
+
     }
 
 }

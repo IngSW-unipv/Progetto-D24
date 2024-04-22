@@ -1,9 +1,13 @@
-package it.unipv.insfw23.TicketWave.modelController.Controller.access;
+package it.unipv.insfw23.TicketWave.modelController.Controller.Access;
 
-import it.unipv.insfw23.TicketWave.modelController.Controller.user.CustomerController;
+import it.unipv.insfw23.TicketWave.modelController.Controller.Subscription.SubscriptionSelectionController;
+import it.unipv.insfw23.TicketWave.modelController.Controller.User.CustomerController;
+import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
+import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
+import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -40,7 +44,7 @@ public class SignUpController {
                 // Azione da eseguire quando il pulsante "Torna Indietro" viene premuto
                 System.out.println("Hai cliccato il pulsante Torna Indietro");
                 //loginView= new LoginView();
-                //LoginController loginController= new LoginController(mainstage,signUpView,customerview,loginView);
+                LoginController loginController= new LoginController(mainstage,signUpView,customerview,loginView,managerView);
                 loginView.reSetBars();
                 mainstage.setScene(loginView.getScene()); // Imposta la scena LoginView sullo Stage principal
 

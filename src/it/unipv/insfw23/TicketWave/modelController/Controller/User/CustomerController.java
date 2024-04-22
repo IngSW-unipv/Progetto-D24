@@ -1,12 +1,13 @@
-package it.unipv.insfw23.TicketWave.modelController.Controller.user;
+package it.unipv.insfw23.TicketWave.modelController.Controller.User;
 
-import it.unipv.insfw23.TicketWave.modelController.ResearchCaseController.ResearchController;
-import it.unipv.insfw23.TicketWave.modelView.CustomerView;
-import it.unipv.insfw23.TicketWave.modelView.LoginView;
-import it.unipv.insfw23.TicketWave.modelView.ManagerView;
-import it.unipv.insfw23.TicketWave.modelView.ResearchGUI.ResearchView;
-import it.unipv.insfw23.TicketWave.modelView.ResearchGUI.ResultResearchView;
-import it.unipv.insfw23.TicketWave.modelView.SignUpView;
+import it.unipv.insfw23.TicketWave.modelController.Controller.Access.LoginController;
+import it.unipv.insfw23.TicketWave.modelController.Controller.Research.ResearchController;
+
+import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
+import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
+import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
+import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
+import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -31,9 +32,9 @@ public class CustomerController {
             @Override
             public void handle(MouseEvent event) {
                 System.out.println("logout");
-//				LoginView logview = new LoginView();
-//				SignUpView signupview = new SignUpView();
-//				LoginController logcon = new LoginController(window, signupview, null, logview);
+				//loginView = new LoginView();
+				SignUpView signupview = new SignUpView();
+				LoginController logcon = new LoginController(mainstage,signupview,customerView,loginView,managerView);
                 loginView.reSetBars();
                 mainstage.setScene(loginView.getScene());
             }

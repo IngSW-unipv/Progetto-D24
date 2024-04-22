@@ -1,11 +1,20 @@
 package it.unipv.insfw23.TicketWave.modelView.event;
 
+import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
+import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Priority;
+import javafx.scene.text.Font;
 
 public class SelectionNewEventTypeView extends Scene{
 	private Button abortbutton;
@@ -100,7 +109,7 @@ public class SelectionNewEventTypeView extends Scene{
 		grid.getChildren().addAll(title, concerto, festival, teatro, altro, forwardbutton, abortbutton);
 		
 		layout.setStyle("-fx-background-color: #def1fa;");
-		layout.setTop(ManagerUpperBar.getIstance());
+		layout.setTop(UpperBar.getIstance());
 		layout.setCenter(grid);
 		layout.setBottom(LowerBar.getInstance());
 	}
@@ -134,7 +143,7 @@ public class SelectionNewEventTypeView extends Scene{
 	public void reSetBars(){
         BorderPane temp = new BorderPane();
         setRoot(temp);
-        layout.setTop(ManagerUpperBar.getIstance());
+        layout.setTop(UpperBar.getIstance());
         layout.setCenter(grid);
         layout.setBottom(LowerBar.getInstance());
         setRoot(layout);
