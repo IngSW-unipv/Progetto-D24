@@ -64,7 +64,7 @@ public class PaymentDataPView extends Scene {
         BorderPane.setAlignment(inserEmail, Pos.CENTER);
 
 
-        Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/backArrow.png");
+        Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/backArrow.png");
         ImageView backarrow = new ImageView(backarrowlogo);
         backarrow.setFitWidth(50);
         backarrow.setPreserveRatio(true);

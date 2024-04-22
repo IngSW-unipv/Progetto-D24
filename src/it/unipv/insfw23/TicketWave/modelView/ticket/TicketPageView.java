@@ -233,16 +233,22 @@ public class TicketPageView extends Scene {
         return scene;
     }
 
-        public void reSetBarsCustomer(){
+        public void reSetBars(){
             BorderPane temp = new BorderPane();
             setRoot(temp);
-            UpperBar.getIstance().setForCustomer();
+            if(typeofviewermanager) {
+                UpperBar.getIstance().setForManager();
+            }
+            else{
+                UpperBar.getIstance().setForCustomer();
+            }
             layout.setTop(UpperBar.getIstance());
             layout.setBottom(LowerBar.getInstance());
             setRoot(layout);
         }
 
 
+        /*
     public void reSetBarsManager(){
         BorderPane temp = new BorderPane();
         setRoot(temp);
@@ -252,7 +258,7 @@ public class TicketPageView extends Scene {
         setRoot(layout);
     }
 
-
+*/
     public Toggle getIfPriceSelected() {
         return priceselection.getSelectedToggle();
     }

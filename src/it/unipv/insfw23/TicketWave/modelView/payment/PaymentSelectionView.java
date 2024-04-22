@@ -19,12 +19,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentSelectionView extends Scene {
-    private static  RadioButton paypalButton = new RadioButton("Paypal");//paypal
-    private static  RadioButton mastercardButton = new RadioButton("Mastercard"); //mastercard
-    private static  Button nextButton = new Button();
-    private static  Button backButton = new Button();
+    private static RadioButton paypalButton = new RadioButton("Paypal");//paypal
+    private static RadioButton mastercardButton = new RadioButton("Mastercard"); //mastercard
+    private static Button nextButton = new Button();
+    private static Button backButton = new Button();
 
-    private static final  Label titleLabel = new Label("TicketWave");
+    private static final Label titleLabel = new Label("TicketWave");
     private static final Label totalStringLabel = new Label("Totale:");
     private static final Label paySelectionLabel = new Label("Scegli un metodo con cui pagare:");
     private static Label totalAmountLabel = new Label();
@@ -34,10 +34,11 @@ public class PaymentSelectionView extends Scene {
     private Scene scene;
     private BorderPane layout;
     private Pane root;
+    private boolean isviewermanager;
 
-    public PaymentSelectionView(){
+    public PaymentSelectionView() {
         super(new BorderPane(), 1080, 600);
-//        initComponents();
+
     }
 
     public void setComponents(double price) {
@@ -114,8 +115,7 @@ public class PaymentSelectionView extends Scene {
         gridPane.add(paypalImage, 1, 3);
         gridPane.add(mastercardButton, 0, 4);
         gridPane.add(mastercardImage, 1, 4);
-        gridPane.add(errmessage,0,6);
-
+        gridPane.add(errmessage, 0, 6);
 
 
         BorderPane.setMargin(backButtonBox, new Insets(0, 10, 10, 10)); // Margine a sinistra
@@ -128,26 +128,29 @@ public class PaymentSelectionView extends Scene {
         root.setRight(nextButtonBox);
 
 
-
-        BorderPane layout= new BorderPane();
+        BorderPane layout = new BorderPane();
         layout.setStyle("-fx-background-color: #def1fa;");
         layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
         layout.setTop(UpperBar.getIstance());
         setRoot(layout);
-        this.layout=layout;
-        this.root=root;
+        this.layout = layout;
+        this.root = root;
     }
 
-    public void reSetBars(){
+    public void reSetBars() {
         BorderPane temp = new BorderPane();
         setRoot(temp);
-        UpperBar.getIstance().setForManager();
+        if (isviewermanager) {
+            UpperBar.getIstance().setForManager();
+        } else {
+            UpperBar.getIstance().setForCustomer();
+        }
+
         layout.setTop(UpperBar.getIstance());
         layout.setBottom(LowerBar.getInstance());
         setRoot(layout);
     }
-
 
 
     public static RadioButton getPaypalButton() {
@@ -177,4 +180,5 @@ public class PaymentSelectionView extends Scene {
     public static Text getErrmessage() {
         return errmessage;
     }
+
 }

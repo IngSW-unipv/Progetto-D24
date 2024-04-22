@@ -48,14 +48,14 @@ public class PaymentDataMView extends Scene {
 
     private void initComponents() {
 
-        Image forwardarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imageResources/nextArrow.png");
+        Image forwardarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/nextArrow.png");
         forwardButton.setGraphic(new ImageView(forwardarrowlogo));
         forwardButton.setPrefWidth(forwardarrowlogo.getWidth());
         forwardButton.setPrefHeight(forwardarrowlogo.getHeight());
         forwardButton.setPadding(new Insets(0));
        // forwardButton.setStyle("-fx-background-color: rgb(255,255,255)");
 
-        Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imageResources/backArrow.png");
+        Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/backArrow.png");
         backButton.setGraphic(new ImageView(backarrowlogo));
         backButton.setPrefWidth(backarrowlogo.getWidth());
         backButton.setPrefHeight(backarrowlogo.getHeight());
