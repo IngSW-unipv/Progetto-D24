@@ -10,7 +10,6 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Popup;
-import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 
 public class NoMoreEventsPopup extends Popup {
@@ -18,6 +17,7 @@ public class NoMoreEventsPopup extends Popup {
     private static NoMoreEventsPopup istance;
     private Button okButton;
     private Button subscriptionButton;
+
 
     private NoMoreEventsPopup(){
 
