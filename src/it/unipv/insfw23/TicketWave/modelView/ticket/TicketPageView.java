@@ -115,9 +115,12 @@ public class TicketPageView extends Scene {
 
     }
 
-    private void initComponents() {    // la classe contiene unicamente label poichè è solo una pagina di visualizzazione, il cliente non può scriverci sopra
+    private void initComponents() {// la classe contiene unicamente label poichè è solo una pagina di visualizzazione, il cliente non può scriverci sopra
+
+        //BorderPane per struttura esterna
         this.layout=new BorderPane();
         setRoot(layout);
+
         // BorderPane per struttura interna
         BorderPane internalstructure = new BorderPane();
 
@@ -209,8 +212,6 @@ public class TicketPageView extends Scene {
 
 
         //BordePane layout per upperBar e lowerbar
-
-
         layout.setTop(UpperBar.getIstance());
         layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
@@ -237,6 +238,7 @@ public class TicketPageView extends Scene {
         public void reSetBars(){
             BorderPane temp = new BorderPane();
             setRoot(temp);
+            //controllo per il layout inizializzato
             if (layout == null) {
                 System.err.println("Layout non inizializzato correttamente!");
                 return;}

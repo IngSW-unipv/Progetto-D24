@@ -22,7 +22,7 @@ public class ProvaRunTicketPageView extends Application {
         String location = "Madison Square Garden";
         Time time = Time.valueOf("18:00:00");
         LocalDate date = LocalDate.of(2024, 4, 20);
-        String artists = " Artist 1, Artist 2 ";
+        String artists = " Artist 1, Artist 2";
         int idEvent=1;
         String description="description";
         int[] seatsRemainedNumberForType = {100, 50, 20}; // Base, Premium, VIP
@@ -48,7 +48,7 @@ public class ProvaRunTicketPageView extends Application {
 
         // Creazione della scena e impostazione del titolo della finestra
         UpperBarController ctrl = new UpperBarController(primaryStage);
-        primaryStage.setTitle("TicketWave - Event Details");
+        primaryStage.setTitle("TicketWave");
         primaryStage.setScene(ticketPageView);
         primaryStage.show();
     }

@@ -139,10 +139,15 @@ public class PaymentSelectionView extends Scene {
     public void setPriceComponent(double price) {
         totalAmountLabel = new Label(String.valueOf(price));
     }
+
+    //NOTA per il metodo ReSetBars: compilando la loginview il metodo non riesce a valutare il parametro isviewermanager, le barre in questo codice vengono automaticamente
+    //impostate su customer quando viene chiamato dai controller,se runno il codice di provaRunTicketPageView e viene impostato isviewermanager il reset delle barre funziona.
+    // c'è un altro metodo per non portarsi appresso una variabile booleana per distinguere customer da manager?
     public void reSetBars() {
         BorderPane temp = new BorderPane();
         setRoot(temp);
-        if (isviewermanager) {
+        if (isviewermanager==true) {
+            System.out.println("Stai impostando la upperbar per il manager");
             UpperBar.getIstance().setForManager();
         } else {
             UpperBar.getIstance().setForCustomer();

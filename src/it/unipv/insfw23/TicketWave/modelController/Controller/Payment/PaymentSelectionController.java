@@ -66,6 +66,10 @@ public class PaymentSelectionController {
         paymentPage.getNextButton().setOnMouseClicked(goToPaymentDataPage);
 
 
+        //NOTA per turnback il metodo non funziona quando si runna loginview e si prova a registrare un manager.
+        //secondo me perchè non viene valutato il parametro isviewermanager (stesso discorso per il problema di resetBars della view PaymentSelectionView)
+        //bioparco?
+
         EventHandler<MouseEvent> turnBack = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent actionEvent) {
@@ -89,10 +93,10 @@ public class PaymentSelectionController {
                 } catch (NoSuchMethodException e) {
                     // Il metodo "reSetBars" non esiste nella classe della scena
                     System.out.println("Metodo 'reSetBars' non trovato nella classe della scena.");
-                    e.printStackTrace(); // o gestisci l'eccezione in modo appropriato
+                    e.printStackTrace();
                 } catch (IllegalAccessException | InvocationTargetException e) {
                     // Gestione delle eccezioni durante l'invocazione del metodo
-                    e.printStackTrace(); // o gestisci l'eccezione in modo appropriato
+                    e.printStackTrace();
                 }
             }
         };
