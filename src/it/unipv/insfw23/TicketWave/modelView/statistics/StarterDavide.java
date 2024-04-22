@@ -48,9 +48,8 @@ public class StarterDavide extends Application {
 
          */
         UpperBarController ctrl = new UpperBarController(primaryStage);
-        ResearchView scene = new ResearchView();
-        ResearchController controller = new ResearchController(primaryStage, scene);
-        //TypeStatsController controller = new TypeStatsController(primaryStage, scene);
+        TypeStatsView scene = new TypeStatsView();
+        TypeStatsController controller = new TypeStatsController(primaryStage, scene);
         primaryStage.setScene(scene);
 
 

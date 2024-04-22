@@ -1,7 +1,10 @@
 package it.unipv.insfw23.TicketWave.modelController.Controller.Payment;
 
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataPView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import javafx.event.EventHandler;
@@ -16,6 +19,7 @@ public class PaymentDataPController {
     private User user;
 
     public PaymentDataPController(Stage mainStage, PaymentDataPView paymentDataPView, PaymentSelectionView paymentPage){
+<<<<<<< HEAD
        this.paymentDataPView = paymentDataPView;
        this.paymentPage=paymentPage;
        this.mainStage=mainStage;
@@ -36,6 +40,28 @@ public class PaymentDataPController {
        };
 
        paymentDataPView.getBackButton().setOnMouseClicked(turnBackPaymentPage);
+=======
+        this.paymentDataPView = paymentDataPView;
+        this.paymentPage=paymentPage;
+        this.mainStage=mainStage;
+        initComponents();
+
+    }
+
+    public void initComponents(){
+        EventHandler<MouseEvent> turnBackPaymentPage = new EventHandler<>() {
+
+            @Override
+            public void handle(MouseEvent actionEvent) {
+                // Azione da eseguire quando il pulsante viene premuto
+                System.out.println("Sei ritornato indietro alla PaySelectionPage");
+                paymentPage.reSetBars();
+                mainStage.setScene(paymentPage);
+            }
+        };
+
+        paymentDataPView.getBackButton().setOnMouseClicked(turnBackPaymentPage);
+>>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
 
 
 
@@ -51,7 +77,11 @@ public class PaymentDataPController {
        */
 
 
+<<<<<<< HEAD
    }
+=======
+    }
+>>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
 
 
 

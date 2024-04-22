@@ -2,26 +2,19 @@ package it.unipv.insfw23.TicketWave.modelView.user;
 
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
-import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
-import javafx.application.Application;
-import javafx.geometry.Insets;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
-import javafx.stage.Stage;
+import javafx.scene.text.FontWeight;
+
 
 public class CustomerView extends Scene {
     private BorderPane layout;
@@ -53,9 +46,10 @@ public class CustomerView extends Scene {
         this.layout = layout;
 
         customerUpperBar = UpperBar.getIstance();
+        customerUpperBar.setForCustomer();
         lowerBar = LowerBar.getInstance();
 
-        layout.setStyle("-fx-background-color: #def1fa;");
+        layout.setStyle("-fx-background-color: #91bad6;");
         layout.setBottom(lowerBar);
         layout.setTop(customerUpperBar);
         layout.setCenter(grid);
@@ -76,14 +70,14 @@ public class CustomerView extends Scene {
         GridPane.setConstraints(logoutButton, 2, 0);
 
         // Nome e Cognome
-        name = new Label("Benvenuto, Mario");
-        name.setFont(Font.font("Arial Rounded MT Bold", 20));
+        name = new Label("Benvenuto,");
+        name.setFont(Font.font("Helvetica", FontWeight.BOLD, 20));
 
         GridPane.setConstraints(name, 0, 0);
 
         // Punti Accumulati
         wavePoints = new Label("Wave Points: 100"); // Esempio di punti accumulati
-        wavePoints.setFont(Font.font("Arial ", 20));
+        wavePoints.setFont(Font.font("Helvetica ",FontWeight.BOLD, 20));
         GridPane.setConstraints(wavePoints, 1, 0);
 
         // ListView per le notifiche
@@ -106,6 +100,7 @@ public class CustomerView extends Scene {
         GridPane.setConstraints(ticket, 1, 1);
 
         grid.getChildren().addAll(name, wavePoints, notifyListView, ticket,logoutButton);
+
 
 
 
@@ -169,9 +164,12 @@ public class CustomerView extends Scene {
     public void reSetBars(){
         BorderPane temp = new BorderPane();
         setRoot(temp);
-        layout.setTop(UpperBar.getIstance());
+        customerUpperBar = UpperBar.getIstance();
+        customerUpperBar.setForCustomer();
+        lowerBar = LowerBar.getInstance();
 
-        layout.setBottom(LowerBar.getInstance());
+        layout.setTop(customerUpperBar);
+        layout.setBottom(lowerBar);
         layout.setCenter(grid);
         setRoot(layout);
     }

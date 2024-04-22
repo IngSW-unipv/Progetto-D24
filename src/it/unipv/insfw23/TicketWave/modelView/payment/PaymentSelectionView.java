@@ -1,6 +1,9 @@
 package it.unipv.insfw23.TicketWave.modelView.payment;
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import javafx.geometry.Insets;
@@ -51,10 +54,17 @@ public class PaymentSelectionView extends Scene {
         mastercardButton.setToggleGroup(paymethod);
 
 
+<<<<<<< HEAD
         Image paypalLogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/Paypal_logo.png");
         Image mastercardLogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/Mastercard_logo.png");
         Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/backArrow.png");
         Image nextarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/nextArrow.png");
+=======
+        Image paypalLogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/Paypal_logo.png");
+        Image mastercardLogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/Mastercard_logo.png");
+        Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/backArrow.png");
+        Image nextarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/nextArrow.png");
+>>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
 
         ImageView paypalImage = new ImageView(paypalLogo);
         paypalImage.setFitWidth(100);
@@ -127,22 +137,35 @@ public class PaymentSelectionView extends Scene {
         root.setLeft(backButtonBox);
         root.setRight(nextButtonBox);
 
+<<<<<<< HEAD
 
+=======
+        scene = new Scene(root, 800, 400);
+>>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
 
         BorderPane layout= new BorderPane();
         layout.setStyle("-fx-background-color: #def1fa;");
         layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
         layout.setTop(UpperBar.getIstance());
+<<<<<<< HEAD
         this.layout=layout;
         this.root=root;
         setRoot(layout);
+=======
+        setRoot(layout);
+        this.layout=layout;
+        this.root=root;
+>>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
     }
 
     public void reSetBars(){
         BorderPane temp = new BorderPane();
         setRoot(temp);
+<<<<<<< HEAD
         UpperBar.getIstance().setForManager();
+=======
+>>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
         layout.setTop(UpperBar.getIstance());
         layout.setBottom(LowerBar.getInstance());
         setRoot(layout);
@@ -177,4 +200,8 @@ public class PaymentSelectionView extends Scene {
     public static Text getErrmessage() {
         return errmessage;
     }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956

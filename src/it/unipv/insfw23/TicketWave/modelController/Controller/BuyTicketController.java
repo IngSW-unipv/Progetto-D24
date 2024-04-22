@@ -2,11 +2,11 @@ package it.unipv.insfw23.TicketWave.modelController.Controller;
 
 
 
+import it.unipv.insfw23.TicketWave.modelController.Controller.Payment.PaymentSelectionController;
+import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
-import it.unipv.insfw23.TicketWave.modelView.PaymentSelectionView;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 
@@ -31,8 +31,8 @@ public void initComponents() {
 //	ticketPage = new TicketPageView();
 	//assegnazione dei campi dell'evento ai campi della ticketpageview
 	
-	ticketPage.setComponents(isviewermanager,event.getClassName(),event.getName(),event.getCity(),event.getLocation(),event.getProvince(),event.getDate(),
-			event.getArtists(),event.getSeatsRemainedNumberForType(),event.getPrices());
+	//ticketPage.setComponents(isviewermanager,event.getClassName(),event.getName(),event.getCity(),event.getLocation(),event.getProvince(),event.getDate(),
+			//event.getArtists(),event.getSeatsRemainedNumberForType(),event.getPrices());
 	//fine assegnazione
 	//
 	//cambio scena
@@ -51,7 +51,7 @@ public void initComponents() {
             mainStage.setScene(paymentSelectionView);
         	}
         	else
-        		System.out.println("non hai scelto una tipologia di biglietto");//da stampare a video o con eccezione
+        		System.out.println("Non hai scelto una tipologia di biglietto");//da stampare a video o con eccezione
         }
 
     };

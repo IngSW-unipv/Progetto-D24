@@ -33,9 +33,9 @@ public class ManagerTest {
     @Before
     public void setUp() {
         // Preparazione dei dati per i test
-        manager = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", 1, "1234567890123456", events, 5, 1, LocalDate.now(), 0);
-        manager1 = new Manager("Valentino", "Chiaro", "2000-01-01", "valentino@gmail.com", "Cicalone", 3, "1111111111000000", events1, 5, -1, LocalDate.now(), 0);
-        manager2 = new Manager("Valentino", "Chiaro", "2000-01-01", "valentino@gmail.com", "Cicalone", 3, "1111111111000000", events2, 5, 1, LocalDate.now(), 8);
+        manager = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", Province.COMO, "1234567890123456", events, 5, 1, LocalDate.now(), 0);
+        manager1 = new Manager("Valentino", "Chiaro", "2000-01-01", "valentino@gmail.com", "Cicalone", Province.PAVIA, "1111111111000000", events1, 5, -1, LocalDate.now(), 0);
+        manager2 = new Manager("Valentino", "Chiaro", "2000-01-01", "valentino@gmail.com", "Cicalone", Province.BARLETTA_ANDRIA_TRANI, "1111111111000000", events2, 5, 1, LocalDate.now(), 8);
         seatsremainedfortypecorrectevent = new int[]{60};
         ticketsoldfortypecorrectevent = new int[]{15};
         pricecorrectevent = new double[]{35.50};
