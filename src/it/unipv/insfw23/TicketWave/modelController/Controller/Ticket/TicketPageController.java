@@ -15,8 +15,6 @@ public class TicketPageController {
     private Stage mainStage;
     private TicketPageView ticketPage;
 
-
-
     private Event event;
     private boolean isviewermanager;
 
@@ -49,7 +47,7 @@ public void initComponents() {
             System.out.println("Hai cliccato il bottone Acquista");
             PaymentSelectionView paymentSelectionView = new PaymentSelectionView();
             paymentSelectionView.setComponents(event.getPrices()[ticketPage.getWhichPriceSelected()]);
-            PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainStage,paymentSelectionView,ticketPage,isviewermanager);
+            PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainStage,paymentSelectionView,ticketPage);
             mainStage.setScene(paymentSelectionView);
         	}
         	else
