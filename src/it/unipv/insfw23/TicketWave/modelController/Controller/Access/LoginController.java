@@ -1,4 +1,4 @@
-package it.unipv.insfw23.TicketWave.modelController.Controller.Access;
+package it.unipv.insfw23.TicketWave.modelController.controller.access;
 
 import java.sql.Time;
 import java.time.LocalDate;
@@ -49,7 +49,7 @@ public class LoginController {
                 // Azione da eseguire quando il pulsante "Registrati" viene premuto
                 System.out.println("Hai cliccato il pulsante Registrati");
                 signUpView = new SignUpView();
-                SignUpController signUpController = new SignUpController(mainstage, signUpView, customerview, loginView);
+                it.unipv.insfw23.TicketWave.modelController.Controller.Access.SignUpController signUpController = new it.unipv.insfw23.TicketWave.modelController.Controller.Access.SignUpController(mainstage, signUpView, customerview, loginView);
                 signUpView.reSetBars();
                 mainstage.setScene(signUpView); // Imposta la scena SignUpView sulla stage principale
             }

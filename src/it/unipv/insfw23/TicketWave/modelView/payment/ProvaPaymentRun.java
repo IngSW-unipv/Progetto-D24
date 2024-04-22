@@ -1,6 +1,5 @@
 package it.unipv.insfw23.TicketWave.modelView.payment;
 
-import it.unipv.insfw23.TicketWave.modelController.Controller.Payment.PaymentSelectionController;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import javafx.application.Application;
 import javafx.stage.Stage;

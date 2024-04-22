@@ -1,9 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelView.payment;
 
-<<<<<<< HEAD
 
-=======
->>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import javafx.geometry.Insets;
@@ -22,11 +19,6 @@ import javafx.scene.paint.Color;
 import java.util.ArrayList;
 import java.util.List;
 
-<<<<<<< HEAD
-=======
-import static javafx.application.Application.launch;
-
->>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
 public class PaymentDataMView extends Scene {
 
     private static  Label nameLabel = new Label("Nome Intestatario Carta:");
@@ -56,33 +48,19 @@ public class PaymentDataMView extends Scene {
 
     private void initComponents() {
 
-<<<<<<< HEAD
-        Image forwardarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/nextArrow.png");
-=======
-        Image forwardarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/nextArrow.png");
->>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
+        Image forwardarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imageResources/nextArrow.png");
         forwardButton.setGraphic(new ImageView(forwardarrowlogo));
         forwardButton.setPrefWidth(forwardarrowlogo.getWidth());
         forwardButton.setPrefHeight(forwardarrowlogo.getHeight());
         forwardButton.setPadding(new Insets(0));
-<<<<<<< HEAD
        // forwardButton.setStyle("-fx-background-color: rgb(255,255,255)");
 
-        Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/backArrow.png");
-=======
-        // forwardButton.setStyle("-fx-background-color: rgb(255,255,255)");
-
-        Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/backArrow.png");
->>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
+        Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imageResources/backArrow.png");
         backButton.setGraphic(new ImageView(backarrowlogo));
         backButton.setPrefWidth(backarrowlogo.getWidth());
         backButton.setPrefHeight(backarrowlogo.getHeight());
         backButton.setPadding(new Insets(0));
-<<<<<<< HEAD
       //  backButton.setStyle("-fx-background-color: rgb(255,255,255)");
-=======
-        //  backButton.setStyle("-fx-background-color: rgb(255,255,255)");
->>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
 
         textFields.add(insertMM);
         textFields.add(insertYY);
@@ -101,11 +79,7 @@ public class PaymentDataMView extends Scene {
         }
 
 
-<<<<<<< HEAD
         
-=======
-
->>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
         GridPane dataInput = new GridPane();
         dataInput.setAlignment(Pos.TOP_LEFT);
         dataInput.setHgap(10);

@@ -12,13 +12,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-<<<<<<< HEAD
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-=======
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.*;
->>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
 
 public class PaymentDataPView extends Scene {
 
@@ -69,34 +64,19 @@ public class PaymentDataPView extends Scene {
         BorderPane.setAlignment(inserEmail, Pos.CENTER);
 
 
-<<<<<<< HEAD
-        Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/backArrow.png");
-=======
         Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/Resources/backArrow.png");
->>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
         ImageView backarrow = new ImageView(backarrowlogo);
         backarrow.setFitWidth(50);
         backarrow.setPreserveRatio(true);
         backButton.setGraphic(backarrow);
-<<<<<<< HEAD
        // backButton.setStyle("-fx-background-color: rgb(255,255,255)");
 
 
-=======
-        // backButton.setStyle("-fx-background-color: rgb(255,255,255)");
-
-
-        scene = new Scene(root, 1080, 600);
-
->>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
         BorderPane layout= new BorderPane();
         layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
         layout.setTop(UpperBar.getIstance());
-<<<<<<< HEAD
-=======
 
->>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
         setRoot(layout);
 
     }

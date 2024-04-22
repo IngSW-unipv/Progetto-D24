@@ -1,7 +1,6 @@
-package it.unipv.insfw23.TicketWave.modelController.Controller.Ticket;
+package it.unipv.insfw23.TicketWave.modelController.controller.ticket;
 
 
-import it.unipv.insfw23.TicketWave.modelController.Controller.Payment.PaymentSelectionController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
@@ -47,7 +46,7 @@ public void initComponents() {
             System.out.println("Hai cliccato il bottone Acquista");
             PaymentSelectionView paymentSelectionView = new PaymentSelectionView();
             paymentSelectionView.setComponents(event.getPrices()[ticketPage.getWhichPriceSelected()]);
-            PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainStage,paymentSelectionView,ticketPage);
+            //PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainStage,paymentSelectionView,ticketPage);
             mainStage.setScene(paymentSelectionView);
         	}
         	else
