@@ -1,20 +1,24 @@
-package it.unipv.insfw23.TicketWave.modelController.Controller.Payment;
+package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
 
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataPView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
+import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+import it.unipv.insfw23.TicketWave.modelController.controller.payment.PaymentDataMController;
+import it.unipv.insfw23.TicketWave.modelController.controller.payment.PaymentDataPController;
 
 public class PaymentSelectionController {
 
     private Stage mainStage;
     private PaymentSelectionView paymentPage;
     private TicketPageView ticketPage;
+    private SubscriptionSelectionView subscriptionSelectionView;
     private Scene scene;
     private PaymentDataPView paymentDataPPage;
 
@@ -64,15 +68,14 @@ public class PaymentSelectionController {
             @Override
             public void handle(MouseEvent actionEvent) {
                 // Azione da eseguire quando il pulsante viene premuto
-                System.out.println("Sei ritornato indietro alla TicketPage");
                 if(isviewermanager){
                     try {
                         scene.getClass().getMethod("reSetBars");
-                        System.out.println("Sei ritornato indietro alla  PaySubscriptionView");
+                        System.out.println("Sei ritornato indietro alla  subscriptionSelectionView");
                     } catch (NoSuchMethodException e) {
                         throw new RuntimeException(e);
                     }
-                    mainStage.setScene(scene);
+                    mainStage.setScene(subscriptionSelectionView);
                 }
                else {
                    try {

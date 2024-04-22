@@ -1,15 +1,10 @@
-package it.unipv.insfw23.TicketWave.modelController.Controller.Payment;
+package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
-<<<<<<< HEAD
 //import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 //import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 
-=======
-import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
->>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
@@ -99,12 +94,8 @@ public class PaymentDataMController {
 
 
 
-<<<<<<< HEAD
     }
 
 
 
 
-=======
-}
->>>>>>> 24481fa7b4e4944187c3a3d0b9f4b46bd9ebd956

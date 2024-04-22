@@ -3,7 +3,6 @@ package it.unipv.insfw23.TicketWave.modelDomain.event;
 import java.lang.String;
 import java.sql.Time;
 import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
@@ -14,7 +13,7 @@ public abstract class Event {
     private int idEvent;
     private String name, city, location;
     private LocalDate date;
-    private LocalTime time;
+    private Time time;
     private Province province;
     private Genre genre;
     private Type type;
@@ -29,7 +28,7 @@ public abstract class Event {
 
     // costruttore
 
-    public Event(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, Type type, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description) {
+    public Event(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type type, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description) {
         this.idEvent = idEvent;
         this.name = name;
         this.city = city;
@@ -73,9 +72,9 @@ public abstract class Event {
     public String getLocation() {
         return location;
     } // mi serve nel ResultResearchView per la TableView
-    
+
     public LocalDate getDate() {
-    	return date;
+        return date;
     }
 
     public Province getProvince() {
@@ -93,9 +92,9 @@ public abstract class Event {
     public double getPrice(TicketType type) {
         return price[type.ordinal()]; //ordinal torna la posizione di type nella enum
     }
-    
+
     public double[] getPrices() {
-    	return price;
+        return price;
     }
 
     public Type getType() {
@@ -105,26 +104,26 @@ public abstract class Event {
     public Genre getGenre() {
         return genre;
     }
-    
+
     public int[] getSeatsRemainedNumberForType() {
-    	return seatsRemainedNumberForType;
+        return seatsRemainedNumberForType;
     }
-    
+
     public int getSeatsRemaining() {
-    	int ntot = 0;
-    	for(int x : seatsRemainedNumberForType) {
-    		ntot += x;
-    	}
-    	return ntot;
+        int ntot = 0;
+        for(int x : seatsRemainedNumberForType) {
+            ntot += x;
+        }
+        return ntot;
     }
-    
+
     public Manager getCreator() {
-    	return creator;
+        return creator;
     }
-    
+
     public void updateSeatsRemainedAndTicketSoldForType(int type) {
-    	seatsRemainedNumberForType[type]--;
-    	ticketsSoldNumberForType[type]++;
+        seatsRemainedNumberForType[type]--;
+        ticketsSoldNumberForType[type]++;
     }
 
     public int getTicketSoldNumber () { // ritorna tutti i ticket venduti
@@ -141,7 +140,7 @@ public abstract class Event {
         return artists;
     }
 
-    public LocalTime getTime() {
+    public Time getTime() {
         return time;
     }
 
@@ -200,7 +199,7 @@ public abstract class Event {
         }
     }
 
-    public void setTime(LocalTime time) {
+    public void setTime(Time time) {
         this.time = time;
     }
 
@@ -238,7 +237,7 @@ public abstract class Event {
 
     public void crossCheck(double[] price, int[] ticketsSoldNumberForType, int[] seatsRemainedNumberForType, int typeOfSeats){ // serve per controllare che il numero di campi inseriti negli array coincida
         if((price.length != ticketsSoldNumberForType.length) || (ticketsSoldNumberForType.length != seatsRemainedNumberForType.length) || (price.length != seatsRemainedNumberForType.length)
-            || (price.length != typeOfSeats) || (ticketsSoldNumberForType.length != typeOfSeats) || (seatsRemainedNumberForType.length != typeOfSeats)){
+                || (price.length != typeOfSeats) || (ticketsSoldNumberForType.length != typeOfSeats) || (seatsRemainedNumberForType.length != typeOfSeats)){
             throw new IllegalArgumentException("Si è provato a creare un evento in cui il numero di campi dei prezzi e dei posti è diverso, riprovare la creazione");
         }
     }
