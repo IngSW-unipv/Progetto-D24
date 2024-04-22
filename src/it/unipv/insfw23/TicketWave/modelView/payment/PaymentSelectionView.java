@@ -38,13 +38,10 @@ public class PaymentSelectionView extends Scene {
 
     public PaymentSelectionView() {
         super(new BorderPane(), 1080, 600);
-
-    }
-
-    public void setComponents(double price) {
-        totalAmountLabel = new Label(String.valueOf(price));
         initComponents();
     }
+
+
 
     private void initComponents() {
         ToggleGroup paymethod = new ToggleGroup();
@@ -121,6 +118,7 @@ public class PaymentSelectionView extends Scene {
         BorderPane.setMargin(backButtonBox, new Insets(0, 10, 10, 10)); // Margine a sinistra
         BorderPane.setMargin(nextButtonBox, new Insets(0, 10, 10, 10)); // Margine a destra
 
+
         BorderPane root = new BorderPane();
         root.setStyle("-fx-background-color: #def1fa;");
         root.setCenter(gridPane);
@@ -138,6 +136,9 @@ public class PaymentSelectionView extends Scene {
         this.root = root;
     }
 
+    public void setPriceComponent(double price) {
+        totalAmountLabel = new Label(String.valueOf(price));
+    }
     public void reSetBars() {
         BorderPane temp = new BorderPane();
         setRoot(temp);

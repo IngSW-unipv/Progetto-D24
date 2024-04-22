@@ -31,7 +31,6 @@ public class SubscriptionSelectionController {
             public void handle(MouseEvent actionEvent) {
                 System.out.println("Hai selezionato un abbonamento. Reindirizzamento alla pagina di pagamento.");
                 paymentPage= new PaymentSelectionView();
-
                 PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainstage,paymentPage,subscriptionSelectionView,isviewermanager);
                 mainstage.setScene(paymentPage);
             }

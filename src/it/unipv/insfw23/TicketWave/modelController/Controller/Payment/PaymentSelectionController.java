@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 import it.unipv.insfw23.TicketWave.modelController.controller.payment.PaymentDataMController;
 import it.unipv.insfw23.TicketWave.modelController.controller.payment.PaymentDataPController;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+
 public class PaymentSelectionController {
 
     private Stage mainStage;
@@ -45,7 +48,7 @@ public class PaymentSelectionController {
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("Stai andando alla PaymentDataMPage");
                 paymentDataMPage=new PaymentDataMView();
-               PaymentDataMController paymentDataMController = new PaymentDataMController(mainStage,paymentDataMPage,paymentPage);
+               PaymentDataMController paymentDataMController = new PaymentDataMController(mainStage,paymentDataMPage,paymentPage,isviewermanager);
                 mainStage.setScene(paymentDataMPage);
             } else if (paymentPage.getPaypalButton().isSelected()) {
                     System.out.println("Stai andando alla PaymentDataPPage");
@@ -63,34 +66,40 @@ public class PaymentSelectionController {
         paymentPage.getNextButton().setOnMouseClicked(goToPaymentDataPage);
 
 
-        EventHandler<MouseEvent> turnBack = new EventHandler<>() {
-
+        EventHandler<MouseEvent> turnBack = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent actionEvent) {
                 // Azione da eseguire quando il pulsante viene premuto
-                if(isviewermanager){
-                    try {
-                        scene.getClass().getMethod("reSetBars");
-                        System.out.println("Sei ritornato indietro alla  subscriptionSelectionView");
-                    } catch (NoSuchMethodException e) {
-                        throw new RuntimeException(e);
-                    }
-                    mainStage.setScene(subscriptionSelectionView);
-                }
-               else {
-                   try {
-                    scene.getClass().getMethod("reSetBarsCustomer");
-                       System.out.println("Sei ritornato indietro alla TicketPage");
-                } catch (NoSuchMethodException e) {
-                    throw new RuntimeException(e);
-                }
-                    mainStage.setScene(ticketPage);
-               }
+                try {
+                    // Ottieni il metodo "reSetBars" dalla classe della scena
+                    Method method = scene.getClass().getMethod("reSetBars");
+                    // Invoca effettivamente il metodo se esiste
+                    method.invoke(scene);
 
+                    // Determina quale scena caricare in base a isviewermanager
+                    if (isviewermanager) {
+                        System.out.println("Sei ritornato indietro alla subscriptionSelectionView");
+                        mainStage.setScene(subscriptionSelectionView);
+                    } else {
+                        System.out.println("Sei ritornato indietro alla TicketPage");
+                        TicketPageView ticketPageView=new TicketPageView();
+                        ticketPageView.reSetBars();
+                        mainStage.setScene(ticketPageView);
+                    }
+                } catch (NoSuchMethodException e) {
+                    // Il metodo "reSetBars" non esiste nella classe della scena
+                    System.out.println("Metodo 'reSetBars' non trovato nella classe della scena.");
+                    e.printStackTrace(); // o gestisci l'eccezione in modo appropriato
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    // Gestione delle eccezioni durante l'invocazione del metodo
+                    e.printStackTrace(); // o gestisci l'eccezione in modo appropriato
+                }
             }
         };
 
+// Imposta l'handler sull'evento di clic del pulsante di ritorno
         paymentPage.getBackButton().setOnMouseClicked(turnBack);
+
 
 
 

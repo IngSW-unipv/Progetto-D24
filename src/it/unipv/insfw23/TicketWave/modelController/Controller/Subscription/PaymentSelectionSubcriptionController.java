@@ -19,6 +19,7 @@ public class PaymentSelectionSubcriptionController {
     private PaymentSelectionView paymentPage;
     private TicketPageView ticketPage;
     private PaymentDataPView paymentDataPPage;
+    private boolean isviewermanager;
 
     private PaymentDataMView paymentDataMPage;
     private SubscriptionSelectionView subscriptionSelectionView;
@@ -39,7 +40,7 @@ public class PaymentSelectionSubcriptionController {
                     // Azione da eseguire quando il pulsante viene premuto
                     System.out.println("Stai andando alla PaymentDataMPage");
                     paymentDataMPage = new PaymentDataMView();
-                    PaymentDataMController paymentDataMController = new PaymentDataMController(mainStage, paymentDataMPage, paymentPage);
+                    PaymentDataMController paymentDataMController = new PaymentDataMController(mainStage, paymentDataMPage, paymentPage,isviewermanager);
                     mainStage.setScene(paymentDataMPage);
                 } else if (paymentPage.getPaypalButton().isSelected()) {
                     System.out.println("Stai andando alla PaymentDataPPage");

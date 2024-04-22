@@ -27,7 +27,7 @@ public class ProvaPaymentRun extends Application {
 
         // Impostazione dei componenti della vista (ad esempio, il prezzo totale
 
-        paymentView.setComponents(175.0);
+        paymentView.setPriceComponent(175.0);
 
         // Impostazione della scena principale con la vista di pagamento
         //primaryStage.setScene(paymentView);

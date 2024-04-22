@@ -58,6 +58,7 @@ public class TicketPageView extends Scene {
 
     public TicketPageView(){
         super(new BorderPane(), 1080, 600);
+        initComponents();
 
 
     }
@@ -66,6 +67,7 @@ public class TicketPageView extends Scene {
     //senno inizializza la view con i campi vuoti e aggiorna il valore di una label senza reinizializzare
     public void setComponents(boolean isviewermanager, Type typeofevent, String name, String città, String location, Province prov, LocalDate data, String  artist,
                               int[] seatsRemainedNumberForType, double[] price) {
+
         //settaggio dei campi dei valori per un singolo evento
         System.out.println(artist);
         System.out.println(artist.toString());
@@ -110,11 +112,12 @@ public class TicketPageView extends Scene {
         }
 
         //fine settaggio
-        initComponents();
+
     }
 
     private void initComponents() {    // la classe contiene unicamente label poichè è solo una pagina di visualizzazione, il cliente non può scriverci sopra
-
+        this.layout=new BorderPane();
+        setRoot(layout);
         // BorderPane per struttura interna
         BorderPane internalstructure = new BorderPane();
 
@@ -206,14 +209,12 @@ public class TicketPageView extends Scene {
 
 
         //BordePane layout per upperBar e lowerbar
-        BorderPane layout= new BorderPane();
+
 
         layout.setTop(UpperBar.getIstance());
         layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
-        this.root=root;
-        this.layout=layout;
-        setRoot(layout);
+
     }
 
     public int getWhichPriceSelected() {
@@ -236,6 +237,10 @@ public class TicketPageView extends Scene {
         public void reSetBars(){
             BorderPane temp = new BorderPane();
             setRoot(temp);
+            if (layout == null) {
+                System.err.println("Layout non inizializzato correttamente!");
+                return;}
+
             if(typeofviewermanager) {
                 UpperBar.getIstance().setForManager();
             }

@@ -22,12 +22,14 @@ public class PaymentDataMController {
     private Manager manager;
     private PaymentDataMView paymentDataPage;
     private TicketPageView ticketpage;
-    private PaymentSelectionView paymentPage;
+    private PaymentSelectionView paymentSelectionPage;
+    private boolean isviewermanager;
 
-    public PaymentDataMController(Stage mainStage, PaymentDataMView paymentDataPage, PaymentSelectionView paymentPage) {
+    public PaymentDataMController(Stage mainStage, PaymentDataMView paymentDataPage, PaymentSelectionView paymentSelectionPage, boolean isviewermanager) {
         this.paymentDataPage = paymentDataPage;
-        this.paymentPage=paymentPage;
+        this.paymentSelectionPage = paymentSelectionPage;
         this.mainStage = mainStage;
+        this.isviewermanager=isviewermanager;
         initComponents();
     }
 
@@ -40,8 +42,8 @@ public class PaymentDataMController {
             public void handle(MouseEvent actionEvent) {
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("Sei ritornato indietro alla paymentSelectionPage");
-                paymentPage.reSetBars();
-                mainStage.setScene(paymentPage);
+                paymentSelectionPage.reSetBars();
+                mainStage.setScene(paymentSelectionPage);
             }
         };
 
