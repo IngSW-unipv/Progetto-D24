@@ -1,4 +1,4 @@
-package it.unipv.insfw23.TicketWave.modelController.Controller.Payment;
+package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 

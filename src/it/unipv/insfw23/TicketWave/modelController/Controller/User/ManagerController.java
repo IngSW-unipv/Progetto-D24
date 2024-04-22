@@ -1,7 +1,7 @@
-package it.unipv.insfw23.TicketWave.modelController.Controller.User;
+package it.unipv.insfw23.TicketWave.modelController.controller.user;
 
-import it.unipv.insfw23.TicketWave.modelController.Controller.BuyTicketController;
-import it.unipv.insfw23.TicketWave.modelController.Controller.Event.SelectionNewEventTypeController;
+import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageController;
+import it.unipv.insfw23.TicketWave.modelController.controller.event.SelectionNewEventTypeController;
 import it.unipv.insfw23.TicketWave.modelController.Controller.Research.ResearchController;
 import it.unipv.insfw23.TicketWave.modelController.Controller.Statistics.TypeStatsController;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;

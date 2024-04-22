@@ -4,7 +4,7 @@ import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import it.unipv.insfw23.TicketWave.modelController.Controller.User.CustomerController;
+import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
@@ -14,8 +14,9 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
 import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
+import it.unipv.insfw23.TicketWave.modelController.controller.access.SignUpController;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
-import it.unipv.insfw23.TicketWave.modelController.Controller.User.ManagerController;
+import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
 import javafx.event.*;
 import javafx.stage.Stage;
 public class LoginController {
@@ -25,6 +26,7 @@ public class LoginController {
     // view da considerare
     private SignUpView signUpView;
     private CustomerView customerview;
+    private SignUpController signUpController;
     private LoginView loginView;
     private ManagerView managerView;
 
@@ -49,7 +51,7 @@ public class LoginController {
                 // Azione da eseguire quando il pulsante "Registrati" viene premuto
                 System.out.println("Hai cliccato il pulsante Registrati");
                 signUpView = new SignUpView();
-                it.unipv.insfw23.TicketWave.modelController.Controller.Access.SignUpController signUpController = new it.unipv.insfw23.TicketWave.modelController.Controller.Access.SignUpController(mainstage, signUpView, customerview, loginView);
+                signUpController = new SignUpController(mainstage, signUpView, customerview, loginView);
                 signUpView.reSetBars();
                 mainstage.setScene(signUpView); // Imposta la scena SignUpView sulla stage principale
             }

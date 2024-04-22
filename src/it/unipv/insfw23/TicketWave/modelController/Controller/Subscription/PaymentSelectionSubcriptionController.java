@@ -1,7 +1,8 @@
-package it.unipv.insfw23.TicketWave.modelController.Controller.Subscription;
+package it.unipv.insfw23.TicketWave.modelController.controller.subscription;
 
-import it.unipv.insfw23.TicketWave.modelController.Controller.Payment.PaymentDataMController;
-import it.unipv.insfw23.TicketWave.modelController.Controller.Payment.PaymentDataPController;
+import it.unipv.insfw23.TicketWave.modelController.controller.payment.PaymentDataMController;
+import it.unipv.insfw23.TicketWave.modelController.controller.payment.PaymentDataPController;
+import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
 //import it.unipv.insfw23.TicketWave.modelView.*;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataPView;
