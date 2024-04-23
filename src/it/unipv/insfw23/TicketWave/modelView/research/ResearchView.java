@@ -55,7 +55,7 @@ public class ResearchView extends Scene{
         GridPane gp = new GridPane();
         gp.setStyle("-fx-background-color: #91BAD6");
         gp.setAlignment(Pos.TOP_CENTER);
-        // gp.setGridLinesVisible(true);
+        //gp.setGridLinesVisible(true);
         // decido qual'è la distanza da tutti i bordi
         gp.setPadding(new Insets(50,50,50,50));
 
@@ -71,18 +71,18 @@ public class ResearchView extends Scene{
         // creo dei vincoli sulle colonne, in modo da decidere se una colonna deve essere più grande di un'altra
         ColumnConstraints column1 = new ColumnConstraints();
         ColumnConstraints column2 = new ColumnConstraints();
-        gp.getColumnConstraints().add(column1);
-        gp.getColumnConstraints().add(column2);
-        // column1.setPercentWidth(15); // Non mi interessa regolare la grandezza della menubar in base a come ridimensiono la finestra
-        column2.setPercentWidth(33.4);
+        column2.setPercentWidth(35);
         column2.setMinWidth(330.40);
+        gp.getColumnConstraints().addAll(column1, column2);
+        // column1.setPercentWidth(15); // Non mi interessa regolare la grandezza della menubar in base a come ridimensiono la finestra
+
 
         // vincoli sulle righe
         RowConstraints row1 = new RowConstraints();
         RowConstraints row2 = new RowConstraints();
-        gp.getRowConstraints().add(row1);
-        gp.getRowConstraints().add(row2);
         row2.setMinHeight(100);
+        row2.setPrefHeight(1000); // permette alla row2 (quella che contiene la tableview) di prendere tutta la lunghezza disponibile del GridPane
+        gp.getRowConstraints().addAll(row1, row2);
 
         // allineo i vari nodi all'interno delle loro celle della gridpane
         GridPane.setHalignment(rnv.getBar(), HPos.CENTER);
@@ -102,7 +102,6 @@ public class ResearchView extends Scene{
             }
          */
         layout.setTop(UpperBar.getIstance());
-        getStylesheets().add("it/unipv/insfw23/TicketWave/modelView/tableViewStyle.css");
         setRoot(layout);
     }
 

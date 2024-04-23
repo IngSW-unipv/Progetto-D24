@@ -28,6 +28,7 @@ public class ResearchController {
             @Override
             public void handle(javafx.scene.input.MouseEvent mouseEvent) {
                 System.out.println("Faccio la query di ricerca");
+                System.out.println(rv.getresearchnodeview().getSearchBar().getText());
                 rv.getresearchnodeview().getTable().setVisible(true);
                 rv.getresearchnodeview().getTable().getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
             }
@@ -38,25 +39,22 @@ public class ResearchController {
         EventHandler<javafx.scene.input.MouseEvent> eventPressHandler = new EventHandler<>() {
             @Override
             public void handle(MouseEvent mouseEvent) {
-                System.out.println(rv.getresearchnodeview().getTable().getSelectionModel().getSelectedItem()); // devo addare un listener alla tabella
+                System.out.println(rv.getresearchnodeview().getTable().getSelectionModel().getSelectedItem()); // prendo l'elemento cliccato dalla tabella
             }
         };
         rv.getresearchnodeview().getTable().setOnMouseClicked(eventPressHandler);
 
         // Click filtri per il genere
-        for (MenuItem mi : rv.getresearchnodeview().getGenv()){
-            if (mi instanceof CheckMenuItem){
-                CheckMenuItem cmi = (CheckMenuItem) mi;
-                if (cmi.isSelected()){
-                    cmi.setOnAction(this::genrePressHandler); // se viene premuto il checkmenuitem va a genrePressHandler
-                }
+        for (CheckMenuItem cmi : rv.getresearchnodeview().getGenv()){
+            if (cmi.isSelected()){
+                cmi.setOnAction(this::genrePressHandler); // se viene premuto il checkmenuitem va a genrePressHandler
+                System.out.println("1");
             }
         }
-
-
     }
     private void genrePressHandler(ActionEvent event) {
         CheckMenuItem cmi = (CheckMenuItem) event.getSource();
+        System.out.println("2");
         // click sui filtri del genere
         if (cmi.isSelected()) {
             System.out.println(cmi.getText() + " is selected");
