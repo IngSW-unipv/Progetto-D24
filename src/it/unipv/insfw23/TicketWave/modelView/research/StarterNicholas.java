@@ -30,20 +30,6 @@ public class StarterNicholas extends Application {
         primaryStage.setFullScreenExitHint("");
         primaryStage.setFullScreen(true);
 
-        /*
-        BorderPane contenuto = new BorderPane();
-        contenuto.setStyle("-fx-background-color: #def1fa");
-
-        BorderPane layout = new BorderPane();
-        layout.setTop(UpperBar.getIstance());
-
-        layout.setCenter(contenuto);
-        layout.setBottom(LowerBar.getInstance());
-        Scene scene = new Scene(layout, 1080, 600);
-
-        //scene.setFill(Color.web("#FFC943"));
-
-         */
         UpperBarController ctrl = new UpperBarController(primaryStage);
         ResearchView scene = new ResearchView();
         ResearchController controller = new ResearchController(primaryStage, scene);

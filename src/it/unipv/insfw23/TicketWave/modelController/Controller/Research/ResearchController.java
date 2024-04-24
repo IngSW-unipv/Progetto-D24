@@ -44,22 +44,33 @@ public class ResearchController {
         };
         rv.getresearchnodeview().getTable().setOnMouseClicked(eventPressHandler);
 
-        // Click filtri per il genere
-        for (CheckMenuItem cmi : rv.getresearchnodeview().getGenv()){
-            if (cmi.isSelected()){
-                cmi.setOnAction(this::genrePressHandler); // se viene premuto il checkmenuitem va a genrePressHandler
-                System.out.println("1");
+        // click su un genere specifico presente nel filtro generi della ricerca
+        EventHandler<ActionEvent> genrePressHandler = new EventHandler<>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                CheckMenuItem cmi = (CheckMenuItem) actionEvent.getSource();
+                if (cmi.isSelected()){
+                    System.out.println(cmi.getText() + " is selected");
+                } else {
+                    System.out.println(cmi.getText() + " is deselected");
+                }
             }
-        }
-    }
-    private void genrePressHandler(ActionEvent event) {
-        CheckMenuItem cmi = (CheckMenuItem) event.getSource();
-        System.out.println("2");
-        // click sui filtri del genere
-        if (cmi.isSelected()) {
-            System.out.println(cmi.getText() + " is selected");
-        } else {
-            System.out.println(cmi.getText() + " is deselected");
-        }
+        };
+        rv.getresearchnodeview().getGenv().forEach(CheckMenuItem -> CheckMenuItem.setOnAction(genrePressHandler));
+
+        // click su una provincia specifica presente nel filtro delle province
+        EventHandler<ActionEvent> provincePressHandler = new EventHandler<>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                CheckMenuItem cmi = (CheckMenuItem) actionEvent.getSource();
+                if (cmi.isSelected()){
+                    System.out.println(cmi.getText() + " is selected");
+                } else {
+                    System.out.println(cmi.getText() + " is deselected");
+                }
+            }
+        };
+        rv.getresearchnodeview().getPrv().forEach(CheckMenuItem -> CheckMenuItem.setOnAction(provincePressHandler));
+
     }
 }

@@ -81,24 +81,20 @@ public class ResearchNodesView extends Node { //  questo mi serve per avere solo
 
         for (String s : gen) { // Arraylist di CheckMenuItems che popolo
             CheckMenuItem cmi = new CheckMenuItem(s);
-
-        //    GenreFilterController gfc = new GenreFilterController(cmi); // Controller per vedere se viene selezionato o meno un certo CheckMenuBox, cioè un genere in questo caso
-        //    cmi.setOnAction(gfc);
-
             genv.add(cmi);
         }
         genre.getItems().addAll(genv); // Creo il Menu con i CheckMenuItems da mettere dentro la MenuBar
 
         // check menu filtri provincia
+        Province [] prValues = Province.values(); // ho un array con tutti i valori associati ai nomi della ENUM
+        ArrayList<String> pr = new ArrayList<>(); // stringa di generi
+        for (Province value : prValues) { // popolo la mia lista di generi (stringa) partendo dalla ENUM
+            pr.add(value.toString());
+        }
         prv = new ArrayList<CheckMenuItem>(); // vettore per poter gestire i CheckMenu di province nel controller
-        String [] pr = {"PAVIA", "PARMA", "MILANO"}; // stringa delle province
 
         for (String s : pr) { // Arraylist di CheckMenuItems che popolo
             CheckMenuItem cmi = new CheckMenuItem(s);
-
-        //    ProvinceFilterController pfc = new ProvinceFilterController(cmi); // Controller per vedere se viene selezionato o meno un certo CheckMenuBox, cioè una provincia in questo caso
-        //    cmi.setOnAction(pfc);
-
             prv.add(cmi);
         }
         province.getItems().addAll(prv); // Creo il Menu con i CheckMenuItems da mettere dentro la MenuBar
