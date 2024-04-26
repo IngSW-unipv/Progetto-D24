@@ -48,7 +48,7 @@ public class ResearchController {
         EventHandler<ActionEvent> genrePressHandler = new EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                CheckMenuItem cmi = (CheckMenuItem) actionEvent.getSource();
+                CheckBox cmi = (CheckBox) actionEvent.getSource();
                 if (cmi.isSelected()){
                     System.out.println(cmi.getText() + " is selected");
                 } else {
@@ -62,7 +62,8 @@ public class ResearchController {
         EventHandler<ActionEvent> provincePressHandler = new EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                CheckMenuItem cmi = (CheckMenuItem) actionEvent.getSource();
+                //CheckMenuItem cmi = (CheckMenuItem) actionEvent.getSource();
+                CheckBox cmi = (CheckBox) actionEvent.getSource();
                 if (cmi.isSelected()){
                     System.out.println(cmi.getText() + " is selected");
                 } else {

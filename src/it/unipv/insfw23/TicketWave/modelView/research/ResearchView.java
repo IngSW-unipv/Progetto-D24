@@ -4,47 +4,38 @@ package it.unipv.insfw23.TicketWave.modelView.research;
  QUI VA TUTTO, DEVO ABBELLIRE LA DISPOSIZIONE
  *****************************************/
 
-import com.sun.javafx.scene.control.GlobalMenuAdapter;
 // import it.unipv.insfw23.TicketWave.modelController.MainController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+        import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
-import javafx.application.Application;
-import javafx.collections.FXCollections;
+        import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
-import javafx.scene.control.*;
+        import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+        import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.scene.control.CheckMenuItem;
+        import javafx.scene.control.CheckMenuItem;
+import javafx.scene.paint.Paint;
 
 import java.awt.*;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Observable;
+import java.util.Vector;
 
 import static javafx.application.Application.launch;
 
@@ -54,8 +45,8 @@ public class ResearchView extends Scene{
     private MenuBar bar;
     private Menu genre;
     private Menu province;
-    private ArrayList<CheckMenuItem> prv; // vettore per poter gestire i CheckMenu di province nel controller
-    private ArrayList <CheckMenuItem> genv; // vettore per poter gestire i CheckMenu di generi nel controller
+    private ArrayList<CheckBox> prv; // vettore per poter gestire i CheckBox di province nel controller
+    private ArrayList <CheckBox> genv; // vettore per poter gestire i CheckBox di generi nel controller
     private TextField searchBar;
     private TableView<Event> table;
 
@@ -68,7 +59,7 @@ public class ResearchView extends Scene{
     }
 
     public void researchScene() {
-        // Creazione bottoni,... in comune per la ResearchView
+        //__________ Istanzio gli oggetti più importanti _________//
         TextField searchBar = new TextField();
         this.searchBar = searchBar;
 
@@ -87,12 +78,13 @@ public class ResearchView extends Scene{
         TableView<Event> table = new TableView<>();
         this.table = table;
 
-        // Estetica
+        //__________ Estetica SearchBar, SearchButton, MenuBar e Menu _________//
         searchBar.setStyle("-fx-background-color: #ffff");
         searchBar.setPromptText("Enter your search...");
 
         searchButton.setStyle("-fx-background-color: #ffff");
         ImageView searchIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/imagesResources/search_glass.png");
+        searchIcon.setPreserveRatio(true);
         searchIcon.setFitHeight(18);
         searchIcon.setFitWidth(22);
         searchButton.setGraphic(searchIcon);
@@ -103,8 +95,10 @@ public class ResearchView extends Scene{
         province.setStyle("-fx-background-color: #ffff");
         province.setStyle("-fx-font-family: 'Helvetica'; -fx-font-size: 12px;");
 
-        // creo  la MenuBar con i filtri
-        // check menu filtri musica
+        //__________ Creo  la MenuBar con i filtri _________//
+        ///////**** Menu filtri generi ****////////
+        VBox vb1 = new VBox();
+        ScrollPane sp1 = new ScrollPane();
         Genre[] gnValues = Genre.values(); // ho un array con tutti i valori associati ai nomi della ENUM
         ArrayList<String> gen = new ArrayList<>(); // stringa di generi
         for (Genre value : gnValues) { // popolo la mia lista di generi (stringa) partendo dalla ENUM
@@ -112,32 +106,72 @@ public class ResearchView extends Scene{
                 gen.add(value.toString());
             }
         }
-        genv = new ArrayList<CheckMenuItem>();  // array che contiene tutti i checkMenuItem da mettere nel Menu del genere
+        genv = new ArrayList<CheckBox>();  // array che contiene tutti i CheckBox da mettere nel Menu del genere
 
         for (String s : gen) { // Arraylist di CheckMenuItems che popolo
-            CheckMenuItem cmi = new CheckMenuItem(s);
-            genv.add(cmi);
+            //CheckMenuItem cmi = new CheckMenuItem(s);
+            CheckBox cbox = new CheckBox(s);
+            cbox.setStyle("-fx-background-color: #ffff");
+            cbox.setStyle("-fx-font-family: 'Helvetica'; -fx-font-size: 12px; -fx-text-fill: black;");
+            genv.add(cbox);
         }
-        genre.getItems().addAll(genv); // Creo il Menu con i CheckMenuItems da mettere dentro la MenuBar
+        // VBox che contiene lo ScrollPane
+        vb1.getChildren().addAll(genv);
+        vb1.setPrefHeight(200);
+        vb1.setStyle("-fx-background-color: #ffff");
+        vb1.setAlignment(Pos.CENTER_LEFT);
+        // ScrollPane che contiene tutti i CheckBox
+        sp1.setContent(vb1);
+        sp1.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        sp1.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        sp1.setStyle("-fx-background-color: #ffff");
+        // CustomMenuitem che contiene lo ScrollPane, lo devo per forza usare, poiché in un Menu vanno solo MenuItem o CustomMenuItem
+        CustomMenuItem cmi1 = new CustomMenuItem();
+        cmi1.setContent(sp1);
+        cmi1.setStyle("-fx-background-color: #ffff");
+        // Creazione vera e propria del Menu
+        genre.getItems().addAll(cmi1); // Creo il Menu con i CheckMenuItems da mettere dentro la MenuBar
 
-        // check menu filtri provincia
+        ///////**** Menu filtri provincia ****////////
+        VBox vb = new VBox();
+        ScrollPane sp = new ScrollPane();
         Province[] prValues = Province.values(); // ho un array con tutti i valori associati ai nomi della ENUM
         ArrayList<String> pr = new ArrayList<>(); // stringa di generi
         for (Province value : prValues) { // popolo la mia lista di generi (stringa) partendo dalla ENUM
             pr.add(value.toString());
         }
-        prv = new ArrayList<CheckMenuItem>(); // vettore per poter gestire i CheckMenu di province nel controller
+        prv = new ArrayList<CheckBox>(); // vettore per poter gestire i CheckBox di province nel controller
 
-        for (String s : pr) { // Arraylist di CheckMenuItems che popolo
-            CheckMenuItem cmi = new CheckMenuItem(s);
-            prv.add(cmi);
+        for (String s : pr) { // Arraylist di CheckBox che popolo
+            //CheckMenuItem cmi = new CheckMenuItem(s);
+            CheckBox cbox = new CheckBox(s);
+            cbox.setStyle("-fx-background-color: #ffff");
+            cbox.setStyle("-fx-font-family: 'Helvetica'; -fx-font-size: 12px; -fx-text-fill: black;");
+            prv.add(cbox);
         }
-        province.getItems().addAll(prv); // Creo il Menu con i CheckMenuItems da mettere dentro la MenuBar
+        // VBox che contiene lo ScrollPane
+        vb.getChildren().addAll(prv);
+        vb.setPrefHeight(200);
+        vb.setStyle("-fx-background-color: #ffff");
+        vb.setAlignment(Pos.CENTER_LEFT);
+        vb.setMaxHeight(400);
+        // ScrollPane che contiene tutti i CheckBox
+        sp.setContent(vb);
+        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        sp.setStyle("-fx-background-color: #ffff");
+        // CustomMenuitem che contiene lo ScrollPane, lo devo per forza usare, poiché in un Menu vanno solo MenuItem o CustomMenuItem
+        CustomMenuItem cmi = new CustomMenuItem();
+        cmi.setContent(sp);
+        cmi.setStyle("-fx-background-color: #ffff");
+        // Creazione vera e propria del Menu
+        province.getItems().add(cmi); // Creo il Menu con il CustomMenuItem, che contiene lo ScrollPane, che a sua volta contiene la VBox, che a sua volta contiene i vari CheckBox
 
+        // Creazione della MenuBar con i Menu genre e province
         bar.getMenus().addAll(genre, province);
         bar.setStyle("-fx-background-color: #ffff");
 
-        // Creo la TableView per visualizzare i risultati della ricerca, essa va nascosta fino alla prima ricerca; quando avviene la prima ricerca diventa visibile (quando clicco sul SearchButton)
+        //__________ Creo la TableView per visualizzare i risultati della ricerca, essa va nascosta fino alla prima ricerca; quando avviene la prima ricerca diventa visibile (quando clicco sul SearchButton) _________//
         TableColumn<Event,String> tcEvent = new TableColumn<>("Evento");
         tcEvent.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcEvent.setStyle("-fx-alignment: CENTER");
@@ -270,11 +304,11 @@ public class ResearchView extends Scene{
         return province;
     }
 
-    public ArrayList<CheckMenuItem> getPrv() {
+    public ArrayList<CheckBox> getPrv() {
         return prv;
     }
 
-    public ArrayList<CheckMenuItem> getGenv() {
+    public ArrayList<CheckBox> getGenv() {
         return genv;
     }
 
