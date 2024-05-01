@@ -5,7 +5,10 @@ import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
@@ -20,6 +23,7 @@ public class SubscriptionSelectionView extends Scene {
     private StackPane bottonePrimaSub;
     private StackPane bottoneSecondaSub;
     private StackPane bottoneTerzaSub;
+    private static Button backButton=new Button();
 
     public SubscriptionSelectionView() {
         super(new BorderPane(), 1080, 600);
@@ -29,7 +33,13 @@ public class SubscriptionSelectionView extends Scene {
     public void init(){
 
         BorderPane contenuto = new BorderPane();
-       contenuto.setStyle("-fx-background-color: #def1fa;");
+       contenuto.setStyle("-fx-background-color: #91bad6;");
+
+        Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/backArrow.png");
+        ImageView backarrow = new ImageView(backarrowlogo);
+        backarrow.setFitWidth(50);
+        backarrow.setPreserveRatio(true);
+        backButton.setGraphic(backarrow);
 
         BorderPane primaSub = new BorderPane();
         primaSub.setStyle("-fx-background-color: rgba(103,186,255); -fx-background-radius: 20;");
@@ -123,6 +133,8 @@ public class SubscriptionSelectionView extends Scene {
         contenuto.setLeft(bottonePrimaSub);
         contenuto.setCenter(bottoneSecondaSub);
         contenuto.setRight(bottoneTerzaSub);
+        contenuto.setBottom(backButton);
+        BorderPane.setMargin(backButton, new Insets(0, 10, 10, 10));
 
         BorderPane.setAlignment(primaSub, Pos.CENTER_LEFT);
         BorderPane.setAlignment(secondaSub, Pos.CENTER);
@@ -168,6 +180,9 @@ public class SubscriptionSelectionView extends Scene {
         return bottoneTerzaSub;
     }
 
+    public static Button getBackButton() {
+        return backButton;
+    }
 }
 
 

@@ -21,7 +21,6 @@ public class SubscriptionSelectionController {
     private PaymentSelectionView PaymentSelectionView;
     private SubscriptionSelectionView subscriptionSelectionView;
     private PaymentSelectionView paymentPage;
-    boolean isviewermanager=true;
     private User user;
 
 
@@ -54,6 +53,9 @@ public class SubscriptionSelectionController {
         subscriptionSelectionView.getBottonePrimaSub().setOnMouseClicked(goToBuySubscription);
         subscriptionSelectionView.getBottoneSecondaSub().setOnMouseClicked(goToBuySubscription);
         subscriptionSelectionView.getBottoneTerzaSub().setOnMouseClicked(goToBuySubscription);
+
+
+
     }
 
 

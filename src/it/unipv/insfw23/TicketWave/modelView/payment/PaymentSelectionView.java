@@ -120,14 +120,14 @@ public class PaymentSelectionView extends Scene {
 
 
         BorderPane root = new BorderPane();
-        root.setStyle("-fx-background-color: #def1fa;");
+        root.setStyle("-fx-background-color: #91bad6;");
         root.setCenter(gridPane);
         root.setLeft(backButtonBox);
         root.setRight(nextButtonBox);
 
 
         BorderPane layout = new BorderPane();
-        layout.setStyle("-fx-background-color: #def1fa;");
+        layout.setStyle("-fx-background-color: #91bad6;");
         layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
         layout.setTop(UpperBar.getIstance());

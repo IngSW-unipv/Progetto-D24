@@ -104,7 +104,7 @@ public class PaymentDataMView extends Scene {
 
 
         BorderPane layout= new BorderPane();
-        layout.setStyle("-fx-background-color: #def1fa;");
+        layout.setStyle("-fx-background-color: #91bad6;");
         layout.setCenter(root);
         layout.setTop(UpperBar.getIstance());
         UpperBar.getIstance().setForNoLogged();
