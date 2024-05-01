@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.modelView.ticket;
 import it.unipv.insfw23.TicketWave.modelController.controller.upperBar.UpperBarController;
 import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -14,7 +15,7 @@ public class ProvaRunTicketPageView extends Application {
     @Override
     public void start(Stage primaryStage) {
         // Esempio di dati per testare la visualizzazione della TicketPageView
-        boolean isviewerManager = false;
+        Customer customer=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.BARI,favoriteGenre, 100);
         Type typeOfEvent = Type.CONCERT;
         String name = "Coez,Gianna Nannini";
         String city = "New York";
@@ -39,10 +40,10 @@ public class ProvaRunTicketPageView extends Application {
 
         // Creazione della TicketPageView e inizializzazione dei componenti
         TicketPageView ticketPageView = new TicketPageView();
-        ticketPageView.setComponents(isviewerManager, typeOfEvent, name, city, location, Province.AGRIGENTO, date, artists,
+        ticketPageView.setComponents(is\, typeOfEvent, name, city, location, Province.AGRIGENTO, date, artists,
                 seatsRemainedNumberForType, prices);
 
-        TicketPageController ticketPageController=new TicketPageController(primaryStage,ticketPageView,concert,isviewerManager);
+        TicketPageController ticketPageController=new TicketPageController(primaryStage,ticketPageView,concert,customer);
 
 
         // Creazione della scena e impostazione del titolo della finestra

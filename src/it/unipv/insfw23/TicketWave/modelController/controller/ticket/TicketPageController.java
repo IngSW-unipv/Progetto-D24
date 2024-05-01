@@ -21,11 +21,11 @@ public class TicketPageController {
     private User user;
 
 
-    public TicketPageController(Stage mainStage, TicketPageView ticketPage, Event event, boolean isviewermanager) {
+    public TicketPageController(Stage mainStage, TicketPageView ticketPage, Event event, User user) {
         this.mainStage = mainStage;
         this.ticketPage = ticketPage;
         this.event=event;
-        this.isviewermanager = isviewermanager;
+        this.user = user;
         initComponents();
 
     }
@@ -33,7 +33,7 @@ public void initComponents() {
 //	ticketPage = new TicketPageView();
 	//assegnazione dei campi dell'evento ai campi della ticketpageview
 	
-	ticketPage.setComponents(isviewermanager,event.getType(),event.getName(),event.getCity(),event.getLocation(),event.getProvince(),event.getDate(),
+	ticketPage.setComponents(user.isCustomer(), event.getType(),event.getName(),event.getCity(),event.getLocation(),event.getProvince(),event.getDate(),
 			event.getArtists(),event.getSeatsRemainedNumberForType(),event.getPrices());
 	//fine assegnazione
 	//
@@ -49,7 +49,7 @@ public void initComponents() {
             System.out.println("Hai cliccato il bottone Acquista");
             PaymentSelectionView paymentSelectionView = new PaymentSelectionView();
             paymentSelectionView.setPriceComponent(event.getPrices()[ticketPage.getWhichPriceSelected()]);
-            PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainStage,paymentSelectionView,ticketPage,isviewermanager);
+            PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainStage,paymentSelectionView,ticketPage,user);
             mainStage.setScene(paymentSelectionView);
         	}
         	else

@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.subscription;
 
 import it.unipv.insfw23.TicketWave.modelController.controller.payment.PaymentSelectionController;
+import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
@@ -15,6 +16,7 @@ public class SubscriptionSelectionController {
     private SubscriptionSelectionView subscriptionSelectionView;
     private PaymentSelectionView paymentPage;
     boolean isviewermanager=true;
+    private User user;
 
 
     public SubscriptionSelectionController(Stage mainstage,SubscriptionSelectionView subscriptionSelectionView,PaymentSelectionView paymentPage) {
@@ -31,7 +33,7 @@ public class SubscriptionSelectionController {
             public void handle(MouseEvent actionEvent) {
                 System.out.println("Hai selezionato un abbonamento. Reindirizzamento alla pagina di pagamento.");
                 paymentPage= new PaymentSelectionView();
-                PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainstage,paymentPage,subscriptionSelectionView,isviewermanager);
+                PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainstage,paymentPage,subscriptionSelectionView,user);
                 mainstage.setScene(paymentPage);
             }
 

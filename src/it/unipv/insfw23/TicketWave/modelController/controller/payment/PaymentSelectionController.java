@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
 
+import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataPView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
@@ -10,8 +11,6 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-import it.unipv.insfw23.TicketWave.modelController.controller.payment.PaymentDataMController;
-import it.unipv.insfw23.TicketWave.modelController.controller.payment.PaymentDataPController;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -28,12 +27,13 @@ public class PaymentSelectionController {
     private boolean isviewermanager;
 
     private PaymentDataMView paymentDataMPage;
+    private User user;
 
-    public PaymentSelectionController(Stage mainStage, PaymentSelectionView PaymentPage, Scene scene, boolean isviewermanager) {
+    public PaymentSelectionController(Stage mainStage, PaymentSelectionView PaymentPage, Scene scene, User user) {
         this.mainStage = mainStage;
         this.paymentPage = PaymentPage;
         this.scene=scene;
-        this.isviewermanager=isviewermanager;
+        this.user= user;
 
         initComponents();
     }
@@ -81,7 +81,7 @@ public class PaymentSelectionController {
                     method.invoke(scene);
 
                     // Determina quale scena caricare in base a USER.IS MANAGER
-                    if (isviewermanager) {
+                    if (user.isCustomer()) {
                         System.out.println("Sei ritornato indietro alla subscriptionSelectionView");
                         // UPPERBAR.GETISTANCE.SETFORMANAGER
                         mainStage.setScene(scene);
