@@ -15,6 +15,7 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
@@ -56,6 +57,8 @@ public class NewFestivalView extends Scene{
 	private final Label errlabel = new Label("Parametri non validi");
 	private Button abort;
 	private Button confirm;
+	private Button photoButton;
+	private ImageView eventPhoto;
 	
 	public NewFestivalView() {
 		super(new BorderPane(), 1080, 600);
@@ -259,6 +262,20 @@ public class NewFestivalView extends Scene{
 		
 		abort = new Button("Annulla");
 		GridPane.setConstraints(abort, 0, 16);
+
+		//INSERIMENTO FOTO (+ I METODI GET)
+		photoButton = new Button("Scegli foto...");
+		eventPhoto = new ImageView();
+		eventPhoto.setFitHeight(100);
+		eventPhoto.setFitWidth(100);
+		//GridPane.setHalignment(photoButton, HPos.LEFT);
+		//GridPane.setHalignment(eventPhoto, HPos.LEFT);
+		grid.add(photoButton, 3, 10);
+		grid.add(eventPhoto, 3,8);
+		//I BOTTONI CONFERMA E TORNA INDIETRO NON SONO SPARITI, SONO SOTTO,
+		// SE METTI SCHERMO INTERO LI VEDI, POSIZIONALI COME VUOI TUTTI QUANTI
+		// SAREBBE CARINO CHE IL BOTTONE CON LA FOTO USCISSERO AL CENTRO A DX,
+		// SOPRA IL TASTO CONFERMA IN LINEA CON TUTTI GLI ALTRI CAMPI
 		
 		
 		
@@ -377,5 +394,7 @@ public class NewFestivalView extends Scene{
 	
 	public Label getErrLabel() {
 		return errlabel;
-	}	
+	}
+	public Button getPhotoButton(){return photoButton;}
+	public ImageView getPhotoView() {return eventPhoto;}
 }

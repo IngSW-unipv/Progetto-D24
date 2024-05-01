@@ -4,8 +4,12 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.event.NewOtherView;
 import it.unipv.insfw23.TicketWave.modelView.event.SelectionNewEventTypeView;
 import javafx.event.EventHandler;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 public class NewOtherController {
 	Stage window;
@@ -22,6 +26,21 @@ public class NewOtherController {
 	}
 	
 	public void initComponents() {
+
+		EventHandler<MouseEvent> photoChooser = new EventHandler<>() {
+			@Override
+			public void handle(MouseEvent event) {
+				FileChooser filechooser = new FileChooser();
+				filechooser.setTitle("Seleziona un'immagine");
+				File file = filechooser.showOpenDialog(window);
+
+				if(file != null){
+					Image photo = new Image(file.toURI().toString());
+					newotherview.getPhotoView().setImage(photo);
+				}
+			}
+		};
+		newotherview.getPhotoButton().setOnMouseClicked(photoChooser);
 		EventHandler<MouseEvent> abortButton = new EventHandler<>() {
 			
 			@Override
