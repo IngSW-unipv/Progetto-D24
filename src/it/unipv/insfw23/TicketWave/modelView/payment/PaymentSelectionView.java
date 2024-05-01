@@ -146,6 +146,8 @@ public class PaymentSelectionView extends Scene {
     public void reSetBars() {
         BorderPane temp = new BorderPane();
         setRoot(temp);
+
+        //LEVO L'IF, impsto da controller
         if (isviewermanager==true) {
             System.out.println("Stai impostando la upperbar per il manager");
             UpperBar.getIstance().setForManager();

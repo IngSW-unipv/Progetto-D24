@@ -3,6 +3,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.ticket;
 
 import it.unipv.insfw23.TicketWave.modelController.controller.payment.PaymentSelectionController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import javafx.event.EventHandler;
@@ -16,6 +17,8 @@ public class TicketPageController {
 
     private Event event;
     private boolean isviewermanager;
+
+    private User user;
 
 
     public TicketPageController(Stage mainStage, TicketPageView ticketPage, Event event, boolean isviewermanager) {

@@ -80,12 +80,15 @@ public class PaymentSelectionController {
                     // Invoca effettivamente il metodo se esiste
                     method.invoke(scene);
 
-                    // Determina quale scena caricare in base a isviewermanager
+                    // Determina quale scena caricare in base a USER.IS MANAGER
                     if (isviewermanager) {
                         System.out.println("Sei ritornato indietro alla subscriptionSelectionView");
-                        mainStage.setScene(subscriptionSelectionView);
+                        // UPPERBAR.GETISTANCE.SETFORMANAGER
+                        mainStage.setScene(scene);
                     } else {
                         System.out.println("Sei ritornato indietro alla TicketPage");
+
+                        //IDEM OER CUSTUMER
                         TicketPageView ticketPageView=new TicketPageView();
                         ticketPageView.reSetBars();
                         mainStage.setScene(ticketPageView);
