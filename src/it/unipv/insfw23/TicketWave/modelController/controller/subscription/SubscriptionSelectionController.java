@@ -24,9 +24,8 @@ public class SubscriptionSelectionController {
     private User user;
 
 
-    public SubscriptionSelectionController(Stage mainstage,SubscriptionSelectionView subscriptionSelectionView,PaymentSelectionView paymentPage) {
+    public SubscriptionSelectionController(Stage mainstage,SubscriptionSelectionView subscriptionSelectionView) {
         this.subscriptionSelectionView=subscriptionSelectionView;
-        this.paymentPage=paymentPage;
         this.mainstage=mainstage;
 
         user = new Manager("Piero", "Antonelli", "12-10-11", "ciccio@gmail.com",

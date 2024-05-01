@@ -41,6 +41,7 @@ public class ManagerView extends Scene{
 	private TableView<Notification> tabNot;
 	private ObservableList<Notification> nots;
 	private Label name;
+	private Button subButton;
 	
 	
 	public ManagerView(String name, ArrayList<Notification> nots, ArrayList<Event> evs) {
@@ -157,8 +158,12 @@ public class ManagerView extends Scene{
 		tabNot.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 		tabNot.setItems(nots);
 //		tabnot.setPrefWidth(400);
+
+		subButton = new Button("Cambia abbonamento");
+
+
 		
-		grid.getChildren().addAll(name, logoutButton, tabNot, tabEv, not, ev);
+		grid.getChildren().addAll(name, logoutButton, tabNot, tabEv, not, ev, subButton);
 		
 		
 		
@@ -206,6 +211,7 @@ public class ManagerView extends Scene{
 	public Button getProfileButton() {
 		return upperbar.getProfileButton();
 	}
+	public Button getSubButton(){ return subButton;}
 	
 	public void reSetBars(){
         BorderPane temp = new BorderPane();
