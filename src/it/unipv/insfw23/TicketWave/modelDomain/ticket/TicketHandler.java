@@ -1,10 +1,8 @@
 package it.unipv.insfw23.TicketWave.modelDomain.ticket;
 
-import it.unipv.insfw23.TicketWave.modelController.Factory.Notifications.NotificationHandlerFactory;
-import it.unipv.insfw23.TicketWave.modelController.Factory.ticket.ITicketHandler;
+import it.unipv.insfw23.TicketWave.modelController.factory.notifications.NotificationHandlerFactory;
+import it.unipv.insfw23.TicketWave.modelController.factory.ticket.ITicketHandler;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
-import it.unipv.insfw23.TicketWave.modelDomain.user.*;
-import it.unipv.insfw23.TicketWave.modelDomain.notifications.*;
 
 public class TicketHandler implements ITicketHandler{
 		

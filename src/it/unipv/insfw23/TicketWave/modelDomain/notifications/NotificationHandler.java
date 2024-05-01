@@ -2,7 +2,7 @@ package it.unipv.insfw23.TicketWave.modelDomain.notifications;
 
 import java.util.ArrayList;
 
-import it.unipv.insfw23.TicketWave.modelController.Factory.Notifications.INotificationHandler;
+import it.unipv.insfw23.TicketWave.modelController.factory.notifications.INotificationHandler;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.*;
 

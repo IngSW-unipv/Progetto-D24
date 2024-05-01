@@ -3,7 +3,7 @@ package it.unipv.insfw23.TicketWave.modelView.access;
 
 //import it.unipv.insfw23.TicketWave.modelController.LoginController;
 //import it.unipv.insfw23.TicketWave.modelController.SignUpController;
-import it.unipv.insfw23.TicketWave.modelController.Controller.Access.LoginController;
+import it.unipv.insfw23.TicketWave.modelController.controller.Access.LoginController;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;

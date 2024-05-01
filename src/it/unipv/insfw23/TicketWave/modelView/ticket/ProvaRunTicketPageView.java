@@ -1,10 +1,9 @@
 package it.unipv.insfw23.TicketWave.modelView.ticket;
-import it.unipv.insfw23.TicketWave.modelController.Controller.UpperBar.UpperBarController;
+import it.unipv.insfw23.TicketWave.modelController.controller.upperBar.UpperBarController;
 import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.sql.Time;
