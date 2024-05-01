@@ -83,6 +83,7 @@ public class PaymentSelectionController {
                         System.out.println("Sei ritornato indietro alla subscriptionSelectionView");
                         UpperBar.getIstance().setForManager();
                         mainStage.setScene(scene);
+
                     } else {
                         System.out.println("Sei ritornato indietro alla TicketPage");
                         UpperBar.getIstance().setForCustomer();

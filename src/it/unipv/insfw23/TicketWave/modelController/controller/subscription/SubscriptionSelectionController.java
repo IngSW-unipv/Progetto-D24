@@ -1,6 +1,9 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.subscription;
 
 import it.unipv.insfw23.TicketWave.modelController.controller.payment.PaymentSelectionController;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
@@ -8,6 +11,9 @@ import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionV
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class SubscriptionSelectionController {
     private Stage mainstage;
@@ -23,6 +29,10 @@ public class SubscriptionSelectionController {
         this.subscriptionSelectionView=subscriptionSelectionView;
         this.paymentPage=paymentPage;
         this.mainstage=mainstage;
+
+        user = new Manager("Piero", "Antonelli", "12-10-11", "ciccio@gmail.com",
+                "ciccio99", Province.ALESSANDRIA, "3926475898609800", new ArrayList<Event>(), 5, 0, LocalDate.now(), 0);
+
         initComponents();
     }
 
