@@ -43,4 +43,6 @@ public class SubscriptionSelectionController {
         subscriptionSelectionView.getBottoneSecondaSub().setOnMouseClicked(goToBuySubscription);
         subscriptionSelectionView.getBottoneTerzaSub().setOnMouseClicked(goToBuySubscription);
     }
+
+
 }
