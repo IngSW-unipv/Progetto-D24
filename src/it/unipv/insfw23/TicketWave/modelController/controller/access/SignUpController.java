@@ -1,4 +1,4 @@
-package it.unipv.insfw23.TicketWave.modelController.controller.Access;
+package it.unipv.insfw23.TicketWave.modelController.controller.access;
 
 import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;

@@ -4,6 +4,7 @@ import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchC
 import it.unipv.insfw23.TicketWave.modelController.controller.statistics.TypeStatsController;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
+import it.unipv.insfw23.TicketWave.modelView.statistics.NoMoreEventsPopup;
 import it.unipv.insfw23.TicketWave.modelView.statistics.TypeStatsView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -61,7 +62,9 @@ public class UpperBarController {
                 }
                 else {
                 */
-
+                NoMoreEventsPopup.getIstance().setX(mainStage.getX() + mainStage.getWidth() - NoMoreEventsPopup.getIstance().getWidth() - 360);
+                NoMoreEventsPopup.getIstance().setY(mainStage.getY()+95);
+                NoMoreEventsPopup.getIstance().show(mainStage);
             }
         };
         UpperBar.getIstance().getEventPlusButton().setOnAction(creationEventHandler);
