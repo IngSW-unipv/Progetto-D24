@@ -154,3 +154,4 @@ public class ManagerController {
 		managerview.getSubButton().setOnMouseClicked(subscriptionButton);
 	}
 }
+
