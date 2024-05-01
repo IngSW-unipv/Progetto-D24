@@ -1,6 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.user;
 
-import it.unipv.insfw23.TicketWave.modelController.controller.Access.LoginController;
+import it.unipv.insfw23.TicketWave.modelController.controller.access.LoginController;
 import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchController;
 
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
