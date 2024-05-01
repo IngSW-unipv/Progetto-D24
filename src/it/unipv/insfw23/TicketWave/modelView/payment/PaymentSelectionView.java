@@ -131,6 +131,7 @@ public class PaymentSelectionView extends Scene {
         layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
         layout.setTop(UpperBar.getIstance());
+        UpperBar.getIstance().setForNoLogged();
         setRoot(layout);
         this.layout = layout;
         this.root = root;
@@ -147,15 +148,8 @@ public class PaymentSelectionView extends Scene {
         BorderPane temp = new BorderPane();
         setRoot(temp);
 
-        //LEVO L'IF, impsto da controller
-        if (isviewermanager==true) {
-            System.out.println("Stai impostando la upperbar per il manager");
-            UpperBar.getIstance().setForManager();
-        } else {
-            UpperBar.getIstance().setForCustomer();
-        }
-
         layout.setTop(UpperBar.getIstance());
+        UpperBar.getIstance().setForNoLogged();
         layout.setBottom(LowerBar.getInstance());
         setRoot(layout);
     }

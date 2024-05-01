@@ -5,9 +5,13 @@ package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 
+import it.unipv.insfw23.TicketWave.modelDomain.user.User;
+import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
+import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
+import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
@@ -24,12 +28,15 @@ public class PaymentDataMController {
     private TicketPageView ticketpage;
     private PaymentSelectionView paymentSelectionPage;
     private boolean isviewermanager;
+    private User user;
+    private CustomerView customerView;
+    private ManagerView managerView;
 
-    public PaymentDataMController(Stage mainStage, PaymentDataMView paymentDataPage, PaymentSelectionView paymentSelectionPage, boolean isviewermanager) {
+    public PaymentDataMController(Stage mainStage, PaymentDataMView paymentDataPage, PaymentSelectionView paymentSelectionPage, User user ) {
         this.paymentDataPage = paymentDataPage;
         this.paymentSelectionPage = paymentSelectionPage;
         this.mainStage = mainStage;
-        this.isviewermanager=isviewermanager;
+        this.user=user;
         initComponents();
     }
 
@@ -48,6 +55,31 @@ public class PaymentDataMController {
         };
 
         paymentDataPage.getBackButton().setOnMouseClicked(turnBackPaymentPage);
+
+
+        //UNA VOLTA CHE VIENE CLICCATO IL PULSANTE ACQUISTA IL PAGAMENTO VA A BUON FINE(LO RIPORTO INDIETRO E RESETTO LE BARRE
+        //IN BASE AL METODO DI CONTROLLO CUSTOMER O MANAGER
+
+        EventHandler<MouseEvent> goToNewPage = new EventHandler<>() {
+
+            @Override
+            public void handle(MouseEvent actionEvent) {
+                // Azione da eseguire quando il pulsante viene premuto
+                System.out.println("pagamento andato a buon fine stai tornando indietro alla home page!");
+                if(user.isCustomer()){
+                    System.out.println("Stai andando alla CustomerView");
+                    UpperBar.getIstance().setForCustomer();
+                    mainStage.setScene(customerView);
+                }
+                else {
+                    System.out.println("Stai andando alla ManagerView");
+                    UpperBar.getIstance().setForManager();
+                    mainStage.setScene(managerView);
+              }
+            }
+        };
+
+        paymentDataPage.getForwardButton().setOnMouseClicked(goToNewPage);
 
 
 

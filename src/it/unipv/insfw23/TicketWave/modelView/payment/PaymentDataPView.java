@@ -21,7 +21,7 @@ public class PaymentDataPView extends Scene {
     private TextField inserEmail=new TextField();
 
     private Scene scene;
-    private static Button nextButton =new Button("Avanti");
+    private static Button forwardButton =new Button("Avanti");
     private static  Button backButton = new Button();
 
     private static RadioButton usePointsButton= new RadioButton("Utilizza i tuoi WavePoints");
@@ -39,7 +39,7 @@ public class PaymentDataPView extends Scene {
 
     private void initComponents(){
 
-        VBox textBox= new VBox(emailLabel,inserEmail,nextButton,usePointsButton);
+        VBox textBox= new VBox(emailLabel,inserEmail, forwardButton,usePointsButton);
         textBox.setStyle("-fx-font-size: 14px;");
         textBox.setPadding(new Insets(10));
         textBox.setAlignment(Pos.CENTER);
@@ -74,8 +74,10 @@ public class PaymentDataPView extends Scene {
 
         BorderPane layout= new BorderPane();
         layout.setCenter(root);
-        layout.setBottom(LowerBar.getInstance());
         layout.setTop(UpperBar.getIstance());
+        UpperBar.getIstance().setForNoLogged();
+        layout.setBottom(LowerBar.getInstance());
+
 
         setRoot(layout);
 
@@ -85,6 +87,8 @@ public class PaymentDataPView extends Scene {
         return backButton;
     }
 
+
+
     public static Label getEmailLabel() {
         return emailLabel;
     }
@@ -93,8 +97,8 @@ public class PaymentDataPView extends Scene {
         return inserEmail;
     }
 
-    public Button getNextButton() {
-        return nextButton;
+    public Button getForwardButtonButton() {
+        return forwardButton;
     }
 
     public Scene getScene() {
@@ -105,6 +109,8 @@ public class PaymentDataPView extends Scene {
         return usePointsButton;
     }
 
+
+    /*
     public void reSetBars(){
         BorderPane temp = new BorderPane();
         scene.setRoot(temp);
@@ -113,7 +119,7 @@ public class PaymentDataPView extends Scene {
         setRoot(layout);
     }
 
-
+*/
 
 
 

@@ -1,9 +1,13 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
+import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 
+import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataPView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
+import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
+import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -13,12 +17,15 @@ public class PaymentDataPController {
     private PaymentSelectionView paymentPage;
     private Stage mainStage;
     private PaymentDataPView paymentDataPView;
+    private CustomerView customerView;
+    private ManagerView managerView;
     private User user;
 
-    public PaymentDataPController(Stage mainStage, PaymentDataPView paymentDataPView, PaymentSelectionView paymentPage){
+    public PaymentDataPController(Stage mainStage, PaymentDataPView paymentDataPView, PaymentSelectionView paymentPage,User user){
        this.paymentDataPView = paymentDataPView;
        this.paymentPage=paymentPage;
        this.mainStage=mainStage;
+       this.user=user;
        initComponents();
 
    }
@@ -37,18 +44,26 @@ public class PaymentDataPController {
 
        paymentDataPView.getBackButton().setOnMouseClicked(turnBackPaymentPage);
 
+       EventHandler<MouseEvent> goToNewPage = new EventHandler<>() {
 
+           @Override
+           public void handle(MouseEvent actionEvent) {
+               // Azione da eseguire quando il pulsante viene premuto
+               System.out.println("pagamento andato a buon fine stai tornando indietro alla home page!");
+               if(user.isCustomer()){
+                   System.out.println("Stai andando alla CustomerView");
+                   UpperBar.getIstance().setForCustomer();
+                   mainStage.setScene(customerView);
+               }
+               else {
+                   System.out.println("Stai andando alla ManagerView");
+                   UpperBar.getIstance().setForManager();
+                   mainStage.setScene(managerView);
+               }
+           }
+       };
 
-       /*
-       if (!user.isCustomer()) {
-           paymentDataPView.getUsePointsButton().setOpacity(0);
-           paymentDataPView.getUsePointsButton().setDisable(true);
-       } else {
-           // Se l'utente è un Customer, lascia il bottone "Use Points" visibile
-           paymentDataPView.getUsePointsButton().setOpacity(1);
-       }
-
-       */
+       paymentDataPView.getForwardButtonButton().setOnMouseClicked(goToNewPage);
 
 
    }

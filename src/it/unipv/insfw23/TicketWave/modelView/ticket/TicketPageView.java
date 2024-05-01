@@ -102,7 +102,7 @@ public class TicketPageView extends Scene {
                 ticketVipTextField = new Label(String.valueOf(seatsRemainedNumberForType[2]));
                 vipPriceTextField = new Label("€"+price[2]);
         }
-
+        //???????
         if(typeofviewermanager) {
             buyButton.setVisible(false);
             UpperBar.getIstance().setForManager();
@@ -234,7 +234,7 @@ public class TicketPageView extends Scene {
     public Scene getScene() {
         return scene;
     }
-
+        //??????
         public void reSetBars(){
             BorderPane temp = new BorderPane();
             setRoot(temp);

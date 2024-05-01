@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
 
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
+import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataPView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
@@ -48,12 +49,12 @@ public class PaymentSelectionController {
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("Stai andando alla PaymentDataMPage");
                 paymentDataMPage=new PaymentDataMView();
-               PaymentDataMController paymentDataMController = new PaymentDataMController(mainStage,paymentDataMPage,paymentPage,isviewermanager);
+               PaymentDataMController paymentDataMController = new PaymentDataMController(mainStage,paymentDataMPage,paymentPage,user);
                 mainStage.setScene(paymentDataMPage);
             } else if (paymentPage.getPaypalButton().isSelected()) {
                     System.out.println("Stai andando alla PaymentDataPPage");
                     paymentDataPPage=new PaymentDataPView();
-                    PaymentDataPController paymentDataPController=new PaymentDataPController(mainStage,paymentDataPPage,paymentPage);
+                    PaymentDataPController paymentDataPController=new PaymentDataPController(mainStage,paymentDataPPage,paymentPage,user);
                     mainStage.setScene(paymentDataPPage);
                 }else {
                     paymentPage.getErrmessage().setOpacity(100);
@@ -66,9 +67,6 @@ public class PaymentSelectionController {
         paymentPage.getNextButton().setOnMouseClicked(goToPaymentDataPage);
 
 
-        //NOTA per turnback il metodo non funziona quando si runna loginview e si prova a registrare un manager.
-        //secondo me perchè non viene valutato il parametro isviewermanager (stesso discorso per il problema di resetBars della view PaymentSelectionView)
-        //bioparco?
 
         EventHandler<MouseEvent> turnBack = new EventHandler<MouseEvent>() {
             @Override
@@ -81,17 +79,14 @@ public class PaymentSelectionController {
                     method.invoke(scene);
 
                     // Determina quale scena caricare in base a USER.IS MANAGER
-                    if (user.isCustomer()) {
+                    if (user.isCustomer()!=true) {
                         System.out.println("Sei ritornato indietro alla subscriptionSelectionView");
-                        // UPPERBAR.GETISTANCE.SETFORMANAGER
+                        UpperBar.getIstance().setForManager();
                         mainStage.setScene(scene);
                     } else {
                         System.out.println("Sei ritornato indietro alla TicketPage");
-
-                        //IDEM OER CUSTUMER
-                        TicketPageView ticketPageView=new TicketPageView();
-                        ticketPageView.reSetBars();
-                        mainStage.setScene(ticketPageView);
+                        UpperBar.getIstance().setForCustomer();
+                        mainStage.setScene(scene);
                     }
                 } catch (NoSuchMethodException e) {
                     // Il metodo "reSetBars" non esiste nella classe della scena

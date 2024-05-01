@@ -14,6 +14,7 @@ import java.util.ArrayList;
 public class ProvaRunTicketPageView extends Application {
     @Override
     public void start(Stage primaryStage) {
+        Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
         // Esempio di dati per testare la visualizzazione della TicketPageView
         Customer customer=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.BARI,favoriteGenre, 100);
         Type typeOfEvent = Type.CONCERT;
@@ -40,7 +41,7 @@ public class ProvaRunTicketPageView extends Application {
 
         // Creazione della TicketPageView e inizializzazione dei componenti
         TicketPageView ticketPageView = new TicketPageView();
-        ticketPageView.setComponents(is\, typeOfEvent, name, city, location, Province.AGRIGENTO, date, artists,
+        ticketPageView.setComponents(creator.isCustomer(), typeOfEvent, name, city, location, Province.AGRIGENTO, date, artists,
                 seatsRemainedNumberForType, prices);
 
         TicketPageController ticketPageController=new TicketPageController(primaryStage,ticketPageView,concert,customer);

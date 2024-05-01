@@ -8,6 +8,7 @@ import java.util.*;
 
 public abstract class User {
 
+
 	private String name;
 	private String surname;
 	private String dateOfBirth;
