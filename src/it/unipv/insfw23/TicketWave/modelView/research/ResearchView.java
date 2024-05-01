@@ -15,27 +15,21 @@ import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
         import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
         import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-        import javafx.scene.control.CheckMenuItem;
-import javafx.scene.paint.Paint;
 
-import java.awt.*;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Vector;
 
 import static javafx.application.Application.launch;
 
@@ -201,7 +195,7 @@ public class ResearchView extends Scene{
         table.getSelectionModel().setSelectionMode(null); // fino al primo click del searchButton deve rimanere non clickabile
         table.setPlaceholder(new Label("Nessun evento con quelle caratteristiche è stato trovato")); // mex che viene messo a display quando la ricerca non porta a nessun evento
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS); // mi permette di allargare la table senza creare colonne aggiuntive
-        table.getStylesheets().add("it/unipv/insfw23/TicketWave/CSS/researchTableViewStyle.css"); // estetica della tableView
+        table.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css"); // estetica della tableView
 
         // esempio al volo da mettere nella table view
         LocalDate data = LocalDate.now();

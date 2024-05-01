@@ -1,9 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelView.statistics;
 
-import it.unipv.insfw23.TicketWave.modelController.Controller.Research.ResearchController;
-import it.unipv.insfw23.TicketWave.modelController.Controller.Statistics.TypeStatsController;
-import it.unipv.insfw23.TicketWave.modelController.Controller.UpperBar.UpperBarController;
-import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
+import it.unipv.insfw23.TicketWave.modelController.controller.statistics.TypeStatsController;
+import it.unipv.insfw23.TicketWave.modelController.controller.upperBar.UpperBarController;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;

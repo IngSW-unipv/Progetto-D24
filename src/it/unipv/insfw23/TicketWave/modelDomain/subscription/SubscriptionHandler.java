@@ -1,6 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelDomain.subscription;
 
-import it.unipv.insfw23.TicketWave.modelController.Factory.Subscription.ISubscriptionHandlerFactory;
+import it.unipv.insfw23.TicketWave.modelController.factory.subscription.ISubscriptionHandlerFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 

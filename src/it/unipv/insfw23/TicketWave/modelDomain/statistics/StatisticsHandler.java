@@ -1,6 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelDomain.statistics;
 
-import it.unipv.insfw23.TicketWave.modelController.Factory.Statistics.IStatisticsHandler;
+import it.unipv.insfw23.TicketWave.modelController.factory.statistics.IStatisticsHandler;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
