@@ -1,16 +1,10 @@
-package it.unipv.insfw23.TicketWave.modelView.statistics;
+package it.unipv.insfw23.TicketWave.modelView.user;
 
-import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
-import javafx.beans.property.ObjectProperty;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.effect.DropShadow;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.stage.Popup;
-import javafx.stage.Stage;
 
 public class NoMoreEventsPopup extends Popup {
 

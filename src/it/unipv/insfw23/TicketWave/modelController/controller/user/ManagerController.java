@@ -5,24 +5,27 @@ import it.unipv.insfw23.TicketWave.modelController.controller.event.SelectionNew
 import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchController;
 import it.unipv.insfw23.TicketWave.modelController.controller.statistics.TypeStatsController;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.event.SelectionNewEventTypeView;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
 import it.unipv.insfw23.TicketWave.modelView.statistics.TypeStatsView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
+import it.unipv.insfw23.TicketWave.modelView.user.NoMoreEventsPopup;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 
 public class ManagerController {
-	Stage window;
+	Stage mainStage;
 	ManagerView managerview;
 	LoginView logview;
 	Manager loggedmanager;
 	
 	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview, Manager loggedmanager) {
-		window = primarystage;
+		mainStage = primarystage;
 		this.managerview = managerview;
 		this.logview = logview;
 		this.loggedmanager = loggedmanager;
@@ -32,7 +35,6 @@ public class ManagerController {
 	public void initComponents() {
 		
 		EventHandler<MouseEvent> logoutButton = new EventHandler<>() {
-
 			@Override
 			public void handle(MouseEvent event) {
 				System.out.println("logout");
@@ -40,59 +42,66 @@ public class ManagerController {
 //				SignUpView signupview = new SignUpView();
 //				LoginController logcon = new LoginController(window, signupview, null, logview);
 				logview.reSetBars();
-				window.setScene(logview.getScene());
+				mainStage.setScene(logview.getScene());
 			}
 			
 		};
-		
 		managerview.getLogoutButton().setOnMouseClicked(logoutButton);
+
 		
 		EventHandler<MouseEvent> newEventButton = new EventHandler<>() {
-
 			@Override
 			public void handle(MouseEvent event) {
-				//crea controller per typeselectionevent
-				SelectionNewEventTypeView typesel = new SelectionNewEventTypeView();
-				SelectionNewEventTypeController typeselectioneventview = new SelectionNewEventTypeController(window, managerview, typesel, loggedmanager);
-				window.setScene(typesel);
+				if (loggedmanager.anotherEvents()) {
+
+					//crea controller per typeselectionevent
+					SelectionNewEventTypeView typesel = new SelectionNewEventTypeView();
+					SelectionNewEventTypeController typeselectioneventview = new SelectionNewEventTypeController(mainStage, managerview, typesel, loggedmanager);
+					mainStage.setScene(typesel);
+				} else {
+
+					NoMoreEventsPopup.getIstance().setX(mainStage.getX() + mainStage.getWidth() - NoMoreEventsPopup.getIstance().getWidth() - 360);
+					NoMoreEventsPopup.getIstance().setY(mainStage.getY() + 95);
+					NoMoreEventsPopup.getIstance().show(mainStage);
+				}
 			}
-			
 		};
-		
 		managerview.getNewEventButton().setOnMouseClicked(newEventButton);
-		
+
+
 		EventHandler<MouseEvent> searchButton = new EventHandler<>() {
-			
 			@Override
 			public void handle(MouseEvent event) {
 				System.out.println("vai alla ricerca");
 				ResearchView researchview = new ResearchView();
-				ResearchController rescontroller = new ResearchController(window, researchview);
-				window.setScene(researchview);
+				ResearchController rescontroller = new ResearchController(mainStage, researchview);
+				mainStage.setScene(researchview);
 			}
 		};
-		
 		managerview.getSearchButton().setOnMouseClicked(searchButton);
-		
-		EventHandler<MouseEvent> statsButton = new EventHandler<>() {
-			
+
+
+		EventHandler<ActionEvent> statsButtonHandler = new EventHandler<>(){
 			@Override
-			public void handle(MouseEvent arg0) {
-				TypeStatsView typestatsview = new TypeStatsView();
-				TypeStatsController statcontrtype = new TypeStatsController(window, typestatsview/*, loggedmanager*/);
-				window.setScene(typestatsview);
-				
+			public void handle(ActionEvent actionEvent){
+				//mi viene passato il manager
+				//creo una nuova classe di statistiche, a cui passo il manager
+				//StatisticsHandlerArrayList statDominio = new StatisticsHandlerArrayList(sessionManager);
+				//WrapType typeRes = statDominio.typeStats();
+				//Al costruttore di type view, devo passare i risultati del metodo, e la classe di statistiche di dominio
+				TypeStatsView typeView = new TypeStatsView();
+				TypeStatsController typeController = new TypeStatsController(mainStage, typeView);
+				mainStage.setScene(typeView);
 			}
 		};
-		
-		managerview.getStatsButton().setOnMouseClicked(statsButton);
+		UpperBar.getIstance().getStatsButton().setOnAction(statsButtonHandler);
 		
 		EventHandler<MouseEvent> profileButton = new EventHandler<>() {
 			
 			@Override
 			public void handle(MouseEvent event) {
 				managerview.reSetBars();
-				window.setScene(managerview);
+				mainStage.setScene(managerview);
 				
 			}
 		};
@@ -120,11 +129,11 @@ public class ManagerController {
 				//costruttore view
 				TicketPageView tic = new TicketPageView();
 				//costruttore controller
-				TicketPageController buyticketcontroller = new TicketPageController(window, tic, managerview.getTableEv().getSelectionModel().getSelectedItem(), true);
+				TicketPageController buyticketcontroller = new TicketPageController(mainStage, tic, managerview.getTableEv().getSelectionModel().getSelectedItem(), true);
 				//metodo che setta upperbar manager
 				//opacita
 				//
-				window.setScene(tic);
+				mainStage.setScene(tic);
 			}
 		};
 		

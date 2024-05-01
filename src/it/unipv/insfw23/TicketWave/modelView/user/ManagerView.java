@@ -96,6 +96,7 @@ public class ManagerView extends Scene{
 		
 		// tab eventi
 		tabEv = new TableView<>();
+		tabEv.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
 		GridPane.setConstraints(tabEv, 2, 6, 2, 1);
 		GridPane.setHgrow(tabEv, Priority.SOMETIMES);
 		GridPane.setVgrow(tabEv, Priority.SOMETIMES);
@@ -126,6 +127,7 @@ public class ManagerView extends Scene{
 		
 		// tab notifiche
 		tabNot = new TableView<>();
+		tabNot.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
 		GridPane.setConstraints(tabNot, 0, 6, 2,1);
 		GridPane.setHgrow(tabNot, Priority.SOMETIMES);
 		GridPane.setVgrow(tabNot, Priority.SOMETIMES);
