@@ -1,4 +1,4 @@
-package it.unipv.insfw23.TicketWave.modelController.Controller.Research;
+package it.unipv.insfw23.TicketWave.modelController.controller.research;
 
 //import it.unipv.insfw23.TicketWave.modelView.research.ResearchNodesView;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
