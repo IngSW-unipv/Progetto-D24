@@ -41,7 +41,8 @@ public class NewConcertController {
 			}
 		};
 		newconcview.getPhotoButton().setOnMouseClicked(photoChooser);
-		
+
+
 		EventHandler<MouseEvent> abortButton = new EventHandler<>() {
 			
 			@Override
