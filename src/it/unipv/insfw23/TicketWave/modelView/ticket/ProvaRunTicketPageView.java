@@ -41,7 +41,7 @@ public class ProvaRunTicketPageView extends Application {
 
         // Creazione della TicketPageView e inizializzazione dei componenti
         TicketPageView ticketPageView = new TicketPageView();
-        ticketPageView.setComponents(creator.isCustomer(), typeOfEvent, name, city, location, Province.AGRIGENTO, date, artists,
+        ticketPageView.setComponents(customer.isCustomer(), typeOfEvent, name, city, location, Province.AGRIGENTO, date, artists,
                 seatsRemainedNumberForType, prices);
 
         TicketPageController ticketPageController=new TicketPageController(primaryStage,ticketPageView,concert,customer);

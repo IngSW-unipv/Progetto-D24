@@ -130,6 +130,7 @@ public class SubscriptionSelectionView extends Scene {
 
 
         BorderPane layout = new BorderPane();
+        UpperBar.getIstance().setForNoLogged();
         layout.setTop(UpperBar.getIstance());
         layout.setCenter(contenuto);
         layout.setBottom(LowerBar.getInstance());
@@ -147,7 +148,7 @@ public class SubscriptionSelectionView extends Scene {
 
         BorderPane temp = new BorderPane();
         setRoot(temp);
-        UpperBar.getIstance().setForManager();
+        UpperBar.getIstance().setForNoLogged();
         layout.setTop(UpperBar.getIstance());
         layout.setCenter(contenuto);
         layout.setBottom(LowerBar.getInstance());

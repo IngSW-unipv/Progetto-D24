@@ -81,7 +81,6 @@ public class PaymentSelectionController {
                     // Determina quale scena caricare in base a USER.IS MANAGER
                     if (user.isCustomer()!=true) {
                         System.out.println("Sei ritornato indietro alla subscriptionSelectionView");
-                        UpperBar.getIstance().setForManager();
                         mainStage.setScene(scene);
 
                     } else {
