@@ -81,6 +81,7 @@ public class ManagerController {
 		managerview.getSearchButton().setOnMouseClicked(searchButton);
 
 
+
 		EventHandler<ActionEvent> statsButtonHandler = new EventHandler<>(){
 			@Override
 			public void handle(ActionEvent actionEvent){
