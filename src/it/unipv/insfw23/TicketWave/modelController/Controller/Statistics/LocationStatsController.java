@@ -1,4 +1,4 @@
-package it.unipv.insfw23.TicketWave.modelController.Controller.Statistics;
+package it.unipv.insfw23.TicketWave.modelController.controller.statistics;
 
 import it.unipv.insfw23.TicketWave.modelView.statistics.GenreStatsView;
 import it.unipv.insfw23.TicketWave.modelView.statistics.LocationStatsView;

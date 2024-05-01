@@ -1,8 +1,9 @@
-package it.unipv.insfw23.TicketWave.modelController.Controller.Statistics;
+package it.unipv.insfw23.TicketWave.modelController.controller.statistics;
 
 import it.unipv.insfw23.TicketWave.modelView.statistics.GenreStatsView;
 import it.unipv.insfw23.TicketWave.modelView.statistics.LocationStatsView;
 import it.unipv.insfw23.TicketWave.modelView.statistics.TypeStatsView;
+import it.unipv.insfw23.TicketWave.modelController.controller.statistics.LocationStatsController;
 import javafx.event.EventHandler;
 import javafx.scene.chart.XYChart;
 import javafx.scene.input.MouseEvent;
