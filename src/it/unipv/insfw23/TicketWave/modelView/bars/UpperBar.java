@@ -144,5 +144,7 @@ public class UpperBar extends HBox {
     public void setForManager() {
          eventPlusButton.setVisible(true);
          statsButton.setVisible(true);
+         searchButton.setVisible(true);
+         profileButton.setVisible(true);
     }
 }

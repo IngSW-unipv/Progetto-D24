@@ -1,7 +1,7 @@
-package it.unipv.insfw23.TicketWave.modelController.controller.user;
+package it.unipv.insfw23.TicketWave.modelController.Controller.User;
 
-import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageController;
-import it.unipv.insfw23.TicketWave.modelController.controller.event.SelectionNewEventTypeController;
+import it.unipv.insfw23.TicketWave.modelController.Controller.Ticket.TicketPageController;
+import it.unipv.insfw23.TicketWave.modelController.Controller.Event.SelectionNewEventTypeController;
 import it.unipv.insfw23.TicketWave.modelController.Controller.Research.ResearchController;
 import it.unipv.insfw23.TicketWave.modelController.Controller.Statistics.TypeStatsController;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
@@ -19,13 +19,13 @@ public class ManagerController {
 	Stage window;
 	ManagerView managerview;
 	LoginView logview;
-	Manager managerlogged;
+	Manager loggedmanager;
 	
-	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview, Manager managerlogged) {
+	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview, Manager loggedmanager) {
 		window = primarystage;
 		this.managerview = managerview;
 		this.logview = logview;
-		this.managerlogged = managerlogged;
+		this.loggedmanager = loggedmanager;
 		initComponents();
 	}
 	
@@ -53,7 +53,7 @@ public class ManagerController {
 			public void handle(MouseEvent event) {
 				//crea controller per typeselectionevent
 				SelectionNewEventTypeView typesel = new SelectionNewEventTypeView();
-				//SelectionNewEventTypeController typeselectioneventview = new SelectionNewEventTypeController(window, managerview, typesel/*, loggedmanager*/);
+				SelectionNewEventTypeController typeselectioneventview = new SelectionNewEventTypeController(window, managerview, typesel, loggedmanager);
 				window.setScene(typesel);
 			}
 			
@@ -120,11 +120,11 @@ public class ManagerController {
 				//costruttore view
 				TicketPageView tic = new TicketPageView();
 				//costruttore controller
-				//BuyTicketController buyticketcontroller = new BuyTicketController(window, tic, managerview.getTableev().getSelectionModel().getSelectedItem(), true);
+				TicketPageController buyticketcontroller = new TicketPageController(window, tic, managerview.getTableEv().getSelectionModel().getSelectedItem(), true);
 				//metodo che setta upperbar manager
 				//opacita
 				//
-				//window.setScene(tic);
+				window.setScene(tic);
 			}
 		};
 		

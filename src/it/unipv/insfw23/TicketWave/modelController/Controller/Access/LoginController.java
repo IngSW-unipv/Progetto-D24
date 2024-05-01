@@ -16,7 +16,7 @@ import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
 import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
 import it.unipv.insfw23.TicketWave.modelController.Controller.Access.SignUpController;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
-import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
+import it.unipv.insfw23.TicketWave.modelController.Controller.User.ManagerController;
 import javafx.event.*;
 import javafx.stage.Stage;
 public class LoginController {
@@ -97,6 +97,7 @@ public class LoginController {
                     //Concert eventofinto1 = new Concert(12,"reunion","busto arstizio",dataev1, "via dei matti ,0", Province.LIVORNO,300,2, seduteRImasteev1, vettfalsopriceev1,Genre.INDIE,managerfinto,arrfintoartista1);
 
                     int[] seduterimasteev2 = {100,80,12};
+                    int[] ticketsoldev2 = {700,20,88};
                     double[] vettfalsopriceev2 = {11,250,500};
                     LocalDate dataev2 = LocalDate.of(2024, 10, 02);
                     ArrayList<String> arrfintoartista2 = new ArrayList<>();
@@ -105,7 +106,7 @@ public class LoginController {
                     //Concert eventofinto2 = new Concert(12,"reunion","busto arstizio",dataev2, "via dei matti ,0", Province.LIVORNO,300,2, seduterimasteev2, vettfalsopriceev2,Genre.INDIE,managerfinto,arrfintoartista2);
 
                     try {
-                        managerfinto.createConcert(12, "reunion", "milano","discoteca",dataev1,time,Province.AGRIGENTO,Genre.HOUSE, Type.CONCERT,1000,1,seduterimasteev2,seduteRImasteev1,vettfalsopriceev2,managerfinto,"U2","BELLO");
+                        managerfinto.createConcert(12, "reunion", "milano","discoteca",dataev1,time,Province.AGRIGENTO,Genre.HOUSE, Type.CONCERT,1000,3,seduterimasteev2,ticketsoldev2,vettfalsopriceev2,managerfinto,"U2","BELLO");
                                 //managerfinto.createConcert(14, "festino", "Rozzano", dataev2, "stadio dell'albero", Province.MILANO, 10000, 3, seduterimasteev2, vettfalsopriceev2, Genre.HOUSE, managerfinto, arrfintoartista2);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -118,10 +119,12 @@ public class LoginController {
 
                     // Azione da eseguire quando il pulsante "Login" viene premuto
                     System.out.println("Hai cliccato il pulsante Login come gestore");
+                    arraylistevent = managerfinto.getEventlist();
+                    arrayListNotification = managerfinto.getNotification();
                     managerView = new ManagerView("Marco",arrayListNotification,arraylistevent);
                     //managerView.setEventsforTableev(managerfinto);
                     ManagerController managerController = new ManagerController(mainstage, managerView, loginView, managerfinto);
-                    managerView.reSetBars();
+                    //managerView.reSetBars();
                     mainstage.setScene(managerView); // Imposta la scena SignUpView sulla stage principale }
                 }// devi mettere managerview anche all'interno del costruttore
 

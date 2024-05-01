@@ -125,10 +125,10 @@ public class ManagerView extends Scene{
 		
 		
 		// tab notifiche
-		TableView<Notification> tabnot = new TableView<>();
-		GridPane.setConstraints(tabnot, 0, 6, 2,1);
-		GridPane.setHgrow(tabnot, Priority.SOMETIMES);
-		GridPane.setVgrow(tabnot, Priority.SOMETIMES);
+		tabNot = new TableView<>();
+		GridPane.setConstraints(tabNot, 0, 6, 2,1);
+		GridPane.setHgrow(tabNot, Priority.SOMETIMES);
+		GridPane.setVgrow(tabNot, Priority.SOMETIMES);
 
 		
 		TableColumn<Notification, Integer> codcol = new TableColumn<>("codice");
@@ -147,13 +147,13 @@ public class ManagerView extends Scene{
 		datacol.setCellValueFactory(new PropertyValueFactory<>("date"));
 		datacol.setStyle("-fx-alignment: CENTER");
 		
-		tabnot.getColumns().addAll(codcol, msgcol, orariocol, datacol);
+		tabNot.getColumns().addAll(codcol, msgcol, orariocol, datacol);
 		
 //		ObservableList<Notification> nots = FXCollections.observableArrayList();
 //		nots.add(new Notification(1,new Customer("f", "tf", "h", "d", "cf", Province.AGRIGENTO, null, 300),"str2"));
 //		nots.add(new Notification(3,"str3","str4"));
-		tabnot.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
-		tabnot.setItems(nots);
+		tabNot.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+		tabNot.setItems(nots);
 //		tabnot.setPrefWidth(400);
 		
 		grid.getChildren().addAll(name, logoutButton, tabNot, tabEv, not, ev);
