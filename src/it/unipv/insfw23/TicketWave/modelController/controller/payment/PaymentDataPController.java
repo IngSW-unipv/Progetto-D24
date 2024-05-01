@@ -27,6 +27,7 @@ public class PaymentDataPController {
        this.mainStage=mainStage;
        this.user=user;
        initComponents();
+        setLabelforWavePoints();
 
    }
 
@@ -67,7 +68,11 @@ public class PaymentDataPController {
 
 
    }
-
+    public void setLabelforWavePoints() {
+        if(!user.isCustomer()){
+            paymentDataPView.getUsePointsButton().setVisible(false);
+        }
+    }
 
 
 

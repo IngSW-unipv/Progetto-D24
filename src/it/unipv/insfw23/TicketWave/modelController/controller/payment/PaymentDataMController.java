@@ -38,10 +38,14 @@ public class PaymentDataMController {
         this.mainStage = mainStage;
         this.user=user;
         initComponents();
+        setLabelforWavePoints();
     }
 
 
     public void initComponents() {
+
+
+
 
         EventHandler<MouseEvent> turnBackPaymentPage = new EventHandler<>() {
 
@@ -122,13 +126,13 @@ public class PaymentDataMController {
 */
 
 
-
-
-
-
-
-
+    public void setLabelforWavePoints(){
+        if(!user.isCustomer()){
+            paymentDataPage.getUsePointsButton().setVisible(false);
+        }
     }
+
+}
 
 
 
