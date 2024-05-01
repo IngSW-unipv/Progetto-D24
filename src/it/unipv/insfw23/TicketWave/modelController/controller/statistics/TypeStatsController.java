@@ -1,7 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.statistics;
 
 import it.unipv.insfw23.TicketWave.modelView.statistics.GenreStatsView;
-import it.unipv.insfw23.TicketWave.modelView.statistics.NoMoreEventsPopup;
 import it.unipv.insfw23.TicketWave.modelView.statistics.TypeStatsView;
 import javafx.event.EventHandler;
 import javafx.scene.chart.XYChart;

@@ -4,7 +4,7 @@ import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchC
 import it.unipv.insfw23.TicketWave.modelController.controller.statistics.TypeStatsController;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
-import it.unipv.insfw23.TicketWave.modelView.statistics.NoMoreEventsPopup;
+import it.unipv.insfw23.TicketWave.modelView.user.NoMoreEventsPopup;
 import it.unipv.insfw23.TicketWave.modelView.statistics.TypeStatsView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,7 +21,7 @@ public class UpperBarController {
     }
 
     private void initComponents(){
-
+/*
         EventHandler<ActionEvent> statsButtonHandler = new EventHandler<>(){
             @Override
             public void handle(ActionEvent actionEvent){
@@ -37,6 +37,8 @@ public class UpperBarController {
         };
         UpperBar.getIstance().getStatsButton().setOnAction(statsButtonHandler);
 
+
+ */
         // quando clicco sulla lente di ingrandimento presente nella upperBar => vado alla researchView
         EventHandler<ActionEvent> researchButtonHandler = new EventHandler<>(){
             @Override
@@ -53,15 +55,16 @@ public class UpperBarController {
         };
         UpperBar.getIstance().getSearchButton().setOnAction(researchButtonHandler);
 
+        /*
         EventHandler<ActionEvent> creationEventHandler = new EventHandler<>(){
             @Override
             public void handle(ActionEvent actionEvent){
-                /*
+
                 if (manager.anotherEvents){
                     vai alla pagina di creazione dell'evento
                 }
                 else {
-                */
+
                 NoMoreEventsPopup.getIstance().setX(mainStage.getX() + mainStage.getWidth() - NoMoreEventsPopup.getIstance().getWidth() - 360);
                 NoMoreEventsPopup.getIstance().setY(mainStage.getY()+95);
                 NoMoreEventsPopup.getIstance().show(mainStage);
@@ -69,7 +72,7 @@ public class UpperBarController {
         };
         UpperBar.getIstance().getEventPlusButton().setOnAction(creationEventHandler);
 
-
+        */
 
     }
 }

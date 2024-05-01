@@ -82,11 +82,13 @@ public class CustomerView extends Scene {
 
         // ListView per le notifiche
         notifyListView = new ListView<>();
+        notifyListView.getStylesheets().add("it/unipv/insfw23/TicketWave/css/listViewStyle.css");
         notifyListView.getItems().addAll("Notifica 1", "Notifica 2", "Notifica 3"); // Dati di esempio
         GridPane.setConstraints(notifyListView, 0, 1);
 
         // TableView per i biglietti acquistati
         ticket = new TableView<>();
+        ticket.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
         ticket.setItems(getEsempioBiglietti());
         TableColumn<Biglietto, String> eventoCol = new TableColumn<>("Evento");
         eventoCol.setCellValueFactory(new PropertyValueFactory<>("evento"));
