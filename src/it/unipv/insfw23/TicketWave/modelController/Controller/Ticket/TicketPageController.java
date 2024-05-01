@@ -1,7 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelController.Controller.Ticket;
 
 
-import it.unipv.insfw23.TicketWave.modelController.Controller.Payment.PaymentSelectionController;
+//import it.unipv.insfw23.TicketWave.modelController.Controller.Payment.PaymentSelectionController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
