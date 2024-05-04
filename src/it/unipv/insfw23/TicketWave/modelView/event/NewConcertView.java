@@ -1,6 +1,8 @@
 package it.unipv.insfw23.TicketWave.modelView.event;
 
 import java.time.LocalDate;
+import java.util.Arrays;
+import java.util.EnumSet;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
@@ -19,14 +21,13 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
-import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 
@@ -49,8 +50,8 @@ public class NewConcertView extends Scene{
 	private final Label datelabel = new Label("Data: ");
 	private DatePicker datepicker;
 	private final Label hourlabel = new Label("orario(hh mm): ");
-	private Spinner hourspinner;
-	private Spinner minutesspinner;
+	private Spinner<Integer> hourspinner;
+	private Spinner<Integer> minutesspinner;
 	private HBox hboxtime;
 	private final Label numbaselabel = new Label("n. biglietti base: ");
 	private TextField numbasefield;
@@ -67,7 +68,8 @@ public class NewConcertView extends Scene{
 	private final Button photoButton = new Button("Scegli foto...");
 	private ImageView eventPhoto;
 	private final Label descriptionlabel = new Label("Descrizione: ");
-	private TextField descriptionfield;
+//	private TextField descriptionfield;
+	private TextArea descriptionarea;
 	private final Label errlabel = new Label("Parametri non validi");	
 	private Button abort = new Button("Annulla");
 	private Button confirm = new Button("Conferma");
@@ -87,7 +89,7 @@ public class NewConcertView extends Scene{
 		grid.setPadding(new Insets(50, 50, 50, 50));
 		grid.setVgap(10);
 		grid.setHgap(60);
-		grid.setGridLinesVisible(true);
+//		grid.setGridLinesVisible(true);
 		grid.setAlignment(Pos.CENTER);
 		
 		
@@ -167,6 +169,7 @@ public class NewConcertView extends Scene{
 		GridPane.setConstraints(hboxtime, 1, 6);
 		GridPane.setVgrow(hboxtime, Priority.SOMETIMES);
 		GridPane.setHgrow(hboxtime, Priority.SOMETIMES);
+		hboxtime.setMaxWidth(120);
 		
 		
 		
@@ -175,7 +178,7 @@ public class NewConcertView extends Scene{
 		GridPane.setHgrow(genlabel, Priority.SOMETIMES);
 		
 		gensbox = new ComboBox<>();
-		gensbox.getItems().addAll(Genre.values());
+		gensbox.getItems().addAll(Arrays.copyOfRange(Genre.values(), 0, Genre.START_THEATER.ordinal()));
 		GridPane.setConstraints(gensbox, 2, 6);
 		GridPane.setVgrow(gensbox, Priority.SOMETIMES);
 		GridPane.setHgrow(gensbox, Priority.SOMETIMES);
@@ -249,9 +252,12 @@ public class NewConcertView extends Scene{
 		GridPane.setHgrow(photoButton, Priority.SOMETIMES);
 		
 		eventPhoto = new ImageView();
+		eventPhoto.isSmooth();
+//		eventPhoto.maxHeight(50);
+//		eventPhoto.maxWidth(50);
 		eventPhoto.setFitHeight(100);
 		eventPhoto.setFitWidth(100);
-		GridPane.setConstraints(eventPhoto, 0, 12,2,1);
+		GridPane.setConstraints(eventPhoto, 0, 12,3,3);
 		GridPane.setVgrow(eventPhoto, Priority.SOMETIMES);
 		GridPane.setHgrow(eventPhoto, Priority.SOMETIMES);
 		
@@ -265,7 +271,7 @@ public class NewConcertView extends Scene{
 		pricebasefield = new TextField();
 		GridPane.setConstraints(pricebasefield, 1, 12);
 		pricebasefield.setVisible(false);
-		GridPane.setValignment(pricebasefield, VPos.TOP);
+//		GridPane.setValignment(pricebasefield, VPos.TOP);
 		GridPane.setVgrow(pricebasefield, Priority.SOMETIMES);
 		GridPane.setHgrow(pricebasefield, Priority.SOMETIMES);
 		
@@ -279,7 +285,7 @@ public class NewConcertView extends Scene{
 		pricevipfield = new TextField();
 		GridPane.setConstraints(pricevipfield, 2, 12);
 		pricevipfield.setVisible(false);
-		GridPane.setValignment(pricevipfield, VPos.TOP);
+//		GridPane.setValignment(pricevipfield, VPos.TOP);
 		GridPane.setVgrow(pricevipfield, Priority.SOMETIMES);
 		GridPane.setHgrow(pricevipfield, Priority.SOMETIMES);
 		
@@ -293,7 +299,7 @@ public class NewConcertView extends Scene{
 		pricepremiumfield = new TextField();
 		GridPane.setConstraints(pricepremiumfield, 3, 12);
 		pricepremiumfield.setVisible(false);
-		GridPane.setValignment(pricepremiumfield, VPos.TOP);
+//		GridPane.setValignment(pricepremiumfield, VPos.TOP);
 		GridPane.setVgrow(pricepremiumfield, Priority.SOMETIMES);
 		GridPane.setHgrow(pricepremiumfield, Priority.SOMETIMES);
 		
@@ -303,10 +309,11 @@ public class NewConcertView extends Scene{
 		GridPane.setVgrow(descriptionlabel, Priority.SOMETIMES);
 		GridPane.setHgrow(descriptionlabel, Priority.SOMETIMES);
 		
-		descriptionfield = new TextField();
-		GridPane.setConstraints(descriptionfield, 1,15,3,1);
-		GridPane.setVgrow(descriptionfield, Priority.SOMETIMES);
-		GridPane.setHgrow(descriptionfield, Priority.SOMETIMES);
+//		descriptionfield = new TextField();
+		descriptionarea = new TextArea();
+		GridPane.setConstraints(descriptionarea, 1,15,2,1);
+		GridPane.setVgrow(descriptionarea, Priority.SOMETIMES);
+		GridPane.setHgrow(descriptionarea, Priority.SOMETIMES);
 		
 		
 		
@@ -386,11 +393,14 @@ public class NewConcertView extends Scene{
 								    addressfield, datelabel, datepicker, hourlabel, hboxtime, numtypeticketlabel, typesticketbox, 
 								    genlabel, gensbox, artistlabel, artistfield, numbaselabel, numbasefield, numviplabel, numvipfield, 
 								    numpremiumlabel, numpremiumfield, photoButton, eventPhoto, pricebaselabel, pricebasefield, 
-								    priceviplabel, pricevipfield, pricepremiumlabel, pricepremiumfield, confirm, errlabel,abort);
+								    priceviplabel, pricevipfield, pricepremiumlabel, pricepremiumfield, descriptionlabel, descriptionarea,
+								    confirm, errlabel,abort);
 		
 		layout.setTop(UpperBar.getIstance());
 		layout.setCenter(grid);
 		layout.setBottom(LowerBar.getInstance());
+		
+		
 		
 		
 		
