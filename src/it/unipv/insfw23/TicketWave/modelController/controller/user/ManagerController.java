@@ -151,7 +151,7 @@ public class ManagerController {
 			@Override
 			public void handle(MouseEvent event) {
 				SubscriptionSelectionView subView = new SubscriptionSelectionView();
-				SubscriptionSelectionController subController = new SubscriptionSelectionController(mainStage, subView);
+				SubscriptionSelectionController subController = new SubscriptionSelectionController(mainStage, subView, managerview);
 				mainStage.setScene(subView);
 			}
 		};

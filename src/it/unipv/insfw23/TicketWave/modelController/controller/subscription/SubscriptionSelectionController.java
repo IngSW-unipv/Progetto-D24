@@ -9,6 +9,7 @@ import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -21,13 +22,14 @@ public class SubscriptionSelectionController {
     private PaymentSelectionView PaymentSelectionView;
     private SubscriptionSelectionView subscriptionSelectionView;
     private PaymentSelectionView paymentPage;
+    private Scene backScene;
     private User user;
 
 
-    public SubscriptionSelectionController(Stage mainstage,SubscriptionSelectionView subscriptionSelectionView) {
+    public SubscriptionSelectionController(Stage mainstage,SubscriptionSelectionView subscriptionSelectionView, Scene scene) {
         this.subscriptionSelectionView=subscriptionSelectionView;
         this.mainstage=mainstage;
-
+        this.backScene = scene;
         user = new Manager("Piero", "Antonelli", "12-10-11", "ciccio@gmail.com",
                 "ciccio99", Province.ALESSANDRIA, "3926475898609800", new ArrayList<Event>(), 5, 0, LocalDate.now(), 0);
 
@@ -53,6 +55,18 @@ public class SubscriptionSelectionController {
         subscriptionSelectionView.getBottoneSecondaSub().setOnMouseClicked(goToBuySubscription);
         subscriptionSelectionView.getBottoneTerzaSub().setOnMouseClicked(goToBuySubscription);
 
+
+        EventHandler<MouseEvent> goBackEvent = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent actionEvent) {
+                //backScene.reSetBars();
+                mainstage.setScene(backScene);
+            }
+
+        };
+        subscriptionSelectionView.getBackButton().setOnMouseClicked(goBackEvent);
+
+        subscriptionSelectionView.getBottonePrimaSub().setOnMouseClicked(goToBuySubscription);
 
 
     }
