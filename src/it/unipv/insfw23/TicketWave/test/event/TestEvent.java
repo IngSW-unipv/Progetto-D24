@@ -67,9 +67,9 @@ public class TestEvent {
     @Test
     public void createOther(){
         try {
-            int[] a = {0};
-            int[] b = {0};
-            double[] p = {0};
+            int[] a = {};
+            int[] b = {};
+            double[] p = {};
             ot = new Other(3, "Sagra della salsiccia", "Roma", "Mercato de Roma", LocalDate.of(2023, 7, 22), Time.valueOf("19:00:00"), Province.ROMA, null, Type.OTHER, 0,
                     0, a, b, p, mg, null, "Sagra della salsiccia de Roma, er mejo");
         } catch (Exception e) {
