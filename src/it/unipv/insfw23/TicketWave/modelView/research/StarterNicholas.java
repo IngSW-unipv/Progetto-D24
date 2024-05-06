@@ -1,13 +1,12 @@
 package it.unipv.insfw23.TicketWave.modelView.research;
 
-import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchController;
 import it.unipv.insfw23.TicketWave.modelController.controller.upperBar.UpperBarController;
+import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchController;
 import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class StarterNicholas extends Application {
-    private Stage primaryStage;
     public static void main(String[] args) {
         launch(args);
     }
@@ -15,7 +14,6 @@ public class StarterNicholas extends Application {
     @Override
     public void start(Stage primaryStage) {
 
-        this.primaryStage = primaryStage;
         primaryStage.show();
 
         primaryStage.setTitle("TicketWave");
