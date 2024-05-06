@@ -40,13 +40,14 @@ public class SubscriptionSelectionView extends Scene {
         backarrow.setFitWidth(50);
         backarrow.setPreserveRatio(true);
         backButton.setGraphic(backarrow);
+        backButton.setStyle("-fx-background-color: #91bad6;");
 
         BorderPane primaSub = new BorderPane();
-        primaSub.setStyle("-fx-background-color: rgba(103,186,255); -fx-background-radius: 20;");
+        primaSub.setStyle("-fx-background-color: #2E5984; -fx-background-radius: 20;");
         BorderPane secondaSub = new BorderPane();
-        secondaSub.setStyle("-fx-background-color: rgb(103,186,255); -fx-background-radius: 20;");
+        secondaSub.setStyle("-fx-background-color: #2E5984; -fx-background-radius: 20;");
         BorderPane terzaSub = new BorderPane();
-        terzaSub.setStyle("-fx-background-color: rgba(103,186,255); -fx-background-radius: 20;");
+        terzaSub.setStyle("-fx-background-color: #2E5984; -fx-background-radius: 20;");
 
         BorderPane.setMargin(primaSub, new Insets(30));
         BorderPane.setMargin(secondaSub, new Insets(30));
@@ -58,48 +59,48 @@ public class SubscriptionSelectionView extends Scene {
 
         Label nome1 = new Label("Nessun Abbonamento");
         nome1.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 20));
-        nome1.setTextFill(Color.BLACK);
+        nome1.setTextFill(Color.WHITE);
         primaSub.setTop(nome1);
 
         Label descr1 = new Label("Descrizione 1");
         descr1.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 20));
-        descr1.setTextFill(Color.BLACK);
+        descr1.setTextFill(Color.WHITE);
         primaSub.setCenter(descr1);
 
         Label prezzo1 = new Label("0,00 $");
         prezzo1.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 20));
-        prezzo1.setTextFill(Color.BLACK);
+        prezzo1.setTextFill(Color.WHITE);
         primaSub.setBottom(prezzo1);
 
         Label nome2 = new Label("Abbonamento Base");
         nome2.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 20));
-        nome2.setTextFill(Color.BLACK);
+        nome2.setTextFill(Color.WHITE);
         secondaSub.setTop(nome2);
 
         Label descr2 = new Label("Descrizione 2");
         descr2.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 20));
-        descr2.setTextFill(Color.BLACK);
+        descr2.setTextFill(Color.WHITE);
         secondaSub.setCenter(descr2);
 
         Label prezzo2 = new Label("8,99 $");
         prezzo2.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 20));
-        prezzo2.setTextFill(Color.BLACK);
+        prezzo2.setTextFill(Color.WHITE);
         secondaSub.setBottom(prezzo2);
 
 
         Label nome3 = new Label("   Abbonamento Premium");
         nome3.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 20));
-        nome3.setTextFill(Color.BLACK);
+        nome3.setTextFill(Color.WHITE);
         terzaSub.setTop(nome3);
 
         Label descr3 = new Label("Descrizione 3");
         descr3.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 20));
-        descr3.setTextFill(Color.BLACK);
+        descr3.setTextFill(Color.WHITE);
         terzaSub.setCenter(descr3);
 
         Label prezzo3 = new Label("14,99 $");
         prezzo3.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 20));
-        prezzo3.setTextFill(Color.BLACK);
+        prezzo3.setTextFill(Color.WHITE);
         terzaSub.setBottom(prezzo3);
 
         BorderPane.setAlignment(nome1, Pos.TOP_CENTER);

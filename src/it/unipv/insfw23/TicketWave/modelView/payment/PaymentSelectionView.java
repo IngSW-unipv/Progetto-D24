@@ -71,26 +71,13 @@ public class PaymentSelectionView extends Scene {
         nextarrow.setPreserveRatio(true);
 
         nextButton.setGraphic(nextarrow);
-        // nextButton.setStyle("-fx-background-color: rgb(255,255,255)");
+         nextButton.setStyle("-fx-background-color: #91bad6;");
         backButton.setGraphic(backarrow);
-        // backButton.setStyle("-fx-background-color: rgb(255,255,255)");
+         backButton.setStyle("-fx-background-color: #91bad6;");
 
         errmessage.setOpacity(0);
         errmessage.setFill(javafx.scene.paint.Color.RED);
 
-        // da mettere nei controller!!!!!!
-        /*
-        private void setTextFieldsTextColor(){
-            // Accedi ai nodi figlio del contenitore della scena
-            for (Node node : ((BorderPane) getRoot()).getChildren()) {
-                // Controlla se il nodo è un'etichetta (Label)
-                if (node instanceof Label) {
-                    ((Label) node).setTextFill(Color.BLACK);
-                }
-            }
-
-        }
-*/
 
         HBox nextButtonBox = new HBox();
         nextButtonBox.getChildren().add(nextButton);
