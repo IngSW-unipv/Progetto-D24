@@ -82,7 +82,6 @@ public class SubscriptionSelectionController {
         };
         subscriptionSelectionView.getBackButton().setOnMouseClicked(goBackEvent);
 
-
     }
 
 
