@@ -58,7 +58,7 @@ public class TicketPageView extends Scene {
 
     public TicketPageView(){
         super(new BorderPane(), 1080, 600);
-        initComponents();
+        //initComponents();
 
 
     }
@@ -112,7 +112,7 @@ public class TicketPageView extends Scene {
         }
 
         //fine settaggio
-
+        initComponents();
     }
 
     private void initComponents() {// la classe contiene unicamente label poichè è solo una pagina di visualizzazione, il cliente non può scriverci sopra
