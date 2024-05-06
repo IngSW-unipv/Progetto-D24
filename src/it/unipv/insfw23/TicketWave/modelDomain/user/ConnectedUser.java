@@ -28,3 +28,4 @@ public class ConnectedUser {
         this.user = null;
     }
 }
+
