@@ -10,6 +10,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
+import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
@@ -73,6 +74,11 @@ public class LoginController {
                     customerview = new CustomerView();
                     CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
                     customerview.reSetBars();
+                    //
+                    //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
+                    //
+                    //ConnectedUser.getInstance().setUser();
+                    //
                     mainstage.setScene(customerview); // Imposta la scena SignUpView sulla stage principale
                 }
                 else if (loginView.getManagerRadioButton().isSelected()) {
@@ -124,6 +130,11 @@ public class LoginController {
                     //managerView.setEventsforTableev(managerfinto);
                     ManagerController managerController = new ManagerController(mainstage, managerView, loginView, managerfinto);
                     //managerView.reSetBars();
+                    //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
+                    //
+                    ConnectedUser.getInstance().setUser(managerfinto);
+                    //
+
                     mainstage.setScene(managerView); // Imposta la scena SignUpView sulla stage principale }
                 }// devi mettere managerview anche all'interno del costruttore
 

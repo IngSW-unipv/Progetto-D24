@@ -5,6 +5,7 @@ import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageC
 import it.unipv.insfw23.TicketWave.modelController.controller.event.SelectionNewEventTypeController;
 import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchController;
 import it.unipv.insfw23.TicketWave.modelController.controller.statistics.TypeStatsController;
+import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.event.SelectionNewEventTypeView;
@@ -44,6 +45,9 @@ public class ManagerController {
 //				SignUpView signupview = new SignUpView();
 //				LoginController logcon = new LoginController(window, signupview, null, logview);
 				logview.reSetBars();
+				//
+				ConnectedUser.getInstance().unlogUser();
+				//
 				mainStage.setScene(logview.getScene());
 			}
 			

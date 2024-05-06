@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.access;
 
 import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
+import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
@@ -63,6 +64,13 @@ public class SignUpController {
                     customerview = new CustomerView();
                     CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
                     customerview.reSetBars();
+
+                    //set del customer, CHIAMATA AL DAO PER LA REGISTRAZIONE
+
+                    //ConnectedUser.getInstance().setUser();
+
+                    //
+
                     mainstage.setScene(customerview);
                     // Imposta la scena SignUpView sulla stage principale
                 } else if (signUpView.getManagerRadioButton().isSelected()) {
@@ -71,8 +79,14 @@ public class SignUpController {
                     System.out.println("Hai cliccato il pulsante registrati  come gestore");
                     subscriptionSelectionView = new SubscriptionSelectionView();
                     SubscriptionSelectionController subscriptionSelectionController = new SubscriptionSelectionController(mainstage,subscriptionSelectionView);
-
                     subscriptionSelectionView.reSetBars();
+
+                    //set del manager, CHIAMATA AL DAO PER LA REGISTRAZIONE
+
+                    //ConnectedUser.getInstance().setUser();
+
+                    //
+
                     mainstage.setScene(subscriptionSelectionView);
                     // Imposta la scena subscriptio sulla stage principale
                 }
