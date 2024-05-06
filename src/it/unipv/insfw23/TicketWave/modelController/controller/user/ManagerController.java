@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.user;
 
+import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
 import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageController;
 import it.unipv.insfw23.TicketWave.modelController.controller.event.SelectionNewEventTypeController;
 import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchController;
@@ -9,6 +10,7 @@ import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.event.SelectionNewEventTypeView;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
 import it.unipv.insfw23.TicketWave.modelView.statistics.TypeStatsView;
+import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import it.unipv.insfw23.TicketWave.modelView.user.NoMoreEventsPopup;
@@ -96,7 +98,8 @@ public class ManagerController {
 			}
 		};
 		UpperBar.getIstance().getStatsButton().setOnAction(statsButtonHandler);
-		
+
+
 		EventHandler<MouseEvent> profileButton = new EventHandler<>() {
 			
 			@Override
@@ -108,7 +111,8 @@ public class ManagerController {
 		};
 		
 		managerview.getProfileButton().setOnMouseClicked(profileButton);
-		
+
+
 		EventHandler<MouseEvent> openevent = new EventHandler<>() {
 			
 			@Override
@@ -137,7 +141,17 @@ public class ManagerController {
 				mainStage.setScene(tic);
 			}
 		};
-		
-		managerview.getTableEv().setOnMouseClicked(openevent);;
+		managerview.getTableEv().setOnMouseClicked(openevent);
+
+		EventHandler<MouseEvent> subscriptionButton = new EventHandler<>() {
+			@Override
+			public void handle(MouseEvent event) {
+				SubscriptionSelectionView subView = new SubscriptionSelectionView();
+				SubscriptionSelectionController subController = new SubscriptionSelectionController(mainStage, subView);
+				mainStage.setScene(subView);
+			}
+		};
+		managerview.getSubButton().setOnMouseClicked(subscriptionButton);
 	}
 }
+

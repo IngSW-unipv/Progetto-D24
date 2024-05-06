@@ -245,7 +245,7 @@ public class ResearchView extends Scene{
         gp.add(bar, 0, 0, 1, 1);
         gp.add(searchBar, 1, 0, 1,1);
         gp.add(searchButton,2,0,1,1);
-        gp.add(table,1,1,1,1);
+        gp.add(table,0,1,3,1);
         // decido di quanto spaziare gli elementi del gridPane
         gp.setHgap(20); // gap orizzontale
         gp.setVgap(20); // gap verticale

@@ -22,7 +22,6 @@ public class SignUpController {
     private CustomerView customerview;
     private LoginView loginView;
     private SubscriptionSelectionView subscriptionSelectionView;
-    private PaymentSelectionView paymentSelectionView;
 
 
     public SignUpController(Stage mainstage, SignUpView signUpView, CustomerView customerview, LoginView loginView) {
@@ -71,7 +70,7 @@ public class SignUpController {
 
                     System.out.println("Hai cliccato il pulsante registrati  come gestore");
                     subscriptionSelectionView = new SubscriptionSelectionView();
-                    SubscriptionSelectionController subscriptionSelectionController = new SubscriptionSelectionController(mainstage,subscriptionSelectionView,paymentSelectionView);
+                    SubscriptionSelectionController subscriptionSelectionController = new SubscriptionSelectionController(mainstage,subscriptionSelectionView);
 
                     subscriptionSelectionView.reSetBars();
                     mainstage.setScene(subscriptionSelectionView);
