@@ -69,7 +69,7 @@ public class PaymentDataPView extends Scene {
         backarrow.setFitWidth(50);
         backarrow.setPreserveRatio(true);
         backButton.setGraphic(backarrow);
-       // backButton.setStyle("-fx-background-color: rgb(255,255,255)");
+        backButton.setStyle("-fx-background-color: #91bad6;");
 
 
         BorderPane layout= new BorderPane();
