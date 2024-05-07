@@ -13,6 +13,8 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -22,14 +24,14 @@ public class SubscriptionSelectionController {
     private PaymentSelectionView PaymentSelectionView;
     private SubscriptionSelectionView subscriptionSelectionView;
     private PaymentSelectionView paymentPage;
+    private Scene backScene;
     private User user;
-    private Scene scene;
 
 
     public SubscriptionSelectionController(Stage mainstage, SubscriptionSelectionView subscriptionSelectionView, Scene scene) {
         this.subscriptionSelectionView=subscriptionSelectionView;
         this.mainstage=mainstage;
-        this.scene= scene;
+        this.backScene= scene;
 
         /*
 
@@ -47,8 +49,8 @@ public class SubscriptionSelectionController {
             @Override
             public void handle(MouseEvent actionEvent) {
                 System.out.println("Hai selezionato un abbonamento. Reindirizzamento alla pagina di pagamento.");
-                paymentPage= new PaymentSelectionView();
-                PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainstage,paymentPage,subscriptionSelectionView);
+                paymentPage = new PaymentSelectionView();
+                PaymentSelectionController paymentSelectionController = new PaymentSelectionController(mainstage, paymentPage, subscriptionSelectionView);
                 mainstage.setScene(paymentPage);
             }
 
@@ -61,8 +63,25 @@ public class SubscriptionSelectionController {
         subscriptionSelectionView.getBottoneTerzaSub().setOnMouseClicked(goToBuySubscription);
 
 
+        EventHandler<MouseEvent> goBackEvent = new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent actionEvent) {
+                try {
+                    Method method = backScene.getClass().getMethod("reSetBars");
 
+                    // Invoca effettivamente il metodo se esiste
+                    method.invoke(backScene);
+                    mainstage.setScene(backScene);
+                } catch (NoSuchMethodException e) {
+                    // Il metodo "reSetBars" non esiste nella classe della scena
+                    System.out.println("Metodo 'reSetBars' non trovato nella classe della scena");
+                    e.printStackTrace();
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    // Gestione delle eccezioni durante l'invocazione del metodo
+                    e.printStackTrace();
+                }
+            }
+        };
+        subscriptionSelectionView.getBackButton().setOnMouseClicked(goBackEvent);
     }
-
-
 }

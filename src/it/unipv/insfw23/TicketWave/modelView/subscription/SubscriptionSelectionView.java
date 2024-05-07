@@ -181,7 +181,7 @@ public class SubscriptionSelectionView extends Scene {
         return bottoneTerzaSub;
     }
 
-    public static Button getBackButton() {
+    public Button getBackButton() {
         return backButton;
     }
 }
