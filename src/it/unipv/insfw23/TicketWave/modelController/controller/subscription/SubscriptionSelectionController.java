@@ -20,12 +20,9 @@ import java.util.ArrayList;
 
 public class SubscriptionSelectionController {
     private Stage mainstage;
-    private TicketPageView ticketPage;
-    private PaymentSelectionView PaymentSelectionView;
     private SubscriptionSelectionView subscriptionSelectionView;
     private PaymentSelectionView paymentPage;
     private Scene backScene;
-    private User user;
 
 
     public SubscriptionSelectionController(Stage mainstage, SubscriptionSelectionView subscriptionSelectionView, Scene scene) {
