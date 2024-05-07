@@ -59,21 +59,21 @@ public class ManagerController {
 			@Override
 			public void handle(MouseEvent event) {
 				if (loggedmanager.anotherEvents()) {
-
 					//crea controller per typeselectionevent
 					SelectionNewEventTypeView typesel = new SelectionNewEventTypeView();
 					SelectionNewEventTypeController typeselectioneventview = new SelectionNewEventTypeController(mainStage, managerview, typesel, loggedmanager);
 					mainStage.setScene(typesel);
+
 				} else {
 
 					NoMoreEventsPopup.getIstance().setX(mainStage.getX() + mainStage.getWidth() - NoMoreEventsPopup.getIstance().getWidth() - 360);
 					NoMoreEventsPopup.getIstance().setY(mainStage.getY() + 95);
 					NoMoreEventsPopup.getIstance().show(mainStage);
+					NoMoreEventsPopupController popupController = new NoMoreEventsPopupController(mainStage, NoMoreEventsPopup.getIstance().getBackButton(), NoMoreEventsPopup.getIstance().getSubscriptionButton(), managerview);
 				}
 			}
 		};
 		managerview.getNewEventButton().setOnMouseClicked(newEventButton);
-
 
 		EventHandler<MouseEvent> searchButton = new EventHandler<>() {
 			@Override
@@ -151,7 +151,7 @@ public class ManagerController {
 			@Override
 			public void handle(MouseEvent event) {
 				SubscriptionSelectionView subView = new SubscriptionSelectionView();
-				SubscriptionSelectionController subController = new SubscriptionSelectionController(mainStage, subView);
+				SubscriptionSelectionController subController = new SubscriptionSelectionController(mainStage, subView, managerview);
 				mainStage.setScene(subView);
 			}
 		};

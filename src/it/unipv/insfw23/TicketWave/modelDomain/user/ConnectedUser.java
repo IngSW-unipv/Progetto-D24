@@ -7,6 +7,7 @@ public class ConnectedUser {
     private User user;
 
     private ConnectedUser(){
+        this.user = null;
     }
 
     public static ConnectedUser getInstance(){

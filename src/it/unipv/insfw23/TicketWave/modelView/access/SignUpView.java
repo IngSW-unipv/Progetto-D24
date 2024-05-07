@@ -158,10 +158,10 @@ public class SignUpView extends Scene {
         GridPane.setConstraints(managerRadioButton, 1, 0);
 
 
-        GridPane.setConstraints(signUpButton, 1, 5);
+        GridPane.setConstraints(signUpButton, 2, 5);
 
 
-        GridPane.setConstraints(backButton,2,5);
+        GridPane.setConstraints(backButton,1,5);
 
         // controllo sulle password
         Label errorLabel = new Label();
@@ -186,7 +186,7 @@ public class SignUpView extends Scene {
                 emailLabel, emailField, confirmEmailLabel, confirmEmailField,
                 passwordLabel, passwordField, confirmPasswordLabel, confirmPasswordField,
                 provinceLabel, residenceComboBox,
-                customerRadioButton, managerRadioButton, signUpButton,backButton
+                customerRadioButton, managerRadioButton, backButton, signUpButton
         );
 
 
