@@ -78,7 +78,7 @@ public class SignUpController {
 
                     System.out.println("Hai cliccato il pulsante registrati  come gestore");
                     subscriptionSelectionView = new SubscriptionSelectionView();
-                    SubscriptionSelectionController subscriptionSelectionController = new SubscriptionSelectionController(mainstage,subscriptionSelectionView, signUpView);
+                    SubscriptionSelectionController subscriptionSelectionController = new SubscriptionSelectionController(mainstage,subscriptionSelectionView,signUpView);
                     subscriptionSelectionView.reSetBars();
 
                     //set del manager, CHIAMATA AL DAO PER LA REGISTRAZIONE

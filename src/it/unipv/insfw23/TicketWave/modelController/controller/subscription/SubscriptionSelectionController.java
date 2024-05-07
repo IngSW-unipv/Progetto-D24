@@ -9,6 +9,7 @@ import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -22,11 +23,13 @@ public class SubscriptionSelectionController {
     private SubscriptionSelectionView subscriptionSelectionView;
     private PaymentSelectionView paymentPage;
     private User user;
+    private Scene scene;
 
 
-    public SubscriptionSelectionController(Stage mainstage,SubscriptionSelectionView subscriptionSelectionView) {
+    public SubscriptionSelectionController(Stage mainstage, SubscriptionSelectionView subscriptionSelectionView, Scene scene) {
         this.subscriptionSelectionView=subscriptionSelectionView;
         this.mainstage=mainstage;
+        this.scene= scene;
 
         /*
 
