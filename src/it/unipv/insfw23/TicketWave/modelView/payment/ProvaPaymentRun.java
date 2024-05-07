@@ -26,7 +26,7 @@ public class ProvaPaymentRun extends Application {
         TicketPageView ticketPageView=new TicketPageView();
         PaymentSelectionView paymentView = new PaymentSelectionView();
         SubscriptionSelectionView subscriptionSelectionView=new SubscriptionSelectionView();
-        PaymentSelectionController paymentSelectionController=new PaymentSelectionController(primaryStage,paymentView,subscriptionSelectionView,creator);
+        PaymentSelectionController paymentSelectionController=new PaymentSelectionController(primaryStage,paymentView,subscriptionSelectionView);
         //PaymentDataPView paymentDataPView=new PaymentDataPView();
         SubscriptionSelectionController subscriptionSelectionController=new SubscriptionSelectionController(primaryStage,subscriptionSelectionView);
 

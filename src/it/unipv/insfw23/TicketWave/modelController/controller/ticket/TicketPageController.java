@@ -3,6 +3,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.ticket;
 
 import it.unipv.insfw23.TicketWave.modelController.controller.payment.PaymentSelectionController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
@@ -19,21 +20,20 @@ public class TicketPageController {
     private Event event;
     private boolean isviewermanager;
 
-    private User user;
+    private User user=ConnectedUser.getInstance().getUser();
 
 
-    public TicketPageController(Stage mainStage, TicketPageView ticketPage, Event event, User user) {
+    public TicketPageController(Stage mainStage, TicketPageView ticketPage, Event event) {
         this.mainStage = mainStage;
         this.ticketPage = ticketPage;
         this.event=event;
-        this.user = user;
         initComponents();
 
     }
 public void initComponents() {
 //	ticketPage = new TicketPageView();
 	//assegnazione dei campi dell'evento ai campi della ticketpageview
-	
+
 	ticketPage.setComponents(user.isCustomer(), event.getType(),event.getName(),event.getCity(),event.getLocation(),event.getProvince(),event.getDate(),
 			event.getArtists(),event.getSeatsRemainedNumberForType(),event.getPrices());
 	//fine assegnazione
@@ -50,7 +50,7 @@ public void initComponents() {
             System.out.println("Hai cliccato il bottone Acquista");
             PaymentSelectionView paymentSelectionView = new PaymentSelectionView();
             paymentSelectionView.setPriceComponent(event.getPrices()[ticketPage.getWhichPriceSelected()]);
-            PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainStage,paymentSelectionView,ticketPage,user);
+            PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainStage,paymentSelectionView,ticketPage);
             mainStage.setScene(paymentSelectionView);
         	}
         	else

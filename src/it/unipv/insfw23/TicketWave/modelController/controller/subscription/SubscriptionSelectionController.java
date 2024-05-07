@@ -28,8 +28,12 @@ public class SubscriptionSelectionController {
         this.subscriptionSelectionView=subscriptionSelectionView;
         this.mainstage=mainstage;
 
+        /*
+
         user = new Manager("Piero", "Antonelli", "12-10-11", "ciccio@gmail.com",
                 "ciccio99", Province.ALESSANDRIA, "3926475898609800", new ArrayList<Event>(), 5, 0, LocalDate.now(), 0);
+
+         */
 
         initComponents();
     }
@@ -41,7 +45,7 @@ public class SubscriptionSelectionController {
             public void handle(MouseEvent actionEvent) {
                 System.out.println("Hai selezionato un abbonamento. Reindirizzamento alla pagina di pagamento.");
                 paymentPage= new PaymentSelectionView();
-                PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainstage,paymentPage,subscriptionSelectionView,user);
+                PaymentSelectionController paymentSelectionController= new PaymentSelectionController(mainstage,paymentPage,subscriptionSelectionView);
                 mainstage.setScene(paymentPage);
             }
 

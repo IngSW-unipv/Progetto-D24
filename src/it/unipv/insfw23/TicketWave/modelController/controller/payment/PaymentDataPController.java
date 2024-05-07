@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
+import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
@@ -19,13 +20,12 @@ public class PaymentDataPController {
     private PaymentDataPView paymentDataPView;
     private CustomerView customerView;
     private ManagerView managerView;
-    private User user;
+    private User user= ConnectedUser.getInstance().getUser();;
 
-    public PaymentDataPController(Stage mainStage, PaymentDataPView paymentDataPView, PaymentSelectionView paymentPage,User user){
+    public PaymentDataPController(Stage mainStage, PaymentDataPView paymentDataPView, PaymentSelectionView paymentPage){
        this.paymentDataPView = paymentDataPView;
        this.paymentPage=paymentPage;
        this.mainStage=mainStage;
-       this.user=user;
        initComponents();
         setLabelforWavePoints();
 

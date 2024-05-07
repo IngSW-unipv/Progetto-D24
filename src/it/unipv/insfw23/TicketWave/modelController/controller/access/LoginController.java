@@ -11,6 +11,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
@@ -69,7 +70,10 @@ public class LoginController {
                      *
                      * */
 
+                    //customer esempio
 
+                    Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
+                    Customer customer=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.BARI,favoriteGenre, 100);
                     System.out.println("Hai cliccato il pulsante Login come cliente");
                     customerview = new CustomerView();
                     CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
@@ -77,7 +81,7 @@ public class LoginController {
                     //
                     //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
                     //
-                    //ConnectedUser.getInstance().setUser();
+                    ConnectedUser.getInstance().setUser(customer);
                     //
                     mainstage.setScene(customerview); // Imposta la scena SignUpView sulla stage principale
                 }

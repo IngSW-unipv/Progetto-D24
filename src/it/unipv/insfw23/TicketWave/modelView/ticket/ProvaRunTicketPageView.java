@@ -44,7 +44,7 @@ public class ProvaRunTicketPageView extends Application {
         ticketPageView.setComponents(customer.isCustomer(), typeOfEvent, name, city, location, Province.AGRIGENTO, date, artists,
                 seatsRemainedNumberForType, prices);
 
-        TicketPageController ticketPageController=new TicketPageController(primaryStage,ticketPageView,concert,customer);
+        TicketPageController ticketPageController=new TicketPageController(primaryStage,ticketPageView,concert);
 
 
         // Creazione della scena e impostazione del titolo della finestra
