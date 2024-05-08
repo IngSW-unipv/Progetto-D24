@@ -35,7 +35,7 @@ public class SelectionNewEventTypeView extends Scene{
 	
 	private void init() {
 		layout = (BorderPane) getRoot();
-		layout.setStyle("-fx-background-color: #def1fa;");
+		layout.setStyle("-fx-background-color: #91bad6;");
 		
 		grid = new GridPane();
 		grid.setPadding(new Insets(50, 30, 50, 30));
@@ -108,7 +108,7 @@ public class SelectionNewEventTypeView extends Scene{
 				
 		grid.getChildren().addAll(title, concerto, festival, teatro, altro, forwardbutton, abortbutton);
 		
-		layout.setStyle("-fx-background-color: #def1fa;");
+		
 		layout.setTop(UpperBar.getIstance());
 		layout.setCenter(grid);
 		layout.setBottom(LowerBar.getInstance());

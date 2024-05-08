@@ -67,7 +67,7 @@ public class NewTheatreView extends Scene{
 		BorderPane layout = (BorderPane)  getRoot();
 		
 
-		layout.setStyle("-fx-background-color: #def1fa;");
+		layout.setStyle("-fx-background-color: #91bad6;");
 		GridPane grid = new GridPane();
 		
 		grid.setPadding(new Insets(50, 50, 50, 50));

@@ -68,7 +68,7 @@ public class NewFestivalView extends Scene{
 	public void init() {
 		
 		layout = (BorderPane) getRoot();
-		layout.setStyle("-fx-background-color: #def1fa;");
+		layout.setStyle("-fx-background-color: #91bad6;");
 		grid = new GridPane();
 		
 		grid.setPadding(new Insets(50, 50, 50, 50));
