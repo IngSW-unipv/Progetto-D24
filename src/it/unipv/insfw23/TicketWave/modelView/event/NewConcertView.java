@@ -69,7 +69,6 @@ public class NewConcertView extends Scene{
 	private final Button photoButton = new Button("Scegli foto...");
 	private ImageView eventPhoto;
 	private final Label descriptionlabel = new Label("Descrizione: ");
-//	private TextField descriptionfield;
 	private TextArea descriptionarea;
 	private final Label errlabel = new Label("Parametri non validi");	
 	private Button abort = new Button("Annulla");
@@ -90,7 +89,7 @@ public class NewConcertView extends Scene{
 		grid.setPadding(new Insets(20, 40, 20, 40));
 		grid.setVgap(10);
 		grid.setHgap(40);
-		grid.setGridLinesVisible(true);
+//		grid.setGridLinesVisible(true);
 		grid.setAlignment(Pos.CENTER);
 		
 		
@@ -155,9 +154,6 @@ public class NewConcertView extends Scene{
 		
 		
 		
-//		GridPane.setConstraints(datelabel, 0, 5);
-//		GridPane.setVgrow(datelabel, Priority.SOMETIMES);
-//		GridPane.setHgrow(datelabel, Priority.SOMETIMES);
 		datetimelabel.setFont(lebelsfont);
 		GridPane.setConstraints(datetimelabel, 0, 5, 2, 1);
 		GridPane.setVgrow(datetimelabel, Priority.SOMETIMES);
@@ -165,16 +161,7 @@ public class NewConcertView extends Scene{
 		
 		datepicker = new DatePicker();
 		datepicker.setMaxWidth(200);
-//		GridPane.setConstraints(datepicker, 0, 6);
-//		GridPane.setVgrow(datepicker, Priority.SOMETIMES);
-//		GridPane.setHgrow(datepicker, Priority.SOMETIMES);
-		
-		
-		
-//		GridPane.setConstraints(hourlabel, 1, 5);
-//		GridPane.setVgrow(hourlabel, Priority.SOMETIMES);
-//		GridPane.setHgrow(hourlabel, Priority.SOMETIMES);
-		
+				
 		hourspinner = new Spinner<>(0,23,0);
 		hourspinner.setMinWidth(55);
 		hourspinner.setPrefWidth(55);
@@ -182,11 +169,7 @@ public class NewConcertView extends Scene{
 		minutesspinner.setPrefWidth(55);
 		minutesspinner.setMinWidth(55);
 		hboxtime = new HBox(10,hourspinner,minutesspinner);
-//		hboxtime.setAlignment(Pos.CENTER);
-//		GridPane.setConstraints(hboxtime, 1, 6);
-//		GridPane.setVgrow(hboxtime, Priority.SOMETIMES);
-//		GridPane.setHgrow(hboxtime, Priority.SOMETIMES);
-//		hboxtime.setPrefWidth(120);
+
 		hboxdatetime = new HBox(20,datepicker,hboxtime);
 		GridPane.setConstraints(hboxdatetime, 0, 6, 2, 1);
 		GridPane.setVgrow(hboxdatetime, Priority.SOMETIMES);
@@ -291,8 +274,6 @@ public class NewConcertView extends Scene{
 		
 		eventPhoto = new ImageView();
 		eventPhoto.isSmooth();
-//		eventPhoto.maxHeight(50);
-//		eventPhoto.maxWidth(50);
 		eventPhoto.setFitHeight(100);
 		eventPhoto.setFitWidth(100);
 		GridPane.setConstraints(eventPhoto, 7, 2, 1, 5);
@@ -313,7 +294,6 @@ public class NewConcertView extends Scene{
 		pricebasefield.setMinWidth(30);
 		GridPane.setConstraints(pricebasefield, 1, 9);
 		pricebasefield.setVisible(false);
-//		GridPane.setValignment(pricebasefield, VPos.TOP);
 		GridPane.setVgrow(pricebasefield, Priority.SOMETIMES);
 		GridPane.setHgrow(pricebasefield, Priority.SOMETIMES);
 		
@@ -331,7 +311,6 @@ public class NewConcertView extends Scene{
 		pricevipfield.setMinWidth(30);
 		GridPane.setConstraints(pricevipfield, 3, 9);
 		pricevipfield.setVisible(false);
-//		GridPane.setValignment(pricevipfield, VPos.TOP);
 		GridPane.setVgrow(pricevipfield, Priority.SOMETIMES);
 		GridPane.setHgrow(pricevipfield, Priority.SOMETIMES);
 		
@@ -349,7 +328,6 @@ public class NewConcertView extends Scene{
 		pricepremiumfield.setMinWidth(30);
 		GridPane.setConstraints(pricepremiumfield, 5, 9);
 		pricepremiumfield.setVisible(false);
-//		GridPane.setValignment(pricepremiumfield, VPos.TOP);
 		GridPane.setVgrow(pricepremiumfield, Priority.SOMETIMES);
 		GridPane.setHgrow(pricepremiumfield, Priority.SOMETIMES);
 		
@@ -360,7 +338,6 @@ public class NewConcertView extends Scene{
 		GridPane.setVgrow(descriptionlabel, Priority.SOMETIMES);
 		GridPane.setHgrow(descriptionlabel, Priority.SOMETIMES);
 		
-//		descriptionfield = new TextField();
 		descriptionarea = new TextArea();
 		descriptionarea.maxHeight(20);
 		GridPane.setConstraints(descriptionarea, 0,12,4,1);
@@ -388,22 +365,7 @@ public class NewConcertView extends Scene{
 		GridPane.setConstraints(confirm, 7, 14);
 		GridPane.setHalignment(confirm, HPos.RIGHT);
 		
-		
-		
-		
-		
-		
-        //INSERIMENTO FOTO (+ I METODI GET)
-		
-		//GridPane.setHalignment(photoButton, HPos.LEFT);
-		//GridPane.setHalignment(eventPhoto, HPos.LEFT);
-
-		//I BOTTONI CONFERMA E TORNA INDIETRO NON SONO SPARITI, SONO SOTTO,
-		// SE METTI SCHERMO INTERO LI VEDI, POSIZIONALI COME VUOI TUTTI QUANTI
-		// SAREBBE CARINO CHE IL BOTTONE CON LA FOTO USCISSERO AL CENTRO A DX,
-		// SOPRA IL TASTO CONFERMA IN LINEA CON TUTTI GLI ALTRI CAMPI
-
-		
+			
 		
 		/* handler per il num di biglietti*/
 		typesticketbox.setOnAction(new EventHandler<>() {
@@ -444,11 +406,11 @@ public class NewConcertView extends Scene{
 			
 		
 		grid.getChildren().addAll(titlelabel, namelabel, namefield,citylabel, cityfield, provincelabel, provincesbox, addresslabel, 
-								    addressfield, datetimelabel, hboxdatetime, numtypeticketlabel, typesticketbox, 
-								    genlabel, gensbox, artistlabel, artistfield, numbaselabel, numbasefield, numviplabel, numvipfield, 
-								    numpremiumlabel, numpremiumfield, photoButton, eventPhoto, pricebaselabel, pricebasefield, 
-								    priceviplabel, pricevipfield, pricepremiumlabel, pricepremiumfield, descriptionlabel, descriptionarea,
-								    confirm, errlabel,abort);
+								   addressfield, datetimelabel, hboxdatetime, numtypeticketlabel, typesticketbox, 
+								   genlabel, gensbox, artistlabel, artistfield, numbaselabel, numbasefield, numviplabel, numvipfield, 
+								   numpremiumlabel, numpremiumfield, photoButton, eventPhoto, pricebaselabel, pricebasefield, 
+								   priceviplabel, pricevipfield, pricepremiumlabel, pricepremiumfield, descriptionlabel, descriptionarea,
+								   confirm, errlabel,abort);
 		
 		layout.setTop(UpperBar.getIstance());
 		layout.setCenter(grid);
@@ -531,6 +493,11 @@ public class NewConcertView extends Scene{
 		return errlabel;
 	}
 
-	public Button getPhotoButton(){return photoButton;}
-	public ImageView getPhotoView() {return eventPhoto;}
+	public Button getPhotoButton(){
+		return photoButton;
+	}
+	
+	public ImageView getPhotoView() {
+		return eventPhoto;
+	}
 }

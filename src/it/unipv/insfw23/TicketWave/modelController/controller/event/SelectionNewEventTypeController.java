@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.event;
 
+
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.event.NewConcertView;
 import it.unipv.insfw23.TicketWave.modelView.event.NewFestivalView;
@@ -15,13 +16,12 @@ public class SelectionNewEventTypeController {
 	Stage window;
 	ManagerView managerview;
 	SelectionNewEventTypeView typeselevview;
-	Manager loggedmanager;
+
 	
-	public SelectionNewEventTypeController(Stage primarystage, ManagerView managerview, SelectionNewEventTypeView typeselevview, Manager loggedmanager) {
+	public SelectionNewEventTypeController(Stage primarystage, ManagerView managerview, SelectionNewEventTypeView typeselevview) {
 		window = primarystage;
 		this.managerview = managerview;
 		this.typeselevview = typeselevview;
-		this.loggedmanager = loggedmanager;
 		initComponents();
 	}
 	
@@ -48,19 +48,19 @@ public class SelectionNewEventTypeController {
 				
 				if(typeselevview.getConcertoRadioButton().isSelected()) {
 					NewConcertView newconc = new NewConcertView();
-					NewConcertController newconccontroller = new NewConcertController(window, newconc, typeselevview, loggedmanager);
+					NewConcertController newconccontroller = new NewConcertController(window, newconc, typeselevview);
 					window.setScene(newconc);
 				}else if(typeselevview.getFestivalRadioButton().isSelected()) {
 					NewFestivalView newfest = new NewFestivalView();
-					NewFestivalController newfestcontroller = new NewFestivalController(window, newfest, typeselevview, loggedmanager);
+					NewFestivalController newfestcontroller = new NewFestivalController(window, newfest, typeselevview);
 					window.setScene(newfest);
 				}else if(typeselevview.getTeathreRadioButton().isSelected()) {
 					NewTheatreView newtheatre = new NewTheatreView();
-					NewTheatreController newtheatrecontroller = new NewTheatreController(window, newtheatre, typeselevview, loggedmanager);
+					NewTheatreController newtheatrecontroller = new NewTheatreController(window, newtheatre, typeselevview);
 					window.setScene(newtheatre);
 				}else if(typeselevview.getOtherRadioButton().isSelected()) {
 					NewOtherView newother = new NewOtherView();
-					NewOtherController  newothercontroller = new NewOtherController(window, newother, typeselevview, loggedmanager);
+					NewOtherController  newothercontroller = new NewOtherController(window, newother, typeselevview);
 					window.setScene(newother);
 				}
 			}

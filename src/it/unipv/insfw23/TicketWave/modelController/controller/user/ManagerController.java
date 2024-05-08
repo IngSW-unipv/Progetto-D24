@@ -27,11 +27,11 @@ public class ManagerController {
 	LoginView logview;
 	Manager loggedmanager;
 	
-	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview, Manager loggedmanager) {
+	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview) {
 		mainStage = primarystage;
 		this.managerview = managerview;
 		this.logview = logview;
-		this.loggedmanager = loggedmanager;
+		this.loggedmanager = (Manager) ConnectedUser.getInstance().getUser();
 		initComponents();
 	}
 	
@@ -61,7 +61,7 @@ public class ManagerController {
 				if (loggedmanager.anotherEvents()) {
 					//crea controller per typeselectionevent
 					SelectionNewEventTypeView typesel = new SelectionNewEventTypeView();
-					SelectionNewEventTypeController typeselectioneventview = new SelectionNewEventTypeController(mainStage, managerview, typesel, loggedmanager);
+					SelectionNewEventTypeController typeselectioneventview = new SelectionNewEventTypeController(mainStage, managerview, typesel);
 					mainStage.setScene(typesel);
 
 				} else {
