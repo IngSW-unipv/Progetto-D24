@@ -75,7 +75,7 @@ public class Manager extends User {
     public void createFestival(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type tipe, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, int artistsNumber) throws Exception {
         if((subscription == 1 && counterCreatedEvents < maxNumberOfEvents) || subscription == 2) {
 
-            Event festival = new Festival(idEvent, name, city,location,date,time,province,genre,tipe,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,ticketsSoldNumberForType,price,creator,artists,description,artistsNumber);
+            Event festival = new Festival(idEvent, name, city,location,date,time,province,genre,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,ticketsSoldNumberForType,price,creator,artists,description,artistsNumber);
             event.add(festival);
             counterCreatedEvents++;
         }
@@ -87,7 +87,7 @@ public class Manager extends User {
     public void createConcert(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type tipe, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description) throws Exception{
         if((subscription == 1 && counterCreatedEvents < maxNumberOfEvents) || subscription == 2) {
 
-            Event concert= new Concert(idEvent,name,city,location,date,time,province,genre,tipe,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,ticketsSoldNumberForType,price,creator,artists,description);
+            Event concert= new Concert(idEvent,name,city,location,date,time,province,genre,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,ticketsSoldNumberForType,price,creator,artists,description);
             event.add(concert);
             counterCreatedEvents++;
         }
@@ -99,7 +99,7 @@ public class Manager extends User {
     public void createTheater(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type tipe, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, String authorName)throws Exception {
         if((subscription == 1 && counterCreatedEvents < maxNumberOfEvents) || subscription == 2) {
 
-            Event theater = new Theater(idEvent, name, city, location,date,time, province,genre,tipe,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,ticketsSoldNumberForType,price,creator,artists,description,authorName);
+            Event theater = new Theater(idEvent, name, city, location,date,time, province,genre,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,ticketsSoldNumberForType,price,creator,artists,description,authorName);
             event.add(theater);
             counterCreatedEvents++;
         }
@@ -111,7 +111,7 @@ public class Manager extends User {
     public void createOther(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type tipe, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description)throws Exception{
         if((subscription == 1 && counterCreatedEvents < maxNumberOfEvents) || subscription == 2) {
 
-            Event other = new Other(idEvent, name, city, location, date,time,province,genre,tipe,maxNumberOfSeats,typeOfSeats, seatsRemainedNumberForType, ticketsSoldNumberForType,price, creator,artists,description);
+            Event other = new Other(idEvent, name, city, location, date,time,province,genre,maxNumberOfSeats,typeOfSeats, seatsRemainedNumberForType, ticketsSoldNumberForType,price, creator,artists,description);
             event.add(other);
             counterCreatedEvents++;
         }
