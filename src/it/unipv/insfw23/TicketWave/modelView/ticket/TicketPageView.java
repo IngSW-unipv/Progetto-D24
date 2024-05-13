@@ -29,6 +29,8 @@ public class TicketPageView extends Scene {
     private static final Label eventDescriptionLabel = new Label("Descrizione Evento:");
     private static final Label ticketsLabel = new Label("Biglietti disponibili per tipo:");
     private static  Button buyButton = new Button();
+
+    private static ImageView EventPosterImage= new ImageView();
     private static  ToggleGroup priceselection = new ToggleGroup();
 
     // campi riempiti dal controller
@@ -44,6 +46,7 @@ public class TicketPageView extends Scene {
     private static Label basePriceTextField = new Label();
     private static Label premiumPriceTextField = new Label();
     private static Label vipPriceTextField = new Label();
+
     private static final RadioButton basePricebutton = new RadioButton();
     private static final RadioButton premiumPricebutton = new RadioButton();
     private static final RadioButton vipPricebutton = new RadioButton();
@@ -159,6 +162,13 @@ public class TicketPageView extends Scene {
         buyButton.setStyle("-fx-background-color: #91BAD6");
         buyButton.setOpacity(1);
 
+        //LA LOCANDINA DELL'EVENTO DEVE ESSERE IMPOSTATA DAL DAO METTO UNA PROVVISORIA
+        Image EventPoster=new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/eventexeple.png");
+        EventPosterImage.setImage(EventPoster);
+        EventPosterImage.setFitHeight(200);
+        EventPosterImage.setFitWidth(200);
+
+
         //Gridpane per sistemazione elementi centrali
         GridPane centerGrid = new GridPane();
         centerGrid.setPadding(new Insets(10));
@@ -168,6 +178,7 @@ public class TicketPageView extends Scene {
         centerGrid.add(eventNameTextField, 1, 0);
         centerGrid.add(eventDescriptionLabel, 0, 1);
         centerGrid.add(eventDescriptionTextField, 1, 1);
+
 
         // Gridpane per sistemazione elementi sul fine pagina
         GridPane bottomGrid = new GridPane();
@@ -209,6 +220,7 @@ public class TicketPageView extends Scene {
         root.setBottom(buttonbox);
         BorderPane.setMargin(buttonbox, new Insets(30));
         BorderPane.setAlignment(buttonbox, Pos.BOTTOM_RIGHT);
+        BorderPane.setAlignment(EventPosterImage,Pos.CENTER);
 
 
         //BordePane layout per upperBar e lowerbar
@@ -266,9 +278,14 @@ public class TicketPageView extends Scene {
     }
 
 */
+
+
+
     public Toggle getIfPriceSelected() {
         return priceselection.getSelectedToggle();
     }
+
+
 
 
 }

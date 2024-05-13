@@ -33,7 +33,7 @@ public class ProvaRunTicketPageView extends Application {
         Manager creator = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", Province.COMO, "1234567890123456", events, 5, 1, LocalDate.now(), 0);
 
 
-        Concert concert=new Concert(1,name,city,location,date,time,Province.AGRIGENTO, Genre.ROCK,typeOfEvent,1,3,seatsRemainedNumberForType,
+        Concert concert=new Concert(1,name,city,location,date,time,Province.AGRIGENTO, Genre.ROCK,1,3,seatsRemainedNumberForType,
         ticketSoldNumberForType,prices,creator,artists,description);
 
 

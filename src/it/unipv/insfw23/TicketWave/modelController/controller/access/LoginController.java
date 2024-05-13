@@ -115,7 +115,7 @@ public class LoginController {
                     //Concert eventofinto2 = new Concert(12,"reunion","busto arstizio",dataev2, "via dei matti ,0", Province.LIVORNO,300,2, seduterimasteev2, vettfalsopriceev2,Genre.INDIE,managerfinto,arrfintoartista2);
 
                     try {
-                        managerfinto.createConcert(12, "reunion", "milano","discoteca",dataev1,time,Province.AGRIGENTO,Genre.HOUSE, Type.CONCERT,1000,3,seduterimasteev2,ticketsoldev2,vettfalsopriceev2,managerfinto,"U2","BELLO");
+                        managerfinto.createConcert(12, "reunion", "milano","discoteca",dataev1,time,Province.AGRIGENTO,Genre.HOUSE, 1000,3,seduterimasteev2,ticketsoldev2,vettfalsopriceev2,managerfinto,"U2","BELLO");
                                 //managerfinto.createConcert(14, "festino", "Rozzano", dataev2, "stadio dell'albero", Province.MILANO, 10000, 3, seduterimasteev2, vettfalsopriceev2, Genre.HOUSE, managerfinto, arrfintoartista2);
                     } catch (Exception e) {
                         e.printStackTrace();
