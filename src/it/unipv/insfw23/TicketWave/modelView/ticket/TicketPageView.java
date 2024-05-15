@@ -8,8 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 
 import javafx.application.Application;
@@ -27,13 +25,10 @@ import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 
 public class TicketPageView extends Scene {
-    private final Font labelsfont = Font.font("Helvetica", FontWeight.NORMAL, 13);
     private static final Label eventNameLabel = new Label("Nome Evento:");
     private static final Label eventDescriptionLabel = new Label("Descrizione Evento:");
     private static final Label ticketsLabel = new Label("Biglietti disponibili per tipo:");
     private static  Button buyButton = new Button();
-
-    private static Button backButton= new Button();
 
     private static ImageView EventPosterImage= new ImageView();
     private static  ToggleGroup priceselection = new ToggleGroup();
@@ -59,7 +54,8 @@ public class TicketPageView extends Scene {
     private BorderPane layout;
     private UpperBar upperBar;
     private BorderPane root;
-    private boolean typeofviewermanager = false;
+    private boolean isCustomerViewer;
+    private Button backButton = new Button();
 
 
 
@@ -73,13 +69,14 @@ public class TicketPageView extends Scene {
 
     //evento che setta le label dipendenti dall'evento prima di inizializzare la view
     //senno inizializza la view con i campi vuoti e aggiorna il valore di una label senza reinizializzare
-    public void setComponents(boolean isviewermanager, Type typeofevent, String name, String città, String location, Province prov, LocalDate data, String  artist,
+    public void setComponents(boolean isCustomerViewer, Type typeofevent, String name, String città, String location, Province prov, LocalDate data, String  artist,
                               int[] seatsRemainedNumberForType, double[] price) {
 
         //settaggio dei campi dei valori per un singolo evento
         System.out.println(artist);
         System.out.println(artist.toString());
-        typeofviewermanager = isviewermanager;
+        this.isCustomerViewer = isCustomerViewer;
+
         eventNameTextField = new Label(name);
         eventDescriptionTextField = new Label("Il giorno "+data+" si terra un "+typeofevent.name()+" in "+location+" a "+città+" ,in provincia di "+prov+" tenuto da "
                 +artist.toString().substring(1, artist.toString().length()-1));
@@ -111,12 +108,13 @@ public class TicketPageView extends Scene {
                 vipPriceTextField = new Label("€"+price[2]);
         }
         //???????
-        if(typeofviewermanager) {
-            buyButton.setVisible(false);
-            UpperBar.getIstance().setForManager();
+        if(isCustomerViewer) {
+            buyButton.setVisible(true);
+            UpperBar.getIstance().setForCustomer();
         }
         else {
-            UpperBar.getIstance().setForCustomer();
+            buyButton.setVisible(false);
+            UpperBar.getIstance().setForManager();
         }
 
         //fine settaggio
@@ -146,12 +144,22 @@ public class TicketPageView extends Scene {
 
         //box per il bottone di acquistto
 
-        HBox buttonbox= new HBox(buyButton,backButton);
+        HBox buttonbox= new HBox(buyButton, backButton);
         buttonbox.setPadding(new Insets(10));
-        buttonbox.setAlignment(Pos.BOTTOM_RIGHT);
+        buyButton.setAlignment(Pos.BOTTOM_RIGHT);
+        backButton.setAlignment(Pos.BOTTOM_LEFT);
         buttonbox.setSpacing(50);
 
-        //import dell'immagine  di acquisto
+        Image backButtonlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/backArrow.png");
+        ImageView imageViewBackButton=new ImageView();
+        imageViewBackButton.setImage(backButtonlogo);
+        imageViewBackButton.setFitHeight(120);
+        imageViewBackButton.setFitWidth(200);
+
+        backButton.setGraphic(imageViewBackButton);
+        backButton.setStyle("-fx-background-color: #91BAD6");
+
+        //import dell'immagine del bottone di acquisto
 
         Image BuyButtonlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/NewBuyButton.png");
         ImageView imageView=new ImageView();
@@ -166,15 +174,6 @@ public class TicketPageView extends Scene {
         buyButton.setPadding(new Insets(0));
         buyButton.setStyle("-fx-background-color: #91BAD6");
         buyButton.setOpacity(1);
-
-        //DA SISTEMARE LA POSIZIONE DEL BOTTONE 
-        Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/backArrow.png");
-        ImageView backarrow = new ImageView(backarrowlogo);
-        backarrow.setFitWidth(50);
-        backarrow.setPreserveRatio(true);
-        backButton.setStyle("-fx-background-color: #91bad6;");
-        backButton.setGraphic(backarrow);
-
 
         //LA LOCANDINA DELL'EVENTO DEVE ESSERE IMPOSTATA DAL DAO METTO UNA PROVVISORIA
         Image EventPoster=new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/eventexeple.png");
@@ -234,12 +233,15 @@ public class TicketPageView extends Scene {
         root.setBottom(buttonbox);
         BorderPane.setMargin(buttonbox, new Insets(30));
         BorderPane.setAlignment(buttonbox, Pos.BOTTOM_RIGHT);
+        BorderPane.setAlignment(EventPosterImage,Pos.CENTER);
 
 
         //BordePane layout per upperBar e lowerbar
         layout.setTop(UpperBar.getIstance());
         layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
+
+        reSetBars();
 
     }
 
@@ -268,11 +270,11 @@ public class TicketPageView extends Scene {
                 System.err.println("Layout non inizializzato correttamente!");
                 return;}
 
-            if(typeofviewermanager) {
-                UpperBar.getIstance().setForManager();
+            if(isCustomerViewer) {
+                UpperBar.getIstance().setForCustomer();
             }
             else{
-                UpperBar.getIstance().setForCustomer();
+                UpperBar.getIstance().setForManager();
             }
             layout.setTop(UpperBar.getIstance());
             layout.setBottom(LowerBar.getInstance());
