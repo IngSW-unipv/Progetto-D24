@@ -4,6 +4,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.research;
 import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
@@ -19,7 +20,7 @@ public class ResearchController {
     private final Stage mainStage;
     // le mie view
     private final ResearchView rv;
-    private User user;
+    private ConnectedUser cu;
 
     // costruttore
     public ResearchController(Stage mainStage, ResearchView rv) {
@@ -48,8 +49,9 @@ public class ResearchController {
                 //esempio di creazione customer, se no non funziona, il vero utente lo devo prendere dal sign up o dal sign in
                 Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
                 Customer cs=new Customer("Gesvaldo","Pieri","2020-10-10","Ges.Pieri@gmail.com","123",Province.BARI,favoriteGenre, 100);
-                //
+                // 
                 TicketPageView tpv = new TicketPageView();
+
                 tpv.setComponents(cs.isCustomer(), rv.getTable().getSelectionModel().getSelectedItem().getType(), rv.getTable().getSelectionModel().getSelectedItem().getName(), rv.getTable().getSelectionModel().getSelectedItem().getCity(),
                                   rv.getTable().getSelectionModel().getSelectedItem().getLocation(), rv.getTable().getSelectionModel().getSelectedItem().getProvince(), rv.getTable().getSelectionModel().getSelectedItem().getDate(),
                                   rv.getTable().getSelectionModel().getSelectedItem().getArtists(), rv.getTable().getSelectionModel().getSelectedItem().getSeatsRemainedNumberForType(), rv.getTable().getSelectionModel().getSelectedItem().getPrice());
