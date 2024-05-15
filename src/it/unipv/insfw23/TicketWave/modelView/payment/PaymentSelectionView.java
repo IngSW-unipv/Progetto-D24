@@ -13,12 +13,16 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentSelectionView extends Scene {
+
+    private final Font font = Font.font("Helvetica", FontWeight.NORMAL, 13);
     private static RadioButton paypalButton = new RadioButton("Paypal");//paypal
     private static RadioButton mastercardButton = new RadioButton("Mastercard"); //mastercard
     private static Button nextButton = new Button();
@@ -48,6 +52,12 @@ public class PaymentSelectionView extends Scene {
         paypalButton.setToggleGroup(paymethod);
         mastercardButton.setToggleGroup(paymethod);
 
+        titleLabel.setFont(font);
+        totalStringLabel.setFont(font);
+        totalAmountLabel.setFont(font);
+        paySelectionLabel.setFont(font);
+        errmessage.setFont(font);
+
 
         Image paypalLogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/Paypal_logo.png");
         Image mastercardLogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/Mastercard_logo.png");
@@ -65,27 +75,34 @@ public class PaymentSelectionView extends Scene {
         ImageView backarrow = new ImageView(backarrowlogo);
         backarrow.setFitWidth(50);
         backarrow.setPreserveRatio(true);
+        backButton.setGraphic(backarrow);
+        backButton.setStyle("-fx-background-color: #91bad6;");
+
 
         ImageView nextarrow = new ImageView(nextarrowlogo);
         nextarrow.setFitWidth(50);
         nextarrow.setPreserveRatio(true);
-
         nextButton.setGraphic(nextarrow);
-         nextButton.setStyle("-fx-background-color: #91bad6;");
-        backButton.setGraphic(backarrow);
-         backButton.setStyle("-fx-background-color: #91bad6;");
+        nextButton.setStyle("-fx-background-color: #91bad6;");
+
+
 
         errmessage.setOpacity(0);
         errmessage.setFill(javafx.scene.paint.Color.RED);
 
 
-        HBox nextButtonBox = new HBox();
-        nextButtonBox.getChildren().add(nextButton);
-        nextButtonBox.setAlignment(Pos.BOTTOM_RIGHT);
+        Region leftSpacer = new Region();
+        HBox.setHgrow(leftSpacer, Priority.ALWAYS); // Consente a leftSpacer di espandersi per riempire lo spazio disponibile
 
-        HBox backButtonBox = new HBox();
-        backButtonBox.getChildren().add(backButton);
-        backButtonBox.setAlignment(Pos.BOTTOM_LEFT);
+        Region rightSpacer = new Region();
+        HBox.setHgrow(rightSpacer, Priority.ALWAYS); // Consente a rightSpacer di espandersi per riempire lo spazio disponibile// Imposta un margine di 10 unità a destra del backButton
+        // Creazione di un HBox per contenere i bottoni e le Region vuote
+        HBox buttonBox = new HBox( backButton, rightSpacer, nextButton);
+        buttonBox.setMargin(backButton, new Insets(0, 10, 10, 10)); // Margine a sinistra
+        buttonBox.setMargin(nextButton, new Insets(0, 10, 10, 10)); // Margine a destra
+
+        buttonBox.setSpacing(50); // Spazio tra i bottoni
+        buttonBox.setAlignment(Pos.CENTER);
 
         GridPane gridPane = new GridPane();
         gridPane.setHgap(10);
@@ -102,16 +119,13 @@ public class PaymentSelectionView extends Scene {
         gridPane.add(errmessage, 0, 6);
 
 
-        BorderPane.setMargin(backButtonBox, new Insets(0, 10, 10, 10)); // Margine a sinistra
-        BorderPane.setMargin(nextButtonBox, new Insets(0, 10, 10, 10)); // Margine a destra
+
 
 
         BorderPane root = new BorderPane();
         root.setStyle("-fx-background-color: #91bad6;");
         root.setCenter(gridPane);
-        root.setLeft(backButtonBox);
-        root.setRight(nextButtonBox);
-
+        root.setBottom(buttonBox);
 
         BorderPane layout = new BorderPane();
         layout.setStyle("-fx-background-color: #91bad6;");
@@ -128,9 +142,6 @@ public class PaymentSelectionView extends Scene {
         totalAmountLabel = new Label(String.valueOf(price));
     }
 
-    //NOTA per il metodo ReSetBars: compilando la loginview il metodo non riesce a valutare il parametro isviewermanager, le barre in questo codice vengono automaticamente
-    //impostate su customer quando viene chiamato dai controller,se runno il codice di provaRunTicketPageView e viene impostato isviewermanager il reset delle barre funziona.
-    // c'è un altro metodo per non portarsi appresso una variabile booleana per distinguere customer da manager?
     public void reSetBars() {
         BorderPane temp = new BorderPane();
         setRoot(temp);

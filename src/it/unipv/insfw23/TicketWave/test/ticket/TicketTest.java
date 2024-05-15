@@ -40,7 +40,7 @@ public class TicketTest {
 		try {
 			
 			creator.createConcert(4,"Reunion","Firenze","via del palo",LocalDate.of(2024, 5, 23),Time.valueOf(LocalTime.of(20, 30)),Province.ASTI,Genre.METAL,
-					Type.CONCERT,150,2,seatsremainedfortypecorrectevent,ticketsoldfortypecorrectevent,pricecorrectevent,creator,"Califano","lalalala");
+					150,2,seatsremainedfortypecorrectevent,ticketsoldfortypecorrectevent,pricecorrectevent,creator,"Califano","lalalala");
 
 		} catch (Exception e) {
 			// TODO: handle exception

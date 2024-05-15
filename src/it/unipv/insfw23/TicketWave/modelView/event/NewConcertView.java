@@ -2,7 +2,6 @@ package it.unipv.insfw23.TicketWave.modelView.event;
 
 import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.EnumSet;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
@@ -13,7 +12,6 @@ import javafx.event.EventHandler;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.geometry.VPos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
@@ -30,8 +28,10 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class NewConcertView extends Scene{
+	private final Font lebelsfont = Font.font("Helvetica", FontWeight.NORMAL, 13);
 	private final Label titlelabel = new Label("Compilare i seguenti campi per proseguire:");
 	private final Label namelabel = new Label("Nome: ");
 	private TextField namefield;
@@ -47,12 +47,13 @@ public class NewConcertView extends Scene{
 	private ComboBox<Genre> gensbox;
 	private final Label artistlabel = new Label("Artista: ");
 	private TextField artistfield;
-	private final Label datelabel = new Label("Data: ");
+	private final Label datetimelabel = new Label("Data e ora: ");
 	private DatePicker datepicker;
-	private final Label hourlabel = new Label("orario(hh mm): ");
+//	private final Label hourlabel = new Label("orario(hh mm): ");
 	private Spinner<Integer> hourspinner;
 	private Spinner<Integer> minutesspinner;
 	private HBox hboxtime;
+	private HBox hboxdatetime;
 	private final Label numbaselabel = new Label("n. biglietti base: ");
 	private TextField numbasefield;
 	private final Label numviplabel = new Label("n. biglietti vip: ");
@@ -68,7 +69,6 @@ public class NewConcertView extends Scene{
 	private final Button photoButton = new Button("Scegli foto...");
 	private ImageView eventPhoto;
 	private final Label descriptionlabel = new Label("Descrizione: ");
-//	private TextField descriptionfield;
 	private TextArea descriptionarea;
 	private final Label errlabel = new Label("Parametri non validi");	
 	private Button abort = new Button("Annulla");
@@ -83,150 +83,165 @@ public class NewConcertView extends Scene{
 	public void init() {
 		
 		BorderPane layout = (BorderPane) getRoot();
-		layout.setStyle("-fx-background-color: #def1fa;");
+		layout.setStyle("-fx-background-color: #91bad6;");
 		GridPane grid = new GridPane();
 		
-		grid.setPadding(new Insets(50, 50, 50, 50));
+		grid.setPadding(new Insets(20, 40, 20, 40));
 		grid.setVgap(10);
-		grid.setHgap(60);
+		grid.setHgap(40);
 //		grid.setGridLinesVisible(true);
 		grid.setAlignment(Pos.CENTER);
 		
 		
 		
-		titlelabel.setFont(Font.font("Arial", 30));
-		GridPane.setConstraints(titlelabel, 0, 0, 4, 1);
+		titlelabel.setFont(Font.font("Helvetica", FontWeight.BOLD,30));
+		GridPane.setConstraints(titlelabel, 0, 0, 8, 1);
 		GridPane.setHalignment(titlelabel, HPos.CENTER);
 		GridPane.setVgrow(titlelabel, Priority.SOMETIMES);
 		GridPane.setHgrow(titlelabel, Priority.SOMETIMES);
 		
 		
 		
-		GridPane.setConstraints(namelabel, 0, 2);
+		namelabel.setFont(lebelsfont);
+		GridPane.setConstraints(namelabel, 0, 2, 2, 1);
 		GridPane.setVgrow(namelabel, Priority.SOMETIMES);
 		GridPane.setHgrow(namelabel, Priority.SOMETIMES);
 		
 		namefield = new TextField();
-		//namefield.setMaxWidth(30);
-		GridPane.setConstraints(namefield, 0, 3);
+		namefield.setPrefWidth(150);
+		GridPane.setConstraints(namefield, 0, 3, 2, 1);
 		GridPane.setVgrow(namefield, Priority.SOMETIMES);
 		GridPane.setHgrow(namefield, Priority.SOMETIMES);
 		
 		
 		
-		GridPane.setConstraints(citylabel, 1, 2);
+		citylabel.setFont(lebelsfont);
+		GridPane.setConstraints(citylabel, 2, 2, 2, 1);
 		GridPane.setVgrow(citylabel, Priority.SOMETIMES);
 		GridPane.setHgrow(citylabel, Priority.SOMETIMES);
 		
 		cityfield = new TextField();
-		GridPane.setConstraints(cityfield, 1, 3);
+		GridPane.setConstraints(cityfield, 2, 3, 2, 1);
 		GridPane.setVgrow(cityfield, Priority.SOMETIMES);
 		GridPane.setHgrow(cityfield, Priority.SOMETIMES);
 		
 		
 		
-		GridPane.setConstraints(provincelabel, 2, 2);
+		provincelabel.setFont(lebelsfont);
+		GridPane.setConstraints(provincelabel, 4, 2);
 		GridPane.setVgrow(provincelabel, Priority.SOMETIMES);
 		GridPane.setHgrow(provincelabel, Priority.SOMETIMES);
 		
 		provincesbox = new ComboBox<>();
 		provincesbox.getItems().addAll(Province.values());
-		GridPane.setConstraints(provincesbox, 2, 3);
+		provincesbox.setMaxWidth(120);
+		GridPane.setConstraints(provincesbox, 4, 3);
 		GridPane.setVgrow(provincesbox, Priority.SOMETIMES);
 		GridPane.setHgrow(provincesbox, Priority.SOMETIMES);
 		
 		
 		
-		GridPane.setConstraints(addresslabel, 3, 2);
+		addresslabel.setFont(lebelsfont);
+		GridPane.setConstraints(addresslabel, 5, 2, 2, 1);
 		GridPane.setVgrow(addresslabel, Priority.SOMETIMES);
 		GridPane.setHgrow(addresslabel, Priority.SOMETIMES);
 		
 		addressfield = new TextField();
-		GridPane.setConstraints(addressfield, 3, 3);
+		addressfield.setMinWidth(150);
+		GridPane.setConstraints(addressfield, 5, 3, 2, 1);
 		GridPane.setVgrow(addressfield, Priority.SOMETIMES);
 		GridPane.setHgrow(addressfield, Priority.SOMETIMES);
 		
 		
 		
-		GridPane.setConstraints(datelabel, 0, 5);
-		GridPane.setVgrow(datelabel, Priority.SOMETIMES);
-		GridPane.setHgrow(datelabel, Priority.SOMETIMES);
+		datetimelabel.setFont(lebelsfont);
+		GridPane.setConstraints(datetimelabel, 0, 5, 2, 1);
+		GridPane.setVgrow(datetimelabel, Priority.SOMETIMES);
+		GridPane.setHgrow(datetimelabel, Priority.SOMETIMES);
 		
 		datepicker = new DatePicker();
-		GridPane.setConstraints(datepicker, 0, 6);
-		GridPane.setVgrow(datepicker, Priority.SOMETIMES);
-		GridPane.setHgrow(datepicker, Priority.SOMETIMES);
-		
-		
-		
-		GridPane.setConstraints(hourlabel, 1, 5);
-		GridPane.setVgrow(hourlabel, Priority.SOMETIMES);
-		GridPane.setHgrow(hourlabel, Priority.SOMETIMES);
-		
+		datepicker.setMaxWidth(200);
+				
 		hourspinner = new Spinner<>(0,23,0);
+		hourspinner.setMinWidth(55);
+		hourspinner.setPrefWidth(55);
 		minutesspinner = new Spinner<>(0,55,0,5);
+		minutesspinner.setPrefWidth(55);
+		minutesspinner.setMinWidth(55);
 		hboxtime = new HBox(10,hourspinner,minutesspinner);
-		GridPane.setConstraints(hboxtime, 1, 6);
-		GridPane.setVgrow(hboxtime, Priority.SOMETIMES);
-		GridPane.setHgrow(hboxtime, Priority.SOMETIMES);
-		hboxtime.setMaxWidth(120);
+
+		hboxdatetime = new HBox(20,datepicker,hboxtime);
+		GridPane.setConstraints(hboxdatetime, 0, 6, 2, 1);
+		GridPane.setVgrow(hboxdatetime, Priority.SOMETIMES);
+		GridPane.setHgrow(hboxdatetime, Priority.SOMETIMES);
 		
 		
 		
-		GridPane.setConstraints(genlabel, 2, 5);
+		genlabel.setFont(lebelsfont);
+		GridPane.setConstraints(genlabel, 4, 5);
 		GridPane.setVgrow(genlabel, Priority.SOMETIMES);
 		GridPane.setHgrow(genlabel, Priority.SOMETIMES);
 		
 		gensbox = new ComboBox<>();
 		gensbox.getItems().addAll(Arrays.copyOfRange(Genre.values(), 0, Genre.START_THEATER.ordinal()));
-		GridPane.setConstraints(gensbox, 2, 6);
+		GridPane.setConstraints(gensbox, 4, 6);
 		GridPane.setVgrow(gensbox, Priority.SOMETIMES);
 		GridPane.setHgrow(gensbox, Priority.SOMETIMES);
 		
 		
 		
-		GridPane.setConstraints(artistlabel, 3, 5);
+		artistlabel.setFont(lebelsfont);
+		GridPane.setConstraints(artistlabel, 2, 5, 2, 1);
 		GridPane.setVgrow(artistlabel, Priority.SOMETIMES);
 		GridPane.setHgrow(artistlabel, Priority.SOMETIMES);
 		
 		artistfield = new TextField();
-		GridPane.setConstraints(artistfield, 3,6);
+		GridPane.setConstraints(artistfield, 2, 6, 2, 1);
 		GridPane.setVgrow(artistfield, Priority.SOMETIMES);
 		GridPane.setHgrow(artistfield, Priority.SOMETIMES);
 		
 		
 		
-		GridPane.setConstraints(numtypeticketlabel, 0, 8);
+		numtypeticketlabel.setFont(lebelsfont);
+		GridPane.setConstraints(numtypeticketlabel, 5, 5, 2, 1);
 		GridPane.setVgrow(numtypeticketlabel, Priority.SOMETIMES);
 		GridPane.setHgrow(numtypeticketlabel, Priority.SOMETIMES);
 		
 		typesticketbox = new ChoiceBox<>();
 		typesticketbox.getItems().addAll("1","2","3");
-		GridPane.setConstraints(typesticketbox, 0, 9);
+		GridPane.setConstraints(typesticketbox, 5, 6);
 		GridPane.setVgrow(typesticketbox, Priority.SOMETIMES);
 		GridPane.setHgrow(typesticketbox, Priority.SOMETIMES);
 		
 		
 		
-		GridPane.setConstraints(numbaselabel, 1, 8);
+		numbaselabel.setFont(lebelsfont);
+		numbaselabel.setMinWidth(100);
+		GridPane.setConstraints(numbaselabel, 0, 8);
 		numbaselabel.setVisible(false);
 		GridPane.setVgrow(numbaselabel, Priority.SOMETIMES);
 		GridPane.setHgrow(numbaselabel, Priority.SOMETIMES);
 		
 		numbasefield = new TextField();
-		GridPane.setConstraints(numbasefield, 1, 9);
+		numbasefield.setMaxWidth(80);
+		numbasefield.setMinWidth(30);
+		GridPane.setConstraints(numbasefield, 0, 9);
 		numbasefield.setVisible(false);
 		GridPane.setVgrow(numbasefield, Priority.SOMETIMES);
 		GridPane.setHgrow(numbasefield, Priority.SOMETIMES);
 		
 		
 		
+		numviplabel.setFont(lebelsfont);
+		numviplabel.setMinWidth(90);
 		GridPane.setConstraints(numviplabel, 2, 8);
 		numviplabel.setVisible(false);
 		GridPane.setVgrow(numviplabel, Priority.SOMETIMES);
 		GridPane.setHgrow(numviplabel, Priority.SOMETIMES);
 		
 		numvipfield = new TextField();
+		numvipfield.setMaxWidth(80);
+		numvipfield.setMinWidth(30);
 		GridPane.setConstraints(numvipfield, 2, 9);
 		numvipfield.setVisible(false);
 		GridPane.setVgrow(numvipfield, Priority.SOMETIMES);
@@ -234,95 +249,110 @@ public class NewConcertView extends Scene{
 		
 		
 		
-		GridPane.setConstraints(numpremiumlabel, 3, 8);
+		numpremiumlabel.setFont(lebelsfont);
+		numpremiumlabel.setMinWidth(125);
+		GridPane.setConstraints(numpremiumlabel, 4, 8);
 		numpremiumlabel.setVisible(false);
 		GridPane.setVgrow(numpremiumlabel, Priority.SOMETIMES);
 		GridPane.setHgrow(numpremiumlabel, Priority.SOMETIMES);
 		
 		numpremiumfield = new TextField();
-		GridPane.setConstraints(numpremiumfield, 3, 9);
+		numpremiumfield.setMaxWidth(80);
+		numpremiumfield.setMinWidth(30);
+		GridPane.setConstraints(numpremiumfield, 4, 9);
 		numpremiumfield.setVisible(false);
 		GridPane.setVgrow(numpremiumfield, Priority.SOMETIMES);
 		GridPane.setHgrow(numpremiumfield, Priority.SOMETIMES);
 		
 		
 		
-		GridPane.setConstraints(photoButton, 0, 11);
+		photoButton.setFont(lebelsfont);
+		GridPane.setConstraints(photoButton, 7, 8, 1, 2);
+		GridPane.setHalignment(photoButton, HPos.CENTER);
 		GridPane.setVgrow(photoButton, Priority.SOMETIMES);
 		GridPane.setHgrow(photoButton, Priority.SOMETIMES);
 		
 		eventPhoto = new ImageView();
 		eventPhoto.isSmooth();
-//		eventPhoto.maxHeight(50);
-//		eventPhoto.maxWidth(50);
 		eventPhoto.setFitHeight(100);
 		eventPhoto.setFitWidth(100);
-		GridPane.setConstraints(eventPhoto, 0, 12,3,3);
+		GridPane.setConstraints(eventPhoto, 7, 2, 1, 5);
 		GridPane.setVgrow(eventPhoto, Priority.SOMETIMES);
 		GridPane.setHgrow(eventPhoto, Priority.SOMETIMES);
 		
 		
 		
-		GridPane.setConstraints(pricebaselabel, 1, 11);
+		pricebaselabel.setFont(lebelsfont);
+		pricebaselabel.setMinWidth(90);
+		GridPane.setConstraints(pricebaselabel, 1, 8);
 		pricebaselabel.setVisible(false);
 		GridPane.setVgrow(pricebaselabel, Priority.SOMETIMES);
 		GridPane.setHgrow(pricebaselabel, Priority.SOMETIMES);
 		
 		pricebasefield = new TextField();
-		GridPane.setConstraints(pricebasefield, 1, 12);
+		pricebasefield.setMaxWidth(80);
+		pricebasefield.setMinWidth(30);
+		GridPane.setConstraints(pricebasefield, 1, 9);
 		pricebasefield.setVisible(false);
-//		GridPane.setValignment(pricebasefield, VPos.TOP);
 		GridPane.setVgrow(pricebasefield, Priority.SOMETIMES);
 		GridPane.setHgrow(pricebasefield, Priority.SOMETIMES);
 		
 		
 		
-		GridPane.setConstraints(priceviplabel, 2, 11);
+		priceviplabel.setFont(lebelsfont);
+		priceviplabel.setMinWidth(75);
+		GridPane.setConstraints(priceviplabel, 3, 8);
 		priceviplabel.setVisible(false);
 		GridPane.setVgrow(priceviplabel, Priority.SOMETIMES);
 		GridPane.setHgrow(priceviplabel, Priority.SOMETIMES);
 		
 		pricevipfield = new TextField();
-		GridPane.setConstraints(pricevipfield, 2, 12);
+		pricevipfield.setMaxWidth(80);
+		pricevipfield.setMinWidth(30);
+		GridPane.setConstraints(pricevipfield, 3, 9);
 		pricevipfield.setVisible(false);
-//		GridPane.setValignment(pricevipfield, VPos.TOP);
 		GridPane.setVgrow(pricevipfield, Priority.SOMETIMES);
 		GridPane.setHgrow(pricevipfield, Priority.SOMETIMES);
 		
 		
 		
-		GridPane.setConstraints(pricepremiumlabel, 3, 11);
+		pricepremiumlabel.setFont(lebelsfont);
+		pricepremiumlabel.setMinWidth(110);
+		GridPane.setConstraints(pricepremiumlabel, 5, 8);
 		pricepremiumlabel.setVisible(false);
 		GridPane.setVgrow(pricepremiumlabel, Priority.SOMETIMES);
 		GridPane.setHgrow(pricepremiumlabel, Priority.SOMETIMES);
 		
 		pricepremiumfield = new TextField();
-		GridPane.setConstraints(pricepremiumfield, 3, 12);
+		pricepremiumfield.setMaxWidth(80);
+		pricepremiumfield.setMinWidth(30);
+		GridPane.setConstraints(pricepremiumfield, 5, 9);
 		pricepremiumfield.setVisible(false);
-//		GridPane.setValignment(pricepremiumfield, VPos.TOP);
 		GridPane.setVgrow(pricepremiumfield, Priority.SOMETIMES);
 		GridPane.setHgrow(pricepremiumfield, Priority.SOMETIMES);
 		
 		
 		
-		GridPane.setConstraints(descriptionlabel, 1, 14);
+		descriptionlabel.setFont(lebelsfont);
+		GridPane.setConstraints(descriptionlabel, 0, 11, 2, 1);
 		GridPane.setVgrow(descriptionlabel, Priority.SOMETIMES);
 		GridPane.setHgrow(descriptionlabel, Priority.SOMETIMES);
 		
-//		descriptionfield = new TextField();
 		descriptionarea = new TextArea();
-		GridPane.setConstraints(descriptionarea, 1,15,2,1);
+		descriptionarea.maxHeight(20);
+		GridPane.setConstraints(descriptionarea, 0,12,4,1);
 		GridPane.setVgrow(descriptionarea, Priority.SOMETIMES);
 		GridPane.setHgrow(descriptionarea, Priority.SOMETIMES);
 		
 		
 		
-		GridPane.setConstraints(abort, 0, 16);
+		abort.setFont(lebelsfont);
+		GridPane.setConstraints(abort, 0, 14);
 		
 		
 		
-		GridPane.setConstraints(errlabel, 1, 16,1,2);
-		errlabel.setFont(Font.font("Arial", 20));
+		GridPane.setConstraints(errlabel, 1, 14,5,1);
+		errlabel.setFont(Font.font("Helvetica",FontWeight.BOLD, 20));
 		errlabel.setTextFill(Color.web("#FF0400"));;
 		errlabel.setVisible(false);;
 		GridPane.setHalignment(errlabel, HPos.CENTER);
@@ -331,25 +361,11 @@ public class NewConcertView extends Scene{
 		
 		
 		
-		GridPane.setConstraints(confirm, 3, 16);
+		confirm.setFont(lebelsfont);
+		GridPane.setConstraints(confirm, 7, 14);
 		GridPane.setHalignment(confirm, HPos.RIGHT);
 		
-		
-		
-		
-		
-		
-        //INSERIMENTO FOTO (+ I METODI GET)
-		
-		//GridPane.setHalignment(photoButton, HPos.LEFT);
-		//GridPane.setHalignment(eventPhoto, HPos.LEFT);
-
-		//I BOTTONI CONFERMA E TORNA INDIETRO NON SONO SPARITI, SONO SOTTO,
-		// SE METTI SCHERMO INTERO LI VEDI, POSIZIONALI COME VUOI TUTTI QUANTI
-		// SAREBBE CARINO CHE IL BOTTONE CON LA FOTO USCISSERO AL CENTRO A DX,
-		// SOPRA IL TASTO CONFERMA IN LINEA CON TUTTI GLI ALTRI CAMPI
-
-		
+			
 		
 		/* handler per il num di biglietti*/
 		typesticketbox.setOnAction(new EventHandler<>() {
@@ -390,11 +406,11 @@ public class NewConcertView extends Scene{
 			
 		
 		grid.getChildren().addAll(titlelabel, namelabel, namefield,citylabel, cityfield, provincelabel, provincesbox, addresslabel, 
-								    addressfield, datelabel, datepicker, hourlabel, hboxtime, numtypeticketlabel, typesticketbox, 
-								    genlabel, gensbox, artistlabel, artistfield, numbaselabel, numbasefield, numviplabel, numvipfield, 
-								    numpremiumlabel, numpremiumfield, photoButton, eventPhoto, pricebaselabel, pricebasefield, 
-								    priceviplabel, pricevipfield, pricepremiumlabel, pricepremiumfield, descriptionlabel, descriptionarea,
-								    confirm, errlabel,abort);
+								   addressfield, datetimelabel, hboxdatetime, numtypeticketlabel, typesticketbox, 
+								   genlabel, gensbox, artistlabel, artistfield, numbaselabel, numbasefield, numviplabel, numvipfield, 
+								   numpremiumlabel, numpremiumfield, photoButton, eventPhoto, pricebaselabel, pricebasefield, 
+								   priceviplabel, pricevipfield, pricepremiumlabel, pricepremiumfield, descriptionlabel, descriptionarea,
+								   confirm, errlabel,abort);
 		
 		layout.setTop(UpperBar.getIstance());
 		layout.setCenter(grid);
@@ -477,6 +493,11 @@ public class NewConcertView extends Scene{
 		return errlabel;
 	}
 
-	public Button getPhotoButton(){return photoButton;}
-	public ImageView getPhotoView() {return eventPhoto;}
+	public Button getPhotoButton(){
+		return photoButton;
+	}
+	
+	public ImageView getPhotoView() {
+		return eventPhoto;
+	}
 }

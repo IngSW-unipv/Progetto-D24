@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
 //import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 //import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 
@@ -28,15 +29,14 @@ public class PaymentDataMController {
     private TicketPageView ticketpage;
     private PaymentSelectionView paymentSelectionPage;
     private boolean isviewermanager;
-    private User user;
+    private User user= ConnectedUser.getInstance().getUser();
     private CustomerView customerView;
     private ManagerView managerView;
 
-    public PaymentDataMController(Stage mainStage, PaymentDataMView paymentDataPage, PaymentSelectionView paymentSelectionPage, User user ) {
+    public PaymentDataMController(Stage mainStage, PaymentDataMView paymentDataPage, PaymentSelectionView paymentSelectionPage) {
         this.paymentDataPage = paymentDataPage;
         this.paymentSelectionPage = paymentSelectionPage;
         this.mainStage = mainStage;
-        this.user=user;
         initComponents();
         setLabelforWavePoints();
     }
@@ -83,7 +83,7 @@ public class PaymentDataMController {
             }
         };
 
-        paymentDataPage.getForwardButton().setOnMouseClicked(goToNewPage);
+        paymentDataPage.getNextButton().setOnMouseClicked(goToNewPage);
 
 
 

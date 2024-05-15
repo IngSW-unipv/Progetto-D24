@@ -12,16 +12,17 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class PaymentDataPView extends Scene {
-
+    private final Font font = Font.font("Helvetica", FontWeight.NORMAL, 13);
     private static Label emailLabel = new Label("Inserisci la tua E-mail:");
     private TextField inserEmail=new TextField();
 
     private Scene scene;
-    private static Button forwardButton =new Button("Avanti");
+    private static Button nextButton =new Button("Avanti");
     private static  Button backButton = new Button();
 
     private static RadioButton usePointsButton= new RadioButton("Utilizza i tuoi WavePoints");
@@ -39,7 +40,11 @@ public class PaymentDataPView extends Scene {
 
     private void initComponents(){
 
-        VBox textBox= new VBox(emailLabel,inserEmail, forwardButton,usePointsButton);
+        emailLabel.setFont(font);
+        inserEmail.setFont(font);
+        usePointsButton.setFont(font);
+
+        VBox textBox= new VBox(emailLabel,inserEmail, nextButton,usePointsButton);
         textBox.setStyle("-fx-font-size: 14px;");
         textBox.setPadding(new Insets(10));
         textBox.setAlignment(Pos.CENTER);
@@ -47,29 +52,28 @@ public class PaymentDataPView extends Scene {
         inserEmail.setMaxWidth(200);
         usePointsButton.setAlignment(Pos.BOTTOM_CENTER);
 
-
-        HBox buttonBox= new HBox(backButton);
-        buttonBox.setPadding(new Insets(10));
-        buttonBox.setSpacing(50);
-
-
-        BorderPane root= new BorderPane();
-        root.setStyle("-fx-background-color: #91bad6;");
-        root.setPadding(new Insets(10));
-        root.setCenter(textBox);
-        root.setBottom(buttonBox);
-
-
-        BorderPane.setAlignment(emailLabel, Pos.TOP_CENTER);
-        BorderPane.setAlignment(inserEmail, Pos.CENTER);
-
-
         Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/backArrow.png");
         ImageView backarrow = new ImageView(backarrowlogo);
         backarrow.setFitWidth(50);
         backarrow.setPreserveRatio(true);
         backButton.setGraphic(backarrow);
         backButton.setStyle("-fx-background-color: #91bad6;");
+
+
+
+        BorderPane root= new BorderPane();
+        root.setStyle("-fx-background-color: #91bad6;");
+        root.setPadding(new Insets(10));
+        root.setCenter(textBox);
+        BorderPane.setAlignment(backButton,Pos.BOTTOM_LEFT);
+        root.setBottom(backButton);
+
+
+        BorderPane.setAlignment(emailLabel, Pos.TOP_CENTER);
+        BorderPane.setAlignment(inserEmail, Pos.CENTER);
+
+
+
 
 
         BorderPane layout= new BorderPane();
@@ -98,7 +102,7 @@ public class PaymentDataPView extends Scene {
     }
 
     public Button getForwardButtonButton() {
-        return forwardButton;
+        return nextButton;
     }
 
     public Scene getScene() {

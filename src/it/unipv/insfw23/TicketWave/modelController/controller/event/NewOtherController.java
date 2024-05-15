@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.event;
 
+import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.event.NewOtherView;
 import it.unipv.insfw23.TicketWave.modelView.event.SelectionNewEventTypeView;
@@ -17,11 +18,11 @@ public class NewOtherController {
 	SelectionNewEventTypeView typeselevview;
 	Manager loggedmanager;
 	
-	public NewOtherController(Stage primarystage, NewOtherView newotherview, SelectionNewEventTypeView typeselevview, Manager loggedmanager) {
+	public NewOtherController(Stage primarystage, NewOtherView newotherview, SelectionNewEventTypeView typeselevview) {
 		window = primarystage;
 		this.newotherview = newotherview;
 		this.typeselevview = typeselevview;
-		this.loggedmanager = loggedmanager;
+		this.loggedmanager = (Manager) ConnectedUser.getInstance().getUser();
 		initComponents();
 	}
 	
@@ -61,6 +62,6 @@ public class NewOtherController {
 			}
 		};
 		
-		newotherview.getForwardButton().setOnMouseClicked(forwardButton);
+		newotherview.getConfirmButton().setOnMouseClicked(forwardButton);
 	}
 }

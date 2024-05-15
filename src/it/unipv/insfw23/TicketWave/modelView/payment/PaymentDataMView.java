@@ -12,14 +12,16 @@ import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
+import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentDataMView extends Scene {
+    private final Font font = Font.font("Helvetica", FontWeight.NORMAL, 13);
 
     private static  Label nameLabel = new Label("Nome Intestatario Carta:");
     private static  Label surnameLabel = new Label("Cognome Intestatario Carta:");
@@ -33,7 +35,7 @@ public class PaymentDataMView extends Scene {
     private static   TextField insertYY = new TextField();
     private static  TextField insertcvc = new TextField();
     private static  Button backButton = new Button();
-    private static Button forwardButton = new Button();
+    private static Button nextButton = new Button();
 
     private static RadioButton usePointsButton= new RadioButton("Utilizza i tuoi WavePoints");
     private static  List<TextField> textFields = new ArrayList<>();
@@ -48,19 +50,35 @@ public class PaymentDataMView extends Scene {
 
     private void initComponents() {
 
-        Image forwardarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/nextArrow.png");
-        forwardButton.setGraphic(new ImageView(forwardarrowlogo));
-        forwardButton.setPrefWidth(forwardarrowlogo.getWidth());
-        forwardButton.setPrefHeight(forwardarrowlogo.getHeight());
-        forwardButton.setPadding(new Insets(0));
-        forwardButton.setStyle("-fx-background-color: #91bad6;");
+
+
+        Image nextarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/nextArrow.png");
+        ImageView nextarrow = new ImageView(nextarrowlogo);
+        nextarrow.setFitWidth(50);
+        nextarrow.setPreserveRatio(true);
+        nextButton.setGraphic(nextarrow);
+        nextButton.setStyle("-fx-background-color: #91bad6;");
+
 
         Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/backArrow.png");
-        backButton.setGraphic(new ImageView(backarrowlogo));
-        backButton.setPrefWidth(backarrowlogo.getWidth());
-        backButton.setPrefHeight(backarrowlogo.getHeight());
-        backButton.setPadding(new Insets(0));
+        ImageView backarrow = new ImageView(backarrowlogo);
+        backarrow.setFitWidth(50);
+        backarrow.setPreserveRatio(true);
+        backButton.setGraphic(backarrow);
         backButton.setStyle("-fx-background-color: #91bad6;");
+
+        Region leftSpacer = new Region();
+        HBox.setHgrow(leftSpacer, Priority.ALWAYS); // Consente a leftSpacer di espandersi per riempire lo spazio disponibile
+
+        Region rightSpacer = new Region();
+        HBox.setHgrow(rightSpacer, Priority.ALWAYS); // Consente a rightSpacer di espandersi per riempire lo spazio disponibile// Imposta un margine di 10 unità a destra del backButton
+        // Creazione di un HBox per contenere i bottoni e le Region vuote
+        HBox buttonBox = new HBox( backButton, rightSpacer, nextButton);
+        buttonBox.setMargin(backButton, new Insets(0, 0, 0, 0)); // Margine a sinistra
+        buttonBox.setMargin(nextButton, new Insets(0, 0, 0, 0)); // Margine a destra
+
+        buttonBox.setSpacing(50); // Spazio tra i bottoni
+        buttonBox.setAlignment(Pos.CENTER);
 
         textFields.add(insertMM);
         textFields.add(insertYY);
@@ -75,8 +93,16 @@ public class PaymentDataMView extends Scene {
 
         // Impostazione del colore del testo a nero per tutti i label
         for (Label label : labels) {
+            label.setFont(font);
             label.setTextFill(Color.BLACK);
         }
+
+        for (TextField textField : textFields) {
+            textField.setFont(font);
+
+        }
+        usePointsButton.setFont(font);
+
 
 
         
@@ -97,10 +123,11 @@ public class PaymentDataMView extends Scene {
         //root.setStyle("-fx-background-color: #def1fa;");
         root.setPadding(new Insets(10));
         root.setCenter(dataInput);
-        root.setRight(forwardButton);
-        root.setLeft(backButton);
-        BorderPane.setAlignment(forwardButton, Pos.BOTTOM_RIGHT);
-        BorderPane.setAlignment(backButton,Pos.BOTTOM_LEFT);
+        //root.setRight(nextButton);
+        //root.setLeft(backButton);
+        root.setBottom(buttonBox);
+        //BorderPane.setAlignment(nextButton, Pos.BOTTOM_RIGHT);
+        //BorderPane.setAlignment(backButton,Pos.BOTTOM_LEFT);
 
 
         BorderPane layout= new BorderPane();
@@ -140,8 +167,8 @@ public class PaymentDataMView extends Scene {
         return expirationLabel;
     }
 
-    public static Button getForwardButton() {
-        return forwardButton;
+    public static Button getNextButton() {
+        return nextButton;
     }
 
     public static List<TextField> getTextFields() {

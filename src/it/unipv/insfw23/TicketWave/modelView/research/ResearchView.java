@@ -7,7 +7,10 @@ package it.unipv.insfw23.TicketWave.modelView.research;
 // import it.unipv.insfw23.TicketWave.modelController.MainController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
-        import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
         import javafx.collections.FXCollections;
@@ -27,6 +30,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
         import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
+import javax.imageio.event.IIOReadProgressListener;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -34,7 +38,7 @@ import java.util.ArrayList;
 import static javafx.application.Application.launch;
 
 // Estende Scene, in maniera da poter visualizzare i nodes comuni della ResearchNodesView
-public class ResearchView extends Scene{
+public class ResearchView extends Scene implements IResettableScene {
     private Button searchButton;
     private MenuBar bar;
     private Menu genre;
@@ -43,6 +47,7 @@ public class ResearchView extends Scene{
     private ArrayList <CheckBox> genv; // vettore per poter gestire i CheckBox di generi nel controller
     private TextField searchBar;
     private TableView<Event> table;
+    private BorderPane layout;
 
     // costruttore
     public ResearchView() {
@@ -71,6 +76,9 @@ public class ResearchView extends Scene{
 
         TableView<Event> table = new TableView<>();
         this.table = table;
+
+        BorderPane layout = new BorderPane();
+        this.layout = layout;
 
         //__________ Estetica SearchBar, SearchButton, MenuBar e Menu _________//
         searchBar.setStyle("-fx-background-color: #ffff");
@@ -207,25 +215,25 @@ public class ResearchView extends Scene{
         Time time = null;
 
         ObservableList<Event> evs = FXCollections.observableArrayList(
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(2,"Rooler in tha house","ROZZANO","Laghetto", data, time, Province.MILANO, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"Orcocan", "Orcocan è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, Type.CONCERT,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui")
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+                new Concert(2,"Rooler in tha house","ROZZANO","Laghetto", data, time, Province.MILANO, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"Orcocan", "Orcocan è qui"),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui")
         );
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         table.setItems(evs);
@@ -233,7 +241,6 @@ public class ResearchView extends Scene{
         //*_____________________________________________* //
         // Inizio creazione GridPane //
         //*_____________________________________________*  //
-
         GridPane gp = new GridPane();
         gp.setStyle("-fx-background-color: #91BAD6");
         gp.setAlignment(Pos.TOP_CENTER);
@@ -272,15 +279,11 @@ public class ResearchView extends Scene{
 
         gp.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
 
-        BorderPane layout = new BorderPane();
+        //*_____________________________________________* //
+        // BorderPane che contiene le barre e il GridPane //
+        //*_____________________________________________*  //
         layout.setCenter(gp);
         layout.setBottom(LowerBar.getInstance());
-        /* if ( User == Manager) {
-               layout.setTop(ManagerUpperBar.getIstance());
-            }  else {
-                layout.setTop(CustomerUpperBar.getIstance());
-            }
-         */
         layout.setTop(UpperBar.getIstance());
         setRoot(layout);
     }
@@ -312,5 +315,29 @@ public class ResearchView extends Scene{
 
     public TableView<Event> getTable() {
         return table;
+    }
+
+    @Override
+    public void reSetBars(){
+        BorderPane temp = new BorderPane();
+        setRoot(temp);
+        //controllo per il layout inizializzato
+        if (layout == null) {
+            System.err.println("Layout non inizializzato correttamente!");
+            return;}
+        // Customer d'esempio, poi dovrò mettere cu.getUser().isCustomer() all'interno dell'if sotto
+        Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
+        Customer cs =new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.BARI, favoriteGenre, 100);
+
+        ConnectedUser cu = ConnectedUser.getInstance();
+        if(cs.isCustomer()) {
+            UpperBar.getIstance().setForCustomer();
+        }
+        else{
+            UpperBar.getIstance().setForManager();
+        }
+        layout.setTop(UpperBar.getIstance());
+        layout.setBottom(LowerBar.getInstance());
+        setRoot(layout);
     }
 }

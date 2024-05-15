@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
 
+import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
@@ -28,13 +29,12 @@ public class PaymentSelectionController {
     private boolean isviewermanager;
 
     private PaymentDataMView paymentDataMPage;
-    private User user;
+    private User user= ConnectedUser.getInstance().getUser();
 
-    public PaymentSelectionController(Stage mainStage, PaymentSelectionView PaymentPage, Scene scene, User user) {
+    public PaymentSelectionController(Stage mainStage, PaymentSelectionView PaymentPage, Scene scene) {
         this.mainStage = mainStage;
         this.paymentPage = PaymentPage;
         this.scene=scene;
-        this.user= user;
 
         initComponents();
     }
@@ -49,12 +49,12 @@ public class PaymentSelectionController {
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("Stai andando alla PaymentDataMPage");
                 paymentDataMPage=new PaymentDataMView();
-               PaymentDataMController paymentDataMController = new PaymentDataMController(mainStage,paymentDataMPage,paymentPage,user);
+               PaymentDataMController paymentDataMController = new PaymentDataMController(mainStage,paymentDataMPage,paymentPage);
                 mainStage.setScene(paymentDataMPage);
             } else if (paymentPage.getPaypalButton().isSelected()) {
                     System.out.println("Stai andando alla PaymentDataPPage");
                     paymentDataPPage=new PaymentDataPView();
-                    PaymentDataPController paymentDataPController=new PaymentDataPController(mainStage,paymentDataPPage,paymentPage,user);
+                    PaymentDataPController paymentDataPController=new PaymentDataPController(mainStage,paymentDataPPage,paymentPage);
                     mainStage.setScene(paymentDataPPage);
                 }else {
                     paymentPage.getErrmessage().setOpacity(100);

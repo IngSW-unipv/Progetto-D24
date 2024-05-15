@@ -15,8 +15,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class SelectionNewEventTypeView extends Scene{
+	private Font labelsfont = Font.font("Helvetica", FontWeight.NORMAL, 16);
 	private Button abortbutton;
 	private Button forwardbutton;
 	private RadioButton concerto;
@@ -35,7 +37,7 @@ public class SelectionNewEventTypeView extends Scene{
 	
 	private void init() {
 		layout = (BorderPane) getRoot();
-		layout.setStyle("-fx-background-color: #def1fa;");
+		layout.setStyle("-fx-background-color: #91bad6;");
 		
 		grid = new GridPane();
 		grid.setPadding(new Insets(50, 30, 50, 30));
@@ -46,7 +48,7 @@ public class SelectionNewEventTypeView extends Scene{
 		
 		
 		Label title = new Label("Selezionare la tipologia del'evento che si vuole pubblicare:");
-		title.setFont(Font.font("Arial", 25));
+		title.setFont(Font.font("Helvetica", FontWeight.BOLD, 25));
 		title.setStyle("-fx-alignment: CENTER");
 		GridPane.setConstraints(title, 0, 0, 6, 1);
 		GridPane.setValignment(title, VPos.CENTER);
@@ -57,27 +59,30 @@ public class SelectionNewEventTypeView extends Scene{
 		ToggleGroup togglegroup = new ToggleGroup();
 		
 		concerto = new RadioButton("Concerto");
-		concerto.setFont(Font.font("Arial", 18));
+		concerto.setFont(labelsfont);
 		GridPane.setConstraints(concerto, 1, 1);
 		concerto.setToggleGroup(togglegroup);
 		GridPane.setHgrow(concerto, Priority.SOMETIMES);
 		GridPane.setVgrow(concerto, Priority.SOMETIMES);
 		
+		
 		festival = new RadioButton("Festival");
-		festival.setFont(Font.font("Arial", 18));
+		festival.setFont(labelsfont);
 		GridPane.setConstraints(festival, 3, 1);
 		festival.setToggleGroup(togglegroup);
 		GridPane.setHgrow(festival, Priority.SOMETIMES);
 		GridPane.setVgrow(festival, Priority.SOMETIMES);
 //		GridPane.setHalignment(festival, HPos.CENTER);
 		
+		
 		teatro = new RadioButton("Spettacolo teatrale");
-		teatro.setFont(Font.font("Arial", 18));
+		teatro.setFont(labelsfont);
 		GridPane.setConstraints(teatro, 1, 2);
 		teatro.setToggleGroup(togglegroup);
 		
+		
 		altro = new RadioButton("Altro");
-		altro.setFont(Font.font("Arial", 18));
+		altro.setFont(labelsfont);
 		GridPane.setConstraints(altro, 3, 2);
 		altro.setToggleGroup(togglegroup);
 		GridPane.setHgrow(teatro, Priority.SOMETIMES);
@@ -88,7 +93,7 @@ public class SelectionNewEventTypeView extends Scene{
 //		choice = (RadioButton)togglegroup.getSelectedToggle();
 		
 		forwardbutton = new Button("Prosegui");
-		forwardbutton.setFont(Font.font("Arial", 15));
+		forwardbutton.setFont(labelsfont);
 		GridPane.setConstraints(forwardbutton, 3, 3, 2, 1);
 		forwardbutton.setStyle("-fx-alignment: CENTER");
 //		GridPane.setValignment(avanti, VPos.CENTER);
@@ -98,7 +103,7 @@ public class SelectionNewEventTypeView extends Scene{
 		
 		
 		abortbutton = new Button("Annulla");
-		abortbutton.setFont(Font.font("Arial", 15));
+		abortbutton.setFont(labelsfont);
 		GridPane.setConstraints(abortbutton, 1, 3);
 		abortbutton.setStyle("-fx-alignment: CENTER");
 		GridPane.setHgrow(abortbutton, Priority.SOMETIMES);
@@ -108,7 +113,7 @@ public class SelectionNewEventTypeView extends Scene{
 				
 		grid.getChildren().addAll(title, concerto, festival, teatro, altro, forwardbutton, abortbutton);
 		
-		layout.setStyle("-fx-background-color: #def1fa;");
+		
 		layout.setTop(UpperBar.getIstance());
 		layout.setCenter(grid);
 		layout.setBottom(LowerBar.getInstance());

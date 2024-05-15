@@ -44,7 +44,7 @@ public class CustomerTest {
         int [] a = {20};
         int [] b = {2080};
         double [] p = {125};
-        fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024,4,20), Time.valueOf("14:04:00"), Province.COMO, Genre.EDM, Type.FESTIVAL, 3000,
+        fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024,4,20), Time.valueOf("14:04:00"), Province.COMO, Genre.EDM, 3000,
                 1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", 3);
     }
 
