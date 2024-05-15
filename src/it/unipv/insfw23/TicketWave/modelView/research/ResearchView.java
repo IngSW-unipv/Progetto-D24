@@ -8,6 +8,7 @@ package it.unipv.insfw23.TicketWave.modelView.research;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
         import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
         import javafx.collections.FXCollections;
@@ -27,6 +28,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
         import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
+import javax.imageio.event.IIOReadProgressListener;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -34,7 +36,7 @@ import java.util.ArrayList;
 import static javafx.application.Application.launch;
 
 // Estende Scene, in maniera da poter visualizzare i nodes comuni della ResearchNodesView
-public class ResearchView extends Scene{
+public class ResearchView extends Scene implements IResettableScene {
     private Button searchButton;
     private MenuBar bar;
     private Menu genre;
@@ -312,5 +314,10 @@ public class ResearchView extends Scene{
 
     public TableView<Event> getTable() {
         return table;
+    }
+
+    @Override
+    public void reSetBars() {
+
     }
 }

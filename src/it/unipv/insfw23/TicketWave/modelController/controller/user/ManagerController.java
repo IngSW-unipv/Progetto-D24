@@ -7,6 +7,7 @@ import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchC
 import it.unipv.insfw23.TicketWave.modelController.controller.statistics.TypeStatsController;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.event.SelectionNewEventTypeView;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
@@ -26,6 +27,7 @@ public class ManagerController {
 	ManagerView managerview;
 	LoginView logview;
 	Manager loggedmanager;
+	IResettableScene backScene;
 	
 	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview) {
 		mainStage = primarystage;
@@ -138,7 +140,7 @@ public class ManagerController {
 				//costruttore view
 				TicketPageView tic = new TicketPageView();
 				//costruttore controller
-				TicketPageController buyticketcontroller = new TicketPageController(mainStage, tic, managerview.getTableEv().getSelectionModel().getSelectedItem());
+				TicketPageController buyticketcontroller = new TicketPageController(mainStage, tic, managerview.getTableEv().getSelectionModel().getSelectedItem(),managerview);
 				//metodo che setta upperbar manager
 				//opacita
 				//

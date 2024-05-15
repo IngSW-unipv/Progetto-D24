@@ -7,6 +7,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
+import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import javafx.event.ActionEvent;
@@ -54,7 +55,7 @@ public class ResearchController {
                 tpv.setComponents(user.isCustomer(), rv.getTable().getSelectionModel().getSelectedItem().getType(), rv.getTable().getSelectionModel().getSelectedItem().getName(), rv.getTable().getSelectionModel().getSelectedItem().getCity(),
                                   rv.getTable().getSelectionModel().getSelectedItem().getLocation(), rv.getTable().getSelectionModel().getSelectedItem().getProvince(), rv.getTable().getSelectionModel().getSelectedItem().getDate(),
                                   rv.getTable().getSelectionModel().getSelectedItem().getArtists(), rv.getTable().getSelectionModel().getSelectedItem().getSeatsRemainedNumberForType(), rv.getTable().getSelectionModel().getSelectedItem().getPrice());
-                TicketPageController tpc =  new TicketPageController(mainStage, tpv, rv.getTable().getSelectionModel().getSelectedItem()); // creazione del TicketPageController
+                TicketPageController tpc =  new TicketPageController(mainStage, tpv, rv.getTable().getSelectionModel().getSelectedItem(),rv); // creazione del TicketPageController
                 mainStage.setScene(tpv);
             }
         };

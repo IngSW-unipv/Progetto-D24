@@ -83,7 +83,7 @@ public class PaymentDataMController {
             }
         };
 
-        paymentDataPage.getForwardButton().setOnMouseClicked(goToNewPage);
+        paymentDataPage.getNextButton().setOnMouseClicked(goToNewPage);
 
 
 
