@@ -19,7 +19,7 @@ import javafx.scene.text.FontWeight;
 
 import javax.imageio.event.IIOReadProgressListener;
 
-public class SubscriptionSelectionView extends Scene {
+public class SubscriptionSelectionView extends Scene implements IResettableScene{
 
     private BorderPane layout;
     private Pane contenuto;

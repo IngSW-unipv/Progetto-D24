@@ -3,6 +3,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
+import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataPView;
@@ -23,7 +24,7 @@ public class PaymentSelectionController {
     private PaymentSelectionView paymentPage;
     private TicketPageView ticketPage;
     private SubscriptionSelectionView subscriptionSelectionView;
-    private Scene scene;
+    private IResettableScene backScene;
     private PaymentDataPView paymentDataPPage;
 
     private boolean isviewermanager;
@@ -31,10 +32,10 @@ public class PaymentSelectionController {
     private PaymentDataMView paymentDataMPage;
     private User user= ConnectedUser.getInstance().getUser();
 
-    public PaymentSelectionController(Stage mainStage, PaymentSelectionView PaymentPage, Scene scene) {
+    public PaymentSelectionController(Stage mainStage, PaymentSelectionView PaymentPage, IResettableScene backScene) {
         this.mainStage = mainStage;
         this.paymentPage = PaymentPage;
-        this.scene=scene;
+        this.backScene=backScene;
 
         initComponents();
     }
@@ -72,6 +73,12 @@ public class PaymentSelectionController {
             @Override
             public void handle(MouseEvent actionEvent) {
                 // Azione da eseguire quando il pulsante viene premuto
+
+                backScene.reSetBars();
+                Scene backSceneCasted = (Scene) backScene;
+                mainStage.setScene(backSceneCasted);
+
+                /*
                 try {
                     // Ottieni il metodo "reSetBars" dalla classe della scena
                     Method method = scene.getClass().getMethod("reSetBars");
@@ -96,6 +103,8 @@ public class PaymentSelectionController {
                     // Gestione delle eccezioni durante l'invocazione del metodo
                     e.printStackTrace();
                 }
+
+                 */
             }
         };
 
