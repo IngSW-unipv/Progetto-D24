@@ -325,12 +325,9 @@ public class ResearchView extends Scene implements IResettableScene {
         if (layout == null) {
             System.err.println("Layout non inizializzato correttamente!");
             return;}
-        // Customer d'esempio, poi dovrò mettere cu.getUser().isCustomer() all'interno dell'if sotto
-        Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
-        Customer cs =new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.BARI, favoriteGenre, 100);
 
         ConnectedUser cu = ConnectedUser.getInstance();
-        if(cs.isCustomer()) {
+        if(cu.getUser().isCustomer()) {
             UpperBar.getIstance().setForCustomer();
         }
         else{

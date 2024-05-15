@@ -41,11 +41,7 @@ public class TicketPageController {
     public void initComponents() {
 //	ticketPage = new TicketPageView();
         //assegnazione dei campi dell'evento ai campi della ticketpageview
-        // Customer d'esempio, va tolto e rimpiazzato con user.isCustomer() nel ticketPage.setComponents
-        Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
-        Customer cs =new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123", Province.BARI, favoriteGenre, 100);
-
-        ticketPage.setComponents(cs.isCustomer(), event.getType(), event.getName(), event.getCity(), event.getLocation(), event.getProvince(), event.getDate(),
+        ticketPage.setComponents(user.isCustomer(), event.getType(), event.getName(), event.getCity(), event.getLocation(), event.getProvince(), event.getDate(),
                 event.getArtists(), event.getSeatsRemainedNumberForType(), event.getPrices());
         //fine assegnazione
         //
