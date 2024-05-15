@@ -5,6 +5,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
+import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
@@ -22,13 +23,13 @@ public class SubscriptionSelectionController {
     private Stage mainstage;
     private SubscriptionSelectionView subscriptionSelectionView;
     private PaymentSelectionView paymentPage;
-    private Scene backScene;
+    private IResettableScene backScene;
 
 
-    public SubscriptionSelectionController(Stage mainstage, SubscriptionSelectionView subscriptionSelectionView, Scene scene) {
+    public SubscriptionSelectionController(Stage mainstage, SubscriptionSelectionView subscriptionSelectionView, IResettableScene backScene) {
         this.subscriptionSelectionView=subscriptionSelectionView;
         this.mainstage=mainstage;
-        this.backScene= scene;
+        this.backScene= backScene;
 
         /*
 
@@ -63,6 +64,11 @@ public class SubscriptionSelectionController {
         EventHandler<MouseEvent> goBackEvent = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent actionEvent) {
+                backScene.reSetBars();
+                Scene backSceneCasted = (Scene) backScene;
+                mainstage.setScene(backSceneCasted);
+
+                /*
                 try {
                     Method method = backScene.getClass().getMethod("reSetBars");
 
@@ -77,6 +83,8 @@ public class SubscriptionSelectionController {
                     // Gestione delle eccezioni durante l'invocazione del metodo
                     e.printStackTrace();
                 }
+
+                 */
             }
         };
         subscriptionSelectionView.getBackButton().setOnMouseClicked(goBackEvent);

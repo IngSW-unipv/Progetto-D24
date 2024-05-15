@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.user;
 
 import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
+import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.user.NoMoreEventsPopup;
 import javafx.event.EventHandler;
@@ -11,11 +12,11 @@ import javafx.stage.Stage;
 
 public class NoMoreEventsPopupController {
     private Stage mainStage;
-    private Scene managerView;
+    private IResettableScene managerView;
     private Button backButton;
     private Button subButton;
 
-    public NoMoreEventsPopupController(Stage mainStage, Button backButton, Button subButton, Scene managerView) {
+    public NoMoreEventsPopupController(Stage mainStage, Button backButton, Button subButton, IResettableScene managerView) {
         this.mainStage = mainStage;
         this.managerView = managerView;
         this.backButton = backButton;

@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelView.access;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import javafx.application.Application;
@@ -16,7 +17,7 @@ import javafx.scene.text.FontWeight;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 
-public class SignUpView extends Scene {
+public class SignUpView extends Scene implements IResettableScene {
 
     private static Label nameLabel = new Label("Nome");
     private static Label surnameLabel = new Label("Cognome");
