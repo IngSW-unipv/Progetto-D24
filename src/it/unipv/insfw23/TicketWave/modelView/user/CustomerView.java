@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelView.user;
 
+import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import javafx.collections.FXCollections;
@@ -16,7 +17,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 
-public class CustomerView extends Scene {
+public class CustomerView extends Scene implements IResettableScene {
     private BorderPane layout;
     private GridPane grid;
     private Label name;

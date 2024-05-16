@@ -79,6 +79,8 @@ public class SignUpController {
                     Customer customer=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.BARI,favoriteGenre, 100);
 
                     ConnectedUser.getInstance().setUser(customer);
+                    ConnectedUser.getInstance().setHome(customerview);
+                    ConnectedUser.getInstance().setLoginView(loginView);
 
                     //
 
@@ -97,7 +99,9 @@ public class SignUpController {
                     ArrayList<Event> arraylistevent = new ArrayList<>();
                     LocalDate datasub = LocalDate.of(2024, 02, 25);
                     Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","password1234", Province.CREMONA, "2324523432451420", arraylistevent,5,1,datasub,0);
+
                     ConnectedUser.getInstance().setUser(managerfinto);
+                    ConnectedUser.getInstance().setLoginView(loginView);
 
                     //
 

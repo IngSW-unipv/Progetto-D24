@@ -39,6 +39,8 @@ public class CustomerController {
                 loginView.reSetBars();
                 //
                 ConnectedUser.getInstance().unlogUser();
+                ConnectedUser.getInstance().setHome(null);
+                ConnectedUser.getInstance().setLoginView(null);
                 //
                 mainstage.setScene(loginView.getScene());
             }

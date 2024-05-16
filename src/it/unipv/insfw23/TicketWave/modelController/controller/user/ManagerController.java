@@ -49,6 +49,8 @@ public class ManagerController {
 				logview.reSetBars();
 				//
 				ConnectedUser.getInstance().unlogUser();
+				ConnectedUser.getInstance().setHome(null);
+				ConnectedUser.getInstance().setLoginView(null);
 				//
 				mainStage.setScene(logview.getScene());
 			}

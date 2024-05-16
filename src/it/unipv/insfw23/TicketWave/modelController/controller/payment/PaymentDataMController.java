@@ -2,11 +2,16 @@ package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
 //import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 //import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import it.unipv.insfw23.TicketWave.modelController.controller.access.LoginController;
+import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
+import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
+import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
+import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
@@ -16,6 +21,7 @@ import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
+import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -23,15 +29,12 @@ import javafx.stage.Stage;
 
 public class PaymentDataMController {
     private Stage mainStage;
-    private Customer customer;
-    private Manager manager;
     private PaymentDataMView paymentDataPage;
     private TicketPageView ticketpage;
     private PaymentSelectionView paymentSelectionPage;
     private boolean isviewermanager;
     private User user= ConnectedUser.getInstance().getUser();
-    private CustomerView customerView;
-    private ManagerView managerView;
+    private IResettableScene home = ConnectedUser.getInstance().getHome();
 
     public PaymentDataMController(Stage mainStage, PaymentDataMView paymentDataPage, PaymentSelectionView paymentSelectionPage) {
         this.paymentDataPage = paymentDataPage;
@@ -72,13 +75,35 @@ public class PaymentDataMController {
                 System.out.println("pagamento andato a buon fine stai tornando indietro alla home page!");
                 if(user.isCustomer()){
                     System.out.println("Stai andando alla CustomerView");
-                    UpperBar.getIstance().setForCustomer();
-                    mainStage.setScene(customerView);
+                    if(home != null){
+                        UpperBar.getIstance().setForCustomer();
+                        home.reSetBars();
+                        Scene nextScene = (Scene) home;
+                        mainStage.setScene(nextScene);
+                    }
+                    else {
+                        UpperBar.getIstance().setForCustomer();
+                        Customer customerUser = (Customer) user;
+                        CustomerView customerView = new CustomerView();
+                        CustomerController customerController = new CustomerController(mainStage, customerView, ConnectedUser.getInstance().getLoginView());
+                        mainStage.setScene(customerView);
+                    }
                 }
                 else {
-                    System.out.println("Stai andando alla ManagerView");
-                    UpperBar.getIstance().setForManager();
-                    mainStage.setScene(managerView);
+                    if(home!=null){
+                        UpperBar.getIstance().setForManager();
+                        home.reSetBars();
+                        Scene nextScene = (Scene) home;
+                        mainStage.setScene(nextScene);
+                    }
+                    else{
+                        UpperBar.getIstance().setForManager();
+                        Manager managerUser = (Manager) user;
+                        ManagerView managerView = new ManagerView(managerUser.getName(), managerUser.getNotification(), managerUser.getEvent());
+                        ManagerController managerController = new ManagerController(mainStage, managerView, ConnectedUser.getInstance().getLoginView());
+                        mainStage.setScene(managerView);
+                    }
+
               }
             }
         };
