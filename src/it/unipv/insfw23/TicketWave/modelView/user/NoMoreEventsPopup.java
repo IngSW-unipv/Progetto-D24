@@ -9,7 +9,7 @@ import javafx.stage.Popup;
 public class NoMoreEventsPopup extends Popup {
 
     private static NoMoreEventsPopup istance;
-    private Button okButton;
+    private Button backButton;
     private Button subscriptionButton;
 
 
@@ -18,14 +18,14 @@ public class NoMoreEventsPopup extends Popup {
         BorderPane content = new BorderPane();
 
         Label message = new Label("Hai raggiunto il numero massimo di eventi per \nquesto mese! \nSe non vuoi aspettare, cambia subito il tuo abbonamento!");
-        okButton = new Button("Indietro");
+        backButton = new Button("Indietro");
         subscriptionButton = new Button("Procedi");
 
         content.setTop(message);
-        content.setLeft(okButton);
+        content.setLeft(backButton);
         content.setRight(subscriptionButton);
         BorderPane.setAlignment(subscriptionButton, Pos.BOTTOM_RIGHT);
-        BorderPane.setAlignment(okButton, Pos.BOTTOM_LEFT);
+        BorderPane.setAlignment(backButton, Pos.BOTTOM_LEFT);
 
         getContent().add(content);
         content.setStyle("-fx-background-color: lightblue; " + // Colore di sfondo
@@ -47,5 +47,13 @@ public class NoMoreEventsPopup extends Popup {
             istance = new NoMoreEventsPopup();
         }
         return istance;
+    }
+
+    public Button getBackButton(){
+        return backButton;
+    }
+
+    public Button getSubscriptionButton(){
+        return subscriptionButton;
     }
 }

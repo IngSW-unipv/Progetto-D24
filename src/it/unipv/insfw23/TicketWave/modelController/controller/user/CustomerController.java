@@ -3,6 +3,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.user;
 import it.unipv.insfw23.TicketWave.modelController.controller.access.LoginController;
 import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchController;
 
+import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
 import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
@@ -36,6 +37,11 @@ public class CustomerController {
 				SignUpView signupview = new SignUpView();
 				LoginController logcon = new LoginController(mainstage,signupview,customerView,loginView,managerView);
                 loginView.reSetBars();
+                //
+                ConnectedUser.getInstance().unlogUser();
+                ConnectedUser.getInstance().setHome(null);
+                ConnectedUser.getInstance().setLoginView(null);
+                //
                 mainstage.setScene(loginView.getScene());
             }
 

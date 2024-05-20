@@ -11,8 +11,8 @@ public class Theater extends Event{
     // costruttore
 
 
-    public Theater(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type type, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, String authorName) {
-        super(idEvent, name, city, location, date, time, province, genre, type, maxNumberOfSeats, typeOfSeats, seatsRemainedNumberForType, ticketsSoldNumberForType, price, creator, artists, description);
+    public Theater(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, String authorName) {
+        super(idEvent, name, city, location, date, time, province, genre, Type.THEATER, maxNumberOfSeats, typeOfSeats, seatsRemainedNumberForType, ticketsSoldNumberForType, price, creator, artists, description);
         this.authorName = authorName;
     }
 }

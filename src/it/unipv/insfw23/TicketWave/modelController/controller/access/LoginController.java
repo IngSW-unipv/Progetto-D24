@@ -10,6 +10,8 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
+import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
@@ -68,11 +70,21 @@ public class LoginController {
                      *
                      * */
 
+                    //customer esempio
 
+                    Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
+                    Customer customer=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.BARI,favoriteGenre, 100);
                     System.out.println("Hai cliccato il pulsante Login come cliente");
                     customerview = new CustomerView();
                     CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
                     customerview.reSetBars();
+                    //
+                    //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
+                    //
+                    ConnectedUser.getInstance().setUser(customer);
+                    ConnectedUser.getInstance().setHome(customerview);
+                    ConnectedUser.getInstance().setLoginView(loginView);
+                    //
                     mainstage.setScene(customerview); // Imposta la scena SignUpView sulla stage principale
                 }
                 else if (loginView.getManagerRadioButton().isSelected()) {
@@ -105,7 +117,7 @@ public class LoginController {
                     //Concert eventofinto2 = new Concert(12,"reunion","busto arstizio",dataev2, "via dei matti ,0", Province.LIVORNO,300,2, seduterimasteev2, vettfalsopriceev2,Genre.INDIE,managerfinto,arrfintoartista2);
 
                     try {
-                        managerfinto.createConcert(12, "reunion", "milano","discoteca",dataev1,time,Province.AGRIGENTO,Genre.HOUSE, Type.CONCERT,1000,3,seduterimasteev2,ticketsoldev2,vettfalsopriceev2,managerfinto,"U2","BELLO");
+                        managerfinto.createConcert(12, "reunion", "milano","discoteca",dataev1,time,Province.AGRIGENTO,Genre.HOUSE, 1000,3,seduterimasteev2,ticketsoldev2,vettfalsopriceev2,managerfinto,"U2","BELLO");
                                 //managerfinto.createConcert(14, "festino", "Rozzano", dataev2, "stadio dell'albero", Province.MILANO, 10000, 3, seduterimasteev2, vettfalsopriceev2, Genre.HOUSE, managerfinto, arrfintoartista2);
                     } catch (Exception e) {
                         e.printStackTrace();
@@ -122,8 +134,15 @@ public class LoginController {
                     arrayListNotification = managerfinto.getNotification();
                     managerView = new ManagerView("Marco",arrayListNotification,arraylistevent);
                     //managerView.setEventsforTableev(managerfinto);
-                    ManagerController managerController = new ManagerController(mainstage, managerView, loginView, managerfinto);
+                    ManagerController managerController = new ManagerController(mainstage, managerView, loginView);
                     //managerView.reSetBars();
+                    //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
+                    //
+                    ConnectedUser.getInstance().setUser(managerfinto);
+                    ConnectedUser.getInstance().setHome(managerView);
+                    ConnectedUser.getInstance().setLoginView(loginView);
+                    //
+
                     mainstage.setScene(managerView); // Imposta la scena SignUpView sulla stage principale }
                 }// devi mettere managerview anche all'interno del costruttore
 

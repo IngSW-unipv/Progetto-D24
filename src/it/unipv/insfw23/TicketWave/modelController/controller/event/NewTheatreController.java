@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.event;
 
+import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.event.NewTheatreView;
 import it.unipv.insfw23.TicketWave.modelView.event.SelectionNewEventTypeView;
@@ -17,11 +18,11 @@ public class NewTheatreController {
 	SelectionNewEventTypeView typeselevview;
 	Manager loggedmanager;
 	
-	public NewTheatreController(Stage primarystage, NewTheatreView newtheatreview, SelectionNewEventTypeView typeselevview, Manager loggedmanager) {
+	public NewTheatreController(Stage primarystage, NewTheatreView newtheatreview, SelectionNewEventTypeView typeselevview) {
 		window = primarystage;
 		this.newtheatreview = newtheatreview;
 		this.typeselevview = typeselevview;
-		this.loggedmanager = loggedmanager;
+		this.loggedmanager = (Manager) ConnectedUser.getInstance().getUser();
 		initComponents();
 	}
 	

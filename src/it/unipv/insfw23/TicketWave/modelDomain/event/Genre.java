@@ -20,7 +20,9 @@ public enum Genre {
     DRAMMA,
     MONOLOGO,
     SKETCH,
-    TRAGEDIA;
+    TRAGEDIA,
+    START_OTHER,
+    OTHER;
 
     // Ritorna un'array delle scritte associate ai valori della enum
     public static String[] getGenreNameArray() {

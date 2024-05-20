@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelDomain.event;
 
 import java.lang.String;
+import java.sql.Blob;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -24,7 +25,7 @@ public abstract class Event {
     private Manager creator;
     private String artists, description; // tutti gli eventi hanno una descrizione
 
-    //private File photo;
+    //private Blob photo;
 
     // costruttore
 

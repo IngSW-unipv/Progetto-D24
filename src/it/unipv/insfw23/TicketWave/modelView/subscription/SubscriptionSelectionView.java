@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelView.subscription;
 
+import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import javafx.geometry.Insets;
@@ -16,14 +17,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-public class SubscriptionSelectionView extends Scene {
+import javax.imageio.event.IIOReadProgressListener;
+
+public class SubscriptionSelectionView extends Scene implements IResettableScene{
 
     private BorderPane layout;
     private Pane contenuto;
     private StackPane bottonePrimaSub;
     private StackPane bottoneSecondaSub;
     private StackPane bottoneTerzaSub;
-    private static Button backButton=new Button();
+    private static Button backButton = new Button();
 
     public SubscriptionSelectionView() {
         super(new BorderPane(), 1080, 600);
@@ -33,7 +36,7 @@ public class SubscriptionSelectionView extends Scene {
     public void init(){
 
         BorderPane contenuto = new BorderPane();
-       contenuto.setStyle("-fx-background-color: #91bad6;");
+        contenuto.setStyle("-fx-background-color: #91bad6;");
 
         Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/backArrow.png");
         ImageView backarrow = new ImageView(backarrowlogo);
@@ -181,7 +184,7 @@ public class SubscriptionSelectionView extends Scene {
         return bottoneTerzaSub;
     }
 
-    public static Button getBackButton() {
+    public Button getBackButton() {
         return backButton;
     }
 }

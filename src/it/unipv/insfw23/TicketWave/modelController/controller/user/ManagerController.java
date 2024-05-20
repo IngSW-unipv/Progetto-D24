@@ -5,7 +5,9 @@ import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageC
 import it.unipv.insfw23.TicketWave.modelController.controller.event.SelectionNewEventTypeController;
 import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchController;
 import it.unipv.insfw23.TicketWave.modelController.controller.statistics.TypeStatsController;
+import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.event.SelectionNewEventTypeView;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
@@ -25,12 +27,13 @@ public class ManagerController {
 	ManagerView managerview;
 	LoginView logview;
 	Manager loggedmanager;
+	IResettableScene backScene;
 	
-	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview, Manager loggedmanager) {
+	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview) {
 		mainStage = primarystage;
 		this.managerview = managerview;
 		this.logview = logview;
-		this.loggedmanager = loggedmanager;
+		this.loggedmanager = (Manager) ConnectedUser.getInstance().getUser();
 		initComponents();
 	}
 	
@@ -44,6 +47,11 @@ public class ManagerController {
 //				SignUpView signupview = new SignUpView();
 //				LoginController logcon = new LoginController(window, signupview, null, logview);
 				logview.reSetBars();
+				//
+				ConnectedUser.getInstance().unlogUser();
+				ConnectedUser.getInstance().setHome(null);
+				ConnectedUser.getInstance().setLoginView(null);
+				//
 				mainStage.setScene(logview.getScene());
 			}
 			
@@ -55,21 +63,21 @@ public class ManagerController {
 			@Override
 			public void handle(MouseEvent event) {
 				if (loggedmanager.anotherEvents()) {
-
 					//crea controller per typeselectionevent
 					SelectionNewEventTypeView typesel = new SelectionNewEventTypeView();
-					SelectionNewEventTypeController typeselectioneventview = new SelectionNewEventTypeController(mainStage, managerview, typesel, loggedmanager);
+					SelectionNewEventTypeController typeselectioneventview = new SelectionNewEventTypeController(mainStage, managerview, typesel);
 					mainStage.setScene(typesel);
+
 				} else {
 
 					NoMoreEventsPopup.getIstance().setX(mainStage.getX() + mainStage.getWidth() - NoMoreEventsPopup.getIstance().getWidth() - 360);
 					NoMoreEventsPopup.getIstance().setY(mainStage.getY() + 95);
 					NoMoreEventsPopup.getIstance().show(mainStage);
+					NoMoreEventsPopupController popupController = new NoMoreEventsPopupController(mainStage, NoMoreEventsPopup.getIstance().getBackButton(), NoMoreEventsPopup.getIstance().getSubscriptionButton(), managerview);
 				}
 			}
 		};
 		managerview.getNewEventButton().setOnMouseClicked(newEventButton);
-
 
 		EventHandler<MouseEvent> searchButton = new EventHandler<>() {
 			@Override
@@ -134,7 +142,7 @@ public class ManagerController {
 				//costruttore view
 				TicketPageView tic = new TicketPageView();
 				//costruttore controller
-				TicketPageController buyticketcontroller = new TicketPageController(mainStage, tic, managerview.getTableEv().getSelectionModel().getSelectedItem(),loggedmanager);
+				TicketPageController buyticketcontroller = new TicketPageController(mainStage, tic, managerview.getTableEv().getSelectionModel().getSelectedItem(),managerview);
 				//metodo che setta upperbar manager
 				//opacita
 				//
@@ -147,7 +155,7 @@ public class ManagerController {
 			@Override
 			public void handle(MouseEvent event) {
 				SubscriptionSelectionView subView = new SubscriptionSelectionView();
-				SubscriptionSelectionController subController = new SubscriptionSelectionController(mainStage, subView);
+				SubscriptionSelectionController subController = new SubscriptionSelectionController(mainStage, subView, managerview);
 				mainStage.setScene(subView);
 			}
 		};
