@@ -134,7 +134,7 @@ public class LoginController {
                     arrayListNotification = managerfinto.getNotification();
                     managerView = new ManagerView("Marco",arrayListNotification,arraylistevent);
                     //managerView.setEventsforTableev(managerfinto);
-                    ManagerController managerController = new ManagerController(mainstage, managerView, loginView);
+
                     //managerView.reSetBars();
                     //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
                     //
@@ -142,7 +142,7 @@ public class LoginController {
                     ConnectedUser.getInstance().setHome(managerView);
                     ConnectedUser.getInstance().setLoginView(loginView);
                     //
-
+                    ManagerController managerController = new ManagerController(mainstage, managerView, loginView);
                     mainstage.setScene(managerView); // Imposta la scena SignUpView sulla stage principale }
                 }// devi mettere managerview anche all'interno del costruttore
 
