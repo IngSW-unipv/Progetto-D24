@@ -134,7 +134,6 @@ public class LoginController {
                     arrayListNotification = managerfinto.getNotification();
                     managerView = new ManagerView("Marco",arrayListNotification,arraylistevent);
                     //managerView.setEventsforTableev(managerfinto);
-
                     //managerView.reSetBars();
                     //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
                     //
