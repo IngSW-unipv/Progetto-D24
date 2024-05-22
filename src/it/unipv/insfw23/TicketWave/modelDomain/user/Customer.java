@@ -11,17 +11,18 @@ import java.util.ArrayList;
 
 public class Customer extends User {
 
-    private ArrayList<Ticket> ticketsList= new ArrayList<>();
+    private ArrayList<Ticket> ticketsList;
 
     private int points;
     private Genre [] favoriteGenre ;
     int maxfavoriteGenre = 5;
 
 
-    public Customer(String name, String surname, String dateOfBirth, String email, String password, Province provinceOfResidence, Genre [] favoriteGenre, int points) {
+    public Customer(String name, String surname, String dateOfBirth, String email, String password, Province provinceOfResidence, Genre [] favoriteGenre, int points,ArrayList<Ticket> ticketsList) {
         super(name,surname, dateOfBirth, email,password, provinceOfResidence);
         this.points = points;
         this.favoriteGenre= favoriteGenre;
+        this.ticketsList= ticketsList;
     }
 
     // metodo per acquisto biglietto con controllo su paymentmethod e usepoints, quest'ultima serve per dire se si vogliono o meno usare i punti finora accumulati

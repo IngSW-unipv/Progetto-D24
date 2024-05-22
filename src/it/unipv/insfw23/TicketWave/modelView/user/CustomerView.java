@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelView.user;
 
+import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
@@ -91,15 +92,20 @@ public class CustomerView extends Scene implements IResettableScene {
         ticket = new TableView<>();
         ticket.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
         ticket.setItems(getEsempioBiglietti());
-        TableColumn<Biglietto, String> eventoCol = new TableColumn<>("Evento");
-        eventoCol.setCellValueFactory(new PropertyValueFactory<>("evento"));
-        TableColumn<Biglietto, String> tipoBigliettoCol = new TableColumn<>("Tipo Biglietto");
-        tipoBigliettoCol.setCellValueFactory(new PropertyValueFactory<>("tipoBiglietto"));
-        TableColumn<Biglietto, String> dataEventoCol = new TableColumn<>("Data Evento");
-        dataEventoCol.setCellValueFactory(new PropertyValueFactory<>("dataEvento"));
-        TableColumn<Biglietto, Double> prezzoCol = new TableColumn<>("Prezzo");
-        prezzoCol.setCellValueFactory(new PropertyValueFactory<>("prezzo"));
-        ticket.getColumns().addAll(eventoCol, tipoBigliettoCol, dataEventoCol, prezzoCol);
+
+        TableColumn<Ticket, String> eventCol = new TableColumn<>("Evento");
+        eventCol.setCellValueFactory(new PropertyValueFactory<>("evento"));
+
+        TableColumn<Biglietto, String> typeTicCol = new TableColumn<>("Tipo Biglietto");
+        typeTicCol.setCellValueFactory(new PropertyValueFactory<>("tipoBiglietto"));
+
+        TableColumn<Biglietto, String> dataEventCol = new TableColumn<>("Data Evento");
+        dataEventCol.setCellValueFactory(new PropertyValueFactory<>("dataEvento"));
+
+        TableColumn<Biglietto, Double> priceCol = new TableColumn<>("Prezzo");
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("prezzo"));
+
+        ticket.getColumns().addAll(eventCol, typeTicCol, dataEventCol, priceCol);
         GridPane.setConstraints(ticket, 1, 1);
 
         grid.getChildren().addAll(name, wavePoints, notifyListView, ticket,logoutButton);
@@ -162,8 +168,9 @@ public class CustomerView extends Scene implements IResettableScene {
     }
 
 
-
-
+    public TableView getTicket() {
+        return ticket;
+    }
 
     public void reSetBars(){
         BorderPane temp = new BorderPane();

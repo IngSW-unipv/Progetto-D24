@@ -10,6 +10,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
+import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
@@ -27,7 +28,7 @@ public class LoginController {
     // view da considerare
     private SignUpView signUpView;
     private CustomerView customerview;
-    private SignUpController signUpController;
+
     private LoginView loginView;
     private ManagerView managerView;
 
@@ -52,7 +53,7 @@ public class LoginController {
                 // Azione da eseguire quando il pulsante "Registrati" viene premuto
                 System.out.println("Hai cliccato il pulsante Registrati");
                 signUpView = new SignUpView();
-                signUpController = new SignUpController(mainstage, signUpView, customerview, loginView);
+                SignUpController signUpController = new SignUpController(mainstage, signUpView, customerview, loginView);
                 signUpView.reSetBars();
                 mainstage.setScene(signUpView); // Imposta la scena SignUpView sulla stage principale
             }
@@ -73,11 +74,14 @@ public class LoginController {
                     //customer esempio
 
                     Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
-                    Customer customer=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.BARI,favoriteGenre, 100);
+                    ArrayList<Ticket> tickets= new ArrayList<>();
+                    Customer customer=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.BARI,favoriteGenre, 100,tickets);
                     System.out.println("Hai cliccato il pulsante Login come cliente");
                     customerview = new CustomerView();
+
                     CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
                     customerview.reSetBars();
+
                     //
                     //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
                     //
