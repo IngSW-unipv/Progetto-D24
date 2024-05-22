@@ -20,7 +20,7 @@ import static org.junit.Assert.*;
 public class CustomerTest {
     private Customer customer;
     private Customer customer2;
-    private ArrayList<Ticket> ticketsList= new ArrayList<>();
+    private ArrayList<Ticket> tickets;
     private IPaymentAdapter paymentpaypal;
     private IPaymentAdapter paymentmastercard;
 
@@ -37,7 +37,8 @@ public class CustomerTest {
 
 
         Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
-        customer=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.BARI,favoriteGenre, 100);
+        tickets= new ArrayList<>();
+        customer=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.BARI,favoriteGenre, 100,tickets);
 
         mg = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", Province.CAMPOBASSO, "1234567890123456",
                 events, 5, 1, LocalDate.now(), 0);
@@ -134,7 +135,7 @@ public class CustomerTest {
     public void favoriteGenreLimitTest(){
         try {
         Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP,Genre.ROCK,Genre.INDIE,Genre.RAP};
-        customer2=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.CREMONA,favoriteGenre, 100);
+        customer2=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.CREMONA,favoriteGenre, 100,tickets);
         customer2.setFavoriteGenre(favoriteGenre);
         } catch(Exception e){
             assertEquals("Impossibile selezionere più di 5 generi", e.getMessage());
