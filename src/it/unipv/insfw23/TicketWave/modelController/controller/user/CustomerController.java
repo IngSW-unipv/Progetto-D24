@@ -74,7 +74,22 @@ public class CustomerController {
             }
         };
         customerView.getSearchButton().setOnMouseClicked(searchButton);
+       /* EventHandler<MouseEvent> openevent = new EventHandler<>() {
 
+            @Override
+            public void handle(MouseEvent event) {
+
+                //costruttore view
+                TicketPageView tic = new TicketPageView();
+                //costruttore controller
+                TicketPageController buyticketcontroller = new TicketPageController(mainstage, tic,customerView.getTicketTab().getSelectionModel(),customerView);
+                //metodo che setta upperbar manager
+                //opacita
+                //
+                mainstage.setScene(tic);
+            }
+        };
+        customerView.getTicketTab().setOnMouseClicked(openevent);
 
     }
 }

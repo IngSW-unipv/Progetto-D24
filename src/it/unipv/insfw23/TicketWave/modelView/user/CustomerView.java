@@ -1,6 +1,10 @@
 package it.unipv.insfw23.TicketWave.modelView.user;
 
-import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Concert;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
@@ -17,6 +21,10 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
+import java.sql.Time;
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 
 public class CustomerView extends Scene implements IResettableScene {
     private BorderPane layout;
@@ -24,7 +32,7 @@ public class CustomerView extends Scene implements IResettableScene {
     private Label name;
     private Label wavePoints;
     private ListView notifyListView;
-    private TableView ticket;
+    private TableView ticketTab;
     private Button logoutButton;
 
     private UpperBar customerUpperBar;
@@ -89,26 +97,29 @@ public class CustomerView extends Scene implements IResettableScene {
         GridPane.setConstraints(notifyListView, 0, 1);
 
         // TableView per i biglietti acquistati
-        ticket = new TableView<>();
-        ticket.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
-        ticket.setItems(getEsempioBiglietti());
+        ticketTab = new TableView<>();
+        ticketTab.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
 
-        TableColumn<Ticket, String> eventCol = new TableColumn<>("Evento");
-        eventCol.setCellValueFactory(new PropertyValueFactory<>("evento"));
 
-        TableColumn<Biglietto, String> typeTicCol = new TableColumn<>("Tipo Biglietto");
-        typeTicCol.setCellValueFactory(new PropertyValueFactory<>("tipoBiglietto"));
+        TableColumn<Event, String> eventCol = new TableColumn<>("Evento");
+        eventCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-        TableColumn<Biglietto, String> dataEventCol = new TableColumn<>("Data Evento");
-        dataEventCol.setCellValueFactory(new PropertyValueFactory<>("dataEvento"));
+        TableColumn<Event, Enum> provinceCol = new TableColumn<>("Provincia");
+        provinceCol.setCellValueFactory(new PropertyValueFactory<>("province"));
 
-        TableColumn<Biglietto, Double> priceCol = new TableColumn<>("Prezzo");
-        priceCol.setCellValueFactory(new PropertyValueFactory<>("prezzo"));
+        TableColumn<Event, LocalDate> dataEventCol = new TableColumn<>("Data Evento");
+        dataEventCol.setCellValueFactory(new PropertyValueFactory<>("date"));
 
-        ticket.getColumns().addAll(eventCol, typeTicCol, dataEventCol, priceCol);
-        GridPane.setConstraints(ticket, 1, 1);
+        TableColumn<Event, String> artistCol = new TableColumn<>("Artista");
+        artistCol.setCellValueFactory(new PropertyValueFactory<>("artists"));
 
-        grid.getChildren().addAll(name, wavePoints, notifyListView, ticket,logoutButton);
+        ticketTab.getColumns().addAll(eventCol, provinceCol, dataEventCol, artistCol);
+        ticketTab.setItems(getfakeEvent());
+        ticketTab.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+
+        GridPane.setConstraints(ticketTab, 1, 1);
+
+        grid.getChildren().addAll(name, wavePoints, notifyListView, ticketTab,logoutButton);
 
 
 
@@ -124,16 +135,26 @@ public class CustomerView extends Scene implements IResettableScene {
         return customerUpperBar.getSearchButton();
     }
 
-    private ObservableList<Biglietto> getEsempioBiglietti() {
-        ObservableList<Biglietto> biglietti = FXCollections.observableArrayList();
-        biglietti.add(new Biglietto("Concerto", "VIP", "2024-02-25", 50.0));
-        biglietti.add(new Biglietto("Partita", "Standard", "2024-03-15", 30.0));
-        return biglietti;
+    private ObservableList<Event> getfakeEvent() {
+
+        LocalDate data = LocalDate.now();
+        ArrayList<Event> arraylistevent = new ArrayList<>();
+        Manager managerfinto = new Manager("paolo","rossi","2000-12-30","paobro@gmail.com","passwd",Province.AGRIGENTO, "23245234324", arraylistevent,5,1,data,4);
+        int intvett[] = {2,5,10};
+        int vett [] = {200, 3000, 20};
+        double price[] = {30, 50, 10};
+        Time time = null;
+        ObservableList<Event> evs = FXCollections.observableArrayList(
+
+                new Concert(2,"Rooler in tha house","ROZZANO","Laghetto", data, time, Province.MILANO, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"Blanco", "Nuovo Album")
+
+        );
+        return evs;
     }
 
 
 
-
+/*
     public static class Biglietto {
         private String evento;
         private String tipoBiglietto;
@@ -166,10 +187,10 @@ public class CustomerView extends Scene implements IResettableScene {
 
 
     }
+*/
 
-
-    public TableView getTicket() {
-        return ticket;
+    public TableView getTicketTab() {
+        return ticketTab;
     }
 
     public void reSetBars(){
