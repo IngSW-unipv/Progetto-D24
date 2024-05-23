@@ -96,6 +96,7 @@ public class CustomerView extends Scene implements IResettableScene {
         notifyListView.getItems().addAll("Notifica 1", "Notifica 2", "Notifica 3"); // Dati di esempio
         GridPane.setConstraints(notifyListView, 0, 1);
 
+        // AGGIUSTARE LA TABLEVIEW CON GLI ATTRIBUTI DEI BIGLIETTI E POI COLLEGARE CON IL DAO PER LEGGERE I DATI
         // TableView per i biglietti acquistati
         ticketTab = new TableView<>();
         ticketTab.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
@@ -189,7 +190,7 @@ public class CustomerView extends Scene implements IResettableScene {
     }
 */
 
-    public TableView getTicketTab() {
+    public TableView<Event> getTicketTab() {
         return ticketTab;
     }
 
