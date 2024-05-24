@@ -1,6 +1,8 @@
 package it.unipv.insfw23.TicketWave.modelView.event;
 
+import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
@@ -232,26 +234,9 @@ public class NewConcertView extends Scene{
 		
 		
 		
-		numviplabel.setFont(lebelsfont);
-		numviplabel.setMinWidth(90);
-		GridPane.setConstraints(numviplabel, 2, 8);
-		numviplabel.setVisible(false);
-		GridPane.setVgrow(numviplabel, Priority.SOMETIMES);
-		GridPane.setHgrow(numviplabel, Priority.SOMETIMES);
-		
-		numvipfield = new TextField();
-		numvipfield.setMaxWidth(80);
-		numvipfield.setMinWidth(30);
-		GridPane.setConstraints(numvipfield, 2, 9);
-		numvipfield.setVisible(false);
-		GridPane.setVgrow(numvipfield, Priority.SOMETIMES);
-		GridPane.setHgrow(numvipfield, Priority.SOMETIMES);
-		
-		
-		
 		numpremiumlabel.setFont(lebelsfont);
 		numpremiumlabel.setMinWidth(125);
-		GridPane.setConstraints(numpremiumlabel, 4, 8);
+		GridPane.setConstraints(numpremiumlabel, 2, 8);
 		numpremiumlabel.setVisible(false);
 		GridPane.setVgrow(numpremiumlabel, Priority.SOMETIMES);
 		GridPane.setHgrow(numpremiumlabel, Priority.SOMETIMES);
@@ -259,10 +244,27 @@ public class NewConcertView extends Scene{
 		numpremiumfield = new TextField();
 		numpremiumfield.setMaxWidth(80);
 		numpremiumfield.setMinWidth(30);
-		GridPane.setConstraints(numpremiumfield, 4, 9);
+		GridPane.setConstraints(numpremiumfield, 2, 9);
 		numpremiumfield.setVisible(false);
 		GridPane.setVgrow(numpremiumfield, Priority.SOMETIMES);
 		GridPane.setHgrow(numpremiumfield, Priority.SOMETIMES);
+		
+		
+		
+		numviplabel.setFont(lebelsfont);
+		numviplabel.setMinWidth(90);
+		GridPane.setConstraints(numviplabel, 4, 8);
+		numviplabel.setVisible(false);
+		GridPane.setVgrow(numviplabel, Priority.SOMETIMES);
+		GridPane.setHgrow(numviplabel, Priority.SOMETIMES);
+		
+		numvipfield = new TextField();
+		numvipfield.setMaxWidth(80);
+		numvipfield.setMinWidth(30);
+		GridPane.setConstraints(numvipfield, 4, 9);
+		numvipfield.setVisible(false);
+		GridPane.setVgrow(numvipfield, Priority.SOMETIMES);
+		GridPane.setHgrow(numvipfield, Priority.SOMETIMES);
 		
 		
 		
@@ -299,26 +301,9 @@ public class NewConcertView extends Scene{
 		
 		
 		
-		priceviplabel.setFont(lebelsfont);
-		priceviplabel.setMinWidth(75);
-		GridPane.setConstraints(priceviplabel, 3, 8);
-		priceviplabel.setVisible(false);
-		GridPane.setVgrow(priceviplabel, Priority.SOMETIMES);
-		GridPane.setHgrow(priceviplabel, Priority.SOMETIMES);
-		
-		pricevipfield = new TextField();
-		pricevipfield.setMaxWidth(80);
-		pricevipfield.setMinWidth(30);
-		GridPane.setConstraints(pricevipfield, 3, 9);
-		pricevipfield.setVisible(false);
-		GridPane.setVgrow(pricevipfield, Priority.SOMETIMES);
-		GridPane.setHgrow(pricevipfield, Priority.SOMETIMES);
-		
-		
-		
 		pricepremiumlabel.setFont(lebelsfont);
 		pricepremiumlabel.setMinWidth(110);
-		GridPane.setConstraints(pricepremiumlabel, 5, 8);
+		GridPane.setConstraints(pricepremiumlabel, 3, 8);
 		pricepremiumlabel.setVisible(false);
 		GridPane.setVgrow(pricepremiumlabel, Priority.SOMETIMES);
 		GridPane.setHgrow(pricepremiumlabel, Priority.SOMETIMES);
@@ -326,10 +311,27 @@ public class NewConcertView extends Scene{
 		pricepremiumfield = new TextField();
 		pricepremiumfield.setMaxWidth(80);
 		pricepremiumfield.setMinWidth(30);
-		GridPane.setConstraints(pricepremiumfield, 5, 9);
+		GridPane.setConstraints(pricepremiumfield, 3, 9);
 		pricepremiumfield.setVisible(false);
 		GridPane.setVgrow(pricepremiumfield, Priority.SOMETIMES);
 		GridPane.setHgrow(pricepremiumfield, Priority.SOMETIMES);
+		
+		
+		
+		priceviplabel.setFont(lebelsfont);
+		priceviplabel.setMinWidth(75);
+		GridPane.setConstraints(priceviplabel, 5, 8);
+		priceviplabel.setVisible(false);
+		GridPane.setVgrow(priceviplabel, Priority.SOMETIMES);
+		GridPane.setHgrow(priceviplabel, Priority.SOMETIMES);
+		
+		pricevipfield = new TextField();
+		pricevipfield.setMaxWidth(80);
+		pricevipfield.setMinWidth(30);
+		GridPane.setConstraints(pricevipfield, 5, 9);
+		pricevipfield.setVisible(false);
+		GridPane.setVgrow(pricevipfield, Priority.SOMETIMES);
+		GridPane.setHgrow(pricevipfield, Priority.SOMETIMES);
 		
 		
 		
@@ -384,15 +386,15 @@ public class NewConcertView extends Scene{
 				
 				switch(typesticketbox.getValue()) {
 				case "3":
-					numpremiumlabel.setVisible(true);
-					numpremiumfield.setVisible(true);
-					pricepremiumlabel.setVisible(true);
-					pricepremiumfield.setVisible(true);
-				case "2":
 					numviplabel.setVisible(true);
 					numvipfield.setVisible(true);
 					priceviplabel.setVisible(true);
 					pricevipfield.setVisible(true);
+				case "2":
+					numpremiumlabel.setVisible(true);
+					numpremiumfield.setVisible(true);
+					pricepremiumlabel.setVisible(true);
+					pricepremiumfield.setVisible(true);
 				case "1":
 					numbaselabel.setVisible(true);
 					numbasefield.setVisible(true);
@@ -456,6 +458,13 @@ public class NewConcertView extends Scene{
 	public LocalDate getDatepicked() {
 		return datepicker.getValue();
 	}
+	
+	public LocalTime getTimeSelected() {
+		int hour = hourspinner.getValue();
+		int minutes = minutesspinner.getValue();
+		LocalTime time = LocalTime.of(hour, minutes);
+		return time;
+	}
 
 	public int getNumbasefield() throws NumberFormatException{
 		return Integer.parseInt(numbasefield.getText());
@@ -468,7 +477,7 @@ public class NewConcertView extends Scene{
 	public int getNumpremiumfield() throws NumberFormatException{
 		return Integer.parseInt(numpremiumfield.getText());
 	}
-
+	
 	public double getPricebasefield() throws NumberFormatException{
 		return Double.parseDouble(pricebasefield.getText());
 	}
@@ -480,6 +489,7 @@ public class NewConcertView extends Scene{
 	public double getPricepremiumfield() throws NumberFormatException{
 		return Double.parseDouble(pricepremiumfield.getText());
 	}
+	
 
 	public Button getAbortButton() {
 		return abort;
@@ -499,5 +509,9 @@ public class NewConcertView extends Scene{
 	
 	public ImageView getPhotoView() {
 		return eventPhoto;
+	}
+	
+	public String getDescription() {
+		return descriptionarea.toString();
 	}
 }
