@@ -39,7 +39,7 @@ public class TicketTest {
 		double[] pricecorrectevent = {35.50,70,100};
 		try {
 			
-			creator.createConcert(4,"Reunion","Firenze","via del palo",LocalDate.of(2024, 5, 23),Time.valueOf(LocalTime.of(20, 30)),Province.ASTI,Genre.METAL,
+			creator.createConcert(4,"Reunion","Firenze","via del palo",LocalDate.of(2024, 5, 23),LocalTime.of(20, 30),Province.ASTI,Genre.METAL,
 					150,2,seatsremainedfortypecorrectevent,ticketsoldfortypecorrectevent,pricecorrectevent,creator,"Califano","lalalala");
 
 		} catch (Exception e) {

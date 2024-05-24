@@ -9,6 +9,7 @@ import static org.junit.Assert.*;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class TestEvent {
@@ -31,7 +32,7 @@ public class TestEvent {
             int[] a = {20};
             int[] b = {2080};
             double[] p = {150};
-            fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), Time.valueOf("14:04:00"), Province.COMO, Genre.EDM,
+            fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.of(14, 4), Province.COMO, Genre.EDM,
                     3000,
                     1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", 3);
         } catch (Exception e) {
@@ -45,7 +46,7 @@ public class TestEvent {
             int[] a = {20, 10};
             int[] b = {1480, 490};
             double[] p = {150, 300};
-            co = new Concert(1, "Martin Garrix", "Milano", "San Siro", LocalDate.of(2024, 7, 24), Time.valueOf("21:34:00"), Province.MILANO, Genre.EDM, 2000,
+            co = new Concert(1, "Martin Garrix", "Milano", "San Siro", LocalDate.of(2024, 7, 24), LocalTime.of(21, 34), Province.MILANO, Genre.EDM, 2000,
                     2, a, b, p, mg, "Martin Garrix", "Concerto di Martin Garrix");
         } catch (Exception e) {
             assertEquals("CreateConcert error", e.getMessage());
@@ -58,7 +59,7 @@ public class TestEvent {
             int[] a = {23, 10, 50};
             int[] b = {477, 490, 150};
             double[] p = {50, 300, 1000};
-            th = new Theater(2, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), Time.valueOf("22:50:00"), Province.ROMA, Genre.COMMEDIA,
+            th = new Theater(2, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), LocalTime.of(22, 50), Province.ROMA, Genre.COMMEDIA,
                     1200, 3, a, b, p, mg, "Franchino er criminale", "Commedia di Franchino er criminale ", "Paolo");
         } catch (Exception e) {
             assertEquals("CreateTheater error", e.getMessage());
@@ -71,7 +72,7 @@ public class TestEvent {
             int[] a = {};
             int[] b = {};
             double[] p = {};
-            ot = new Other(3, "Sagra della salsiccia", "Roma", "Mercato de Roma", LocalDate.of(2023, 7, 22), Time.valueOf("19:00:00"), Province.ROMA, null, 0,
+            ot = new Other(3, "Sagra della salsiccia", "Roma", "Mercato de Roma", LocalDate.of(2023, 7, 22), LocalTime.parse("19:00:00"), Province.ROMA, null, 0,
                     0, a, b, p, mg, null, "Sagra della salsiccia de Roma, er mejo");
         } catch (Exception e) {
             assertEquals("CreateOther error", e.getMessage());
@@ -101,7 +102,7 @@ public class TestEvent {
             co = new Concert(100000, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                     "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                     "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-                    LocalDate.of(10000, 10, 30), Time.valueOf("24:59:99"), Province.MILANO, Genre.EDM, 999999999,
+                    LocalDate.of(10000, 10, 30), LocalTime.parse("24:59:99"), Province.MILANO, Genre.EDM, 999999999,
                     3, a, b, p, mg, "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. ",
                     "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.");
             System.out.println(co);
@@ -117,15 +118,15 @@ public class TestEvent {
             int[] a = {20};
             int[] b = {2080};
             double[] p = {150};
-            Festival festival = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), Time.valueOf("14:04:00"), Province.COMO, Genre.EDM, 3000,
+            Festival festival = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
                     1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", 3);
-            Festival festival2 = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), Time.valueOf("14:04:00"), Province.COMO, Genre.EDM, 3000,
+            Festival festival2 = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
                     1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", 3);
-            Other other = new Other(3, "Sagra della salsiccia", "Roma", "Mercato de Roma", LocalDate.of(2023, 7, 22), Time.valueOf("19:00:00"), Province.ROMA, null, 0,
+            Other other = new Other(3, "Sagra della salsiccia", "Roma", "Mercato de Roma", LocalDate.of(2023, 7, 22), LocalTime.parse("19:00:00"), Province.ROMA, null, 0,
                     1, a, b, p, mg, null, "Sagra della salsiccia de Roma, er mejo");
-            Theater theater = new Theater(2, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), Time.valueOf("22:50:00"), Province.ROMA, Genre.COMMEDIA,
+            Theater theater = new Theater(2, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), LocalTime.parse("22:50:00"), Province.ROMA, Genre.COMMEDIA,
                     1200, 1, a, b, p, mg, "Franchino er criminale", "Commedia di Franchino er criminale ", "Paolo");
-            Theater theater1 = new Theater(2, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), Time.valueOf("22:50:00"), Province.ROMA, Genre.COMMEDIA,
+            Theater theater1 = new Theater(2, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), LocalTime.parse("22:50:00"), Province.ROMA, Genre.COMMEDIA,
                     1200, 1, a, b, p, mg, "Franchino er criminale", "Commedia di Franchino er criminale ", "Paolo");
             // popolo l'array list di Eventi
             ev1 = new ArrayList<Event>();
@@ -153,7 +154,7 @@ public class TestEvent {
             int[] a = {20, 10};
             int[] b = {1980, 990};
             double[] p = {150, 270};
-            fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), Time.valueOf("14:04:00"), Province.COMO, Genre.EDM, 3000,
+            fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
                     2, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", 3);
             int [] ticketSold;
             ticketSold = fs.getTicketsSoldNumberForType();

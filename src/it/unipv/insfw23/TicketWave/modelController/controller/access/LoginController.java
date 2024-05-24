@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.access;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
@@ -121,7 +122,7 @@ public class LoginController {
                     LocalDate dataev2 = LocalDate.of(2024, 10, 02);
                     ArrayList<String> arrfintoartista2 = new ArrayList<>();
                     arrfintoartista2.add("loredana berte");
-                    Time time = Time.valueOf("19:30:00");
+                    LocalTime time = LocalTime.of(19, 30);
                     //Concert eventofinto2 = new Concert(12,"reunion","busto arstizio",dataev2, "via dei matti ,0", Province.LIVORNO,300,2, seduterimasteev2, vettfalsopriceev2,Genre.INDIE,managerfinto,arrfintoartista2);
 
                     try {
