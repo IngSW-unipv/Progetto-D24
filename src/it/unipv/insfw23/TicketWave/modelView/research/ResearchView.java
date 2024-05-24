@@ -33,6 +33,7 @@ import javafx.scene.layout.*;
 import javax.imageio.event.IIOReadProgressListener;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import static javafx.application.Application.launch;
@@ -212,7 +213,7 @@ public class ResearchView extends Scene implements IResettableScene {
         int intvett[] = {2,5,10};
         int vett [] = {200, 3000, 20};
         double price[] = {30, 50, 10};
-        Time time = null;
+        LocalTime time = null;
 
         ObservableList<Event> evs = FXCollections.observableArrayList(
                 new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),

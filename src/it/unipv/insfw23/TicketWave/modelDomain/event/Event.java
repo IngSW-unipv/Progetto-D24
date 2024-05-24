@@ -4,6 +4,7 @@ import java.lang.String;
 import java.sql.Blob;
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
@@ -14,7 +15,7 @@ public abstract class Event {
     private int idEvent;
     private String name, city, location;
     private LocalDate date;
-    private Time time;
+    private LocalTime time;
     private Province province;
     private Genre genre;
     private Type type;
@@ -29,7 +30,7 @@ public abstract class Event {
 
     // costruttore
 
-    public Event(int idEvent, String name, String city, String location, LocalDate date, Time time, Province province, Genre genre, Type type, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description) {
+    public Event(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, Type type, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description) {
         this.idEvent = idEvent;
         this.name = name;
         this.city = city;
@@ -141,7 +142,7 @@ public abstract class Event {
         return artists;
     }
 
-    public Time getTime() {
+    public LocalTime getTime() {
         return time;
     }
 
@@ -200,7 +201,7 @@ public abstract class Event {
         }
     }
 
-    public void setTime(Time time) {
+    public void setTime(LocalTime time) {
         this.time = time;
     }
 

@@ -23,6 +23,7 @@ import javafx.scene.text.FontWeight;
 
 import java.sql.Time;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 
 
@@ -144,7 +145,7 @@ public class CustomerView extends Scene implements IResettableScene {
         int intvett[] = {2,5,10};
         int vett [] = {200, 3000, 20};
         double price[] = {30, 50, 10};
-        Time time = null;
+        LocalTime time = null;
         ObservableList<Event> evs = FXCollections.observableArrayList(
 
                 new Concert(2,"Rooler in tha house","ROZZANO","Laghetto", data, time, Province.MILANO, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"Blanco", "Nuovo Album")
