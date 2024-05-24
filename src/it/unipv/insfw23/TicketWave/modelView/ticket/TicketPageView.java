@@ -2,7 +2,6 @@ package it.unipv.insfw23.TicketWave.modelView.ticket;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
-import javafx.application.Application;
 
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -12,13 +11,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -30,27 +26,41 @@ import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 
 public class TicketPageView extends Scene implements IResettableScene {
 
-    private final Font font = Font.font("Helvetica", FontWeight.NORMAL, 13);
+    private final Font font = Font.font("Helvetica", FontWeight.BOLD, 13);
     private static final Label eventNameLabel = new Label("Nome Evento:");
     private static final Label eventDescriptionLabel = new Label("Descrizione Evento:");
     private static final Label ticketsLabel = new Label("Biglietti disponibili per tipo:");
     private static  Button buyButton = new Button();
 
-    private static Text errmessage = new Text("Seleziona una tipologia di biglietto");
+    private static Label errmessage = new Label("Seleziona una tipologia di biglietto");
 
 
     private static  ToggleGroup priceselection = new ToggleGroup();
 
     // campi riempiti dal controller
     private static Label eventNameTextField = new Label();
+    private static Label eventCityTextField=new Label();
+    private static Label eventTypeOfEventTextField= new Label();
+    private static Label eventLocationTextField=new Label();
+
+    private static Label eventProvinceTextField=new Label();
+    private static Label eventDateTextField=new Label();
+
+    private static Label eventArtistTextField=new Label();
     private static Label eventDescriptionTextField = new Label();
+    private static Label eventCityLabel = new Label("Città:");
+    private static Label eventLocationLabel = new Label("Location:");
+    private static Label eventProvinceLabel = new Label("Provincia:");
+    private static Label eventDateLabel = new Label("Data:");
+    private static Label eventArtistLabel = new Label("Artista:");
+
     private static final Label ticketBaseLabel = new Label("Base Tickets:");
     private static final Label ticketPremiumLabel = new Label("Premium Tickets:");
     private static final Label ticketVipLabel = new Label("Vip Tickets:");
     private static Label ticketBaseTextField = new Label();
     private static Label ticketPremiumTextField = new Label();
     private static Label ticketVipTextField = new Label();
-    private static List<Label> labels = new ArrayList<>();
+    private static List<Label> text = new ArrayList<>();
     private static Label basePriceTextField = new Label();
     private static Label premiumPriceTextField = new Label();
     private static Label vipPriceTextField = new Label();
@@ -83,7 +93,17 @@ public class TicketPageView extends Scene implements IResettableScene {
         System.out.println(artist.toString());
         this.isCustomerViewer = isCustomerViewer;
 
-        eventNameTextField = new Label(name);
+
+        //settaggio valori da mostrare
+        eventNameTextField.setText(name);
+        eventCityTextField.setText(città);
+        eventLocationTextField.setText(location);
+        eventProvinceTextField.setText(prov.toString());
+        eventDateTextField.setText(data.toString());
+        eventArtistTextField.setText(artist);
+
+
+        //DA PRENDERE DAL DAO
         eventDescriptionTextField = new Label("Il giorno "+data+" si terra un "+typeofevent.name()+" in "+location+" a "+città+" ,in provincia di "+prov+" tenuto da "
                 +artist.toString().substring(1, artist.toString().length()-1));
 
@@ -136,18 +156,41 @@ public class TicketPageView extends Scene implements IResettableScene {
         // BorderPane per struttura interna
         BorderPane internalStructure = new BorderPane();
 
-        labels.add(eventNameLabel);
-        labels.add(eventDescriptionLabel);
-        labels.add(ticketsLabel);
-        labels.add(ticketBaseLabel);
-        labels.add(ticketPremiumLabel);
-        labels.add(ticketVipLabel);
+        //aggiunta campi alla lista di testo
+        text.add(eventNameLabel);
+        text.add(eventCityLabel);
+        text.add(eventLocationLabel);
+        text.add(eventProvinceLabel);
+        text.add(eventDateLabel);
+        text.add(eventArtistLabel);
+        text.add(eventDescriptionLabel);
+        text.add(eventNameTextField);
+        text.add(eventCityTextField);
+        text.add(eventLocationTextField);
+        text.add(eventProvinceTextField);
+        text.add(eventDateTextField);
+        text.add(eventArtistTextField);
+        text.add(eventDescriptionTextField);
+        text.add(ticketBaseLabel);
+        text.add(ticketPremiumLabel);
+        text.add(ticketVipLabel);
+        text.add(ticketBaseTextField);
+        text.add(ticketPremiumTextField);
+        text.add(ticketVipTextField);
+        text.add(basePriceTextField);
+        text.add(premiumPriceTextField);
+        text.add(vipPriceTextField);
+        text.add(ticketsLabel);
+        text.add(errmessage);
 
 
-        for (Label label : labels) {
+        //istruzioni per settaggio del testo
+        for (Label label : text) {
             label.setTextFill(Color.BLACK);
             label.setFont(font);
         }
+
+        eventNameTextField.setFont(Font.font("Helvetica", FontWeight.EXTRA_BOLD, 17));
 
 
 
@@ -166,11 +209,9 @@ public class TicketPageView extends Scene implements IResettableScene {
         buyButtonImageView.setImage(BuyButtonlogo);
         buyButtonImageView.setFitHeight(120);
         buyButtonImageView.setFitWidth(200);
-
         buyButton.setGraphic(buyButtonImageView);
         buyButton.setPrefWidth(buyButton.getWidth());
         buyButton.setPrefHeight(buyButton.getHeight());
-
         buyButton.setPadding(new Insets(0));
         buyButton.setStyle("-fx-background-color: #91BAD6");
         buyButton.setOpacity(1);
@@ -199,8 +240,7 @@ public class TicketPageView extends Scene implements IResettableScene {
     buttonBox.setAlignment(Pos.CENTER); // Allinea i bottoni al centro
 
         errmessage.setOpacity(0);
-        errmessage.setFill(javafx.scene.paint.Color.RED);
-
+        errmessage.setStyle("-fx-text-fill: red;");
 
 
         //Gridpane per sistemazione elementi centrali
@@ -210,14 +250,25 @@ public class TicketPageView extends Scene implements IResettableScene {
         centerGrid.setHgap(10);
         centerGrid.add(eventNameLabel, 0, 0);
         centerGrid.add(eventNameTextField, 1, 0);
-        centerGrid.add(eventDescriptionLabel, 0, 1);
-        centerGrid.add(eventDescriptionTextField, 1, 1);
+        centerGrid.add(eventDateLabel, 0, 1);
+        centerGrid.add(eventDateTextField, 1, 1);
+        centerGrid.add(eventLocationLabel, 0, 2);
+        centerGrid.add(eventLocationTextField, 1, 2);
+        centerGrid.add(eventCityLabel, 0, 3);
+        centerGrid.add(eventCityTextField, 1, 3);
+        centerGrid.add(eventProvinceLabel, 0, 4);
+        centerGrid.add(eventProvinceTextField, 1, 4);
+        centerGrid.add(eventArtistLabel, 0, 5);
+        centerGrid.add(eventArtistTextField, 1, 5);
+        centerGrid.add(eventDescriptionLabel, 0, 6);
+        centerGrid.add(eventDescriptionTextField, 1, 6);
 
 
         // Gridpane per sistemazione elementi sul fine pagina
+
         GridPane bottomGrid = new GridPane();
 
-        bottomGrid.setPadding(new Insets(20));
+        bottomGrid.setPadding(new Insets(10));
         bottomGrid.setVgap(10);
         bottomGrid.setHgap(10);
         bottomGrid.add(errmessage, 0, 0);
@@ -226,17 +277,18 @@ public class TicketPageView extends Scene implements IResettableScene {
         bottomGrid.add(ticketPremiumLabel, 0, 3);
         bottomGrid.add(ticketVipLabel, 0, 4);
         //aggiunta dei campi riempiti dal controller
-        bottomGrid.add(ticketBaseTextField, 1, 1);
-        bottomGrid.add(ticketPremiumTextField, 1, 2);
-        bottomGrid.add(ticketVipTextField, 1, 3);
+        bottomGrid.add(ticketBaseTextField, 1, 2);
+        bottomGrid.add(ticketPremiumTextField, 1, 3);
+        bottomGrid.add(ticketVipTextField, 1, 4);
         //aggiunta dei prezzi
-        bottomGrid.add(basePriceTextField, 2, 1);
-        bottomGrid.add(premiumPriceTextField, 2, 2);
-        bottomGrid.add(vipPriceTextField, 2, 3);
+        bottomGrid.add(basePriceTextField, 2, 2);
+        bottomGrid.add(premiumPriceTextField, 2, 3);
+        bottomGrid.add(vipPriceTextField, 2, 4);
         //aggiunta dei bottoni di selezione
-        bottomGrid.add(basePricebutton, 3, 1);
-        bottomGrid.add(premiumPricebutton, 3, 2);
-        bottomGrid.add(vipPricebutton, 3, 3);
+        bottomGrid.add(basePricebutton, 3, 2);
+        bottomGrid.add(premiumPricebutton, 3, 3);
+        bottomGrid.add(vipPricebutton, 3, 4);
+
 
 
         basePricebutton.setToggleGroup(priceselection);
@@ -246,19 +298,21 @@ public class TicketPageView extends Scene implements IResettableScene {
 
         internalStructure.setCenter(centerGrid);
         internalStructure.setBottom(bottomGrid);
+        internalStructure.setStyle("-fx-background-color: #91BAD6;");
+        internalStructure.setRight(EventPosterImage);
 
         //Borderpane esterno per l'immissione di tutto al centro+ layout sopra e sotto
         BorderPane root=new BorderPane();
 
-        root.setCenter(internalStructure);
-        root.setStyle("-fx-background-color: #91BAD6;");
-        root.setBottom(buttonBox);
+       // root.setCenter(internalStructure);
+       // root.setStyle("-fx-background-color: #91BAD6;");
+        //root.setBottom(buttonBox);
 
 
 
         //BordePane layout per upperBar e lowerbar
         layout.setTop(UpperBar.getIstance());
-        layout.setCenter(root);
+        layout.setCenter(internalStructure);
         layout.setBottom(LowerBar.getInstance());
 
         reSetBars();
@@ -302,6 +356,8 @@ public class TicketPageView extends Scene implements IResettableScene {
         }
 
 
+
+
     public Toggle getIfPriceSelected() {
         return priceselection.getSelectedToggle();
     }
@@ -311,7 +367,7 @@ public class TicketPageView extends Scene implements IResettableScene {
         return backButton;
     }
 
-    public static Text getErrmessage() {
+    public static Label getErrmessage() {
         return errmessage;
     }
 
