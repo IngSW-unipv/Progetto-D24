@@ -3,6 +3,7 @@ package it.unipv.insfw23.TicketWave.modelView.ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 
+import javafx.geometry.HPos;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -221,12 +222,13 @@ public class TicketPageView extends Scene implements IResettableScene {
         Image EventPoster=new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/eventexeple.png");
         ImageView EventPosterImage= new ImageView();
         EventPosterImage.setImage(EventPoster);
-        EventPosterImage.setFitHeight(80);
-        EventPosterImage.setFitWidth(80);
+        EventPosterImage.setFitHeight(70);
+        EventPosterImage.setFitWidth(70);
 
 
 
       // Creazione di Region vuote per occupare lo spazio tra i bottoni e i margini
+
     Region leftSpacer = new Region();
     HBox.setHgrow(leftSpacer, Priority.ALWAYS); // Consente a leftSpacer di espandersi per riempire lo spazio disponibile
 
@@ -262,6 +264,9 @@ public class TicketPageView extends Scene implements IResettableScene {
         centerGrid.add(eventArtistTextField, 1, 5);
         centerGrid.add(eventDescriptionLabel, 0, 6);
         centerGrid.add(eventDescriptionTextField, 1, 6);
+        centerGrid.add(errmessage, 0, 7);
+
+
 
 
         // Gridpane per sistemazione elementi sul fine pagina
@@ -269,8 +274,8 @@ public class TicketPageView extends Scene implements IResettableScene {
         GridPane bottomGrid = new GridPane();
 
         bottomGrid.setPadding(new Insets(10));
-        bottomGrid.setVgap(10);
-        bottomGrid.setHgap(10);
+        bottomGrid.setVgap(1);
+        bottomGrid.setHgap(20);
         bottomGrid.add(errmessage, 0, 0);
         bottomGrid.add(ticketsLabel, 0, 1);
         bottomGrid.add(ticketBaseLabel, 0, 2);
@@ -291,6 +296,9 @@ public class TicketPageView extends Scene implements IResettableScene {
 
 
 
+
+
+
         basePricebutton.setToggleGroup(priceselection);
         premiumPricebutton.setToggleGroup(priceselection);
         vipPricebutton.setToggleGroup(priceselection);
@@ -298,21 +306,24 @@ public class TicketPageView extends Scene implements IResettableScene {
 
         internalStructure.setCenter(centerGrid);
         internalStructure.setBottom(bottomGrid);
+
         internalStructure.setStyle("-fx-background-color: #91BAD6;");
-        internalStructure.setRight(EventPosterImage);
+
 
         //Borderpane esterno per l'immissione di tutto al centro+ layout sopra e sotto
         BorderPane root=new BorderPane();
 
-       // root.setCenter(internalStructure);
-       // root.setStyle("-fx-background-color: #91BAD6;");
-        //root.setBottom(buttonBox);
+        root.setCenter(internalStructure);
+        root.setStyle("-fx-background-color: #91BAD6;");
+        BorderPane.setMargin(EventPosterImage, new Insets(30, 50, 0, 0));
+        root.setRight(EventPosterImage);
+        root.setBottom(buttonBox);
 
 
 
         //BordePane layout per upperBar e lowerbar
         layout.setTop(UpperBar.getIstance());
-        layout.setCenter(internalStructure);
+        layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
 
         reSetBars();
