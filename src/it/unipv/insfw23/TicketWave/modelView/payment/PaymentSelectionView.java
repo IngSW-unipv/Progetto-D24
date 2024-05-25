@@ -22,7 +22,7 @@ import java.util.List;
 
 public class PaymentSelectionView extends Scene {
 
-    private final Font font = Font.font("Helvetica", FontWeight.NORMAL, 13);
+    private final Font font = Font.font("Helvetica", FontWeight.BOLD, 13);
     private static RadioButton paypalButton = new RadioButton("Paypal");//paypal
     private static RadioButton mastercardButton = new RadioButton("Mastercard"); //mastercard
     private static Button nextButton = new Button();
@@ -57,6 +57,8 @@ public class PaymentSelectionView extends Scene {
         totalAmountLabel.setFont(font);
         paySelectionLabel.setFont(font);
         errmessage.setFont(font);
+        paypalButton.setFont(font);
+        mastercardButton.setFont(font);
 
 
         Image paypalLogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/Paypal_logo.png");

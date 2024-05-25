@@ -21,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PaymentDataMView extends Scene {
-    private final Font font = Font.font("Helvetica", FontWeight.NORMAL, 13);
+    private final Font font = Font.font("Helvetica", FontWeight.BOLD, 15);
 
     private static  Label nameLabel = new Label("Nome Intestatario Carta:");
     private static  Label surnameLabel = new Label("Cognome Intestatario Carta:");

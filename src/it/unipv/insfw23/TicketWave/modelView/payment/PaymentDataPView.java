@@ -17,9 +17,9 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
 public class PaymentDataPView extends Scene {
-    private final Font font = Font.font("Helvetica", FontWeight.NORMAL, 13);
+    private final Font font = Font.font("Helvetica", FontWeight.BOLD, 15);
     private static Label emailLabel = new Label("Inserisci la tua E-mail:");
-    private TextField inserEmail=new TextField();
+    private TextField insertEmail =new TextField();
 
     private Scene scene;
     private static Button nextButton =new Button("Avanti");
@@ -40,16 +40,16 @@ public class PaymentDataPView extends Scene {
 
     private void initComponents(){
 
-        emailLabel.setFont(font);
-        inserEmail.setFont(font);
+        emailLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 20));
+        insertEmail.setFont(font);
         usePointsButton.setFont(font);
 
-        VBox textBox= new VBox(emailLabel,inserEmail, nextButton,usePointsButton);
+        VBox textBox= new VBox(emailLabel, insertEmail, usePointsButton,nextButton);
         textBox.setStyle("-fx-font-size: 14px;");
         textBox.setPadding(new Insets(10));
         textBox.setAlignment(Pos.CENTER);
         textBox.setSpacing(50);
-        inserEmail.setMaxWidth(200);
+        insertEmail.setMaxWidth(200);
         usePointsButton.setAlignment(Pos.BOTTOM_CENTER);
 
         Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/backArrow.png");
@@ -58,6 +58,13 @@ public class PaymentDataPView extends Scene {
         backarrow.setPreserveRatio(true);
         backButton.setGraphic(backarrow);
         backButton.setStyle("-fx-background-color: #91bad6;");
+
+        Image nextarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/nextArrow.png");
+        ImageView nextarrow = new ImageView(nextarrowlogo);
+        nextarrow.setFitWidth(50);
+        nextarrow.setPreserveRatio(true);
+        nextButton.setGraphic(nextarrow);
+        nextButton.setStyle("-fx-background-color: #91bad6;");
 
 
 
@@ -70,7 +77,7 @@ public class PaymentDataPView extends Scene {
 
 
         BorderPane.setAlignment(emailLabel, Pos.TOP_CENTER);
-        BorderPane.setAlignment(inserEmail, Pos.CENTER);
+        BorderPane.setAlignment(insertEmail, Pos.CENTER);
 
 
 
@@ -97,8 +104,8 @@ public class PaymentDataPView extends Scene {
         return emailLabel;
     }
 
-    public TextField getInserEmail() {
-        return inserEmail;
+    public TextField getInsertEmail() {
+        return insertEmail;
     }
 
     public Button getForwardButtonButton() {
@@ -114,16 +121,6 @@ public class PaymentDataPView extends Scene {
     }
 
 
-    /*
-    public void reSetBars(){
-        BorderPane temp = new BorderPane();
-        scene.setRoot(temp);
-        layout.setTop(UpperBar.getIstance());
-        layout.setBottom(LowerBar.getInstance());
-        setRoot(layout);
-    }
-
-*/
 
 
 
