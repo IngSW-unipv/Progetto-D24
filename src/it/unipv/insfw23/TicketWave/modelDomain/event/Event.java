@@ -26,11 +26,11 @@ public abstract class Event {
     private Manager creator;
     private String artists, description; // tutti gli eventi hanno una descrizione
 
-    //private Blob photo;
+    private Blob photo;
 
     // costruttore
 
-    public Event(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, Type type, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description) {
+    public Event(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, Type type, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, Blob photo) {
         this.idEvent = idEvent;
         this.name = name;
         this.city = city;
@@ -48,6 +48,7 @@ public abstract class Event {
         this.creator = creator;
         this.artists = artists;
         this.description = description;
+        this.photo = photo;
         setDate(date);
         setTypeOfSeats(typeOfSeats);
         setSeatsRemainedNumberForType(seatsRemainedNumberForType);
@@ -158,7 +159,9 @@ public abstract class Event {
         return description;
     }
 
-    // public File getPhoto() { return photo; }
+    public Blob getPhoto() {
+    	return photo;
+    }
 
     // Setter //
     public void setIdEvent(int idEvent) {
@@ -256,5 +259,7 @@ public abstract class Event {
         this.description = description;
     }
 
-    // public void setPhoto(File photo) { this.photo = photo};
+    public void setPhoto(Blob photo) {
+    	this.photo = photo;
+    }
 }
