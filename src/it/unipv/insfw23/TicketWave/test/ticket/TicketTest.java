@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.test.ticket;
 
 import static org.junit.Assert.*;
 
+import java.sql.Blob;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -37,10 +38,11 @@ public class TicketTest {
 		int[] seatsremainedfortypecorrectevent = {60,20,25};
 		int[] ticketsoldfortypecorrectevent = {15,5,25};
 		double[] pricecorrectevent = {35.50,70,100};
+		Blob bl = null;
 		try {
 			
 			creator.createConcert(4,"Reunion","Firenze","via del palo",LocalDate.of(2024, 5, 23),LocalTime.of(20, 30),Province.ASTI,Genre.METAL,
-					150,2,seatsremainedfortypecorrectevent,ticketsoldfortypecorrectevent,pricecorrectevent,creator,"Califano","lalalala");
+					150,2,seatsremainedfortypecorrectevent,ticketsoldfortypecorrectevent,pricecorrectevent,creator,"Califano","lalalala", bl);
 
 		} catch (Exception e) {
 			// TODO: handle exception

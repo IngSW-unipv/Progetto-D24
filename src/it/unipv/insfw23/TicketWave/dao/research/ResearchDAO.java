@@ -1,14 +1,12 @@
-/*package it.unipv.insfw23.TicketWave.Dao.Research;
+package it.unipv.insfw23.TicketWave.dao.research;
 
-import it.unipv.insfw23.TicketWave.Dao.ConnectionDB;
+import it.unipv.insfw23.TicketWave.dao.ConnectionDB;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -21,14 +19,14 @@ public class ResearchDAO implements IResearchDAO{
     }
 
     @Override
-    public ArrayList<Event> searchAllEvents() {
+    public ArrayList<Event> getAllEvents() {
         conn = ConnectionDB.startConnection(conn,schema);
         PreparedStatement ps;
         ResultSet rs;
         ArrayList<Event> result = new ArrayList<>();
 
         try{
-            result = getAllEvents(); // entro nel metodo che istanzia gli eventi
+            result = getAllEventsFromDB(); // entro nel metodo che istanzia gli eventi
         }catch (Exception e){
             e.printStackTrace();
         }
@@ -36,12 +34,13 @@ public class ResearchDAO implements IResearchDAO{
         return result;
     } // Quando sulla ResearchBar non ho nulla, allora restituisco tutti gli eventi
     @Override
-    public ArrayList<Event> searchFilteredEvents(String search) { // Quando qualcuno scrive sulla ResearchBar (TextField) e usa o meno i filtri, allora uso questo metodo
+    public ArrayList<Event> getFilteredEvents(String search) { // Quando qualcuno scrive sulla ResearchBar (TextField) e usa o meno i filtri, allora uso questo metodo
 
         return null;
     }
 
-    private ArrayList<Event> getAllEvents() throws SQLException {
+    // Caso click sulla lente di ingrandimento senza aver ricercato nulla
+    private ArrayList<Event> getAllEventsFromDB() throws SQLException {
         ArrayList<Event> result = new ArrayList<>();
         Manager manager = null;
         PreparedStatement statement1;
@@ -59,6 +58,8 @@ public class ResearchDAO implements IResearchDAO{
 
         while (resultset1.next()) {
             LocalDate ld = resultset1.getDate("DATE_").toLocalDate();
+            LocalTime tm = resultset1.getTime("TIME_").toLocalTime();
+            Blob bl = resultset1.getBlob("PHOTO");
             try {
                 String query2 = "SELECT * FROM MANAGER WHERE MAIL = ?";
                 statement2 = conn.prepareStatement(query2);
@@ -67,7 +68,7 @@ public class ResearchDAO implements IResearchDAO{
 
                 if (resultset2.next()) {
                     manager = new Manager(resultset2.getString("NAME"), resultset2.getString("SURNAME"), resultset2.getDate("BIRTHDATE").toString(),
-                            resultset2.getString("MAIL"), resultset2.getString("PWD"), resultset2.getInt("PROVINCE"),
+                            resultset2.getString("MAIL"), resultset2.getString("PWD"), Province.valueOf(resultset1.getString("PROVINCE")),
                             resultset2.getString("CARDNUMBER"), result, resultset2.getInt("MAXEVENTS"), resultset2.getInt("SUBSCRIPTION"),
                             ld2, resultset2.getInt("COUNTER_CREATED_EVENTS"));
                 }
@@ -77,42 +78,41 @@ public class ResearchDAO implements IResearchDAO{
             }
             double[] price = {resultset1.getDouble("BASE_PRICE"), resultset1.getDouble("PREMIUM_PRICE"), resultset1.getDouble("VIP_PRICE")};
             int[] seatsremaining = {resultset1.getInt("REMAINING_BASE_SEATS"), resultset1.getInt("REMAINING_PREMIUM_SEATS"), resultset1.getInt("REMAINING_VIP_SEATS")};
+            int[] ticketSoldNumberForType = {resultset1.getInt("SOLD_BASE_SEATS"), resultset1.getInt("SOLD_PREMIUM_SEATS"), resultset1.getInt("SOLD_VIP_SEATS")};
             switch (resultset1.getInt("TYPE")) {
                 case 0 -> {
                     Concert currentConcert = new Concert(resultset1.getInt("ID_EVENT"), resultset1.getString("NAME_"),
-                            resultset1.getString("CITY"), ld,
-                            resultset1.getString("LOCATION"), Province.valueOf(resultset1.getString("PROVINCE")),
-                            resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS"), seatsremaining, price,
-                            Genre.valueOf(resultset1.getString("GENRE")), manager, splitStringToArrayList(resultset1.getString("ARTISTS")));
+                            resultset1.getString("CITY"), resultset1.getString("LOCATION"), ld, tm,
+                            Province.valueOf(resultset1.getString("PROVINCE")), Genre.valueOf(resultset1.getString("GENRE")),
+                            resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
+                            manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), bl);
                     result.add(currentConcert);
                     break;
                 }
                 case 1 -> {
                     Festival currentFestival = new Festival(resultset1.getInt("ID_EVENT"), resultset1.getString("NAME_"),
-                            resultset1.getString("CITY"), ld,
-                            resultset1.getString("LOCATION"), Province.valueOf(resultset1.getString("PROVINCE")),
-                            resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS"), seatsremaining, price,
-                            Genre.valueOf(resultset1.getString("GENRE")), manager, splitStringToArrayList(resultset1.getString("ARTISTS")));
+                            resultset1.getString("CITY"), resultset1.getString("LOCATION"), ld, tm,
+                            Province.valueOf(resultset1.getString("PROVINCE")), Genre.valueOf(resultset1.getString("GENRE")),
+                            resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
+                            manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), resultset1.getInt("NUM_ARTISTS"), bl);
                     result.add(currentFestival);
                     break;
                 }
                 case 2 -> {
                     Theater currentTheatre = new Theater(resultset1.getInt("ID_EVENT"), resultset1.getString("NAME_"),
-                            resultset1.getString("CITY"), ld,
-                            resultset1.getString("LOCATION"), Province.valueOf(resultset1.getString("PROVINCE")),
-                            resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS"), seatsremaining, price,
-                            Genre.valueOf(resultset1.getString("GENRE")), manager, splitStringToArrayList(resultset1.getString("ARTISTS")),
-                            null, resultset1.getString(19));
+                            resultset1.getString("CITY"), resultset1.getString("LOCATION"), ld, tm,
+                            Province.valueOf(resultset1.getString("PROVINCE")), Genre.valueOf(resultset1.getString("GENRE")),
+                            resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
+                            manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), resultset1.getString("AUTHOR"), bl);
                     result.add(currentTheatre);
                     break;
                 }
                 case 3 -> {
                     Other currentOther = new Other(resultset1.getInt("ID_EVENT"), resultset1.getString("NAME_"),
-                            resultset1.getString("CITY"), ld,
-                            resultset1.getString("LOCATION"), Province.valueOf(resultset1.getString("PROVINCE")),
-                            resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS"), seatsremaining, price,
-                            Genre.valueOf(resultset1.getString("GENRE")), manager, splitStringToArrayList(resultset1.getString("ARTISTS")),
-                            resultset1.getString(20));
+                            resultset1.getString("CITY"), resultset1.getString("LOCATION"), ld, tm,
+                            Province.valueOf(resultset1.getString("PROVINCE")), Genre.valueOf(resultset1.getString("GENRE")),
+                            resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
+                            manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), bl);
                     result.add(currentOther);
                     break;
                 }
@@ -146,4 +146,3 @@ public class ResearchDAO implements IResearchDAO{
     }
 
 }
-*/
