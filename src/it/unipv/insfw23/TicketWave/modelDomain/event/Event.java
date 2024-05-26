@@ -26,7 +26,7 @@ public abstract class Event {
     private Manager creator;
     private String artists, description; // tutti gli eventi hanno una descrizione
 
-    //private Blob photo;
+    private Blob photo;
 
     // costruttore
 
