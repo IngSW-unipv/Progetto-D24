@@ -130,10 +130,30 @@ public class ProfileDao implements IProfileDao {
                     resultSet2 = statement2.executeQuery();
 
                     while (resultSet2.next()) {
+
                         LocalDate currentDate = resultSet2.getDate("DATE_").toLocalDate(); // converto data in LocalData
-                        double[] price = {resultSet2.getDouble("BASE_PRICE"), resultSet2.getDouble("PREMIUM_PRICE"), resultSet2.getDouble("VIP_PRICE")};
-                        int[] seatsRemaining = {resultSet2.getInt("REMAINING_BASE_SEATS"), resultSet2.getInt("REMAINING_BASE_SEATS"), resultSet2.getInt("REMAINING_BASE_SEATS")};
-                        int[] seatsSold = {resultSet2.getInt("SOLD_BASE_SEATS"), resultSet2.getInt("SOLD_BASE_SEATS"), resultSet2.getInt("SOLD_BASE_SEATS")};
+
+                        double[] price = new double[resultSet2.getInt("NUM_SEATS_TYPE")];
+                        int[] seatsRemaining = new int[resultSet2.getInt("NUM_SEATS_TYPE")];
+                        int[] seatsSold = new int[resultSet2.getInt("NUM_SEATS_TYPE")];
+
+                        switch (resultSet2.getInt("NUM_SEATS_TYPE")){
+                            case 3:
+                                price[2] = resultSet2.getDouble("VIP_PRICE");
+                                seatsRemaining[2] = resultSet2.getInt("REMAINING_VIP_SEATS");
+                                seatsSold[2] = resultSet2.getInt("SOLD_VIP_SEATS");
+
+                            case 2:
+                                price[1] = resultSet2.getDouble("PREMIUM_PRICE");
+                                seatsRemaining[1] = resultSet2.getInt("REMAINING_PREMIUM_SEATS");
+                                seatsSold[1] = resultSet2.getInt("SOLD_PREMIUM_SEATS");
+
+                            case 1:
+                                price[0] = resultSet2.getDouble("BASE_PRICE");
+                                seatsRemaining[0] = resultSet2.getInt("REMAINING_BASE_SEATS");
+                                seatsSold[0] = resultSet2.getInt("SOLD_BASE_SEATS");
+                        }
+
 
                         switch (resultSet2.getInt("TYPE")) {
                             case 0:
@@ -243,19 +263,18 @@ public class ProfileDao implements IProfileDao {
                     while (resultSet2.next()) {
                         Ticket currentTicket = new Ticket(resultSet2.getString("BAR_CODE"), resultSet2.getDouble("PRICE"),
                                 TicketType.valueOf(resultSet2.getString("TYPE")));
+
+                        customer.addTickets(currentTicket);
                     }
-
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-
-
-            return null;
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+        ConnectionDB.closeConnection(connection);
+        return customer;
     }
 
     private Genre[] splitStringToArrayGenre(String s) {
