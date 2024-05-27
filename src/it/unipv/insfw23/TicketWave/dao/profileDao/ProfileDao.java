@@ -24,15 +24,73 @@ public class ProfileDao implements IProfileDao {
     }
 
     @Override
-    public void insertManager() {
+    public void insertManager(Manager manager) throws SQLException {
+
+        try {
+            connection = ConnectionDB.startConnection(connection,schema);  // apro connessione
+            if(ConnectionDB.isOpen(connection)){   // check se è tutto ok
+
+                //query d'inserimento
+                String query = "INSERT INTO MANAGER (name, surname, dateOfBirth, email, password, provinceOfResidence, " +
+                        "creditCard, maxNumberOfEvents, subscription, subscriptionDate, counterCreatedEvents) " +
+                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+                //setto i campi
+                PreparedStatement preparedStatement=connection.prepareStatement(query);
+                preparedStatement.setString(1, manager.getName());
+                preparedStatement.setString(2, manager.getSurname());
+                preparedStatement.setString(3, manager.getDateOfBirth());
+                preparedStatement.setString(4, manager.getEmail());
+                preparedStatement.setString(5, manager.getPassword());
+                preparedStatement.setString(6, manager.getProvinceOfResidence().toString());
+                preparedStatement.setString(7, manager.getCreditCard());
+                preparedStatement.setInt(8, manager.getMaxNumberOfEvents());
+                preparedStatement.setInt(9, 0);     // il subscription è =0 al momento dell'iscrizione
+                preparedStatement.setDate(10, Date.valueOf(manager.getSubscriptionDate()));
+                preparedStatement.setInt(11, 0);    //counterCreatedEvents=0 al momento dell'iscrizione
+
+                preparedStatement.executeUpdate();  // eseguo
+            }
+        }catch (SQLException e) {
+            throw new SQLException("No zi non posso salvare i tuoi dati, c'è qualche prob", e);
+        }
+        ConnectionDB.closeConnection(connection);
 
     }
 
 
     @Override
-    public void insertCustomer() {
+    public void insertCustomer(Customer customer)throws SQLException{
+        try {
+            connection = ConnectionDB.startConnection(connection,schema);  // apro connessione
+            if(ConnectionDB.isOpen(connection)){
 
+
+                String query = "INSERT INTO CUSTOMER(name, surname, dateOfBirth, email, password, provinceOfResidence, points, favouriteGenre) VALUES (?, ?, ?, ?, ?, ?, ?)";
+
+                PreparedStatement preparedStatement=connection.prepareStatement(query);
+
+                preparedStatement.setString(1, customer.getName());
+                preparedStatement.setString(2, customer.getSurname());
+                preparedStatement.setString(3, customer.getDateOfBirth());
+                preparedStatement.setString(4, customer.getEmail());
+                preparedStatement.setString(5, customer.getPassword());
+                preparedStatement.setString(6, customer.getProvinceOfResidence().toString()); // Assuming Province has a proper toString() method
+                preparedStatement.setInt(7, 0);  // points=0 al momento dell'iscrizione
+                //preparedStatement.executeUpdate();
+
+                for (Genre genre : customer.getFavoriteGenre()) {
+                    preparedStatement.setString(1, genre.toString());
+                }
+                preparedStatement.executeUpdate();  // OCCHIO: non so se faccia l'update completo
+                //o ho bisongno di fare un ulteriore statement, e poi metterlo all'interno del ciclo
+            }
+        } catch (SQLException e) {
+            throw new SQLException("Errore per inserimento del Customer", e);
+        }
+        ConnectionDB.closeConnection(connection);
     }
+
 
 
     @Override
@@ -120,8 +178,8 @@ public class ProfileDao implements IProfileDao {
                     }
                     manager.setEvent(createdEvents);
 
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
                 }
             }
         } catch (SQLException e) {
