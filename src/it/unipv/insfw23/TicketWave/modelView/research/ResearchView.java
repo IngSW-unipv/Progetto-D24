@@ -31,6 +31,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.*;
 
 import javax.imageio.event.IIOReadProgressListener;
+import java.sql.Blob;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -214,27 +215,28 @@ public class ResearchView extends Scene implements IResettableScene {
         int vett [] = {200, 3000, 20};
         double price[] = {30, 50, 10};
         LocalTime time = null;
+        Blob bl = null;
 
         ObservableList<Event> evs = FXCollections.observableArrayList(
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(2,"Rooler in tha house","ROZZANO","Laghetto", data, time, Province.MILANO, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"Orcocan", "Orcocan è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui"),
-                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui")
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
+                new Concert(2,"Rooler in tha house","ROZZANO","Laghetto", data, time, Province.MILANO, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"Orcocan", "Orcocan è qui", bl),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE,500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
+                new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl)
         );
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         table.setItems(evs);
