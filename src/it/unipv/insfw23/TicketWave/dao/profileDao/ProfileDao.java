@@ -301,4 +301,5 @@ public class ProfileDao implements IProfileDao {
     public static boolean checkPassword(String plainPassword, String hashedPassword) {
         return BCrypt.checkpw(plainPassword, hashedPassword);
     }
+
 }
