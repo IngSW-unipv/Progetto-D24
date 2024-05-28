@@ -13,6 +13,9 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import it.unipv.insfw23.TicketWave.org.mindrot.jbcrypt.BCrypt;
+
+
 
 public class ProfileDao implements IProfileDao {
     private String schema;
@@ -41,7 +44,7 @@ public class ProfileDao implements IProfileDao {
                 preparedStatement.setString(2, manager.getSurname());
                 preparedStatement.setString(3, manager.getDateOfBirth());
                 preparedStatement.setString(4, manager.getEmail());
-                preparedStatement.setString(5, manager.getPassword());
+                preparedStatement.setString(5, hashPassword(manager.getPassword()));
                 preparedStatement.setString(6, manager.getProvinceOfResidence().toString());
                 preparedStatement.setString(7, manager.getCreditCard());
                 preparedStatement.setInt(8, manager.getMaxNumberOfEvents());
@@ -74,7 +77,7 @@ public class ProfileDao implements IProfileDao {
                 preparedStatement.setString(2, customer.getSurname());
                 preparedStatement.setString(3, customer.getDateOfBirth());
                 preparedStatement.setString(4, customer.getEmail());
-                preparedStatement.setString(5, customer.getPassword());
+                preparedStatement.setString(5, hashPassword(customer.getPassword()));
                 preparedStatement.setString(6, customer.getProvinceOfResidence().toString()); // Assuming Province has a proper toString() method
                 preparedStatement.setInt(7, 0);  // points=0 al momento dell'iscrizione
                 //preparedStatement.executeUpdate();
@@ -104,14 +107,13 @@ public class ProfileDao implements IProfileDao {
         Manager manager = null;
 
         try {
-            String query1 = "SELECT * FROM MANAGER WHERE (MAIL = ?) AND (PASSWORD = ?)";
+            String query1 = "SELECT * FROM MANAGER WHERE (MAIL = ?)";
             statement1 = connection.prepareStatement(query1);
             statement1.setString(1, mail);
-            statement1.setString(2, password);
 
             resultSet1 = statement1.executeQuery();
 
-            if (resultSet1.next()) {
+            if (resultSet1.next() && checkPassword(password, resultSet1.getString("PASSWORD"))) {
                 ArrayList<Event> createdEvents = new ArrayList<>();         //creo la arraylist da riempire
                 Date date = resultSet1.getDate("SUBSCRIPTION_DATE");             //mi prendo la data di sub per castarla
                 LocalDate subDate = date.toLocalDate();
@@ -202,8 +204,9 @@ public class ProfileDao implements IProfileDao {
                     throw new RuntimeException(e);
                 }
             }
+            else {return null;}
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Utente non trovato o non registrato");
         }
 
         ConnectionDB.closeConnection(connection);
@@ -238,14 +241,13 @@ public class ProfileDao implements IProfileDao {
         Customer customer = null;
 
         try {
-            String query1 = "SELECT * FROM CUSTOMER WHERE (MAIL = ?) AND (PASSWORD = ?)";
+            String query1 = "SELECT * FROM CUSTOMER WHERE (MAIL = ?)";
             statement1 = connection.prepareStatement(query1);
             statement1.setString(1, mail);
-            statement1.setString(2, password);
 
             resultSet1 = statement1.executeQuery();
 
-            if (resultSet1.next()) {
+            if (resultSet1.next() && checkPassword(password, resultSet1.getString("PASSWORD"))) {
 
                 ArrayList<Ticket> boughtTickets = new ArrayList<>();   // creo l'arraylist per riempirla
 
@@ -270,8 +272,10 @@ public class ProfileDao implements IProfileDao {
                     e.printStackTrace();
                 }
             }
+            else{ return null;}
+
         } catch (SQLException e) {
-            throw new RuntimeException(e);
+            throw new RuntimeException("Utente non trovato o non registrato");
         }
         ConnectionDB.closeConnection(connection);
         return customer;
@@ -288,5 +292,13 @@ public class ProfileDao implements IProfileDao {
             i++;
         }
         return genreArray;
+    }
+
+    public static String hashPassword(String password) {
+        return BCrypt.hashpw(password, BCrypt.gensalt());
+    }
+
+    public static boolean checkPassword(String plainPassword, String hashedPassword) {
+        return BCrypt.checkpw(plainPassword, hashedPassword);
     }
 }
