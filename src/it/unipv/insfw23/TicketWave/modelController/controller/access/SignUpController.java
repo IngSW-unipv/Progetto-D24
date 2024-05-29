@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.access;
 
+import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
@@ -20,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -33,6 +35,7 @@ public class SignUpController {
     private CustomerView customerview;
     private LoginView loginView;
     private SubscriptionSelectionView subscriptionSelectionView;
+    private ProfileDao profileDao;
 
 
     public SignUpController(Stage mainstage, SignUpView signUpView, CustomerView customerview, LoginView loginView) {
@@ -76,9 +79,24 @@ public class SignUpController {
                     customerview.reSetBars();
 
                     //set del customer, CHIAMATA AL DAO PER LA REGISTRAZIONE
+
+                    /*
                     Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
                     ArrayList<Ticket> tickets= new ArrayList<>();
-                    Customer customer=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.BARI,favoriteGenre, 100,tickets);
+
+
+                     */
+
+                    Customer customer=new Customer(signUpView.getNameField().getText(),
+                            signUpView.getSurnameField().getText(), signUpView.getDatePicker().getValue().toString(),
+                            signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(),
+                            signUpView.getSelectedProvince(),favoriteGenre, 0,0);  // setto  a zero i biglietti creati e i punti vanno presi dopo nelle altre view
+
+                    try {
+                        profileDao.insertCustomer(customer);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
 
                     ConnectedUser.getInstance().setUser(customer);
                     ConnectedUser.getInstance().setHome(customerview);
@@ -87,6 +105,8 @@ public class SignUpController {
                     //
 
                     mainstage.setScene(customerview);
+
+
                     // Imposta la scena SignUpView sulla stage principale
                 } else if (signUpView.getManagerRadioButton().isSelected()) {
 
@@ -97,10 +117,14 @@ public class SignUpController {
                     subscriptionSelectionView.reSetBars();
 
                     //set del manager, CHIAMATA AL DAO PER LA REGISTRAZIONE
+                    /*
                     ArrayList<Notification> arrayListNotification = new ArrayList<>();
                     ArrayList<Event> arraylistevent = new ArrayList<>();
                     LocalDate datasub = LocalDate.of(2024, 02, 25);
-                    Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","password1234", Province.CREMONA, "2324523432451420", arraylistevent,5,1,datasub,0);
+                    */
+
+                    Manager managerfinto = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), null, null,1,null,null,0);
+                    //credit card, data sub max numberofevents, da prendere nella mastercardview, datasub
 
                     ConnectedUser.getInstance().setUser(managerfinto);
                     ConnectedUser.getInstance().setLoginView(loginView);

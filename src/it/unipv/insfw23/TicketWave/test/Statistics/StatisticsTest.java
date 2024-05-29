@@ -5,8 +5,12 @@ import it.unipv.insfw23.TicketWave.modelController.factory.statistics.Statistics
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.statistics.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import javafx.scene.image.Image;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import java.sql.Blob;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -40,18 +44,20 @@ public class StatisticsTest {
         int [] bc1 = {2250};
         double [] pc1 = {50};
 
+        Image bl = null;
+
         events = new ArrayList<Event>();
 
         Festival f1 = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024,4,20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 2250,
-                1, af1, bf1, pf1, manager, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", 3);
+                1, af1, bf1, pf1, manager, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", 3, bl);
         events.add(f1);
 
         Festival f2 = new Festival(0, "Nameless", "Pavia", "Parco di Pavia", LocalDate.of(2024,4,28), LocalTime.parse("14:04:00"), Province.PAVIA, Genre.EDM, 2250,
-                1, af2, bf2, pf2, manager, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", 3);
+                1, af2, bf2, pf2, manager, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", 3, bl);
         events.add(f2);
 
         Concert c1 = new Concert(0, "Nameless", "Milano", "Forum", LocalDate.of(2024,3,20), LocalTime.parse("14:04:00"), Province.MILANO, Genre.RAP, 2250,
-                1, ac1, bc1, pc1, manager, "Salmo", "Festival di musica EDM");
+                1, ac1, bc1, pc1, manager, "Salmo", "Festival di musica EDM", bl);
         events.add(c1);
 
         manager = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", Province.COMO, "1234567890123456", events, 5, 1, LocalDate.now(), 0);

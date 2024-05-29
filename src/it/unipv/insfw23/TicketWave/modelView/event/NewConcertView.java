@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelView.event;
 
+import java.sql.Blob;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -91,7 +92,7 @@ public class NewConcertView extends Scene{
 		grid.setPadding(new Insets(20, 40, 20, 40));
 		grid.setVgap(10);
 		grid.setHgap(40);
-//		grid.setGridLinesVisible(true);
+		grid.setGridLinesVisible(true);
 		grid.setAlignment(Pos.CENTER);
 		
 		
