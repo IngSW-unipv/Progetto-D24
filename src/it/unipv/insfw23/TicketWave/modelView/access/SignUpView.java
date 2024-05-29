@@ -4,18 +4,16 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
-import javafx.scene.image.Image;
+
+import java.time.LocalDate;
 
 public class SignUpView extends Scene implements IResettableScene {
 
@@ -26,7 +24,14 @@ public class SignUpView extends Scene implements IResettableScene {
     private static Label passwordLabel = new Label("Password:");
     private static Label confirmPasswordLabel = new Label("Conferma password:");
     private static Label dateLabel = new Label("Data di nascita");
+    private static TextField surnameField = new TextField();
+    private static TextField confirmEmailField = new TextField();
+    private static PasswordField passwordField = new PasswordField();
+    private static PasswordField confirmPasswordField = new PasswordField();
+    private static DatePicker datePicker = new DatePicker();
     private static Label provinceLabel = new Label("Comune di residenza");
+    private static TextField nameField = new TextField();
+    private static TextField emailField = new TextField();
     private BorderPane layout ;
     private GridPane grid;
     private Button signUpButton = new Button("Registrati");
@@ -94,44 +99,37 @@ public class SignUpView extends Scene implements IResettableScene {
 
         nameLabel.setFont(labelFont);
         GridPane.setConstraints(nameLabel, 0, 1);
-        TextField nameField = new TextField();
         GridPane.setConstraints(nameField, 1, 1);
 
 
         surnameLabel.setFont(labelFont);
         GridPane.setConstraints(surnameLabel, 2, 1);
-        TextField surnameField = new TextField();
         GridPane.setConstraints(surnameField, 3, 1);
 
 
         emailLabel.setFont(labelFont);
         GridPane.setConstraints(emailLabel, 0, 3);
-        TextField emailField = new TextField();
         GridPane.setConstraints(emailField, 1, 3);
 
 
         confirmEmailLabel.setFont(labelFont);
         GridPane.setConstraints(confirmEmailLabel, 2, 3);
-        TextField confirmEmailField = new TextField();
         GridPane.setConstraints(confirmEmailField, 3, 3);
 
 
         passwordLabel.setFont(labelFont);
         GridPane.setConstraints(passwordLabel, 0, 4);
-        PasswordField passwordField = new PasswordField();
         GridPane.setConstraints(passwordField, 1, 4);
 
 
         confirmPasswordLabel.setFont(labelFont);
         GridPane.setConstraints(confirmPasswordLabel, 2, 4);
-        PasswordField confirmPasswordField = new PasswordField();
         GridPane.setConstraints(confirmPasswordField, 3, 4);
 
 
         dateLabel.setFont(labelFont);
         GridPane.setConstraints(dateLabel, 0, 2);
 
-        DatePicker datePicker = new DatePicker();
         GridPane.setConstraints(datePicker, 1, 2);
 
 
@@ -217,5 +215,31 @@ public class SignUpView extends Scene implements IResettableScene {
         setRoot(layout);
     }
 
+    public static TextField getSurnameField() {
+        return surnameField;
+    }
 
+    public static TextField getConfirmEmailField() {
+        return confirmEmailField;
+    }
+
+    public static PasswordField getPasswordField() {
+        return passwordField;
+    }
+
+    public static PasswordField getConfirmPasswordField() {
+        return confirmPasswordField;
+    }
+
+    public static DatePicker getDatePicker() {
+        return datePicker //restituisco la local date direttamente, per semplificarmi il codice nel controller
+    }
+
+    public static TextField getNameField() {
+        return nameField;
+    }
+
+    public static TextField getEmailField() {
+        return emailField;
+    }
 }

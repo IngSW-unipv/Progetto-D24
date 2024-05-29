@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.access;
 
+import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
@@ -33,6 +34,7 @@ public class SignUpController {
     private CustomerView customerview;
     private LoginView loginView;
     private SubscriptionSelectionView subscriptionSelectionView;
+    private ProfileDao profileDao;
 
 
     public SignUpController(Stage mainstage, SignUpView signUpView, CustomerView customerview, LoginView loginView) {
@@ -76,9 +78,14 @@ public class SignUpController {
                     customerview.reSetBars();
 
                     //set del customer, CHIAMATA AL DAO PER LA REGISTRAZIONE
+
+                    /*
                     Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
                     ArrayList<Ticket> tickets= new ArrayList<>();
-                    Customer customer=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.BARI,favoriteGenre, 100,tickets);
+
+
+                     */
+                    Customer customer=new Customer(signUpView.getNameField().getText(),signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(),Province.BARI,favoriteGenre, 100,tickets);
 
                     ConnectedUser.getInstance().setUser(customer);
                     ConnectedUser.getInstance().setHome(customerview);
