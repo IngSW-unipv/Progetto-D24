@@ -18,5 +18,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" exported="" name="JavaFX-19" level="application" />
+    <orderEntry type="library" name="javafx-swt" level="project" />
   </component>
 </module>

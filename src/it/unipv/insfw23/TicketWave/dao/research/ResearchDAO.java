@@ -32,7 +32,7 @@ public class ResearchDAO implements IResearchDAO{
             if (!ConnectionDB.isOpen(conn)) { // se non è aperta una connessione, allora aprila
                 ConnectionDB.startConnection(conn, schema);
             }
-            String query = "SELECT * FROM EVENT_ WHERE MANAGER_ID = ?";
+            String query = "SELECT * FROM EVENT_ JOIN MANAGER ON MANAGER_ID = MAIL";
             statement1 = conn.prepareStatement(query);
             resultset1 = statement1.executeQuery(query);
 
@@ -41,7 +41,7 @@ public class ResearchDAO implements IResearchDAO{
                 LocalTime tm = resultset1.getTime("TIME_").toLocalTime();
                 Blob bl = resultset1.getBlob("PHOTO");
                 try {
-                    String query2 = "SELECT * FROM MANAGER WHERE MAIL = ?";
+                    String query2 = "SELECT * FROM MANAGER LEFT JOIN EVENT_ ON MAIL = MANAGER_ID"; // se funziona la query sopra, questa va fatta volare insieme al try catch, tengo solo la creazione dei vari manager
                     statement2 = conn.prepareStatement(query2);
                     resultset2 = statement2.executeQuery(query2);
                     LocalDate ld2 = resultset2.getDate("SUBSCRIPTION_DATE").toLocalDate();
@@ -101,9 +101,38 @@ public class ResearchDAO implements IResearchDAO{
         return result;
     } // Quando sulla ResearchBar non ho nulla, allora restituisco tutti gli eventi
     @Override
-    public ArrayList<Event> getFilteredEvents(String search) throws SQLException{ // Quando qualcuno scrive sulla ResearchBar (TextField) e usa o meno i filtri, allora uso questo metodo
+    public ArrayList<Event> getFilteredEvents(String searchField, String checkboxProvince, String checkboxGenre) throws SQLException{ // Quando qualcuno scrive sulla ResearchBar (TextField) e usa o meno i filtri, allora uso questo metodo
+        conn = ConnectionDB.startConnection(conn,schema);
+        ArrayList<Event> result = new ArrayList<>();
+        Manager manager;
+        PreparedStatement statement1;
+        ResultSet resultset1;
 
-        return null;
+        try {
+            if (!ConnectionDB.isOpen(conn)){
+                ConnectionDB.startConnection(conn, schema);
+            }
+            String query = "SELECT * FROM EVENT_ JOIN MANAGER ON MANAGER_ID = MAIL WHERE checkboxProvince = PROVINCE AND checkboxGenre = GENRE AND (NAME_ LIKE ? OR ARTISTS LIKE ?)"; // prendo tutti gli attributi degli eventi che corrispondono ai filtri. 90 su 100 è cannata
+            statement1 = conn.prepareStatement(query);
+            statement1.setString(1, "%"+ searchField + "%");
+            statement1.setString(2, "%"+ searchField + "%");
+            resultset1 = statement1.executeQuery();
+            while(resultset1.next()) { // finché ci sono risultati prima creo il manager e poi un evento
+                manager = createManager(resultset1, result); // cannato perché  il resultset è vuoto, per cui creo un  manager con 0 eventi nell'arraylist, come faccio?
+                // creo l'evento
+                result.add(createEvent(resultset1,manager)); // result viene aggiornato dentro a create event con result.add
+
+                // devo sparare elemento per elemento di result dentro la table dei risultati della research view, ma lo faccio da controller
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Evento non trovato");
+        }
+
+
+
+
+        ConnectionDB.closeConnection(conn); // chiudo la connessione
+        return result;
     }
 
     private ArrayList<String> splitStringToArrayList(String s){
@@ -141,5 +170,55 @@ public class ResearchDAO implements IResearchDAO{
         // Divide la stringa in base alla virgola
         String[] words = input.split("\\s*,\\s*");
         return words.length;
+    }
+
+    private Manager createManager(ResultSet rs, ArrayList<Event> result) throws SQLException {
+        Manager mg = null;
+        LocalDate ld2 = rs.getDate("SUBSCRIPTION_DATE").toLocalDate();
+        mg = new Manager(rs.getString("NAME"), rs.getString("SURNAME"), rs.getDate("BIRTHDATE").toString(),
+                rs.getString("MAIL"), rs.getString("PWD"), Province.valueOf(rs.getString("PROVINCE")),
+                rs.getString("CARDNUMBER"), result, rs.getInt("MAXEVENTS"), rs.getInt("SUBSCRIPTION"),
+                ld2, rs.getInt("COUNTER_CREATED_EVENTS"));
+        return mg;
+    }
+
+    private Event createEvent(ResultSet resultset1, Manager manager) throws SQLException {
+        LocalDate ld = resultset1.getDate("DATE_").toLocalDate();
+        LocalTime tm = resultset1.getTime("TIME_").toLocalTime();
+        Blob bl = resultset1.getBlob("PHOTO");
+        double[] price = {resultset1.getDouble("BASE_PRICE"), resultset1.getDouble("PREMIUM_PRICE"), resultset1.getDouble("VIP_PRICE")};
+        int[] seatsremaining = {resultset1.getInt("REMAINING_BASE_SEATS"), resultset1.getInt("REMAINING_PREMIUM_SEATS"), resultset1.getInt("REMAINING_VIP_SEATS")};
+        int[] ticketSoldNumberForType = {resultset1.getInt("SOLD_BASE_SEATS"), resultset1.getInt("SOLD_PREMIUM_SEATS"), resultset1.getInt("SOLD_VIP_SEATS")};
+        switch (resultset1.getInt("TYPE")) {
+            case 0 -> {
+                return new Concert(resultset1.getInt("ID_EVENT"), resultset1.getString("NAME_"),
+                        resultset1.getString("CITY"), resultset1.getString("LOCATION"), ld, tm,
+                        Province.valueOf(resultset1.getString("PROVINCE")), Genre.valueOf(resultset1.getString("GENRE")),
+                        resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
+                        manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), bl);
+            }
+            case 1 -> {
+                return new Festival(resultset1.getInt("ID_EVENT"), resultset1.getString("NAME_"),
+                        resultset1.getString("CITY"), resultset1.getString("LOCATION"), ld, tm,
+                        Province.valueOf(resultset1.getString("PROVINCE")), Genre.valueOf(resultset1.getString("GENRE")),
+                        resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
+                        manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), countWords(resultset1.getString("ARTISTS")), bl);
+            }
+            case 2 -> {
+                return new Theater(resultset1.getInt("ID_EVENT"), resultset1.getString("NAME_"),
+                        resultset1.getString("CITY"), resultset1.getString("LOCATION"), ld, tm,
+                        Province.valueOf(resultset1.getString("PROVINCE")), Genre.valueOf(resultset1.getString("GENRE")),
+                        resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
+                        manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), resultset1.getString("AUTHOR"), bl);
+            }
+            case 3 -> {
+                return new Other(resultset1.getInt("ID_EVENT"), resultset1.getString("NAME_"),
+                        resultset1.getString("CITY"), resultset1.getString("LOCATION"), ld, tm,
+                        Province.valueOf(resultset1.getString("PROVINCE")), Genre.valueOf(resultset1.getString("GENRE")),
+                        resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
+                        manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), bl);
+            }
+        }
+        return null; // nel caso in cui non rientra in nessun tipo => nullo => errore
     }
 }

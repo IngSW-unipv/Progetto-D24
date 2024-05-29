@@ -35,7 +35,7 @@ public class ResearchController {
             @Override
             public void handle(javafx.scene.input.MouseEvent mouseEvent) {
                 System.out.println("Faccio la query di ricerca");
-                System.out.println(rv.getSearchBar().getText());
+                System.out.println(rv.getSearchBar().getText()); // in questo modo devo prendere la searchbar e passarla al ResearchDAO
                 rv.getTable().setVisible(true);
                 rv.getTable().getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
             }
