@@ -51,6 +51,7 @@ public class SignUpController {
 
     public void initComponents() {
 
+        // Action sul logingbutton
         EventHandler<ActionEvent> goToLoginView = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -66,6 +67,7 @@ public class SignUpController {
 
         signUpView.getBackButton().setOnAction(goToLoginView);
 
+        // Action sul signupbutton
         EventHandler<ActionEvent> goToSelection = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {

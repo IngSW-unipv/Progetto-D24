@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelView.access;
 
+import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
@@ -10,10 +11,13 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class SignUpView extends Scene implements IResettableScene {
 
@@ -33,6 +37,7 @@ public class SignUpView extends Scene implements IResettableScene {
     private static TextField nameField = new TextField();
     private static TextField emailField = new TextField();
     private static ComboBox<Province> residenceComboBox = new ComboBox<>();
+    private Label genre;
 
     private BorderPane layout ;
     private GridPane grid;
@@ -40,9 +45,11 @@ public class SignUpView extends Scene implements IResettableScene {
     private Button backButton = new Button("Torna indietro");
     private RadioButton managerRadioButton;
     private RadioButton customerRadioButton;
+   private  ToggleGroup accountTypeToggleGroup;
     private UpperBar upperBar;
     private LowerBar lowerBar;
-
+    private CheckBox favoriteGenre;
+    private Text errmessage;
 
 
     public SignUpView(){
@@ -98,42 +105,73 @@ public class SignUpView extends Scene implements IResettableScene {
 
         Font labelFont = Font.font("Helvetica", FontWeight.BOLD, 18); // imposto font di tutta la pagina
 
-
+        // NOME UTENTE
         nameLabel.setFont(labelFont);
         GridPane.setConstraints(nameLabel, 0, 1);
         GridPane.setConstraints(nameField, 1, 1);
 
-
+        // COGNOME UTENTE
         surnameLabel.setFont(labelFont);
         GridPane.setConstraints(surnameLabel, 2, 1);
         GridPane.setConstraints(surnameField, 3, 1);
 
 
+        genre = new Label(" Generi Preferiti ");
+        genre.setFont(labelFont);
+        // Creare caselle di controllo per i generi
+        VBox vb1 = new VBox();
+        ScrollPane sp1 = new ScrollPane();
+        Genre[] gnValues = Genre.values(); // ho un array con tutti i valori associati ai nomi della ENUM
+        ArrayList<String> gen = new ArrayList<>(); // stringa di generi
+        for (Genre value : gnValues) { // popolo la mia lista di generi (stringa) partendo dalla ENUM
+            if (value != Genre.START_THEATER) { // se la stringa è diversa dal separatore dei generi la metto nella successiva CheckBox, per cui la metto nell'array di stringhe
+                gen.add(value.toString());
+            }
+        }
+       ArrayList<CheckBox> genv = new ArrayList<CheckBox>();  // array che contiene tutti i CheckBox da mettere nel Menu del genere
+
+        for (String s : gen) { // Arraylist di CheckMenuItems che popolo
+            //CheckMenuItem cmi = new CheckMenuItem(s);
+            favoriteGenre = new CheckBox(s);
+            genv.add(favoriteGenre);
+        }
+        // VBox che contiene lo ScrollPane
+        vb1.getChildren().addAll(genv);
+        vb1.setPrefHeight(60);
+
+
+        sp1.setContent(vb1);
+        sp1.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+
+
+        GridPane.setConstraints(genre, 4, 1);
+        GridPane.setConstraints(sp1, 5, 1);
+        // EMAIL
         emailLabel.setFont(labelFont);
         GridPane.setConstraints(emailLabel, 0, 3);
         GridPane.setConstraints(emailField, 1, 3);
 
-
+        //CONFERMA EMAIL
         confirmEmailLabel.setFont(labelFont);
         GridPane.setConstraints(confirmEmailLabel, 2, 3);
         GridPane.setConstraints(confirmEmailField, 3, 3);
 
-
+        // PASSWORD
         passwordLabel.setFont(labelFont);
         GridPane.setConstraints(passwordLabel, 0, 4);
         GridPane.setConstraints(passwordField, 1, 4);
 
-
+        //CONFERMA PASSWORD
         confirmPasswordLabel.setFont(labelFont);
         GridPane.setConstraints(confirmPasswordLabel, 2, 4);
         GridPane.setConstraints(confirmPasswordField, 3, 4);
 
-
+        // DATA DI NASCITA
         dateLabel.setFont(labelFont);
         GridPane.setConstraints(dateLabel, 0, 2);
         GridPane.setConstraints(datePicker, 1, 2);
 
-
+        // PROVINCIA DI RESIDENZA
         provinceLabel.setFont(labelFont);
         GridPane.setConstraints(provinceLabel, 2, 2);
         residenceComboBox.getItems().addAll(Province.values());
@@ -141,7 +179,7 @@ public class SignUpView extends Scene implements IResettableScene {
 
 
 
-        ToggleGroup accountTypeToggleGroup = new ToggleGroup();
+        accountTypeToggleGroup = new ToggleGroup();
 
         RadioButton customerRadioButton = new RadioButton("Cliente");
         this.customerRadioButton=customerRadioButton;
@@ -162,6 +200,11 @@ public class SignUpView extends Scene implements IResettableScene {
 
         GridPane.setConstraints(backButton,1,5);
 
+        errmessage= new Text("Hai selezionato più di 5 generi");
+        errmessage.setFont(labelFont);
+        errmessage.setOpacity(0);
+        errmessage.setFill(javafx.scene.paint.Color.RED);
+        GridPane.setConstraints(errmessage, 2, 6);
         // controllo sulle password
         Label errorLabel = new Label();
         errorLabel.setTextFill(javafx.scene.paint.Color.RED);
@@ -185,7 +228,7 @@ public class SignUpView extends Scene implements IResettableScene {
                 emailLabel, emailField, confirmEmailLabel, confirmEmailField,
                 passwordLabel, passwordField, confirmPasswordLabel, confirmPasswordField,
                 provinceLabel, residenceComboBox,
-                customerRadioButton, managerRadioButton, backButton, signUpButton
+                customerRadioButton, managerRadioButton, backButton, signUpButton,genre,sp1,errorLabel
         );
 
 
@@ -232,7 +275,7 @@ public class SignUpView extends Scene implements IResettableScene {
     }
 
     public static DatePicker getDatePicker() {
-        return datePicker //restituisco la local date direttamente, per semplificarmi il codice nel controller
+        return datePicker; //restituisco la local date direttamente, per semplificarmi il codice nel controller
     }
 
     public static TextField getNameField() {
