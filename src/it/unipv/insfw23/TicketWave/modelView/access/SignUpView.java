@@ -32,6 +32,8 @@ public class SignUpView extends Scene implements IResettableScene {
     private static Label provinceLabel = new Label("Comune di residenza");
     private static TextField nameField = new TextField();
     private static TextField emailField = new TextField();
+    private static ComboBox<Province> residenceComboBox = new ComboBox<>();
+
     private BorderPane layout ;
     private GridPane grid;
     private Button signUpButton = new Button("Registrati");
@@ -129,13 +131,11 @@ public class SignUpView extends Scene implements IResettableScene {
 
         dateLabel.setFont(labelFont);
         GridPane.setConstraints(dateLabel, 0, 2);
-
         GridPane.setConstraints(datePicker, 1, 2);
 
 
         provinceLabel.setFont(labelFont);
         GridPane.setConstraints(provinceLabel, 2, 2);
-        ComboBox<Province> residenceComboBox = new ComboBox<>();
         residenceComboBox.getItems().addAll(Province.values());
         GridPane.setConstraints(residenceComboBox, 3, 2);
 
@@ -241,5 +241,9 @@ public class SignUpView extends Scene implements IResettableScene {
 
     public static TextField getEmailField() {
         return emailField;
+    }
+
+    public static Province getSelectedProvince() {
+        return residenceComboBox.getValue();
     }
 }
