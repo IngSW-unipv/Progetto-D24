@@ -90,7 +90,7 @@ public class NewFestivalView extends Scene{
 		grid.setPadding(new Insets(20, 40, 20, 40));
 		grid.setVgap(10);
 		grid.setHgap(40);
-//		grid.setGridLinesVisible(true);
+		grid.setGridLinesVisible(true);
 		grid.setAlignment(Pos.CENTER);
 		
 		

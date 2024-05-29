@@ -2,6 +2,8 @@ package it.unipv.insfw23.TicketWave.test.event;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import javafx.scene.image.Image;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -20,7 +22,7 @@ public class TestEvent {
     private Other ot;
     private ArrayList<Event> events, ev1;
     private Manager mg, mg1;
-    private Blob bl;
+    private Image bl;
 
     @Before
     public void setup(){

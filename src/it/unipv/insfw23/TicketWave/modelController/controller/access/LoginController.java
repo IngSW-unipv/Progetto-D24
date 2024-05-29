@@ -1,6 +1,5 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.access;
 
-import java.sql.Blob;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -24,6 +23,7 @@ import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
 import javafx.event.*;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 public class LoginController {
 
@@ -124,7 +124,7 @@ public class LoginController {
                     ArrayList<String> arrfintoartista2 = new ArrayList<>();
                     arrfintoartista2.add("loredana berte");
                     LocalTime time = LocalTime.of(19, 30);
-                    Blob bl = null;
+                    Image bl = null;
                     //Concert eventofinto2 = new Concert(12,"reunion","busto arstizio",dataev2, "via dei matti ,0", Province.LIVORNO,300,2, seduterimasteev2, vettfalsopriceev2,Genre.INDIE,managerfinto,arrfintoartista2);
 
                     try {

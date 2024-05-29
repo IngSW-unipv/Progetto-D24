@@ -3,7 +3,9 @@ package it.unipv.insfw23.TicketWave.dao.research;
 import it.unipv.insfw23.TicketWave.dao.ConnectionDB;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import javafx.scene.image.Image;
 
+import java.io.InputStream;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -40,6 +42,11 @@ public class ResearchDAO implements IResearchDAO{
                 LocalDate ld = resultset1.getDate("DATE_").toLocalDate();
                 LocalTime tm = resultset1.getTime("TIME_").toLocalTime();
                 Blob bl = resultset1.getBlob("PHOTO");
+                //conversione dell'immagine da blob a image
+                
+                InputStream is = bl.getBinaryStream();
+                Image photo = new Image(is);
+                
                 try {
                     String query2 = "SELECT * FROM MANAGER LEFT JOIN EVENT_ ON MAIL = MANAGER_ID"; // se funziona la query sopra, questa va fatta volare insieme al try catch, tengo solo la creazione dei vari manager
                     statement2 = conn.prepareStatement(query2);
@@ -65,7 +72,7 @@ public class ResearchDAO implements IResearchDAO{
                                 resultset1.getString("CITY"), resultset1.getString("LOCATION"), ld, tm,
                                 Province.valueOf(resultset1.getString("PROVINCE")), Genre.valueOf(resultset1.getString("GENRE")),
                                 resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
-                                manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), bl);
+                                manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), photo);
                         result.add(currentConcert);
                     }
                     case 1 -> {
@@ -73,7 +80,7 @@ public class ResearchDAO implements IResearchDAO{
                                 resultset1.getString("CITY"), resultset1.getString("LOCATION"), ld, tm,
                                 Province.valueOf(resultset1.getString("PROVINCE")), Genre.valueOf(resultset1.getString("GENRE")),
                                 resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
-                                manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), countWords(resultset1.getString("ARTISTS")), bl);
+                                manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), countWords(resultset1.getString("ARTISTS")), photo);
                         result.add(currentFestival);
                     }
                     case 2 -> {
@@ -81,7 +88,7 @@ public class ResearchDAO implements IResearchDAO{
                                 resultset1.getString("CITY"), resultset1.getString("LOCATION"), ld, tm,
                                 Province.valueOf(resultset1.getString("PROVINCE")), Genre.valueOf(resultset1.getString("GENRE")),
                                 resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
-                                manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), resultset1.getString("AUTHOR"), bl);
+                                manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), resultset1.getString("AUTHOR"), photo);
                         result.add(currentTheatre);
                     }
                     case 3 -> {
@@ -89,7 +96,7 @@ public class ResearchDAO implements IResearchDAO{
                                 resultset1.getString("CITY"), resultset1.getString("LOCATION"), ld, tm,
                                 Province.valueOf(resultset1.getString("PROVINCE")), Genre.valueOf(resultset1.getString("GENRE")),
                                 resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
-                                manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), bl);
+                                manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), photo);
                         result.add(currentOther);
                     }
                 }
@@ -186,6 +193,10 @@ public class ResearchDAO implements IResearchDAO{
         LocalDate ld = resultset1.getDate("DATE_").toLocalDate();
         LocalTime tm = resultset1.getTime("TIME_").toLocalTime();
         Blob bl = resultset1.getBlob("PHOTO");
+        //conversione da blob a image
+        InputStream is = bl.getBinaryStream();
+        Image photo = new Image(is);
+        
         double[] price = {resultset1.getDouble("BASE_PRICE"), resultset1.getDouble("PREMIUM_PRICE"), resultset1.getDouble("VIP_PRICE")};
         int[] seatsremaining = {resultset1.getInt("REMAINING_BASE_SEATS"), resultset1.getInt("REMAINING_PREMIUM_SEATS"), resultset1.getInt("REMAINING_VIP_SEATS")};
         int[] ticketSoldNumberForType = {resultset1.getInt("SOLD_BASE_SEATS"), resultset1.getInt("SOLD_PREMIUM_SEATS"), resultset1.getInt("SOLD_VIP_SEATS")};
@@ -195,28 +206,28 @@ public class ResearchDAO implements IResearchDAO{
                         resultset1.getString("CITY"), resultset1.getString("LOCATION"), ld, tm,
                         Province.valueOf(resultset1.getString("PROVINCE")), Genre.valueOf(resultset1.getString("GENRE")),
                         resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
-                        manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), bl);
+                        manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), photo);
             }
             case 1 -> {
                 return new Festival(resultset1.getInt("ID_EVENT"), resultset1.getString("NAME_"),
                         resultset1.getString("CITY"), resultset1.getString("LOCATION"), ld, tm,
                         Province.valueOf(resultset1.getString("PROVINCE")), Genre.valueOf(resultset1.getString("GENRE")),
                         resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
-                        manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), countWords(resultset1.getString("ARTISTS")), bl);
+                        manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), countWords(resultset1.getString("ARTISTS")), photo);
             }
             case 2 -> {
                 return new Theater(resultset1.getInt("ID_EVENT"), resultset1.getString("NAME_"),
                         resultset1.getString("CITY"), resultset1.getString("LOCATION"), ld, tm,
                         Province.valueOf(resultset1.getString("PROVINCE")), Genre.valueOf(resultset1.getString("GENRE")),
                         resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
-                        manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), resultset1.getString("AUTHOR"), bl);
+                        manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), resultset1.getString("AUTHOR"), photo);
             }
             case 3 -> {
                 return new Other(resultset1.getInt("ID_EVENT"), resultset1.getString("NAME_"),
                         resultset1.getString("CITY"), resultset1.getString("LOCATION"), ld, tm,
                         Province.valueOf(resultset1.getString("PROVINCE")), Genre.valueOf(resultset1.getString("GENRE")),
                         resultset1.getInt("MAX_NUM_SEATS"), resultset1.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
-                        manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), bl);
+                        manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), photo);
             }
         }
         return null; // nel caso in cui non rientra in nessun tipo => nullo => errore

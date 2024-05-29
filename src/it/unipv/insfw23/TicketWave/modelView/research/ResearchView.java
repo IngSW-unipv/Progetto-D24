@@ -27,7 +27,8 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-        import javafx.scene.image.ImageView;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 
 import javax.imageio.event.IIOReadProgressListener;
@@ -215,7 +216,7 @@ public class ResearchView extends Scene implements IResettableScene {
         int vett [] = {200, 3000, 20};
         double price[] = {30, 50, 10};
         LocalTime time = null;
-        Blob bl = null;
+        Image bl = null;
 
         ObservableList<Event> evs = FXCollections.observableArrayList(
                 new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),

@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import javafx.scene.image.Image;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
@@ -26,11 +27,11 @@ public abstract class Event {
     private Manager creator;
     private String artists, description; // tutti gli eventi hanno una descrizione
 
-    private Blob photo;
+    private Image photo;
 
     // costruttore
 
-    public Event(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, Type type, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, Blob photo) {
+    public Event(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, Type type, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, Image photo) {
         this.idEvent = idEvent;
         this.name = name;
         this.city = city;
@@ -159,7 +160,7 @@ public abstract class Event {
         return description;
     }
 
-    public Blob getPhoto() {
+    public Image getPhoto() {
     	return photo;
     }
 
@@ -259,7 +260,7 @@ public abstract class Event {
         this.description = description;
     }
 
-    public void setPhoto(Blob photo) {
+    public void setPhoto(Image photo) {
     	this.photo = photo;
     }
 }
