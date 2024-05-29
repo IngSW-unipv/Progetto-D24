@@ -9,11 +9,13 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 
 import it.unipv.insfw23.TicketWave.dao.ConnectionDB;
 import java.sql.Connection;
+import java.io.InputStream;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import it.unipv.insfw23.TicketWave.org.mindrot.jbcrypt.BCrypt;
+import javafx.scene.image.Image;
 
 
 
@@ -166,14 +168,19 @@ public class ProfileDao implements IProfileDao {
                                 seatsSold[0] = resultSet2.getInt("SOLD_BASE_SEATS");
                         }
 
-
+                        // parte di conversione da blob a image in comune a tutti i case
+                        Blob blobphoto = resultSet2.getBlob("PHOTO");
+                        InputStream is = blobphoto.getBinaryStream();
+                        Image photo = new Image(is);
+                        
+                        
                         switch (resultSet2.getInt("TYPE")) {
                             case 0:
                                 Concert currentConcert = new Concert(resultSet2.getInt("ID_EVENT"), resultSet2.getString("NAME_"),
                                         resultSet2.getString("CITY"), resultSet2.getString("LOCATION"),
                                         currentDate, resultSet2.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet2.getString("PROVINCE")),
                                         Genre.valueOf(resultSet2.getString("GENRE")), resultSet2.getInt("MAX_NUM_SEATS"), resultSet2.getInt("NUM_SEATS_TYPE"),
-                                        seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION"), resultSet2.getBlob("PHOTO"));
+                                        seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION"), photo);
                                 createdEvents.add(currentConcert);
                                 break;
 
@@ -183,7 +190,7 @@ public class ProfileDao implements IProfileDao {
                                         currentDate, resultSet2.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet2.getString("PROVINCE")),
                                         Genre.valueOf(resultSet2.getString("GENRE")), resultSet2.getInt("MAX_NUM_SEATS"), resultSet2.getInt("NUM_SEATS_TYPE"),
                                         seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION"), countWords(resultSet2.getString("ARTISTS")),
-                                        resultSet2.getBlob("PHOTO"));
+                                        photo);
                                 createdEvents.add(currentFestival);
                                 break;
 
@@ -193,7 +200,7 @@ public class ProfileDao implements IProfileDao {
                                         currentDate, resultSet2.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet2.getString("PROVINCE")),
                                         Genre.valueOf(resultSet2.getString("GENRE")), resultSet2.getInt("MAX_NUM_SEATS"), resultSet2.getInt("NUM_SEATS_TYPE"),
                                         seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION"), resultSet2.getString("AUTHOR"),
-                                        resultSet2.getBlob("PHOTO"));
+                                        photo);
                                 createdEvents.add(currentTheatre);
                                 break;
 
@@ -203,7 +210,7 @@ public class ProfileDao implements IProfileDao {
                                         currentDate, resultSet2.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet2.getString("PROVINCE")),
                                         Genre.valueOf(resultSet2.getString("GENRE")), resultSet2.getInt("MAX_NUM_SEATS"), resultSet2.getInt("NUM_SEATS_TYPE"),
                                         seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION"),
-                                        resultSet2.getBlob("PHOTO"));
+                                        photo);
                                 createdEvents.add(currentOther);
                                 break;
                         }

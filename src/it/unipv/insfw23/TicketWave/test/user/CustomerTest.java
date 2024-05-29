@@ -8,6 +8,8 @@ import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import javafx.scene.image.Image;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -47,7 +49,7 @@ public class CustomerTest {
         int [] a = {20};
         int [] b = {2080};
         double [] p = {125};
-        Blob bl = null;
+        Image bl = null;
         fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024,4,20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
                 1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", 3, bl);
     }

@@ -19,6 +19,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import javafx.scene.image.Image;
 
 public class NotificationTest {
 
@@ -37,7 +38,7 @@ public class NotificationTest {
 		int[] seatsremainedfortypecorrectevent = {60,20,25};
 		int[] ticketsoldfortypecorrectevent = {15,5,25};
 		double[] pricecorrectevent = {35.50,70,100};
-		Blob bl = null;
+		Image bl = null;
 		try {
 			
 			creator.createConcert(4,"Reunion","Firenze","via del palo",LocalDate.of(2024, 5, 23),LocalTime.of(20, 30),Province.ASTI,Genre.METAL,

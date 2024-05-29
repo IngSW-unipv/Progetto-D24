@@ -11,6 +11,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.sql.Blob;
 import java.util.Arrays;
 
 public class NewConcertController {
@@ -91,8 +92,12 @@ public class NewConcertController {
 					int[] ticketSoldNumberForType = new int[view.getTypesticket()];
 					Arrays.fill(ticketSoldNumberForType, 0);
 					
+					//conversione da ImageView nella view a Blob
+					Blob photoblob;
+					Image photo = view.getPhotoView().getImage();
+					
 					loggedmanager.createConcert(id, view.getNamefield(), view.getCityfield(), view.getAddressfield(), view.getDatepicked(), view.getTimeSelected(), view.getProvince(), 
-												view.getGenre(), maxNumOfSeats, view.getTypesticket(), seatsRemainedNumberForType, ticketSoldNumberForType, prices, loggedmanager, view.getArtistfield(), view.getDescription());
+												view.getGenre(), maxNumOfSeats, view.getTypesticket(), seatsRemainedNumberForType, ticketSoldNumberForType, prices, loggedmanager, view.getArtistfield(), view.getDescription(), photo);
 				
 				}catch (NumberFormatException e){
 					view.getErrLabel().setVisible(true);

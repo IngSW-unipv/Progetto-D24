@@ -5,6 +5,8 @@ import it.unipv.insfw23.TicketWave.modelController.factory.statistics.Statistics
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.statistics.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import javafx.scene.image.Image;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -42,7 +44,7 @@ public class StatisticsTest {
         int [] bc1 = {2250};
         double [] pc1 = {50};
 
-        Blob bl = null;
+        Image bl = null;
 
         events = new ArrayList<Event>();
 

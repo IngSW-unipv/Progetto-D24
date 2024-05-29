@@ -5,6 +5,8 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import javafx.scene.image.Image;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -25,7 +27,7 @@ public class ManagerTest {
     private int[] seatsremainedfortypecorrectevent;
     int[] ticketsoldfortypecorrectevent;
     double[] pricecorrectevent;
-    private Blob bl;
+    private Image bl;
     IPaymentAdapter paymentAdapter ;
     @Before
     public void setUp() {
