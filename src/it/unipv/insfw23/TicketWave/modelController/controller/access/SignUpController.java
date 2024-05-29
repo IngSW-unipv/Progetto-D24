@@ -78,19 +78,20 @@ public class SignUpController {
                     CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
                     customerview.reSetBars();
 
-                    //set del customer, CHIAMATA AL DAO PER LA REGISTRAZIONE
 
-                    /*
+
+
                     Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
                     ArrayList<Ticket> tickets= new ArrayList<>();
 
 
-                     */
 
+
+                    //set del customer, CHIAMATA AL DAO PER LA REGISTRAZIONE
                     Customer customer=new Customer(signUpView.getNameField().getText(),
                             signUpView.getSurnameField().getText(), signUpView.getDatePicker().getValue().toString(),
                             signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(),
-                            signUpView.getSelectedProvince(),favoriteGenre, 0,0);  // setto  a zero i biglietti creati e i punti vanno presi dopo nelle altre view
+                            signUpView.getSelectedProvince(),favoriteGenre, 0,tickets);  // setto  a zero i biglietti creati e i punti vanno presi dopo nelle altre view con (CustomerPointsUpdate)
 
                     try {
                         profileDao.insertCustomer(customer);
@@ -116,17 +117,19 @@ public class SignUpController {
                     SubscriptionSelectionController subscriptionSelectionController = new SubscriptionSelectionController(mainstage,subscriptionSelectionView,signUpView);
                     subscriptionSelectionView.reSetBars();
 
-                    //set del manager, CHIAMATA AL DAO PER LA REGISTRAZIONE
-                    /*
+
+
                     ArrayList<Notification> arrayListNotification = new ArrayList<>();
                     ArrayList<Event> arraylistevent = new ArrayList<>();
                     LocalDate datasub = LocalDate.of(2024, 02, 25);
-                    */
 
-                    Manager managerfinto = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), null, null,1,null,null,0);
-                    //credit card, data sub max numberofevents, da prendere nella mastercardview, datasub
 
-                    ConnectedUser.getInstance().setUser(managerfinto);
+                    //set del manager, CHIAMATA AL DAO PER LA REGISTRAZIONE
+                    Manager manager = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), "0", arraylistevent,1,0,datasub,0);
+                    //credit card, subscription,subscriptionDate da impostare dopo che il metodo buySub è andato buon fine dalla mastercard view. (ManagerSubUpdate)
+                    // al momento della registrazione hanno valore nullo.
+
+                    ConnectedUser.getInstance().setUser(manager);
                     ConnectedUser.getInstance().setLoginView(loginView);
 
                     //

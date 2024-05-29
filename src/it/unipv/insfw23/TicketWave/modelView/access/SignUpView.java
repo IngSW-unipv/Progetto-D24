@@ -232,7 +232,7 @@ public class SignUpView extends Scene implements IResettableScene {
     }
 
     public static DatePicker getDatePicker() {
-        return datePicker //restituisco la local date direttamente, per semplificarmi il codice nel controller
+        return datePicker; //restituisco la local date direttamente, per semplificarmi il codice nel controller
     }
 
     public static TextField getNameField() {
