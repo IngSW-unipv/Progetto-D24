@@ -62,14 +62,28 @@ public class ProfileDao implements IProfileDao {
     }
 
 
+
+
     @Override
     public void insertCustomer(Customer customer)throws SQLException{
         try {
             connection = ConnectionDB.startConnection(connection,schema);  // apro connessione
             if(ConnectionDB.isOpen(connection)){
 
+                //utilizzo stringBuilder per separare i valori all'interno del db per ogni favoriteGenre
+                StringBuilder genresBuilder = new StringBuilder();
+                Genre[] favoriteGenres = customer.getFavoriteGenre();
+                for (int i = 0; i < favoriteGenres.length; i++) {
+                    if (i > 0) {
+                        genresBuilder.append(",");  // aggiungo virgola
+                    }
+                    genresBuilder.append(favoriteGenres[i].toString());
+                }
 
-                String query = "INSERT INTO CUSTOMER(name, surname, dateOfBirth, email, password, provinceOfResidence, points, favouriteGenre) VALUES (?, ?, ?, ?, ?, ?, ?)";
+                String favoriteGenresStr = genresBuilder.toString();
+                ///////////////////////////////////////////////////////
+
+                String query = "INSERT INTO CUSTOMER(name, surname, dateOfBirth, email, password, provinceOfResidence, points, favouriteGenre) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
 
                 PreparedStatement preparedStatement=connection.prepareStatement(query);
 
@@ -80,13 +94,9 @@ public class ProfileDao implements IProfileDao {
                 preparedStatement.setString(5, hashPassword(customer.getPassword()));
                 preparedStatement.setString(6, customer.getProvinceOfResidence().toString()); // Assuming Province has a proper toString() method
                 preparedStatement.setInt(7, 0);  // points=0 al momento dell'iscrizione
-                //preparedStatement.executeUpdate();
+                preparedStatement.setString(8, favoriteGenresStr);  //settaggio parametri utilizzando la stringaBuildata
 
-                for (Genre genre : customer.getFavoriteGenre()) {
-                    preparedStatement.setString(1, genre.toString());
-                }
-                preparedStatement.executeUpdate();  // OCCHIO: non so se faccia l'update completo
-                //o ho bisongno di fare un ulteriore statement, e poi metterlo all'interno del ciclo
+                preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
             throw new SQLException("Errore per inserimento del Customer", e);
