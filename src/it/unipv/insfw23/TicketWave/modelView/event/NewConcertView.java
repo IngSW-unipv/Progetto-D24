@@ -1,7 +1,5 @@
 package it.unipv.insfw23.TicketWave.modelView.event;
 
-import java.sql.Blob;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
@@ -52,23 +50,22 @@ public class NewConcertView extends Scene{
 	private TextField artistfield;
 	private final Label datetimelabel = new Label("Data e ora: ");
 	private DatePicker datepicker;
-//	private final Label hourlabel = new Label("orario(hh mm): ");
 	private Spinner<Integer> hourspinner;
 	private Spinner<Integer> minutesspinner;
 	private HBox hboxtime;
 	private HBox hboxdatetime;
 	private final Label numbaselabel = new Label("n. biglietti base: ");
 	private TextField numbasefield;
+	private final Label numpremiumlabel = new Label("n. biglietti premium: ");
+	private TextField numpremiumfield;	
 	private final Label numviplabel = new Label("n. biglietti vip: ");
 	private TextField numvipfield;
-	private final Label numpremiumlabel = new Label("n. biglietti premium: ");
-	private TextField numpremiumfield;
 	private final Label pricebaselabel = new Label("prezzo base: ");
 	private TextField pricebasefield;
+	private final Label pricepremiumlabel = new Label("prezzo premium: ");
+	private TextField pricepremiumfield;	
 	private final Label priceviplabel = new Label("prezzo vip: ");
 	private TextField pricevipfield;
-	private final Label pricepremiumlabel = new Label("prezzo premium: ");
-	private TextField pricepremiumfield;
 	private final Button photoButton = new Button("Scegli foto...");
 	private ImageView eventPhoto;
 	private final Label descriptionlabel = new Label("Descrizione: ");
@@ -92,7 +89,7 @@ public class NewConcertView extends Scene{
 		grid.setPadding(new Insets(20, 40, 20, 40));
 		grid.setVgap(10);
 		grid.setHgap(40);
-		grid.setGridLinesVisible(true);
+//		grid.setGridLinesVisible(true);
 		grid.setAlignment(Pos.CENTER);
 		
 		
@@ -375,15 +372,14 @@ public class NewConcertView extends Scene{
 
 			@Override
 			public void handle(ActionEvent eventmouse) {
-				numviplabel.setVisible(false);
-				numvipfield.setVisible(false);
 				numpremiumlabel.setVisible(false);
 				numpremiumfield.setVisible(false);
-				priceviplabel.setVisible(false);
-				pricevipfield.setVisible(false);
+				numviplabel.setVisible(false);
+				numvipfield.setVisible(false);
 				pricepremiumlabel.setVisible(false);
 				pricepremiumfield.setVisible(false);
-				
+				priceviplabel.setVisible(false);
+				pricevipfield.setVisible(false);
 				
 				switch(typesticketbox.getValue()) {
 				case "3":
@@ -415,12 +411,10 @@ public class NewConcertView extends Scene{
 								   priceviplabel, pricevipfield, pricepremiumlabel, pricepremiumfield, descriptionlabel, descriptionarea,
 								   confirm, errlabel,abort);
 		
+		
 		layout.setTop(UpperBar.getIstance());
 		layout.setCenter(grid);
 		layout.setBottom(LowerBar.getInstance());
-		
-		
-		
 		
 		
 	}
@@ -470,27 +464,26 @@ public class NewConcertView extends Scene{
 	public int getNumbasefield() throws NumberFormatException{
 		return Integer.parseInt(numbasefield.getText());
 	}
-
-	public int getNumvipfield() throws NumberFormatException{
-		return Integer.parseInt(numvipfield.getText());
-	}
-
+	
 	public int getNumpremiumfield() throws NumberFormatException{
 		return Integer.parseInt(numpremiumfield.getText());
 	}
 	
+	public int getNumvipfield() throws NumberFormatException{
+		return Integer.parseInt(numvipfield.getText());
+	}
+
 	public double getPricebasefield() throws NumberFormatException{
 		return Double.parseDouble(pricebasefield.getText());
 	}
-
-	public double getPricevipfield() throws NumberFormatException{
-		return Double.parseDouble(pricevipfield.getText());
-	}
-
+	
 	public double getPricepremiumfield() throws NumberFormatException{
 		return Double.parseDouble(pricepremiumfield.getText());
 	}
 	
+	public double getPricevipfield() throws NumberFormatException{
+		return Double.parseDouble(pricevipfield.getText());
+	}
 
 	public Button getAbortButton() {
 		return abort;

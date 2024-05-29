@@ -80,17 +80,17 @@ public class SignUpController {
 
                     //set del customer, CHIAMATA AL DAO PER LA REGISTRAZIONE
 
-                    /*
+                    
                     Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
                     ArrayList<Ticket> tickets= new ArrayList<>();
 
 
-                     */
+                    
 
                     Customer customer=new Customer(signUpView.getNameField().getText(),
                             signUpView.getSurnameField().getText(), signUpView.getDatePicker().getValue().toString(),
                             signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(),
-                            signUpView.getSelectedProvince(),favoriteGenre, 0,0);  // setto  a zero i biglietti creati e i punti vanno presi dopo nelle altre view
+                            signUpView.getSelectedProvince(),favoriteGenre, 0,tickets);  // setto  a zero i biglietti creati e i punti vanno presi dopo nelle altre view
 
                     try {
                         profileDao.insertCustomer(customer);
@@ -122,8 +122,9 @@ public class SignUpController {
                     ArrayList<Event> arraylistevent = new ArrayList<>();
                     LocalDate datasub = LocalDate.of(2024, 02, 25);
                     */
+                    ArrayList<Event> arraylistevent = new ArrayList<>();
 
-                    Manager managerfinto = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), null, null,1,null,null,0);
+                    Manager managerfinto = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), null, arraylistevent,1,1,LocalDate.now(),0);
                     //credit card, data sub max numberofevents, da prendere nella mastercardview, datasub
 
                     ConnectedUser.getInstance().setUser(managerfinto);
