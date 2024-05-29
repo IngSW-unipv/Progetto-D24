@@ -47,7 +47,7 @@ public class CustomerTest {
         int [] b = {2080};
         double [] p = {125};
         fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024,4,20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
-                1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", 3);
+                1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", 3,);
     }
 
 
