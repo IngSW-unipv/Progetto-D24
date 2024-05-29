@@ -281,7 +281,7 @@ public class ProfileDao implements IProfileDao {
 
                     while (resultSet2.next()) {
                         Ticket currentTicket = new Ticket(resultSet2.getString("BAR_CODE"), resultSet2.getDouble("PRICE"),
-                                TicketType.valueOf(resultSet2.getString("TYPE")));
+                                TicketType.valueOf(resultSet2.getString("TYPE")),resultSet2.getInt("ID_EVENT"),resultSet2.getString("EVENT_NAME"));
 
                         customer.addTickets(currentTicket);
                     }
