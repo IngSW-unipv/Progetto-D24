@@ -4,6 +4,8 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Concert;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
+import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
@@ -22,8 +24,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-import java.sql.Blob;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -105,20 +105,20 @@ public class CustomerView extends Scene implements IResettableScene {
         ticketTab.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
 
 
+        TableColumn<Ticket, String> barcodeCol = new TableColumn<>("Brcode");
+        barcodeCol.setCellValueFactory(new PropertyValueFactory<>("barcode"));
+
+        TableColumn<Event, TicketType> typeCol = new TableColumn<>("Tipo");
+        typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+
+        TableColumn<Event, Double> priceCol = new TableColumn<>("Data Evento");
+        priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+
         TableColumn<Event, String> eventCol = new TableColumn<>("Evento");
         eventCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 
-        TableColumn<Event, Enum> provinceCol = new TableColumn<>("Provincia");
-        provinceCol.setCellValueFactory(new PropertyValueFactory<>("province"));
+        ticketTab.getColumns().addAll(eventCol,barcodeCol, priceCol,typeCol);
 
-        TableColumn<Event, LocalDate> dataEventCol = new TableColumn<>("Data Evento");
-        dataEventCol.setCellValueFactory(new PropertyValueFactory<>("date"));
-
-        TableColumn<Event, String> artistCol = new TableColumn<>("Artista");
-        artistCol.setCellValueFactory(new PropertyValueFactory<>("artists"));
-
-        ticketTab.getColumns().addAll(eventCol, provinceCol, dataEventCol, artistCol);
-        ticketTab.setItems(getfakeEvent());
         ticketTab.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
 
         GridPane.setConstraints(ticketTab, 1, 1);
@@ -139,23 +139,7 @@ public class CustomerView extends Scene implements IResettableScene {
         return customerUpperBar.getSearchButton();
     }
 
-    private ObservableList<Event> getfakeEvent() {
 
-        LocalDate data = LocalDate.now();
-        ArrayList<Event> arraylistevent = new ArrayList<>();
-        Manager managerfinto = new Manager("paolo","rossi","2000-12-30","paobro@gmail.com","passwd",Province.AGRIGENTO, "23245234324", arraylistevent,5,1,data,4);
-        int intvett[] = {2,5,10};
-        int vett [] = {200, 3000, 20};
-        double price[] = {30, 50, 10};
-        LocalTime time = null;
-        Image bl = null;
-        ObservableList<Event> evs = FXCollections.observableArrayList(
-
-                new Concert(2,"Rooler in tha house","ROZZANO","Laghetto", data, time, Province.MILANO, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"Blanco", "Nuovo Album", bl)
-
-        );
-        return evs;
-    }
 
 
 
