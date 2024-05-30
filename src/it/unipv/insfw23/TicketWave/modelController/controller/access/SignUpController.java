@@ -44,6 +44,7 @@ public class SignUpController {
         this.mainstage = mainstage;
         this.customerview = customerview;
         this.loginView = loginView;
+        this.profileDao=new ProfileDao();
         // this.subscriptionSelectionView= subscriptionSelectionView;
         initComponents();
 

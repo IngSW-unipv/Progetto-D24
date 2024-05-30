@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.dao.profileDao;
 
+import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
@@ -25,14 +26,14 @@ public class ProfileDao implements IProfileDao {
 
     public ProfileDao() {
         super();
-        this.schema = "";
+        this.schema = "TicketWaveDB";
     }
 
     @Override
     public void insertManager(Manager manager) throws SQLException {
 
         try {
-            connection = ConnectionDB.startConnection(connection,schema);  // apro connessione
+            connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
             if(ConnectionDB.isOpen(connection)){   // check se è tutto ok
 
                 //query d'inserimento
@@ -69,7 +70,7 @@ public class ProfileDao implements IProfileDao {
     @Override
     public void insertCustomer(Customer customer)throws SQLException{
         try {
-            connection = ConnectionDB.startConnection(connection,schema);  // apro connessione
+            connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
             if(ConnectionDB.isOpen(connection)){
 
                 //utilizzo stringBuilder per separare i valori all'interno del db per ogni favoriteGenre
