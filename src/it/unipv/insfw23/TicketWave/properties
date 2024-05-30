@@ -8,6 +8,7 @@ mastercard.adapter.class.name=it.unipv.insfw23.TicketWave.modelDomain.payment.Ma
 paypal.adapter.class.name=it.unipv.insfw23.TicketWave.modelDomain.payment.PayPalAdapter
 
 
+
 statisticshandler.class.name = it.unipv.insfw23.TicketWave.modelDomain.statistics.StatisticsHandler
 
 subscriptionhandler.class.name = it.unipv.insfw23.TicketWave.modelDomain.subscription.SubscriptionHandler
