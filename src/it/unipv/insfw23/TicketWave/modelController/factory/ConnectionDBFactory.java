@@ -40,12 +40,12 @@ public class ConnectionDBFactory {
                 //JavaReflection
                 Constructor c = Class.forName(connectionDBClassName).getConstructor();
                 connectionDB = (ConnectionDB) c.newInstance();
+                System.out.println("ciaoooooooooo2");
             } catch (Exception e) {
 
                 e.printStackTrace();
             }
         }
-
         return connectionDB;
     }
 }

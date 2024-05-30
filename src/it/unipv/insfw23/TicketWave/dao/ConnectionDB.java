@@ -7,12 +7,12 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 
-public class ConnectionDB {
+public class  ConnectionDB {
 
-    private static final String PROPERTYDBDRIVER = "DBDRIVER";
-    private static final String PROPERTYDBURL = "DBURL";
-    private static final String PROPERTYNAME = "db_usn";
-    private static final String PROPERTYPSW = "db_psw";
+    private static final String PROPERTYDBDRIVER = "PROPERTYDBDRIVER";
+    private static final String PROPERTYDBURL = "PROPERTYDBURL";
+    private static final String PROPERTYNAME = "PROPERTYNAME";
+    private static final String PROPERTYPSW = "PROPERTYPSW";
     private static String username;
     private static String password;
     private static String dbDriver;
@@ -29,7 +29,6 @@ public class ConnectionDB {
             dbDriver =p.getProperty(PROPERTYDBDRIVER);
             dbURL =p.getProperty(PROPERTYDBURL);
 
-
         }catch(Exception e) {
             e.printStackTrace();
         }
@@ -39,7 +38,6 @@ public class ConnectionDB {
     // di codice viene eseguita alla creazione della classe, quindi al momento della chimata di startConnection è già tutto inizializzato
     public static Connection startConnection(Connection conn, String schema)
     {
-        System.out.println(dbURL+"ciao");
 
         if ( isOpen(conn) )
             closeConnection(conn);
