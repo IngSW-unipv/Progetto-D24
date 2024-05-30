@@ -1,7 +1,7 @@
 PROPERTYNAME=utente
 PROPERTYPSW=1234
-PROPERTYDBDRIVER="com.mysql.cj.jdbc.Driver"
-PROPERTYDBURL="jdbc:mysql://localhost:3306/%s";
+PROPERTYDBDRIVER=com.mysql.cj.jdbc.Driver
+PROPERTYDBURL=jdbc:mysql://localhost:3306/%s
 connectiondb.class.name = it.unipv.insfw23.TicketWave.dao.ConnectionDB
 
 mastercard.adapter.class.name=it.unipv.insfw23.TicketWave.modelDomain.payment.MastercardAdapter
