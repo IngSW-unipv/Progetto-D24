@@ -142,6 +142,7 @@ public class CustomerView extends Scene implements IResettableScene {
 
 
 
+
 /*
     public static class Biglietto {
         private String evento;
