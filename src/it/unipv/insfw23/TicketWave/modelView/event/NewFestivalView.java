@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelView.event;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.Arrays;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
@@ -49,27 +50,25 @@ public class NewFestivalView extends Scene{
 	private TextField artistfield;
 	private final Label datetimelabel = new Label("Data e ora: ");
 	private DatePicker datepicker;
-//	private final Label hourlabel = new Label("orario(hh mm): ");
 	private Spinner<Integer> hourspinner;
 	private Spinner<Integer> minutesspinner;
 	private HBox hboxtime;
 	private HBox hboxdatetime;
 	private final Label numbaselabel = new Label("n. biglietti base: ");
 	private TextField numbasefield;
+	private final Label numpremiumlabel = new Label("n. biglietti premium: ");
+	private TextField numpremiumfield;	
 	private final Label numviplabel = new Label("n. biglietti vip: ");
 	private TextField numvipfield;
-	private final Label numpremiumlabel = new Label("n. biglietti premium: ");
-	private TextField numpremiumfield;
 	private final Label pricebaselabel = new Label("prezzo base: ");
 	private TextField pricebasefield;
+	private final Label pricepremiumlabel = new Label("prezzo premium: ");
+	private TextField pricepremiumfield;	
 	private final Label priceviplabel = new Label("prezzo vip: ");
 	private TextField pricevipfield;
-	private final Label pricepremiumlabel = new Label("prezzo premium: ");
-	private TextField pricepremiumfield;
 	private final Button photoButton = new Button("Scegli foto...");
 	private ImageView eventPhoto;
 	private final Label descriptionlabel = new Label("Descrizione: ");
-//	private TextField descriptionfield;
 	private TextArea descriptionarea;
 	private final Label errlabel = new Label("Parametri non validi");	
 	private Button abort = new Button("Annulla");
@@ -90,7 +89,7 @@ public class NewFestivalView extends Scene{
 		grid.setPadding(new Insets(20, 40, 20, 40));
 		grid.setVgap(10);
 		grid.setHgap(40);
-		grid.setGridLinesVisible(true);
+//		grid.setGridLinesVisible(true);
 		grid.setAlignment(Pos.CENTER);
 		
 		
@@ -233,26 +232,9 @@ public class NewFestivalView extends Scene{
 		
 		
 		
-		numviplabel.setFont(lebelsfont);
-		numviplabel.setMinWidth(90);
-		GridPane.setConstraints(numviplabel, 2, 8);
-		numviplabel.setVisible(false);
-		GridPane.setVgrow(numviplabel, Priority.SOMETIMES);
-		GridPane.setHgrow(numviplabel, Priority.SOMETIMES);
-		
-		numvipfield = new TextField();
-		numvipfield.setMaxWidth(80);
-		numvipfield.setMinWidth(30);
-		GridPane.setConstraints(numvipfield, 2, 9);
-		numvipfield.setVisible(false);
-		GridPane.setVgrow(numvipfield, Priority.SOMETIMES);
-		GridPane.setHgrow(numvipfield, Priority.SOMETIMES);
-		
-		
-		
 		numpremiumlabel.setFont(lebelsfont);
 		numpremiumlabel.setMinWidth(125);
-		GridPane.setConstraints(numpremiumlabel, 4, 8);
+		GridPane.setConstraints(numpremiumlabel, 2, 8);
 		numpremiumlabel.setVisible(false);
 		GridPane.setVgrow(numpremiumlabel, Priority.SOMETIMES);
 		GridPane.setHgrow(numpremiumlabel, Priority.SOMETIMES);
@@ -260,10 +242,27 @@ public class NewFestivalView extends Scene{
 		numpremiumfield = new TextField();
 		numpremiumfield.setMaxWidth(80);
 		numpremiumfield.setMinWidth(30);
-		GridPane.setConstraints(numpremiumfield, 4, 9);
+		GridPane.setConstraints(numpremiumfield, 2, 9);
 		numpremiumfield.setVisible(false);
 		GridPane.setVgrow(numpremiumfield, Priority.SOMETIMES);
-		GridPane.setHgrow(numpremiumfield, Priority.SOMETIMES);
+		GridPane.setHgrow(numpremiumfield, Priority.SOMETIMES);	
+		
+		
+		
+		numviplabel.setFont(lebelsfont);
+		numviplabel.setMinWidth(90);
+		GridPane.setConstraints(numviplabel, 4, 8);
+		numviplabel.setVisible(false);
+		GridPane.setVgrow(numviplabel, Priority.SOMETIMES);
+		GridPane.setHgrow(numviplabel, Priority.SOMETIMES);
+		
+		numvipfield = new TextField();
+		numvipfield.setMaxWidth(80);
+		numvipfield.setMinWidth(30);
+		GridPane.setConstraints(numvipfield, 4, 9);
+		numvipfield.setVisible(false);
+		GridPane.setVgrow(numvipfield, Priority.SOMETIMES);
+		GridPane.setHgrow(numvipfield, Priority.SOMETIMES);
 		
 		
 		
@@ -298,28 +297,11 @@ public class NewFestivalView extends Scene{
 		GridPane.setVgrow(pricebasefield, Priority.SOMETIMES);
 		GridPane.setHgrow(pricebasefield, Priority.SOMETIMES);
 		
-		
-		
-		priceviplabel.setFont(lebelsfont);
-		priceviplabel.setMinWidth(75);
-		GridPane.setConstraints(priceviplabel, 3, 8);
-		priceviplabel.setVisible(false);
-		GridPane.setVgrow(priceviplabel, Priority.SOMETIMES);
-		GridPane.setHgrow(priceviplabel, Priority.SOMETIMES);
-		
-		pricevipfield = new TextField();
-		pricevipfield.setMaxWidth(80);
-		pricevipfield.setMinWidth(30);
-		GridPane.setConstraints(pricevipfield, 3, 9);
-		pricevipfield.setVisible(false);
-		GridPane.setVgrow(pricevipfield, Priority.SOMETIMES);
-		GridPane.setHgrow(pricevipfield, Priority.SOMETIMES);
-		
-		
+
 		
 		pricepremiumlabel.setFont(lebelsfont);
 		pricepremiumlabel.setMinWidth(110);
-		GridPane.setConstraints(pricepremiumlabel, 5, 8);
+		GridPane.setConstraints(pricepremiumlabel, 3, 8);
 		pricepremiumlabel.setVisible(false);
 		GridPane.setVgrow(pricepremiumlabel, Priority.SOMETIMES);
 		GridPane.setHgrow(pricepremiumlabel, Priority.SOMETIMES);
@@ -327,10 +309,27 @@ public class NewFestivalView extends Scene{
 		pricepremiumfield = new TextField();
 		pricepremiumfield.setMaxWidth(80);
 		pricepremiumfield.setMinWidth(30);
-		GridPane.setConstraints(pricepremiumfield, 5, 9);
+		GridPane.setConstraints(pricepremiumfield, 3, 9);
 		pricepremiumfield.setVisible(false);
 		GridPane.setVgrow(pricepremiumfield, Priority.SOMETIMES);
-		GridPane.setHgrow(pricepremiumfield, Priority.SOMETIMES);
+		GridPane.setHgrow(pricepremiumfield, Priority.SOMETIMES);		
+		
+		
+		
+		priceviplabel.setFont(lebelsfont);
+		priceviplabel.setMinWidth(75);
+		GridPane.setConstraints(priceviplabel, 5, 8);
+		priceviplabel.setVisible(false);
+		GridPane.setVgrow(priceviplabel, Priority.SOMETIMES);
+		GridPane.setHgrow(priceviplabel, Priority.SOMETIMES);
+		
+		pricevipfield = new TextField();
+		pricevipfield.setMaxWidth(80);
+		pricevipfield.setMinWidth(30);
+		GridPane.setConstraints(pricevipfield, 5, 9);
+		pricevipfield.setVisible(false);
+		GridPane.setVgrow(pricevipfield, Priority.SOMETIMES);
+		GridPane.setHgrow(pricevipfield, Priority.SOMETIMES);
 		
 		
 		
@@ -373,27 +372,26 @@ public class NewFestivalView extends Scene{
 
 			@Override
 			public void handle(ActionEvent eventmouse) {
-				numviplabel.setVisible(false);
-				numvipfield.setVisible(false);
 				numpremiumlabel.setVisible(false);
 				numpremiumfield.setVisible(false);
-				priceviplabel.setVisible(false);
-				pricevipfield.setVisible(false);
+				numviplabel.setVisible(false);
+				numvipfield.setVisible(false);
 				pricepremiumlabel.setVisible(false);
 				pricepremiumfield.setVisible(false);
-				
+				priceviplabel.setVisible(false);
+				pricevipfield.setVisible(false);
 				
 				switch(typesticketbox.getValue()) {
 				case "3":
-					numpremiumlabel.setVisible(true);
-					numpremiumfield.setVisible(true);
-					pricepremiumlabel.setVisible(true);
-					pricepremiumfield.setVisible(true);
-				case "2":
 					numviplabel.setVisible(true);
 					numvipfield.setVisible(true);
 					priceviplabel.setVisible(true);
 					pricevipfield.setVisible(true);
+				case "2":
+					numpremiumlabel.setVisible(true);
+					numpremiumfield.setVisible(true);
+					pricepremiumlabel.setVisible(true);
+					pricepremiumfield.setVisible(true);
 				case "1":
 					numbaselabel.setVisible(true);
 					numbasefield.setVisible(true);
@@ -413,12 +411,10 @@ public class NewFestivalView extends Scene{
 								   priceviplabel, pricevipfield, pricepremiumlabel, pricepremiumfield, descriptionlabel, descriptionarea,
 								   confirm, errlabel,abort);
 		
+		
 		layout.setTop(UpperBar.getIstance());
 		layout.setCenter(grid);
 		layout.setBottom(LowerBar.getInstance());
-		
-		
-		
 		
 		
 	}
@@ -458,28 +454,35 @@ public class NewFestivalView extends Scene{
 		return datepicker.getValue();
 	}
 
+	public LocalTime getTimeSelected() {
+		int hour = hourspinner.getValue();
+		int minutes = minutesspinner.getValue();
+		LocalTime time = LocalTime.of(hour, minutes);
+		return time;
+	}
+	
 	public int getNumbasefield() throws NumberFormatException{
 		return Integer.parseInt(numbasefield.getText());
 	}
-
-	public int getNumvipfield() throws NumberFormatException{
-		return Integer.parseInt(numvipfield.getText());
-	}
-
+	
 	public int getNumpremiumfield() throws NumberFormatException{
 		return Integer.parseInt(numpremiumfield.getText());
+	}
+	
+	public int getNumvipfield() throws NumberFormatException{
+		return Integer.parseInt(numvipfield.getText());
 	}
 
 	public double getPricebasefield() throws NumberFormatException{
 		return Double.parseDouble(pricebasefield.getText());
 	}
-
-	public double getPricevipfield() throws NumberFormatException{
-		return Double.parseDouble(pricevipfield.getText());
-	}
-
+	
 	public double getPricepremiumfield() throws NumberFormatException{
 		return Double.parseDouble(pricepremiumfield.getText());
+	}
+	
+	public double getPricevipfield() throws NumberFormatException{
+		return Double.parseDouble(pricevipfield.getText());
 	}
 
 	public Button getAbortButton() {
@@ -500,5 +503,9 @@ public class NewFestivalView extends Scene{
 	
 	public ImageView getPhotoView() {
 		return eventPhoto;
+	}
+	
+	public String getDescription() {
+		return descriptionarea.toString();
 	}
 }
