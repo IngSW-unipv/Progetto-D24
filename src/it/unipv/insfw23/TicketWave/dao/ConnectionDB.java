@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 
-public class ConnectionDB {
+public class  ConnectionDB {
 
     private static final String PROPERTYDBDRIVER = "DBDRIVER";
     private static final String PROPERTYDBURL = "DBURL";
