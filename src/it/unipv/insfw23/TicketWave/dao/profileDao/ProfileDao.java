@@ -86,7 +86,7 @@ public class ProfileDao implements IProfileDao {
                 String favoriteGenresStr = genresBuilder.toString();
                 ///////////////////////////////////////////////////////
 
-                String query = "INSERT INTO CUSTOMER(name, surname, dateOfBirth, email, password, provinceOfResidence, points, favouriteGenre) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+                String query = "INSERT INTO CUSTOMER(NAME_, SURNAME, BIRTHDATE, MAIL, PWD, PROVINCE, POINTS, FAVOURITE_GENRE) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
 
                 PreparedStatement preparedStatement=connection.prepareStatement(query);
 
