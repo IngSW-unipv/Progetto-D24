@@ -29,6 +29,7 @@ public class  ConnectionDB {
             dbDriver =p.getProperty(PROPERTYDBDRIVER);
             dbURL =p.getProperty(PROPERTYDBURL);
 
+
         }catch(Exception e) {
             e.printStackTrace();
         }
@@ -38,7 +39,7 @@ public class  ConnectionDB {
     // di codice viene eseguita alla creazione della classe, quindi al momento della chimata di startConnection è già tutto inizializzato
     public static Connection startConnection(Connection conn, String schema)
     {
-        System.out.println(dbURL);
+        System.out.println(dbURL+"ciao");
 
         if ( isOpen(conn) )
             closeConnection(conn);

@@ -9,7 +9,7 @@ import java.util.Properties;
 public class ConnectionDBFactory {
     //Attributes
     private static ConnectionDB connectionDB;
-    private static final String CONNECTIONDB_PROPERTYNAME = "connectionDB.class.name";
+    private static final String CONNECTIONDB_PROPERTYNAME = "connectiondb.class.name";
     private static ConnectionDBFactory instance = null;
 
 
@@ -33,7 +33,7 @@ public class ConnectionDBFactory {
             try {
                 //Obtaining path for connectionDB
                 Properties p = new Properties(System.getProperties());
-                p.load(new FileInputStream("src/it/unipv/insfw23/TicketWave/properties")); // path proprietaria
+                p.load(new FileInputStream("it/unipv/insfw23/TicketWave/properties")); // path proprietaria
                 connectionDBClassName = p.getProperty(CONNECTIONDB_PROPERTYNAME);
 
 

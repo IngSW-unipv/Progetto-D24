@@ -143,7 +143,7 @@ public class LoginController {
                     System.out.println("Hai cliccato il pulsante Login come gestore");
                     arraylistevent = managerfinto.getEventlist();
                     arrayListNotification = managerfinto.getNotification();
-                    managerView = new ManagerView("Marco",arrayListNotification,arraylistevent);
+                    managerView = new ManagerView(managerfinto.getName(),arrayListNotification,arraylistevent);
                     //managerView.setEventsforTableev(managerfinto);
                     //managerView.reSetBars();
                     //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
