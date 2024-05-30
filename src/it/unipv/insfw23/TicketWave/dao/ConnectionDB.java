@@ -23,7 +23,7 @@ public class ConnectionDB {
     public ConnectionDB() {
         Properties p = new Properties(System.getProperties());
         try {
-            p.load(new FileInputStream("it/unipv/insfw23/TicketWave/properties"));
+            p.load(new FileInputStream("src/it/unipv/insfw23/TicketWave/properties"));
             username=p.getProperty(PROPERTYNAME);
             password=p.getProperty(PROPERTYPSW);
             dbDriver =p.getProperty(PROPERTYDBDRIVER);
