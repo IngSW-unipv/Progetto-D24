@@ -37,8 +37,8 @@ public class ProfileDao implements IProfileDao {
             if(ConnectionDB.isOpen(connection)){   // check se è tutto ok
 
                 //query d'inserimento
-                String query = "INSERT INTO MANAGER (name, surname, dateOfBirth, email, password, provinceOfResidence, " +
-                        "creditCard, maxNumberOfEvents, subscription, subscriptionDate, counterCreatedEvents) " +
+                String query = "INSERT INTO MANAGER (NAME, SURNAME, BIRTHDATE,MAIL,PWD, PROVINCE, " +
+                        "CARDNUMBER,MAXEVENTS, SUBSCRIPTION, SUBSCRIPTION_DATE, COUNTER_CREATED_EVENTS) " +
                         "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 //setto i campi
@@ -86,7 +86,7 @@ public class ProfileDao implements IProfileDao {
                 String favoriteGenresStr = genresBuilder.toString();
                 ///////////////////////////////////////////////////////
 
-                String query = "INSERT INTO CUSTOMER(name, surname, dateOfBirth, email, password, provinceOfResidence, points, favouriteGenre) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
+                String query = "INSERT INTO CUSTOMER(NAME_, SURNAME, BIRTHDATE, MAIL,PWD,PROVINCE, POINTS, FAVOURITE_GENRE) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
 
                 PreparedStatement preparedStatement=connection.prepareStatement(query);
 
