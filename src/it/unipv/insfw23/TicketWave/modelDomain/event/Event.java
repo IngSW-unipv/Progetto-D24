@@ -36,26 +36,21 @@ public abstract class Event {
         this.name = name;
         this.city = city;
         this.location = location;
-        this.date = date;
+        setDate(date);
         this.time = time;
         this.province = province;
         this.genre = genre;
         this.type = type;
         this.maxNumberOfSeats = maxNumberOfSeats;
-        this.typeOfSeats = typeOfSeats;
-        this.seatsRemainedNumberForType = seatsRemainedNumberForType;
-        this.ticketsSoldNumberForType = ticketsSoldNumberForType;
-        this.price = price;
-        this.creator = creator;
-        this.artists = artists;
-        this.description = description;
-        this.photo = photo;
-        setDate(date);
         setTypeOfSeats(typeOfSeats);
         setSeatsRemainedNumberForType(seatsRemainedNumberForType);
         setTicketsSoldNumberForType(ticketsSoldNumberForType);
         setPrice(price);
         crossCheck(price, ticketsSoldNumberForType, seatsRemainedNumberForType, typeOfSeats);
+        this.creator = creator;
+        this.artists = artists;
+        this.description = description;
+        this.photo = photo;       
     }
 
 
