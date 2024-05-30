@@ -114,7 +114,6 @@ public class SignUpController {
 
 
                     System.out.println("Hai cliccato il pulsante registrati  come gestore");
-                    //signUpView.getGenreScrollP().setVisible(false);
                     subscriptionSelectionView = new SubscriptionSelectionView();
                     SubscriptionSelectionController subscriptionSelectionController = new SubscriptionSelectionController(mainstage,subscriptionSelectionView,signUpView);
                     subscriptionSelectionView.reSetBars();

@@ -191,6 +191,20 @@ public class SignUpView extends Scene implements IResettableScene {
         managerRadioButton.setToggleGroup(accountTypeToggleGroup);
         GridPane.setConstraints(managerRadioButton, 1, 0);
 
+        // setto visibilità dei generi in base al tipo di utente
+        accountTypeToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == customerRadioButton) {
+                genreScrollP.setVisible(true);
+                genreLbel.setVisible(true);
+            } else if (newValue == managerRadioButton) {
+                getGenreScrollP().setVisible(false);
+                genreLbel.setVisible(false);
+            }
+        });
+
+        // Inizialmente la ScrollPane è visibile poiché "Cliente" è selezionato
+        genreScrollP.setVisible(true);
+
 
         GridPane.setConstraints(signUpButton, 2, 5);
 
