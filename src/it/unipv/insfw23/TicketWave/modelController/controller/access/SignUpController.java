@@ -127,10 +127,15 @@ public class SignUpController {
                     */
                     ArrayList<Event> arraylistevent = new ArrayList<>();
 
-                    Manager managerfinto = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), null, arraylistevent,1,1,LocalDate.now(),0);
+                    Manager manager = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), null, arraylistevent,1,1,LocalDate.now(),0);
                     //credit card, data sub max numberofevents, da prendere nella mastercardview, datasub
 
-                    ConnectedUser.getInstance().setUser(managerfinto);
+                    try {
+                        profileDao.insertManager(manager);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+                    ConnectedUser.getInstance().setUser(manager);
                     ConnectedUser.getInstance().setLoginView(loginView);
 
                     //

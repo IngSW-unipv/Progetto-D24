@@ -37,9 +37,7 @@ public class ProfileDao implements IProfileDao {
             if(ConnectionDB.isOpen(connection)){   // check se è tutto ok
 
                 //query d'inserimento
-                String query = "INSERT INTO MANAGER (NAME_, SURNAME, BIRTHDATE, MAIL, PWD, PROVINCE, " +
-                        "CARDNUMBER, MAXEVENTS, SUBSCRIPTION, SUBSCRIPTION_DATE, COUNTER_CREATED_EVENTS) " +
-                        "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                String query = "INSERT INTO MANAGER (NAME_, SURNAME, BIRTHDATE, MAIL, PWD, PROVINCE,CARDNUMBER, MAXEVENTS, SUBSCRIPTION, SUBSCRIPTION_DATE, COUNTER_CREATED_EVENTS) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 //setto i campi
                 PreparedStatement preparedStatement=connection.prepareStatement(query);
@@ -56,6 +54,7 @@ public class ProfileDao implements IProfileDao {
                 preparedStatement.setInt(11, 0);    //counterCreatedEvents=0 al momento dell'iscrizione
 
                 preparedStatement.executeUpdate();  // eseguo
+                System.out.println("query eseguita");
             }
         }catch (SQLException e) {
             throw new SQLException("No zi non posso salvare i tuoi dati, c'è qualche prob", e);
