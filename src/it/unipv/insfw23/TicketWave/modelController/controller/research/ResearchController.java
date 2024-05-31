@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.research;
 
 //import it.unipv.insfw23.TicketWave.modelView.research.ResearchNodesView;
+import it.unipv.insfw23.TicketWave.dao.research.ResearchDAO;
 import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
@@ -17,16 +18,25 @@ import javafx.stage.Stage;
 
 import javafx.event.EventHandler;
 
+import java.sql.SQLException;
+import java.util.ArrayList;
+
 public class ResearchController {
     private final Stage mainStage;
     // le mie view
     private final ResearchView rv;
-    private User user;
+    private ArrayList<String> pr, gen; // sono gli arrayList che contengono i filtri selezionati, per cui le province selezionate ed i generi selezionati
 
     // costruttore
     public ResearchController(Stage mainStage, ResearchView rv) {
         this.mainStage = mainStage;
         this.rv = rv;
+        ResearchDAO rd = new ResearchDAO();
+        try {
+            rd.getFilteredEvents(rv.getSearchBar().getText(), pr.toString(), gen.toString()); // qua forse dovrei intervallare a virgole
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         setResearchListener();
     }
     public void setResearchListener() {
@@ -65,10 +75,12 @@ public class ResearchController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 CheckBox cmi = (CheckBox) actionEvent.getSource();
-                if (cmi.isSelected()){
+                if (cmi.isSelected()){ // se un checkbox viene selezionato => il genere fa parte dell'array list di stringhe, altrimenti no
                     System.out.println(cmi.getText() + " is selected");
+                    gen.add(cmi.getText());
                 } else {
                     System.out.println(cmi.getText() + " is deselected");
+                    gen.remove(cmi.getText());
                 }
             }
         };
@@ -78,12 +90,13 @@ public class ResearchController {
         EventHandler<ActionEvent> provincePressHandler = new EventHandler<>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                //CheckMenuItem cmi = (CheckMenuItem) actionEvent.getSource();
                 CheckBox cmi = (CheckBox) actionEvent.getSource();
-                if (cmi.isSelected()){
+                if (cmi.isSelected()){ // se un checkbox viene selezionato => la provincia fa parte dell'array list di stringhe, altrimenti no
                     System.out.println(cmi.getText() + " is selected");
+                    pr.add(cmi.getText());
                 } else {
                     System.out.println(cmi.getText() + " is deselected");
+                    pr.remove(cmi.getText());
                 }
             }
         };
