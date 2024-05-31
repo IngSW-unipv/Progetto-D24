@@ -3,6 +3,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.research;
 //import it.unipv.insfw23.TicketWave.modelView.research.ResearchNodesView;
 import it.unipv.insfw23.TicketWave.dao.research.ResearchDAO;
 import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageController;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
@@ -11,6 +12,8 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
 import javafx.scene.input.MouseEvent;
@@ -26,17 +29,12 @@ public class ResearchController {
     // le mie view
     private final ResearchView rv;
     private ArrayList<String> pr, gen; // sono gli arrayList che contengono i filtri selezionati, per cui le province selezionate ed i generi selezionati
+    private ResearchDAO rd;
 
     // costruttore
     public ResearchController(Stage mainStage, ResearchView rv) {
         this.mainStage = mainStage;
         this.rv = rv;
-        ResearchDAO rd = new ResearchDAO();
-        try {
-            rd.getFilteredEvents(rv.getSearchBar().getText(), pr.toString(), gen.toString()); // qua forse dovrei intervallare a virgole
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
         setResearchListener();
     }
     public void setResearchListener() {
@@ -44,8 +42,27 @@ public class ResearchController {
         EventHandler<javafx.scene.input.MouseEvent> researchPressHandlerResearchView = new EventHandler<>() {
             @Override
             public void handle(javafx.scene.input.MouseEvent mouseEvent) {
+                ResearchDAO rd = new ResearchDAO();
+                ArrayList<Event> ev = new ArrayList<>();
+                if (rv.getSearchBar().getText() == null){ // se non scrivo nulla nella barra di ricerca => ricerco tutti gli eventi e li stampo
+                    try { // CHIAMATA AL DAO
+                        ev = rd.getAllEvents(); // devo passarla alla tabella
+                        ObservableList<Event> evs = FXCollections.observableArrayList(ev);
+                        rv.getTable().setItems(evs); // mostro gli eventi nella tabella dei risultati
+                    } catch (SQLException e) {
+                        throw new RuntimeException("Tutti gli eventi non trovati (ResearchController riga 53)");
+                    }
+                } else { // se scrivo qualcosa sulla barra di ricerca faccio una ricerca filtrata
+                    try {
+                        ev = rd.getFilteredEvents(rv.getSearchBar().getText(), pr.toString(), gen.toString());
+                        ObservableList<Event> evs = FXCollections.observableArrayList(ev);
+                        rv.getTable().setItems(evs); // mostro gli eventi filtrati nella tabella dei risultati
+                    } catch (SQLException e) {
+                        throw new RuntimeException("Eventi filtrati non trovati (ResearchController riga 59)");
+                    }
+                }
                 System.out.println("Faccio la query di ricerca");
-                System.out.println(rv.getSearchBar().getText()); // in questo modo devo prendere la searchbar e passarla al ResearchDAO
+                System.out.println(rv.getSearchBar().getText());
                 rv.getTable().setVisible(true);
                 rv.getTable().getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
             }

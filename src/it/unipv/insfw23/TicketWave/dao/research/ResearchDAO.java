@@ -27,39 +27,18 @@ public class ResearchDAO implements IResearchDAO{
         ArrayList<Event> result = new ArrayList<>();
         Manager manager = null;
         PreparedStatement statement1;
-        PreparedStatement statement2;
         ResultSet resultset1;
-        ResultSet resultset2;
 
         try {
             if (!ConnectionDB.isOpen(conn)) { // se non è aperta una connessione, allora aprila
                 ConnectionDB.startConnection(conn, schema);
             }
-            String query = "SELECT * FROM EVENT_ JOIN MANAGER ON MANAGER_ID = MAIL";
+            String query = "SELECT * FROM EVENT_ JOIN MANAGER ON EVENT_.MANAGER_ID = MANAGER.MAIL";
             statement1 = conn.prepareStatement(query);
             resultset1 = statement1.executeQuery(query);
 
             while (resultset1.next()) {
-                LocalDate ld = resultset1.getDate("DATE_").toLocalDate();
-                LocalTime tm = resultset1.getTime("TIME_").toLocalTime();
-                Blob bl = resultset1.getBlob("PHOTO");
-                //conversione dell'immagine da blob a image
-                
-                InputStream is = bl.getBinaryStream();
-                Image photo = new Image(is);
-                
-                try {
-                    String query2 = "SELECT * FROM MANAGER LEFT JOIN EVENT_ ON MAIL = MANAGER_ID"; // se funziona la query sopra, questa va fatta volare insieme al try catch, tengo solo la creazione dei vari manager
-                    statement2 = conn.prepareStatement(query2);
-                    resultset2 = statement2.executeQuery(query2);
-                    LocalDate ld2 = resultset2.getDate("SUBSCRIPTION_DATE").toLocalDate();
-
-                    if (resultset2.next()) {
-                        manager = createManager(resultset2, result);
-                    }
-                } catch (SQLException e) {
-                    throw new RuntimeException("Errore nella query del manager (ResearchDAO)");
-                }
+                manager = createManager(resultset1, result);
                 // aggiungo a result un nuovo evento grazie a createEvent
                 result.add(createEvent(resultset1,manager));
             }
@@ -101,7 +80,7 @@ public class ResearchDAO implements IResearchDAO{
                         query.append(",");
                     }
                 }
-                query.append(")"); // la query dinamica mi permette di prendere tutti gli attributi degli eventi che corrispondono ai filtri
+                query.append(")"); // la query dinamica mi permette di prendere tutte le province e i generi clickati nella view
                 statement1 = conn.prepareStatement(query.toString()); // la query che è di tipo StringBuilder la faccio diventare di tipo String
                 statement1.setString(1, "%"+ searchField + "%");
                 statement1.setString(2, "%"+ searchField + "%");
