@@ -41,6 +41,9 @@ public class LoginView extends Application {
     private LowerBar lowerBar;
     private UpperBar upperBar;
 
+    private TextField mail;
+    private PasswordField password;
+
 
 
     @Override
@@ -79,6 +82,7 @@ public class LoginView extends Application {
         emailnameLabel.setFont(Font.font("Helvetica", FontWeight.BOLD,20));
         GridPane.setConstraints(emailnameLabel, 0, 1);
         TextField emailField = new TextField();
+        this.mail=emailField;
         GridPane.setConstraints(emailField, 1, 1);
 
         // Imposto camp password
@@ -86,6 +90,7 @@ public class LoginView extends Application {
         passwordLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 20));
         GridPane.setConstraints(passwordLabel, 0, 2);
         PasswordField passwordField = new PasswordField();
+        this.password = passwordField;
         GridPane.setConstraints(passwordField, 1, 2);
 
         Label signupLabel = new Label("Non sei ancora iscritto ?");
@@ -201,6 +206,15 @@ public class LoginView extends Application {
 
     public Scene getScene() {
         return scene;
+    }
+
+    public TextField getMail(){return mail;}
+
+    public PasswordField getPassword(){return password;}
+
+    public void makeBlankPage(){
+        mail.setText(null);
+        password.setText(null);
     }
     public static void main(String[] args) {
         launch(args);

@@ -52,6 +52,8 @@ public class SignUpView extends Scene implements IResettableScene {
     //private CheckBox favoriteGenre;
     private ScrollPane genreScrollP;
 
+    private ArrayList<CheckBox> choiceGenre;
+
 
 
     public SignUpView(){
@@ -116,8 +118,8 @@ public class SignUpView extends Scene implements IResettableScene {
                 gen.add(value.toString());
             }
         }
-       ArrayList<CheckBox> genv = new ArrayList<CheckBox>();  // array che contiene tutti i CheckBox da mettere nel Menu del genere
-
+        ArrayList<CheckBox> genv = new ArrayList<CheckBox>();  // array che contiene tutti i CheckBox da mettere nel Menu del genere
+        this.choiceGenre = genv;
         for (String s : gen) {  // Arraylist di CheckMenuItems che popolo
             CheckBox favoriteGenre = new CheckBox(s);
             favoriteGenre.setOnAction(event -> {
@@ -317,4 +319,5 @@ public class SignUpView extends Scene implements IResettableScene {
     public ScrollPane getGenreScrollP() {
         return genreScrollP;
     }
+
 }

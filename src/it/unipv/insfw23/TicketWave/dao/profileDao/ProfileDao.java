@@ -109,8 +109,8 @@ public class ProfileDao implements IProfileDao {
 
 
     @Override
-    public Manager selectManager(String mail, String password) {
-        connection = ConnectionDB.startConnection(connection, schema);
+    public Manager selectManager(String mail, String password) throws SQLException{
+        connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
         PreparedStatement statement1;
         PreparedStatement statement2;
         ResultSet resultSet1;
@@ -125,22 +125,30 @@ public class ProfileDao implements IProfileDao {
 
             resultSet1 = statement1.executeQuery();
 
-            if (resultSet1.next() && checkPassword(password, resultSet1.getString("PASSWORD"))) {
+            String dbPassword = new String();
+            boolean resultAvailable = false;
+
+            if(resultSet1.next()){
+                resultAvailable = true;
+                Object genericDbPassword= resultSet1.getString("PWD");
+                dbPassword = genericDbPassword.toString();
+            }
+
+            if (resultAvailable && checkPassword(password, dbPassword)) {
+
                 ArrayList<Event> createdEvents = new ArrayList<>();         //creo la arraylist da riempire
                 Date date = resultSet1.getDate("SUBSCRIPTION_DATE");             //mi prendo la data di sub per castarla
                 LocalDate subDate = date.toLocalDate();
-                String provString = resultSet1.getString("PROVINCE");    //mi prendo la Province per castarla
-                Province province = Province.valueOf(provString);
 
-                manager = new Manager(resultSet1.getString("NAME_"), resultSet1.getString("SURNAME"), resultSet1.getString("BIRTHDAY"),
+                manager = new Manager(resultSet1.getString("NAME_"), resultSet1.getString("SURNAME"), resultSet1.getString("BIRTHDATE"),
                         resultSet1.getString("MAIL"), null, Province.valueOf(resultSet1.getString("PROVINCE")), resultSet1.getString("CARDNUMBER"), createdEvents,
                         resultSet1.getInt("MAXEVENTS"), resultSet1.getInt("SUBSCRIPTION"), subDate, resultSet1.getInt("COUNTER_CREATED_EVENTS"));
 
                 try {
-                    String query2 = "SELECT * FROM EVENT WHERE ID_MANAGER = ?";
+                    String query2 = "SELECT * FROM EVENT_ WHERE ID_MANAGER = ?";
+
                     statement2 = connection.prepareStatement(query2);
                     statement2.setString(1, mail);
-
                     resultSet2 = statement2.executeQuery();
 
                     while (resultSet2.next()) {
@@ -172,7 +180,7 @@ public class ProfileDao implements IProfileDao {
                         Blob blobphoto = resultSet2.getBlob("PHOTO");
                         InputStream is = blobphoto.getBinaryStream();
                         Image photo = new Image(is);
-                        
+
                         
                         switch (resultSet2.getInt("TYPE")) {
                             case 0:
@@ -218,10 +226,11 @@ public class ProfileDao implements IProfileDao {
                     manager.setEvent(createdEvents);
 
                 } catch (SQLException e) {
-                    throw new RuntimeException(e);
+                    throw new RuntimeException("Problema nel caricamento degli eventi");
                 }
             }
-            else {return null;}
+            else {
+                return null;}
         } catch (SQLException e) {
             throw new RuntimeException("Utente non trovato o non registrato");
         }
@@ -248,8 +257,8 @@ public class ProfileDao implements IProfileDao {
 
 
     @Override
-    public Customer selectCustomer(String mail, String password) {
-        connection = ConnectionDB.startConnection(connection, schema);
+    public Customer selectCustomer(String mail, String password) throws SQLException{
+        connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
         PreparedStatement statement1;
         PreparedStatement statement2;
         ResultSet resultSet1;
@@ -264,11 +273,19 @@ public class ProfileDao implements IProfileDao {
 
             resultSet1 = statement1.executeQuery();
 
-            if (resultSet1.next() && checkPassword(password, resultSet1.getString("PASSWORD"))) {
+            String dbPassword = new String();
+            boolean resultAvailable = false;
+
+            if(resultSet1.next()){
+                resultAvailable = true;
+                Object genericDbPassword= resultSet1.getString("PWD");
+                dbPassword = genericDbPassword.toString();
+            }
+            if (resultAvailable && checkPassword(password, dbPassword)) {
 
                 ArrayList<Ticket> boughtTickets = new ArrayList<>();   // creo l'arraylist per riempirla
 
-                customer = new Customer(resultSet1.getString("NAME_"), resultSet1.getString("SURNAME"), resultSet1.getString("BIRTHDAY"),
+                customer = new Customer(resultSet1.getString("NAME_"), resultSet1.getString("SURNAME"), resultSet1.getString("BIRTHDATE"),
                         resultSet1.getString("MAIL"), null, Province.valueOf(resultSet1.getString("PROVINCE")), splitStringToArrayGenre(resultSet1.getString("FAVOURITE_GENRE")),
                         resultSet1.getInt("POINTS"), boughtTickets);
 
@@ -285,8 +302,8 @@ public class ProfileDao implements IProfileDao {
 
                         customer.addTickets(currentTicket);
                     }
-                } catch (Exception e) {
-                    e.printStackTrace();
+                } catch (SQLException e) {
+                    throw new RuntimeException("Errore nel caricamento dei biglietti");
                 }
             }
             else{ return null;}
