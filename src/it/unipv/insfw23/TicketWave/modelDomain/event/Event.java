@@ -147,10 +147,6 @@ public abstract class Event {
         return typeOfSeats;
     }
 
-    public double[] getPrice() {
-        return price;
-    }
-
     public String getDescription() {
         return description;
     }

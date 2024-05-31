@@ -18,4 +18,8 @@ public class Theater extends Event{
         super(idEvent, name, city, location, date, time, province, genre, Type.THEATER, maxNumberOfSeats, typeOfSeats, seatsRemainedNumberForType, ticketsSoldNumberForType, price, creator, artists, description, photo);
         this.authorName = authorName;
     }
+
+    public String getAuthorName() {
+        return authorName;
+    }
 }
