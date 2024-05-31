@@ -52,9 +52,9 @@ public class ManagerController {
 				ConnectedUser.getInstance().setHome(null);
 				ConnectedUser.getInstance().setLoginView(null);
 				//
+				logview.makeBlankPage();
 				mainStage.setScene(logview.getScene());
 			}
-			
 		};
 		managerview.getLogoutButton().setOnMouseClicked(logoutButton);
 

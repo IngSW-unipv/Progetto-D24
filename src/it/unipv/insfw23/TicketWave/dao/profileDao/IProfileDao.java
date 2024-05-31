@@ -9,7 +9,7 @@ public interface IProfileDao {
     public void insertManager(Manager manager) throws SQLException;
 
     public void insertCustomer(Customer customer) throws SQLException;
-    public Manager selectManager(String mail, String password);
-    public Customer selectCustomer(String mail, String password);
+    public Manager selectManager(String mail, String password) throws SQLException;
+    public Customer selectCustomer(String mail, String password) throws SQLException;
 
 }

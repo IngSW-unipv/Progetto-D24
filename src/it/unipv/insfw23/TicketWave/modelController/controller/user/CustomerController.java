@@ -36,14 +36,15 @@ public class CustomerController {
             public void handle(MouseEvent event) {
                 System.out.println("logout");
 				//loginView = new LoginView();
-				SignUpView signupview = new SignUpView();
-				LoginController logcon = new LoginController(mainstage,signupview,customerView,loginView,managerView);
+				signUpView = new SignUpView();
+				LoginController logcon = new LoginController(mainstage,signUpView,customerView,loginView,managerView);
                 loginView.reSetBars();
                 //
                 ConnectedUser.getInstance().unlogUser();
                 ConnectedUser.getInstance().setHome(null);
                 ConnectedUser.getInstance().setLoginView(null);
                 //
+                loginView.makeBlankPage();
                 mainstage.setScene(loginView.getScene());
             }
 

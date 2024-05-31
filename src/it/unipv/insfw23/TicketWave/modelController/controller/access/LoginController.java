@@ -1,10 +1,12 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.access;
 
+import java.sql.SQLException;
 import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
@@ -68,34 +70,45 @@ public class LoginController {
         EventHandler<ActionEvent> goToCustomerorManagerView = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                ProfileDao profileDao = new ProfileDao();
 
                 if (loginView.getCustomerRadioButton().isSelected()) {
 
+                    Customer loggedCustomer;
                     /*creazione customer ed evento per poi creare vari biglietti e fare delle verifiche
                      *
                      * */
 
                     //customer esempio
-
+/*
                     Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
                     ArrayList<Ticket> tickets= new ArrayList<>();
                     Customer customer=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.BARI,favoriteGenre, 100,tickets);
-                    System.out.println("Hai cliccato il pulsante Login come cliente");
-                    customerview = new CustomerView();
-                    IPaymentAdapter paymentpaypal;
-
-
-                    CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
-                    customerview.reSetBars();
-
+ */
                     //
                     //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
-                    //
-                    ConnectedUser.getInstance().setUser(customer);
-                    ConnectedUser.getInstance().setHome(customerview);
-                    ConnectedUser.getInstance().setLoginView(loginView);
-                    //
-                    mainstage.setScene(customerview); // Imposta la scena SignUpView sulla stage principale
+                    try {
+                        loggedCustomer = profileDao.selectCustomer(loginView.getMail().getText(), loginView.getPassword().getText());
+                    } catch (SQLException e) {
+                        throw new RuntimeException("Utente non registrato");
+                    }
+                        //
+
+                    if(loggedCustomer != null){
+                        System.out.println("Hai cliccato il pulsante Login come cliente");
+                        customerview = new CustomerView();
+
+                        CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
+                        customerview.reSetBars();
+
+                        ConnectedUser.getInstance().setUser(loggedCustomer);
+                        ConnectedUser.getInstance().setHome(customerview);
+                        ConnectedUser.getInstance().setLoginView(loginView);
+                        //
+                        mainstage.setScene(customerview); // Imposta la scena SignUpView sulla stage principale
+                    }
+                    else{System.out.println("Email o password errate");}
+
                 }
                 else if (loginView.getManagerRadioButton().isSelected()) {
 
@@ -103,8 +116,17 @@ public class LoginController {
                      * 	da parte di questo manager e simulare aggiunta di questo evento al suo arraylist di eventi
                      * 	cosi da lavorare con un ipotetico manager che ha pubblicato degli eventi
                      * */
+                    Manager loggedManager;
 
+                    //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
+                    try{
+                        loggedManager = profileDao.selectManager(loginView.getMail().getText(), loginView.getPassword().getText());
+                    } catch (SQLException e) {
+                        throw new RuntimeException("Utente non registrato");
+                    }
 
+                    //
+/*
                     ArrayList<Notification> arrayListNotification = new ArrayList<>();
                     ArrayList<Event> arraylistevent = new ArrayList<>();
                     LocalDate datasub = LocalDate.of(2024, 02, 25);
@@ -136,24 +158,29 @@ public class LoginController {
 
                     /*
                      * 	fine modifiche di Loris
-                     * */
+                     *
+                     */
+
 
 
                     // Azione da eseguire quando il pulsante "Login" viene premuto
-                    System.out.println("Hai cliccato il pulsante Login come gestore");
-                    arraylistevent = managerfinto.getEventlist();
-                    arrayListNotification = managerfinto.getNotification();
-                    managerView = new ManagerView(managerfinto.getName(),arrayListNotification,arraylistevent);
-                    //managerView.setEventsforTableev(managerfinto);
-                    //managerView.reSetBars();
-                    //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
-                    //
-                    ConnectedUser.getInstance().setUser(managerfinto);
-                    ConnectedUser.getInstance().setHome(managerView);
-                    ConnectedUser.getInstance().setLoginView(loginView);
-                    //
-                    ManagerController managerController = new ManagerController(mainstage, managerView, loginView);
-                    mainstage.setScene(managerView); // Imposta la scena SignUpView sulla stage principale }
+                    if(loggedManager != null){
+                        System.out.println("Hai cliccato il pulsante Login come gestore");
+                        ArrayList<Event> arrayListEvent = loggedManager.getEventlist();
+                        ArrayList<Notification> arrayListNotification = loggedManager.getNotification();
+                        managerView = new ManagerView(loggedManager.getName(),arrayListNotification,arrayListEvent);
+                        //managerView.setEventsforTableev(managerfinto);
+                        //managerView.reSetBars();
+
+                        ConnectedUser.getInstance().setUser(loggedManager);
+                        ConnectedUser.getInstance().setHome(managerView);
+                        ConnectedUser.getInstance().setLoginView(loginView);
+                        //
+                        ManagerController managerController = new ManagerController(mainstage, managerView, loginView);
+                        mainstage.setScene(managerView); // Imposta la scena SignUpView sulla stage principale }
+                    }
+                    else{System.out.println("Email o password errate");}
+
                 }// devi mettere managerview anche all'interno del costruttore
 
 
