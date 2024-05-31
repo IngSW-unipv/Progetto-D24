@@ -55,7 +55,6 @@ public class ManagerController {
 				logview.makeBlankPage();
 				mainStage.setScene(logview.getScene());
 			}
-			
 		};
 		managerview.getLogoutButton().setOnMouseClicked(logoutButton);
 
