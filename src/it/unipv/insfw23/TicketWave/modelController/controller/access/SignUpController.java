@@ -93,7 +93,7 @@ public class SignUpController {
                     Customer customer=new Customer(signUpView.getNameField().getText(),
                             signUpView.getSurnameField().getText(), signUpView.getDatePicker().getValue().toString(),
                             signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(),
-                            signUpView.getSelectedProvince(),favoriteGenre, 0,tickets);  // setto  a zero i biglietti creati e i punti vanno presi dopo nelle altre view
+                            signUpView.getSelectedProvince(),signUpView.getSelectedGenres(), 0,tickets);  // setto  a zero i biglietti creati e i punti vanno presi dopo nelle altre view
 
                     try {
                         profileDao.insertCustomer(customer);

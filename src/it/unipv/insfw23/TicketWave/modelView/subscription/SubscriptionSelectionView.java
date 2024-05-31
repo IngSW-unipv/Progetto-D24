@@ -70,7 +70,7 @@ public class SubscriptionSelectionView extends Scene implements IResettableScene
         descr1.setTextFill(Color.WHITE);
         primaSub.setCenter(descr1);
 
-        Label prezzo1 = new Label("0,00 $");
+        Label prezzo1 = new Label("0,00 €");
         prezzo1.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 20));
         prezzo1.setTextFill(Color.WHITE);
         primaSub.setBottom(prezzo1);
@@ -85,7 +85,7 @@ public class SubscriptionSelectionView extends Scene implements IResettableScene
         descr2.setTextFill(Color.WHITE);
         secondaSub.setCenter(descr2);
 
-        Label prezzo2 = new Label("8,99 $");
+        Label prezzo2 = new Label("8,99 €");
         prezzo2.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 20));
         prezzo2.setTextFill(Color.WHITE);
         secondaSub.setBottom(prezzo2);
@@ -101,7 +101,7 @@ public class SubscriptionSelectionView extends Scene implements IResettableScene
         descr3.setTextFill(Color.WHITE);
         terzaSub.setCenter(descr3);
 
-        Label prezzo3 = new Label("14,99 $");
+        Label prezzo3 = new Label("14,99 €");
         prezzo3.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 20));
         prezzo3.setTextFill(Color.WHITE);
         terzaSub.setBottom(prezzo3);
@@ -187,7 +187,23 @@ public class SubscriptionSelectionView extends Scene implements IResettableScene
     public Button getBackButton() {
         return backButton;
     }
+
+    public double getPricePrimaSub() {
+        return Double.parseDouble(((Label) ((BorderPane) bottonePrimaSub.getChildren().get(0)).getBottom()).getText().replace(" €", "").replace(",", "."));
+    }
+
+    public double getPriceSecondaSub() {
+        return Double.parseDouble(((Label) ((BorderPane) bottoneSecondaSub.getChildren().get(0)).getBottom()).getText().replace(" €", "").replace(",", "."));
+    }
+
+    public double getPriceTerzaSub() {
+        return Double.parseDouble(((Label) ((BorderPane) bottoneTerzaSub.getChildren().get(0)).getBottom()).getText().replace(" €", "").replace(",", "."));
+    }
 }
+
+
+
+
 
 
 

@@ -11,7 +11,10 @@ import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 import java.lang.reflect.InvocationTargetException;
@@ -31,12 +34,6 @@ public class SubscriptionSelectionController {
         this.mainstage=mainstage;
         this.backScene= backScene;
 
-        /*
-
-        user = new Manager("Piero", "Antonelli", "12-10-11", "ciccio@gmail.com",
-                "ciccio99", Province.ALESSANDRIA, "3926475898609800", new ArrayList<Event>(), 5, 0, LocalDate.now(), 0);
-
-         */
 
         initComponents();
     }
@@ -47,7 +44,19 @@ public class SubscriptionSelectionController {
             @Override
             public void handle(MouseEvent actionEvent) {
                 System.out.println("Hai selezionato un abbonamento. Reindirizzamento alla pagina di pagamento.");
+                double price = 0;
+                if (actionEvent.getSource() == subscriptionSelectionView.getBottonePrimaSub()) {
+                    price = subscriptionSelectionView.getPricePrimaSub();
+
+                } else if (actionEvent.getSource() == subscriptionSelectionView.getBottoneSecondaSub()) {
+                    price = subscriptionSelectionView.getPriceSecondaSub();
+
+                } else if (actionEvent.getSource() == subscriptionSelectionView.getBottoneTerzaSub()) {
+                    price = subscriptionSelectionView.getPriceTerzaSub();
+                }
                 paymentPage = new PaymentSelectionView();
+                paymentPage.setPriceComponent(price);
+                System.out.println("prezzo impostato");
                 PaymentSelectionController paymentSelectionController = new PaymentSelectionController(mainstage, paymentPage, subscriptionSelectionView);
                 mainstage.setScene(paymentPage);
             }
@@ -68,23 +77,6 @@ public class SubscriptionSelectionController {
                 Scene backSceneCasted = (Scene) backScene;
                 mainstage.setScene(backSceneCasted);
 
-                /*
-                try {
-                    Method method = backScene.getClass().getMethod("reSetBars");
-
-                    // Invoca effettivamente il metodo se esiste
-                    method.invoke(backScene);
-                    mainstage.setScene(backScene);
-                } catch (NoSuchMethodException e) {
-                    // Il metodo "reSetBars" non esiste nella classe della scena
-                    System.out.println("Metodo 'reSetBars' non trovato nella classe della scena");
-                    e.printStackTrace();
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    // Gestione delle eccezioni durante l'invocazione del metodo
-                    e.printStackTrace();
-                }
-
-                 */
             }
         };
         subscriptionSelectionView.getBackButton().setOnMouseClicked(goBackEvent);

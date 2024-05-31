@@ -22,16 +22,16 @@ import java.util.List;
 
 public class PaymentSelectionView extends Scene {
 
-    private final Font font = Font.font("Helvetica", FontWeight.BOLD, 13);
+    private final Font font = Font.font("Helvetica", FontWeight.BOLD, 16);
     private static RadioButton paypalButton = new RadioButton("Paypal");//paypal
     private static RadioButton mastercardButton = new RadioButton("Mastercard"); //mastercard
     private static Button nextButton = new Button();
     private static Button backButton = new Button();
 
-    private static final Label titleLabel = new Label("TicketWave");
+
     private static final Label totalStringLabel = new Label("Totale:");
     private static final Label paySelectionLabel = new Label("Scegli un metodo con cui pagare:");
-    private static Label totalAmountLabel = new Label();
+    private static Label totalAmountLabel=new Label();
     private static List<Label> labels = new ArrayList<>();
 
     private static Text errmessage = new Text("Devi prima selezionare un metodo di pagamento!");
@@ -52,7 +52,7 @@ public class PaymentSelectionView extends Scene {
         paypalButton.setToggleGroup(paymethod);
         mastercardButton.setToggleGroup(paymethod);
 
-        titleLabel.setFont(font);
+
         totalStringLabel.setFont(font);
         totalAmountLabel.setFont(font);
         paySelectionLabel.setFont(font);
@@ -110,14 +110,13 @@ public class PaymentSelectionView extends Scene {
         gridPane.setHgap(10);
         gridPane.setVgap(10);
         gridPane.setPadding(new Insets(10));
-        gridPane.add(titleLabel, 0, 0, 2, 1);
         gridPane.add(totalStringLabel, 0, 1);
-        gridPane.add(totalAmountLabel, 1, 1);
-        gridPane.add(paySelectionLabel, 0, 2, 2, 1);
-        gridPane.add(paypalButton, 0, 3);
-        gridPane.add(paypalImage, 1, 3);
-        gridPane.add(mastercardButton, 0, 4);
-        gridPane.add(mastercardImage, 1, 4);
+        gridPane.add(totalAmountLabel, 0, 2);
+        gridPane.add(paySelectionLabel, 0, 3);
+        gridPane.add(paypalButton, 0, 4);
+        gridPane.add(paypalImage, 1, 4);
+        gridPane.add(mastercardButton, 0, 5);
+        gridPane.add(mastercardImage, 1, 5);
         gridPane.add(errmessage, 0, 6);
 
 
@@ -141,7 +140,7 @@ public class PaymentSelectionView extends Scene {
     }
 
     public void setPriceComponent(double price) {
-        totalAmountLabel = new Label(String.valueOf(price));
+        totalAmountLabel.setText("€ " + String.valueOf(price));
     }
 
     public void reSetBars() {

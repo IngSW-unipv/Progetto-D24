@@ -223,7 +223,7 @@ public class SignUpView extends Scene implements IResettableScene {
 
         signUpButton.setOnAction(event -> {
             // Check se password e email corrispondono
-            if (!passwordField.getText().equals(confirmPasswordField.getText()) ||!emailField.getText().equals(confirmEmailField.getText()) ) {
+            if (!passwordField.getText().equals(confirmPasswordField.getText())||!emailField.getText().equals(confirmEmailField.getText()) ) {
                 errorLabel.setText("Email o password non corrispondono");
             }
         });
@@ -319,5 +319,14 @@ public class SignUpView extends Scene implements IResettableScene {
     public ScrollPane getGenreScrollP() {
         return genreScrollP;
     }
-
+    public Genre[] getSelectedGenres() {
+        ArrayList<Genre> selectedGenres = new ArrayList<>();
+        for (CheckBox checkBox : choiceGenre) {
+            if (checkBox.isSelected()) {
+                selectedGenres.add(Genre.valueOf(checkBox.getText()));
+            }
+        }
+        return selectedGenres.toArray(new Genre[0]);
+    }
 }
+

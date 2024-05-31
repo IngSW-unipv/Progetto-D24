@@ -78,33 +78,6 @@ public class PaymentSelectionController {
                 Scene backSceneCasted = (Scene) backScene;
                 mainStage.setScene(backSceneCasted);
 
-                /*
-                try {
-                    // Ottieni il metodo "reSetBars" dalla classe della scena
-                    Method method = scene.getClass().getMethod("reSetBars");
-                    // Invoca effettivamente il metodo se esiste
-                    method.invoke(scene);
-
-                    // Determina quale scena caricare in base a USER.IS MANAGER
-                    if (user.isCustomer()!=true) {
-                        System.out.println("Sei ritornato indietro alla subscriptionSelectionView");
-                        mainStage.setScene(scene);
-
-                    } else {
-                        System.out.println("Sei ritornato indietro alla TicketPage");
-                        UpperBar.getIstance().setForCustomer();
-                        mainStage.setScene(scene);
-                    }
-                } catch (NoSuchMethodException e) {
-                    // Il metodo "reSetBars" non esiste nella classe della scena
-                    System.out.println("Metodo 'reSetBars' non trovato nella classe della scena.");
-                    e.printStackTrace();
-                } catch (IllegalAccessException | InvocationTargetException e) {
-                    // Gestione delle eccezioni durante l'invocazione del metodo
-                    e.printStackTrace();
-                }
-
-                 */
             }
         };
 
