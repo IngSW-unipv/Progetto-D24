@@ -119,26 +119,56 @@ public class ResearchDAO implements IResearchDAO{
             if (!ConnectionDB.isOpen(conn)){
                 ConnectionDB.startConnection(conn, schema);
             }
-            String query = "SELECT * FROM EVENT_ JOIN MANAGER ON MANAGER_ID = MAIL WHERE checkboxProvince = PROVINCE AND checkboxGenre = GENRE AND (NAME_ LIKE ? OR ARTISTS LIKE ?)"; // prendo tutti gli attributi degli eventi che corrispondono ai filtri. 90 su 100 è cannata
+            String query = "SELECT * FROM EVENT_ JOIN MANAGER ON MANAGER_ID = MAIL WHERE PROVINCE IN (?, ?, ?, ?) AND GENRE IN (?, ?, ?, ?) AND (NAME_ LIKE ? OR ARTISTS LIKE ?)"; // prendo tutti gli attributi degli eventi che corrispondono ai filtri. 90 su 100 è cannata
             statement1 = conn.prepareStatement(query);
-            statement1.setString(1, "%"+ searchField + "%");
-            statement1.setString(2, "%"+ searchField + "%");
+            statement1.setString(1,  checkboxProvince + ", "); // DA RIVEDERE E' CANNATO. VEDI CHATGPT CHE HO CERCATO PRIMA PER QUERY DINAMICA
+            statement1.setString(2,  " " + checkboxProvince + ", ");
+            statement1.setString(3,  " " + checkboxProvince + ", ");
+            statement1.setString(4,  " " + checkboxProvince );
+            statement1.setString(5,  checkboxGenre + ", ");
+            statement1.setString(6,  " " + checkboxGenre + ", ");
+            statement1.setString(7,  " " + checkboxGenre + ", ");
+            statement1.setString(8,  " " + checkboxGenre );
+            statement1.setString(9, "%"+ searchField + "%");
+            statement1.setString(10, "%"+ searchField + "%");
             resultset1 = statement1.executeQuery();
+            ArrayList <Manager> mgPrec = new ArrayList<>(); // Tengo un arraylist di manager, in modo da non creare uno stesso manager più volte (sarebbe sbagliato)
+            ArrayList <Event> evManager = new ArrayList<>(); // tengo un arraylist di eventi, in modo da settare correttamente sul manager tutti gli eventi che ha creato
+            boolean flag = false;
+
             while(resultset1.next()) { // finché ci sono risultati prima creo il manager e poi un evento
-                manager = createManager(resultset1, result); // cannato perché  il resultset è vuoto, per cui creo un  manager con 0 eventi nell'arraylist, come faccio?
+                manager = createManager(resultset1, null); // creo un manager con arrayList di eventi nulla
+                if (!mgPrec.isEmpty()) { // se l'array di manager è vuoto, non ha senso fare il check sotto
+                    for (Manager m : mgPrec) {
+                        if (manager.equals(m)) { // se il manager appena creato è già presente nei manager precedenti => manager = m
+                            manager = m; // hanno la stessa reference
+                            flag = true; // se sono uguali => il manager è già presente in mgPrec => non lo devo aggiungere a mgPrec
+                        }
+                    }
+                }
+                if(!manager.equals(mgPrec.getLast())){ // se il manager corrente è uguale al precedente => uso la stessa evManager, altrimenti la devo ricreare
+                    evManager.clear(); // tolgo tutti gli eventi di questa arrayList, poiché cambiano da manager a manager
+                    for (Event e : result) {
+                        if (e.getCreator().equals(manager)) { // se il creatore dell'evento == manager allora aggiungo all'array list del manager quell'evento
+                            evManager.add(e);
+                        }
+                    }
+                }
+                manager.setEvent(evManager); // setto l'arraylist di eventi creati da quel manager
+                if(flag == false){ // se il flag è falso => questo manager non è nella mgPrec, lo devo aggiungere => è un nuovo manager
+                    mgPrec.add(manager);
+                } else {
+                    flag = false; // se il flag è vero => questo manager esiste già nella mgPrec, non lo devo inserire e per il prox giro devo resettare il flag a false
+                }
                 // creo l'evento
                 result.add(createEvent(resultset1,manager)); // result viene aggiornato dentro a create event con result.add
-
-                // devo sparare elemento per elemento di result dentro la table dei risultati della research view, ma lo faccio da controller
             }
         } catch (SQLException e) {
             throw new RuntimeException("Evento non trovato");
         }
 
-
-
-
         ConnectionDB.closeConnection(conn); // chiudo la connessione
+        // devo sparare elemento per elemento di result dentro la table dei risultati della research view
         return result;
     }
 
@@ -180,13 +210,11 @@ public class ResearchDAO implements IResearchDAO{
     }
 
     private Manager createManager(ResultSet rs, ArrayList<Event> result) throws SQLException {
-        Manager mg = null;
         LocalDate ld2 = rs.getDate("SUBSCRIPTION_DATE").toLocalDate();
-        mg = new Manager(rs.getString("NAME"), rs.getString("SURNAME"), rs.getDate("BIRTHDATE").toString(),
+        return new Manager(rs.getString("NAME"), rs.getString("SURNAME"), rs.getDate("BIRTHDATE").toString(),
                 rs.getString("MAIL"), rs.getString("PWD"), Province.valueOf(rs.getString("PROVINCE")),
                 rs.getString("CARDNUMBER"), result, rs.getInt("MAXEVENTS"), rs.getInt("SUBSCRIPTION"),
                 ld2, rs.getInt("COUNTER_CREATED_EVENTS"));
-        return mg;
     }
 
     private Event createEvent(ResultSet resultset1, Manager manager) throws SQLException {
@@ -230,6 +258,6 @@ public class ResearchDAO implements IResearchDAO{
                         manager, resultset1.getString("ARTISTS"), resultset1.getString("DESCRIPTION_"), photo);
             }
         }
-        return null; // nel caso in cui non rientra in nessun tipo => nullo => errore
+        throw new RuntimeException("L'evento non è stato creato nel dominio (errore nel metodo CreateEvent del ResearchDAO)");
     }
 }
