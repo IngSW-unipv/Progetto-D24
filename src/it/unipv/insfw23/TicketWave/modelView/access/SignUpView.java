@@ -320,13 +320,13 @@ public class SignUpView extends Scene implements IResettableScene {
         return genreScrollP;
     }
     public Genre[] getSelectedGenres() {
-        ArrayList<Genre> selectedGenres = new ArrayList<>();
-        for (CheckBox checkBox : choiceGenre) {
+        ArrayList<Genre> selectedGenres = new ArrayList<>();  //creo un arraylist tempraneo per i generi selezionati
+        for (CheckBox checkBox : choiceGenre) {  //itero lungo tutti gli elementi della choiceGenre
             if (checkBox.isSelected()) {
-                selectedGenres.add(Genre.valueOf(checkBox.getText()));
+                selectedGenres.add(Genre.valueOf(checkBox.getText()));  // se è selezionato inserisco nell'array prendendone il valore dalla checkbox e convertendone il valore in genere
             }
         }
-        return selectedGenres.toArray(new Genre[0]);
+        return selectedGenres.toArray(new Genre[0]);  // converto l'arraylist in un array di generi
     }
 }
 

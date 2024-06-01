@@ -83,12 +83,7 @@ public class SignUpController {
 
                     //set del customer, CHIAMATA AL DAO PER LA REGISTRAZIONE
 
-                    
-                    Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
                     ArrayList<Ticket> tickets= new ArrayList<>();
-
-
-                    
 
                     Customer customer=new Customer(signUpView.getNameField().getText(),
                             signUpView.getSurnameField().getText(), signUpView.getDatePicker().getValue().toString(),
@@ -120,11 +115,7 @@ public class SignUpController {
                     subscriptionSelectionView.reSetBars();
 
                     //set del manager, CHIAMATA AL DAO PER LA REGISTRAZIONE
-                    /*
-                    ArrayList<Notification> arrayListNotification = new ArrayList<>();
-                    ArrayList<Event> arraylistevent = new ArrayList<>();
-                    LocalDate datasub = LocalDate.of(2024, 02, 25);
-                    */
+
                     ArrayList<Event> arraylistevent = new ArrayList<>();
 
                     Manager manager = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), null, arraylistevent,1,1,LocalDate.now(),0);
