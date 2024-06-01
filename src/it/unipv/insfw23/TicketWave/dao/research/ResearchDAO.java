@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.dao.research;
 
 import it.unipv.insfw23.TicketWave.dao.ConnectionDB;
+import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import javafx.scene.image.Image;
@@ -14,16 +15,17 @@ import java.util.Arrays;
 import java.util.List;
 
 public class ResearchDAO implements IResearchDAO{
-    private String schema = "Ticket_Wave";
+    private final String schema;
     private Connection conn;
 
     public ResearchDAO() { // è un Object easy
         super();
+        this.schema = "TicketWaveDB";
     } // costruttore
 
     @Override
     public ArrayList<Event> getAllEvents() throws SQLException{
-        conn = ConnectionDB.startConnection(conn,schema);
+        conn = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(conn,schema);
         ArrayList<Event> result = new ArrayList<>();
         Manager manager = null;
         PreparedStatement statement1;
@@ -50,7 +52,7 @@ public class ResearchDAO implements IResearchDAO{
     } // Quando sulla ResearchBar non ho nulla, allora restituisco tutti gli eventi
     @Override
     public ArrayList<Event> getFilteredEvents(String searchField, String checkboxProvince, String checkboxGenre) throws SQLException{ // Quando qualcuno scrive sulla ResearchBar (TextField) e usa o meno i filtri, allora uso questo metodo
-        conn = ConnectionDB.startConnection(conn,schema);
+        conn = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(conn,schema);
         ArrayList<String> pr = new ArrayList<>(); // serve per la query
         ArrayList<String> gen = new ArrayList<>(); // serve per la query
         int k = 2; // mi serve per settare i paramtri della query nel resultset1
@@ -60,9 +62,6 @@ public class ResearchDAO implements IResearchDAO{
         ResultSet resultset1;
 
         try {
-            if (!ConnectionDB.isOpen(conn)){
-                ConnectionDB.startConnection(conn, schema);
-            }
             try { // controllo che la query venga costruita correttamente
                 pr = splitStringOnComma(checkboxProvince);
                 gen = splitStringOnComma(checkboxGenre);

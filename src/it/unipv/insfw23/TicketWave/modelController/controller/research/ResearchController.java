@@ -35,6 +35,8 @@ public class ResearchController {
     public ResearchController(Stage mainStage, ResearchView rv) {
         this.mainStage = mainStage;
         this.rv = rv;
+        pr = new ArrayList<>();
+        gen = new ArrayList<>();
         setResearchListener();
     }
     public void setResearchListener() {
@@ -99,6 +101,10 @@ public class ResearchController {
                     System.out.println(cmi.getText() + " is deselected");
                     gen.remove(cmi.getText());
                 }
+                for (String s : gen){ // mi serve per checkare se l'arraylist di stringhe pr viene riempita correttamente
+                    System.out.println(s);
+                    System.out.println(gen.size());
+                }
             }
         };
         rv.getGenv().forEach(CheckMenuItem -> CheckMenuItem.setOnAction(genrePressHandler));
@@ -115,6 +121,12 @@ public class ResearchController {
                     System.out.println(cmi.getText() + " is deselected");
                     pr.remove(cmi.getText());
                 }
+
+                for (String s : pr){ // mi serve per checkare se l'arraylist di stringhe pr viene riempita correttamente
+                    System.out.println(s);
+                    System.out.println(pr.size());
+                }
+
             }
         };
         rv.getPrv().forEach(CheckMenuItem -> CheckMenuItem.setOnAction(provincePressHandler));
