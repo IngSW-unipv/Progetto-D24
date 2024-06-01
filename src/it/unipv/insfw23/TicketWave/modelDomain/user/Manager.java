@@ -75,48 +75,52 @@ public class Manager extends User {
     }
 
     //seguono dei metodi di crea Festival, Concerto ecc..
-    public void createFestival(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, int artistsNumber, Image photo) throws Exception {
+    public Event createFestival(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, int artistsNumber, Image photo) throws Exception {
         if((subscription == 1 && counterCreatedEvents < maxNumberOfEvents) || subscription == 2) {
 
             Event festival = new Festival(idEvent, name, city,location,date,time,province,genre,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,ticketsSoldNumberForType,price,creator,artists,description,artistsNumber,photo);
             event.add(festival);
             counterCreatedEvents++;
+            return festival;
         }
         else {
             throw new Exception("Impossibile Creare l'evento:" + name + ".Non puoi creare altri Eventi");
         }
     }
 
-    public void createConcert(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, Image photo) throws Exception{
+    public Event createConcert(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, Image photo) throws Exception{
         if((subscription == 1 && counterCreatedEvents < maxNumberOfEvents) || subscription == 2) {
 
             Event concert= new Concert(idEvent,name,city,location,date,time,province,genre,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,ticketsSoldNumberForType,price,creator,artists,description,photo);
             event.add(concert);
             counterCreatedEvents++;
+            return concert;
         }
         else {
             throw new Exception("Impossibile Creare l'evento:" + name + ".Non puoi creare altri Eventi");
         }
     }
 
-    public void createTheater(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, String authorName, Image photo)throws Exception {
+    public Event createTheater(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, String authorName, Image photo)throws Exception {
         if((subscription == 1 && counterCreatedEvents < maxNumberOfEvents) || subscription == 2) {
 
             Event theater = new Theater(idEvent, name, city, location,date,time, province,genre,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,ticketsSoldNumberForType,price,creator,artists,description,authorName,photo);
             event.add(theater);
             counterCreatedEvents++;
+            return theater;
         }
         else {
             throw new Exception("Impossibile Creare l'evento:" + name + ".Non puoi creare altri Eventi");
         }
     }
 
-    public void createOther(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre,int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, Image photo)throws Exception{
+    public Event createOther(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre,int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, Image photo)throws Exception{
         if((subscription == 1 && counterCreatedEvents < maxNumberOfEvents) || subscription == 2) {
 
             Event other = new Other(idEvent, name, city, location, date,time,province,genre,maxNumberOfSeats,typeOfSeats, seatsRemainedNumberForType, ticketsSoldNumberForType,price, creator,artists,description,photo);
             event.add(other);
             counterCreatedEvents++;
+            return other;
         }
         else {
             throw new Exception("Impossibile Creare l'evento:" + name + ".Non puoi creare altri Eventi");
