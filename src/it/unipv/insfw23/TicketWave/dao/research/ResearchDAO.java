@@ -28,24 +28,19 @@ public class ResearchDAO implements IResearchDAO{
         conn = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(conn,schema);
         ArrayList<Event> result = new ArrayList<>();
         Manager manager = null;
-        PreparedStatement statement1;
-        ResultSet resultset1;
 
         try {
-            if (!ConnectionDB.isOpen(conn)) { // se non è aperta una connessione, allora aprila
-                ConnectionDB.startConnection(conn, schema);
-            }
-            String query = "SELECT * FROM EVENT_ JOIN MANAGER ON EVENT_.MANAGER_ID = MANAGER.MAIL";
-            statement1 = conn.prepareStatement(query);
-            resultset1 = statement1.executeQuery(query);
+                // String query = "SELECT * FROM EVENT_ JOIN MANAGER ON EVENT_.MANAGER_ID = MANAGER.MAIL";
+                String query = "SELECT * FROM EVENT_";
+                PreparedStatement statement1 = conn.prepareStatement(query);
+                ResultSet resultset1 = statement1.executeQuery(query);
 
-            while (resultset1.next()) {
-                manager = createManager(resultset1, result);
-                // aggiungo a result un nuovo evento grazie a createEvent
-                result.add(createEvent(resultset1,manager));
-            }
-        } catch (SQLException e){
-            throw new RuntimeException("Errore nella query dell'evento (ResearchDAO)");
+                while (resultset1.next()) {
+                    manager = createManager(resultset1, result);
+                    result.add(createEvent(resultset1, manager)); // aggiungo a result un nuovo evento grazie a createEvent
+                }
+        } catch (SQLException e) {
+            throw new RuntimeException("Errore nella query di ricerca dell'evento (ResearchDAO)");
         }
         ConnectionDB.closeConnection(conn); // chiudo la connessione
         return result;
@@ -63,35 +58,35 @@ public class ResearchDAO implements IResearchDAO{
 
         try {
             try { // controllo che la query venga costruita correttamente
-                pr = splitStringOnComma(checkboxProvince);
-                gen = splitStringOnComma(checkboxGenre);
-                StringBuilder query = new StringBuilder("SELECT * FROM EVENT_ JOIN MANAGER ON MANAGER_ID = MAIL WHERE (NAME_ LIKE ? OR ARTISTS LIKE ?) AND PROVINCE IN (");
-                for (int i = 0; i < pr.size(); i++){
-                    query.append("?");
-                    if(i < pr.size() - 1){
-                        query.append(",");
+                    pr = splitStringOnComma(checkboxProvince);
+                    gen = splitStringOnComma(checkboxGenre);
+                    StringBuilder query = new StringBuilder("SELECT * FROM EVENT_ JOIN MANAGER ON MANAGER_ID = MAIL WHERE (NAME_ LIKE ? OR ARTISTS LIKE ?) AND PROVINCE IN (");
+                    for (int i = 0; i < pr.size(); i++) {
+                        query.append("?");
+                        if (i < pr.size() - 1) {
+                            query.append(",");
+                        }
                     }
-                }
-                query.append("AND GENRE IN (");
-                for (int i = 0; i < gen.size(); i++){
-                    query.append("?");
-                    if(i < gen.size() - 1){
-                        query.append(",");
+                    query.append("AND GENRE IN (");
+                    for (int i = 0; i < gen.size(); i++) {
+                        query.append("?");
+                        if (i < gen.size() - 1) {
+                            query.append(",");
+                        }
                     }
-                }
-                query.append(")"); // la query dinamica mi permette di prendere tutte le province e i generi clickati nella view
-                statement1 = conn.prepareStatement(query.toString()); // la query che è di tipo StringBuilder la faccio diventare di tipo String
-                statement1.setString(1, "%"+ searchField + "%");
-                statement1.setString(2, "%"+ searchField + "%");
-                for (String s : pr) { //setto i parametri con il ?. Vado avanti finché non arrivo a pr.size()
-                    statement1.setString(k + 1, s);
-                    k++;
-                }
-                k = pr.size();
-                for (String s : gen) { // vado avanti finché non arrivo a gen.size()
-                    statement1.setString(k + 1, s);
-                }
-            } catch (SQLException e ){
+                    query.append(")"); // la query dinamica mi permette di prendere tutte le province e i generi clickati nella view
+                    statement1 = conn.prepareStatement(query.toString()); // la query che è di tipo StringBuilder la faccio diventare di tipo String
+                    statement1.setString(1, "%" + searchField + "%");
+                    statement1.setString(2, "%" + searchField + "%");
+                    for (String s : pr) { //setto i parametri con il ?. Vado avanti finché non arrivo a pr.size()
+                        statement1.setString(k + 1, s);
+                        k++;
+                    }
+                    k = pr.size();
+                    for (String s : gen) { // vado avanti finché non arrivo a gen.size()
+                        statement1.setString(k + 1, s);
+                    }
+            } catch (SQLException e){
                 throw new RuntimeException("La query non è stata costruita correttamente (ResearchDAO riga 156)");
             }
 

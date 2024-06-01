@@ -208,7 +208,7 @@ public class ResearchView extends Scene implements IResettableScene {
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS); // mi permette di allargare la table senza creare colonne aggiuntive
         table.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css"); // estetica della tableView
 
-        // esempio al volo da mettere nella table view
+    /*  // esempio al volo da mettere nella table view
         LocalDate data = LocalDate.now();
         ArrayList<Event> arraylistevent = new ArrayList<>();
         Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","passwd",Province.AGRIGENTO, "23245234324", arraylistevent,5,1,data,4);
@@ -239,8 +239,8 @@ public class ResearchView extends Scene implements IResettableScene {
                 new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl),
                 new Concert(23,"ER MEGLIO","PAVIA","MAGAZZINI GENERALI", data, time, Province.PAVIA, Genre.HOUSE, 500, 3, intvett, vett, price, managerfinto,"paolo", "paolo è qui", bl)
         );
+        table.setItems(evs); */
         table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
-        table.setItems(evs);
 
         //*_____________________________________________* //
         // Inizio creazione GridPane //
