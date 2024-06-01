@@ -83,7 +83,7 @@ public class PaymentDataPController {
                    else{
                        UpperBar.getIstance().setForManager();
                        Manager managerUser = (Manager) user;
-                       ManagerView managerView = new ManagerView(managerUser.getName(), managerUser.getNotification(), managerUser.getEvent());
+                       ManagerView managerView = new ManagerView(managerUser.getName(), managerUser.getNotification(), managerUser.getEventlist());
                        ManagerController managerController = new ManagerController(mainStage, managerView, ConnectedUser.getInstance().getLoginView());
                        mainStage.setScene(managerView);
                    }

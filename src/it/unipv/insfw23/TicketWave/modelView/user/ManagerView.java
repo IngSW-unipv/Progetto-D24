@@ -234,6 +234,11 @@ public class ManagerView extends Scene  implements IResettableScene {
 		return tabNot;
 	}
 	
+	public void updateEvsTable(ArrayList<Event> evs) {
+		this.evs = FXCollections.observableArrayList(evs);
+		init();
+	}
+	
 //	public void setEventsforTableev(Manager manager) {
 //		evs = FXCollections.observableArrayList(manager.getEventlist());
 //		init();

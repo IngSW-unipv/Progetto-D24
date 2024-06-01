@@ -46,7 +46,7 @@ public class ManagerTest {
     public void testCreateFestival() {
         try {
             manager.createFestival(1, "Festival Test", "City Test", "Location Test", LocalDate.now(), LocalTime.of(20, 30), Province.AGRIGENTO, Genre.ROCK, 100, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Pino Daniele,Calcutta", "Description Test", 2, bl);
-            assertEquals(1, manager.getEvent().size());
+            assertEquals(1, manager.getEventlist().size());
         }
         catch(Exception e){
                 // TODO: handle exception
@@ -81,7 +81,7 @@ public class ManagerTest {
     @Test public void testDontCreateFestival3(){ // caso limite utilizzo test con parametri nulli su data, tempo e genere
         try {
             manager2.createFestival(1, null, "City Test", "Location Test", null,null, Province.AGRIGENTO, null, 100, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Pino Daniele,Calcutta", "Description Test", 2, bl);
-            assertEquals(1, manager.getEvent().size());
+            assertEquals(1, manager.getEventlist().size());
         }
         catch(Exception e){
             // TODO: handle exception
@@ -112,7 +112,7 @@ public class ManagerTest {
     public void testCreateTheater() {
         try {
             manager.createTheater(3, "Theater Test", "City Test", "Location Test", LocalDate.now(), LocalTime.of(20, 30), Province.AGRIGENTO, Genre.DRAMMA, 1, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Checco Zalone,Jerry Calà", "Description Test", "Author Test", bl);
-            assertEquals(1, manager.getEvent().size());
+            assertEquals(1, manager.getEventlist().size());
         }
         catch(Exception e){
                 // TODO: handle exception
@@ -126,7 +126,7 @@ public class ManagerTest {
     public void testCreateConcert() {
         try {
             manager.createConcert(1, "Concert Test", "City Test", "Location Test", LocalDate.now(), LocalTime.of(20, 30), Province.AGRIGENTO, Genre.POP, 200, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Pino Daniele", "Description Test", bl);
-            assertEquals(1, manager.getEvent().size());
+            assertEquals(1, manager.getEventlist().size());
         }
         catch(Exception e){
             // TODO: handle exception
@@ -138,7 +138,7 @@ public class ManagerTest {
     public void testCreateOther()  {
         try {
             manager.createOther(4, "Other Test", "City Test", "Location Test", LocalDate.now(), LocalTime.of(20, 30), Province.AGRIGENTO, Genre.ROCK, 400, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Comico", "Description Test", bl);
-            assertEquals(1, manager.getEvent().size());
+            assertEquals(1, manager.getEventlist().size());
         }
         catch(Exception e){
             // TODO: handle exception

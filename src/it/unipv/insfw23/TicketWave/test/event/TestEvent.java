@@ -144,9 +144,9 @@ public class TestEvent {
             mg1 = new Manager("Paolo", "Bisio", "1970-02-07", "Paolo@example.com", "dajeRoma", Province.ROMA, "423432523523",
                     ev1, 10000000, 2, LocalDate.now(), 0);
             // check + stampa delle reference degli eventi
-            assertEquals(5, mg1.getEvent().size()); // controllo che 6 sia la size dell'arrayList di eventi in manager
+            assertEquals(5, mg1.getEventlist().size()); // controllo che 6 sia la size dell'arrayList di eventi in manager
             for (int i = 0; i < 5; i++) {
-                System.out.println(mg1.getEvent().get(i)); // stampo la reference dell'evento puntato in quel giro
+                System.out.println(mg1.getEventlist().get(i)); // stampo la reference dell'evento puntato in quel giro
             }
         } catch (Exception e) {
             assertEquals("CreatedEventsFromManager error", e.getMessage());
