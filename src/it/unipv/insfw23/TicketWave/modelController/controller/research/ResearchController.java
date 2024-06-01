@@ -53,15 +53,15 @@ public class ResearchController {
                         ObservableList<Event> evs = FXCollections.observableArrayList(ev);
                         rv.getTable().setItems(evs); // mostro gli eventi nella tabella dei risultati
                     } catch (SQLException e) {
-                        throw new RuntimeException("Tutti gli eventi non trovati (ResearchController riga 53)");
+                        throw new RuntimeException("Tutti gli eventi non trovati (ResearchController riga 56)");
                     }
                 } else { // se scrivo qualcosa sulla barra di ricerca faccio una ricerca filtrata
                     try {
-                        ev = rd.getFilteredEvents(rv.getSearchBar().getText(), pr.toString(), gen.toString());
+                        ev = rd.getFilteredEvents(rv.getSearchBar().getText(), pr, gen);
                         ObservableList<Event> evs = FXCollections.observableArrayList(ev);
                         rv.getTable().setItems(evs); // mostro gli eventi filtrati nella tabella dei risultati
                     } catch (SQLException e) {
-                        throw new RuntimeException("Eventi filtrati non trovati (ResearchController riga 59)");
+                        throw new RuntimeException("Eventi filtrati non trovati (ResearchController riga 64)");
                     }
                 }
                 System.out.println("Faccio la query di ricerca");
@@ -82,6 +82,7 @@ public class ResearchController {
                 } else {
                     rv.getTable().getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
                     System.out.println(rv.getTable().getSelectionModel().getSelectedItem()); // prendo l'elemento cliccato dalla tabella
+
                     // Prendo lo user connesso a questa sessione dell'applicativo
                     ConnectedUser cu = ConnectedUser.getInstance();
                     TicketPageView tpv = new TicketPageView();
@@ -108,10 +109,6 @@ public class ResearchController {
                     System.out.println(cmi.getText() + " is deselected");
                     gen.remove(cmi.getText());
                 }
-                for (String s : gen){ // mi serve per checkare se l'arraylist di stringhe pr viene riempita correttamente
-                    System.out.println(s);
-                    System.out.println(gen.size());
-                }
             }
         };
         rv.getGenv().forEach(CheckMenuItem -> CheckMenuItem.setOnAction(genrePressHandler));
@@ -128,12 +125,6 @@ public class ResearchController {
                     System.out.println(cmi.getText() + " is deselected");
                     pr.remove(cmi.getText());
                 }
-
-                for (String s : pr){ // mi serve per checkare se l'arraylist di stringhe pr viene riempita correttamente
-                    System.out.println(s);
-                    System.out.println(pr.size());
-                }
-
             }
         };
         rv.getPrv().forEach(CheckMenuItem -> CheckMenuItem.setOnAction(provincePressHandler));

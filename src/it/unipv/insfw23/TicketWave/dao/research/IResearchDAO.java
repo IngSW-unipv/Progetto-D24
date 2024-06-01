@@ -11,6 +11,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 
 public interface IResearchDAO {
-    public ArrayList<Event> getFilteredEvents(String searchField, String checkboxProvince, String checkboxGenre) throws SQLException; // metodo della ricerca, esso fornisce i risultati
+    public ArrayList<Event> getFilteredEvents(String searchField, ArrayList<String> pr , ArrayList<String> gen) throws SQLException; // metodo della ricerca, esso fornisce i risultati
     public ArrayList<Event> getAllEvents() throws SQLException; // Restituisco tutti gli eventi quando sul textField della ricerca non c'è nulla
 }

@@ -30,8 +30,7 @@ public class ResearchDAO implements IResearchDAO{
         Manager manager = null;
 
         try {
-                // String query = "SELECT * FROM EVENT_ JOIN MANAGER ON EVENT_.MANAGER_ID = MANAGER.MAIL";
-                String query = "SELECT * FROM EVENT_";
+                String query = "SELECT * FROM EVENT_ JOIN MANAGER ON EVENT_.ID_MANAGER = MANAGER.MAIL";
                 PreparedStatement statement1 = conn.prepareStatement(query);
                 ResultSet resultset1 = statement1.executeQuery(query);
 
@@ -46,10 +45,8 @@ public class ResearchDAO implements IResearchDAO{
         return result;
     } // Quando sulla ResearchBar non ho nulla, allora restituisco tutti gli eventi
     @Override
-    public ArrayList<Event> getFilteredEvents(String searchField, String checkboxProvince, String checkboxGenre) throws SQLException{ // Quando qualcuno scrive sulla ResearchBar (TextField) e usa o meno i filtri, allora uso questo metodo
+    public ArrayList<Event> getFilteredEvents(String searchField, ArrayList<String> pr , ArrayList<String> gen) throws SQLException{ // Quando qualcuno scrive sulla ResearchBar (TextField) e usa o meno i filtri, allora uso questo metodo
         conn = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(conn,schema);
-        ArrayList<String> pr = new ArrayList<>(); // serve per la query
-        ArrayList<String> gen = new ArrayList<>(); // serve per la query
         int k = 2; // mi serve per settare i paramtri della query nel resultset1
         ArrayList<Event> result = new ArrayList<>();
         Manager manager;
@@ -58,42 +55,54 @@ public class ResearchDAO implements IResearchDAO{
 
         try {
             try { // controllo che la query venga costruita correttamente
-                    pr = splitStringOnComma(checkboxProvince);
-                    gen = splitStringOnComma(checkboxGenre);
-                    StringBuilder query = new StringBuilder("SELECT * FROM EVENT_ JOIN MANAGER ON MANAGER_ID = MAIL WHERE (NAME_ LIKE ? OR ARTISTS LIKE ?) AND PROVINCE IN (");
-                    for (int i = 0; i < pr.size(); i++) {
-                        query.append("?");
-                        if (i < pr.size() - 1) {
-                            query.append(",");
+                    StringBuilder query = new StringBuilder("SELECT * FROM EVENT_ JOIN MANAGER ON MANAGER_ID = MAIL WHERE (EVENT_.NAME_ LIKE ? OR EVENT_.ARTISTS LIKE ?)");
+                    if(!pr.isEmpty()) { // se è uguale a 0 => non ho messo filtri, non metto la parte di query "PROVINCE IN()"
+                        query.append(" AND EVENT_.PROVINCE IN ( ");
+                        for (int i = 0; i < pr.size(); i++) {
+                            query.append("?");
+                            if (i < pr.size() - 1) {
+                                query.append(",");
+                            }
                         }
+                        query.append(" ) ");
                     }
-                    query.append("AND GENRE IN (");
-                    for (int i = 0; i < gen.size(); i++) {
-                        query.append("?");
-                        if (i < gen.size() - 1) {
-                            query.append(",");
+                    if (!gen.isEmpty()){ // se è uguale a 0 => non ho messo filtri, non metto la parte di query "GENRE IN()"
+                        query.append("AND EVENT_.GENRE IN ( ");
+                        for (int i = 0; i < gen.size(); i++) {
+                            query.append("?");
+                            if (i < gen.size() - 1) {
+                                query.append(",");
+                            }
                         }
-                    }
-                    query.append(")"); // la query dinamica mi permette di prendere tutte le province e i generi clickati nella view
+                        query.append(" )");
+                    } // la query dinamica mi permette di prendere tutte le province e i generi clickati nella view
+                System.out.println(query.toString());
+                System.out.println(gen.size()); // QUESTI 3 SONO CHECK DA RIMUOVERE *****************************
+                System.out.println(pr.size());
                     statement1 = conn.prepareStatement(query.toString()); // la query che è di tipo StringBuilder la faccio diventare di tipo String
-                    statement1.setString(1, "%" + searchField + "%");
+                    statement1.setString(1, "%" + searchField + "%"); // controlla se nel DB c'è un evento che ha da qualche parte nel nome la sottostringa searchField
                     statement1.setString(2, "%" + searchField + "%");
-                    for (String s : pr) { //setto i parametri con il ?. Vado avanti finché non arrivo a pr.size()
-                        statement1.setString(k + 1, s);
-                        k++;
+                    if (!pr.isEmpty()) { // stesso discorso di prima se non ho filtri sulle PROVINCE vado ai filtri per GENRE
+                        for (String s : pr) { //setto i parametri con il ?. Vado avanti finché non arrivo a pr.size()
+                            statement1.setString(k + 1, s);
+                            k++;
+                        }
                     }
-                    k = pr.size();
-                    for (String s : gen) { // vado avanti finché non arrivo a gen.size()
-                        statement1.setString(k + 1, s);
+                    if (!gen.isEmpty()) {
+                        for (String s : gen) { // vado avanti finché non arrivo a gen.size()
+                            statement1.setString(k + 1, s);
+                            k++;
+                        }
                     }
+                System.out.println( statement1  ); // DA RIMUOVERE *****************************************
             } catch (SQLException e){
-                throw new RuntimeException("La query non è stata costruita correttamente (ResearchDAO riga 156)");
+                throw new RuntimeException("La query non è stata costruita correttamente (ResearchDAO riga 89)"); // ****** FIN QUI TUTTO BENE ********* //
             }
 
             try{ // provo a vedere se la query viene eseguita correttamente
                 resultset1 = statement1.executeQuery();
             } catch (SQLException e) {
-                throw new RuntimeException("La query non è stata eseguita correttamente (ResearchDAO riga 162)");
+                throw new RuntimeException("La query non è stata eseguita correttamente (ResearchDAO riga 95)");
             }
 
             ArrayList <Manager> mgPrec = new ArrayList<>(); // Tengo un arraylist di manager, in modo da non creare uno stesso manager più volte (sarebbe sbagliato)
@@ -225,10 +234,11 @@ public class ResearchDAO implements IResearchDAO{
         throw new RuntimeException("L'evento non è stato creato nel dominio (errore nel metodo CreateEvent del ResearchDAO)");
     }
 
-    private ArrayList<String> splitStringOnComma(String generic){
-        String[] arrayString = generic.split(",");
-        ArrayList<String> resArrayList = new ArrayList<>();
-        resArrayList.addAll(Arrays.asList(arrayString));
-        return resArrayList;
+    private String[] splitStringOnCommaOrSpace(String generic){ // se va tutto lo devo rimuovere, serviva solo se passavo delle stringhe al getFilteredEvent
+        String[] arrayString = generic.split("[,\\s]+"); // regex che splitta una stringa sulle virgone, sugli spazi, sui tab e sugli a capo.
+        for (int i = 0; i < arrayString.length; i++){ // CHECK, VA TOLTO **********************************
+            System.out.println(arrayString[i]);
+        }
+        return arrayString;
     }
 }
