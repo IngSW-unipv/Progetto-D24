@@ -38,7 +38,6 @@ public class PaymentSelectionView extends Scene {
     private Scene scene;
     private BorderPane layout;
     private Pane root;
-    private boolean isviewermanager;
 
     public PaymentSelectionView() {
         super(new BorderPane(), 1080, 600);
