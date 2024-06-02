@@ -47,8 +47,7 @@ public class LoginController {
                 // Azione da eseguire quando il pulsante "Registrati" viene premuto
                 System.out.println("Hai cliccato il pulsante Registrati");
                 SignUpView signUpView = new SignUpView();
-                CustomerView customerView= new CustomerView();
-                SignUpController signUpController = new SignUpController(mainstage, signUpView, customerView,loginView);
+                SignUpController signUpController = new SignUpController(mainstage, signUpView, loginView);
                 signUpView.reSetBars();
                 mainstage.setScene(signUpView); // Imposta la scena SignUpView sulla stage principale
             }
@@ -60,11 +59,9 @@ public class LoginController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 ProfileDao profileDao = new ProfileDao();
-                if(loginView.checkEmptyFields()== true ){
-                    loginView.setErrorLabel();
-                }
-                else if (loginView.getCustomerRadioButton().isSelected()) {
 
+                 if (loginView.getCustomerRadioButton().isSelected() && loginView.checkEmptyFields()==false) {
+                     System.out.println("Hai cliccato il pulsante login come cliente");
                     Customer loggedCustomer;
                     /*creazione customer ed evento per poi creare vari biglietti e fare delle verifiche
                      *
@@ -98,10 +95,11 @@ public class LoginController {
                         //
                         mainstage.setScene(customerview); // Imposta la scena SignUpView sulla stage principale
                     }
-                    else{System.out.println("Email o password errate");}
+                    else{System.out.println("Email o password errate");
+                            loginView.setErrorLabel();}
 
                 }
-                else if (loginView.getManagerRadioButton().isSelected()) {
+                else if (loginView.getManagerRadioButton().isSelected() && loginView.checkEmptyFields()==false) {
 
                     /*	modifiche fatte da Loris per simulare la creazione di un manager senza eventi, simulare la creazione di un evento
                      * 	da parte di questo manager e simulare aggiunta di questo evento al suo arraylist di eventi
@@ -170,7 +168,9 @@ public class LoginController {
                         ManagerController managerController = new ManagerController(mainstage, managerView, loginView);
                         mainstage.setScene(managerView); // Imposta la scena SignUpView sulla stage principale }
                     }
-                    else{System.out.println("Email o password errate");}
+                    else {
+                        loginView.setErrorLabel();
+                        System.out.println("Email o password errate");}
 
                 }// devi mettere managerview anche all'interno del costruttore
 

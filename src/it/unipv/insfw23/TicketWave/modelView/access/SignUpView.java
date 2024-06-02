@@ -118,8 +118,8 @@ public class SignUpView extends Scene implements IResettableScene {
                 gen.add(value.toString());
             }
         }
-        ArrayList<CheckBox> genv = new ArrayList<CheckBox>();  // array che contiene tutti i CheckBox da mettere nel Menu del genere
-        this.choiceGenre = genv;
+        choiceGenre = new ArrayList<CheckBox>();  // array che contiene tutti i CheckBox da mettere nel Menu del genere
+
         for (String s : gen) {  // Arraylist di CheckMenuItems che popolo
             CheckBox favoriteGenre = new CheckBox(s);
             favoriteGenre.setOnAction(event -> {
@@ -132,12 +132,12 @@ public class SignUpView extends Scene implements IResettableScene {
                 } else {
                     currentSelections--;
                 }
-                updateCheckBoxesState(genv);
+                updateCheckBoxesState(choiceGenre);
             });
-            genv.add(favoriteGenre);
+            choiceGenre.add(favoriteGenre);
         }
         // VBox che contiene lo ScrollPane
-        vb1.getChildren().addAll(genv);
+        vb1.getChildren().addAll(choiceGenre);
         vb1.setPrefHeight(100);
 
 
@@ -323,7 +323,7 @@ public class SignUpView extends Scene implements IResettableScene {
         return selectedGenres.toArray(new Genre[0]);  // converto l'arraylist in un array di generi
     }
     public boolean checkEqualEmailAndPassword(){
-        if (!passwordField.getText().equals(confirmPasswordField.getText()) && !emailField.getText().equals(confirmEmailField.getText())){
+        if (!passwordField.getText().equals(confirmPasswordField.getText()) || !emailField.getText().equals(confirmEmailField.getText())){
             return false;
         }else{
             return true;
@@ -334,9 +334,17 @@ public class SignUpView extends Scene implements IResettableScene {
         System.out.println("mail/password diverse o campi vuoti");
         errorLabel.setVisible(true);
     }
+    private boolean isAnyCheckBoxSelected() {
+        for (CheckBox checkBox : choiceGenre) {
+            if (checkBox.isSelected()) {
+                return true;
+            }
+        }
+        return false;
+    }
     public boolean checkFieldsEmpty(){
         if(getNameField().getText()== null || getSurnameField().getText()== null || getEmailField().getText()==null || getConfirmEmailField().getText()== null ||
-                getPasswordField().getText()== null || getConfirmPasswordField().getText()==null || getDatePicker().getValue() == null && getSelectedProvince()==null  ){
+                getPasswordField().getText()== null || getConfirmPasswordField().getText()==null || getDatePicker().getValue() == null && getSelectedProvince()==null || isAnyCheckBoxSelected()==false  ){
             return true;
         }else{
             return  false;
