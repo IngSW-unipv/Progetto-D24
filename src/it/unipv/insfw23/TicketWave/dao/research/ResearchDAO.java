@@ -29,17 +29,27 @@ public class ResearchDAO implements IResearchDAO{
         ArrayList<Event> result = new ArrayList<>();
         Manager manager = null;
 
-        try {
-                String query = "SELECT * FROM EVENT_ JOIN MANAGER ON EVENT_.ID_MANAGER = MANAGER.MAIL";
+        if (ConnectionDB.isOpen(conn)) {
+            try {
+                String query = "SELECT * FROM MANAGER";
                 PreparedStatement statement1 = conn.prepareStatement(query);
                 ResultSet resultset1 = statement1.executeQuery(query);
 
-                while (resultset1.next()) {
+                if (resultset1.next()){ // creazione Manager
                     manager = createManager(resultset1, result);
-                    result.add(createEvent(resultset1, manager)); // aggiungo a result un nuovo evento grazie a createEvent
+
+                    String query2 = "SELECT * FROM EVENT_"; // query per prendere tutti gli eventi
+                    PreparedStatement statement2 = conn.prepareStatement(query2);
+                    ResultSet resultset2 = statement2.executeQuery(query2);
+
+                    if (resultset2.next()){ // creazione Evento
+                        result.add(createEvent(resultset2, manager)); // aggiungo a result un nuovo evento grazie a createEvent
+                    }
                 }
-        } catch (SQLException e) {
-            throw new RuntimeException("Errore nella query di ricerca dell'evento (ResearchDAO)");
+            } catch (SQLException e) {
+                e.printStackTrace();
+                throw new RuntimeException("Errore nella query di ricerca dell'evento (ResearchDAO riga 42)");
+            }
         }
         ConnectionDB.closeConnection(conn); // chiudo la connessione
         return result;
@@ -118,7 +128,7 @@ public class ResearchDAO implements IResearchDAO{
                         }
                     }
                 }
-                if(!manager.equals(mgPrec.getLast())){ // se il manager corrente è uguale al precedente => uso la stessa evManager, altrimenti la devo ricreare
+                if(!manager.equals(mgPrec.get(0))){ // se il manager corrente è uguale al precedente => uso la stessa evManager, altrimenti la devo ricreare
                     evManager.clear(); // tolgo tutti gli eventi di questa arrayList, poiché cambiano da manager a manager
                     for (Event e : result) {
                         if (e.getCreator().equals(manager)) { // se il creatore dell'evento == manager allora aggiungo all'array list del manager quell'evento
@@ -181,12 +191,16 @@ public class ResearchDAO implements IResearchDAO{
         return words.length;
     }
 
-    private Manager createManager(ResultSet rs, ArrayList<Event> result) throws SQLException {
-        LocalDate ld2 = rs.getDate("SUBSCRIPTION_DATE").toLocalDate();
-        return new Manager(rs.getString("NAME"), rs.getString("SURNAME"), rs.getDate("BIRTHDATE").toString(),
-                rs.getString("MAIL"), rs.getString("PWD"), Province.valueOf(rs.getString("PROVINCE")),
-                rs.getString("CARDNUMBER"), result, rs.getInt("MAXEVENTS"), rs.getInt("SUBSCRIPTION"),
-                ld2, rs.getInt("COUNTER_CREATED_EVENTS"));
+    private Manager createManager(ResultSet resultSet1, ArrayList<Event> result) throws SQLException {
+        try {
+            LocalDate subDate = resultSet1.getDate("SUBSCRIPTION_DATE").toLocalDate();
+            return new Manager(resultSet1.getString("NAME_"), resultSet1.getString("SURNAME"), resultSet1.getString("BIRTHDATE"),
+                    resultSet1.getString("MAIL"), null, Province.valueOf(resultSet1.getString("PROVINCE")), resultSet1.getString("CARDNUMBER"), result,
+                    resultSet1.getInt("MAXEVENTS"), resultSet1.getInt("SUBSCRIPTION"), subDate, resultSet1.getInt("COUNTER_CREATED_EVENTS"));
+        } catch (SQLException e) {
+            throw new RuntimeException("Manager non creato correttamente (ResearchDAO createManager)");
+        }
+
     }
 
     private Event createEvent(ResultSet resultset1, Manager manager) throws SQLException {
@@ -196,11 +210,11 @@ public class ResearchDAO implements IResearchDAO{
         //conversione da blob a image
         InputStream is = bl.getBinaryStream();
         Image photo = new Image(is);
-        
+
         double[] price = {resultset1.getDouble("BASE_PRICE"), resultset1.getDouble("PREMIUM_PRICE"), resultset1.getDouble("VIP_PRICE")};
         int[] seatsremaining = {resultset1.getInt("REMAINING_BASE_SEATS"), resultset1.getInt("REMAINING_PREMIUM_SEATS"), resultset1.getInt("REMAINING_VIP_SEATS")};
         int[] ticketSoldNumberForType = {resultset1.getInt("SOLD_BASE_SEATS"), resultset1.getInt("SOLD_PREMIUM_SEATS"), resultset1.getInt("SOLD_VIP_SEATS")};
-        switch (resultset1.getInt("TYPE")) {
+        switch (resultset1.getInt("TYPE_")) {
             case 0 -> {
                 return new Concert(resultset1.getInt("ID_EVENT"), resultset1.getString("NAME_"),
                         resultset1.getString("CITY"), resultset1.getString("LOCATION"), ld, tm,
