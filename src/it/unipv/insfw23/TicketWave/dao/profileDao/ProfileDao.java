@@ -183,7 +183,7 @@ public class ProfileDao implements IProfileDao {
                         Image photo = new Image(is);
 
                         
-                        switch (resultSet2.getInt("TYPE")) {
+                        switch (Type.valueOf(resultSet2.getString("TYPE_")).ordinal()) {
                             case 0:
                                 Concert currentConcert = new Concert(resultSet2.getInt("ID_EVENT"), resultSet2.getString("NAME_"),
                                         resultSet2.getString("CITY"), resultSet2.getString("LOCATION"),
@@ -198,7 +198,7 @@ public class ProfileDao implements IProfileDao {
                                         resultSet2.getString("CITY"), resultSet2.getString("LOCATION"),
                                         currentDate, resultSet2.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet2.getString("PROVINCE")),
                                         Genre.valueOf(resultSet2.getString("GENRE")), resultSet2.getInt("MAX_NUM_SEATS"), resultSet2.getInt("NUM_SEATS_TYPE"),
-                                        seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION"), countWords(resultSet2.getString("ARTISTS")),
+                                        seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION_"), countWords(resultSet2.getString("ARTISTS")),
                                         photo);
                                 createdEvents.add(currentFestival);
                                 break;
@@ -227,6 +227,7 @@ public class ProfileDao implements IProfileDao {
                     manager.setEvent(createdEvents);
 
                 } catch (SQLException e) {
+                    e.printStackTrace();
                     throw new RuntimeException("Problema nel caricamento degli eventi");
                 }
             }
@@ -316,6 +317,14 @@ public class ProfileDao implements IProfileDao {
         return customer;
     }
 
+    /*
+    public void customerPointsUpdate(){
+
+
+
+    }
+*/
+    
     private Genre[] splitStringToArrayGenre(String s) {
         String[] arrayString = s.split(",");
         Genre[] genreArray = new Genre[5];

@@ -47,7 +47,7 @@ public class ResearchController {
             public void handle(javafx.scene.input.MouseEvent mouseEvent) {
                 ResearchDAO rd = new ResearchDAO();
                 ArrayList<Event> ev = new ArrayList<>();
-                if (Objects.equals(rv.getSearchBar().getText(), "")){ // se non scrivo nulla nella barra di ricerca => ricerco tutti gli eventi e li stampo
+                if (Objects.equals(rv.getSearchBar().getText(), "") && pr.isEmpty() && gen.isEmpty()){ // se non scrivo nulla nella barra di ricerca => ricerco tutti gli eventi e li stampo
                     try { // CHIAMATA AL DAO
                         ev = rd.getAllEvents(); // devo passarla alla tabella
                         ObservableList<Event> evs = FXCollections.observableArrayList(ev);
@@ -88,7 +88,7 @@ public class ResearchController {
                     TicketPageView tpv = new TicketPageView();
                     tpv.setComponents(cu.getUser().isCustomer(), rv.getTable().getSelectionModel().getSelectedItem().getType(), rv.getTable().getSelectionModel().getSelectedItem().getName(), rv.getTable().getSelectionModel().getSelectedItem().getCity(),
                             rv.getTable().getSelectionModel().getSelectedItem().getLocation(), rv.getTable().getSelectionModel().getSelectedItem().getProvince(), rv.getTable().getSelectionModel().getSelectedItem().getDate(),
-                            rv.getTable().getSelectionModel().getSelectedItem().getArtists(), rv.getTable().getSelectionModel().getSelectedItem().getSeatsRemainedNumberForType(), rv.getTable().getSelectionModel().getSelectedItem().getPrices());
+                            rv.getTable().getSelectionModel().getSelectedItem().getArtists(), rv.getTable().getSelectionModel().getSelectedItem().getSeatsRemainedNumberForType(), rv.getTable().getSelectionModel().getSelectedItem().getPrices(), rv.getTable().getSelectionModel().getSelectedItem().getPhoto());
                     // creazione del TicketPageController
                     TicketPageController tpc =  new TicketPageController(mainStage, tpv, rv.getTable().getSelectionModel().getSelectedItem(), rv);
                     mainStage.setScene(tpv);

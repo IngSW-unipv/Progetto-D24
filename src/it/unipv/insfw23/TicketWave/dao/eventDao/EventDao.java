@@ -3,8 +3,12 @@ package it.unipv.insfw23.TicketWave.dao.eventDao;
 import it.unipv.insfw23.TicketWave.dao.ConnectionDB;
 import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Theater;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
+import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
+import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
@@ -13,6 +17,7 @@ import javax.sql.rowset.serial.SerialBlob;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class EventDao implements IEventDao{
     private String schema;
@@ -26,6 +31,8 @@ public class EventDao implements IEventDao{
     @Override
     public void insertEvent(Event event) throws SQLException {
 
+        int eventNumber = selectEventNumber();
+
         try {
             connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
             if(ConnectionDB.isOpen(connection)){   // check se è tutto ok
@@ -33,8 +40,8 @@ public class EventDao implements IEventDao{
                 //query d'inserimento
                 String query = "INSERT INTO EVENT_ (ID_EVENT, NAME_, CITY, LOCATION, DATE_, TIME_, PROVINCE, GENRE, TYPE_, MAX_NUM_SEATS," +
                         "NUM_SEATS_TYPE, SOLD_BASE_SEATS, SOLD_PREMIUM_SEATS, SOLD_VIP_SEATS, REMAINING_BASE_SEATS, REMAINING_PREMIUM_SEATS, " +
-                        "REMAINING_VIP_SEATS, BASE_PRICE, PREMIUM_PRICE, VIP_PRICE, ID_MANAGER, ARTISTS, AUTHOR, DESCRIPTION_) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?," +
-                        "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        "REMAINING_VIP_SEATS, BASE_PRICE, PREMIUM_PRICE, VIP_PRICE, ID_MANAGER, ARTISTS, AUTHOR, DESCRIPTION_, PHOTO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?," +
+                        "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
                 Date eventDate = Date.valueOf(event.getDate());
                 Time eventTime = Time.valueOf(event.getTime());
@@ -45,7 +52,7 @@ public class EventDao implements IEventDao{
 
                 //setto i campi
                 PreparedStatement preparedStatement=connection.prepareStatement(query);
-                preparedStatement.setInt(1, event.getIdEvent());
+                preparedStatement.setInt(1, eventNumber+1);
                 System.out.println(event.getIdEvent());
                 preparedStatement.setString(2, event.getName());
                 System.out.println(event.getName());
@@ -128,7 +135,7 @@ public class EventDao implements IEventDao{
                 System.out.println(author);
                 preparedStatement.setString(24, event.getDescription());
                 System.out.println(event.getDescription());
-                //preparedStatement.setBlob(25, photoDB);
+                preparedStatement.setBlob(25, photoDB);
 
 
                 System.out.println("prova pre-esecuzione");
@@ -136,6 +143,7 @@ public class EventDao implements IEventDao{
                 System.out.println("query eseguita");
             }
         }catch (SQLException e) {
+            e.printStackTrace();
             throw new SQLException("No zi non posso salvare i tuoi dati, c'è qualche prob");
         }
         ConnectionDB.closeConnection(connection);
@@ -171,4 +179,27 @@ public class EventDao implements IEventDao{
         throw new IllegalStateException( "Should not reach this point in method `transformImageIntoInputStream`." );
     }
 
+    public int selectEventNumber() throws SQLException{
+        connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
+        PreparedStatement statement1;
+        ResultSet resultSet1;
+
+        int eventNumber = 0;
+
+        try {
+            String query1 = "SELECT COUNT(*) FROM EVENT_";
+            statement1 = connection.prepareStatement(query1);
+
+            resultSet1 = statement1.executeQuery();
+
+            if(resultSet1.next()){
+                eventNumber = resultSet1.getInt(1);
+            }
+            
+        } catch (SQLException e) {
+            throw new RuntimeException("Utente non trovato o non registrato");
+        }
+        ConnectionDB.closeConnection(connection);
+        return eventNumber;
+    }
 }

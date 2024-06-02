@@ -34,11 +34,10 @@ public class SignUpController {
     private ProfileDao profileDao;
 
 
-    public SignUpController(Stage mainstage, SignUpView signUpView, CustomerView customerview, LoginView loginView) {
+    public SignUpController(Stage mainstage, SignUpView signUpView, LoginView loginView) {
 
         this.signUpView = signUpView;
         this.mainstage = mainstage;
-        this.customerview = customerview;
         this.loginView = loginView;
         this.profileDao=new ProfileDao();
         // this.subscriptionSelectionView= subscriptionSelectionView;
@@ -67,10 +66,19 @@ public class SignUpController {
 
         // Action sul signupbutton
         EventHandler<ActionEvent> goToSelection = new EventHandler<ActionEvent>() {
+
+
             @Override
             public void handle(ActionEvent actionEvent) {
-                if(signUpView.checkFieldsEmpty() == true || signUpView.checkEqualEmailAndPassword()== false){
+                //aggiungo queste stampe solo per controllare cosa ritornano i valori di controllo(claudio)
+                System.out.println("checkEqualEmailAndPassword: " + signUpView.checkEqualEmailAndPassword());
+                System.out.println("checkFieldsEmpty: " + signUpView.checkFieldsEmpty());
+
+
+                if(signUpView.checkEqualEmailAndPassword()== false ||signUpView.checkFieldsEmpty() == true) {
                     signUpView.setErrorLabel();
+
+
                 }else if (signUpView.getCustomerRadioButton().isSelected()) {
 
 
@@ -116,8 +124,8 @@ public class SignUpController {
 
                     ArrayList<Event> arraylistevent = new ArrayList<>();
 
-                    Manager manager = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), null, arraylistevent,1,1,LocalDate.now(),0);
-                    //credit card, data sub max numberofevents, da prendere nella mastercardview, datasub
+                    Manager manager = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), null, arraylistevent,5,1,LocalDate.now(),0);
+                    //credit card, data sub max numberofevents, da prendere nella mastercardview, subcription impostato a 1 solo per creare gli eventi di prova, però deve essere cambiato dal subupdate
 
                     try {
                         profileDao.insertManager(manager);

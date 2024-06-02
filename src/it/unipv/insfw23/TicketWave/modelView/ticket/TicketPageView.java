@@ -73,6 +73,7 @@ public class TicketPageView extends Scene implements IResettableScene {
     private BorderPane layout;
     private boolean isCustomerViewer;
     private Button backButton = new Button();
+    private ImageView eventPosterImage = new ImageView();
 
 
 
@@ -87,8 +88,9 @@ public class TicketPageView extends Scene implements IResettableScene {
     //evento che setta le label dipendenti dall'evento prima di inizializzare la view
     //senno inizializza la view con i campi vuoti e aggiorna il valore di una label senza reinizializzare
     public void setComponents(boolean isCustomerViewer, Type typeofevent, String name, String città, String location, Province prov, LocalDate data, String  artist,
-                              int[] seatsRemainedNumberForType, double[] price) {
+                              int[] seatsRemainedNumberForType, double[] price, Image image) {
 
+        eventPosterImage.setImage(image);
         //settaggio dei campi dei valori per un singolo evento
         System.out.println(artist);
         System.out.println(artist.toString());
@@ -141,6 +143,9 @@ public class TicketPageView extends Scene implements IResettableScene {
         }
         else {
             buyButton.setVisible(false);
+            basePricebutton.setVisible(false);
+            premiumPricebutton.setVisible(false);
+            vipPricebutton.setVisible(false);
             UpperBar.getIstance().setForManager();
         }
 
@@ -219,11 +224,8 @@ public class TicketPageView extends Scene implements IResettableScene {
 
         //LA LOCANDINA DELL'EVENTO DEVE ESSERE IMPOSTATA DAL DAO METTO UNA PROVVISORIA
 
-        Image EventPoster=new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/eventexeple.png");
-        ImageView EventPosterImage= new ImageView();
-        EventPosterImage.setImage(EventPoster);
-        EventPosterImage.setFitHeight(70);
-        EventPosterImage.setFitWidth(70);
+        eventPosterImage.setFitHeight(200);
+        eventPosterImage.setFitWidth(200);
 
 
 
@@ -315,8 +317,8 @@ public class TicketPageView extends Scene implements IResettableScene {
 
         root.setCenter(internalStructure);
         root.setStyle("-fx-background-color: #91BAD6;");
-        BorderPane.setMargin(EventPosterImage, new Insets(30, 50, 0, 0));
-        root.setRight(EventPosterImage);
+        BorderPane.setMargin(eventPosterImage, new Insets(30, 50, 0, 0));
+        root.setRight(eventPosterImage);
         root.setBottom(buttonBox);
 
 

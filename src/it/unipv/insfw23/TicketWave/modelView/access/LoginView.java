@@ -44,6 +44,7 @@ public class LoginView extends Application {
     private TextField mail;
     private PasswordField password;
     private Label errorLabel;
+    private  ToggleGroup accountTypeToggleGroup;
 
 
 
@@ -99,7 +100,7 @@ public class LoginView extends Application {
         GridPane.setConstraints(signupLabel, 0, 6);
 
 
-        ToggleGroup accountTypeToggleGroup = new ToggleGroup();
+        accountTypeToggleGroup = new ToggleGroup();
 
         customerRadioButton = new RadioButton("Cliente");
 
@@ -117,6 +118,16 @@ public class LoginView extends Application {
         errorLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
         errorLabel.setText("Campi non validi o vuoti");
         errorLabel.setVisible(false);
+
+        accountTypeToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
+            if (newValue == customerRadioButton) {
+                errorLabel.setVisible(false);
+
+            } else if (newValue == managerRadioButton) {
+                errorLabel.setVisible(false);
+
+            }
+        });
 
         GridPane.setConstraints(managerRadioButton, 1, 0);
         GridPane.setConstraints(loginButton, 1, 5);
@@ -168,12 +179,11 @@ public class LoginView extends Application {
 
       Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/logo.png");
 
-
         LoginController loginController = new LoginController(primaryStage, this);
 
 
         primaryStage.getIcons().add(icon);
-        primaryStage.setWidth(1080);
+        primaryStage.setWidth(1120);
         primaryStage.setHeight(600);
         primaryStage.setMinHeight(600);
         primaryStage.setMinWidth(800);
@@ -228,6 +238,11 @@ public class LoginView extends Application {
             return true;
         }else {return false;}
     }
+
+    public Label getErrorLabel() {
+        return errorLabel;
+    }
+
     public void setErrorLabel(){
 
         System.out.println("mail/password diverse o campi vuoti");

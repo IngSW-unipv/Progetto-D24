@@ -42,7 +42,7 @@ public class TicketPageController {
 //	ticketPage = new TicketPageView();
         //assegnazione dei campi dell'evento ai campi della ticketpageview
         ticketPage.setComponents(user.isCustomer(), event.getType(), event.getName(), event.getCity(), event.getLocation(), event.getProvince(), event.getDate(),
-                event.getArtists(), event.getSeatsRemainedNumberForType(), event.getPrices());
+                event.getArtists(), event.getSeatsRemainedNumberForType(), event.getPrices(), event.getPhoto());
         //fine assegnazione
         //
         //cambio scena

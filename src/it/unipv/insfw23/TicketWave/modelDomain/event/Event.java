@@ -46,7 +46,7 @@ public abstract class Event {
         setSeatsRemainedNumberForType(seatsRemainedNumberForType);
         setTicketsSoldNumberForType(ticketsSoldNumberForType);
         setPrice(price);
-        crossCheck(price, ticketsSoldNumberForType, seatsRemainedNumberForType, typeOfSeats);
+        // crossCheck(price, ticketsSoldNumberForType, seatsRemainedNumberForType, typeOfSeats);
         this.creator = creator;
         this.artists = artists;
         this.description = description;
@@ -232,12 +232,12 @@ public abstract class Event {
         }
     }
 
-    public void crossCheck(double[] price, int[] ticketsSoldNumberForType, int[] seatsRemainedNumberForType, int typeOfSeats){ // serve per controllare che il numero di campi inseriti negli array coincida
+ /*   public void crossCheck(double[] price, int[] ticketsSoldNumberForType, int[] seatsRemainedNumberForType, int typeOfSeats){ // serve per controllare che il numero di campi inseriti negli array coincida
         if((price.length != ticketsSoldNumberForType.length) || (ticketsSoldNumberForType.length != seatsRemainedNumberForType.length) || (price.length != seatsRemainedNumberForType.length)
                 || (price.length != typeOfSeats) || (ticketsSoldNumberForType.length != typeOfSeats) || (seatsRemainedNumberForType.length != typeOfSeats)){
             throw new IllegalArgumentException("Si è provato a creare un evento in cui il numero di campi dei prezzi e dei posti è diverso, riprovare la creazione");
         }
-    }
+    } */  // QUESTO METODO VOLA, PERCHE' DA DB PRENDO SEMPRE TUTTI GLI ARRAY DI GRANDEZZA 3, SE NON HO UN TIPO DI BIGLIETTO ESSO E' PARI A 0
 
     public void setCreator(Manager creator) {
         this.creator = creator;
