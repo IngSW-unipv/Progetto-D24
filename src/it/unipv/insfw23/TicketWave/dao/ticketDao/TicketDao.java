@@ -4,6 +4,7 @@ import it.unipv.insfw23.TicketWave.dao.ConnectionDB;
 import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
+import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 
 import java.sql.Connection;
@@ -35,7 +36,7 @@ public class TicketDao implements ITicketDao {
                 preparedStatement.setInt(3,ticket.getIdEvent());
                 preparedStatement.setString(4,ticket.getEventName());
                 preparedStatement.setDouble(5,ticket.getPrice());
-                preparedStatement.setInt(6, ticket.getType().ordinal());  // va bene??
+                preparedStatement.setString(6, ticket.getType().toString());  // va bene?? da fare Stringa,cambiare db
 
                 preparedStatement.executeUpdate();
 
