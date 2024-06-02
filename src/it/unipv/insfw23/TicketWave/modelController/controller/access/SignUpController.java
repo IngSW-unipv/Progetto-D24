@@ -34,11 +34,10 @@ public class SignUpController {
     private ProfileDao profileDao;
 
 
-    public SignUpController(Stage mainstage, SignUpView signUpView, CustomerView customerview, LoginView loginView) {
+    public SignUpController(Stage mainstage, SignUpView signUpView, LoginView loginView) {
 
         this.signUpView = signUpView;
         this.mainstage = mainstage;
-        this.customerview = customerview;
         this.loginView = loginView;
         this.profileDao=new ProfileDao();
         // this.subscriptionSelectionView= subscriptionSelectionView;
@@ -69,8 +68,9 @@ public class SignUpController {
         EventHandler<ActionEvent> goToSelection = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                if(signUpView.checkFieldsEmpty() == true || signUpView.checkEqualEmailAndPassword()== false){
+                if(signUpView.checkEqualEmailAndPassword()== false ||signUpView.checkFieldsEmpty() == true) {
                     signUpView.setErrorLabel();
+
                 }else if (signUpView.getCustomerRadioButton().isSelected()) {
 
 
