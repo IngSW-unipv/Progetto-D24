@@ -33,8 +33,8 @@ public class EventDao implements IEventDao{
                 //query d'inserimento
                 String query = "INSERT INTO EVENT_ (ID_EVENT, NAME_, CITY, LOCATION, DATE_, TIME_, PROVINCE, GENRE, TYPE_, MAX_NUM_SEATS," +
                         "NUM_SEATS_TYPE, SOLD_BASE_SEATS, SOLD_PREMIUM_SEATS, SOLD_VIP_SEATS, REMAINING_BASE_SEATS, REMAINING_PREMIUM_SEATS, " +
-                        "REMAINING_VIP_SEATS, BASE_PRICE, PREMIUM_PRICE, VIP_PRICE, ID_MANAGER, ARTISTS, AUTHOR, DESCRIPTION_) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?," +
-                        "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                        "REMAINING_VIP_SEATS, BASE_PRICE, PREMIUM_PRICE, VIP_PRICE, ID_MANAGER, ARTISTS, AUTHOR, DESCRIPTION_,PHOTO) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?," +
+                        "?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
                 Date eventDate = Date.valueOf(event.getDate());
                 Time eventTime = Time.valueOf(event.getTime());
@@ -128,7 +128,7 @@ public class EventDao implements IEventDao{
                 System.out.println(author);
                 preparedStatement.setString(24, event.getDescription());
                 System.out.println(event.getDescription());
-                //preparedStatement.setBlob(25, photoDB);
+                preparedStatement.setBlob(25, photoDB);
 
 
                 System.out.println("prova pre-esecuzione");

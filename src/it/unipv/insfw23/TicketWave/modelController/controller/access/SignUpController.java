@@ -116,8 +116,8 @@ public class SignUpController {
 
                     ArrayList<Event> arraylistevent = new ArrayList<>();
 
-                    Manager manager = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), null, arraylistevent,1,1,LocalDate.now(),0);
-                    //credit card, data sub max numberofevents, da prendere nella mastercardview, datasub
+                    Manager manager = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), null, arraylistevent,5,1,LocalDate.now(),0);
+                    //credit card, data sub max numberofevents, da prendere nella mastercardview, subcription impostato a 1 solo per creare gli eventi di prova, però deve essere cambiato dal subupdate
 
                     try {
                         profileDao.insertManager(manager);
