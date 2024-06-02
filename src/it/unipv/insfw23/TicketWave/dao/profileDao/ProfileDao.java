@@ -226,6 +226,7 @@ public class ProfileDao implements IProfileDao {
                     manager.setEvent(createdEvents);
 
                 } catch (SQLException e) {
+                    e.printStackTrace();
                     throw new RuntimeException("Problema nel caricamento degli eventi");
                 }
             }
