@@ -64,7 +64,7 @@ public class ResearchDAO implements IResearchDAO{
                                 query.append(",");
                             }
                         }
-                        query.append(" ) ");
+                        query.append(" )");
                     }
                     if (!gen.isEmpty()){ // se è uguale a 0 => non ho messo filtri, non metto la parte di query "GENRE IN()"
                         query.append("AND EVENT_.GENRE IN ( ");
@@ -74,9 +74,12 @@ public class ResearchDAO implements IResearchDAO{
                                 query.append(",");
                             }
                         }
-                        query.append(" )");
-                    } // la query dinamica mi permette di prendere tutte le province e i generi clickati nella view
-                System.out.println(query.toString());
+                        query.append(" );");
+                    } else {
+                        query.append(";");
+                    }
+                    // la query dinamica mi permette di prendere tutte le province e i generi clickati nella view
+                System.out.println(query);
                 System.out.println(gen.size()); // QUESTI 3 SONO CHECK DA RIMUOVERE *****************************
                 System.out.println(pr.size());
                     statement1 = conn.prepareStatement(query.toString()); // la query che è di tipo StringBuilder la faccio diventare di tipo String
@@ -94,15 +97,11 @@ public class ResearchDAO implements IResearchDAO{
                             k++;
                         }
                     }
-                System.out.println( statement1  ); // DA RIMUOVERE *****************************************
+                System.out.println( statement1  ); // DA RIMUOVERE E' per fare un check ***************************************** // ****** FIN QUI TUTTO BENE ********* //
+                resultset1 = statement1.executeQuery(); // NON VA QUI
+                System.out.println(resultset1);
             } catch (SQLException e){
-                throw new RuntimeException("La query non è stata costruita correttamente (ResearchDAO riga 89)"); // ****** FIN QUI TUTTO BENE ********* //
-            }
-
-            try{ // provo a vedere se la query viene eseguita correttamente
-                resultset1 = statement1.executeQuery();
-            } catch (SQLException e) {
-                throw new RuntimeException("La query non è stata eseguita correttamente (ResearchDAO riga 95)");
+                throw new RuntimeException("La query non è stata eseguita correttamente (ResearchDAO riga 101)");
             }
 
             ArrayList <Manager> mgPrec = new ArrayList<>(); // Tengo un arraylist di manager, in modo da non creare uno stesso manager più volte (sarebbe sbagliato)
@@ -235,6 +234,7 @@ public class ResearchDAO implements IResearchDAO{
     }
 
     private String[] splitStringOnCommaOrSpace(String generic){ // se va tutto lo devo rimuovere, serviva solo se passavo delle stringhe al getFilteredEvent
+        generic = generic.toUpperCase(); // faccio diventare tutto in maiscolo, perché nel DB ho tutto in maiuscolo
         String[] arrayString = generic.split("[,\\s]+"); // regex che splitta una stringa sulle virgone, sugli spazi, sui tab e sugli a capo.
         for (int i = 0; i < arrayString.length; i++){ // CHECK, VA TOLTO **********************************
             System.out.println(arrayString[i]);
