@@ -61,7 +61,7 @@ public class LoginController {
                 ProfileDao profileDao = new ProfileDao();
 
                  if (loginView.getCustomerRadioButton().isSelected() && loginView.checkEmptyFields()==false) {
-
+                     System.out.println("Hai cliccato il pulsante login come cliente");
                     Customer loggedCustomer;
                     /*creazione customer ed evento per poi creare vari biglietti e fare delle verifiche
                      *
