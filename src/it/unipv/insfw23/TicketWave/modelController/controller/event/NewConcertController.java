@@ -103,11 +103,11 @@ public class NewConcertController {
 				try {
 					
 					
-					Concert createdconcert = loggedmanager.createConcert(id, view.getNamefield(), view.getCityfield(), view.getAddressfield(), view.getDatepicked(), view.getTimeSelected(), view.getProvince(), 
+					Concert createdConcert = loggedmanager.createConcert(id, view.getNamefield(), view.getCityfield(), view.getAddressfield(), view.getDatepicked(), view.getTimeSelected(), view.getProvince(),
 												view.getGenre(), maxNumOfSeats, view.getTypesticket(), seatsRemainedNumberForType, ticketSoldNumberForType, prices, loggedmanager, view.getArtistfield(), view.getDescription(), photo);
 					
-					EventDao daoevent = new EventDao();
-					daoevent.insertEvent((Event)createdconcert);
+					EventDao eventDao = new EventDao();
+					eventDao.insertEvent(createdConcert);
 				
 				}catch (NumberFormatException e){
 					view.getErrLabel().setVisible(true);
