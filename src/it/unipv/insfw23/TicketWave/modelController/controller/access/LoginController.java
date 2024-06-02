@@ -40,6 +40,7 @@ public class LoginController {
     public void initComponents() {
 
 
+
         EventHandler<ActionEvent> goToSignUpView = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -174,7 +175,7 @@ public class LoginController {
 
                 }// devi mettere managerview anche all'interno del costruttore
 
-
+                loginView.setErrorLabel();
 
                 // Imposta l'handler sull'azione del pulsante "Registrati"
             }

@@ -19,24 +19,24 @@ import java.util.ArrayList;
 
 public class SignUpView extends Scene implements IResettableScene {
 
-    private static Label nameLabel = new Label("Nome");
-    private static Label surnameLabel = new Label("Cognome");
-    private static Label emailLabel = new Label("Email");
-    private static Label confirmEmailLabel = new Label("Conferma Email");
-    private static Label passwordLabel = new Label("Password:");
-    private static Label confirmPasswordLabel = new Label("Conferma password:");
-    private static Label dateLabel = new Label("Data di nascita");
-    private static TextField surnameField = new TextField();
-    private static TextField confirmEmailField = new TextField();
-    private static PasswordField passwordField = new PasswordField();
-    private static PasswordField confirmPasswordField = new PasswordField();
-    private static DatePicker datePicker = new DatePicker();
-    private static Label provinceLabel = new Label("Comune di residenza");
-    private static TextField nameField = new TextField();
-    private static TextField emailField = new TextField();
-    private static ComboBox<Province> residenceComboBox = new ComboBox<>();
+    private Label nameLabel = new Label("Nome");
+    private  Label surnameLabel = new Label("Cognome");
+    private  Label emailLabel = new Label("Email");
+    private  Label confirmEmailLabel = new Label("Conferma Email");
+    private  Label passwordLabel = new Label("Password:");
+    private  Label confirmPasswordLabel = new Label("Conferma password:");
+    private  Label dateLabel = new Label("Data di nascita");
+    private  TextField surnameField = new TextField();
+    private  TextField confirmEmailField = new TextField();
+    private  PasswordField passwordField = new PasswordField();
+    private  PasswordField confirmPasswordField = new PasswordField();
+    private  DatePicker datePicker = new DatePicker();
+    private  Label provinceLabel = new Label("Comune di residenza");
+    private  TextField nameField = new TextField();
+    private  TextField emailField = new TextField();
+    private  ComboBox<Province> residenceComboBox = new ComboBox<>();
     private Label genreLbel;
-    private static final int MAX_SELECTIONS = 5;  // Numero massimo di selezioni consentite
+    private  final int MAX_SELECTIONS = 5;  // Numero massimo di selezioni consentite
     private int currentSelections = 0;            // Numero attuale di selezioni
 
     private BorderPane layout ;
@@ -263,31 +263,31 @@ public class SignUpView extends Scene implements IResettableScene {
         setRoot(layout);
     }
 
-    public static TextField getSurnameField() {
+    public  TextField getSurnameField() {
         return surnameField;
     }
 
-    public static TextField getConfirmEmailField() {
+    public  TextField getConfirmEmailField() {
         return confirmEmailField;
     }
 
-    public static PasswordField getPasswordField() {
+    public  PasswordField getPasswordField() {
         return passwordField;
     }
 
-    public static PasswordField getConfirmPasswordField() {
+    public  PasswordField getConfirmPasswordField() {
         return confirmPasswordField;
     }
 
-    public static DatePicker getDatePicker() {
+    public  DatePicker getDatePicker() {
         return datePicker; //restituisco la local date direttamente, per semplificarmi il codice nel controller
     }
 
-    public static TextField getNameField() {
+    public  TextField getNameField() {
         return nameField;
     }
 
-    public static TextField getEmailField() {
+    public  TextField getEmailField() {
         return emailField;
     }
     public Button getSignUpButton() {
@@ -306,7 +306,7 @@ public class SignUpView extends Scene implements IResettableScene {
         return customerRadioButton;
     }
 
-    public static Province getSelectedProvince() {
+    public  Province getSelectedProvince() {
         return residenceComboBox.getValue();
     }
 
@@ -350,7 +350,6 @@ public class SignUpView extends Scene implements IResettableScene {
             return  false;
         }
     }
-
 
 }
 
