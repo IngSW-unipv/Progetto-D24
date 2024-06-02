@@ -466,11 +466,19 @@ public class NewConcertView extends Scene{
 	}
 	
 	public int getNumpremiumfield() throws NumberFormatException{
-		return Integer.parseInt(numpremiumfield.getText());
+		try{
+			return Integer.parseInt(numpremiumfield.getText());
+		}catch (NumberFormatException e){
+			return 0;
+		}
 	}
 	
 	public int getNumvipfield() throws NumberFormatException{
-		return Integer.parseInt(numvipfield.getText());
+		try {
+			return Integer.parseInt(numvipfield.getText());
+		}catch (NumberFormatException e){
+			return 0;
+		}
 	}
 
 	public double getPricebasefield() throws NumberFormatException{
@@ -506,6 +514,6 @@ public class NewConcertView extends Scene{
 	}
 	
 	public String getDescription() {
-		return descriptionarea.toString();
+		return descriptionarea.getText();
 	}
 }
