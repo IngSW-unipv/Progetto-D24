@@ -114,7 +114,7 @@ public class SignUpView extends Scene implements IResettableScene {
         Genre[] gnValues = Genre.values(); // ho un array con tutti i valori associati ai nomi della ENUM
         ArrayList<String> gen = new ArrayList<>(); // stringa di generi
         for (Genre value : gnValues) { // popolo la mia lista di generi (stringa) partendo dalla ENUM
-            if (value != Genre.START_THEATER) { // se la stringa è diversa dal separatore dei generi la metto nella successiva CheckBox, per cui la metto nell'array di stringhe
+            if ( value != Genre.START_OTHER && value != Genre.START_THEATER ) { // se la stringa è diversa dal separatore dei generi la metto nella successiva CheckBox, per cui la metto nell'array di stringhe
                 gen.add(value.toString());
             }
         }
@@ -217,17 +217,11 @@ public class SignUpView extends Scene implements IResettableScene {
         // controllo sulle password
         errorLabel = new Label();
         errorLabel.setTextFill(javafx.scene.paint.Color.RED);
-        errorLabel.setFont(Font.font("Helvetica", FontWeight.NORMAL, 14));
+        errorLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
+        errorLabel.setText("Campi non validi o vuoti");
+        errorLabel.setVisible(false);
         GridPane.setColumnSpan(errorLabel, 2);
         GridPane.setConstraints(errorLabel, 3, 5);
-
-        signUpButton.setOnAction(event -> {
-            // Check se password e email corrispondono
-            if (!passwordField.getText().equals(confirmPasswordField.getText())||!emailField.getText().equals(confirmEmailField.getText()) ) {
-                errorLabel.setText("Email o password non corrispondono");
-            }
-        });
-
 
         grid.getChildren().addAll(
                 nameLabel, nameField, surnameLabel, surnameField, dateLabel, datePicker,
@@ -328,5 +322,27 @@ public class SignUpView extends Scene implements IResettableScene {
         }
         return selectedGenres.toArray(new Genre[0]);  // converto l'arraylist in un array di generi
     }
+    public boolean checkEqualEmailAndPassword(){
+        if (!passwordField.getText().equals(confirmPasswordField.getText()) && !emailField.getText().equals(confirmEmailField.getText())){
+            return false;
+        }else{
+            return true;
+        }
+    }
+    public void setErrorLabel(){
+
+        System.out.println("mail/password diverse o campi vuoti");
+        errorLabel.setVisible(true);
+    }
+    public boolean checkFieldsEmpty(){
+        if(getNameField().getText()== null || getSurnameField().getText()== null || getEmailField().getText()==null || getConfirmEmailField().getText()== null ||
+                getPasswordField().getText()== null || getConfirmPasswordField().getText()==null || getDatePicker().getValue() == null && getSelectedProvince()==null  ){
+            return true;
+        }else{
+            return  false;
+        }
+    }
+
+
 }
 

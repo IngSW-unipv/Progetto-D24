@@ -105,16 +105,16 @@ public class CustomerView extends Scene implements IResettableScene {
         ticketTab.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
 
 
-        TableColumn<Ticket, String> barcodeCol = new TableColumn<>("Brcode");
+        TableColumn<Ticket, String> barcodeCol = new TableColumn<>("Barcode");
         barcodeCol.setCellValueFactory(new PropertyValueFactory<>("barcode"));
 
-        TableColumn<Event, TicketType> typeCol = new TableColumn<>("Tipo");
+        TableColumn<Ticket, TicketType> typeCol = new TableColumn<>("Tipo");
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
 
-        TableColumn<Event, Double> priceCol = new TableColumn<>("Data Evento");
+        TableColumn<Ticket, Double> priceCol = new TableColumn<>("Data Evento");
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
-        TableColumn<Event, String> eventCol = new TableColumn<>("Evento");
+        TableColumn<Ticket, String> eventCol = new TableColumn<>("Evento");
         eventCol.setCellValueFactory(new PropertyValueFactory<>("name"));
 
         ticketTab.getColumns().addAll(eventCol,barcodeCol, priceCol,typeCol);
