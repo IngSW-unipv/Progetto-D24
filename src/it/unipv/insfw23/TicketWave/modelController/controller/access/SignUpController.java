@@ -53,7 +53,7 @@ public class SignUpController {
             public void handle(ActionEvent actionEvent) {
                 // Azione da eseguire quando il pulsante "Torna Indietro" viene premuto
                 System.out.println("Hai cliccato il pulsante Torna Indietro");
-                loginView= new LoginView();
+                //loginView= new LoginView();
                 LoginController loginController= new LoginController(mainstage,loginView );
                 loginView.reSetBars();
                 loginView.makeBlankPage();
