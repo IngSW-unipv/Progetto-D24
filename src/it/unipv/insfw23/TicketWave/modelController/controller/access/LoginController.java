@@ -40,6 +40,7 @@ public class LoginController {
     public void initComponents() {
 
 
+
         EventHandler<ActionEvent> goToSignUpView = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
