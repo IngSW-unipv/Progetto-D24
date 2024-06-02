@@ -29,8 +29,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.sql.SQLException;
-
 
 public class PaymentDataMController {
     private Stage mainStage;
@@ -97,9 +95,9 @@ public class PaymentDataMController {
 
 
                     }
-                    catch (SQLException e) {
-                        throw new RuntimeException("Errore nel dao dei ticket");
-                    }
+                        catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
 
 
 
