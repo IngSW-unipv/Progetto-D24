@@ -27,6 +27,7 @@ public class ResearchDAO implements IResearchDAO{
     public ArrayList<Event> getAllEvents() throws SQLException{
         conn = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(conn,schema);
         ArrayList<Event> result = new ArrayList<>();
+        ArrayList<Event> managerEvent = new ArrayList<>();
         Manager manager = null;
 
         if (ConnectionDB.isOpen(conn)) {
@@ -35,16 +36,26 @@ public class ResearchDAO implements IResearchDAO{
                 PreparedStatement statement1 = conn.prepareStatement(query);
                 ResultSet resultset1 = statement1.executeQuery(query);
 
-                if (resultset1.next()){ // creazione Manager
-                    manager = createManager(resultset1, result);
+                while(resultset1.next()) { // creazione Manager
+                        manager = createManager(resultset1);
 
-                    String query2 = "SELECT * FROM EVENT_"; // query per prendere tutti gli eventi
-                    PreparedStatement statement2 = conn.prepareStatement(query2);
-                    ResultSet resultset2 = statement2.executeQuery(query2);
+                        String query2 = "SELECT * FROM EVENT_ WHERE ID_MANAGER = ?"; // query per prendere tutti gli eventi // NON FUNZIONA DIO PORCO, MI DICE CHE USO IN MANIERA SBAGLIATA IL ?
+                        PreparedStatement statement2 = conn.prepareStatement(query2);
+                    System.out.println(manager.getEmail()); // CHECK DA FAR VOLARE
+                        statement2.setString(1, manager.getEmail());
+                        ResultSet resultset2 = statement2.executeQuery(query2);
 
-                    if (resultset2.next()){ // creazione Evento
-                        result.add(createEvent(resultset2, manager)); // aggiungo a result un nuovo evento grazie a createEvent
-                    }
+                        while(resultset2.next()) { // creazione Evento
+                                result.add(createEvent(resultset2, manager)); // aggiungo a result un nuovo evento grazie a createEvent
+                                managerEvent.add(createEvent(resultset2, manager)); // lista degli eventi di un manager
+                        }
+                        manager.setEvent(managerEvent); // setto gli eventi creati da quel manager
+                        managerEvent.clear(); // lo azzero per i prossimi manager che avranno creato eventi diversi
+                }
+                int i = 0; // check easy per vedere se ha creato gli eventi o no
+                for (Event e : result){
+                    System.out.println(result.get(i));
+                    i++;
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -114,12 +125,14 @@ public class ResearchDAO implements IResearchDAO{
                 throw new RuntimeException("La query non è stata eseguita correttamente (ResearchDAO riga 101)");
             }
 
+            // FINE QUERY, INIZIO CREAZIONE OGGETTI DEL DOMINIO
+
             ArrayList <Manager> mgPrec = new ArrayList<>(); // Tengo un arraylist di manager, in modo da non creare uno stesso manager più volte (sarebbe sbagliato)
             ArrayList <Event> evManager = new ArrayList<>(); // tengo un arraylist di eventi, in modo da settare correttamente sul manager tutti gli eventi che ha creato
             boolean flag = false;
 
             while(resultset1.next()) { // finché ci sono risultati prima creo il manager e poi un evento
-                manager = createManager(resultset1, null); // creo un manager con arrayList di eventi nulla
+                manager = createManager(resultset1); // creo un manager con arrayList di eventi nulla
                 if (!mgPrec.isEmpty()) { // se l'array di manager è vuoto, non ha senso fare il check sotto
                     for (Manager m : mgPrec) {
                         if (manager.equals(m)) { // se il manager appena creato è già presente nei manager precedenti => manager = m
@@ -191,11 +204,11 @@ public class ResearchDAO implements IResearchDAO{
         return words.length;
     }
 
-    private Manager createManager(ResultSet resultSet1, ArrayList<Event> result) throws SQLException {
+    private Manager createManager(ResultSet resultSet1) throws SQLException {
         try {
             LocalDate subDate = resultSet1.getDate("SUBSCRIPTION_DATE").toLocalDate();
             return new Manager(resultSet1.getString("NAME_"), resultSet1.getString("SURNAME"), resultSet1.getString("BIRTHDATE"),
-                    resultSet1.getString("MAIL"), null, Province.valueOf(resultSet1.getString("PROVINCE")), resultSet1.getString("CARDNUMBER"), result,
+                    resultSet1.getString("MAIL"), null, Province.valueOf(resultSet1.getString("PROVINCE")), resultSet1.getString("CARDNUMBER"),null,
                     resultSet1.getInt("MAXEVENTS"), resultSet1.getInt("SUBSCRIPTION"), subDate, resultSet1.getInt("COUNTER_CREATED_EVENTS"));
         } catch (SQLException e) {
             throw new RuntimeException("Manager non creato correttamente (ResearchDAO createManager)");
