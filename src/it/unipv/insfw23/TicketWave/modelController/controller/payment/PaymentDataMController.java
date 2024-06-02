@@ -29,6 +29,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
+
 
 public class PaymentDataMController {
     private Stage mainStage;
@@ -85,13 +87,24 @@ public class PaymentDataMController {
                     try {
                         Customer customer = (Customer) user;
                         TicketDao ticketDao = new TicketDao();
+                        System.out.println("ticketdao creato");
 
                         MastercardPayment mastercard = new MastercardPayment();
                         iPaymentAdapter = PaymentFactory.getMastercardAdapter(mastercard);
+                        System.out.println("creati i mastercard payment e interfaccia");
 
 
                         Ticket ticket = customer.buyticket(iPaymentAdapter, ConnectedUser.getInstance().getEventForTicket(), ConnectedUser.getInstance().getTicketType(), getUsePoint());
-                        ticketDao.insertTicket(ticket, customer);
+                        System.out.println("Ticket associato correttamente");
+
+                        try {
+                            ticketDao.insertTicket(ticket, customer);
+
+                            System.out.println("insert ticket eseguito");
+                        } catch (SQLException e) {
+                            throw new SQLException("No zi non posso salvare i tuoi dati, c'è qualche prob", e);
+                        }
+
 
 
                     }
@@ -179,7 +192,7 @@ public class PaymentDataMController {
     }
 
     public int getUsePoint(){
-        int usePoint=1;
+        int usePoint;
         if(paymentDataPage.getUsePointsButton().isSelected()){
              usePoint=1;
         }
