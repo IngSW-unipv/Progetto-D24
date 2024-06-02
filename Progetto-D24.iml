@@ -19,5 +19,6 @@
     </orderEntry>
     <orderEntry type="library" name="mysql-connector-j-8.4.0" level="project" />
     <orderEntry type="library" name="lib" level="application" />
+    <orderEntry type="library" name="BCryp" level="project" />
   </component>
 </module>

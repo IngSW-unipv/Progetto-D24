@@ -49,6 +49,7 @@ public class LoginController {
                 System.out.println("Hai cliccato il pulsante Registrati");
                 SignUpView signUpView = new SignUpView();
                 SignUpController signUpController = new SignUpController(mainstage, signUpView, loginView);
+                signUpView.makeBlankPage();
                 signUpView.reSetBars();
                 mainstage.setScene(signUpView); // Imposta la scena SignUpView sulla stage principale
             }
@@ -175,7 +176,7 @@ public class LoginController {
 
                 }// devi mettere managerview anche all'interno del costruttore
 
-
+                loginView.setErrorLabel();
 
                 // Imposta l'handler sull'azione del pulsante "Registrati"
             }

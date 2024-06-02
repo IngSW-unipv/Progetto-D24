@@ -350,6 +350,16 @@ public class SignUpView extends Scene implements IResettableScene {
             return  false;
         }
     }
+    public void makeBlankPage(){
+        nameField.setText(null);
+        surnameField.setText(null);
+        emailField.setText(null);
+        confirmEmailField.setText(null);
+        passwordField.setText(null);
+        confirmPasswordField.setText(null);
+        datePicker.setValue(null);
+        residenceComboBox.setValue(null);
+    }
 
 
 }
