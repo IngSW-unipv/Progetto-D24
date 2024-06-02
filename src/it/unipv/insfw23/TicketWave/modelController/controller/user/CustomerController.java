@@ -37,7 +37,7 @@ public class CustomerController {
                 System.out.println("logout");
 				//loginView = new LoginView();
 				signUpView = new SignUpView();
-				LoginController logcon = new LoginController(mainstage,signUpView,customerView,loginView,managerView);
+				LoginController logcon = new LoginController(mainstage, loginView);
                 loginView.reSetBars();
                 //
                 ConnectedUser.getInstance().unlogUser();
