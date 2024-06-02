@@ -42,6 +42,7 @@ public class EventDao implements IEventDao{
                 InputStream photoDB = transformImageIntoInputStream(event.getPhoto());
                 String author = null;
 
+
                 //setto i campi
                 PreparedStatement preparedStatement=connection.prepareStatement(query);
                 preparedStatement.setInt(1, event.getIdEvent());
