@@ -111,7 +111,7 @@ public class CustomerView extends Scene implements IResettableScene {
         TableColumn<Ticket, TicketType> typeCol = new TableColumn<>("Tipo");
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
 
-        TableColumn<Ticket, Double> priceCol = new TableColumn<>("Data Evento");
+        TableColumn<Ticket, Double> priceCol = new TableColumn<>("Prezzo");
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         TableColumn<Ticket, String> eventCol = new TableColumn<>("Evento");

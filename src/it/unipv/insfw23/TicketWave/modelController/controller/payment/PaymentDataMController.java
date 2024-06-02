@@ -2,7 +2,6 @@ package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
 //import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 //import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
-import it.unipv.insfw23.TicketWave.modelController.controller.access.LoginController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
@@ -11,7 +10,6 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
-import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;

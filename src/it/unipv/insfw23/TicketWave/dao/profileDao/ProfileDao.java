@@ -316,6 +316,14 @@ public class ProfileDao implements IProfileDao {
         return customer;
     }
 
+    /*
+    public void customerPointsUpdate(){
+
+
+
+    }
+*/
+    
     private Genre[] splitStringToArrayGenre(String s) {
         String[] arrayString = s.split(",");
         Genre[] genreArray = new Genre[5];
