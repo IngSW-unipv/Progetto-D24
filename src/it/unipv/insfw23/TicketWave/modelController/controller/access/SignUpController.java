@@ -4,14 +4,10 @@ import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
-import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
-import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
@@ -59,8 +55,9 @@ public class SignUpController {
                 // Azione da eseguire quando il pulsante "Torna Indietro" viene premuto
                 System.out.println("Hai cliccato il pulsante Torna Indietro");
                 //loginView= new LoginView();
-                LoginController loginController= new LoginController(mainstage,signUpView,customerview,loginView,managerView);
+                LoginController loginController= new LoginController(mainstage,loginView );
                 loginView.reSetBars();
+                loginView.makeBlankPage();
                 mainstage.setScene(loginView.getScene()); // Imposta la scena LoginView sullo Stage principal
 
             }
@@ -72,12 +69,13 @@ public class SignUpController {
         EventHandler<ActionEvent> goToSelection = new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-
-                if (signUpView.getCustomerRadioButton().isSelected()) {
+                if(signUpView.checkFieldsEmpty() == true || signUpView.checkEqualEmailAndPassword()== false){
+                    signUpView.setErrorLabel();
+                }else if (signUpView.getCustomerRadioButton().isSelected()) {
 
 
                     System.out.println("Hai cliccato il pulsante registrati  come cliente");
-                    customerview = new CustomerView();
+                    CustomerView customerview = new CustomerView();
                     CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
                     customerview.reSetBars();
 

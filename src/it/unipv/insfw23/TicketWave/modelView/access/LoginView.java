@@ -43,6 +43,7 @@ public class LoginView extends Application {
 
     private TextField mail;
     private PasswordField password;
+    private Label errorLabel;
 
 
 
@@ -110,11 +111,17 @@ public class LoginView extends Application {
         managerRadioButton = new RadioButton("Gestore");
         managerRadioButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
         managerRadioButton.setToggleGroup(accountTypeToggleGroup);
+
+        errorLabel = new Label();
+        errorLabel.setTextFill(javafx.scene.paint.Color.RED);
+        errorLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
+        errorLabel.setText("Campi non validi o vuoti");
+        errorLabel.setVisible(false);
+
         GridPane.setConstraints(managerRadioButton, 1, 0);
-
-
         GridPane.setConstraints(loginButton, 1, 5);
         GridPane.setConstraints(regButton, 1, 6);
+        GridPane.setConstraints(errorLabel, 2, 6);
 
        /* loginButton.setOnAction(e -> {
 
@@ -149,7 +156,7 @@ public class LoginView extends Application {
 
 
 
-        grid.getChildren().addAll(emailnameLabel, emailField, passwordLabel, passwordField, customerRadioButton, managerRadioButton, loginButton,signupLabel,regButton);
+        grid.getChildren().addAll(emailnameLabel, emailField, passwordLabel, passwordField, customerRadioButton, managerRadioButton, loginButton,signupLabel,regButton,errorLabel);
 
 
 
@@ -162,11 +169,10 @@ public class LoginView extends Application {
       Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/logo.png");
 
 
-        LoginController loginController = new LoginController(primaryStage, signUpView, customerView, this,managerView);
+        LoginController loginController = new LoginController(primaryStage, this);
 
-        //SignUpController signUpController= new SignUpController(primaryStage,signUpView,customerView,this);
 
-       primaryStage.getIcons().add(icon);
+        primaryStage.getIcons().add(icon);
         primaryStage.setWidth(1080);
         primaryStage.setHeight(600);
         primaryStage.setMinHeight(600);
@@ -215,6 +221,17 @@ public class LoginView extends Application {
     public void makeBlankPage(){
         mail.setText(null);
         password.setText(null);
+        errorLabel.setVisible(false);
+    }
+    public boolean checkEmptyFields(){
+        if(mail.getText()== null || password.getText()==null){
+            return true;
+        }else {return false;}
+    }
+    public void setErrorLabel(){
+
+        System.out.println("mail/password diverse o campi vuoti");
+        errorLabel.setVisible(true);
     }
     public static void main(String[] args) {
         launch(args);

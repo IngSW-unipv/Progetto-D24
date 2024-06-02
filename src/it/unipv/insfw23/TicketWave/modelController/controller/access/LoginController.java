@@ -1,21 +1,12 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.access;
 
 import java.sql.SQLException;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
-import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
-import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
-import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
@@ -25,26 +16,23 @@ import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
 import javafx.event.*;
-import javafx.scene.image.Image;
 import javafx.stage.Stage;
 public class LoginController {
 
     private Stage mainstage;
 
     // view da considerare
-    private SignUpView signUpView;
+    //private SignUpView signUpView;
     private CustomerView customerview;
-
+    private SignUpView signUpView;
     private LoginView loginView;
     private ManagerView managerView;
 
 
-    public LoginController(Stage mainstage, SignUpView signUpView, CustomerView customerview, LoginView loginView,ManagerView managerView) {
+    public LoginController(Stage mainstage ,LoginView loginView) {
         this.mainstage = mainstage;
-        this.signUpView = signUpView;
-        this.customerview = customerview;
         this.loginView = loginView;
-        this.managerView=managerView;
+
 
         initComponents();
     }
@@ -58,8 +46,9 @@ public class LoginController {
 
                 // Azione da eseguire quando il pulsante "Registrati" viene premuto
                 System.out.println("Hai cliccato il pulsante Registrati");
-                signUpView = new SignUpView();
-                SignUpController signUpController = new SignUpController(mainstage, signUpView, customerview, loginView);
+                SignUpView signUpView = new SignUpView();
+                CustomerView customerView= new CustomerView();
+                SignUpController signUpController = new SignUpController(mainstage, signUpView, customerView,loginView);
                 signUpView.reSetBars();
                 mainstage.setScene(signUpView); // Imposta la scena SignUpView sulla stage principale
             }
@@ -71,8 +60,10 @@ public class LoginController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 ProfileDao profileDao = new ProfileDao();
-
-                if (loginView.getCustomerRadioButton().isSelected()) {
+                if(loginView.checkEmptyFields()== true ){
+                    loginView.setErrorLabel();
+                }
+                else if (loginView.getCustomerRadioButton().isSelected()) {
 
                     Customer loggedCustomer;
                     /*creazione customer ed evento per poi creare vari biglietti e fare delle verifiche
@@ -96,7 +87,7 @@ public class LoginController {
 
                     if(loggedCustomer != null){
                         System.out.println("Hai cliccato il pulsante Login come cliente");
-                        customerview = new CustomerView();
+                         CustomerView customerview = new CustomerView();
 
                         CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
                         customerview.reSetBars();
@@ -168,7 +159,7 @@ public class LoginController {
                         System.out.println("Hai cliccato il pulsante Login come gestore");
                         ArrayList<Event> arrayListEvent = loggedManager.getEventlist();
                         ArrayList<Notification> arrayListNotification = loggedManager.getNotification();
-                        managerView = new ManagerView(loggedManager.getName(),arrayListNotification,arrayListEvent);
+                        ManagerView managerView = new ManagerView(loggedManager.getName(),arrayListNotification,arrayListEvent);
                         //managerView.setEventsforTableev(managerfinto);
                         //managerView.reSetBars();
 
