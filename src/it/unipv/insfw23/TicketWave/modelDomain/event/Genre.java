@@ -10,6 +10,7 @@ public enum Genre {
     RAP,
     TRAP,
     POP,
+    PUNK,
     START_THEATER,  // da qui in poi iniziano le opere teatrali
     BALLETTO,
     COMMEDIA,
