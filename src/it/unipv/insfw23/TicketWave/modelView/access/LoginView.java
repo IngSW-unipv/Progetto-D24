@@ -179,7 +179,6 @@ public class LoginView extends Application {
 
       Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/logo.png");
 
-
         LoginController loginController = new LoginController(primaryStage, this);
 
 
