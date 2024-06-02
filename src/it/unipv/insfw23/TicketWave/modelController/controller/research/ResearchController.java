@@ -47,7 +47,7 @@ public class ResearchController {
             public void handle(javafx.scene.input.MouseEvent mouseEvent) {
                 ResearchDAO rd = new ResearchDAO();
                 ArrayList<Event> ev = new ArrayList<>();
-                if (Objects.equals(rv.getSearchBar().getText(), "")){ // se non scrivo nulla nella barra di ricerca => ricerco tutti gli eventi e li stampo
+                if (Objects.equals(rv.getSearchBar().getText(), "") && pr.isEmpty() && gen.isEmpty()){ // se non scrivo nulla nella barra di ricerca => ricerco tutti gli eventi e li stampo
                     try { // CHIAMATA AL DAO
                         ev = rd.getAllEvents(); // devo passarla alla tabella
                         ObservableList<Event> evs = FXCollections.observableArrayList(ev);
