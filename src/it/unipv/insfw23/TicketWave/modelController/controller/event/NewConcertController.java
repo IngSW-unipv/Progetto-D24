@@ -70,38 +70,39 @@ public class NewConcertController {
 			public void handle(MouseEvent event){
 				view.getErrLabel().setVisible(false);
 				
-				System.out.println(view.getPricebasefield());
-				System.out.println(view.getTypesticket());
+				//System.out.println(view.getPricebasefield());
+				//System.out.println(view.getTypesticket());
 				
-				//calcolo dei param da passare al metodo per la creazione nel dominio
 				
-				//id preso come count ella table event sul db
-				int id = 12;//da cambiare col numero effettivo
-				int maxNumOfSeats = view.getNumbasefield()+view.getNumpremiumfield()+view.getNumvipfield();
-				
-				int[] seatsRemainedNumberForType = new int[view.getTypesticket()];
-				double[] prices = new double[view.getTypesticket()];
-				switch(view.getTypesticket()) {
-				case 3:
-					seatsRemainedNumberForType[2] = view.getNumvipfield();
-					prices[2] = view.getPricevipfield();
-				case 2:
-					seatsRemainedNumberForType[1] = view.getNumpremiumfield();
-					prices[1] = view.getPricepremiumfield();
-				case 1:
-					seatsRemainedNumberForType[0] = view.getNumbasefield();
-					prices[0] = view.getPricebasefield();
-				}
-				
-				// il vettore di biglietti venduti è a 0 dato che l'eveento sta venendo creato
-				int[] ticketSoldNumberForType = new int[view.getTypesticket()];
-				Arrays.fill(ticketSoldNumberForType, 0);
-				
-				//conversione da ImageView nella view a Image
-				Image photo = view.getPhotoView().getImage();
 				
 				try {
-
+					//calcolo dei param da passare al metodo per la creazione nel dominio
+				
+					//id preso come count ella table event sul db
+					int id = 12;//da cambiare col numero effettivo
+					int maxNumOfSeats = view.getNumbasefield()+view.getNumpremiumfield()+view.getNumvipfield();
+				
+					int[] seatsRemainedNumberForType = new int[view.getTypesticket()];
+					double[] prices = new double[view.getTypesticket()];
+					switch(view.getTypesticket()) {
+					case 3:
+						seatsRemainedNumberForType[2] = view.getNumvipfield();
+						prices[2] = view.getPricevipfield();
+					case 2:
+						seatsRemainedNumberForType[1] = view.getNumpremiumfield();
+						prices[1] = view.getPricepremiumfield();
+					case 1:
+						seatsRemainedNumberForType[0] = view.getNumbasefield();
+						prices[0] = view.getPricebasefield();
+					}
+				
+					// il vettore di biglietti venduti è a 0 dato che l'eveento sta venendo creato
+					int[] ticketSoldNumberForType = new int[view.getTypesticket()];
+					Arrays.fill(ticketSoldNumberForType, 0);
+				
+					//conversione da ImageView nella view a Image
+					Image photo = view.getPhotoView().getImage();
+					
 					Concert createdConcert = loggedmanager.createConcert(id, view.getNamefield(), view.getCityfield(), view.getAddressfield(), view.getDatepicked(), view.getTimeSelected(), view.getProvince(),
 												view.getGenre(), maxNumOfSeats, view.getTypesticket(), seatsRemainedNumberForType, ticketSoldNumberForType, prices, loggedmanager, view.getArtistfield(), view.getDescription(), photo);
 					
@@ -115,9 +116,9 @@ public class NewConcertController {
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-				home.updateEvsTable(loggedmanager.getEventlist());
-				home.reSetBars();
-				window.setScene(home);
+	//			home.updateEvsTable(loggedmanager.getEventlist());
+	//			home.reSetBars();
+	//			window.setScene(home);
 			}
 		};
 		

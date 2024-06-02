@@ -9,6 +9,7 @@ public class ConnectedUser {
     private User user;
     private IResettableScene home;
     private LoginView logView;
+    private int newSubLevel;
 
     private ConnectedUser(){
         this.user = null;
@@ -44,5 +45,15 @@ public class ConnectedUser {
     public void unlogUser(){
         this.user = null;
     }
+
+	public int getNewSubLevel() {
+		return newSubLevel;
+	}
+
+	public void setNewSubLevel(int newSubLevel) {
+		this.newSubLevel = newSubLevel;
+	}
+    
+    
 }
 

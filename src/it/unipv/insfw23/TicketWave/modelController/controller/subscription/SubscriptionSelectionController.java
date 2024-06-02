@@ -3,6 +3,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.subscription;
 import it.unipv.insfw23.TicketWave.modelController.controller.payment.PaymentSelectionController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
@@ -47,12 +48,15 @@ public class SubscriptionSelectionController {
                 double price = 0;
                 if (actionEvent.getSource() == subscriptionSelectionView.getBottonePrimaSub()) {
                     price = subscriptionSelectionView.getPricePrimaSub();
+                    ConnectedUser.getInstance().setNewSubLevel(0);
 
                 } else if (actionEvent.getSource() == subscriptionSelectionView.getBottoneSecondaSub()) {
                     price = subscriptionSelectionView.getPriceSecondaSub();
+                    ConnectedUser.getInstance().setNewSubLevel(1);
 
                 } else if (actionEvent.getSource() == subscriptionSelectionView.getBottoneTerzaSub()) {
                     price = subscriptionSelectionView.getPriceTerzaSub();
+                    ConnectedUser.getInstance().setNewSubLevel(2);
                 }
                 paymentPage = new PaymentSelectionView();
                 paymentPage.setPriceComponent(price);

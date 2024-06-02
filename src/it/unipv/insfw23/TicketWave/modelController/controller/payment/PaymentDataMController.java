@@ -1,10 +1,16 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
+import java.sql.SQLException;
+
+import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 //import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 //import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelController.controller.access.LoginController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
+import it.unipv.insfw23.TicketWave.modelController.factory.payment.PaymentFactory;
+import it.unipv.insfw23.TicketWave.modelController.factory.subscription.SubscriptionHandlerFactory;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.MastercardPayment;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
@@ -90,6 +96,20 @@ public class PaymentDataMController {
                     }
                 }
                 else {
+                	Manager managerlogged = (Manager)user;
+                	ProfileDao profiledao = new ProfileDao();
+                	SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMastercardAdapter(new MastercardPayment()), paymentSelectionPage.getPrice());
+                	if(managerlogged.getSubscription() != -1) {
+                		try {
+                			profiledao.updateManagerSub(managerlogged);
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+                	}
+                	else {
+                		System.out.println("pagamento non andato a buon fine");
+                	}
+                	
                     if(home!=null){
                         UpperBar.getIstance().setForManager();
                         home.reSetBars();

@@ -30,7 +30,7 @@ public class SubscriptionHandlerFactory {
             try {
                 //Obtaining path for subscriptionHandler
                 Properties p = new Properties(System.getProperties());
-                p.load(new FileInputStream("it/unipv/insfw23/TicketWave/properties")); // path proprietaria
+                p.load(new FileInputStream("src/it/unipv/insfw23/TicketWave/properties")); // path proprietaria
                 subscriptionHandlerClassName = p.getProperty(SUBSCRIPTIONHANDLER_PROPERTYNAME);
 
 
