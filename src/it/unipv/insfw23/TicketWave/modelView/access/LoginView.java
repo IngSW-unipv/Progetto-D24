@@ -179,12 +179,11 @@ public class LoginView extends Application {
 
       Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/logo.png");
 
-
         LoginController loginController = new LoginController(primaryStage, this);
 
 
         primaryStage.getIcons().add(icon);
-        primaryStage.setWidth(1080);
+        primaryStage.setWidth(1120);
         primaryStage.setHeight(600);
         primaryStage.setMinHeight(600);
         primaryStage.setMinWidth(800);
