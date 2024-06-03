@@ -2,6 +2,8 @@ package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
+import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
+import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
@@ -17,6 +19,8 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
+import java.util.ArrayList;
 
 public class PaymentDataPController {
 
@@ -67,7 +71,9 @@ public class PaymentDataPController {
                    else{
                        UpperBar.getIstance().setForCustomer();
                        Customer customerUser = (Customer) user;
-                       CustomerView customerView = new CustomerView();
+                       ArrayList<Ticket> arrayListTicket = customerUser.getTicketsList();
+                       ArrayList<Notification> arrayListNotification = customerUser.getNotification();
+                       CustomerView customerView = new CustomerView(customerUser.getName(),arrayListNotification,arrayListTicket,customerUser.getPoints() );
                        CustomerController customerController = new CustomerController(mainStage, customerView, ConnectedUser.getInstance().getLoginView());
                        mainStage.setScene(customerView);
                    }

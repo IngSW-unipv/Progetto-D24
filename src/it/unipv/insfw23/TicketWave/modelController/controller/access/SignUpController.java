@@ -4,10 +4,12 @@ import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
@@ -32,6 +34,7 @@ public class SignUpController {
     private LoginView loginView;
     private SubscriptionSelectionView subscriptionSelectionView;
     private ProfileDao profileDao;
+    private User user= ConnectedUser.getInstance().getUser();
 
 
     public SignUpController(Stage mainstage, SignUpView signUpView, LoginView loginView) {
@@ -81,9 +84,11 @@ public class SignUpController {
 
                 }else if (signUpView.getCustomerRadioButton().isSelected()) {
 
-
+                    Customer loggedCustomer =  (Customer) user;;
                     System.out.println("Hai cliccato il pulsante registrati  come cliente");
-                    CustomerView customerview = new CustomerView();
+                    ArrayList<Ticket> arrayListTicket = loggedCustomer.getTicketsList();
+                    ArrayList<Notification> arrayListNotification = loggedCustomer.getNotification();
+                    CustomerView customerview = new CustomerView(loggedCustomer.getName(),arrayListNotification,arrayListTicket,loggedCustomer.getPoints() );
                     CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
                     customerview.reSetBars();
 

@@ -5,6 +5,8 @@ import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchC
 
 import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageController;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
 import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
@@ -21,11 +23,13 @@ public class CustomerController {
     private CustomerView customerView;
     private SignUpView signUpView;
     private ManagerView managerView;
+    Customer loggedCustomer;
 
     public CustomerController(Stage mainstage, CustomerView customerView, LoginView loginView) {
         this.mainstage = mainstage;
         this.customerView = customerView;
         this.loginView = loginView;
+        this.loggedCustomer = (Customer) ConnectedUser.getInstance().getUser();
         initComponents();
     }
 
