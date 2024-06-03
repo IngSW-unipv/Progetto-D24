@@ -104,22 +104,25 @@ public class EventDao implements IEventDao {
                     case 2:
                         preparedStatement.setInt(12, event.getTicketsSoldNumberForType()[0]);
                         preparedStatement.setInt(13, event.getTicketsSoldNumberForType()[1]);
-                        //preparedStatement.setInt(14, null);
-
+                        preparedStatement.setNull(14, Types.INTEGER);
                         preparedStatement.setInt(15, event.getSeatsRemainedNumberForType()[0]);
                         preparedStatement.setInt(16, event.getSeatsRemainedNumberForType()[1]);
-
+                        preparedStatement.setNull(17, Types.INTEGER);
                         preparedStatement.setDouble(18, event.getPrices()[0]);
                         preparedStatement.setDouble(19, event.getPrices()[1]);
-
+                        preparedStatement.setNull(20, Types.INTEGER);
                         break;
 
                     case 1:
                         preparedStatement.setInt(12, event.getTicketsSoldNumberForType()[0]);
-
+                        preparedStatement.setNull(13, Types.INTEGER);
+                        preparedStatement.setNull(14, Types.INTEGER);
                         preparedStatement.setInt(15, event.getSeatsRemainedNumberForType()[0]);
-
+                        preparedStatement.setNull(16, Types.INTEGER);
+                        preparedStatement.setNull(17, Types.INTEGER);
                         preparedStatement.setDouble(18, event.getPrices()[0]);
+                        preparedStatement.setNull(19, Types.INTEGER);
+                        preparedStatement.setNull(20, Types.INTEGER);
 
                         break;
                 }
@@ -266,7 +269,7 @@ public class EventDao implements IEventDao {
                                 resultSet1.getString("CITY"), resultSet1.getString("LOCATION"),
                                 currentDate, resultSet1.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet1.getString("PROVINCE")),
                                 Genre.valueOf(resultSet1.getString("GENRE")), resultSet1.getInt("MAX_NUM_SEATS"), resultSet1.getInt("NUM_SEATS_TYPE"),
-                                seatsRemaining, seatsSold, price, manager, resultSet1.getString("ARTISTS"), resultSet1.getString("DESCRIPTION"), photo);
+                                seatsRemaining, seatsSold, price, manager, resultSet1.getString("ARTISTS"), resultSet1.getString("DESCRIPTION_"), photo);
                         selectedEvent = currentConcert;
                         break;
 
@@ -275,7 +278,7 @@ public class EventDao implements IEventDao {
                                 resultSet1.getString("CITY"), resultSet1.getString("LOCATION"),
                                 currentDate, resultSet1.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet1.getString("PROVINCE")),
                                 Genre.valueOf(resultSet1.getString("GENRE")), resultSet1.getInt("MAX_NUM_SEATS"), resultSet1.getInt("NUM_SEATS_TYPE"),
-                                seatsRemaining, seatsSold, price, manager, resultSet1.getString("ARTISTS"), resultSet1.getString("DESCRIPTION"), resultSet1.getString("AUTHOR"),
+                                seatsRemaining, seatsSold, price, manager, resultSet1.getString("ARTISTS"), resultSet1.getString("DESCRIPTION_"), resultSet1.getString("AUTHOR"),
                                 photo);
                         selectedEvent = currentTheatre;
                         break;
@@ -285,7 +288,7 @@ public class EventDao implements IEventDao {
                                 resultSet1.getString("CITY"), resultSet1.getString("LOCATION"),
                                 currentDate, resultSet1.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet1.getString("PROVINCE")),
                                 Genre.valueOf(resultSet1.getString("GENRE")), resultSet1.getInt("MAX_NUM_SEATS"), resultSet1.getInt("NUM_SEATS_TYPE"),
-                                seatsRemaining, seatsSold, price, manager, resultSet1.getString("ARTISTS"), resultSet1.getString("DESCRIPTION"),
+                                seatsRemaining, seatsSold, price, manager, resultSet1.getString("ARTISTS"), resultSet1.getString("DESCRIPTION_"),
                                 photo);
                         selectedEvent = currentOther;
                         break;

@@ -88,7 +88,7 @@ public class TicketPageView extends Scene implements IResettableScene {
     //evento che setta le label dipendenti dall'evento prima di inizializzare la view
     //senno inizializza la view con i campi vuoti e aggiorna il valore di una label senza reinizializzare
     public void setComponents(boolean isCustomerViewer, Type typeofevent, String name, String città, String location, Province prov, LocalDate data, String  artist,
-                              int[] seatsRemainedNumberForType, double[] price, Image image) {
+                              int[] seatsRemainedNumberForType, double[] price, String description, Image image) {
 
         eventPosterImage.setImage(image);
         //settaggio dei campi dei valori per un singolo evento
@@ -99,6 +99,7 @@ public class TicketPageView extends Scene implements IResettableScene {
 
         //settaggio valori da mostrare
         eventNameTextField.setText(name);
+        eventDescriptionTextField.setText(description);
         eventCityTextField.setText(città);
         eventLocationTextField.setText(location);
         eventProvinceTextField.setText(prov.toString());
@@ -107,8 +108,7 @@ public class TicketPageView extends Scene implements IResettableScene {
 
 
         //DA PRENDERE DAL DAO
-        eventDescriptionTextField = new Label("Il giorno "+data+" si terra un "+typeofevent.name()+" in "+location+" a "+città+" ,in provincia di "+prov+" tenuto da "
-                +artist.toString());
+
 
         switch(seatsRemainedNumberForType.length) {
             case 1:
@@ -389,7 +389,9 @@ public class TicketPageView extends Scene implements IResettableScene {
         return basePricebutton;
     }
 
-
+    public static void setEventDescriptionTextField(Label eventDescriptionTextField) {
+        TicketPageView.eventDescriptionTextField = eventDescriptionTextField;
+    }
 }
 
 

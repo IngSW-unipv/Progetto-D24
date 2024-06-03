@@ -4,7 +4,6 @@ import java.sql.SQLException;
 
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.dao.ticketDao.TicketDao;
-import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
 import it.unipv.insfw23.TicketWave.modelController.factory.payment.PaymentFactory;
 import it.unipv.insfw23.TicketWave.modelController.factory.subscription.SubscriptionHandlerFactory;
@@ -21,7 +20,6 @@ import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
-import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -36,9 +34,9 @@ import javafx.stage.Stage;
 
 public class PaymentDataMController {
     private Stage mainStage;
-    private PaymentDataMView paymentDataPage;
+    private PaymentDataMView paymentDataMView;
     private TicketPageView ticketpage;
-    private PaymentSelectionView paymentSelectionPage;
+    private PaymentSelectionView paymentSelectionView;
     private boolean isviewermanager;
     private User user= ConnectedUser.getInstance().getUser();
 
@@ -47,9 +45,9 @@ public class PaymentDataMController {
 
     private IResettableScene home = ConnectedUser.getInstance().getHome();
 
-    public PaymentDataMController(Stage mainStage, PaymentDataMView paymentDataPage, PaymentSelectionView paymentSelectionPage) {
-        this.paymentDataPage = paymentDataPage;
-        this.paymentSelectionPage = paymentSelectionPage;
+    public PaymentDataMController(Stage mainStage, PaymentDataMView paymentDataMView, PaymentSelectionView paymentSelectionView) {
+        this.paymentDataMView = paymentDataMView;
+        this.paymentSelectionView = paymentSelectionView;
         this.mainStage = mainStage;
         initComponents();
         setLabelforWavePoints();
@@ -67,12 +65,12 @@ public class PaymentDataMController {
             public void handle(MouseEvent actionEvent) {
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("Sei ritornato indietro alla paymentSelectionPage");
-                paymentSelectionPage.reSetBars();
-                mainStage.setScene(paymentSelectionPage);
+                paymentSelectionView.reSetBars();
+                mainStage.setScene(paymentSelectionView);
             }
         };
 
-        paymentDataPage.getBackButton().setOnMouseClicked(turnBackPaymentPage);
+        paymentDataMView.getBackButton().setOnMouseClicked(turnBackPaymentPage);
 
 
         //UNA VOLTA CHE VIENE CLICCATO IL PULSANTE ACQUISTA IL PAGAMENTO VA A BUON FINE(LO RIPORTO INDIETRO E RESETTO LE BARRE
@@ -91,9 +89,9 @@ public class PaymentDataMController {
                         TicketDao ticketDao = new TicketDao();
                         System.out.println("ticketdao creato");
 
-                        MastercardPayment mastercard = new MastercardPayment();
-                        iPaymentAdapter = PaymentFactory.getMastercardAdapter(mastercard);
-                        System.out.println("creati i mastercard payment e interfaccia");
+                        MastercardPayment mastercardPayment = new MastercardPayment();
+                        iPaymentAdapter = PaymentFactory.getMastercardAdapter(mastercardPayment);
+                        System.out.println("creati i mastercardPayment payment e interfaccia");
 
 
                         Ticket ticket = customer.buyticket(iPaymentAdapter, ConnectedUser.getInstance().getEventForTicket(), ConnectedUser.getInstance().getTicketType(), getUsePoint());
@@ -104,7 +102,7 @@ public class PaymentDataMController {
 
                             System.out.println("insert ticket eseguito");
                         } catch (SQLException e) {
-                            throw new SQLException("No zi non posso salvare i tuoi dati, c'è qualche prob", e);
+                            throw new SQLException("Problema inserimento ticket", e);
                         }
 
 
@@ -128,7 +126,7 @@ public class PaymentDataMController {
                 else {
                 	Manager managerlogged = (Manager)user;
                 	ProfileDao profiledao = new ProfileDao();
-                	SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMastercardAdapter(new MastercardPayment()), paymentSelectionPage.getPrice());
+                	SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMastercardAdapter(new MastercardPayment()), paymentSelectionView.getPrice());
                 	if(managerlogged.getSubscription() != -1) {
                 		try {
                 			profiledao.updateManagerSub(managerlogged);
@@ -158,15 +156,15 @@ public class PaymentDataMController {
             }
         };
 
-        paymentDataPage.getNextButton().setOnMouseClicked(goToNewPage);
+        paymentDataMView.getNextButton().setOnMouseClicked(goToNewPage);
 
 
 
 
-        addCharacterLimit(paymentDataPage.getInsertNC(), 16);
-        addCharacterLimit(paymentDataPage.getInsertMM(), 2);
-        addCharacterLimit(paymentDataPage.getInsertYY(), 2);
-        addCharacterLimit(paymentDataPage.getInsertcvc(), 4);
+        addCharacterLimit(paymentDataMView.getInsertNC(), 16);
+        addCharacterLimit(paymentDataMView.getInsertMM(), 2);
+        addCharacterLimit(paymentDataMView.getInsertYY(), 2);
+        addCharacterLimit(paymentDataMView.getInsertcvc(), 4);
 
 
     }
@@ -203,13 +201,13 @@ public class PaymentDataMController {
 
     public void setLabelforWavePoints(){
         if(!user.isCustomer()){
-            paymentDataPage.getUsePointsButton().setVisible(false);
+            paymentDataMView.getUsePointsButton().setVisible(false);
         }
     }
 
     public int getUsePoint(){
         int usePoint;
-        if(paymentDataPage.getUsePointsButton().isSelected()){
+        if(paymentDataMView.getUsePointsButton().isSelected()){
              usePoint=1;
         }
         else{
