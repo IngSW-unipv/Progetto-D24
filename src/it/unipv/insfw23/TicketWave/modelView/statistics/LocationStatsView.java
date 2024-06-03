@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelView.statistics;
 
+import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapProv;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import javafx.geometry.Insets;
@@ -17,10 +18,11 @@ public class LocationStatsView extends Scene {
     private String artistTitle;
     private Button backButton;
     private XYChart<String, Number> LocationSerie;
+    private WrapProv provRes;
 
-    public LocationStatsView(String artistTitle) {
+    public LocationStatsView(WrapProv provRes) {
         super(new BorderPane(), 1080, 600);
-        this.artistTitle = artistTitle;
+        this.provRes = provRes;
         init();
     }
 
@@ -32,7 +34,7 @@ public class LocationStatsView extends Scene {
 
         // Creazioni assi X e Y (scheletro)
         final CategoryAxis xAxis = new CategoryAxis();
-        final NumberAxis yAxis = new NumberAxis();
+        final NumberAxis yAxis = new NumberAxis(0, 100, 10);
         xAxis.setLabel("Località");
         yAxis.setLabel("Percentuale");
 
@@ -44,16 +46,22 @@ public class LocationStatsView extends Scene {
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
 
-        // Aggiunta dei dati alla serie
-        series.getData().add(new XYChart.Data<>("Località 1", 100));
-        series.getData().add(new XYChart.Data<>("Località 2", 20));
-        series.getData().add(new XYChart.Data<>("Località 3", 30));
-        series.getData().add(new XYChart.Data<>("Località 4", 45));
-        series.getData().add(new XYChart.Data<>("Località 5", 73));
+        if (provRes.getProvResult().size() != provRes.getProvinceArray().size()) {
+            System.out.println("cazzu");
+            throw new IllegalArgumentException("Le liste devono avere la stessa dimensione");
+        }
+        else {
+            // Aggiunta dei dati alla serie
+            for (int i = 0; i < provRes.getProvinceArray().size(); i++) {
+                System.out.println(provRes.getProvinceArray().get(i).toString());
+                System.out.println(provRes.getProvResult().get(i));
+
+                series.getData().add(new XYChart.Data<>(provRes.getProvinceArray().get(i).toString(), provRes.getProvResult().get(i)));
+            }
+        }
 
         // Aggiunta della serie al grafico
         lineChart.getData().add(series);
-
 
         // Back button
         backButton = new Button();

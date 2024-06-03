@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelView.statistics;
 
+import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapType;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
@@ -28,12 +29,14 @@ public class TypeStatsView extends Scene{
     private XYChart.Series<Number, String> typeSerie;
     private BorderPane layout;
     private Pane content;
+    private WrapType typeRes;
 
 
     // modifico il costruttore per ricevere i risultati (WrapType) e la classe
     // di dominio statDominio (StatisticHandlerArrayList)
-    public TypeStatsView(){
+    public TypeStatsView(WrapType typeRes){
         super(new BorderPane(), 1080, 600);
+        this.typeRes = typeRes;
         init();
     }
 
@@ -62,11 +65,10 @@ public class TypeStatsView extends Scene{
         this.typeSerie=series;
 
         // Aggiunta dei dati alla serie
-        series.getData().add(new XYChart.Data<>(0, "Categoria 1"));
-        series.getData().add(new XYChart.Data<>(14, "Categoria 2"));
-        series.getData().add(new XYChart.Data<>(72, "Categoria 3"));
-        series.getData().add(new XYChart.Data<>(55, "Categoria 4"));
-        series.getData().add(new XYChart.Data<>(100, "Categoria 5"));
+        for (int i=0; i<typeRes.getTypeArray().length; i++){
+            series.getData().add(new XYChart.Data<>(typeRes.getTypeResult()[i], typeRes.getTypeArray()[i].toString()));
+            System.out.println(typeRes.getTypeArray()[i].toString()+typeRes.getTypeResult()[i]);
+        }
 
         // Aggiunta della serie al grafico
         barChart.getData().add(series);

@@ -32,7 +32,7 @@ public class StatisticsHandler implements IStatisticsHandler {
             for (Event currentEvent : eventList) {
 
                 if (currentEvent.getType() == typeArray[j]) {
-
+                    System.out.println(currentEvent.getName());
                     double maxn = (double) currentEvent.getMaxNumberOfSeats();
                     int soldn = currentEvent.getTicketSoldNumber();
 
