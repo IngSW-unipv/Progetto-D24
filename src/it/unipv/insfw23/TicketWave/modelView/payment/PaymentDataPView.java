@@ -108,7 +108,7 @@ public class PaymentDataPView extends Scene {
         return insertEmail;
     }
 
-    public Button getForwardButtonButton() {
+    public Button getNextButton() {
         return nextButton;
     }
 

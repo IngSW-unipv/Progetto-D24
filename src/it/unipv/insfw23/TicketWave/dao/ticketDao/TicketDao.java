@@ -28,7 +28,7 @@ public class TicketDao implements ITicketDao {
             connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
             if(ConnectionDB.isOpen(connection)){
 
-                String query= "INSERT INTO TICKET(BUY_CODE,ID_CUSTOMER,ID_EVENT,EVENT_NAME,PRICE,TYPE_) VALUES (?,?,?,?,?,?)";
+                String query= "INSERT INTO TICKET(BAR_CODE,ID_CUSTOMER,ID_EVENT,EVENT_NAME,PRICE,TYPE_) VALUES (?,?,?,?,?,?)";
 
                 PreparedStatement preparedStatement=connection.prepareStatement(query);
                 preparedStatement.setString(1, ticket.getBarcode());  // va bene?
