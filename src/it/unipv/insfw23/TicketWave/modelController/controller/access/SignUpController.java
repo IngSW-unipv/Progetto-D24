@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.access;
 
+import it.unipv.insfw23.TicketWave.dao.profileDao.IProfileDao;
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
@@ -39,7 +40,7 @@ public class SignUpController {
         this.signUpView = signUpView;
         this.mainstage = mainstage;
         this.loginView = loginView;
-        this.profileDao=new ProfileDao();
+        //this.profileDao=new ProfileDao();
         // this.subscriptionSelectionView= subscriptionSelectionView;
         initComponents();
 
@@ -97,6 +98,7 @@ public class SignUpController {
                             signUpView.getSelectedProvince(),signUpView.getSelectedGenres(), 0,tickets);  // setto  a zero i biglietti creati e i punti vanno presi dopo nelle altre view
 
                     try {
+                        ProfileDao profileDao=new ProfileDao();
                         profileDao.insertCustomer(customer);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
@@ -124,7 +126,7 @@ public class SignUpController {
 
                     ArrayList<Event> arraylistevent = new ArrayList<>();
 
-                    Manager manager = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), null, arraylistevent,5,1,LocalDate.now(),0);
+                    Manager manager = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), null, arraylistevent,1,0,LocalDate.now(),0);
                     //credit card, data sub max numberofevents, da prendere nella mastercardview, subcription impostato a 1 solo per creare gli eventi di prova, però deve essere cambiato dal subupdate
 
                     try {
