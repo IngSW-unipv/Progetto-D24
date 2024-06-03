@@ -3,9 +3,11 @@ package it.unipv.insfw23.TicketWave.dao.research;
 import it.unipv.insfw23.TicketWave.dao.ConnectionDB;
 import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import javafx.scene.image.Image;
 
+import java.awt.*;
 import java.io.InputStream;
 import java.sql.*;
 import java.time.LocalDate;
@@ -13,6 +15,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class ResearchDAO implements IResearchDAO{
     private final String schema;
@@ -28,7 +31,8 @@ public class ResearchDAO implements IResearchDAO{
         conn = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(conn,schema);
         ArrayList<Event> result = new ArrayList<>();
         ArrayList<Event> managerEvent = new ArrayList<>();
-        Manager manager = null;
+        ArrayList<Manager> prevManager = new ArrayList<>();
+        Manager manager;
 
         if (ConnectionDB.isOpen(conn)) {
             try {
@@ -39,17 +43,36 @@ public class ResearchDAO implements IResearchDAO{
                 while(resultset1.next()) { // creazione Manager
                         manager = createManager(resultset1);
 
-                        String query2 = "SELECT * FROM EVENT_ WHERE ID_MANAGER = ?"; // query per prendere tutti gli eventi
-                        PreparedStatement statement2 = conn.prepareStatement(query2);
-                        statement2.setString(1, manager.getEmail());
-                        ResultSet resultset2 = statement2.executeQuery();
+                        // for (Manager m : prevManager) { // prevManager non viene mai aggiornato
+                        //    if (!m.equals(manager)) {
 
-                        while(resultset2.next()) { // creazione Evento
-                            result.add(createEvent(resultset2, manager)); // aggiungo a result un nuovo evento grazie a createEvent
-                            managerEvent.add(createEvent(resultset2, manager)); // lista degli eventi di un manager
-                        }
-                        manager.setEvent(managerEvent); // setto gli eventi creati da quel manager
-                        managerEvent.clear(); // lo azzero per i prossimi manager che avranno creato eventi diversi
+                                String query2 = "SELECT * FROM EVENT_ WHERE ID_MANAGER = ?"; // query per prendere tutti gli eventi
+                                PreparedStatement statement2 = conn.prepareStatement(query2);
+                                statement2.setString(1, manager.getEmail());
+                                ResultSet resultset2 = statement2.executeQuery();
+
+                                while (resultset2.next()) { // creazione Evento
+                                    managerEvent.add(createEvent(resultset2, manager));
+                                    // result.add(createEvent(resultset2, manager)); // aggiungo a result un nuovo evento grazie a createEvent
+                                    // managerEvent.add(createEvent(resultset2, manager)); // lista degli eventi di un manager
+                                }
+                                manager.setEvent(managerEvent); // setto gli eventi creati da quel manager
+                                for (int i = 0; i < managerEvent.size(); i++) { // setto i manager con la loro lista di eventi ai vari eventi
+                                    managerEvent.get(i).setCreator(manager);
+                                    //System.out.println(managerEvent.get(i).getCreator().getEventlist().get(i).getCreator().getEmail()); // CHECK DA RIMUOVERE *********************
+                                    //System.out.println(managerEvent.get(i).getCreator().getEventlist().get(i).getName());
+                                }
+                                prevManager.add(manager);
+
+                                result.addAll(managerEvent);
+                                managerEvent.clear(); // lo azzero per i prossimi manager che avranno creato eventi diversi
+                         //   }
+                       //  }
+                }
+                for (Event e : result){ // result esce fuori senza avere un Evento
+                    System.out.println(e.getCreator().getEmail());
+                    System.out.println(e.getCreator().getEventlist());
+                    System.out.println(e.getName());
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -70,7 +93,7 @@ public class ResearchDAO implements IResearchDAO{
 
         try {
             try { // controllo che la query venga costruita correttamente
-                    StringBuilder query = new StringBuilder("SELECT * FROM EVENT_ JOIN MANAGER ON EVENT_.MANAGER_ID = MANAGER.MAIL WHERE (EVENT_.NAME_ LIKE ? OR EVENT_.ARTISTS LIKE ?)");
+                    StringBuilder query = new StringBuilder("SELECT * FROM EVENT_ JOIN MANAGER ON EVENT_.ID_MANAGER = MANAGER.MAIL WHERE (EVENT_.NAME_ LIKE ? OR EVENT_.ARTISTS LIKE ?)");
                     if(!pr.isEmpty()) { // se è uguale a 0 => non ho messo filtri, non metto la parte di query "PROVINCE IN()"
                         query.append(" AND EVENT_.PROVINCE IN ( ");
                         for (int i = 0; i < pr.size(); i++) {
@@ -112,8 +135,8 @@ public class ResearchDAO implements IResearchDAO{
                             k++;
                         }
                     }
-                System.out.println( statement1  ); // DA RIMUOVERE E' per fare un check ***************************************** // ****** FIN QUI TUTTO BENE ********* //
-                resultset1 = statement1.executeQuery(); // NON FUNZIONA QUI
+                System.out.println( statement1  ); // DA RIMUOVERE E' per fare un check *****************************************
+                resultset1 = statement1.executeQuery();
                 System.out.println(resultset1);
             } catch (SQLException e){
                 throw new RuntimeException("La query non è stata eseguita correttamente (ResearchDAO riga 101)");
@@ -123,41 +146,34 @@ public class ResearchDAO implements IResearchDAO{
 
             ArrayList <Manager> mgPrec = new ArrayList<>(); // Tengo un arraylist di manager, in modo da non creare uno stesso manager più volte (sarebbe sbagliato)
             ArrayList <Event> evManager = new ArrayList<>(); // tengo un arraylist di eventi, in modo da settare correttamente sul manager tutti gli eventi che ha creato
-            boolean flag = false;
 
             while(resultset1.next()) { // finché ci sono risultati prima creo il manager e poi un evento
                 manager = createManager(resultset1); // creo un manager con arrayList di eventi nulla
-                if (!mgPrec.isEmpty()) { // se l'array di manager è vuoto, non ha senso fare il check sotto
-                    for (Manager m : mgPrec) {
-                        if (manager.equals(m)) { // se il manager appena creato è già presente nei manager precedenti => manager = m
-                            manager = m; // hanno la stessa reference
-                            flag = true; // se sono uguali => il manager è già presente in mgPrec => non lo devo aggiungere a mgPrec
-                        }
+                System.out.println(manager.getEmail()); // check da rimuovere ***************************
+
+                for (Manager m : mgPrec){ // Se il manager appena creato è uguale ad uno presente in mgPrec, non lo aggiungo in mgPrec
+                    if (m != manager){
+                        mgPrec.add(manager);
                     }
                 }
-                if(!manager.equals(mgPrec.get(0))){ // se il manager corrente è uguale al precedente => uso la stessa evManager, altrimenti la devo ricreare
-                    evManager.clear(); // tolgo tutti gli eventi di questa arrayList, poiché cambiano da manager a manager
-                    for (Event e : result) {
-                        if (e.getCreator().equals(manager)) { // se il creatore dell'evento == manager allora aggiungo all'array list del manager quell'evento
-                            evManager.add(e);
-                        }
+
+                if(!mgPrec.getLast().equals(manager)){ // Se il manager precedente = al manager corrente => uso la stessa lista degli eventi, altrimenti la rifaccio per quello corrente
+                    evManager.clear();
+                    for (Event e : result){
+
                     }
                 }
                 manager.setEvent(evManager); // setto l'arraylist di eventi creati da quel manager
-                if(flag == false){ // se il flag è falso => questo manager non è nella mgPrec, lo devo aggiungere => è un nuovo manager
-                    mgPrec.add(manager);
-                } else {
-                    flag = false; // se il flag è vero => questo manager esiste già nella mgPrec, non lo devo inserire e per il prox giro devo resettare il flag a false
-                }
+
                 // creo l'evento
                 result.add(createEvent(resultset1,manager)); // aggiungo a result l'evento corretto grazie a createEvent
+                System.out.println(result.getLast().getName());
             }
         } catch (SQLException e) {
             throw new RuntimeException("Evento non trovato");
         }
 
         ConnectionDB.closeConnection(conn); // chiudo la connessione
-        // devo sparare elemento per elemento di result dentro la table dei risultati della research view
         return result;
     }
 
