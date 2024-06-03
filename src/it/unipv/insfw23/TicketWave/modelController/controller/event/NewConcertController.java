@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.event;
 
 import it.unipv.insfw23.TicketWave.dao.eventDao.EventDao;
+import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Concert;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
@@ -119,6 +120,7 @@ public class NewConcertController {
 				}
 				home.updateEvsTable(loggedmanager.getEventlist());
 				home.reSetBars();
+				ManagerController managerController = new ManagerController(window, home, ConnectedUser.getInstance().getLoginView());
 				window.setScene(home);
 			}
 		};
