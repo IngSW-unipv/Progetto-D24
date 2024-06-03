@@ -43,8 +43,6 @@ public class SignUpController {
         this.signUpView = signUpView;
         this.mainstage = mainstage;
         this.loginView = loginView;
-        //this.profileDao=new ProfileDao();
-        // this.subscriptionSelectionView= subscriptionSelectionView;
         initComponents();
 
     }

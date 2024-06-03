@@ -317,14 +317,6 @@ public class ProfileDao implements IProfileDao {
         ConnectionDB.closeConnection(connection);
         return customer;
     }
-
-    /*
-    public void customerPointsUpdate(){
-
-
-
-    }
-*/
     
     private Genre[] splitStringToArrayGenre(String s) {
         String[] arrayString = s.split(",");
