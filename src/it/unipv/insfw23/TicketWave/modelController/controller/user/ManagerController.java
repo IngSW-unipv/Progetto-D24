@@ -5,6 +5,8 @@ import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageC
 import it.unipv.insfw23.TicketWave.modelController.controller.event.SelectionNewEventTypeController;
 import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchController;
 import it.unipv.insfw23.TicketWave.modelController.controller.statistics.TypeStatsController;
+import it.unipv.insfw23.TicketWave.modelDomain.statistics.StatisticsHandler;
+import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
@@ -96,11 +98,12 @@ public class ManagerController {
 			@Override
 			public void handle(ActionEvent actionEvent){
 				//mi viene passato il manager
+
 				//creo una nuova classe di statistiche, a cui passo il manager
-				//StatisticsHandlerArrayList statDominio = new StatisticsHandlerArrayList(sessionManager);
-				//WrapType typeRes = statDominio.typeStats();
+				StatisticsHandler statDominio = new StatisticsHandler();
+				WrapType typeRes = statDominio.typeStats(loggedmanager);
 				//Al costruttore di type view, devo passare i risultati del metodo, e la classe di statistiche di dominio
-				TypeStatsView typeView = new TypeStatsView();
+				TypeStatsView typeView = new TypeStatsView(typeRes);
 				TypeStatsController typeController = new TypeStatsController(mainStage, typeView);
 				mainStage.setScene(typeView);
 			}

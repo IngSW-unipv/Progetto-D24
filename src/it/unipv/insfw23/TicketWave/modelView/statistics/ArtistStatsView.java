@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelView.statistics;
 
+import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapArtist;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.Node;
@@ -21,7 +22,7 @@ public class ArtistStatsView extends BorderPane{
     private XYChart.Series<String, Number> artistSerie;
 
     //modifico il costruttore per ricevere wrapArtist
-    public ArtistStatsView() {
+    public ArtistStatsView(WrapArtist artistRes) {
 
         final NumberAxis yAxis = new NumberAxis(0, 100, 10);
         final CategoryAxis xAxis = new CategoryAxis();
@@ -39,11 +40,16 @@ public class ArtistStatsView extends BorderPane{
         barChart.setLegendVisible(false);
 
         // Aggiunta dei dati alla serie
-        series.getData().add(new XYChart.Data<>("Categoria 1", 56));
-        series.getData().add(new XYChart.Data<>("Categoria 2", 66));
-        series.getData().add(new XYChart.Data<>("Categoria 3", 89));
-        series.getData().add(new XYChart.Data<>("Categoria 4", 12));
-        series.getData().add(new XYChart.Data<>("Categoria 5", 0));
+        if (artistRes.getArtistResult().size() != artistRes.getArtistNameArray().size()) {
+            throw new IllegalArgumentException("Le liste devono avere la stessa dimensione");
+        }
+        else {
+            // Aggiunta dei dati alla serie
+            for (int i = 0; i < artistRes.getArtistNameArray().size(); i++) {
+
+                series.getData().add(new XYChart.Data<>(artistRes.getArtistNameArray().get(i), artistRes.getArtistResult().get(i)));
+            }
+        }
 
         // Aggiunta della serie al grafico
         barChart.getData().add(series);

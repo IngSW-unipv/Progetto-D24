@@ -300,11 +300,12 @@ public class ProfileDao implements IProfileDao {
 
                     while (resultSet2.next()) {
                         Ticket currentTicket = new Ticket(resultSet2.getString("BAR_CODE"), resultSet2.getDouble("PRICE"),
-                                TicketType.valueOf(resultSet2.getString("TYPE")),resultSet2.getInt("ID_EVENT"),resultSet2.getString("EVENT_NAME"));
+                                TicketType.valueOf(resultSet2.getString("TYPE_")),resultSet2.getInt("ID_EVENT"),resultSet2.getString("EVENT_NAME"));
 
                         customer.addTickets(currentTicket);
                     }
                 } catch (SQLException e) {
+                    e.printStackTrace();
                     throw new RuntimeException("Errore nel caricamento dei biglietti");
                 }
             }

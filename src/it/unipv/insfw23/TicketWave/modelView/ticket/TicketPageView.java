@@ -108,7 +108,7 @@ public class TicketPageView extends Scene implements IResettableScene {
 
         //DA PRENDERE DAL DAO
         eventDescriptionTextField = new Label("Il giorno "+data+" si terra un "+typeofevent.name()+" in "+location+" a "+città+" ,in provincia di "+prov+" tenuto da "
-                +artist.toString().substring(1, artist.toString().length()-1));
+                +artist.toString());
 
         switch(seatsRemainedNumberForType.length) {
             case 1:
@@ -385,8 +385,12 @@ public class TicketPageView extends Scene implements IResettableScene {
     }
 
 
-}
+  public RadioButton getBasePricebutton(){
+        return basePricebutton;
+    }
 
+
+}
 
 
 

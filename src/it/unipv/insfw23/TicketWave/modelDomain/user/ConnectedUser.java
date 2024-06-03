@@ -45,6 +45,10 @@ public class ConnectedUser {
         return ticketType;
     }
 
+    public void setTicketType(TicketType ticketType) {
+        this.ticketType = ticketType;
+    }
+
     public void setEventForTicket(Event eventForTicket) {
         this.eventForTicket = eventForTicket;
     }

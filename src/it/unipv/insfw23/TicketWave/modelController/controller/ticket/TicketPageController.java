@@ -5,6 +5,8 @@ import it.unipv.insfw23.TicketWave.modelController.controller.payment.PaymentSel
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
+import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
@@ -52,6 +54,7 @@ public class TicketPageController {
             @Override
             public void handle(MouseEvent actionEvent) {
 
+
                 // Azione da eseguire quando il pulsante viene premuto
                 if (ticketPage.getIfPriceSelected() != null) {
                     System.out.println("Hai cliccato il bottone Acquista");
@@ -59,7 +62,30 @@ public class TicketPageController {
                     paymentSelectionView.setPriceComponent(event.getPrices()[ticketPage.getWhichPriceSelected()]);
                     PaymentSelectionController paymentSelectionController = new PaymentSelectionController(mainStage, paymentSelectionView, ticketPage);
                     mainStage.setScene(paymentSelectionView);
-                } else{
+
+                    ConnectedUser.getInstance().setEventForTicket(event);
+
+                    TicketType ticketType = null;
+
+                    if (ticketPage.getWhichPriceSelected() == 0) {
+                        ticketType = TicketType.BASE;
+                    } 
+                    else if (ticketPage.getWhichPriceSelected() == 1) {
+                        ticketType = TicketType.PREMIUM;
+                    } else if (ticketPage.getWhichPriceSelected() == 2) {
+                        ticketType = TicketType.VIP;
+                    }
+                    ConnectedUser.getInstance().setTicketType(ticketType);
+
+
+                }
+
+
+            
+
+        
+
+                 else{
                     ticketPage.getErrmessage().setOpacity(100);
                     System.out.println("Scegli una tipologia di biglietto");//da stampare a video o con eccezione
                 }
