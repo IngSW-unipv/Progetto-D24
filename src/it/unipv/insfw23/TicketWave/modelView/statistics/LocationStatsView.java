@@ -63,7 +63,6 @@ public class LocationStatsView extends Scene {
         // Aggiunta della serie al grafico
         lineChart.getData().add(series);
 
-
         // Back button
         backButton = new Button();
         ImageView backbuttonicon = new ImageView("it/unipv/insfw23/TicketWave/modelView/imagesResources/back2.png");
