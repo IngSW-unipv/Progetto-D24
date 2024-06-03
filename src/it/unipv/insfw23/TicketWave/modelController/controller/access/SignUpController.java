@@ -66,10 +66,18 @@ public class SignUpController {
 
         // Action sul signupbutton
         EventHandler<ActionEvent> goToSelection = new EventHandler<ActionEvent>() {
+
+
             @Override
             public void handle(ActionEvent actionEvent) {
+                //aggiungo queste stampe solo per controllare cosa ritornano i valori di controllo(claudio)
+                System.out.println("checkEqualEmailAndPassword: " + signUpView.checkEqualEmailAndPassword());
+                System.out.println("checkFieldsEmpty: " + signUpView.checkFieldsEmpty());
+
+
                 if(signUpView.checkEqualEmailAndPassword()== false ||signUpView.checkFieldsEmpty() == true) {
                     signUpView.setErrorLabel();
+
 
                 }else if (signUpView.getCustomerRadioButton().isSelected()) {
 

@@ -141,6 +141,11 @@ public class PaymentSelectionView extends Scene {
     public void setPriceComponent(double price) {
         totalAmountLabel.setText("€ " + String.valueOf(price));
     }
+    
+    public double getPrice() {
+    	String pricestring = totalAmountLabel.getText().substring(2);
+    	return Double.parseDouble(pricestring);
+    }
 
     public void reSetBars() {
         BorderPane temp = new BorderPane();

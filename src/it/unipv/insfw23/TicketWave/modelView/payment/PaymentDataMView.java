@@ -51,7 +51,35 @@ public class PaymentDataMView extends Scene {
     private void initComponents() {
 
 
+        labels.add(nameLabel);
+        labels.add(surnameLabel);
+        labels.add(ncLabel);
+        labels.add(expirationLabel);
+        labels.add(cvcLabel);
 
+        // Setting the text color to black for all labels
+        for (Label label : labels) {
+            label.setFont(font);
+            label.setTextFill(Color.BLACK);
+        }
+
+        textFields.add(insertMM);
+        textFields.add(insertYY);
+        textFields.add(insertcvc);
+        textFields.add(insertName);
+        textFields.add(insertSurname);
+        textFields.add(insertNC);
+
+        // Setting the text color to black for all TextFields
+        for (TextField textField : textFields) {
+            textField.setFont(font);
+
+        }
+
+        //setting color for usePointsButton
+        usePointsButton.setFont(font);
+
+        //setting nextButton
         Image nextarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/nextArrow.png");
         ImageView nextarrow = new ImageView(nextarrowlogo);
         nextarrow.setFitWidth(50);
@@ -59,7 +87,7 @@ public class PaymentDataMView extends Scene {
         nextButton.setGraphic(nextarrow);
         nextButton.setStyle("-fx-background-color: #91bad6;");
 
-
+        //setting backButton
         Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/backArrow.png");
         ImageView backarrow = new ImageView(backarrowlogo);
         backarrow.setFitWidth(50);
@@ -68,44 +96,12 @@ public class PaymentDataMView extends Scene {
         backButton.setStyle("-fx-background-color: #91bad6;");
 
         Region leftSpacer = new Region();
-        HBox.setHgrow(leftSpacer, Priority.ALWAYS); // Consente a leftSpacer di espandersi per riempire lo spazio disponibile
-
+        HBox.setHgrow(leftSpacer, Priority.ALWAYS); // Allows leftSpacer to expand to fill available space
         Region rightSpacer = new Region();
-        HBox.setHgrow(rightSpacer, Priority.ALWAYS); // Consente a rightSpacer di espandersi per riempire lo spazio disponibile// Imposta un margine di 10 unità a destra del backButton
-        // Creazione di un HBox per contenere i bottoni e le Region vuote
-        HBox buttonBox = new HBox( backButton, rightSpacer, nextButton);
-        buttonBox.setMargin(backButton, new Insets(0, 0, 0, 0)); // Margine a sinistra
-        buttonBox.setMargin(nextButton, new Insets(0, 0, 0, 0)); // Margine a destra
-
-        buttonBox.setSpacing(50); // Spazio tra i bottoni
-        buttonBox.setAlignment(Pos.CENTER);
-
-        textFields.add(insertMM);
-        textFields.add(insertYY);
-        textFields.add(insertcvc);
+        HBox.setHgrow(rightSpacer, Priority.ALWAYS); // Allows rightSpacer  to expand to fill available space
 
 
-        labels.add(nameLabel);
-        labels.add(surnameLabel);
-        labels.add(ncLabel);
-        labels.add(expirationLabel);
-        labels.add(cvcLabel);
-
-        // Impostazione del colore del testo a nero per tutti i label
-        for (Label label : labels) {
-            label.setFont(font);
-            label.setTextFill(Color.BLACK);
-        }
-
-        for (TextField textField : textFields) {
-            textField.setFont(font);
-
-        }
-        usePointsButton.setFont(font);
-
-
-
-        
+        //setting dataInputGrid
         GridPane dataInput = new GridPane();
         dataInput.setAlignment(Pos.TOP_LEFT);
         dataInput.setHgap(10);
@@ -119,17 +115,24 @@ public class PaymentDataMView extends Scene {
         dataInput.addRow(6,usePointsButton);
 
 
+
+        // Setting of an HBox to contain the buttons and empty Regions
+        HBox buttonBox = new HBox( backButton, rightSpacer, nextButton);
+        buttonBox.setMargin(backButton, new Insets(0, 0, 0, 0)); // Margine a sinistra
+        buttonBox.setMargin(nextButton, new Insets(0, 0, 0, 0)); // Margine a destra
+
+        buttonBox.setSpacing(50); // Spazio tra i bottoni
+        buttonBox.setAlignment(Pos.CENTER);
+
+
+        //creating external structure
         BorderPane root = new BorderPane();
-        //root.setStyle("-fx-background-color: #def1fa;");
         root.setPadding(new Insets(10));
         root.setCenter(dataInput);
-        //root.setRight(nextButton);
-        //root.setLeft(backButton);
         root.setBottom(buttonBox);
-        //BorderPane.setAlignment(nextButton, Pos.BOTTOM_RIGHT);
-        //BorderPane.setAlignment(backButton,Pos.BOTTOM_LEFT);
 
 
+        //Setting external layout
         BorderPane layout= new BorderPane();
         layout.setStyle("-fx-background-color: #91bad6;");
         layout.setCenter(root);

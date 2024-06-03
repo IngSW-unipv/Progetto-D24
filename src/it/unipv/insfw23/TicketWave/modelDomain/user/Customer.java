@@ -29,10 +29,11 @@ public class Customer extends User {
 
 
 
-    public void buyticket(IPaymentAdapter pay,Event event,TicketType type ,int usePoints) throws Exception {
+    public Ticket buyticket(IPaymentAdapter pay,Event event,TicketType type ,int usePoints) throws Exception {
 
         double startPrice = event.getPrice(type);
         double endPrice;
+        Ticket ticket;
         if(usePoints == 1 ){
 
             endPrice = startPrice - (0.25 * usablePoints(startPrice, points));
@@ -41,7 +42,7 @@ public class Customer extends User {
                 points = points - usablePoints(startPrice, points);
                 System.out.println("L'acquisto del tuo biglietto per " + event + " è andato a buon fine ");
                 points = points + (int) (endPrice / 10);
-                Ticket ticket = TicketHandler.getIstance().createTicket(event, type);
+                 ticket = TicketHandler.getIstance().createTicket(event, type);
                 ticket.setPrice(endPrice);
                 addTickets(ticket);
             } else {
@@ -53,7 +54,7 @@ public class Customer extends User {
             if (pay.paymentMethod(endPrice) == true){
                 System.out.println( "L'acquisto del tuo biglietto per " + event + "è andato a buon fine ");
                 points = points + (int) (endPrice/10);
-                Ticket ticket= TicketHandler.getIstance().createTicket(event,type);
+                 ticket= TicketHandler.getIstance().createTicket(event,type);
                 addTickets(ticket);
             }  else {
                 throw new Exception ( "L'acquisto del tuo biglietto per " + event + "non è andato a buon fine ");
@@ -62,6 +63,7 @@ public class Customer extends User {
         else {
             throw new Exception("Selezionare un numero valido");
         }
+        return ticket;
     }
 
     // setto generi preferiti

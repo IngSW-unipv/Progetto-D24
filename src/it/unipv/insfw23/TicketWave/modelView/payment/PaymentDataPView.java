@@ -82,7 +82,7 @@ public class PaymentDataPView extends Scene {
 
 
 
-
+        //Setting external layout
         BorderPane layout= new BorderPane();
         layout.setCenter(root);
         layout.setTop(UpperBar.getIstance());

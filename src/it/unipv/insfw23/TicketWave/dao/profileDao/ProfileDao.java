@@ -4,12 +4,13 @@ import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
+import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 
 import it.unipv.insfw23.TicketWave.dao.ConnectionDB;
-import java.sql.Connection;
+
 import java.io.InputStream;
 import java.sql.*;
 import java.time.LocalDate;
@@ -344,5 +345,41 @@ public class ProfileDao implements IProfileDao {
     public static boolean checkPassword(String plainPassword, String hashedPassword) {
         return BCrypt.checkpw(plainPassword, hashedPassword);
     }
+
+	@Override
+	public void updateManagerSub(Manager manager) throws SQLException {
+		connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);
+		PreparedStatement statement1;
+		try {
+			
+			String query1 = "UPDATE MANAGER SET MAXEVENTS = ?, SUBSCRIPTION = ?, SUBSCRIPTION_DATE = ?, COUNTER_CREATED_EVENTS = ? WHERE MAIL = ?";
+			
+			statement1 = connection.prepareStatement(query1);
+			switch (ConnectedUser.getInstance().getNewSubLevel()) {
+			case 0:
+				statement1.setInt(1, 1);
+				break;
+			case 1:
+				statement1.setInt(1, 5);
+				break;
+			case 2:
+				statement1.setInt(1, Short.MAX_VALUE);
+			}
+			statement1.setInt(2, ConnectedUser.getInstance().getNewSubLevel());
+			statement1.setDate(3, Date.valueOf(LocalDate.now()));
+			statement1.setInt(4, 0);
+			statement1.setString(5, manager.getEmail());
+			
+			statement1.execute();
+		} catch (SQLException e) {
+			throw new SQLException("Errore nell'aggiornamento della sub");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		ConnectionDB.closeConnection(connection);
+	}
+    
+    
 
 }

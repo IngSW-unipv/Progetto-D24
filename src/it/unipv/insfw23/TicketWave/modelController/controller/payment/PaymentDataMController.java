@@ -1,9 +1,16 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
-//import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
-//import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import java.sql.SQLException;
+
+import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
+import it.unipv.insfw23.TicketWave.dao.ticketDao.TicketDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
+import it.unipv.insfw23.TicketWave.modelController.factory.payment.PaymentFactory;
+import it.unipv.insfw23.TicketWave.modelController.factory.subscription.SubscriptionHandlerFactory;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.MastercardPayment;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
+import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
@@ -25,6 +32,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 
+
+
 public class PaymentDataMController {
     private Stage mainStage;
     private PaymentDataMView paymentDataPage;
@@ -32,6 +41,10 @@ public class PaymentDataMController {
     private PaymentSelectionView paymentSelectionPage;
     private boolean isviewermanager;
     private User user= ConnectedUser.getInstance().getUser();
+
+   private  IPaymentAdapter iPaymentAdapter;
+
+
     private IResettableScene home = ConnectedUser.getInstance().getHome();
 
     public PaymentDataMController(Stage mainStage, PaymentDataMView paymentDataPage, PaymentSelectionView paymentSelectionPage) {
@@ -73,21 +86,60 @@ public class PaymentDataMController {
                 System.out.println("pagamento andato a buon fine stai tornando indietro alla home page!");
                 if(user.isCustomer()){
                     System.out.println("Stai andando alla CustomerView");
-                    if(home != null){
+                    try {
+                        Customer customer = (Customer) user;
+                        TicketDao ticketDao = new TicketDao();
+                        System.out.println("ticketdao creato");
+
+                        MastercardPayment mastercard = new MastercardPayment();
+                        iPaymentAdapter = PaymentFactory.getMastercardAdapter(mastercard);
+                        System.out.println("creati i mastercard payment e interfaccia");
+
+
+                        Ticket ticket = customer.buyticket(iPaymentAdapter, ConnectedUser.getInstance().getEventForTicket(), ConnectedUser.getInstance().getTicketType(), getUsePoint());
+                        System.out.println("Ticket associato correttamente");
+
+                        try {
+                            ticketDao.insertTicket(ticket, customer);
+
+                            System.out.println("insert ticket eseguito");
+                        } catch (SQLException e) {
+                            throw new SQLException("No zi non posso salvare i tuoi dati, c'è qualche prob", e);
+                        }
+
+
+
+                    }
+                        catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+
+
+
                         UpperBar.getIstance().setForCustomer();
                         home.reSetBars();
                         Scene nextScene = (Scene) home;
                         mainStage.setScene(nextScene);
-                    }
-                    else {
-                        UpperBar.getIstance().setForCustomer();
-                        Customer customerUser = (Customer) user;
-                        CustomerView customerView = new CustomerView();
-                        CustomerController customerController = new CustomerController(mainStage, customerView, ConnectedUser.getInstance().getLoginView());
-                        mainStage.setScene(customerView);
-                    }
+
+
+
+
                 }
                 else {
+                	Manager managerlogged = (Manager)user;
+                	ProfileDao profiledao = new ProfileDao();
+                	SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMastercardAdapter(new MastercardPayment()), paymentSelectionPage.getPrice());
+                	if(managerlogged.getSubscription() != -1) {
+                		try {
+                			profiledao.updateManagerSub(managerlogged);
+						} catch (SQLException e) {
+							e.printStackTrace();
+						}
+                	}
+                	else {
+                		System.out.println("pagamento non andato a buon fine");
+                	}
+                	
                     if(home!=null){
                         UpperBar.getIstance().setForManager();
                         home.reSetBars();
@@ -153,6 +205,17 @@ public class PaymentDataMController {
         if(!user.isCustomer()){
             paymentDataPage.getUsePointsButton().setVisible(false);
         }
+    }
+
+    public int getUsePoint(){
+        int usePoint;
+        if(paymentDataPage.getUsePointsButton().isSelected()){
+             usePoint=1;
+        }
+        else{
+            usePoint=0;
+        }
+          return usePoint;
     }
 
 }
