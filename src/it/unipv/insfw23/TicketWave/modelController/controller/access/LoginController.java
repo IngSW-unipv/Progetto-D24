@@ -7,6 +7,7 @@ import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
+import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
@@ -63,7 +64,7 @@ public class LoginController {
 
                  if (loginView.getCustomerRadioButton().isSelected() && loginView.checkEmptyFields()==false) {
                      System.out.println("Hai cliccato il pulsante login come cliente");
-                    Customer loggedCustomer;
+                     Customer loggedCustomer;
                     /*creazione customer ed evento per poi creare vari biglietti e fare delle verifiche
                      *
                      * */
@@ -85,7 +86,9 @@ public class LoginController {
 
                     if(loggedCustomer != null){
                         System.out.println("Hai cliccato il pulsante Login come cliente");
-                         CustomerView customerview = new CustomerView();
+                        ArrayList<Ticket> arrayListTicket = loggedCustomer.getTicketsList();
+                        ArrayList<Notification> arrayListNotification = loggedCustomer.getNotification();
+                         CustomerView customerview = new CustomerView(loggedCustomer.getName(),arrayListNotification,arrayListTicket,loggedCustomer.getPoints() );
 
                         CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
                         customerview.reSetBars();

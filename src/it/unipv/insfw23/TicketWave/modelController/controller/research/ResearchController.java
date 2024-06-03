@@ -52,6 +52,14 @@ public class ResearchController {
                         ev = rd.getAllEvents(); // devo passarla alla tabella
                         ObservableList<Event> evs = FXCollections.observableArrayList(ev);
                         rv.getTable().setItems(evs); // mostro gli eventi nella tabella dei risultati
+                       /* for (Event event : ev) { // check DA RIMUOVERE *****************************
+                            System.out.println(event.getCreator());
+                            ArrayList<Event> ar = new ArrayList<>(event.getCreator().getEventlist());
+                            System.out.println(ar);
+                            for (Event e : ar){
+                                System.out.println(e.getName());
+                            }
+                        }*/
                     } catch (SQLException e) {
                         throw new RuntimeException("Tutti gli eventi non trovati (ResearchController riga 56)");
                     }

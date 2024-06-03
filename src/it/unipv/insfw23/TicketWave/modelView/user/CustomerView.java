@@ -4,6 +4,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Concert;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
@@ -32,18 +33,24 @@ import java.util.ArrayList;
 public class CustomerView extends Scene implements IResettableScene {
     private BorderPane layout;
     private GridPane grid;
-    private Label name;
+    private Label nameLabel;
     private Label wavePoints;
     private ListView notifyListView;
     private TableView ticketTab;
     private Button logoutButton;
-
+    private ObservableList<Ticket> tick;
+    private ObservableList<Notification> nots;
     private UpperBar customerUpperBar;
     private LowerBar lowerBar;
 
+
     // private final
-    public CustomerView() {
+    public CustomerView(String name, ArrayList<Notification> nots, ArrayList<Ticket> tick, int points) {
         super(new BorderPane(), 1080, 600);
+        this.nameLabel = new Label("Benvenuto, "+name);
+        this.wavePoints = new Label("WavePoints: " +points);
+        this.nots = FXCollections.observableArrayList(nots);
+        this.tick = FXCollections.observableArrayList(tick);
         initComponents();
 
     }
@@ -83,20 +90,22 @@ public class CustomerView extends Scene implements IResettableScene {
         GridPane.setConstraints(logoutButton, 2, 0);
 
         // Nome e Cognome
-        name = new Label("Benvenuto,");
-        name.setFont(Font.font("Helvetica", FontWeight.BOLD, 20));
 
-        GridPane.setConstraints(name, 0, 0);
+        nameLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 20));
+
+        GridPane.setConstraints(nameLabel, 0, 0);
 
         // Punti Accumulati
-        wavePoints = new Label("Wave Points: 100"); // Esempio di punti accumulati
+
         wavePoints.setFont(Font.font("Helvetica ",FontWeight.BOLD, 20));
         GridPane.setConstraints(wavePoints, 1, 0);
 
         // ListView per le notifiche
         notifyListView = new ListView<>();
         notifyListView.getStylesheets().add("it/unipv/insfw23/TicketWave/css/listViewStyle.css");
-        notifyListView.getItems().addAll("Notifica 1", "Notifica 2", "Notifica 3"); // Dati di esempio
+        if(nots != null){
+            notifyListView.setItems(nots);}
+       // notifyListView.getItems().addAll("Notifica 1", "Notifica 2", "Notifica 3"); // Dati di esempio
         GridPane.setConstraints(notifyListView, 0, 1);
 
         // AGGIUSTARE LA TABLEVIEW CON GLI ATTRIBUTI DEI BIGLIETTI E POI COLLEGARE CON IL DAO PER LEGGERE I DATI
@@ -115,15 +124,16 @@ public class CustomerView extends Scene implements IResettableScene {
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         TableColumn<Ticket, String> eventCol = new TableColumn<>("Evento");
-        eventCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        eventCol.setCellValueFactory(new PropertyValueFactory<>("eventName"));
 
         ticketTab.getColumns().addAll(eventCol,barcodeCol, priceCol,typeCol);
-
         ticketTab.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
-
+        if(tick != null) {
+            ticketTab.setItems(tick);
+        }
         GridPane.setConstraints(ticketTab, 1, 1);
 
-        grid.getChildren().addAll(name, wavePoints, notifyListView, ticketTab,logoutButton);
+        grid.getChildren().addAll(nameLabel, wavePoints, notifyListView, ticketTab,logoutButton);
 
 
 

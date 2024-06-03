@@ -1,14 +1,13 @@
 package it.unipv.insfw23.TicketWave.dao.eventDao;
 
 import it.unipv.insfw23.TicketWave.dao.ConnectionDB;
+import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Theater;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
+import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
@@ -17,9 +16,10 @@ import javax.sql.rowset.serial.SerialBlob;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 
-public class EventDao implements IEventDao{
+public class EventDao implements IEventDao {
     private String schema;
     private Connection connection;
 
@@ -34,8 +34,8 @@ public class EventDao implements IEventDao{
         int eventNumber = selectEventNumber();
 
         try {
-            connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
-            if(ConnectionDB.isOpen(connection)){   // check se è tutto ok
+            connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);  // apro connessione
+            if (ConnectionDB.isOpen(connection)) {   // check se è tutto ok
 
                 //query d'inserimento
                 String query = "INSERT INTO EVENT_ (ID_EVENT, NAME_, CITY, LOCATION, DATE_, TIME_, PROVINCE, GENRE, TYPE_, MAX_NUM_SEATS," +
@@ -51,8 +51,8 @@ public class EventDao implements IEventDao{
 
 
                 //setto i campi
-                PreparedStatement preparedStatement=connection.prepareStatement(query);
-                preparedStatement.setInt(1, eventNumber+1);
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+                preparedStatement.setInt(1, eventNumber + 1);
                 System.out.println(event.getIdEvent());
                 preparedStatement.setString(2, event.getName());
                 System.out.println(event.getName());
@@ -79,7 +79,7 @@ public class EventDao implements IEventDao{
                 //vettore biglietti rimanenti
                 //vettore prezzo biglietti
 
-                switch (event.getTypeOfSeats()){
+                switch (event.getTypeOfSeats()) {
                     case 3:
                         preparedStatement.setInt(12, event.getTicketsSoldNumberForType()[0]);
                         System.out.println(event.getTicketsSoldNumberForType()[0]);
@@ -104,6 +104,7 @@ public class EventDao implements IEventDao{
                     case 2:
                         preparedStatement.setInt(12, event.getTicketsSoldNumberForType()[0]);
                         preparedStatement.setInt(13, event.getTicketsSoldNumberForType()[1]);
+                        //preparedStatement.setInt(14, null);
 
                         preparedStatement.setInt(15, event.getSeatsRemainedNumberForType()[0]);
                         preparedStatement.setInt(16, event.getSeatsRemainedNumberForType()[1]);
@@ -127,7 +128,7 @@ public class EventDao implements IEventDao{
                 preparedStatement.setString(22, event.getArtists());
                 System.out.println(event.getArtists());
 
-                if(event.getType() == Type.THEATER){
+                if (event.getType() == Type.THEATER) {
                     Theater theatreEvent = (Theater) event;
                     author = theatreEvent.getAuthorName();
                 }
@@ -142,7 +143,7 @@ public class EventDao implements IEventDao{
                 preparedStatement.executeUpdate();  // eseguo
                 System.out.println("query eseguita");
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             e.printStackTrace();
             throw new SQLException("No zi non posso salvare i tuoi dati, c'è qualche prob");
         }
@@ -164,23 +165,22 @@ public class EventDao implements IEventDao{
 
  */
 
-    private InputStream transformImageIntoInputStream (final Image image )
-    {
-        BufferedImage awtBufferedImage = SwingFXUtils.fromFXImage( image , null );
+    private InputStream transformImageIntoInputStream(final Image image) {
+        BufferedImage awtBufferedImage = SwingFXUtils.fromFXImage(image, null);
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-        try
-        {
-            ImageIO.write( awtBufferedImage , "jpg" , outputStream );
+        try {
+            ImageIO.write(awtBufferedImage, "jpg", outputStream);
             byte[] res = outputStream.toByteArray();
-            InputStream inputStream = new ByteArrayInputStream( res );
+            InputStream inputStream = new ByteArrayInputStream(res);
             return inputStream;
+        } catch (IOException e) {
+            e.printStackTrace();
         }
-        catch ( IOException e ) { e.printStackTrace(); }
-        throw new IllegalStateException( "Should not reach this point in method `transformImageIntoInputStream`." );
+        throw new IllegalStateException("Should not reach this point in method `transformImageIntoInputStream`.");
     }
 
-    public int selectEventNumber() throws SQLException{
-        connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
+    public int selectEventNumber() throws SQLException {
+        connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);  // apro connessione
         PreparedStatement statement1;
         ResultSet resultSet1;
 
@@ -192,14 +192,126 @@ public class EventDao implements IEventDao{
 
             resultSet1 = statement1.executeQuery();
 
-            if(resultSet1.next()){
+            if (resultSet1.next()) {
                 eventNumber = resultSet1.getInt(1);
             }
-            
+
         } catch (SQLException e) {
             throw new RuntimeException("Utente non trovato o non registrato");
         }
         ConnectionDB.closeConnection(connection);
         return eventNumber;
+    }
+
+
+    public Event selectEvent(int event_Id) throws SQLException {
+        Event selectedEvent = null;
+        connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);  // apro connessione
+        PreparedStatement statement1;
+        ResultSet resultSet1;
+        Manager manager = null;
+        String managerId = null;
+
+        try {
+            String query1 = "SELECT * FROM EVENT_ WHERE ID_EVENT = ?";
+            statement1 = connection.prepareStatement(query1);
+            statement1.setInt(1, event_Id);
+            resultSet1 = statement1.executeQuery();
+
+            while (resultSet1.next()) {
+
+                managerId = resultSet1.getString("ID_MANAGER");
+                LocalDate currentDate = resultSet1.getDate("DATE_").toLocalDate(); // converto data in LocalData
+
+                double[] price = new double[resultSet1.getInt("NUM_SEATS_TYPE")];
+                int[] seatsRemaining = new int[resultSet1.getInt("NUM_SEATS_TYPE")];
+                int[] seatsSold = new int[resultSet1.getInt("NUM_SEATS_TYPE")];
+
+                switch (resultSet1.getInt("NUM_SEATS_TYPE")) {
+                    case 3:
+                        price[2] = resultSet1.getDouble("VIP_PRICE");
+                        seatsRemaining[2] = resultSet1.getInt("REMAINING_VIP_SEATS");
+                        seatsSold[2] = resultSet1.getInt("SOLD_VIP_SEATS");
+
+                    case 2:
+                        price[1] = resultSet1.getDouble("PREMIUM_PRICE");
+                        seatsRemaining[1] = resultSet1.getInt("REMAINING_PREMIUM_SEATS");
+                        seatsSold[1] = resultSet1.getInt("SOLD_PREMIUM_SEATS");
+
+                    case 1:
+                        price[0] = resultSet1.getDouble("BASE_PRICE");
+                        seatsRemaining[0] = resultSet1.getInt("REMAINING_BASE_SEATS");
+                        seatsSold[0] = resultSet1.getInt("SOLD_BASE_SEATS");
+                }
+
+                // parte di conversione da blob a image in comune a tutti i case
+                Blob blobphoto = resultSet1.getBlob("PHOTO");
+                InputStream is = blobphoto.getBinaryStream();
+                Image photo = new Image(is);
+
+
+                switch (Type.valueOf(resultSet1.getString("TYPE_")).ordinal()) {
+                    case 0:
+                        Festival currentFestival = new Festival(resultSet1.getInt("ID_EVENT"), resultSet1.getString("NAME_"),
+                                resultSet1.getString("CITY"), resultSet1.getString("LOCATION"),
+                                currentDate, resultSet1.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet1.getString("PROVINCE")),
+                                Genre.valueOf(resultSet1.getString("GENRE")), resultSet1.getInt("MAX_NUM_SEATS"), resultSet1.getInt("NUM_SEATS_TYPE"),
+                                seatsRemaining, seatsSold, price, manager, resultSet1.getString("ARTISTS"), resultSet1.getString("DESCRIPTION_"), countWords(resultSet1.getString("ARTISTS")),
+                                photo);
+                        selectedEvent = currentFestival;
+                        break;
+
+                    case 1:
+                        Concert currentConcert = new Concert(resultSet1.getInt("ID_EVENT"), resultSet1.getString("NAME_"),
+                                resultSet1.getString("CITY"), resultSet1.getString("LOCATION"),
+                                currentDate, resultSet1.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet1.getString("PROVINCE")),
+                                Genre.valueOf(resultSet1.getString("GENRE")), resultSet1.getInt("MAX_NUM_SEATS"), resultSet1.getInt("NUM_SEATS_TYPE"),
+                                seatsRemaining, seatsSold, price, manager, resultSet1.getString("ARTISTS"), resultSet1.getString("DESCRIPTION_"), photo);
+                        selectedEvent = currentConcert;
+                        break;
+
+                    case 2:
+                        Theater currentTheatre = new Theater(resultSet1.getInt("ID_EVENT"), resultSet1.getString("NAME_"),
+                                resultSet1.getString("CITY"), resultSet1.getString("LOCATION"),
+                                currentDate, resultSet1.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet1.getString("PROVINCE")),
+                                Genre.valueOf(resultSet1.getString("GENRE")), resultSet1.getInt("MAX_NUM_SEATS"), resultSet1.getInt("NUM_SEATS_TYPE"),
+                                seatsRemaining, seatsSold, price, manager, resultSet1.getString("ARTISTS"), resultSet1.getString("DESCRIPTION_"), resultSet1.getString("AUTHOR"),
+                                photo);
+                        selectedEvent = currentTheatre;
+                        break;
+
+                    case 3:
+                        Other currentOther = new Other(resultSet1.getInt("ID_EVENT"), resultSet1.getString("NAME_"),
+                                resultSet1.getString("CITY"), resultSet1.getString("LOCATION"),
+                                currentDate, resultSet1.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet1.getString("PROVINCE")),
+                                Genre.valueOf(resultSet1.getString("GENRE")), resultSet1.getInt("MAX_NUM_SEATS"), resultSet1.getInt("NUM_SEATS_TYPE"),
+                                seatsRemaining, seatsSold, price, manager, resultSet1.getString("ARTISTS"), resultSet1.getString("DESCRIPTION_"),
+                                photo);
+                        selectedEvent = currentOther;
+                        break;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("Problema nel caricamento degli eventi");
+        }
+        return selectedEvent;
+    }
+
+
+    public int countWords(String input) {
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+        // Rimuove eventuali spazi bianchi prima e dopo la stringa
+        input = input.trim();
+
+        // Se la stringa è vuota dopo il trim, ritorna 0
+        if (input.isEmpty()) {
+            return 0;
+        }
+        // Divide la stringa in base alla virgola
+        String[] words = input.split("\\s*,\\s*");
+        return words.length;
     }
 }

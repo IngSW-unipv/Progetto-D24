@@ -5,10 +5,12 @@ import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
@@ -33,6 +35,7 @@ public class SignUpController {
     private LoginView loginView;
     private SubscriptionSelectionView subscriptionSelectionView;
     private ProfileDao profileDao;
+    private User user= ConnectedUser.getInstance().getUser();
 
 
     public SignUpController(Stage mainstage, SignUpView signUpView, LoginView loginView) {
@@ -84,9 +87,7 @@ public class SignUpController {
 
 
                     System.out.println("Hai cliccato il pulsante registrati  come cliente");
-                    CustomerView customerview = new CustomerView();
-                    CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
-                    customerview.reSetBars();
+
 
                     //set del customer, CHIAMATA AL DAO PER LA REGISTRAZIONE
 
@@ -107,6 +108,12 @@ public class SignUpController {
                     ConnectedUser.getInstance().setUser(customer);
                     ConnectedUser.getInstance().setHome(customerview);
                     ConnectedUser.getInstance().setLoginView(loginView);
+
+                    ArrayList<Ticket> arrayListTicket = customer.getTicketsList();
+                    ArrayList<Notification> arrayListNotification = customer.getNotification();
+                    CustomerView customerview = new CustomerView(customer.getName(),arrayListNotification,arrayListTicket,customer.getPoints() );
+                    CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
+                    customerview.reSetBars();
 
                     //
 

@@ -95,7 +95,7 @@ public class Customer extends User {
         return ticketsList;
     }
 
-    public double getPoints() {
+    public int getPoints() {
 
         return points;
     }

@@ -108,17 +108,18 @@ public class NewConcertController {
 					
 					EventDao eventDao = new EventDao();
 					eventDao.insertEvent(createdConcert);
-				
+					
+					
+					
 				}catch (NumberFormatException e){
 					view.getErrLabel().setVisible(true);
-					
 					
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-	//			home.updateEvsTable(loggedmanager.getEventlist());
-	//			home.reSetBars();
-	//			window.setScene(home);
+				home.updateEvsTable(loggedmanager.getEventlist());
+				home.reSetBars();
+				window.setScene(home);
 			}
 		};
 		
