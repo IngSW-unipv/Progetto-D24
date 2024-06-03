@@ -75,7 +75,7 @@ public class SignUpController {
                 System.out.println("checkFieldsEmpty: " + signUpView.checkFieldsEmpty());
 
 
-                if(signUpView.checkEqualEmailAndPassword()== false ||signUpView.checkFieldsEmpty() == true) {
+                if(signUpView.checkEqualEmailAndPassword()== false || signUpView.checkFieldsEmpty() == true) {
                     signUpView.setErrorLabel();
 
 
