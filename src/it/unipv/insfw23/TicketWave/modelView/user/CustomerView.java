@@ -110,7 +110,7 @@ public class CustomerView extends Scene implements IResettableScene {
 
         // AGGIUSTARE LA TABLEVIEW CON GLI ATTRIBUTI DEI BIGLIETTI E POI COLLEGARE CON IL DAO PER LEGGERE I DATI
         // TableView per i biglietti acquistati
-        ticketTab = new TableView<>();
+        ticketTab = new TableView<Ticket>();
         ticketTab.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
 
 
@@ -153,6 +153,7 @@ public class CustomerView extends Scene implements IResettableScene {
 
 
 
+
 /*
     public static class Biglietto {
         private String evento;
@@ -188,7 +189,7 @@ public class CustomerView extends Scene implements IResettableScene {
     }
 */
 
-    public TableView<Event> getTicketTab() {
+    public TableView<Ticket> getTicketTab() {
         return ticketTab;
     }
 
