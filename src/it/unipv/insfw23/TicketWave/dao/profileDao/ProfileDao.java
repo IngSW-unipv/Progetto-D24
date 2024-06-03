@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.dao.profileDao;
 
 import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
@@ -114,8 +115,10 @@ public class ProfileDao implements IProfileDao {
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
         PreparedStatement statement1;
         PreparedStatement statement2;
+        PreparedStatement statement3;
         ResultSet resultSet1;
         ResultSet resultSet2;
+        ResultSet resultSet3;
 
         Manager manager = null;
 
@@ -230,6 +233,29 @@ public class ProfileDao implements IProfileDao {
                     e.printStackTrace();
                     throw new RuntimeException("Problema nel caricamento degli eventi");
                 }
+
+
+                try {
+                    String query3 = "SELECT * FROM NOTIFY WHERE MAIL = ?";
+
+                    statement3 = connection.prepareStatement(query3);
+                    statement3.setString(1, mail);
+                    resultSet3 = statement3.executeQuery();
+
+                    ArrayList<Notification> notificationArrayList= new ArrayList<>();
+
+                    while (resultSet3.next()) {
+                        Notification currentNotify = new Notification(resultSet3.getInt("ID"), null,
+                                resultSet3.getString("MEXAGE"));
+                        currentNotify.setEmailReceiver(mail);
+                        currentNotify.setDate(resultSet3.getDate("DATE_").toLocalDate());
+                        currentNotify.setTime(resultSet3.getTime("HOUR_").toLocalTime());
+
+                        manager.addNotification(currentNotify);
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
             else {
                 return null;}
@@ -263,8 +289,10 @@ public class ProfileDao implements IProfileDao {
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
         PreparedStatement statement1;
         PreparedStatement statement2;
+        PreparedStatement statement3;
         ResultSet resultSet1;
         ResultSet resultSet2;
+        ResultSet resultSet3;
 
         Customer customer = null;
 
@@ -307,6 +335,28 @@ public class ProfileDao implements IProfileDao {
                 } catch (SQLException e) {
                     e.printStackTrace();
                     throw new RuntimeException("Errore nel caricamento dei biglietti");
+                }
+
+                try {
+                    String query3 = "SELECT * FROM NOTIFY WHERE MAIL = ?";
+
+                    statement3 = connection.prepareStatement(query3);
+                    statement3.setString(1, mail);
+                    resultSet3 = statement3.executeQuery();
+
+                    ArrayList<Notification> notificationArrayList= new ArrayList<>();
+
+                    while (resultSet3.next()) {
+                        Notification currentNotify = new Notification(resultSet3.getInt("ID"), null,
+                                resultSet3.getString("MEXAGE"));
+                        currentNotify.setEmailReceiver(mail);
+                        currentNotify.setDate(resultSet3.getDate("DATE_").toLocalDate());
+                        currentNotify.setTime(resultSet3.getTime("HOUR_").toLocalTime());
+
+                        customer.addNotification(currentNotify);
+                    }
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
                 }
             }
             else{ return null;}
@@ -372,7 +422,66 @@ public class ProfileDao implements IProfileDao {
 		
 		ConnectionDB.closeConnection(connection);
 	}
-    
+
+
+    @Override
+    public ArrayList<String> selectCustomerByGenre (Genre genreToCheck) throws SQLException{
+        connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
+        PreparedStatement statement1;
+        ResultSet resultSet1;
+
+        ArrayList<String> customerWithGenreMail = new ArrayList<>();
+
+        try {
+            String query1 = "SELECT * FROM CUSTOMER";
+            statement1 = connection.prepareStatement(query1);
+
+            resultSet1 = statement1.executeQuery();
+
+            while(resultSet1.next()) {
+
+                Genre[] genreArray= splitStringToArrayGenre(resultSet1.getString("FAVOURITE_GENRE"));
+                for(int i=0; i<genreArray.length; i++){
+                    if(genreToCheck == genreArray[i]){
+                        customerWithGenreMail.add(resultSet1.getString("MAIL"));
+                    }
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Utente non trovato o non registrato");
+        }
+        ConnectionDB.closeConnection(connection);
+        return customerWithGenreMail;
+    }
+
+    public ArrayList<String> selectCustomerByProvince (Province provToCheck) throws SQLException{
+        connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
+        PreparedStatement statement1;
+        ResultSet resultSet1;
+
+        ArrayList<String> customerWithProvMail = new ArrayList<>();
+
+        try {
+            String query1 = "SELECT * FROM CUSTOMER";
+            statement1 = connection.prepareStatement(query1);
+
+            resultSet1 = statement1.executeQuery();
+
+            while(resultSet1.next()) {
+
+                Province province = Province.valueOf(resultSet1.getString("PROVINCE"));
+                if(province == provToCheck){
+                    customerWithProvMail.add(resultSet1.getString("MAIL"));
+                }
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException("Utente non trovato o non registrato");
+        }
+        ConnectionDB.closeConnection(connection);
+        return customerWithProvMail;
+    }
     
 
 }

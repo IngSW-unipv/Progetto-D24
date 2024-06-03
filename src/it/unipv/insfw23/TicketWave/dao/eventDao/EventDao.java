@@ -104,22 +104,25 @@ public class EventDao implements IEventDao {
                     case 2:
                         preparedStatement.setInt(12, event.getTicketsSoldNumberForType()[0]);
                         preparedStatement.setInt(13, event.getTicketsSoldNumberForType()[1]);
-                        //preparedStatement.setInt(14, null);
-
+                        preparedStatement.setNull(14, Types.INTEGER);
                         preparedStatement.setInt(15, event.getSeatsRemainedNumberForType()[0]);
                         preparedStatement.setInt(16, event.getSeatsRemainedNumberForType()[1]);
-
+                        preparedStatement.setNull(17, Types.INTEGER);
                         preparedStatement.setDouble(18, event.getPrices()[0]);
                         preparedStatement.setDouble(19, event.getPrices()[1]);
-
+                        preparedStatement.setNull(20, Types.INTEGER);
                         break;
 
                     case 1:
                         preparedStatement.setInt(12, event.getTicketsSoldNumberForType()[0]);
-
+                        preparedStatement.setNull(13, Types.INTEGER);
+                        preparedStatement.setNull(14, Types.INTEGER);
                         preparedStatement.setInt(15, event.getSeatsRemainedNumberForType()[0]);
-
+                        preparedStatement.setNull(16, Types.INTEGER);
+                        preparedStatement.setNull(17, Types.INTEGER);
                         preparedStatement.setDouble(18, event.getPrices()[0]);
+                        preparedStatement.setNull(19, Types.INTEGER);
+                        preparedStatement.setNull(20, Types.INTEGER);
 
                         break;
                 }
