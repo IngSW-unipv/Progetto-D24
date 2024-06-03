@@ -144,6 +144,7 @@ public class ManagerController {
 				System.out.println(managerview.getTableEv().getSelectionModel().getSelectedItem());
 				//costruttore view
 				TicketPageView tic = new TicketPageView();
+				tic.setForNotBuyable();
 				//costruttore controller
 				TicketPageController buyticketcontroller = new TicketPageController(mainStage, tic, managerview.getTableEv().getSelectionModel().getSelectedItem(),managerview);
 				//metodo che setta upperbar manager

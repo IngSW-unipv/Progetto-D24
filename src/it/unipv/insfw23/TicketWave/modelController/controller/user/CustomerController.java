@@ -1,9 +1,11 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.user;
 
+import it.unipv.insfw23.TicketWave.dao.eventDao.EventDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.access.LoginController;
 import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchController;
 
 import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageController;
+import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
@@ -16,6 +18,8 @@ import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
+
+import java.sql.SQLException;
 
 public class CustomerController {
     private LoginView loginView;
@@ -98,12 +102,21 @@ public class CustomerController {
             @Override
             public void handle(MouseEvent event) {
 //				creo un manager finto per creare un evento finto
-
-                System.out.println(customerView.getTicketTab().getSelectionModel().getSelectedItem());
-                //costruttore view
                 TicketPageView tic = new TicketPageView();
+                try {
+                EventDao eventDao = new EventDao();
+                System.out.println(customerView.getTicketTab().getSelectionModel().getSelectedItem().getIdEvent());
+                //costruttore view
+                   // Ticket tick = (Ticket) customerView.getTicketTab().getSelectionModel().getSelectedItem();
+                int idEvent = customerView.getTicketTab().getSelectionModel().getSelectedItem().getIdEvent();
+
                 //costruttore controller
-                TicketPageController buyticketcontroller = new TicketPageController(mainstage, tic, customerView.getTicketTab().getSelectionModel().getSelectedItem(),customerView);
+
+                    TicketPageController buyticketcontroller = new TicketPageController(mainstage, tic, eventDao.selectEvent(idEvent), customerView);
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    throw new RuntimeException(e);
+                }
                 //metodo che setta upperbar manager
                 //opacita
                 //

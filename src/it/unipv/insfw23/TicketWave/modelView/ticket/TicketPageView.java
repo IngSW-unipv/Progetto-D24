@@ -31,7 +31,7 @@ public class TicketPageView extends Scene implements IResettableScene {
     private static final Label eventNameLabel = new Label("Nome Evento:");
     private static final Label eventDescriptionLabel = new Label("Descrizione Evento:");
     private static final Label ticketsLabel = new Label("Biglietti disponibili per tipo:");
-    private static  Button buyButton = new Button();
+    private  Button buyButton = new Button();
 
     private static Label errmessage = new Label("Seleziona una tipologia di biglietto");
 
@@ -66,9 +66,9 @@ public class TicketPageView extends Scene implements IResettableScene {
     private static Label premiumPriceTextField = new Label();
     private static Label vipPriceTextField = new Label();
 
-    private final RadioButton basePricebutton = new RadioButton();
+    private  final RadioButton basePricebutton = new RadioButton();
     private  final RadioButton premiumPricebutton = new RadioButton();
-    private final RadioButton vipPricebutton = new RadioButton();
+    private  final RadioButton vipPricebutton = new RadioButton();
     private Scene scene;
     private BorderPane layout;
     private boolean isCustomerViewer;
@@ -138,14 +138,9 @@ public class TicketPageView extends Scene implements IResettableScene {
         }
         // controllo e reset delle barre
         if(isCustomerViewer) {
-            buyButton.setVisible(true);
             UpperBar.getIstance().setForCustomer();
         }
         else {
-            buyButton.setVisible(false);
-            basePricebutton.setVisible(false);
-            premiumPricebutton.setVisible(false);
-            vipPricebutton.setVisible(false);
             UpperBar.getIstance().setForManager();
         }
 
@@ -298,9 +293,6 @@ public class TicketPageView extends Scene implements IResettableScene {
 
 
 
-
-
-
         basePricebutton.setToggleGroup(priceselection);
         premiumPricebutton.setToggleGroup(priceselection);
         vipPricebutton.setToggleGroup(priceselection);
@@ -341,7 +333,7 @@ public class TicketPageView extends Scene implements IResettableScene {
             return 0;
     }
 
-    public static Button getBuyButton() {
+    public Button getBuyButton() {
         return buyButton;
     }
 
@@ -385,8 +377,19 @@ public class TicketPageView extends Scene implements IResettableScene {
     }
 
 
-  public RadioButton getBasePricebutton(){
+    public RadioButton getBasePricebutton(){
         return basePricebutton;
+    }
+
+    public static void setEventDescriptionTextField(Label eventDescriptionTextField) {
+        TicketPageView.eventDescriptionTextField = eventDescriptionTextField;
+    }
+
+    public void setForNotBuyable(){
+        buyButton.setVisible(false);
+        basePricebutton.setVisible(false);
+        premiumPricebutton.setVisible(false);
+        vipPricebutton.setVisible(false);
     }
 
 }
