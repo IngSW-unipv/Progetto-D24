@@ -31,7 +31,6 @@ public class LoginView extends Application {
     private Button loginButton = new Button("Login");
     private Button regButton = new Button("Registrati");
     private SignUpView signUpView= new SignUpView();
-    private CustomerView customerView= new CustomerView();
     private ManagerView managerView;
     private BorderPane root ;
     private Scene scene ;

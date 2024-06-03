@@ -1,13 +1,16 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.access;
 
+import it.unipv.insfw23.TicketWave.dao.profileDao.IProfileDao;
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
@@ -32,6 +35,7 @@ public class SignUpController {
     private LoginView loginView;
     private SubscriptionSelectionView subscriptionSelectionView;
     private ProfileDao profileDao;
+    private User user= ConnectedUser.getInstance().getUser();
 
 
     public SignUpController(Stage mainstage, SignUpView signUpView, LoginView loginView) {
@@ -39,7 +43,7 @@ public class SignUpController {
         this.signUpView = signUpView;
         this.mainstage = mainstage;
         this.loginView = loginView;
-        this.profileDao=new ProfileDao();
+        //this.profileDao=new ProfileDao();
         // this.subscriptionSelectionView= subscriptionSelectionView;
         initComponents();
 
@@ -83,9 +87,7 @@ public class SignUpController {
 
 
                     System.out.println("Hai cliccato il pulsante registrati  come cliente");
-                    CustomerView customerview = new CustomerView();
-                    CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
-                    customerview.reSetBars();
+
 
                     //set del customer, CHIAMATA AL DAO PER LA REGISTRAZIONE
 
@@ -97,6 +99,7 @@ public class SignUpController {
                             signUpView.getSelectedProvince(),signUpView.getSelectedGenres(), 0,tickets);  // setto  a zero i biglietti creati e i punti vanno presi dopo nelle altre view
 
                     try {
+                        ProfileDao profileDao=new ProfileDao();
                         profileDao.insertCustomer(customer);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
@@ -105,6 +108,12 @@ public class SignUpController {
                     ConnectedUser.getInstance().setUser(customer);
                     ConnectedUser.getInstance().setHome(customerview);
                     ConnectedUser.getInstance().setLoginView(loginView);
+
+                    ArrayList<Ticket> arrayListTicket = customer.getTicketsList();
+                    ArrayList<Notification> arrayListNotification = customer.getNotification();
+                    CustomerView customerview = new CustomerView(customer.getName(),arrayListNotification,arrayListTicket,customer.getPoints() );
+                    CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
+                    customerview.reSetBars();
 
                     //
 
@@ -124,7 +133,7 @@ public class SignUpController {
 
                     ArrayList<Event> arraylistevent = new ArrayList<>();
 
-                    Manager manager = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), null, arraylistevent,5,1,LocalDate.now(),0);
+                    Manager manager = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), null, arraylistevent,1,0,LocalDate.now(),0);
                     //credit card, data sub max numberofevents, da prendere nella mastercardview, subcription impostato a 1 solo per creare gli eventi di prova, però deve essere cambiato dal subupdate
 
                     try {

@@ -5,6 +5,8 @@ import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchC
 
 import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageController;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
 import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
@@ -21,11 +23,13 @@ public class CustomerController {
     private CustomerView customerView;
     private SignUpView signUpView;
     private ManagerView managerView;
+    Customer loggedCustomer;
 
     public CustomerController(Stage mainstage, CustomerView customerView, LoginView loginView) {
         this.mainstage = mainstage;
         this.customerView = customerView;
         this.loginView = loginView;
+        this.loggedCustomer = (Customer) ConnectedUser.getInstance().getUser();
         initComponents();
     }
 
@@ -75,7 +79,7 @@ public class CustomerController {
             }
         };
         customerView.getSearchButton().setOnMouseClicked(searchButton);
-       EventHandler<MouseEvent> openevent = new EventHandler<>() {
+       /*EventHandler<MouseEvent> openevent = new EventHandler<>() {
 
             @Override
             public void handle(MouseEvent event) {
@@ -88,7 +92,25 @@ public class CustomerController {
                 mainstage.setScene(tic);
             }
         };
-        customerView.getTicketTab().setOnMouseClicked(openevent);
+        customerView.getTicketTab().setOnMouseClicked(openevent);*/
+        EventHandler<MouseEvent> openTicket = new EventHandler<>() {
+
+            @Override
+            public void handle(MouseEvent event) {
+//				creo un manager finto per creare un evento finto
+
+                System.out.println(customerView.getTicketTab().getSelectionModel().getSelectedItem());
+                //costruttore view
+                TicketPageView tic = new TicketPageView();
+                //costruttore controller
+                TicketPageController buyticketcontroller = new TicketPageController(mainstage, tic, customerView.getTicketTab().getSelectionModel().getSelectedItem(),customerView);
+                //metodo che setta upperbar manager
+                //opacita
+                //
+                mainstage.setScene(tic);
+            }
+        };
+        customerView.getTicketTab().setOnMouseClicked(openTicket);
 
     }
 }
