@@ -15,6 +15,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Objects;
 
 public class ResearchDAO implements IResearchDAO{
     private final String schema;
@@ -30,7 +31,8 @@ public class ResearchDAO implements IResearchDAO{
         conn = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(conn,schema);
         ArrayList<Event> result = new ArrayList<>();
         ArrayList<Event> managerEvent = new ArrayList<>();
-        Manager manager = null;
+        ArrayList<Manager> prevManager = new ArrayList<>();
+        Manager manager;
 
         if (ConnectionDB.isOpen(conn)) {
             try {
@@ -41,19 +43,36 @@ public class ResearchDAO implements IResearchDAO{
                 while(resultset1.next()) { // creazione Manager
                         manager = createManager(resultset1);
 
-                        String query2 = "SELECT * FROM EVENT_ WHERE ID_MANAGER = ?"; // query per prendere tutti gli eventi
-                        PreparedStatement statement2 = conn.prepareStatement(query2);
-                        statement2.setString(1, manager.getEmail());
-                        ResultSet resultset2 = statement2.executeQuery();
+                        // for (Manager m : prevManager) { // prevManager non viene mai aggiornato
+                        //    if (!m.equals(manager)) {
 
-                        while(resultset2.next()) { // creazione Evento
-                            managerEvent.add(createEvent(resultset2, manager));
-                            // result.add(createEvent(resultset2, manager)); // aggiungo a result un nuovo evento grazie a createEvent
-                            // managerEvent.add(createEvent(resultset2, manager)); // lista degli eventi di un manager
-                        }
-                        manager.setEvent(managerEvent); // setto gli eventi creati da quel manager
-                        result = managerEvent;
-                        managerEvent.clear(); // lo azzero per i prossimi manager che avranno creato eventi diversi
+                                String query2 = "SELECT * FROM EVENT_ WHERE ID_MANAGER = ?"; // query per prendere tutti gli eventi
+                                PreparedStatement statement2 = conn.prepareStatement(query2);
+                                statement2.setString(1, manager.getEmail());
+                                ResultSet resultset2 = statement2.executeQuery();
+
+                                while (resultset2.next()) { // creazione Evento
+                                    managerEvent.add(createEvent(resultset2, manager));
+                                    // result.add(createEvent(resultset2, manager)); // aggiungo a result un nuovo evento grazie a createEvent
+                                    // managerEvent.add(createEvent(resultset2, manager)); // lista degli eventi di un manager
+                                }
+                                manager.setEvent(managerEvent); // setto gli eventi creati da quel manager
+                                for (int i = 0; i < managerEvent.size(); i++) { // setto i manager con la loro lista di eventi ai vari eventi
+                                    managerEvent.get(i).setCreator(manager);
+                                    //System.out.println(managerEvent.get(i).getCreator().getEventlist().get(i).getCreator().getEmail()); // CHECK DA RIMUOVERE *********************
+                                    //System.out.println(managerEvent.get(i).getCreator().getEventlist().get(i).getName());
+                                }
+                                prevManager.add(manager);
+
+                                result.addAll(managerEvent);
+                                managerEvent.clear(); // lo azzero per i prossimi manager che avranno creato eventi diversi
+                         //   }
+                       //  }
+                }
+                for (Event e : result){ // result esce fuori senza avere un Evento
+                    System.out.println(e.getCreator().getEmail());
+                    System.out.println(e.getCreator().getEventlist());
+                    System.out.println(e.getName());
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
