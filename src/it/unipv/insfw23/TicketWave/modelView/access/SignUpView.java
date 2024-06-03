@@ -336,7 +336,7 @@ public class SignUpView extends Scene implements IResettableScene {
     }
     private boolean isAnyCheckBoxSelected() {
         for (CheckBox checkBox : choiceGenre) {
-            if (checkBox.isSelected()) {
+            if (checkBox.isSelected() && customerRadioButton.isSelected()) {
                 return true;
             }
         }
@@ -344,12 +344,14 @@ public class SignUpView extends Scene implements IResettableScene {
     }
     public boolean checkFieldsEmpty(){
         if(getNameField().getText()== null || getSurnameField().getText()== null || getEmailField().getText()==null || getConfirmEmailField().getText()== null ||
-                getPasswordField().getText()== null || getConfirmPasswordField().getText()==null || getDatePicker().getValue() == null && getSelectedProvince()==null  ){
+                getPasswordField().getText()== null || getConfirmPasswordField().getText()==null || getDatePicker().getValue() == null || getSelectedProvince()==null  ){
             return true;
         }else{
             return  false;
         }
     }
+
+
 
 }
 

@@ -84,13 +84,9 @@ public class SignUpController {
 
                 }else if (signUpView.getCustomerRadioButton().isSelected()) {
 
-                    Customer loggedCustomer =  (Customer) user;;
+
                     System.out.println("Hai cliccato il pulsante registrati  come cliente");
-                    ArrayList<Ticket> arrayListTicket = loggedCustomer.getTicketsList();
-                    ArrayList<Notification> arrayListNotification = loggedCustomer.getNotification();
-                    CustomerView customerview = new CustomerView(loggedCustomer.getName(),arrayListNotification,arrayListTicket,loggedCustomer.getPoints() );
-                    CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
-                    customerview.reSetBars();
+
 
                     //set del customer, CHIAMATA AL DAO PER LA REGISTRAZIONE
 
@@ -110,6 +106,12 @@ public class SignUpController {
                     ConnectedUser.getInstance().setUser(customer);
                     ConnectedUser.getInstance().setHome(customerview);
                     ConnectedUser.getInstance().setLoginView(loginView);
+
+                    ArrayList<Ticket> arrayListTicket = customer.getTicketsList();
+                    ArrayList<Notification> arrayListNotification = customer.getNotification();
+                    CustomerView customerview = new CustomerView(customer.getName(),arrayListNotification,arrayListTicket,customer.getPoints() );
+                    CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
+                    customerview.reSetBars();
 
                     //
 

@@ -48,7 +48,7 @@ public class CustomerView extends Scene implements IResettableScene {
     public CustomerView(String name, ArrayList<Notification> nots, ArrayList<Ticket> tick, int points) {
         super(new BorderPane(), 1080, 600);
         this.nameLabel = new Label("Benvenuto, "+name);
-        this.wavePoints = new Label("Wave Points" +points);
+        this.wavePoints = new Label("WavePoints: " +points);
         this.nots = FXCollections.observableArrayList(nots);
         this.tick = FXCollections.observableArrayList(tick);
         initComponents();
@@ -96,14 +96,15 @@ public class CustomerView extends Scene implements IResettableScene {
         GridPane.setConstraints(nameLabel, 0, 0);
 
         // Punti Accumulati
-        wavePoints = new Label("Wave Points: 100"); // Esempio di punti accumulati
+
         wavePoints.setFont(Font.font("Helvetica ",FontWeight.BOLD, 20));
         GridPane.setConstraints(wavePoints, 1, 0);
 
         // ListView per le notifiche
         notifyListView = new ListView<>();
         notifyListView.getStylesheets().add("it/unipv/insfw23/TicketWave/css/listViewStyle.css");
-        ticketTab.getItems().addAll(nots);
+        if(nots != null){
+            notifyListView.setItems(nots);}
        // notifyListView.getItems().addAll("Notifica 1", "Notifica 2", "Notifica 3"); // Dati di esempio
         GridPane.setConstraints(notifyListView, 0, 1);
 
@@ -127,8 +128,9 @@ public class CustomerView extends Scene implements IResettableScene {
 
         ticketTab.getColumns().addAll(eventCol,barcodeCol, priceCol,typeCol);
         ticketTab.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
-        ticketTab.getItems().addAll(tick);
-
+        if(tick != null) {
+            ticketTab.setItems(tick);
+        }
         GridPane.setConstraints(ticketTab, 1, 1);
 
         grid.getChildren().addAll(nameLabel, wavePoints, notifyListView, ticketTab,logoutButton);
