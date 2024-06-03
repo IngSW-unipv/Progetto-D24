@@ -199,7 +199,7 @@ public class ProfileDao implements IProfileDao {
                                         resultSet2.getString("CITY"), resultSet2.getString("LOCATION"),
                                         currentDate, resultSet2.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet2.getString("PROVINCE")),
                                         Genre.valueOf(resultSet2.getString("GENRE")), resultSet2.getInt("MAX_NUM_SEATS"), resultSet2.getInt("NUM_SEATS_TYPE"),
-                                        seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION"), photo);
+                                        seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION_"), photo);
                                 createdEvents.add(currentConcert);
                                 break;
 
@@ -208,7 +208,7 @@ public class ProfileDao implements IProfileDao {
                                         resultSet2.getString("CITY"), resultSet2.getString("LOCATION"),
                                         currentDate, resultSet2.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet2.getString("PROVINCE")),
                                         Genre.valueOf(resultSet2.getString("GENRE")), resultSet2.getInt("MAX_NUM_SEATS"), resultSet2.getInt("NUM_SEATS_TYPE"),
-                                        seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION"), resultSet2.getString("AUTHOR"),
+                                        seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION_"), resultSet2.getString("AUTHOR"),
                                         photo);
                                 createdEvents.add(currentTheatre);
                                 break;
@@ -218,7 +218,7 @@ public class ProfileDao implements IProfileDao {
                                         resultSet2.getString("CITY"), resultSet2.getString("LOCATION"),
                                         currentDate, resultSet2.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet2.getString("PROVINCE")),
                                         Genre.valueOf(resultSet2.getString("GENRE")), resultSet2.getInt("MAX_NUM_SEATS"), resultSet2.getInt("NUM_SEATS_TYPE"),
-                                        seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION"),
+                                        seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION_"),
                                         photo);
                                 createdEvents.add(currentOther);
                                 break;
