@@ -3,20 +3,14 @@ package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 import java.sql.SQLException;
 
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
-//import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
-//import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.dao.ticketDao.TicketDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
 import it.unipv.insfw23.TicketWave.modelController.factory.payment.PaymentFactory;
-<<<<<<< HEAD
 import it.unipv.insfw23.TicketWave.modelController.factory.subscription.SubscriptionHandlerFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.MastercardPayment;
-=======
 import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
-import it.unipv.insfw23.TicketWave.modelDomain.payment.MastercardPayment;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
->>>>>>> branch 'master' of https://github.com/IngSW-unipv/Progetto-D24.git
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
@@ -37,7 +31,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.sql.SQLException;
+
 
 
 public class PaymentDataMController {
