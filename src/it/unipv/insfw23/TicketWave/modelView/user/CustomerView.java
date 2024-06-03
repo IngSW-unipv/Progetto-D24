@@ -124,7 +124,7 @@ public class CustomerView extends Scene implements IResettableScene {
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
 
         TableColumn<Ticket, String> eventCol = new TableColumn<>("Evento");
-        eventCol.setCellValueFactory(new PropertyValueFactory<>("name"));
+        eventCol.setCellValueFactory(new PropertyValueFactory<>("eventName"));
 
         ticketTab.getColumns().addAll(eventCol,barcodeCol, priceCol,typeCol);
         ticketTab.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
