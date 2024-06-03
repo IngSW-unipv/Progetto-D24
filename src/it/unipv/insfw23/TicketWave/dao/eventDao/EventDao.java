@@ -298,6 +298,7 @@ public class EventDao implements IEventDao {
         return selectedEvent;
     }
 
+
     public int countWords(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
