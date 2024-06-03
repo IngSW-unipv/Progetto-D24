@@ -60,54 +60,48 @@ public class PaymentDataPController {
        paymentDataPView.getBackButton().setOnMouseClicked(turnBackPaymentPage);
 
        EventHandler<MouseEvent> goToNewPage = new EventHandler<>() {
-
            @Override
            public void handle(MouseEvent actionEvent) {
-               // Azione da eseguire quando il pulsante viene premuto
-               System.out.println("pagamento andato a buon fine stai tornando indietro alla home page!");
+               // Validare il campo email
+               if(paymentDataPView.getInsertEmail().getText().isEmpty()){
+                   paymentDataPView.getErrorLabel().setVisible(true);
+                   return;
+               } else {
+                   paymentDataPView.getErrorLabel().setVisible(false);
+               }
+
+               // Azione da eseguire quando il pulsante avanti viene premuto
+               System.out.println("Pagamento andato a buon fine, stai tornando alla pagina principale!");
                if(user.isCustomer()){
-                   System.out.println("Stai andando alla CustomerView");
-                   System.out.println("Stai andando alla CustomerView");
+                   System.out.println("Stai andando alla vista del cliente");
                    try {
                        Customer customer = (Customer) user;
                        TicketDao ticketDao = new TicketDao();
-                       System.out.println("ticketdao creato");
+                       System.out.println("TicketDao creato");
 
                        PayPalPayment payPalPayment = new PayPalPayment();
                        iPaymentAdapter = PaymentFactory.getPaypalAdapter(payPalPayment);
-                       System.out.println("creati i payPalPayment payment e interfaccia");
-
+                       System.out.println("Creati PayPalPayment e interfaccia");
 
                        Ticket ticket = customer.buyticket(iPaymentAdapter, ConnectedUser.getInstance().getEventForTicket(), ConnectedUser.getInstance().getTicketType(), getUsePoint());
-                       System.out.println("Ticket associato correttamente");
+                       System.out.println("Biglietto associato correttamente");
 
                        try {
                            ticketDao.insertTicket(ticket, customer);
-
-                           System.out.println("insert ticket eseguito");
+                           System.out.println("Inserimento biglietto eseguito");
                        } catch (SQLException e) {
-                           throw new SQLException("Problema inserimento ticket", e);
+                           throw new SQLException("Problema inserimento biglietto", e);
                        }
-
-
-
-                   }
-                   catch (Exception e) {
+                   } catch (Exception e) {
                        throw new RuntimeException(e);
                    }
-
-
 
                    UpperBar.getIstance().setForCustomer();
                    home.reSetBars();
                    Scene nextScene = (Scene) home;
                    mainStage.setScene(nextScene);
 
-
-
-
-               }
-               else {
+               } else {
                    Manager managerlogged = (Manager)user;
                    ProfileDao profiledao = new ProfileDao();
                    SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMastercardAdapter(new MastercardPayment()), paymentSelectionView.getPrice());
@@ -117,9 +111,8 @@ public class PaymentDataPController {
                        } catch (SQLException e) {
                            e.printStackTrace();
                        }
-                   }
-                   else {
-                       System.out.println("pagamento non andato a buon fine");
+                   } else {
+                       System.out.println("Pagamento non andato a buon fine");
                    }
 
                    if(home!=null){
@@ -127,15 +120,13 @@ public class PaymentDataPController {
                        home.reSetBars();
                        Scene nextScene = (Scene) home;
                        mainStage.setScene(nextScene);
-                   }
-                   else{
+                   } else {
                        UpperBar.getIstance().setForManager();
                        Manager managerUser = (Manager) user;
                        ManagerView managerView = new ManagerView(managerUser.getName(), managerUser.getNotification(), managerUser.getEventlist());
                        ManagerController managerController = new ManagerController(mainStage, managerView, ConnectedUser.getInstance().getLoginView());
                        mainStage.setScene(managerView);
                    }
-
                }
            }
        };

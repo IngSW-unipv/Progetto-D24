@@ -66,9 +66,9 @@ public class TicketPageView extends Scene implements IResettableScene {
     private static Label premiumPriceTextField = new Label();
     private static Label vipPriceTextField = new Label();
 
-    private static final RadioButton basePricebutton = new RadioButton();
-    private static final RadioButton premiumPricebutton = new RadioButton();
-    private static final RadioButton vipPricebutton = new RadioButton();
+    private final RadioButton basePricebutton = new RadioButton();
+    private  final RadioButton premiumPricebutton = new RadioButton();
+    private final RadioButton vipPricebutton = new RadioButton();
     private Scene scene;
     private BorderPane layout;
     private boolean isCustomerViewer;
@@ -389,9 +389,6 @@ public class TicketPageView extends Scene implements IResettableScene {
         return basePricebutton;
     }
 
-    public static void setEventDescriptionTextField(Label eventDescriptionTextField) {
-        TicketPageView.eventDescriptionTextField = eventDescriptionTextField;
-    }
 }
 
 
