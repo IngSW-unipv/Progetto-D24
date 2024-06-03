@@ -103,7 +103,7 @@ public class ManagerController {
 				StatisticsHandler statDominio = new StatisticsHandler();
 				WrapType typeRes = statDominio.typeStats(loggedmanager);
 				//Al costruttore di type view, devo passare i risultati del metodo, e la classe di statistiche di dominio
-				TypeStatsView typeView = new TypeStatsView();
+				TypeStatsView typeView = new TypeStatsView(typeRes);
 				TypeStatsController typeController = new TypeStatsController(mainStage, typeView);
 				mainStage.setScene(typeView);
 			}

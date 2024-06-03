@@ -1,5 +1,9 @@
 package it.unipv.insfw23.TicketWave.modelView.statistics;
 
+import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
+import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapArtist;
+import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapGenre;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import javafx.geometry.Pos;
@@ -24,10 +28,14 @@ public class GenreStatsView extends Scene {
     private ArtistStatsView artistPane;
     private BorderPane layout;
     private BorderPane content;
+    private WrapGenre genreRes;
+    private WrapArtist artistRes;
 
     //modifico il costruttore per ricevere i due risultati WrapArtist e WrapGenreOrPorv e la classe statDominio
-    public GenreStatsView(){
+    public GenreStatsView(WrapGenre genreRes, WrapArtist artistRes){
         super(new BorderPane(), 1080, 600);
+        this.genreRes = genreRes;
+        this.artistRes = artistRes;
         init();
     }
     private void init() {
@@ -50,13 +58,17 @@ public class GenreStatsView extends Scene {
 
         XYChart.Series<String, Number> series = new XYChart.Series<>();
 
+        if (genreRes.getGenreResult().size() != genreRes.getGenreArray().size()) {
+            throw new IllegalArgumentException("Le liste devono avere la stessa dimensione");
+        }
+        else {
 
-        // Aggiunta dei dati alla serie
-        series.getData().add(new XYChart.Data<>("Categoria 1", 56));
-        series.getData().add(new XYChart.Data<>("Categoria 2", 66));
-        series.getData().add(new XYChart.Data<>("Categoria 3", 89));
-        series.getData().add(new XYChart.Data<>("Categoria 4", 12));
-        series.getData().add(new XYChart.Data<>("Categoria 5", 0));
+            // Aggiunta dei dati alla serie
+            for (int i = 0; i < genreRes.getGenreArray().size(); i++) {
+
+                series.getData().add(new XYChart.Data<>(genreRes.getGenreArray().get(i).toString(), genreRes.getGenreResult().get(i)));
+            }
+        }
 
         // Aggiunta della serie al grafico
         barChart.getData().add(series);
@@ -95,7 +107,7 @@ public class GenreStatsView extends Scene {
 
 
         //passo i risultati artistRes
-        ArtistStatsView artistPane = new ArtistStatsView();
+        ArtistStatsView artistPane = new ArtistStatsView(artistRes);
         this.artistPane=artistPane;
         content.setRight(artistPane);
 

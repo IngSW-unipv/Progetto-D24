@@ -176,7 +176,7 @@ public class LoginController {
 
                 }// devi mettere managerview anche all'interno del costruttore
 
-                loginView.setErrorLabel();
+                else{loginView.setErrorLabel();}
 
                 // Imposta l'handler sull'azione del pulsante "Registrati"
             }
