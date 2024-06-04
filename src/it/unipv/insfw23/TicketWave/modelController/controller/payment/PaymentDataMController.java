@@ -97,7 +97,6 @@ public class PaymentDataMController {
                         iPaymentAdapter = PaymentFactory.getMastercardAdapter(mastercardPayment);
                         System.out.println("creati i mastercardPayment payment e interfaccia");
 
-
                         Ticket ticket = customer.buyticket(iPaymentAdapter, ConnectedUser.getInstance().getEventForTicket(), ConnectedUser.getInstance().getTicketType(), getUsePoint());
                         System.out.println("Ticket associato correttamente");
 
