@@ -497,7 +497,7 @@ public class ProfileDao implements IProfileDao {
 
             statement1.execute();
         } catch (SQLException e) {
-            throw new SQLException("Errore nell'aggiornamento della sub");
+            throw new SQLException("Errore nell'aggiornamento dei punti");
         }catch(Exception e) {
             e.printStackTrace();
         }
