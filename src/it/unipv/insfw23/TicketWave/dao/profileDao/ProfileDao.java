@@ -490,6 +490,28 @@ public class ProfileDao implements IProfileDao {
         ConnectionDB.closeConnection(connection);
         return customerWithProvMail;
     }
+
+    public void updateCustomerPoints(Customer customer) throws SQLException {
+        connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);
+        PreparedStatement statement1;
+        try {
+
+            String query1 = "UPDATE CUSTOMER SET POINTS= ? WHERE MAIL = ?";
+
+            statement1 = connection.prepareStatement(query1);
+
+            statement1.setInt(1,customer.getPoints());
+            statement1.setString(2, customer.getEmail());
+
+            statement1.execute();
+        } catch (SQLException e) {
+            throw new SQLException("Errore nell'aggiornamento della sub");
+        }catch(Exception e) {
+            e.printStackTrace();
+        }
+
+        ConnectionDB.closeConnection(connection);
+    }
     
 
 }

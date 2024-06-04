@@ -87,6 +87,7 @@ public class PaymentDataMController {
                     try {
                         Customer customer = (Customer) user;
                         TicketDao ticketDao = new TicketDao();
+                        //ProfileDao profileDao= new ProfileDao();
                         System.out.println("ticketdao creato");
 
                         MastercardPayment mastercardPayment = new MastercardPayment();
@@ -99,7 +100,7 @@ public class PaymentDataMController {
 
                         try {
                             ticketDao.insertTicket(ticket, customer);
-
+                            //profileDao.updateCustomerPoints(customer);
                             System.out.println("insert ticket eseguito");
                         } catch (SQLException e) {
                             throw new SQLException("Problema inserimento ticket", e);
