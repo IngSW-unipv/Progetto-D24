@@ -110,7 +110,10 @@ public class NewConcertController {
 					EventDao eventDao = new EventDao();
 					eventDao.insertEvent(createdConcert);
 					
-					
+					home.updateEvsTable(loggedmanager.getEventlist(),loggedmanager.getCounterCreatedEvents());
+					home.reSetBars();
+					ManagerController managerController = new ManagerController(window, home, ConnectedUser.getInstance().getLoginView());
+					window.setScene(home);
 					
 				}catch (NumberFormatException e){
 					view.getErrLabel().setVisible(true);
@@ -118,10 +121,7 @@ public class NewConcertController {
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-				home.updateEvsTable(loggedmanager.getEventlist());
-				home.reSetBars();
-				ManagerController managerController = new ManagerController(window, home, ConnectedUser.getInstance().getLoginView());
-				window.setScene(home);
+				
 			}
 		};
 		

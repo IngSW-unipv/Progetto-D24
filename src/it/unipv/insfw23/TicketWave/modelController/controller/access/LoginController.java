@@ -161,7 +161,7 @@ public class LoginController {
                         System.out.println("Hai cliccato il pulsante Login come gestore");
                         ArrayList<Event> arrayListEvent = loggedManager.getEventlist();
                         ArrayList<Notification> arrayListNotification = loggedManager.getNotification();
-                        ManagerView managerView = new ManagerView(loggedManager.getName(),arrayListNotification,arrayListEvent);
+                        ManagerView managerView = new ManagerView(loggedManager.getName(),arrayListNotification,arrayListEvent,loggedManager.getSubscription(),loggedManager.getCounterCreatedEvents());
                         //managerView.setEventsforTableev(managerfinto);
                         //managerView.reSetBars();
 

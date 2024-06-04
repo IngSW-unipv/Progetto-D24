@@ -141,13 +141,16 @@ public class PaymentDataMController {
                     if(home!=null){
                         UpperBar.getIstance().setForManager();
                         home.reSetBars();
-                        Scene nextScene = (Scene) home;
-                        mainStage.setScene(nextScene);
+                        ManagerView managerView = (ManagerView)home;
+                        ManagerController managerController = new ManagerController(mainStage, managerView, ConnectedUser.getInstance().getLoginView());
+                        managerView.updateSubLabels(managerlogged.getSubscription(), managerlogged.getCounterCreatedEvents());
+                        //Scene nextScene = (Scene) home;
+                        //mainStage.setScene(nextScene);
+                        mainStage.setScene(managerView);
                     }
                     else{
                         UpperBar.getIstance().setForManager();
-                        Manager managerUser = (Manager) user;
-                        ManagerView managerView = new ManagerView(managerUser.getName(), managerUser.getNotification(), managerUser.getEventlist());
+                        ManagerView managerView = new ManagerView(managerlogged.getName(), managerlogged.getNotification(), managerlogged.getEventlist(),managerlogged.getSubscription(),managerlogged.getCounterCreatedEvents());
                         ManagerController managerController = new ManagerController(mainStage, managerView, ConnectedUser.getInstance().getLoginView());
                         mainStage.setScene(managerView);
                     }
