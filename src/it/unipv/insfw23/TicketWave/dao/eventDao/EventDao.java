@@ -328,7 +328,7 @@ public class EventDao implements IEventDao {
             if (ConnectionDB.isOpen(connection)) {   // check se è tutto ok
 
                 //query d'inserimento
-                String query = "UPDATE EVENT_ SET SOLD_BASE_SEATS = ?, SOLD_PREMIUM_SEATS = ?, SOLD_VIP_SEATS = ?, REMAINING_BASE_SEATS = ?, REMAINING_PREMIUM_SEATS = ?, REMAINING_VIP_SEATS = ?, WHERE ID_EVENT = ?";
+                String query = "UPDATE EVENT_ SET SOLD_BASE_SEATS = ?, SOLD_PREMIUM_SEATS = ?, SOLD_VIP_SEATS = ?, REMAINING_BASE_SEATS = ?, REMAINING_PREMIUM_SEATS = ?, REMAINING_VIP_SEATS = ? WHERE ID_EVENT = ?";
 
 
                 //setto i campi
