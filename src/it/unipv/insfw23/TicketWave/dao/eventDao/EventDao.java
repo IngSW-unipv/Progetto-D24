@@ -375,4 +375,5 @@ public class EventDao implements IEventDao {
         ConnectionDB.closeConnection(connection);
     }
 
+
 }
