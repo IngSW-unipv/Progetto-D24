@@ -2,7 +2,6 @@ package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
 import java.sql.SQLException;
 
-import it.unipv.insfw23.TicketWave.dao.eventDao.EventDao;
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.dao.ticketDao.TicketDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
@@ -31,17 +30,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 
-
-
 public class PaymentDataMController {
     private Stage mainStage;
     private PaymentDataMView paymentDataMView;
     private TicketPageView ticketpage;
     private PaymentSelectionView paymentSelectionView;
     private boolean isviewermanager;
-    private User user= ConnectedUser.getInstance().getUser();
+    private User user = ConnectedUser.getInstance().getUser();
 
-   private  IPaymentAdapter iPaymentAdapter;
+    private IPaymentAdapter iPaymentAdapter;
 
 
     private IResettableScene home = ConnectedUser.getInstance().getHome();
@@ -56,8 +53,6 @@ public class PaymentDataMController {
 
 
     public void initComponents() {
-
-
 
 
         EventHandler<MouseEvent> turnBackPaymentPage = new EventHandler<>() {
@@ -81,15 +76,18 @@ public class PaymentDataMController {
 
             @Override
             public void handle(MouseEvent actionEvent) {
+                // controllo sull'inserimento dei campi numerici
+                if (!checkNumericFields()) {
+                    // Se checkNumericFields ritorna false, esci dalla funzione
+                    return;
+                }
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("pagamento andato a buon fine stai tornando indietro alla home page!");
-                if(user.isCustomer()){
+                if (user.isCustomer()) {
                     System.out.println("Stai andando alla CustomerView");
                     try {
                         Customer customer = (Customer) user;
                         TicketDao ticketDao = new TicketDao();
-                        ProfileDao profileDao= new ProfileDao();
-                        EventDao eventDao = new EventDao();
                         System.out.println("ticketdao creato");
 
                         MastercardPayment mastercardPayment = new MastercardPayment();
@@ -107,77 +105,55 @@ public class PaymentDataMController {
                         } catch (SQLException e) {
                             throw new SQLException("Problema inserimento ticket", e);
                         }
-                        try {
-                            profileDao.updateCustomerPoints(customer);
 
-                            System.out.println("updatepoints eseguito");
-                        } catch (SQLException e) {
-                            throw new SQLException("Problema aggiornamento punti", e);
-                        }
-                        try {
-                            eventDao.updateSeatsNumber(ConnectedUser.getInstance().getEventForTicket());
 
-                            System.out.println("updateSeats eseguito");
-                        } catch (SQLException e) {
-                            throw new SQLException("Problema aggiornamento posti", e);
-                        }
-
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
-                        catch (Exception e) {
-                            throw new RuntimeException(e);
+
+
+                    UpperBar.getIstance().setForCustomer();
+                    home.reSetBars();
+                    Scene nextScene = (Scene) home;
+                    mainStage.setScene(nextScene);
+
+
+                } else {
+                    Manager managerlogged = (Manager) user;
+                    ProfileDao profiledao = new ProfileDao();
+                    SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMastercardAdapter(new MastercardPayment()), paymentSelectionView.getPrice());
+                    if (managerlogged.getSubscription() != -1) {
+                        try {
+                            profiledao.updateManagerSub(managerlogged);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
                         }
+                    } else {
+                        System.out.println("pagamento non andato a buon fine");
+                    }
 
-
-
-                        UpperBar.getIstance().setForCustomer();
-                        home.reSetBars();
-                        Scene nextScene = (Scene) home;
-                        mainStage.setScene(nextScene);
-
-
-
-
-                }
-                else {
-                	Manager managerlogged = (Manager)user;
-                	ProfileDao profiledao = new ProfileDao();
-                	SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMastercardAdapter(new MastercardPayment()), paymentSelectionView.getPrice());
-                	if(managerlogged.getSubscription() != -1) {
-                		try {
-                			profiledao.updateManagerSub(managerlogged);
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}
-                	}
-                	else {
-                		System.out.println("pagamento non andato a buon fine");
-                	}
-                	
-                    if(home!=null){
+                    if (home != null) {
                         UpperBar.getIstance().setForManager();
                         home.reSetBars();
-                        ManagerView managerView = (ManagerView)home;
+                        ManagerView managerView = (ManagerView) home;
                         ManagerController managerController = new ManagerController(mainStage, managerView, ConnectedUser.getInstance().getLoginView());
                         managerView.updateSubLabels(managerlogged.getSubscription(), managerlogged.getCounterCreatedEvents());
                         //Scene nextScene = (Scene) home;
                         //mainStage.setScene(nextScene);
                         mainStage.setScene(managerView);
-                    }
-                    else{
+                    } else {
                         UpperBar.getIstance().setForManager();
-                        ManagerView managerView = new ManagerView(managerlogged.getName(), managerlogged.getNotification(), managerlogged.getEventlist(),managerlogged.getSubscription(),managerlogged.getCounterCreatedEvents());
+                        ManagerView managerView = new ManagerView(managerlogged.getName(), managerlogged.getNotification(), managerlogged.getEventlist(), managerlogged.getSubscription(), managerlogged.getCounterCreatedEvents());
                         ConnectedUser.getInstance().setHome(managerView);
                         ManagerController managerController = new ManagerController(mainStage, managerView, ConnectedUser.getInstance().getLoginView());
                         mainStage.setScene(managerView);
                     }
 
-              }
+                }
             }
         };
 
         paymentDataMView.getNextButton().setOnMouseClicked(goToNewPage);
-
-
 
 
         addCharacterLimit(paymentDataMView.getInsertNC(), 16);
@@ -198,44 +174,67 @@ public class PaymentDataMController {
             }
         });
     }
-/*
-    EventHandler<MouseEvent> buyTicketEventHandler = new EventHandler<>() {
-        @Override
-        public void handle(MouseEvent actionEvent) {
-            // Azione da eseguire quando il pulsante "Next" viene premuto
-            System.out.println("Hai Acquistato il biglietto");
-
-            // Esegui l'acquisto del biglietto
-            customer.buyticket(); // ???? cosa dovrei passare a questo punto??
-
-            // Chiudi la schermata corrente
-            mainStage.close();
-        }
-    };
-
-        paymentDataPage.getNextButton().setOnMouseClicked(buyTicketEventHandler);
-
-*/
 
 
-    public void setLabelforWavePoints(){
-        if(!user.isCustomer()){
+    public void setLabelforWavePoints() {
+        if (!user.isCustomer()) {
             paymentDataMView.getUsePointsButton().setVisible(false);
         }
     }
 
-    public int getUsePoint(){
+    private boolean isNumericAndNotEmpty(String str) {
+        return str != null && !str.isEmpty() && str.matches("\\d+");
+    }
+
+
+    private boolean checkNumericFields() {
+        boolean valid = true;
+
+        if (!isNumericAndNotEmpty(paymentDataMView.getInsertNC().getText()) || paymentDataMView.getInsertNC().getText().length() != 16) {
+            PaymentDataMView.getErrorLabelNC().setVisible(true);
+            valid = false;
+        } else {
+            PaymentDataMView.getErrorLabelNC().setVisible(false);
+        }
+
+        if (!isNumericAndNotEmpty(paymentDataMView.getInsertMM().getText()) || paymentDataMView.getInsertMM().getText().length() != 2) {
+            PaymentDataMView.getErrorLabelMM().setVisible(true);
+            valid = false;
+        } else {
+            PaymentDataMView.getErrorLabelMM().setVisible(false);
+        }
+
+        if (!isNumericAndNotEmpty(paymentDataMView.getInsertYY().getText()) || paymentDataMView.getInsertYY().getText().length() != 2) {
+            PaymentDataMView.getErrorLabelYY().setVisible(true);
+            valid = false;
+        } else {
+            PaymentDataMView.getErrorLabelYY().setVisible(false);
+        }
+
+        if (!isNumericAndNotEmpty(paymentDataMView.getInsertcvc().getText())) {
+            PaymentDataMView.getErrorLabelCVC().setVisible(true);
+            valid = false;
+        } else {
+            PaymentDataMView.getErrorLabelCVC().setVisible(false);
+        }
+
+       return valid;
+
+        }
+
+
+    public int getUsePoint() {
         int usePoint;
-        if(paymentDataMView.getUsePointsButton().isSelected()){
-             usePoint=1;
+        if (paymentDataMView.getUsePointsButton().isSelected()) {
+            usePoint = 1;
+        } else {
+            usePoint = 0;
         }
-        else{
-            usePoint=0;
-        }
-          return usePoint;
+        return usePoint;
     }
 
 }
+
 
 
 
