@@ -58,11 +58,13 @@ public class TicketTest {
 	@Test
 	public void correctTicketsTest() {
 		Ticket baseticket = null;
+		Ticket baseticket1 = null;
 		Ticket premiumticket = null;
 		Ticket vipticket = null;
 		
 		try {
 		baseticket = ticketHandler.createTicket(event, TicketType.BASE);
+		baseticket1 = ticketHandler.createTicket(event, TicketType.BASE);
 		premiumticket = ticketHandler.createTicket(event, TicketType.PREMIUM);
 		vipticket = ticketHandler.createTicket(event, TicketType.VIP);
 		}catch(Exception e) {
@@ -75,6 +77,11 @@ public class TicketTest {
 		assertEquals(TicketType.BASE, baseticket.getType());
 		assertEquals("4-BASE-16", baseticket.getBarcode());
 		
+		assertNotNull(baseticket1);
+		assertEquals(35.5, baseticket1.getPrice(),0);
+		assertEquals(TicketType.BASE, baseticket1.getType());
+		assertEquals("4-BASE-17", baseticket1.getBarcode());
+		
 		assertNotNull(premiumticket);
 		assertEquals(70, premiumticket.getPrice(),0);
 		assertEquals(TicketType.PREMIUM, premiumticket.getType());
@@ -84,6 +91,37 @@ public class TicketTest {
 		assertEquals(100, vipticket.getPrice(),0);
 		assertEquals(TicketType.VIP, vipticket.getType());
 		assertEquals("4-VIP-26", vipticket.getBarcode());
+	}
+	
+	@Test
+	public void multipleTicketTest() {
+		Ticket baseticket1 = null;
+		Ticket baseticket2 = null;
+		Ticket baseticket3 = null;
+		
+		try {
+		baseticket1 = ticketHandler.createTicket(event, TicketType.BASE);
+		baseticket2 = ticketHandler.createTicket(event, TicketType.BASE);
+		baseticket3 = ticketHandler.createTicket(event, TicketType.BASE);
+		}catch(Exception e) {
+			System.out.println(e.getMessage());
+		}
+		
+		
+		assertNotNull(baseticket1);
+		assertEquals(35.5, baseticket1.getPrice(),0);
+		assertEquals(TicketType.BASE, baseticket1.getType());
+		assertEquals("4-BASE-16", baseticket1.getBarcode());
+		
+		assertNotNull(baseticket2);
+		assertEquals(35.5, baseticket2.getPrice(),0);
+		assertEquals(TicketType.BASE, baseticket2.getType());
+		assertEquals("4-BASE-17", baseticket2.getBarcode());
+		
+		assertNotNull(baseticket3);
+		assertEquals(35.5, baseticket3.getPrice(),0);
+		assertEquals(TicketType.BASE, baseticket3.getType());
+		assertEquals("4-BASE-18", baseticket3.getBarcode());
 	}
 	
 	@Test
