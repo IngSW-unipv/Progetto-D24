@@ -28,14 +28,14 @@ public class PaymentDataMView extends Scene {
     private static  Label ncLabel = new Label("N° Carta:");
     private static Label expirationLabel = new Label("Data Scadenza:");
     private static Label cvcLabel = new Label("CVC:");
-    private static  final TextField insertName = new TextField();
-    private static  final TextField insertSurname = new TextField();
-    private static TextField insertNC = new TextField();
-    private static  TextField insertMM = new TextField();
-    private static   TextField insertYY = new TextField();
-    private static  TextField insertcvc = new TextField();
-    private static  Button backButton = new Button();
-    private static Button nextButton = new Button();
+    private final TextField insertName = new TextField();
+    private  final TextField insertSurname = new TextField();
+    private TextField insertNC = new TextField();
+    private  TextField insertMM = new TextField();
+    private  TextField insertYY = new TextField();
+    private TextField insertcvc = new TextField();
+    private  Button backButton = new Button();
+    private  Button nextButton = new Button();
 
     private static RadioButton usePointsButton= new RadioButton("Utilizza i tuoi WavePoints");
     private static  List<TextField> textFields = new ArrayList<>();
@@ -146,7 +146,7 @@ public class PaymentDataMView extends Scene {
     }
 
 
-    public static Button getBackButton() {
+    public  Button getBackButton() {
         return backButton;
     }
 
@@ -170,7 +170,7 @@ public class PaymentDataMView extends Scene {
         return expirationLabel;
     }
 
-    public static Button getNextButton() {
+    public  Button getNextButton() {
         return nextButton;
     }
 
@@ -186,19 +186,19 @@ public class PaymentDataMView extends Scene {
         return scene;
     }
 
-    public static TextField getInsertcvc() {
+    public TextField getInsertcvc() {
         return insertcvc;
     }
 
-    public static TextField getInsertNC() {
+    public  TextField getInsertNC() {
         return insertNC;
     }
 
-    public static TextField getInsertMM() {
+    public  TextField getInsertMM() {
         return insertMM;
     }
 
-    public static TextField getInsertYY() {
+    public  TextField getInsertYY() {
         return insertYY;
     }
 

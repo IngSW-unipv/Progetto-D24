@@ -27,6 +27,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
 import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 
 public class ManagerView extends Scene  implements IResettableScene {
 	
@@ -42,12 +43,18 @@ public class ManagerView extends Scene  implements IResettableScene {
 	private TableView<Notification> tabNot;
 	private ObservableList<Notification> nots;
 	private Label name;
+	private int currentSub;
+	private Label currentSubLabel;
+	private int counterCreatedEvents;
+	private Label eventRemained;
 	private Button subButton;
 	
 	
-	public ManagerView(String name, ArrayList<Notification> nots, ArrayList<Event> evs) {
+	public ManagerView(String name, ArrayList<Notification> nots, ArrayList<Event> evs, int currentSub, int counterCreatedEvents) {
 		super(new BorderPane(), 1080, 600);
 		this.name = new Label("Benvenuto, "+name);
+		this.currentSub = currentSub;
+		this.counterCreatedEvents = counterCreatedEvents;
 		this.nots = FXCollections.observableArrayList(nots);
 		this.evs = FXCollections.observableArrayList(evs);
 		init();
@@ -71,7 +78,7 @@ public class ManagerView extends Scene  implements IResettableScene {
 		
 		
 		
-		name.setFont(Font.font("Arial", 40));
+		name.setFont(Font.font("Helvetica", FontWeight.BOLD,40));
 		GridPane.setConstraints(name, 1, 0, 2, 1);
 		GridPane.setHalignment(name, HPos.CENTER);
 		GridPane.setHgrow(name, Priority.SOMETIMES);
@@ -86,13 +93,13 @@ public class ManagerView extends Scene  implements IResettableScene {
 		
 		
 		Label not = new Label("Notifiche");
-		not.setFont(Font.font("Arial", 20));
+		not.setFont(Font.font("Helvetica", FontWeight.BOLD,20));
 		GridPane.setConstraints(not, 1, 5);
 		GridPane.setHgrow(not, Priority.SOMETIMES);
 
 		
 		Label ev = new Label("Eventi pubblicati");
-		ev.setFont(Font.font("Arial", 20));		
+		ev.setFont(Font.font("Helvetica", FontWeight.BOLD,20));		
 		GridPane.setConstraints(ev, 3, 5);
 		GridPane.setHgrow(ev, Priority.SOMETIMES);
 		
@@ -161,10 +168,35 @@ public class ManagerView extends Scene  implements IResettableScene {
 //		tabnot.setPrefWidth(400);
 
 		subButton = new Button("Cambia abbonamento");
+		
+		
+		
+		switch(currentSub) {
+		case 0:
+			currentSubLabel = new Label("abbonamento gratuito:");
+			eventRemained = new Label("eventi creabili: "+(1-counterCreatedEvents));
+			break;
+		case 1:
+			currentSubLabel = new Label("abbonamento base:");
+			eventRemained = new Label("eventi creabili: "+(5-counterCreatedEvents));
+			break;
+		case 2:
+			currentSubLabel = new Label("abbonamento premium:");
+			eventRemained = new Label("eventi creabili: nessun limite");
+			break;
+		}
+		
+		currentSubLabel.setFont(Font.font("Helvetica", FontWeight.BOLD,13));
+		GridPane.setConstraints(currentSubLabel, 0, 1, 2, 1);
+		GridPane.setHgrow(currentSubLabel, Priority.SOMETIMES);
+		
+		eventRemained.setFont(Font.font("Helvetica", FontWeight.BOLD,13));
+		GridPane.setConstraints(eventRemained, 0, 2, 2, 1);
+		GridPane.setHgrow(eventRemained, Priority.SOMETIMES);
 
 
 		
-		grid.getChildren().addAll(name, logoutButton, tabNot, tabEv, not, ev, subButton);
+		grid.getChildren().addAll(name, logoutButton, tabNot, tabEv, not, ev, subButton, currentSubLabel, eventRemained);
 		
 		
 		
@@ -234,10 +266,19 @@ public class ManagerView extends Scene  implements IResettableScene {
 		return tabNot;
 	}
 	
-	public void updateEvsTable(ArrayList<Event> evs) {
+	public void updateEvsTable(ArrayList<Event> evs, int counterCreatedEvents) {
 		this.evs = FXCollections.observableArrayList(evs);
+		this.counterCreatedEvents = counterCreatedEvents;
 		init();
 	}
+	
+	public void updateSubLabels(int newCurrentSub, int counterCreatedEvents) {
+		this.currentSub = newCurrentSub;
+		this.counterCreatedEvents = counterCreatedEvents;
+		init();
+	}
+	
+	
 	
 //	public void setEventsforTableev(Manager manager) {
 //		evs = FXCollections.observableArrayList(manager.getEventlist());

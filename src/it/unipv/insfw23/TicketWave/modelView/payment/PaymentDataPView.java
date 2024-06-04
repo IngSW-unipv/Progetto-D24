@@ -25,11 +25,10 @@ public class PaymentDataPView extends Scene {
     private static Button nextButton =new Button("Avanti");
     private static  Button backButton = new Button();
 
-    private static RadioButton usePointsButton= new RadioButton("Utilizza i tuoi WavePoints");
+    private  RadioButton usePointsButton= new RadioButton("Utilizza i tuoi WavePoints");
 
-    private BorderPane layout;
 
-    private BorderPane root;
+    private static Label errorLabel=new Label("Inserisci una mail valida");
 
 
     public PaymentDataPView(){
@@ -42,14 +41,19 @@ public class PaymentDataPView extends Scene {
 
         emailLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 20));
         insertEmail.setFont(font);
+        errorLabel.setFont(font);
+        errorLabel.setStyle("-fx-text-fill: red;");
+
         usePointsButton.setFont(font);
 
-        VBox textBox= new VBox(emailLabel, insertEmail, usePointsButton,nextButton);
+        VBox textBox= new VBox(emailLabel, insertEmail, errorLabel, usePointsButton,nextButton);
         textBox.setStyle("-fx-font-size: 14px;");
         textBox.setPadding(new Insets(10));
         textBox.setAlignment(Pos.CENTER);
         textBox.setSpacing(50);
         insertEmail.setMaxWidth(200);
+        errorLabel.setVisible(false);
+
         usePointsButton.setAlignment(Pos.BOTTOM_CENTER);
 
         Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/backArrow.png");
@@ -116,12 +120,12 @@ public class PaymentDataPView extends Scene {
         return scene;
     }
 
-    public static RadioButton getUsePointsButton() {
+    public  RadioButton getUsePointsButton() {
         return usePointsButton;
     }
 
 
-
-
-
+    public static Label getErrorLabel() {
+        return errorLabel;
+    }
 }

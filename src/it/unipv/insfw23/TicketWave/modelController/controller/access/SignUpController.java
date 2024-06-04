@@ -43,8 +43,7 @@ public class SignUpController {
         this.signUpView = signUpView;
         this.mainstage = mainstage;
         this.loginView = loginView;
-        //this.profileDao=new ProfileDao();
-        // this.subscriptionSelectionView= subscriptionSelectionView;
+        this.profileDao=new ProfileDao(); //DA CAMBIAREEE
         initComponents();
 
     }
@@ -70,6 +69,8 @@ public class SignUpController {
 
         // Action sul signupbutton
         EventHandler<ActionEvent> goToSelection = new EventHandler<ActionEvent>() {
+
+
 
 
             @Override
@@ -99,7 +100,9 @@ public class SignUpController {
                             signUpView.getSelectedProvince(),signUpView.getSelectedGenres(), 0,tickets);  // setto  a zero i biglietti creati e i punti vanno presi dopo nelle altre view
 
                     try {
-                        ProfileDao profileDao=new ProfileDao();
+
+
+
                         profileDao.insertCustomer(customer);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);

@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.event;
 
 import it.unipv.insfw23.TicketWave.dao.eventDao.EventDao;
+import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Concert;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
@@ -109,7 +110,10 @@ public class NewConcertController {
 					EventDao eventDao = new EventDao();
 					eventDao.insertEvent(createdConcert);
 					
-					
+					home.updateEvsTable(loggedmanager.getEventlist(),loggedmanager.getCounterCreatedEvents());
+					home.reSetBars();
+					ManagerController managerController = new ManagerController(window, home, ConnectedUser.getInstance().getLoginView());
+					window.setScene(home);
 					
 				}catch (NumberFormatException e){
 					view.getErrLabel().setVisible(true);
@@ -117,9 +121,7 @@ public class NewConcertController {
 				}catch(Exception e){
 					e.printStackTrace();
 				}
-				home.updateEvsTable(loggedmanager.getEventlist());
-				home.reSetBars();
-				window.setScene(home);
+				
 			}
 		};
 		
