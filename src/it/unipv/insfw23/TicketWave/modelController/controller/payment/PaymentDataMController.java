@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
 import java.sql.SQLException;
 
+import it.unipv.insfw23.TicketWave.dao.eventDao.EventDao;
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.dao.ticketDao.TicketDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
@@ -88,6 +89,7 @@ public class PaymentDataMController {
                         Customer customer = (Customer) user;
                         TicketDao ticketDao = new TicketDao();
                         ProfileDao profileDao= new ProfileDao();
+                        EventDao eventDao = new EventDao();
                         System.out.println("ticketdao creato");
 
                         MastercardPayment mastercardPayment = new MastercardPayment();
@@ -101,7 +103,6 @@ public class PaymentDataMController {
                         try {
                             ticketDao.insertTicket(ticket, customer);
 
-
                             System.out.println("insert ticket eseguito");
                         } catch (SQLException e) {
                             throw new SQLException("Problema inserimento ticket", e);
@@ -109,14 +110,17 @@ public class PaymentDataMController {
                         try {
                             profileDao.updateCustomerPoints(customer);
 
-
                             System.out.println("updatepoints eseguito");
                         } catch (SQLException e) {
                             throw new SQLException("Problema aggiornamento punti", e);
                         }
+                        try {
+                            eventDao.updateSeatsNumber(ConnectedUser.getInstance().getEventForTicket());
 
-
-
+                            System.out.println("updateSeats eseguito");
+                        } catch (SQLException e) {
+                            throw new SQLException("Problema aggiornamento posti", e);
+                        }
 
                     }
                         catch (Exception e) {
