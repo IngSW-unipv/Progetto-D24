@@ -32,8 +32,6 @@ public class ResearchDAO implements IResearchDAO{
         conn = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(conn,schema);
         ArrayList<Event> result = new ArrayList<>();
         ArrayList<Event> managerEvent = new ArrayList<>();
-        ArrayList<Manager> createdManager = new ArrayList<>();
-        Manager eventManager;
         Manager manager = null;
 
         if (ConnectionDB.isOpen(conn)) {
@@ -43,8 +41,9 @@ public class ResearchDAO implements IResearchDAO{
                 ResultSet resultset1 = statement1.executeQuery();
 
                 while(resultset1.next()) { // creazione Manager
+                    managerEvent.clear();
                     manager = createManager(resultset1);
-                    System.out.println(manager.getEmail());
+                    System.out.println(manager.getEmail()); // DA RIMUOVERE ************************
                     String query2 = "SELECT * FROM EVENT_ WHERE ID_MANAGER = ?"; // query per prendere tutti gli eventi
                     PreparedStatement statement2 = conn.prepareStatement(query2);
                     statement2.setString(1, manager.getEmail());
@@ -52,28 +51,33 @@ public class ResearchDAO implements IResearchDAO{
 
                     while (resultSet2.next()) { // creazione Evento
                         managerEvent.add(createEvent(resultSet2, manager));
-                        // result.add(createEvent(resultset2, manager)); // aggiungo a result un nuovo evento grazie a createEvent
-                        // managerEvent.add(createEvent(resultset2, manager)); // lista degli eventi di un manager
                         System.out.println(managerEvent); // DA RIMUOVERE *******************************
                         System.out.println(manager.getEmail() + ": M-EMAIL"); // DA RIMUOVERE *******************************
                     }
-                    manager.setEvent(managerEvent); // setto gli eventi creati da quel manager
-                    System.out.println(manager.getEventlist()+ ":  M");
+                    if(!managerEvent.isEmpty()){ // se managerEvent non è vuoto allora setta i creatori di ogni evento al suo interno e metti tutti gli eventi che contiene in result
+                        manager.setEvent(managerEvent); // setto gli eventi creati da quel manager
+                        System.out.println(manager.getEventlist()+ ":  M");
 
-                    for (int i = 0; i < managerEvent.size(); i++) { // setto i manager con la loro lista di eventi ai vari eventi
-                        managerEvent.get(i).setCreator(manager);
-                        System.out.println(managerEvent.get(i).getCreator().getEventlist().get(i).getCreator().getEmail()); // CHECK DA RIMUOVERE *********************
-                        System.out.println(managerEvent.get(i).getCreator().getEventlist().get(i).getName()); // DA RIMUOVERE *******************************
+                        for (int i = 0; i < managerEvent.size(); i++) { // setto i manager con la loro lista di eventi ai vari eventi
+                            managerEvent.get(i).setCreator(manager);
+                            System.out.println(managerEvent.get(i).getCreator().getEventlist().get(i).getCreator().getEmail()); // CHECK DA RIMUOVERE *********************
+                            System.out.println(managerEvent.get(i).getCreator().getEventlist().get(i).getName()); // DA RIMUOVERE *******************************
+                        }
+                        System.out.println(managerEvent + ":  ME"); // DA RIMUOVERE *******************************
+
+                        result.addAll(managerEvent);
+                        System.out.println(" --------------------- ");
+                       // managerEvent.clear(); // lo azzero per i prossimi manager che avranno creato eventi diversi
+                        System.out.println(managerEvent);
                     }
-                    System.out.println(managerEvent + ":  ME"); // DA RIMUOVERE *******************************
-                    result.addAll(managerEvent);
                     System.out.println(result + ": RIN"); // DA RIMUOVERE *******************************
 
-                    for (Event e : result) { // result esce fuori senza avere un Evento // DA RIMUOVERE *******************************
+                    for(Event e : result){ // Check da RIMUOVERE **************************
                         System.out.println("CONTENUTO DI RESULT");
+                        System.out.println(e.getCreator());
+                        System.out.println(e.getCreator().getEventlist().size());
                         System.out.println(e.getCreator().getEventlist());
                     }
-                    managerEvent.clear(); // lo azzero per i prossimi manager che avranno creato eventi diversi
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
