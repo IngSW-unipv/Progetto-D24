@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
 import java.sql.SQLException;
 
+import it.unipv.insfw23.TicketWave.dao.eventDao.EventDao;
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.dao.ticketDao.TicketDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
@@ -88,6 +89,8 @@ public class PaymentDataMController {
                     try {
                         Customer customer = (Customer) user;
                         TicketDao ticketDao = new TicketDao();
+                        EventDao eventDao = new EventDao();
+                        ProfileDao profileDao = new ProfileDao();
                         System.out.println("ticketdao creato");
 
                         MastercardPayment mastercardPayment = new MastercardPayment();
@@ -104,6 +107,22 @@ public class PaymentDataMController {
                             System.out.println("insert ticket eseguito");
                         } catch (SQLException e) {
                             throw new SQLException("Problema inserimento ticket", e);
+                        }
+
+                        try {
+                            profileDao.updateCustomerPoints(customer);
+
+                            System.out.println("updatePoints eseguito");
+                        } catch (SQLException e) {
+                            throw new SQLException("Problema aggiornamento punti", e);
+                        }
+
+                        try {
+                            eventDao.updateSeatsNumber(ConnectedUser.getInstance().getEventForTicket());
+
+                            System.out.println("updateSeats eseguito");
+                        } catch (SQLException e) {
+                            throw new SQLException("Problema aggiornamento posti", e);
                         }
 
 
