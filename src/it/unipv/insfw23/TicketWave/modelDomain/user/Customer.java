@@ -41,8 +41,8 @@ public class Customer extends User {
             if(pay.paymentMethod(endPrice) == true) {
                 points = points - usablePoints(startPrice, points);
                 System.out.println("L'acquisto del tuo biglietto per " + event + " è andato a buon fine ");
+                ticket = TicketHandler.getIstance().createTicket(event, type);
                 points = points + (int) (endPrice / 10);
-                 ticket = TicketHandler.getIstance().createTicket(event, type);
                 ticket.setPrice(endPrice);
                 addTickets(ticket);
             } else {

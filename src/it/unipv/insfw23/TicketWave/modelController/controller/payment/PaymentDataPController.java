@@ -77,6 +77,7 @@ public class PaymentDataPController {
                    try {
                        Customer customer = (Customer) user;
                        TicketDao ticketDao = new TicketDao();
+                       ProfileDao profileDao= new ProfileDao();
                        System.out.println("TicketDao creato");
 
                        PayPalPayment payPalPayment = new PayPalPayment();
@@ -91,6 +92,14 @@ public class PaymentDataPController {
                            System.out.println("Inserimento biglietto eseguito");
                        } catch (SQLException e) {
                            throw new SQLException("Problema inserimento biglietto", e);
+                       }
+                       try {
+                           profileDao.updateCustomerPoints(customer);
+
+
+                           System.out.println("updatepoints eseguito");
+                       } catch (SQLException e) {
+                           throw new SQLException("Problema aggiornamento punti", e);
                        }
                    } catch (Exception e) {
                        throw new RuntimeException(e);

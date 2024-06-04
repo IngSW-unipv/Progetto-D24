@@ -49,13 +49,14 @@ public class ManagerController {
 //				SignUpView signupview = new SignUpView();
 //				LoginController logcon = new LoginController(window, signupview, null, logview);
 				logview.reSetBars();
-				//
+				/*
 				ConnectedUser.getInstance().unlogUser();
 				ConnectedUser.getInstance().setHome(null);
 				ConnectedUser.getInstance().setLoginView(null);
-				//
+				*/
 				logview.makeBlankPage();
 				mainStage.setScene(logview.getScene());
+				ConnectedUser.getInstance().logoutMethod();
 			}
 		};
 		managerview.getLogoutButton().setOnMouseClicked(logoutButton);
