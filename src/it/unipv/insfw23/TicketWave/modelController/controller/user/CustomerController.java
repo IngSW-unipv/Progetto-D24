@@ -122,6 +122,7 @@ public class CustomerController {
                 //metodo che setta upperbar manager
                 //opacita
                 //
+                tic.setForNotBuyable();
                 mainstage.setScene(tic);
             }
         };
