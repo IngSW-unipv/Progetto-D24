@@ -24,27 +24,27 @@ public class PaymentDataMView extends Scene {
 
         private final Font font = Font.font("Helvetica", FontWeight.BOLD, 15);
 
-        private static Label nameLabel = new Label("Nome Intestatario Carta:");
-        private static Label surnameLabel = new Label("Cognome Intestatario Carta:");
-        private static Label ncLabel = new Label("N° Carta:");
-        private static Label expirationLabel = new Label("Data Scadenza (MM/YY):");
-        private static Label cvcLabel = new Label("CVC:");
-        private final TextField insertName = new TextField();
-        private final TextField insertSurname = new TextField();
+        private final  Label nameLabel = new Label("Nome Intestatario Carta:");
+        private final  Label surnameLabel = new Label("Cognome Intestatario Carta:");
+        private final Label ncLabel = new Label("N° Carta:");
+        private final Label expirationLabel = new Label("Data Scadenza (MM/YY):");
+        private final Label cvcLabel = new Label("CVC:");
+        private TextField insertName = new TextField();
+        private TextField insertSurname = new TextField();
         private TextField insertNC = new TextField();
         private TextField insertMM = new TextField();
         private TextField insertYY = new TextField();
         private TextField insertcvc = new TextField();
-        private Button backButton = new Button();
-        private Button nextButton = new Button();
-        private static Label errorLabelNC = new Label("Inserisci una carta di credito valida ");
-        private static Label errorLabelMM = new Label("MM non valido");
-        private static Label errorLabelYY = new Label("YY non valido");
-        private static Label errorLabelCVC = new Label("CVC non valido");
+        private final  Button backButton = new Button();
+        private final  Button nextButton = new Button();
+        private final Label errorLabelNC = new Label("Inserisci una carta di credito valida ");
+        private final Label errorLabelMM = new Label("MM non valido");
+        private final Label errorLabelYY = new Label("YY non valido");
+        private final Label errorLabelCVC = new Label("CVC non valido");
 
-        private static RadioButton usePointsButton = new RadioButton("Utilizza i tuoi WavePoints");
-        private static List<TextField> textFields = new ArrayList<>();
-        private static List<Label> labels = new ArrayList<>();
+        private final RadioButton usePointsButton = new RadioButton("Utilizza i tuoi WavePoints");
+        private  List<TextField> textFields = new ArrayList<>();
+        private final List<Label> labels = new ArrayList<>();
         private Scene scene;
 
         public PaymentDataMView() {
@@ -178,23 +178,23 @@ public class PaymentDataMView extends Scene {
             return insertYY;
         }
 
-        public static RadioButton getUsePointsButton() {
+        public RadioButton getUsePointsButton() {
             return usePointsButton;
         }
 
-        public static Label getErrorLabelNC() {
+        public  Label getErrorLabelNC() {
             return errorLabelNC;
         }
 
-        public static Label getErrorLabelMM() {
+        public  Label getErrorLabelMM() {
             return errorLabelMM;
         }
 
-        public static Label getErrorLabelYY() {
+        public  Label getErrorLabelYY() {
             return errorLabelYY;
         }
 
-        public static Label getErrorLabelCVC() {
+        public  Label getErrorLabelCVC() {
             return errorLabelCVC;
         }
 

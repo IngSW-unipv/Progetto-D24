@@ -209,31 +209,31 @@ public class PaymentDataMController {
         boolean valid = true;
 
         if (!isNumericAndNotEmpty(paymentDataMView.getInsertNC().getText()) || paymentDataMView.getInsertNC().getText().length() != 16) {
-            PaymentDataMView.getErrorLabelNC().setVisible(true);
+            paymentDataMView.getErrorLabelNC().setVisible(true);
             valid = false;
         } else {
-            PaymentDataMView.getErrorLabelNC().setVisible(false);
+            paymentDataMView.getErrorLabelNC().setVisible(false);
         }
 
         if (!isNumericAndNotEmpty(paymentDataMView.getInsertMM().getText()) || paymentDataMView.getInsertMM().getText().length() != 2) {
-            PaymentDataMView.getErrorLabelMM().setVisible(true);
+            paymentDataMView.getErrorLabelMM().setVisible(true);
             valid = false;
         } else {
-            PaymentDataMView.getErrorLabelMM().setVisible(false);
+            paymentDataMView.getErrorLabelMM().setVisible(false);
         }
 
         if (!isNumericAndNotEmpty(paymentDataMView.getInsertYY().getText()) || paymentDataMView.getInsertYY().getText().length() != 2) {
-            PaymentDataMView.getErrorLabelYY().setVisible(true);
+            paymentDataMView.getErrorLabelYY().setVisible(true);
             valid = false;
         } else {
-            PaymentDataMView.getErrorLabelYY().setVisible(false);
+            paymentDataMView.getErrorLabelYY().setVisible(false);
         }
 
         if (!isNumericAndNotEmpty(paymentDataMView.getInsertcvc().getText())) {
-            PaymentDataMView.getErrorLabelCVC().setVisible(true);
+            paymentDataMView.getErrorLabelCVC().setVisible(true);
             valid = false;
         } else {
-            PaymentDataMView.getErrorLabelCVC().setVisible(false);
+            paymentDataMView.getErrorLabelCVC().setVisible(false);
         }
 
        return valid;
