@@ -58,15 +58,15 @@ public class ResearchDAO implements IResearchDAO{
                         manager.setEvent(managerEvent); // setto gli eventi creati da quel manager
                         System.out.println(manager.getEventlist()+ ":  M");
 
-                        for (int i = 0; i < managerEvent.size(); i++) { // DA FAR VOLARE
-                            System.out.println(managerEvent.get(i).getCreator().getEventlist().get(i).getCreator().getEmail()); // CHECK DA RIMUOVERE *********************
-                            System.out.println(managerEvent.get(i).getCreator().getEventlist().get(i).getName()); // DA RIMUOVERE *******************************
-                        }
+//                        for (int i = 0; i < managerEvent.size(); i++) { // DA FAR VOLARE
+//                            System.out.println(managerEvent.get(i).getCreator().getEventlist().get(i).getCreator().getEmail()); // CHECK DA RIMUOVERE *********************
+//                            System.out.println(managerEvent.get(i).getCreator().getEventlist().get(i).getName()); // DA RIMUOVERE *******************************
+//                        }
                         System.out.println(managerEvent + ":  ME"); // DA RIMUOVERE *******************************
 
                         result.addAll(managerEvent);
                         System.out.println(" --------------------- "); // DA RIMUOVERE ******************
-                        managerEvent.clear(); // lo azzero per i prossimi manager che avranno creato eventi diversi
+                        managerEvent = new ArrayList<>(); // lo azzero per i prossimi manager che avranno creato eventi diversi
                         System.out.println(managerEvent); // DA RIMUOVERE ******************
                     }
                     System.out.println(result + ": RIN"); // DA RIMUOVERE *******************************
