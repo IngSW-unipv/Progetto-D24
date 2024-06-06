@@ -29,13 +29,17 @@ public class ManagerTest {
     double[] pricecorrectevent;
     private Image bl;
     IPaymentAdapter paymentAdapter ;
+    
+    private final int MAX_EVENTS_FOR_FREE_SUB = 1;
+	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
+	private final int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
     @Before
     public void setUp() {
         // Preparazione dei dati per i test
-        manager = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", Province.COMO, "1234567890123456", events, 5, 1, LocalDate.now(), 0);
-        manager1 = new Manager("Valentino", "Chiaro", "2000-01-01", "valentino@gmail.com", "Cicalone", Province.PAVIA, "1111111111000000", events1, 5, -1, LocalDate.now(), 0);
-        manager2 = new Manager("Valentino", "Chiaro", "2000-01-01", "valentino@gmail.com", "Cicalone", Province.BARLETTA_ANDRIA_TRANI, "1111111111000000", events2, 5, 1, LocalDate.now(), 8);
-        manager3 = new Manager("Mario", "Rossi", "1998-07-06", "mario@gmail.com", "Mario", Province.MILANO, "1111111111222222", events2, 5, 1, LocalDate.of(2024,4,12), 2);
+        manager = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", Province.COMO, "1234567890123456", events, MAX_EVENTS_FOR_BASE_SUB, 1, LocalDate.now(), 0);
+        manager1 = new Manager("Valentino", "Chiaro", "2000-01-01", "valentino@gmail.com", "Cicalone", Province.PAVIA, "1111111111000000", events1, MAX_EVENTS_FOR_BASE_SUB, -1, LocalDate.now(), 0);
+        manager2 = new Manager("Valentino", "Chiaro", "2000-01-01", "valentino@gmail.com", "Cicalone", Province.BARLETTA_ANDRIA_TRANI, "1111111111000000", events2, MAX_EVENTS_FOR_BASE_SUB, 1, LocalDate.now(), 8);
+        manager3 = new Manager("Mario", "Rossi", "1998-07-06", "mario@gmail.com", "Mario", Province.MILANO, "1111111111222222", events2, MAX_EVENTS_FOR_BASE_SUB, 1, LocalDate.of(2024,4,12), 2);
         seatsremainedfortypecorrectevent = new int[]{60};
         ticketsoldfortypecorrectevent = new int[]{15};
         pricecorrectevent = new double[]{35.50};

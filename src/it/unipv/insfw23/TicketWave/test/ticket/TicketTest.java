@@ -28,12 +28,16 @@ public class TicketTest {
 	private Event event;
 	private Manager creator;
 	
+	private final int MAX_EVENTS_FOR_FREE_SUB = 1;
+	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
+	private final int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
+	
 	@Before
 	public void setUp() {
 		
 		ArrayList<Event> events = new ArrayList<>();
 		creator = new Manager("Maurizio","Merluzzo","1980-03-20","mauricemerluzz@gmail.com","123456789",
-				Province.COMO,"3456785676954038",events,5,1,LocalDate.now(),0);
+				Province.COMO,"3456785676954038",events,MAX_EVENTS_FOR_BASE_SUB,1,LocalDate.now(),0);
 		
 		//evento corretto
 		int[] seatsremainedfortypecorrectevent = {60,20,25};
@@ -58,13 +62,11 @@ public class TicketTest {
 	@Test
 	public void correctTicketsTest() {
 		Ticket baseticket = null;
-		Ticket baseticket1 = null;
 		Ticket premiumticket = null;
 		Ticket vipticket = null;
 		
 		try {
 		baseticket = ticketHandler.createTicket(event, TicketType.BASE);
-		baseticket1 = ticketHandler.createTicket(event, TicketType.BASE);
 		premiumticket = ticketHandler.createTicket(event, TicketType.PREMIUM);
 		vipticket = ticketHandler.createTicket(event, TicketType.VIP);
 		}catch(Exception e) {
@@ -76,11 +78,6 @@ public class TicketTest {
 		assertEquals(35.5, baseticket.getPrice(),0);
 		assertEquals(TicketType.BASE, baseticket.getType());
 		assertEquals("4-BASE-16", baseticket.getBarcode());
-		
-		assertNotNull(baseticket1);
-		assertEquals(35.5, baseticket1.getPrice(),0);
-		assertEquals(TicketType.BASE, baseticket1.getType());
-		assertEquals("4-BASE-17", baseticket1.getBarcode());
 		
 		assertNotNull(premiumticket);
 		assertEquals(70, premiumticket.getPrice(),0);
@@ -94,7 +91,7 @@ public class TicketTest {
 	}
 	
 	@Test
-	public void multipleTicketTest() {
+	public void consecutiveTicketTest() {
 		Ticket baseticket1 = null;
 		Ticket baseticket2 = null;
 		Ticket baseticket3 = null;

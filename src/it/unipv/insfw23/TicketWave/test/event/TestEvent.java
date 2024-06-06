@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.test.event;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 
 import org.junit.After;
@@ -23,12 +24,15 @@ public class TestEvent {
     private ArrayList<Event> events, ev1;
     private Manager mg, mg1;
     private Image bl;
+    
+	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
+	private final int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
 
     @Before
     public void setup(){
         events = new ArrayList<Event>();
         mg = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", Province.CATANIA, "1234567890123456",
-                            events, 5, 1, LocalDate.now(), 0);
+                            events, MAX_EVENTS_FOR_BASE_SUB, 1, LocalDate.now(), 0);
         bl = null;
     }
     @Test
@@ -142,7 +146,7 @@ public class TestEvent {
             ev1.add(theater1);
             // creo il manager
             mg1 = new Manager("Paolo", "Bisio", "1970-02-07", "Paolo@example.com", "dajeRoma", Province.ROMA, "423432523523",
-                    ev1, 10000000, 2, LocalDate.now(), 0);
+                    ev1, MAX_EVENTS_FOR_PREMIUM_SUB, 2, LocalDate.now(), 0);
             // check + stampa delle reference degli eventi
             assertEquals(5, mg1.getEventlist().size()); // controllo che 6 sia la size dell'arrayList di eventi in manager
             for (int i = 0; i < 5; i++) {

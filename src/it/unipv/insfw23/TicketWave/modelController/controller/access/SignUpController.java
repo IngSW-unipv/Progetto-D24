@@ -36,6 +36,9 @@ public class SignUpController {
     private SubscriptionSelectionView subscriptionSelectionView;
     private ProfileDao profileDao;
     private User user= ConnectedUser.getInstance().getUser();
+    
+    private final int MAX_EVENTS_FOR_FREE_SUB = 1;
+	
 
 
     public SignUpController(Stage mainstage, SignUpView signUpView, LoginView loginView) {
@@ -136,7 +139,7 @@ public class SignUpController {
 
                     ArrayList<Event> arraylistevent = new ArrayList<>();
 
-                    Manager manager = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), null, arraylistevent,1,0,LocalDate.now(),0);
+                    Manager manager = new Manager(signUpView.getNameField().getText(), signUpView.getSurnameField().getText(),signUpView.getDatePicker().getValue().toString(),signUpView.getEmailField().getText(),signUpView.getPasswordField().getText(), signUpView.getSelectedProvince(), null, arraylistevent,MAX_EVENTS_FOR_FREE_SUB,0,LocalDate.now(),0);
                     //credit card, data sub max numberofevents, da prendere nella mastercardview, subcription impostato a 1 solo per creare gli eventi di prova, però deve essere cambiato dal subupdate
 
                     try {

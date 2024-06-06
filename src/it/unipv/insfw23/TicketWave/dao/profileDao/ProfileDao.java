@@ -25,6 +25,10 @@ import javafx.scene.image.Image;
 public class ProfileDao implements IProfileDao {
     private String schema;
     private Connection connection;
+    
+    private final int MAX_EVENTS_FOR_FREE_SUB = 1;
+	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
+	private final int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
 
     public ProfileDao() {
         super();
@@ -400,13 +404,13 @@ public class ProfileDao implements IProfileDao {
 			statement1 = connection.prepareStatement(query1);
 			switch (ConnectedUser.getInstance().getNewSubLevel()) {
 			case 0:
-				statement1.setInt(1, 1);
+				statement1.setInt(1, MAX_EVENTS_FOR_FREE_SUB);
 				break;
 			case 1:
-				statement1.setInt(1, 5);
+				statement1.setInt(1, MAX_EVENTS_FOR_BASE_SUB);
 				break;
 			case 2:
-				statement1.setInt(1, Short.MAX_VALUE);
+				statement1.setInt(1, MAX_EVENTS_FOR_PREMIUM_SUB);
 			}
 			statement1.setInt(2, ConnectedUser.getInstance().getNewSubLevel());
 			statement1.setDate(3, Date.valueOf(LocalDate.now()));

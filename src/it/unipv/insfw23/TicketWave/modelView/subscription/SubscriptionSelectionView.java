@@ -27,6 +27,10 @@ public class SubscriptionSelectionView extends Scene implements IResettableScene
     private StackPane bottoneSecondaSub;
     private StackPane bottoneTerzaSub;
     private static Button backButton = new Button();
+    
+    private final int MAX_EVENTS_FOR_FREE_SUB = 1;
+	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
+	
 
     public SubscriptionSelectionView() {
         super(new BorderPane(), 1080, 600);
@@ -65,8 +69,8 @@ public class SubscriptionSelectionView extends Scene implements IResettableScene
         nome1.setTextFill(Color.WHITE);
         primaSub.setTop(nome1);
 
-        Label descr1 = new Label("Descrizione 1");
-        descr1.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 20));
+        Label descr1 = new Label("-Possibilità di pubblicare "+MAX_EVENTS_FOR_FREE_SUB+" evento\n"+" al mese");
+        descr1.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 14));
         descr1.setTextFill(Color.WHITE);
         primaSub.setCenter(descr1);
 
@@ -80,8 +84,8 @@ public class SubscriptionSelectionView extends Scene implements IResettableScene
         nome2.setTextFill(Color.WHITE);
         secondaSub.setTop(nome2);
 
-        Label descr2 = new Label("Descrizione 2");
-        descr2.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 20));
+        Label descr2 = new Label("-Possibilità di pubblicare "+MAX_EVENTS_FOR_BASE_SUB+" eventi\n"+" al mese\n"+"-Invio di notifiche agli utenti\n"+" residenti nella stessa provincia\n"+" degli eventi pubblicati");
+        descr2.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 14));
         descr2.setTextFill(Color.WHITE);
         secondaSub.setCenter(descr2);
 
@@ -96,8 +100,8 @@ public class SubscriptionSelectionView extends Scene implements IResettableScene
         nome3.setTextFill(Color.WHITE);
         terzaSub.setTop(nome3);
 
-        Label descr3 = new Label("Descrizione 3");
-        descr3.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 20));
+        Label descr3 = new Label("-Possibilità di pubblicare un numero\n"+" infinito di eventi al mese\n"+"-Invio di notifiche agli utenti\n"+" residenti nella stessa provincia\n"+" degli eventi pubblicati\n"+"-Invio di notifiche agli utenti\n"+" che hanno selezionato il genere\n"+" dell'evento tra i preferiti");			
+        descr3.setFont(Font.font("Arial Rounded MT Bold", FontWeight.EXTRA_BOLD, 14));
         descr3.setTextFill(Color.WHITE);
         terzaSub.setCenter(descr3);
 
