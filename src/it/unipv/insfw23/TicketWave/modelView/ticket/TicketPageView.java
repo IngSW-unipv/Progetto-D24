@@ -66,6 +66,11 @@ public class TicketPageView extends Scene implements IResettableScene {
     private  final RadioButton basePricebutton = new RadioButton();
     private  final RadioButton premiumPricebutton = new RadioButton();
     private  final RadioButton vipPricebutton = new RadioButton();
+    
+    private final int MAX_TICKET_BUYABLE = 4;
+    
+    private final Label quantityLabel = new Label("quantità da acquistare: ");
+    
     private Scene scene;
     private BorderPane layout;
     private boolean isCustomerViewer;

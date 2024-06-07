@@ -426,6 +426,8 @@ public class ProfileDao implements IProfileDao {
 		
 		ConnectionDB.closeConnection(connection);
 	}
+	
+	
 
 
     @Override
@@ -485,6 +487,30 @@ public class ProfileDao implements IProfileDao {
         }
         ConnectionDB.closeConnection(connection);
         return customerWithProvMail;
+    }
+    
+    
+    @Override
+    public void updateEventCreatedCounter(Manager manager) throws SQLException {
+    	connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);
+    	PreparedStatement statement1;
+    	
+    	try {
+			String query1 = "UPDATE MANAGER SET COUNTER_CREATED_EVENTS = ? WHERE MAIL = ?";
+			
+			statement1 = connection.prepareStatement(query1);
+			
+			statement1.setInt(1, manager.getCounterCreatedEvents());
+			statement1.setString(2, manager.getEmail());
+			
+			statement1.executeUpdate();
+		} catch (SQLException e) {
+			throw new SQLException("Errore nell'aggiornamento del campo relativo agli eventi creati");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+    	
+    	ConnectionDB.closeConnection(connection);
     }
 
     public void updateCustomerPoints(Customer customer) throws SQLException {

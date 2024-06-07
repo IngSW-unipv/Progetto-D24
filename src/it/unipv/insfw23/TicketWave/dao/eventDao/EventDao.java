@@ -31,7 +31,7 @@ public class EventDao implements IEventDao {
     @Override
     public void insertEvent(Event event) throws SQLException {
 
-        int eventNumber = selectEventNumber();
+        //int eventNumber = selectEventNumber();
 
         try {
             connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);  // apro connessione
@@ -52,7 +52,7 @@ public class EventDao implements IEventDao {
 
                 //setto i campi
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setInt(1, eventNumber + 1);
+                preparedStatement.setInt(1, event.getIdEvent() + 1);
                 System.out.println(event.getIdEvent());
                 preparedStatement.setString(2, event.getName());
                 System.out.println(event.getName());

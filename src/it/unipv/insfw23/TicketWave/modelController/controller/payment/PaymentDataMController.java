@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import it.unipv.insfw23.TicketWave.dao.eventDao.EventDao;
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.dao.ticketDao.TicketDao;
+import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
 import it.unipv.insfw23.TicketWave.modelController.factory.payment.PaymentFactory;
 import it.unipv.insfw23.TicketWave.modelController.factory.subscription.SubscriptionHandlerFactory;
@@ -21,6 +22,7 @@ import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
+import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -86,8 +88,10 @@ public class PaymentDataMController {
                 System.out.println("pagamento andato a buon fine stai tornando indietro alla home page!");
                 if (user.isCustomer()) {
                     System.out.println("Stai andando alla CustomerView");
+                    Customer customer = (Customer) user;
+                    
                     try {
-                        Customer customer = (Customer) user;
+                        
                         TicketDao ticketDao = new TicketDao();
                         EventDao eventDao = new EventDao();
                         ProfileDao profileDao = new ProfileDao();
@@ -132,8 +136,10 @@ public class PaymentDataMController {
 
                     UpperBar.getIstance().setForCustomer();
                     home.reSetBars();
-                    Scene nextScene = (Scene) home;
-                    mainStage.setScene(nextScene);
+                    CustomerView customerview = (CustomerView) home;
+                    customerview.updateTicketsTable(customer.getTicketsList());
+                    CustomerController customerController = new CustomerController(mainStage, customerview, ConnectedUser.getInstance().getLoginView());
+                    mainStage.setScene(customerview);
 
 
                 } else {
@@ -154,10 +160,8 @@ public class PaymentDataMController {
                         UpperBar.getIstance().setForManager();
                         home.reSetBars();
                         ManagerView managerView = (ManagerView) home;
-                        ManagerController managerController = new ManagerController(mainStage, managerView, ConnectedUser.getInstance().getLoginView());
                         managerView.updateSubLabels(managerlogged.getSubscription(), managerlogged.getCounterCreatedEvents());
-                        //Scene nextScene = (Scene) home;
-                        //mainStage.setScene(nextScene);
+                        ManagerController managerController = new ManagerController(mainStage, managerView, ConnectedUser.getInstance().getLoginView());                        
                         mainStage.setScene(managerView);
                     } else {
                         UpperBar.getIstance().setForManager();

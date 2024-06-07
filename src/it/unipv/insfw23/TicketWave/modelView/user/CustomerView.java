@@ -150,8 +150,12 @@ public class CustomerView extends Scene implements IResettableScene {
     }
 
 
-
-
+	public void updateTicketsTable(ArrayList<Ticket> tickets) {
+		this.tick = FXCollections.observableArrayList(tickets);
+		initComponents();
+	}
+	
+	
 
 
 /*

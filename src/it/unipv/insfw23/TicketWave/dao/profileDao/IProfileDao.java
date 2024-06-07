@@ -16,5 +16,5 @@ public interface IProfileDao {
     public Customer selectCustomer(String mail, String password) throws SQLException;
     public ArrayList<String> selectCustomerByGenre(Genre genre) throws SQLException;
     public void updateManagerSub(Manager manager) throws SQLException;
-
+    public void updateEventCreatedCounter(Manager manager) throws SQLException;
 }
