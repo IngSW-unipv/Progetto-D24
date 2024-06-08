@@ -51,6 +51,8 @@ public class PaymentSelectionController {
                 System.out.println("Stai andando alla PaymentDataMPage");
                 paymentDataMPage=new PaymentDataMView();
                PaymentDataMController paymentDataMController = new PaymentDataMController(mainStage,paymentDataMPage,paymentPage);
+               ticketPage = (TicketPageView)backScene;
+               paymentDataMController.setNumOfTickets(ticketPage.getNumOfTickets());
                 mainStage.setScene(paymentDataMPage);
             } else if (paymentPage.getPaypalButton().isSelected()) {
                     System.out.println("Stai andando alla PaymentDataPPage");

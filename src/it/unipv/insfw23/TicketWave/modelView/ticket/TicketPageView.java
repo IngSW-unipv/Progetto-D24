@@ -10,11 +10,15 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
+import javafx.stage.StageStyle;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 
+import java.awt.Paint;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +73,10 @@ public class TicketPageView extends Scene implements IResettableScene {
     
     private final int MAX_TICKET_BUYABLE = 4;
     
-    private final Label quantityLabel = new Label("quantità da acquistare: ");
+    private final Label quantityLabel = new Label("quantità da acquistare(max "+MAX_TICKET_BUYABLE+"): ");
+    private Spinner<Integer> baseSpinner;
+    private Spinner<Integer> premiumSpinner;
+    private Spinner<Integer> vipSpinner;
     
     private Scene scene;
     private BorderPane layout;
@@ -107,6 +114,8 @@ public class TicketPageView extends Scene implements IResettableScene {
         eventProvinceField.setText(prov.toString());
         eventDateField.setText(data.toString());
         eventArtistField.setText(artist);
+        
+        
 
 
         //DA PRENDERE DAL DAO
@@ -120,23 +129,28 @@ public class TicketPageView extends Scene implements IResettableScene {
                 premiumPricebutton.setVisible(false);
                 ticketBaseField = new Label(String.valueOf(seatsRemainedNumberForType[0]));
                 basePriceField = new Label("€"+price[0]);
+                baseSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[0]), 1);
                 break;
             case 2:
                 ticketVipField = new Label("Non disponibili");
                 vipPricebutton.setVisible(false);
                 ticketBaseField = new Label(String.valueOf(seatsRemainedNumberForType[0]));
                 basePriceField = new Label("€"+price[0]);
+                baseSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[0]), 1);
                 ticketPremiumField = new Label(String.valueOf(seatsRemainedNumberForType[1]));
                 premiumPriceField = new Label("€"+price[1]);
-
+                premiumSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[1]), 1);
                 break;
             case 3:
                 ticketBaseField = new Label(String.valueOf(seatsRemainedNumberForType[0]));
                 basePriceField = new Label("€"+price[0]);
+                baseSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[0]), 1);
                 ticketPremiumField = new Label(String.valueOf(seatsRemainedNumberForType[1]));
                 premiumPriceField = new Label("€"+price[1]);
+                premiumSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[1]), 1);
                 ticketVipField = new Label(String.valueOf(seatsRemainedNumberForType[2]));
                 vipPriceField = new Label("€"+price[2]);
+                vipSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[2]), 1);
         }
         // controllo e reset delle barre
         if(isCustomerViewer) {
@@ -184,6 +198,7 @@ public class TicketPageView extends Scene implements IResettableScene {
         text.add(premiumPriceField);
         text.add(vipPriceField);
         text.add(ticketsLabel);
+        text.add(quantityLabel);
         text.add(errmessage);
 
 
@@ -242,6 +257,26 @@ public class TicketPageView extends Scene implements IResettableScene {
 
         errmessage.setOpacity(0);
         errmessage.setStyle("-fx-text-fill: red;");
+        
+        //impostazioni relative alla grafica degli spinner
+        baseSpinner.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
+        baseSpinner.setPrefWidth(65);
+        baseSpinner.setPrefHeight(20);
+        baseSpinner.setVisible(false);
+        
+        if(premiumSpinner != null) {
+        	premiumSpinner.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
+        	premiumSpinner.setPrefWidth(65);
+        	premiumSpinner.setPrefHeight(20);
+        	premiumSpinner.setVisible(false);
+        }
+        
+        if(vipSpinner != null) {
+        	vipSpinner.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
+        	vipSpinner.setPrefWidth(65);
+        	vipSpinner.setPrefHeight(20);
+        	vipSpinner.setVisible(false);
+        }
 
 
         //Gridpane per sistemazione elementi centrali
@@ -292,12 +327,41 @@ public class TicketPageView extends Scene implements IResettableScene {
         bottomGrid.add(basePricebutton, 3, 2);
         bottomGrid.add(premiumPricebutton, 3, 3);
         bottomGrid.add(vipPricebutton, 3, 4);
+        //aggiunta label quantity
+        bottomGrid.add(quantityLabel, 4, 1);
+        //aggiunta degli spinner per la selezione della quantità di biglietti solo se sono stati creati
+        bottomGrid.add(baseSpinner, 4, 2);//non c'è bisogno di controllo, almeno i posti base sono sempre presenti in un evento
+        if(premiumSpinner != null)
+        	bottomGrid.add(premiumSpinner, 4, 3);
+        if(vipSpinner != null)
+        	bottomGrid.add(vipSpinner, 4, 4);
 
 
 
         basePricebutton.setToggleGroup(priceselection);
         premiumPricebutton.setToggleGroup(priceselection);
         vipPricebutton.setToggleGroup(priceselection);
+        
+        //listener per il cambio dello spinner visibile a seconda del radiobutton
+        priceselection.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+			@Override
+			public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) {
+				baseSpinner.setVisible(false);
+				if(premiumSpinner != null)
+					premiumSpinner.setVisible(false);
+				if(vipSpinner != null)
+					vipSpinner.setVisible(false);
+				
+				if(priceselection.getSelectedToggle().equals(basePricebutton)) {
+					baseSpinner.setVisible(true);
+				}else if(priceselection.getSelectedToggle().equals(premiumPricebutton) && premiumSpinner != null) {
+					premiumSpinner.setVisible(true);
+				}else if(priceselection.getSelectedToggle().equals(vipPricebutton) && vipSpinner != null) {
+					vipSpinner.setVisible(true);
+				}
+			}
+		});
 
 
         internalStructure.setCenter(centerGrid);
@@ -388,6 +452,16 @@ public class TicketPageView extends Scene implements IResettableScene {
         basePricebutton.setVisible(false);
         premiumPricebutton.setVisible(false);
         vipPricebutton.setVisible(false);
+        quantityLabel.setVisible(false);
+    }
+    
+    public int getNumOfTickets() {
+    	if(baseSpinner.isVisible())
+    		return baseSpinner.getValue();
+    	else if(premiumSpinner.isVisible())
+    		return premiumSpinner.getValue();
+    	else
+    		return vipSpinner.getValue();
     }
 
 }

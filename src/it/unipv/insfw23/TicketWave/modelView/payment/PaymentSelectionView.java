@@ -32,6 +32,7 @@ public class PaymentSelectionView extends Scene {
     private  final Label totalStringLabel = new Label("Totale:");
     private  final Label paySelectionLabel = new Label("Scegli un metodo con cui pagare:");
     private final Label totalAmountLabel=new Label();
+    private final Label numberOfTicketLabel = new Label();
     private final List<Label> labels = new ArrayList<>();
 
     private final Text errmessage = new Text("Devi prima selezionare un metodo di pagamento!");
@@ -51,7 +52,8 @@ public class PaymentSelectionView extends Scene {
         paypalButton.setToggleGroup(paymethod);
         mastercardButton.setToggleGroup(paymethod);
 
-
+        
+        numberOfTicketLabel.setFont(font);
         totalStringLabel.setFont(font);
         totalAmountLabel.setFont(font);
         paySelectionLabel.setFont(font);
@@ -111,6 +113,7 @@ public class PaymentSelectionView extends Scene {
         gridPane.setPadding(new Insets(10));
         gridPane.add(totalStringLabel, 0, 1);
         gridPane.add(totalAmountLabel, 0, 2);
+        gridPane.add(numberOfTicketLabel, 1, 2);
         gridPane.add(paySelectionLabel, 0, 3);
         gridPane.add(paypalButton, 0, 4);
         gridPane.add(paypalImage, 1, 4);
@@ -140,6 +143,10 @@ public class PaymentSelectionView extends Scene {
 
     public void setPriceComponent(double price) {
         totalAmountLabel.setText("€ " + String.valueOf(price));
+    }
+    
+    public void setTicketNumber(int number) {
+    	numberOfTicketLabel.setText("("+number+((number == 1)?" biglietto)":" biglietti)"));
     }
     
     public double getPrice() {

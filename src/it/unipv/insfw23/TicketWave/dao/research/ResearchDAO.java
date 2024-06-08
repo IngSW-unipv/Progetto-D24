@@ -204,37 +204,54 @@ public class ResearchDAO implements IResearchDAO{
         Blob bl = rs.getBlob("PHOTO");
         InputStream is = bl.getBinaryStream();
         Image photo = new Image(is);
-        double[] price = {rs.getDouble("BASE_PRICE"), rs.getDouble("PREMIUM_PRICE"), rs.getDouble("VIP_PRICE")};
-        int[] seatsremaining = {rs.getInt("REMAINING_BASE_SEATS"), rs.getInt("REMAINING_PREMIUM_SEATS"), rs.getInt("REMAINING_VIP_SEATS")};
-        int[] ticketSoldNumberForType = {rs.getInt("SOLD_BASE_SEATS"), rs.getInt("SOLD_PREMIUM_SEATS"), rs.getInt("SOLD_VIP_SEATS")};
+        
+        double[] price = new double[rs.getInt("NUM_SEATS_TYPE")];
+        int[] seatsRemaining = new int[rs.getInt("NUM_SEATS_TYPE")];
+        int[] ticketSoldNumberForType = new int[rs.getInt("NUM_SEATS_TYPE")];
 
+        switch (rs.getInt("NUM_SEATS_TYPE")){
+            case 3:
+                price[2] = rs.getDouble("VIP_PRICE");
+                seatsRemaining[2] = rs.getInt("REMAINING_VIP_SEATS");
+                ticketSoldNumberForType[2] = rs.getInt("SOLD_VIP_SEATS");
+
+            case 2:
+                price[1] = rs.getDouble("PREMIUM_PRICE");
+                seatsRemaining[1] = rs.getInt("REMAINING_PREMIUM_SEATS");
+                ticketSoldNumberForType[1] = rs.getInt("SOLD_PREMIUM_SEATS");
+
+            case 1:
+                price[0] = rs.getDouble("BASE_PRICE");
+                seatsRemaining[0] = rs.getInt("REMAINING_BASE_SEATS");
+                ticketSoldNumberForType[0] = rs.getInt("SOLD_BASE_SEATS");
+        }
         switch (Type.valueOf(rs.getString("TYPE_")).ordinal()) {
             case 0 -> {
                 return new Concert(rs.getInt("ID_EVENT"), rs.getString("NAME_"),
                         rs.getString("CITY"), rs.getString("LOCATION"), ld, tm,
                         Province.valueOf(rs.getString("PROVINCE")), Genre.valueOf(rs.getString("GENRE")),
-                        rs.getInt("MAX_NUM_SEATS"), rs.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
+                        rs.getInt("MAX_NUM_SEATS"), rs.getInt("NUM_SEATS_TYPE"), seatsRemaining, ticketSoldNumberForType, price,
                         manager, rs.getString("ARTISTS"), rs.getString("DESCRIPTION_"), photo);
             }
             case 1 -> {
                 return new Festival(rs.getInt("ID_EVENT"), rs.getString("NAME_"),
                         rs.getString("CITY"), rs.getString("LOCATION"), ld, tm,
                         Province.valueOf(rs.getString("PROVINCE")), Genre.valueOf(rs.getString("GENRE")),
-                        rs.getInt("MAX_NUM_SEATS"), rs.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
+                        rs.getInt("MAX_NUM_SEATS"), rs.getInt("NUM_SEATS_TYPE"), seatsRemaining, ticketSoldNumberForType, price,
                         manager, rs.getString("ARTISTS"), rs.getString("DESCRIPTION_"), countWords(rs.getString("ARTISTS")), photo);
             }
             case 2 -> {
                 return new Theater(rs.getInt("ID_EVENT"), rs.getString("NAME_"),
                         rs.getString("CITY"), rs.getString("LOCATION"), ld, tm,
                         Province.valueOf(rs.getString("PROVINCE")), Genre.valueOf(rs.getString("GENRE")),
-                        rs.getInt("MAX_NUM_SEATS"), rs.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
+                        rs.getInt("MAX_NUM_SEATS"), rs.getInt("NUM_SEATS_TYPE"), seatsRemaining, ticketSoldNumberForType, price,
                         manager, rs.getString("ARTISTS"), rs.getString("DESCRIPTION_"), rs.getString("AUTHOR"), photo);
             }
             case 3 -> {
                 return new Other(rs.getInt("ID_EVENT"), rs.getString("NAME_"),
                         rs.getString("CITY"), rs.getString("LOCATION"), ld, tm,
                         Province.valueOf(rs.getString("PROVINCE")), Genre.valueOf(rs.getString("GENRE")),
-                        rs.getInt("MAX_NUM_SEATS"), rs.getInt("NUM_SEATS_TYPE"), seatsremaining, ticketSoldNumberForType, price,
+                        rs.getInt("MAX_NUM_SEATS"), rs.getInt("NUM_SEATS_TYPE"), seatsRemaining, ticketSoldNumberForType, price,
                         manager, rs.getString("ARTISTS"), rs.getString("DESCRIPTION_"), photo);
             }
         }

@@ -40,6 +40,7 @@ public class PaymentDataMController {
     private PaymentSelectionView paymentSelectionView;
     private boolean isviewermanager;
     private User user = ConnectedUser.getInstance().getUser();
+    private int numOfTickets;
 
     private IPaymentAdapter iPaymentAdapter;
 
@@ -101,31 +102,33 @@ public class PaymentDataMController {
                         iPaymentAdapter = PaymentFactory.getMastercardAdapter(mastercardPayment);
                         System.out.println("creati i mastercardPayment payment e interfaccia");
 
-                        Ticket ticket = customer.buyticket(iPaymentAdapter, ConnectedUser.getInstance().getEventForTicket(), ConnectedUser.getInstance().getTicketType(), getUsePoint());
-                        System.out.println("Ticket associato correttamente");
+                        for(int i = 0; i < numOfTickets; i++) {
+                        	Ticket ticket = customer.buyticket(iPaymentAdapter, ConnectedUser.getInstance().getEventForTicket(), ConnectedUser.getInstance().getTicketType(), getUsePoint());
+                            System.out.println("Ticket associato correttamente");
 
-                        try {
-                            ticketDao.insertTicket(ticket, customer);
+                            try {
+                                ticketDao.insertTicket(ticket, customer);
 
-                            System.out.println("insert ticket eseguito");
-                        } catch (SQLException e) {
-                            throw new SQLException("Problema inserimento ticket", e);
-                        }
+                                System.out.println("insert ticket eseguito");
+                            } catch (SQLException e) {
+                                throw new SQLException("Problema inserimento ticket", e);
+                            }
 
-                        try {
-                            profileDao.updateCustomerPoints(customer);
+                            try {
+                                profileDao.updateCustomerPoints(customer);
 
-                            System.out.println("updatePoints eseguito");
-                        } catch (SQLException e) {
-                            throw new SQLException("Problema aggiornamento punti", e);
-                        }
+                                System.out.println("updatePoints eseguito");
+                            } catch (SQLException e) {
+                                throw new SQLException("Problema aggiornamento punti", e);
+                            }
 
-                        try {
-                            eventDao.updateSeatsNumber(ConnectedUser.getInstance().getEventForTicket());
+                            try {
+                                eventDao.updateSeatsNumber(ConnectedUser.getInstance().getEventForTicket());
 
-                            System.out.println("updateSeats eseguito");
-                        } catch (SQLException e) {
-                            throw new SQLException("Problema aggiornamento posti", e);
+                                System.out.println("updateSeats eseguito");
+                            } catch (SQLException e) {
+                                throw new SQLException("Problema aggiornamento posti", e);
+                            }
                         }
 
 
@@ -202,6 +205,10 @@ public class PaymentDataMController {
         if (!user.isCustomer()) {
             paymentDataMView.getUsePointsButton().setVisible(false);
         }
+    }
+    
+    public void setNumOfTickets(int number) {
+    	numOfTickets = number;
     }
 
     private boolean isNumericAndNotEmpty(String str) {
