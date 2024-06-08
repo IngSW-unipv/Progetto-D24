@@ -149,6 +149,10 @@ public class ProfileDao implements IProfileDao {
                 dbPassword = genericDbPassword.toString();
             }
 
+            if(!checkPassword(password, dbPassword)){
+                //throw new WrongPasswordException
+            }
+
             if (resultAvailable && checkPassword(password, dbPassword)) {
 
                 ArrayList<Event> createdEvents = new ArrayList<>();         //creo la arraylist da riempire
@@ -322,6 +326,11 @@ public class ProfileDao implements IProfileDao {
                 Object genericDbPassword= resultSet1.getString("PWD");
                 dbPassword = genericDbPassword.toString();
             }
+
+            if(!checkPassword(password, dbPassword)){
+                //throw new WrongPasswordException
+            }
+
             if (resultAvailable && checkPassword(password, dbPassword)) {
 
                 ArrayList<Ticket> boughtTickets = new ArrayList<>();   // creo l'arraylist per riempirla
