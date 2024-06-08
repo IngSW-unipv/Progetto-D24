@@ -108,20 +108,18 @@ public class SignUpController {
                     try {
                         profileDao.insertCustomer(customer);
 
+                        ConnectedUser.getInstance().setUser(customer);
+                        ConnectedUser.getInstance().setHome(customerview);
+                        ConnectedUser.getInstance().setLoginView(loginView);
 
-                    ConnectedUser.getInstance().setUser(customer);
-                    ConnectedUser.getInstance().setHome(customerview);
-                    ConnectedUser.getInstance().setLoginView(loginView);
-
-                    ArrayList<Ticket> arrayListTicket = customer.getTicketsList();
-                    ArrayList<Notification> arrayListNotification = customer.getNotification();
-                    CustomerView customerview = new CustomerView(customer.getName(),arrayListNotification,arrayListTicket,customer.getPoints() );
-                    CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
-                    customerview.reSetBars();
+                        ArrayList<Ticket> arrayListTicket = customer.getTicketsList();
+                        ArrayList<Notification> arrayListNotification = customer.getNotification();
+                        CustomerView customerview = new CustomerView(customer.getName(),arrayListNotification,arrayListTicket,customer.getPoints() );
+                        CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
+                        customerview.reSetBars();
 
                     //
-
-                    mainstage.setScene(customerview);
+                        mainstage.setScene(customerview);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     } catch (AccountAlreadyExistsException e) {
@@ -146,14 +144,14 @@ public class SignUpController {
                     try {
                         profileDao.insertManager(manager);
 
-                    ConnectedUser.getInstance().setUser(manager);
-                    ConnectedUser.getInstance().setLoginView(loginView);
+                        ConnectedUser.getInstance().setUser(manager);
+                        ConnectedUser.getInstance().setLoginView(loginView);
 
-                    subscriptionSelectionView = new SubscriptionSelectionView();
-                    SubscriptionSelectionController subscriptionSelectionController = new SubscriptionSelectionController(mainstage,subscriptionSelectionView,signUpView);
-                    subscriptionSelectionView.reSetBars();
+                        subscriptionSelectionView = new SubscriptionSelectionView();
+                        SubscriptionSelectionController subscriptionSelectionController = new SubscriptionSelectionController(mainstage,subscriptionSelectionView,signUpView);
+                        subscriptionSelectionView.reSetBars();
 
-                    mainstage.setScene(subscriptionSelectionView);
+                        mainstage.setScene(subscriptionSelectionView);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     } catch (AccountAlreadyExistsException e) {
