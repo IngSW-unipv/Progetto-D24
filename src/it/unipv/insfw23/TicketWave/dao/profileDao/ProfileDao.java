@@ -387,7 +387,8 @@ public class ProfileDao implements IProfileDao {
         ConnectionDB.closeConnection(connection);
         return customer;
     }
-    
+
+
     private Genre[] splitStringToArrayGenre(String s) {
         String[] arrayString = s.split(",");
         Genre[] genreArray = new Genre[5];
