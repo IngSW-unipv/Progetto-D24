@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.exceptions.AccountNotFoundException;
+import it.unipv.insfw23.TicketWave.exceptions.WrongPasswordException;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
@@ -88,6 +89,8 @@ public class LoginController {
                         throw new RuntimeException("Utente non registrato");
                     } catch (AccountNotFoundException e) {
                         loginView.setErrorLabel(e.getMessage());
+                    } catch (WrongPasswordException e) {
+                         loginView.setErrorLabel(e.getMessage());
                     }
                      //
 
@@ -120,9 +123,10 @@ public class LoginController {
                         if (loggedManager == null){
                             throw new AccountNotFoundException();
                         }
+
                     } catch (SQLException e) {
                         throw new RuntimeException("Utente non registrato");
-                    } catch (AccountNotFoundException e) {
+                    } catch (AccountNotFoundException | WrongPasswordException e ) {
                         loginView.setErrorLabel(e.getMessage());
                     }
 

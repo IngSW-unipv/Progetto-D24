@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.dao.profileDao;
 
 import it.unipv.insfw23.TicketWave.exceptions.AccountAlreadyExistsException;
+import it.unipv.insfw23.TicketWave.exceptions.WrongPasswordException;
 import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
@@ -122,7 +123,7 @@ public class ProfileDao implements IProfileDao {
 
 
     @Override
-    public Manager selectManager(String mail, String password) throws SQLException{
+    public Manager selectManager(String mail, String password) throws SQLException, WrongPasswordException {
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
         PreparedStatement statement1;
         PreparedStatement statement2;
@@ -147,10 +148,11 @@ public class ProfileDao implements IProfileDao {
                 resultAvailable = true;
                 Object genericDbPassword= resultSet1.getString("PWD");
                 dbPassword = genericDbPassword.toString();
-            }
 
-            if(!checkPassword(password, dbPassword)){
-                //throw new WrongPasswordException
+                if(!checkPassword(password, dbPassword)){
+                    throw new WrongPasswordException();
+                }
+
             }
 
             if (resultAvailable && checkPassword(password, dbPassword)) {
@@ -300,7 +302,7 @@ public class ProfileDao implements IProfileDao {
 
 
     @Override
-    public Customer selectCustomer(String mail, String password) throws SQLException{
+    public Customer selectCustomer(String mail, String password) throws SQLException,WrongPasswordException{
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
         PreparedStatement statement1;
         PreparedStatement statement2;
@@ -325,11 +327,13 @@ public class ProfileDao implements IProfileDao {
                 resultAvailable = true;
                 Object genericDbPassword= resultSet1.getString("PWD");
                 dbPassword = genericDbPassword.toString();
+
+                if(!checkPassword(password, dbPassword)){
+                    throw new WrongPasswordException();
+                }
+
             }
 
-            if(!checkPassword(password, dbPassword)){
-                //throw new WrongPasswordException
-            }
 
             if (resultAvailable && checkPassword(password, dbPassword)) {
 
@@ -406,8 +410,11 @@ public class ProfileDao implements IProfileDao {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
-    public static boolean checkPassword(String plainPassword, String hashedPassword) {
+    public static boolean checkPassword(String plainPassword, String hashedPassword)  {
+
+
         return BCrypt.checkpw(plainPassword, hashedPassword);
+
     }
 
 	@Override
