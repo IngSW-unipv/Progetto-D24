@@ -218,7 +218,7 @@ public class SignUpView extends Scene implements IResettableScene {
         errorLabel = new Label();
         errorLabel.setTextFill(javafx.scene.paint.Color.RED);
         errorLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
-        errorLabel.setText("Campi non validi o vuoti");
+        //errorLabel.setText("Campi non validi o vuoti");
         errorLabel.setVisible(false);
         GridPane.setColumnSpan(errorLabel, 2);
         GridPane.setConstraints(errorLabel, 3, 5);
@@ -329,9 +329,8 @@ public class SignUpView extends Scene implements IResettableScene {
             return true ;
         }
     }
-    public void setErrorLabel(){
-
-        System.out.println("mail/password diverse o campi vuoti");
+    public void setErrorLabel(String message){
+        errorLabel.setText(message);
         errorLabel.setVisible(true);
     }
     private boolean isAnyCheckBoxSelected() {

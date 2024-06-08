@@ -1,5 +1,6 @@
 package it.unipv.insfw23.TicketWave.dao.profileDao;
 
+import it.unipv.insfw23.TicketWave.exceptions.AccountAlreadyExistsException;
 import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
@@ -36,7 +37,7 @@ public class ProfileDao implements IProfileDao {
     }
 
     @Override
-    public void insertManager(Manager manager) throws SQLException {
+    public void insertManager(Manager manager) throws SQLException, AccountAlreadyExistsException {
 
         try {
             connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
@@ -63,7 +64,10 @@ public class ProfileDao implements IProfileDao {
                 System.out.println("query eseguita");
             }
         }catch (SQLException e) {
-            throw new SQLException("No zi non posso salvare i tuoi dati, c'è qualche prob", e);
+            if (e.getErrorCode() == 1062) {
+                throw new AccountAlreadyExistsException();
+            }
+            throw new SQLException("Impossibile salvare i dati della registrazione", e);
         }
         ConnectionDB.closeConnection(connection);
 
@@ -73,7 +77,7 @@ public class ProfileDao implements IProfileDao {
 
 
     @Override
-    public void insertCustomer(Customer customer)throws SQLException{
+    public void insertCustomer(Customer customer)throws SQLException, AccountAlreadyExistsException{
         try {
             connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
             if(ConnectionDB.isOpen(connection)){
@@ -107,7 +111,10 @@ public class ProfileDao implements IProfileDao {
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new SQLException("Errore per inserimento del Customer", e);
+            if (e.getErrorCode() == 1062) {
+                throw new AccountAlreadyExistsException();
+            }
+            throw new SQLException("Impossibile salvare i dati della registrazione", e);
         }
         ConnectionDB.closeConnection(connection);
     }

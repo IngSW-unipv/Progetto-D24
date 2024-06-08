@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.access;
 
 import it.unipv.insfw23.TicketWave.dao.profileDao.IProfileDao;
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
+import it.unipv.insfw23.TicketWave.exceptions.AccountAlreadyExistsException;
 import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
@@ -70,11 +71,11 @@ public class SignUpController {
 
         signUpView.getBackButton().setOnAction(goToLoginView);
 
+
+
+
         // Action sul signupbutton
         EventHandler<ActionEvent> goToSelection = new EventHandler<ActionEvent>() {
-
-
-
 
             @Override
             public void handle(ActionEvent actionEvent) {
@@ -83,9 +84,11 @@ public class SignUpController {
                 System.out.println("checkFieldsEmpty: " + signUpView.checkFieldsEmpty());
 
 
-                if(signUpView.checkEqualEmailAndPassword()== false || signUpView.checkFieldsEmpty() == true) {
-                    signUpView.setErrorLabel();
-
+                if(signUpView.checkEqualEmailAndPassword()== false) {
+                    signUpView.setErrorLabel("Mail o password non corrispondenti");
+                }
+                else if(signUpView.checkFieldsEmpty() == true){
+                    signUpView.setErrorLabel("Campi vuoti o non validi");
 
                 }else if (signUpView.getCustomerRadioButton().isSelected()) {
 
@@ -103,13 +106,8 @@ public class SignUpController {
                             signUpView.getSelectedProvince(),signUpView.getSelectedGenres(), 0,tickets);  // setto  a zero i biglietti creati e i punti vanno presi dopo nelle altre view
 
                     try {
-
-
-
                         profileDao.insertCustomer(customer);
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
+
 
                     ConnectedUser.getInstance().setUser(customer);
                     ConnectedUser.getInstance().setHome(customerview);
@@ -124,6 +122,11 @@ public class SignUpController {
                     //
 
                     mainstage.setScene(customerview);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    } catch (AccountAlreadyExistsException e) {
+                        signUpView.setErrorLabel(e.getMessage());
+                    }
 
 
                     // Imposta la scena SignUpView sulla stage principale
@@ -131,9 +134,7 @@ public class SignUpController {
 
 
                     System.out.println("Hai cliccato il pulsante registrati  come gestore");
-                    subscriptionSelectionView = new SubscriptionSelectionView();
-                    SubscriptionSelectionController subscriptionSelectionController = new SubscriptionSelectionController(mainstage,subscriptionSelectionView,signUpView);
-                    subscriptionSelectionView.reSetBars();
+
 
                     //set del manager, CHIAMATA AL DAO PER LA REGISTRAZIONE
 
@@ -144,15 +145,20 @@ public class SignUpController {
 
                     try {
                         profileDao.insertManager(manager);
-                    } catch (SQLException e) {
-                        throw new RuntimeException(e);
-                    }
+
                     ConnectedUser.getInstance().setUser(manager);
                     ConnectedUser.getInstance().setLoginView(loginView);
 
-                    //
+                    subscriptionSelectionView = new SubscriptionSelectionView();
+                    SubscriptionSelectionController subscriptionSelectionController = new SubscriptionSelectionController(mainstage,subscriptionSelectionView,signUpView);
+                    subscriptionSelectionView.reSetBars();
 
                     mainstage.setScene(subscriptionSelectionView);
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    } catch (AccountAlreadyExistsException e) {
+                        signUpView.setErrorLabel(e.getMessage());
+                    }
                     // Imposta la scena subscriptio sulla stage principale
                 }
             }

@@ -115,7 +115,7 @@ public class LoginView extends Application {
         errorLabel = new Label();
         errorLabel.setTextFill(javafx.scene.paint.Color.RED);
         errorLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
-        errorLabel.setText("Campi non validi o vuoti");
+        //errorLabel.setText("Campi non validi o vuoti");
         errorLabel.setVisible(false);
 
         accountTypeToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
@@ -131,7 +131,7 @@ public class LoginView extends Application {
         GridPane.setConstraints(managerRadioButton, 1, 0);
         GridPane.setConstraints(loginButton, 1, 5);
         GridPane.setConstraints(regButton, 1, 6);
-        GridPane.setConstraints(errorLabel, 2, 6);
+        GridPane.setConstraints(errorLabel, 0, 9);
 
        /* loginButton.setOnAction(e -> {
 
@@ -233,7 +233,7 @@ public class LoginView extends Application {
         errorLabel.setVisible(false);
     }
     public boolean checkEmptyFields(){
-        if(mail.getText()== null || password.getText()==null){
+        if(mail.getText().isEmpty() || password.getText().isEmpty()){
             return true;
         }else {return false;}
     }
@@ -242,9 +242,8 @@ public class LoginView extends Application {
         return errorLabel;
     }
 
-    public void setErrorLabel(){
-
-        System.out.println("mail/password diverse o campi vuoti");
+    public void setErrorLabel(String message){
+        errorLabel.setText(message);
         errorLabel.setVisible(true);
     }
     public static void main(String[] args) {
