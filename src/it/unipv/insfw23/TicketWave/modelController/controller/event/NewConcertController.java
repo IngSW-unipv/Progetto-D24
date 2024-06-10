@@ -128,6 +128,8 @@ public class NewConcertController {
 					customerFavGenre = profileDao.selectCustomerByGenre(createdConcert.getGenre());
 					customerProvince = profileDao.selectCustomerByProvince(createdConcert.getProvince());
 					
+					//aggiorno il numero di notifiche presenti sul db
+					notificationHandler.setCounterNotification(notificationDao.selectNotificationNumber());
 					notifications = notificationHandler.sendNotificationNewEvent(createdConcert, customerProvince, customerFavGenre);
 					
 					for(Notification x : notifications) {

@@ -37,7 +37,8 @@ public class NotificationDao implements INotificationDao{
 			
 			statement.executeUpdate();
 		}catch (SQLException e) {
-			throw new SQLException("Problema nell'inserimento della mail");
+			e.printStackTrace();
+			throw new SQLException("Problema nell'inserimento della notifica");
 		}catch (Exception e) {
 			e.printStackTrace();
 		}

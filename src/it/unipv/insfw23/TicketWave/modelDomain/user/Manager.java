@@ -50,6 +50,7 @@ public class Manager extends User {
     public void setSubscription(int subscription) {
         this.subscription = subscription;
         this.subscriptionDate=LocalDate.now(); // setto anche la data per compattare il metodo
+        this.counterCreatedEvents = 0;
     }
 
     public String getCreditCard() {

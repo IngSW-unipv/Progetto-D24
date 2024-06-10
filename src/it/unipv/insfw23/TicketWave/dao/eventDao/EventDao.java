@@ -52,7 +52,7 @@ public class EventDao implements IEventDao {
 
                 //setto i campi
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setInt(1, event.getIdEvent() + 1);
+                preparedStatement.setInt(1, event.getIdEvent());
                 System.out.println(event.getIdEvent());
                 preparedStatement.setString(2, event.getName());
                 System.out.println(event.getName());
