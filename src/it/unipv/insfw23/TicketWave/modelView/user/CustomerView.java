@@ -1,13 +1,9 @@
 package it.unipv.insfw23.TicketWave.modelView.user;
 
-import it.unipv.insfw23.TicketWave.modelDomain.event.Concert;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
@@ -18,15 +14,11 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 
@@ -59,22 +51,19 @@ public class CustomerView extends Scene implements IResettableScene {
 
     private void initComponents() {
 
-
-        // Creazione del bordo superiore e inferiore
-
         BorderPane layout = (BorderPane) getRoot();
         this.layout = layout;
 
+        // setto barra di sopra e di sotto
         customerUpperBar = UpperBar.getIstance();
         customerUpperBar.setForCustomer();
         lowerBar = LowerBar.getInstance();
-
         layout.setStyle("-fx-background-color: #91bad6;");
         layout.setBottom(lowerBar);
         layout.setTop(customerUpperBar);
         layout.setCenter(grid);
 
-
+        // inizializzo griglia nella quale metto gli elementi
         grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         layout.setCenter(grid);
@@ -82,17 +71,12 @@ public class CustomerView extends Scene implements IResettableScene {
         grid.setVgap(8);
         grid.setHgap(10);
 
+        // bottone logout
         logoutButton = new Button("Logout");
-        /*GridPane.setConstraints(logoutButton, 1, 1, 2, 1);
-        GridPane.setHalignment(logoutButton, HPos.CENTER);
-        GridPane.setHgrow(logoutButton, Priority.SOMETIMES);
-        GridPane.setConstraints(wavePoints, 1, 0);*/
         GridPane.setConstraints(logoutButton, 2, 0);
 
         // Nome e Cognome
-
         nameLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 20));
-
         GridPane.setConstraints(nameLabel, 0, 0);
 
         // Punti Accumulati
@@ -108,12 +92,9 @@ public class CustomerView extends Scene implements IResettableScene {
        // notifyListView.getItems().addAll("Notifica 1", "Notifica 2", "Notifica 3"); // Dati di esempio
         GridPane.setConstraints(notifyListView, 0, 1);
 
-        // AGGIUSTARE LA TABLEVIEW CON GLI ATTRIBUTI DEI BIGLIETTI E POI COLLEGARE CON IL DAO PER LEGGERE I DATI
         // TableView per i biglietti acquistati
         ticketTab = new TableView<Ticket>();
         ticketTab.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
-
-
         TableColumn<Ticket, String> barcodeCol = new TableColumn<>("Barcode");
         barcodeCol.setCellValueFactory(new PropertyValueFactory<>("barcode"));
 
@@ -148,46 +129,6 @@ public class CustomerView extends Scene implements IResettableScene {
     public Button getSearchButton(){
         return customerUpperBar.getSearchButton();
     }
-
-
-
-
-
-
-/*
-    public static class Biglietto {
-        private String evento;
-        private String tipoBiglietto;
-        private String dataEvento;
-        private double prezzo;
-
-        public Biglietto(String evento, String tipoBiglietto, String dataEvento, double prezzo) {
-            this.evento = evento;
-            this.tipoBiglietto = tipoBiglietto;
-            this.dataEvento = dataEvento;
-            this.prezzo = prezzo;
-        }
-
-        public String getEvento() {
-            return evento;
-        }
-
-        public String getTipoBiglietto() {
-            return tipoBiglietto;
-        }
-
-        public String getDataEvento() {
-            return dataEvento;
-        }
-
-        public double getPrezzo() {
-            return prezzo;
-        }
-
-
-
-    }
-*/
 
     public TableView<Ticket> getTicketTab() {
         return ticketTab;

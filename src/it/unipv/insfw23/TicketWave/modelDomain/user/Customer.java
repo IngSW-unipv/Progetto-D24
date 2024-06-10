@@ -12,7 +12,6 @@ import java.util.ArrayList;
 public class Customer extends User {
 
     private ArrayList<Ticket> ticketsList;
-
     private int points;
     private Genre [] favoriteGenre ;
     int maxfavoriteGenre = 5;
@@ -65,9 +64,7 @@ public class Customer extends User {
         }
         return ticket;
     }
-
     // setto generi preferiti
-
     public void setFavoriteGenre(Genre [] favorite) throws Exception {
         if (favorite.length > 5) {
             throw new Exception ("Impossibile selezionere più di 5 generi");
@@ -99,8 +96,6 @@ public class Customer extends User {
 
         return points;
     }
-
-
     @Override
     public boolean isCustomer() {
         return true;
