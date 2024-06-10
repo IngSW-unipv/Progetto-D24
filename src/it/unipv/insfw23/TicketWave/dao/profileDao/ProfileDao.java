@@ -273,6 +273,19 @@ public class ProfileDao implements IProfileDao {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
+/*
+                //costrutto di controllo per verificare che la subscription sia scaduta
+                if(manager.oneMonthPassed()){  // se è passato >= di un mese dall'inizio della sub
+                    manager.setSubscription(-1);//allora abbonamento scaduto
+                    System.out.println(+manager.getSubscription());
+
+                    System.out.println("subscription settata");
+
+                 //  updateManagerSub((manager));
+                  //  System.out.println("query update eseguita");
+
+                }
+*/
             }
             else {
                 return null;}
@@ -422,10 +435,18 @@ public class ProfileDao implements IProfileDao {
 		connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);
 		PreparedStatement statement1;
 		try {
-			
+
 			String query1 = "UPDATE MANAGER SET MAXEVENTS = ?, SUBSCRIPTION = ?, SUBSCRIPTION_DATE = ?, COUNTER_CREATED_EVENTS = ? WHERE MAIL = ?";
-			
+
 			statement1 = connection.prepareStatement(query1);
+            //CONTROLLO PER LA SUB SCADUTA
+            if(manager.getSubscription()==-1){
+
+                statement1.setInt(1, 0); //MAXEVENTS=0
+                statement1.setInt(2, -1);  //SUB=-1
+                System.out.println("statement di correzione eseguito ");
+            }
+            else{
 			switch (ConnectedUser.getInstance().getNewSubLevel()) {
 			case 0:
 				statement1.setInt(1, MAX_EVENTS_FOR_FREE_SUB);
@@ -440,14 +461,17 @@ public class ProfileDao implements IProfileDao {
 			statement1.setDate(3, Date.valueOf(LocalDate.now()));
 			statement1.setInt(4, 0);
 			statement1.setString(5, manager.getEmail());
-			
+
 			statement1.execute();
-		} catch (SQLException e) {
+		    }
+        } catch (SQLException e) {
 			throw new SQLException("Errore nell'aggiornamento della sub");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
-		
+
+
+
 		ConnectionDB.closeConnection(connection);
 	}
 	

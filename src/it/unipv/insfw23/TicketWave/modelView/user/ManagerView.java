@@ -187,6 +187,14 @@ public class ManagerView extends Scene  implements IResettableScene {
 			currentSubLabel = new Label("abbonamento: premium");
 			eventRemained = new Label("eventi creati: "+counterCreatedEvents+" su nessun limite");
 			break;
+
+
+			//AGGIUNTA CASE PER IL SET DI ABBONAMENTO SCADUTO
+			case -1:
+				currentSubLabel = new Label("abbonamento: scaduto");
+				eventRemained = new Label("Non puoi creare altri eventi");
+				break;
+
 		}
 		
 		currentSubLabel.setFont(Font.font("Helvetica", FontWeight.BOLD,13));

@@ -120,6 +120,7 @@ public class LoginController {
                     //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
                     try{
                         loggedManager = profileDao.selectManager(loginView.getMail().getText(), loginView.getPassword().getText());
+
                         if (loggedManager == null){
                             throw new AccountNotFoundException();
                         }
@@ -171,9 +172,19 @@ public class LoginController {
                     // Azione da eseguire quando il pulsante "Login" viene premuto
                     if(loggedManager != null){
                         System.out.println("Hai cliccato il pulsante Login come gestore");
+                        if(loggedManager.oneMonthPassed()){
+                            loggedManager.setSubscription(-1);
+                            try {
+                                profileDao.updateManagerSub(loggedManager);
+                            } catch (SQLException e) {
+                                throw new RuntimeException(e);
+                            }
+                        }
+
                         ArrayList<Event> arrayListEvent = loggedManager.getEventlist();
                         ArrayList<Notification> arrayListNotification = loggedManager.getNotification();
                         ManagerView managerView = new ManagerView(loggedManager.getName(),arrayListNotification,arrayListEvent,loggedManager.getSubscription(),loggedManager.getCounterCreatedEvents());
+
                         //managerView.setEventsforTableev(managerfinto);
                         //managerView.reSetBars();
 
