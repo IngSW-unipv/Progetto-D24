@@ -8,14 +8,14 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.*;
 
 public class Notification {
 		int id;
-		String emailreceiver;
+		String emailReceiver;
 		String msg;
 		LocalTime time;
 		LocalDate date;
 		
-		public Notification(int id, User receiver, String msg) {
+		public Notification(int id, String emailReceiver, String msg) {
 			this.id = id;
-			emailreceiver = receiver.getEmail();
+			this.emailReceiver = emailReceiver;
 			this.msg = msg;
 			date = LocalDate.now();
 			time = LocalTime.now().truncatedTo(ChronoUnit.SECONDS);
@@ -30,11 +30,11 @@ public class Notification {
 		}
 		
 		public String getEmailReceiver() {
-			return emailreceiver;
+			return emailReceiver;
 		}
 		
 		public void setEmailReceiver(String email) {
-			emailreceiver = email;
+			emailReceiver = email;
 		}
 
 		public String getMsg() {

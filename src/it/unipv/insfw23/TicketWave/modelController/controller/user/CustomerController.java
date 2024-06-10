@@ -107,15 +107,21 @@ public class CustomerController {
                 TicketPageView tic = new TicketPageView();
                 try {
                 EventDao eventDao = new EventDao();
-                System.out.println(customerView.getTicketTab().getSelectionModel().getSelectedItem().getIdEvent());
-                //costruttore view
-                   // Ticket tick = (Ticket) customerView.getTicketTab().getSelectionModel().getSelectedItem();
-                int idEvent = customerView.getTicketTab().getSelectionModel().getSelectedItem().getIdEvent();
-
+                
+               	System.out.println(customerView.getTicketTab().getSelectionModel().getSelectedItem().getIdEvent());
+               	//costruttore view
+               	// Ticket tick = (Ticket) customerView.getTicketTab().getSelectionModel().getSelectedItem();
+               	int idEvent = customerView.getTicketTab().getSelectionModel().getSelectedItem().getIdEvent();
                 //costruttore controller
 
                     TicketPageController buyticketcontroller = new TicketPageController(mainstage, tic, eventDao.selectEvent(idEvent), customerView);
-                } catch (SQLException e) {
+                    
+                } catch(NullPointerException e){
+                	/*per quando si clicca su una riga della tabella non popolata o quando si lascia lo scrollbar col mouse interno alla table senza avere
+              	  	cliccato un ticket prima
+                	 */
+                	return;
+                }catch (SQLException e) {
                     e.printStackTrace();
                     throw new RuntimeException(e);
                 }

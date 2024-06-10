@@ -349,6 +349,13 @@ public class SignUpView extends Scene implements IResettableScene {
             return  false;
         }
     }
+    public boolean checkEmptyGenre(){
+        if(isAnyCheckBoxSelected()== false && customerRadioButton.isSelected()){
+            return true;
+        }else{
+            return false;
+        }
+    }
 
 
 

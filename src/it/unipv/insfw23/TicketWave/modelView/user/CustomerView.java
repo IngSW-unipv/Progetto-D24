@@ -35,8 +35,8 @@ public class CustomerView extends Scene implements IResettableScene {
     private GridPane grid;
     private Label nameLabel;
     private Label wavePoints;
-    private ListView notifyListView;
-    private TableView ticketTab;
+    private TableView<Notification> notificationTab;
+    private TableView<Ticket> ticketTab;
     private Button logoutButton;
     private ObservableList<Ticket> tick;
     private ObservableList<Notification> nots;
@@ -81,6 +81,7 @@ public class CustomerView extends Scene implements IResettableScene {
         grid.setPadding(new Insets(20, 20, 20, 20));
         grid.setVgap(8);
         grid.setHgap(10);
+        grid.setGridLinesVisible(true);
 
         logoutButton = new Button("Logout");
         /*GridPane.setConstraints(logoutButton, 1, 1, 2, 1);
@@ -100,13 +101,28 @@ public class CustomerView extends Scene implements IResettableScene {
         wavePoints.setFont(Font.font("Helvetica ",FontWeight.BOLD, 20));
         GridPane.setConstraints(wavePoints, 1, 0);
 
-        // ListView per le notifiche
-        notifyListView = new ListView<>();
-        notifyListView.getStylesheets().add("it/unipv/insfw23/TicketWave/css/listViewStyle.css");
+        // TableView per le notifiche
+        notificationTab = new TableView<Notification>();
+        notificationTab.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
+        
+        TableColumn<Notification, LocalDate> dateCol = new TableColumn<>("Data");
+        dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        
+        TableColumn<Notification, LocalTime> timeCol = new TableColumn<>("Orario");
+        timeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        
+        TableColumn<Notification, String> msgCol = new TableColumn<>("Messaggio");
+        msgCol.setCellValueFactory(new PropertyValueFactory<>("msg"));
+        
+        notificationTab.getColumns().addAll(dateCol, timeCol, msgCol);
+        notificationTab.setMinWidth(400);
+        //notificationTab.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+        
+        
         if(nots != null){
-            notifyListView.setItems(nots);}
+            notificationTab.setItems(nots);}
        // notifyListView.getItems().addAll("Notifica 1", "Notifica 2", "Notifica 3"); // Dati di esempio
-        GridPane.setConstraints(notifyListView, 0, 1);
+        GridPane.setConstraints(notificationTab, 0, 1);
 
         // AGGIUSTARE LA TABLEVIEW CON GLI ATTRIBUTI DEI BIGLIETTI E POI COLLEGARE CON IL DAO PER LEGGERE I DATI
         // TableView per i biglietti acquistati
@@ -127,13 +143,14 @@ public class CustomerView extends Scene implements IResettableScene {
         eventCol.setCellValueFactory(new PropertyValueFactory<>("eventName"));
 
         ticketTab.getColumns().addAll(eventCol,barcodeCol, priceCol,typeCol);
-        ticketTab.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+        ticketTab.setMinWidth(430);
+        //ticketTab.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         if(tick != null) {
             ticketTab.setItems(tick);
         }
         GridPane.setConstraints(ticketTab, 1, 1);
 
-        grid.getChildren().addAll(nameLabel, wavePoints, notifyListView, ticketTab,logoutButton);
+        grid.getChildren().addAll(nameLabel, wavePoints, notificationTab, ticketTab,logoutButton);
 
 
 

@@ -1,11 +1,16 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.event;
 
 import it.unipv.insfw23.TicketWave.dao.eventDao.EventDao;
+import it.unipv.insfw23.TicketWave.dao.notificationDao.NotificationDao;
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
+import it.unipv.insfw23.TicketWave.modelController.factory.notifications.INotificationHandler;
+import it.unipv.insfw23.TicketWave.modelController.factory.notifications.NotificationHandlerFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Concert;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.event.NewConcertView;
 import it.unipv.insfw23.TicketWave.modelView.event.SelectionNewEventTypeView;
@@ -19,6 +24,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class NewConcertController {
@@ -27,6 +33,7 @@ public class NewConcertController {
 	SelectionNewEventTypeView typeselevview;
 	Manager loggedmanager;
 	ManagerView home;
+	INotificationHandler notificationHandler;
 	
 	public NewConcertController(Stage primarystage, NewConcertView newconcview, SelectionNewEventTypeView typeselevview) {
 		window = primarystage;
@@ -34,6 +41,7 @@ public class NewConcertController {
 		this.typeselevview = typeselevview;
 		this.loggedmanager = (Manager) ConnectedUser.getInstance().getUser();
 		this.home = (ManagerView)ConnectedUser.getInstance().getHome();
+		this.notificationHandler = NotificationHandlerFactory.getIstance().getNotificationHandler();
 		initComponents();
 	}
 	
@@ -74,12 +82,14 @@ public class NewConcertController {
 				
 				//System.out.println(view.getPricebasefield());
 				//System.out.println(view.getTypesticket());
-				
-				
+				ArrayList<String> customerFavGenre = new ArrayList<>();
+				ArrayList<String> customerProvince = new ArrayList<>();
+				ArrayList<Notification> notifications = new ArrayList<>();
 				
 				try {
 					EventDao eventDao = new EventDao();
 					ProfileDao profileDao = new ProfileDao();
+					NotificationDao notificationDao = new NotificationDao();
 					//calcolo dei param da passare al metodo per la creazione nel dominio
 				
 					//id preso come count ella table event sul db
@@ -114,6 +124,15 @@ public class NewConcertController {
 					eventDao.insertEvent(createdConcert);
 					
 					profileDao.updateEventCreatedCounter(loggedmanager);
+					
+					customerFavGenre = profileDao.selectCustomerByGenre(createdConcert.getGenre());
+					customerProvince = profileDao.selectCustomerByProvince(createdConcert.getProvince());
+					
+					notifications = notificationHandler.sendNotificationNewEvent(createdConcert, customerProvince, customerFavGenre);
+					
+					for(Notification x : notifications) {
+						notificationDao.insertNotification(x);
+					}
 					
 					home.updateEvsTable(loggedmanager.getEventlist(),loggedmanager.getCounterCreatedEvents());
 					home.reSetBars();

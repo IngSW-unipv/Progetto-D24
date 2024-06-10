@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.dao.profileDao;
 
 import it.unipv.insfw23.TicketWave.exceptions.AccountAlreadyExistsException;
+import it.unipv.insfw23.TicketWave.exceptions.GenreNotSelected;
 import it.unipv.insfw23.TicketWave.exceptions.WrongPasswordException;
 import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
@@ -78,7 +79,7 @@ public class ProfileDao implements IProfileDao {
 
 
     @Override
-    public void insertCustomer(Customer customer)throws SQLException, AccountAlreadyExistsException{
+    public void insertCustomer(Customer customer) throws SQLException, AccountAlreadyExistsException, GenreNotSelected {
         try {
             connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
             if(ConnectionDB.isOpen(connection)){
@@ -94,6 +95,9 @@ public class ProfileDao implements IProfileDao {
                 }
 
                 String favoriteGenresStr = genresBuilder.toString();
+                if(favoriteGenresStr.isEmpty()){
+                    throw new GenreNotSelected();
+                }
                 ///////////////////////////////////////////////////////
 
                 String query = "INSERT INTO CUSTOMER(NAME_, SURNAME, BIRTHDATE, MAIL, PWD, PROVINCE, POINTS, FAVOURITE_GENRE) VALUES (?, ?, ?, ?, ?, ?, ?,?)";
