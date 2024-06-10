@@ -7,7 +7,7 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library" exported="">
+    <orderEntry type="module-library">
       <library name="JUnit4">
         <CLASSES>
           <root url="jar://$MAVEN_REPOSITORY$/junit/junit/4.13.1/junit-4.13.1.jar!/" />
@@ -17,9 +17,8 @@
         <SOURCES />
       </library>
     </orderEntry>
-    <orderEntry type="library" exported="" name="mysql-connector-j-8.4.0" level="project" />
-    <orderEntry type="library" exported="" name="junit-4.13.1" level="project" />
-    <orderEntry type="library" exported="" name="javafx-swt" level="project" />
-    <orderEntry type="library" name="lib1" level="application" />
+    <orderEntry type="library" name="mysql-connector-j-8.4.0" level="project" />
+    <orderEntry type="library" name="BCryp" level="project" />
+    <orderEntry type="library" name="JavaFX-19" level="application" />
   </component>
 </module>
