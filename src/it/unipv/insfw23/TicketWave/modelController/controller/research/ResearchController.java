@@ -1,6 +1,5 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.research;
 
-//import it.unipv.insfw23.TicketWave.modelView.research.ResearchNodesView;
 import it.unipv.insfw23.TicketWave.dao.research.ResearchDAO;
 import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
@@ -52,14 +51,6 @@ public class ResearchController {
                         ev = rd.getAllEvents(); // devo passarla alla tabella
                         ObservableList<Event> evs = FXCollections.observableArrayList(ev);
                         rv.getTable().setItems(evs); // mostro gli eventi nella tabella dei risultati
-                       /* for (Event event : ev) { // check DA RIMUOVERE *****************************
-                            System.out.println(event.getCreator());
-                            ArrayList<Event> ar = new ArrayList<>(event.getCreator().getEventlist());
-                            System.out.println(ar);
-                            for (Event e : ar){
-                                System.out.println(e.getName());
-                            }
-                        }*/
                     } catch (SQLException e) {
                         throw new RuntimeException("Tutti gli eventi non trovati (ResearchController riga 56)");
                     }

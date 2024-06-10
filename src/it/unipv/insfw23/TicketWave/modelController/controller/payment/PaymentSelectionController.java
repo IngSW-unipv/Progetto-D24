@@ -51,7 +51,7 @@ public class PaymentSelectionController {
                 System.out.println("Stai andando alla PaymentDataMPage");
                 paymentDataMPage=new PaymentDataMView();
                PaymentDataMController paymentDataMController = new PaymentDataMController(mainStage,paymentDataMPage,paymentPage);
-               //se lo user è cliente mi porto dietro il numero di biglietti che si vuole acquistare
+               
                if(user.isCustomer()) {
             	   ticketPage = (TicketPageView)backScene;
             	   paymentDataMController.setNumOfTickets(ticketPage.getNumOfTickets());
