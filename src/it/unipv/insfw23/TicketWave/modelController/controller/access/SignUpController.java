@@ -3,6 +3,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.access;
 import it.unipv.insfw23.TicketWave.dao.profileDao.IProfileDao;
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.exceptions.AccountAlreadyExistsException;
+import it.unipv.insfw23.TicketWave.exceptions.GenreNotSelected;
 import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
@@ -86,6 +87,7 @@ public class SignUpController {
 
                 if(signUpView.checkEqualEmailAndPassword()== false) {
                     signUpView.setErrorLabel("Mail o password non corrispondenti");
+
                 }
                 else if(signUpView.checkFieldsEmpty() == true){
                     signUpView.setErrorLabel("Campi vuoti o non validi");
@@ -124,6 +126,8 @@ public class SignUpController {
                         throw new RuntimeException(e);
                     } catch (AccountAlreadyExistsException e) {
                         signUpView.setErrorLabel(e.getMessage());
+                    } catch (GenreNotSelected e) {
+                        signUpView.setErrorLabel(e.getMessage());
                     }
 
 
@@ -154,9 +158,11 @@ public class SignUpController {
                         mainstage.setScene(subscriptionSelectionView);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
-                    } catch (AccountAlreadyExistsException e) {
+                    }
+                    catch (AccountAlreadyExistsException e) {
                         signUpView.setErrorLabel(e.getMessage());
                     }
+
                     // Imposta la scena subscriptio sulla stage principale
                 }
             }
