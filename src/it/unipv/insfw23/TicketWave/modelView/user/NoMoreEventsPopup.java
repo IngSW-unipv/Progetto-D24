@@ -11,17 +11,18 @@ public class NoMoreEventsPopup extends Popup {
     private static NoMoreEventsPopup istance;
     private Button backButton;
     private Button subscriptionButton;
+    private Label messageLabel;
 
 
     private NoMoreEventsPopup(){
 
         BorderPane content = new BorderPane();
 
-        Label message = new Label("Hai raggiunto il numero massimo di eventi per \nquesto mese! \nSe non vuoi aspettare, cambia subito il tuo abbonamento!");
+        messageLabel = new Label();
         backButton = new Button("Indietro");
         subscriptionButton = new Button("Procedi");
 
-        content.setTop(message);
+        content.setTop(messageLabel);
         content.setLeft(backButton);
         content.setRight(subscriptionButton);
         BorderPane.setAlignment(subscriptionButton, Pos.BOTTOM_RIGHT);
@@ -55,5 +56,9 @@ public class NoMoreEventsPopup extends Popup {
 
     public Button getSubscriptionButton(){
         return subscriptionButton;
+    }
+
+    public void setMessageLabel(String messageText){
+        messageLabel.setText(messageText);
     }
 }
