@@ -10,8 +10,6 @@ import javafx.scene.image.Image;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.Blob;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -155,7 +153,7 @@ public class ManagerTest {
     @Test
     public void testOneMonthPassed() {  //testing su un manager in cui è passato sicuramente più di un mese
         try {
-            boolean result = manager3.OneMonthPassed();
+            boolean result = manager3.oneMonthPassed();
             assertTrue(result); // Deve essere falso, poiché non è passato un mese
         }
         catch(Exception e){

@@ -3,8 +3,6 @@ package it.unipv.insfw23.TicketWave.modelDomain.user;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import javafx.scene.image.Image;
 
-import java.sql.Blob;
-import java.sql.Time;
 import java.util.ArrayList;
 
 import java.lang.String;
@@ -125,7 +123,7 @@ public class Manager extends User {
     }
 
 
-    public boolean OneMonthPassed() {  //controllo da effettuare nel Login Dao  una volta che è scaduto l'abbonamento, quando si prova a creare un evento nuovo e si clicca il bottone si rimanda alla pagina di acquisto.
+    public boolean oneMonthPassed() {  //controllo da effettuare nel Login Dao  una volta che è scaduto l'abbonamento, all'atto del login.
         if (subscriptionDate == null) {
             return false;
         }
@@ -133,7 +131,7 @@ public class Manager extends User {
         LocalDate currentDate = LocalDate.now();
         LocalDate oneMonthLater = subscriptionDate.plusMonths(1);  //calcolo un mese successivo alla data corrente
 
-        return currentDate.isAfter(oneMonthLater) || currentDate.isEqual((oneMonthLater)); //se la data corrente è >= della data di iscrizione + un mese, ritorna 1
+        return currentDate.isAfter(oneMonthLater) || currentDate.isEqual((oneMonthLater)); //se la data corrente è >= della data di iscrizione + un mese, ritorna true
 
     }
 

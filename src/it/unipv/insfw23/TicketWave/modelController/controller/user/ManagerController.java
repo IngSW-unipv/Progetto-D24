@@ -30,12 +30,16 @@ public class ManagerController {
 	LoginView logview;
 	Manager loggedmanager;
 	IResettableScene backScene;
+	private double xStageSize;
+	private double yStageSize;
 	
 	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview) {
 		mainStage = primarystage;
 		this.managerview = managerview;
 		this.logview = logview;
 		this.loggedmanager = (Manager) ConnectedUser.getInstance().getUser();
+		this.xStageSize = mainStage.getX() + mainStage.getWidth() - NoMoreEventsPopup.getIstance().getWidth() - 360;
+		this.yStageSize = mainStage.getY() + 95;
 		initComponents();
 	}
 	
@@ -73,14 +77,21 @@ public class ManagerController {
 
 				} else {
 
-					NoMoreEventsPopup.getIstance().setX(mainStage.getX() + mainStage.getWidth() - NoMoreEventsPopup.getIstance().getWidth() - 360);
-					NoMoreEventsPopup.getIstance().setY(mainStage.getY() + 95);
+					if(loggedmanager.getSubscription()==-1){
+						NoMoreEventsPopup.getIstance().setMessageLabel("Abbonamento scaduto! Prosegui per rinnovare");
+					}
+					else{
+						NoMoreEventsPopup.getIstance().setMessageLabel("Hai raggiunto il numero massimo di eventi per \nquesto mese! \nSe non vuoi aspettare, cambia subito il tuo abbonamento!");
+					}
+					NoMoreEventsPopup.getIstance().setX(xStageSize);
+					NoMoreEventsPopup.getIstance().setY(yStageSize);
 					NoMoreEventsPopup.getIstance().show(mainStage);
 					NoMoreEventsPopupController popupController = new NoMoreEventsPopupController(mainStage, NoMoreEventsPopup.getIstance().getBackButton(), NoMoreEventsPopup.getIstance().getSubscriptionButton(), managerview);
 				}
 			}
 		};
 		managerview.getNewEventButton().setOnMouseClicked(newEventButton);
+
 
 		EventHandler<MouseEvent> searchButton = new EventHandler<>() {
 			@Override
