@@ -147,7 +147,14 @@ public class ManagerController {
 				TicketPageView tic = new TicketPageView();
 				tic.setForNotBuyable();
 				//costruttore controller
-				TicketPageController buyticketcontroller = new TicketPageController(mainStage, tic, managerview.getTableEv().getSelectionModel().getSelectedItem(),managerview);
+				try {
+					TicketPageController buyticketcontroller = new TicketPageController(mainStage, tic, managerview.getTableEv().getSelectionModel().getSelectedItem(),managerview);
+				} catch(NullPointerException e){
+                	/*per quando si clicca su una riga della tabella non popolata o quando si lascia lo scrollbar col mouse interno alla table senza avere
+              	  	cliccato un ticket prima
+                	 */
+                	return;
+				}
 				//metodo che setta upperbar manager
 				//opacita
 				//
