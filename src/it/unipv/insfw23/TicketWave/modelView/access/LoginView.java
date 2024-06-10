@@ -241,6 +241,7 @@ public class LoginView extends Application {
         else {return true;}
     }
 
+
     public Label getErrorLabel() {
         return errorLabel;
     }
