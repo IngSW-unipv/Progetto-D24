@@ -9,7 +9,7 @@ import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerContr
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
 import it.unipv.insfw23.TicketWave.modelController.factory.payment.PaymentFactory;
 import it.unipv.insfw23.TicketWave.modelController.factory.subscription.SubscriptionHandlerFactory;
-import it.unipv.insfw23.TicketWave.modelDomain.payment.MastercardPayment;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.MasterPayPayment;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
@@ -27,7 +27,6 @@ import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -98,9 +97,9 @@ public class PaymentDataMController {
                         ProfileDao profileDao = new ProfileDao();
                         System.out.println("ticketdao creato");
 
-                        MastercardPayment mastercardPayment = new MastercardPayment();
-                        iPaymentAdapter = PaymentFactory.getMastercardAdapter(mastercardPayment);
-                        System.out.println("creati i mastercardPayment payment e interfaccia");
+                        MasterPayPayment masterPayPayment = new MasterPayPayment();
+                        iPaymentAdapter = PaymentFactory.getMasterPayAdapter(masterPayPayment);
+                        System.out.println("creati i masterPayPayment payment e interfaccia");
 
                         for(int i = 0; i < numOfTickets; i++) {
                         	Ticket ticket = customer.buyticket(iPaymentAdapter, ConnectedUser.getInstance().getEventForTicket(), ConnectedUser.getInstance().getTicketType(), getUsePoint());
@@ -148,7 +147,7 @@ public class PaymentDataMController {
                 } else {
                     Manager managerlogged = (Manager) user;
                     ProfileDao profiledao = new ProfileDao();
-                    SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMastercardAdapter(new MastercardPayment()), paymentSelectionView.getPrice());
+                    SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMasterPayAdapter(new MasterPayPayment()), paymentSelectionView.getPrice());
                     if (managerlogged.getSubscription() != -1) {
                         try {
                             profiledao.updateManagerSub(managerlogged);

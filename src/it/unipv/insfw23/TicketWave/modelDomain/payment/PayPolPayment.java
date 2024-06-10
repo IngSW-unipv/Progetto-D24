@@ -1,8 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelDomain.payment;
 
-import it.unipv.insfw23.TicketWave.modelDomain.user.User;
-
-public class PayPalPayment implements IPaypalPayment{
+public class PayPolPayment implements IPaypolPayment {
 
     public boolean ppPaymentMethod( double obPrice){
         if(obPrice >= 0){

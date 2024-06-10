@@ -4,7 +4,6 @@ package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
-import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataPView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
@@ -15,9 +14,6 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 public class PaymentSelectionController {
 
     private Stage mainStage;
@@ -27,7 +23,7 @@ public class PaymentSelectionController {
     private IResettableScene backScene;
     private PaymentDataPView paymentDataPPage;
 
-    private boolean isviewermanager;
+
 
     private PaymentDataMView paymentDataMPage;
     private User user= ConnectedUser.getInstance().getUser();
@@ -46,7 +42,7 @@ public class PaymentSelectionController {
 
             @Override
             public void handle(MouseEvent actionEvent) {
-                if(paymentPage.getMastercardButton().isSelected()){
+                if(paymentPage.getMasterPayButton().isSelected()){
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("Stai andando alla PaymentDataMPage");
                 paymentDataMPage=new PaymentDataMView();
@@ -57,7 +53,7 @@ public class PaymentSelectionController {
             	   paymentDataMController.setNumOfTickets(ticketPage.getNumOfTickets());
                }            
                 mainStage.setScene(paymentDataMPage);
-            } else if (paymentPage.getPaypalButton().isSelected()) {
+            } else if (paymentPage.getPaypolButton().isSelected()) {
                     System.out.println("Stai andando alla PaymentDataPPage");
                     paymentDataPPage=new PaymentDataPView();
                     PaymentDataPController paymentDataPController=new PaymentDataPController(mainStage,paymentDataPPage,paymentPage);

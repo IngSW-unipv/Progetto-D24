@@ -4,8 +4,8 @@ PROPERTYDBDRIVER=com.mysql.cj.jdbc.Driver
 PROPERTYDBURL=jdbc:mysql://localhost:3306/%s
 connectiondb.class.name = it.unipv.insfw23.TicketWave.dao.ConnectionDB
 
-mastercard.adapter.class.name=it.unipv.insfw23.TicketWave.modelDomain.payment.MastercardAdapter
-paypal.adapter.class.name=it.unipv.insfw23.TicketWave.modelDomain.payment.PayPalAdapter
+masterpay.adapter.class.name=it.unipv.insfw23.TicketWave.modelDomain.payment.MasterPayAdapter
+paypol.adapter.class.name=it.unipv.insfw23.TicketWave.modelDomain.payment.PayPolAdapter
 
 
 

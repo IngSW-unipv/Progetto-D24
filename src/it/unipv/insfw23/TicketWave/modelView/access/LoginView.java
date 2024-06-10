@@ -6,7 +6,6 @@ package it.unipv.insfw23.TicketWave.modelView.access;
 import it.unipv.insfw23.TicketWave.modelController.controller.access.LoginController;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
-import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -132,37 +131,6 @@ public class LoginView extends Application {
         GridPane.setConstraints(loginButton, 1, 5);
         GridPane.setConstraints(regButton, 1, 6);
         GridPane.setConstraints(errorLabel, 0, 9);
-
-       /* loginButton.setOnAction(e -> {
-
-            String email = emailField.getText();
-            String password = passwordField.getText();
-            if (customerRadioButton.isSelected()) {
-                System.out.println("Login come utente con username: " + email + " e password: " + password);
-            } else if (managerRadioButton.isSelected()) {
-                System.out.println("Login come gestore con username: " + email + " e password: " + password);
-            }
-        });*/
-
-        // aggiungo signupview al bottone registrati
-       /* loginButton.setOnAction(e -> {
-            CustomerView customerView = new CustomerView();
-            try {
-                customerView.start(new Stage());
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });*/
-
-       /* regButton.setOnAction(e -> {
-            SignUpView signUpView = new SignUpView();
-            try {
-                signUpView.start(new Stage());
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });*/
-
 
 
 

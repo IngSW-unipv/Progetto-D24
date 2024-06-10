@@ -1,15 +1,13 @@
 package it.unipv.insfw23.TicketWave.modelDomain.payment;
 
-import it.unipv.insfw23.TicketWave.modelDomain.user.User;
+public class MasterPayAdapter implements IPaymentAdapter{
 
-public class MastercardAdapter implements IPaymentAdapter{
+    //public MasterPayAdapter(){};
 
-    //public MastercardAdapter(){};
-
-    private IMastercardPayment mastercardPayment;
+    private IMasterPayPayment mastercardPayment;
 
 
-    public MastercardAdapter(IMastercardPayment mPayment){
+    public MasterPayAdapter(IMasterPayPayment mPayment){
 
         this.mastercardPayment = mPayment;
     }

@@ -21,5 +21,6 @@
     <orderEntry type="library" exported="" name="junit-4.13.1" level="project" />
     <orderEntry type="library" exported="" name="javafx-swt" level="project" />
     <orderEntry type="library" name="lib1" level="application" />
+    <orderEntry type="library" name="lib" level="application" />
   </component>
 </module>

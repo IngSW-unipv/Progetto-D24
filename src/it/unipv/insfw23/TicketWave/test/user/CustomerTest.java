@@ -2,8 +2,8 @@ package it.unipv.insfw23.TicketWave.test.user;
 import it.unipv.insfw23.TicketWave.modelController.factory.payment.PaymentFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
-import it.unipv.insfw23.TicketWave.modelDomain.payment.MastercardPayment;
-import it.unipv.insfw23.TicketWave.modelDomain.payment.PayPalPayment;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.MasterPayPayment;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.PayPolPayment;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
@@ -13,8 +13,6 @@ import javafx.scene.image.Image;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.Blob;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -63,8 +61,8 @@ public class CustomerTest {
 
     @Test
     public void buyWithPointsTest() throws Exception  {
-        MastercardPayment mastercard= new MastercardPayment();
-        paymentmastercard = PaymentFactory.getMastercardAdapter(mastercard);
+        MasterPayPayment mastercard= new MasterPayPayment();
+        paymentmastercard = PaymentFactory.getMasterPayAdapter(mastercard);
         customer.buyticket(paymentmastercard,fs,TicketType.BASE,1);
         assertEquals(1,customer.getTicketsList().size());
         assertEquals(100.0, customer.getTicketsList().getFirst().getPrice(), 0);
@@ -74,8 +72,8 @@ public class CustomerTest {
     @Test
     public void buyWithoutPointsTest()   {
         try {
-            PayPalPayment paypal = new PayPalPayment();
-            paymentpaypal = PaymentFactory.getPaypalAdapter(paypal);
+            PayPolPayment paypal = new PayPolPayment();
+            paymentpaypal = PaymentFactory.getPaypolAdapter(paypal);
             customer.buyticket(paymentpaypal, fs, TicketType.BASE, 0);
             assertEquals(1, customer.getTicketsList().size());
             assertEquals(125.0, customer.getTicketsList().getFirst().getPrice(), 0);
@@ -102,8 +100,8 @@ public class CustomerTest {
         try{
 
         customer.setPoints(1000);
-        PayPalPayment paypal= new PayPalPayment();
-        paymentpaypal= PaymentFactory.getPaypalAdapter(paypal);
+        PayPolPayment paypal= new PayPolPayment();
+        paymentpaypal= PaymentFactory.getPaypolAdapter(paypal);
         customer.buyticket(paymentpaypal,fs,TicketType.BASE,1);
         assertEquals(1,customer.getTicketsList().size());
         assertEquals(0, customer.getTicketsList().getFirst().getPrice(), 0);
@@ -117,8 +115,8 @@ public class CustomerTest {
     public void zeroPointsTest() {
         try {
             customer.setPoints(0);
-            PayPalPayment paypal = new PayPalPayment();
-            paymentpaypal = PaymentFactory.getPaypalAdapter(paypal);
+            PayPolPayment paypal = new PayPolPayment();
+            paymentpaypal = PaymentFactory.getPaypolAdapter(paypal);
             customer.buyticket(paymentpaypal, fs, TicketType.BASE, 1);
             assertEquals(1, customer.getTicketsList().size());
             assertEquals(125, customer.getTicketsList().getFirst().getPrice(), 0);
@@ -132,8 +130,8 @@ public class CustomerTest {
     public void pointsExceptionTest(){
         try {
             customer.setPoints(0);
-            PayPalPayment paypal = new PayPalPayment();
-            paymentpaypal = PaymentFactory.getPaypalAdapter(paypal);
+            PayPolPayment paypal = new PayPolPayment();
+            paymentpaypal = PaymentFactory.getPaypolAdapter(paypal);
             customer.buyticket(paymentpaypal, fs, TicketType.BASE, 2);
             assertEquals(0, customer.getTicketsList().size());
             assertEquals(0, customer.getPoints(), 0);

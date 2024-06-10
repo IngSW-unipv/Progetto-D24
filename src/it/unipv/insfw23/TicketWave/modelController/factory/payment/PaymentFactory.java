@@ -7,13 +7,13 @@ import java.util.Properties;
 
 public class PaymentFactory {
 
-    private static MastercardAdapter mastercardAdapter;
-    private static PayPalAdapter paypalAdapter;
+    private static MasterPayAdapter masterPayAdapter;
+    private static PayPolAdapter paypolAdapter;
     private static PaymentFactory istance=null;
 
-    private static final String M_PROPERTYNAME="mastercard.adapter.class.name";
+    private static final String M_PROPERTYNAME="masterpay.adapter.class.name";
 
-    private static final String P_PROPERTYNAME="paypal.adapter.class.name";
+    private static final String P_PROPERTYNAME="paypol.adapter.class.name";
 
     private PaymentFactory(){ //costruttore privato per rafFORZAre il pattern Singleton
 
@@ -26,27 +26,27 @@ public class PaymentFactory {
         return istance;
     }
 
-    public static MastercardAdapter getMastercardAdapter(IMastercardPayment payment) {
-        if (mastercardAdapter == null) {
-            String mastercardAdaptClassName;
+    public static MasterPayAdapter getMasterPayAdapter(IMasterPayPayment payment) {
+        if (masterPayAdapter == null) {
+            String masterPayAdaptClassName;
 
             try {
                 Properties prop = new Properties(System.getProperties());
                 prop.load(new FileInputStream("src/it/unipv/insfw23/TicketWave/properties"));
-                mastercardAdaptClassName = prop.getProperty(M_PROPERTYNAME);
+                masterPayAdaptClassName = prop.getProperty(M_PROPERTYNAME);
 
-                Constructor c = Class.forName(mastercardAdaptClassName).getConstructor(IMastercardPayment.class);  //java reflection
-                mastercardAdapter = (MastercardAdapter) c.newInstance(payment);
+                Constructor c = Class.forName(masterPayAdaptClassName).getConstructor(IMasterPayPayment.class);  //java reflection
+                masterPayAdapter = (MasterPayAdapter) c.newInstance(payment);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
-        return mastercardAdapter;
+        return masterPayAdapter;
     }
 
-        public static PayPalAdapter getPaypalAdapter(IPaypalPayment payment){
-            if(paypalAdapter==null){
+        public static PayPolAdapter getPaypolAdapter(IPaypolPayment payment){
+            if(paypolAdapter ==null){
                 String paypalAdaptClassName;
 
                 try{
@@ -54,15 +54,15 @@ public class PaymentFactory {
                     prop.load(new FileInputStream("src/it/unipv/insfw23/TicketWave/properties"));
                     paypalAdaptClassName=prop.getProperty(P_PROPERTYNAME);
 
-                    Constructor c= Class.forName(paypalAdaptClassName).getConstructor(IPaypalPayment.class);
-                    paypalAdapter=(PayPalAdapter)c.newInstance(payment);
+                    Constructor c= Class.forName(paypalAdaptClassName).getConstructor(IPaypolPayment.class);
+                    paypolAdapter =(PayPolAdapter)c.newInstance(payment);
                 }
                 catch (Exception e) {
                     // TODO Auto-generated catch block
                     e.printStackTrace();
                 }
             }
-            return paypalAdapter;
+            return paypolAdapter;
     }
 
 

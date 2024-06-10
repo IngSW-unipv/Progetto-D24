@@ -112,6 +112,11 @@ public class PaymentDataMView extends Scene {
             backButton.setGraphic(backarrow);
             backButton.setStyle("-fx-background-color: #91bad6;");
 
+            Image masterPayLogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/MasterPay3.png");
+            ImageView masterPayImage = new ImageView(masterPayLogo);
+            masterPayImage.setFitWidth(300);
+            masterPayImage.setFitHeight(300);
+
             Region leftSpacer = new Region();
             HBox.setHgrow(leftSpacer, Priority.ALWAYS); // Allows leftSpacer to expand to fill available space
             Region rightSpacer = new Region();
@@ -121,7 +126,7 @@ public class PaymentDataMView extends Scene {
             GridPane dataInput = new GridPane();
             dataInput.setAlignment(Pos.TOP_LEFT);
             dataInput.setHgap(10);
-            dataInput.setVgap(10);
+            dataInput.setVgap(30);
             dataInput.setPadding(new Insets(10));
             dataInput.addRow(0, nameLabel, insertName);
             dataInput.addRow(1, surnameLabel, insertSurname);
@@ -142,6 +147,7 @@ public class PaymentDataMView extends Scene {
             BorderPane root = new BorderPane();
             root.setPadding(new Insets(10));
             root.setCenter(dataInput);
+            root.setRight(masterPayImage);
             root.setBottom(buttonBox);
 
             //Setting external layout
