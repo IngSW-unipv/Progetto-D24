@@ -233,9 +233,12 @@ public class LoginView extends Application {
         errorLabel.setVisible(false);
     }
     public boolean checkEmptyFields(){
-        if(mail.getText().isEmpty() || password.getText().isEmpty()){
-            return true;
-        }else {return false;}
+        if(mail.getText() != null && password.getText() != null){
+            if(mail.getText().isEmpty() || password.getText().isEmpty()){
+                return true;
+            }else {return false;}
+        }
+        else {return true;}
     }
 
     public Label getErrorLabel() {
