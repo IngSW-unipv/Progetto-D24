@@ -196,8 +196,8 @@ public class LoginView extends Application {
     public PasswordField getPassword(){return password;}
 
     public void makeBlankPage(){
-        mail.setText(null);
-        password.setText(null);
+        mail.setText("");
+        password.setText("");
         errorLabel.setVisible(false);
     }
     public boolean checkEmptyFields(){
