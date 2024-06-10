@@ -92,6 +92,7 @@ public class ManagerController {
 		};
 		managerview.getNewEventButton().setOnMouseClicked(newEventButton);
 
+
 		EventHandler<MouseEvent> searchButton = new EventHandler<>() {
 			@Override
 			public void handle(MouseEvent event) {
