@@ -444,27 +444,31 @@ public class ProfileDao implements IProfileDao {
 
                 statement1.setInt(1, 0); //MAXEVENTS=0
                 statement1.setInt(2, -1);  //SUB=-1
+                statement1.setDate(3, Date.valueOf(manager.getSubscriptionDate()));
+                statement1.setInt(4, manager.getCounterCreatedEvents());
+                statement1.setString(5, manager.getEmail());
                 System.out.println("statement di correzione eseguito ");
             }
-            else{
-			switch (ConnectedUser.getInstance().getNewSubLevel()) {
-			case 0:
-				statement1.setInt(1, MAX_EVENTS_FOR_FREE_SUB);
-				break;
-			case 1:
-				statement1.setInt(1, MAX_EVENTS_FOR_BASE_SUB);
-				break;
-			case 2:
-				statement1.setInt(1, MAX_EVENTS_FOR_PREMIUM_SUB);
-			}
-			statement1.setInt(2, ConnectedUser.getInstance().getNewSubLevel());
-			statement1.setDate(3, Date.valueOf(LocalDate.now()));
-			statement1.setInt(4, 0);
-			statement1.setString(5, manager.getEmail());
-
+            else {
+                switch (ConnectedUser.getInstance().getNewSubLevel()) {
+                    case 0:
+                        statement1.setInt(1, MAX_EVENTS_FOR_FREE_SUB);
+                        break;
+                    case 1:
+                        statement1.setInt(1, MAX_EVENTS_FOR_BASE_SUB);
+                        break;
+                    case 2:
+                        statement1.setInt(1, MAX_EVENTS_FOR_PREMIUM_SUB);
+                }
+                statement1.setInt(2, ConnectedUser.getInstance().getNewSubLevel());
+                statement1.setDate(3, Date.valueOf(LocalDate.now()));
+                statement1.setInt(4, 0);
+                statement1.setString(5, manager.getEmail());
+            }
 			statement1.execute();
-		    }
+
         } catch (SQLException e) {
+            e.printStackTrace();
 			throw new SQLException("Errore nell'aggiornamento della sub");
 		}catch(Exception e) {
 			e.printStackTrace();
