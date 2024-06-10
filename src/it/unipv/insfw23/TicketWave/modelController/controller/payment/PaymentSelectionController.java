@@ -62,10 +62,10 @@ public class PaymentSelectionController {
                     paymentDataPPage=new PaymentDataPView();
                     PaymentDataPController paymentDataPController=new PaymentDataPController(mainStage,paymentDataPPage,paymentPage);
                   //se lo user è cliente mi porto dietro il numero di biglietti che si vuole acquistare
-//                    if(user.isCustomer()) {
-//                 	   ticketPage = (TicketPageView)backScene;
-//                    paymentDataPController.setNumOfTickets(ticketPage.getNumOfTickets());
-//                    }
+                    if(user.isCustomer()) {
+                 	   ticketPage = (TicketPageView)backScene;
+                 	   paymentDataPController.setNumOfTickets(ticketPage.getNumOfTickets());
+                    }
                     mainStage.setScene(paymentDataPPage);
                 }else {
                     paymentPage.getErrmessage().setOpacity(100);
