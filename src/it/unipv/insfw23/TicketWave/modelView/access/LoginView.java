@@ -228,17 +228,14 @@ public class LoginView extends Application {
     public PasswordField getPassword(){return password;}
 
     public void makeBlankPage(){
-        mail.setText(null);
-        password.setText(null);
+        mail.setText("");
+        password.setText("");
         errorLabel.setVisible(false);
     }
     public boolean checkEmptyFields(){
-        if(mail.getText() != null && password.getText() != null){
-            if(mail.getText().isEmpty() || password.getText().isEmpty()){
-                return true;
-            }else {return false;}
-        }
-        else {return true;}
+        if(mail.getText().isEmpty() || password.getText().isEmpty()){
+            return true;
+        }else {return false;}
     }
 
 
