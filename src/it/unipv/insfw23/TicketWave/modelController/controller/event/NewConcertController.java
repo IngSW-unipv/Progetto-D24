@@ -1,6 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.event;
 
 import it.unipv.insfw23.TicketWave.dao.eventDao.EventDao;
+import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Concert;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
@@ -77,10 +78,12 @@ public class NewConcertController {
 				
 				
 				try {
+					EventDao eventDao = new EventDao();
+					ProfileDao profileDao = new ProfileDao();
 					//calcolo dei param da passare al metodo per la creazione nel dominio
 				
 					//id preso come count ella table event sul db
-					int id = 12;//da cambiare col numero effettivo
+					int id = eventDao.selectEventNumber()+1;
 					int maxNumOfSeats = view.getNumbasefield()+view.getNumpremiumfield()+view.getNumvipfield();
 				
 					int[] seatsRemainedNumberForType = new int[view.getTypesticket()];
@@ -107,8 +110,10 @@ public class NewConcertController {
 					Concert createdConcert = loggedmanager.createConcert(id, view.getNamefield(), view.getCityfield(), view.getAddressfield(), view.getDatepicked(), view.getTimeSelected(), view.getProvince(),
 												view.getGenre(), maxNumOfSeats, view.getTypesticket(), seatsRemainedNumberForType, ticketSoldNumberForType, prices, loggedmanager, view.getArtistfield(), view.getDescription(), photo);
 					
-					EventDao eventDao = new EventDao();
+					
 					eventDao.insertEvent(createdConcert);
+					
+					profileDao.updateEventCreatedCounter(loggedmanager);
 					
 					home.updateEvsTable(loggedmanager.getEventlist(),loggedmanager.getCounterCreatedEvents());
 					home.reSetBars();

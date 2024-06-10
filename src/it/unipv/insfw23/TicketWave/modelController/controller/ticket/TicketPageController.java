@@ -53,13 +53,14 @@ public class TicketPageController {
         EventHandler<MouseEvent> goToPSelectionViewHandler = new EventHandler<>() {
             @Override
             public void handle(MouseEvent actionEvent) {
-
+            	int numberOfTickets = ticketPage.getNumOfTickets();
 
                 // Azione da eseguire quando il pulsante viene premuto
                 if (ticketPage.getIfPriceSelected() != null) {
                     System.out.println("Hai cliccato il bottone Acquista");
                     PaymentSelectionView paymentSelectionView = new PaymentSelectionView();
-                    paymentSelectionView.setPriceComponent(event.getPrices()[ticketPage.getWhichPriceSelected()]);
+                    paymentSelectionView.setPriceComponent((event.getPrices()[ticketPage.getWhichPriceSelected()])*numberOfTickets);
+                    paymentSelectionView.setTicketNumber(numberOfTickets);
                     PaymentSelectionController paymentSelectionController = new PaymentSelectionController(mainStage, paymentSelectionView, ticketPage);
                     mainStage.setScene(paymentSelectionView);
 

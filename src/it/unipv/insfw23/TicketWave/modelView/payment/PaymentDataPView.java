@@ -18,17 +18,17 @@ import javafx.scene.text.FontWeight;
 
 public class PaymentDataPView extends Scene {
     private final Font font = Font.font("Helvetica", FontWeight.BOLD, 15);
-    private static Label emailLabel = new Label("Inserisci la tua E-mail:");
+    private final Label emailLabel = new Label("Inserisci la tua E-mail:");
     private TextField insertEmail =new TextField();
 
     private Scene scene;
-    private static Button nextButton =new Button("Avanti");
-    private static  Button backButton = new Button();
+    private final  Button nextButton =new Button("Avanti");
+    private  final  Button backButton = new Button();
 
-    private  RadioButton usePointsButton= new RadioButton("Utilizza i tuoi WavePoints");
+    private final   RadioButton usePointsButton= new RadioButton("Utilizza i tuoi WavePoints");
 
 
-    private static Label errorLabel=new Label("Inserisci una mail valida");
+    private final Label errorLabel=new Label("Inserisci una mail valida");
 
 
     public PaymentDataPView(){
@@ -98,13 +98,13 @@ public class PaymentDataPView extends Scene {
 
     }
 
-    public static Button getBackButton() {
+    public  Button getBackButton() {
         return backButton;
     }
 
 
 
-    public static Label getEmailLabel() {
+    public  Label getEmailLabel() {
         return emailLabel;
     }
 
@@ -125,7 +125,7 @@ public class PaymentDataPView extends Scene {
     }
 
 
-    public static Label getErrorLabel() {
+    public  Label getErrorLabel() {
         return errorLabel;
     }
 }

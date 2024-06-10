@@ -36,7 +36,6 @@ public class ConnectedUser {
         return user;
     }
 
-
     public Event getEventForTicket() {
         return eventForTicket;
     }
@@ -77,6 +76,13 @@ public class ConnectedUser {
 		this.newSubLevel = newSubLevel;
 	}
     
-    
+    public void logoutMethod(){
+        this.user = null;
+        this.home = null;
+        this.logView = null;
+        this.eventForTicket = null;
+        this.newSubLevel = -2;
+        this.ticketType = null;
+    }
 }
 

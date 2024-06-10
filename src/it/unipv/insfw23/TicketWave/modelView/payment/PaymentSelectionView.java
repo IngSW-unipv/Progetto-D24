@@ -23,18 +23,19 @@ import java.util.List;
 public class PaymentSelectionView extends Scene {
 
     private final Font font = Font.font("Helvetica", FontWeight.BOLD, 16);
-    private static RadioButton paypalButton = new RadioButton("Paypal");//paypal
-    private static RadioButton mastercardButton = new RadioButton("Mastercard"); //mastercard
-    private static Button nextButton = new Button();
-    private static Button backButton = new Button();
+    private final RadioButton paypalButton = new RadioButton("Paypal");//paypal
+    private final RadioButton mastercardButton = new RadioButton("Mastercard"); //mastercard
+    private final Button nextButton = new Button();
+    private final  Button backButton = new Button();
 
 
-    private static final Label totalStringLabel = new Label("Totale:");
-    private static final Label paySelectionLabel = new Label("Scegli un metodo con cui pagare:");
-    private static Label totalAmountLabel=new Label();
-    private static List<Label> labels = new ArrayList<>();
+    private  final Label totalStringLabel = new Label("Totale:");
+    private  final Label paySelectionLabel = new Label("Scegli un metodo con cui pagare:");
+    private final Label totalAmountLabel=new Label();
+    private final Label numberOfTicketLabel = new Label();
+    private final List<Label> labels = new ArrayList<>();
 
-    private static Text errmessage = new Text("Devi prima selezionare un metodo di pagamento!");
+    private final Text errmessage = new Text("Devi prima selezionare un metodo di pagamento!");
     private Scene scene;
     private BorderPane layout;
     private Pane root;
@@ -51,7 +52,8 @@ public class PaymentSelectionView extends Scene {
         paypalButton.setToggleGroup(paymethod);
         mastercardButton.setToggleGroup(paymethod);
 
-
+        
+        numberOfTicketLabel.setFont(font);
         totalStringLabel.setFont(font);
         totalAmountLabel.setFont(font);
         paySelectionLabel.setFont(font);
@@ -111,6 +113,7 @@ public class PaymentSelectionView extends Scene {
         gridPane.setPadding(new Insets(10));
         gridPane.add(totalStringLabel, 0, 1);
         gridPane.add(totalAmountLabel, 0, 2);
+        gridPane.add(numberOfTicketLabel, 1, 2);
         gridPane.add(paySelectionLabel, 0, 3);
         gridPane.add(paypalButton, 0, 4);
         gridPane.add(paypalImage, 1, 4);
@@ -142,6 +145,10 @@ public class PaymentSelectionView extends Scene {
         totalAmountLabel.setText("€ " + String.valueOf(price));
     }
     
+    public void setTicketNumber(int number) {
+    	numberOfTicketLabel.setText("("+number+((number == 1)?" biglietto)":" biglietti)"));
+    }
+    
     public double getPrice() {
     	String pricestring = totalAmountLabel.getText().substring(2);
     	return Double.parseDouble(pricestring);
@@ -158,23 +165,23 @@ public class PaymentSelectionView extends Scene {
     }
 
 
-    public static RadioButton getPaypalButton() {
+    public  RadioButton getPaypalButton() {
         return paypalButton;
     }
 
-    public static RadioButton getMastercardButton() {
+    public RadioButton getMastercardButton() {
         return mastercardButton;
     }
 
-    public static Button getNextButton() {
+    public  Button getNextButton() {
         return nextButton;
     }
 
-    public static Button getBackButton() {
+    public  Button getBackButton() {
         return backButton;
     }
 
-    public static List<Label> getLabels() {
+    public  List<Label> getLabels() {
         return labels;
     }
 
@@ -182,7 +189,7 @@ public class PaymentSelectionView extends Scene {
         return scene;
     }
 
-    public static Text getErrmessage() {
+    public  Text getErrmessage() {
         return errmessage;
     }
 

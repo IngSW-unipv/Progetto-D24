@@ -1,9 +1,12 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.access;
 
+import java.nio.channels.AcceptPendingException;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
+import it.unipv.insfw23.TicketWave.exceptions.AccountNotFoundException;
+import it.unipv.insfw23.TicketWave.exceptions.WrongPasswordException;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
@@ -64,7 +67,7 @@ public class LoginController {
 
                  if (loginView.getCustomerRadioButton().isSelected() && loginView.checkEmptyFields()==false) {
                      System.out.println("Hai cliccato il pulsante login come cliente");
-                     Customer loggedCustomer;
+                     Customer loggedCustomer = null;
                     /*creazione customer ed evento per poi creare vari biglietti e fare delle verifiche
                      *
                      * */
@@ -79,16 +82,23 @@ public class LoginController {
                     //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
                     try {
                         loggedCustomer = profileDao.selectCustomer(loginView.getMail().getText(), loginView.getPassword().getText());
+                        if (loggedCustomer == null){
+                            throw new AccountNotFoundException();
+                        }
                     } catch (SQLException e) {
                         throw new RuntimeException("Utente non registrato");
+                    } catch (AccountNotFoundException e) {
+                        loginView.setErrorLabel(e.getMessage());
+                    } catch (WrongPasswordException e) {
+                         loginView.setErrorLabel(e.getMessage());
                     }
-                        //
+                     //
 
                     if(loggedCustomer != null){
                         System.out.println("Hai cliccato il pulsante Login come cliente");
                         ArrayList<Ticket> arrayListTicket = loggedCustomer.getTicketsList();
                         ArrayList<Notification> arrayListNotification = loggedCustomer.getNotification();
-                         CustomerView customerview = new CustomerView(loggedCustomer.getName(),arrayListNotification,arrayListTicket,loggedCustomer.getPoints() );
+                        CustomerView customerview = new CustomerView(loggedCustomer.getName(),arrayListNotification,arrayListTicket,loggedCustomer.getPoints() );
 
                         CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
                         customerview.reSetBars();
@@ -99,26 +109,28 @@ public class LoginController {
                         //
                         mainstage.setScene(customerview); // Imposta la scena SignUpView sulla stage principale
                     }
-                    else{System.out.println("Email o password errate");
-                            loginView.setErrorLabel();}
-
                 }
                 else if (loginView.getManagerRadioButton().isSelected() && loginView.checkEmptyFields()==false) {
-
                     /*	modifiche fatte da Loris per simulare la creazione di un manager senza eventi, simulare la creazione di un evento
                      * 	da parte di questo manager e simulare aggiunta di questo evento al suo arraylist di eventi
                      * 	cosi da lavorare con un ipotetico manager che ha pubblicato degli eventi
                      * */
-                    Manager loggedManager;
+                    Manager loggedManager = null;
 
                     //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
                     try{
                         loggedManager = profileDao.selectManager(loginView.getMail().getText(), loginView.getPassword().getText());
+                        if (loggedManager == null){
+                            throw new AccountNotFoundException();
+                        }
+
                     } catch (SQLException e) {
                         throw new RuntimeException("Utente non registrato");
+                    } catch (AccountNotFoundException | WrongPasswordException e ) {
+                        loginView.setErrorLabel(e.getMessage());
                     }
 
-                    //
+                     //
 /*
                     ArrayList<Notification> arrayListNotification = new ArrayList<>();
                     ArrayList<Event> arraylistevent = new ArrayList<>();
@@ -172,13 +184,10 @@ public class LoginController {
                         ManagerController managerController = new ManagerController(mainstage, managerView, loginView);
                         mainstage.setScene(managerView); // Imposta la scena SignUpView sulla stage principale }
                     }
-                    else {
-                        loginView.setErrorLabel();
-                        System.out.println("Email o password errate");}
 
                 }// devi mettere managerview anche all'interno del costruttore
 
-                else{loginView.setErrorLabel();}
+                else{loginView.setErrorLabel("Campi vuoti o non validi");}
 
                 // Imposta l'handler sull'azione del pulsante "Registrati"
             }

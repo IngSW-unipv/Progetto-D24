@@ -31,6 +31,10 @@ public class CustomerTest {
     private Manager mg;
     private ArrayList<Event> events = new ArrayList<>();
     private Festival fs;
+    
+    private final int MAX_EVENTS_FOR_FREE_SUB = 1;
+	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
+	private final int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
 
 
     private double points;
@@ -45,7 +49,7 @@ public class CustomerTest {
         customer=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.BARI,favoriteGenre, 100,tickets);
 
         mg = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", Province.CAMPOBASSO, "1234567890123456",
-                events, 5, 1, LocalDate.now(), 0);
+                events, MAX_EVENTS_FOR_BASE_SUB, 1, LocalDate.now(), 0);
         int [] a = {20};
         int [] b = {2080};
         double [] p = {125};

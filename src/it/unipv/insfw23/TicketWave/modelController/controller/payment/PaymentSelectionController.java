@@ -51,11 +51,21 @@ public class PaymentSelectionController {
                 System.out.println("Stai andando alla PaymentDataMPage");
                 paymentDataMPage=new PaymentDataMView();
                PaymentDataMController paymentDataMController = new PaymentDataMController(mainStage,paymentDataMPage,paymentPage);
+               //se lo user è cliente mi porto dietro il numero di biglietti che si vuole acquistare
+               if(user.isCustomer()) {
+            	   ticketPage = (TicketPageView)backScene;
+            	   paymentDataMController.setNumOfTickets(ticketPage.getNumOfTickets());
+               }            
                 mainStage.setScene(paymentDataMPage);
             } else if (paymentPage.getPaypalButton().isSelected()) {
                     System.out.println("Stai andando alla PaymentDataPPage");
                     paymentDataPPage=new PaymentDataPView();
                     PaymentDataPController paymentDataPController=new PaymentDataPController(mainStage,paymentDataPPage,paymentPage);
+                  //se lo user è cliente mi porto dietro il numero di biglietti che si vuole acquistare
+                    if(user.isCustomer()) {
+                 	   ticketPage = (TicketPageView)backScene;
+                 	   paymentDataPController.setNumOfTickets(ticketPage.getNumOfTickets());
+                    }
                     mainStage.setScene(paymentDataPPage);
                 }else {
                     paymentPage.getErrmessage().setOpacity(100);

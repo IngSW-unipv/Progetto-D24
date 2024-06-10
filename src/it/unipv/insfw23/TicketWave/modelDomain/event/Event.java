@@ -12,7 +12,19 @@ import javafx.scene.image.Image;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
+
+/**
+ * Abstract class representing a generic Event.
+ * Contains attributes and methods common to {@link Concert}, {@link Festival}, {@link Theater} and {@link Other}.
+ *
+ * @see Concert
+ * @see Festival
+ * @see Theater
+ * @see Other
+ */
 public abstract class Event {
+
+    // ATTRIBUTES:
     private int idEvent;
     private String name, city, location;
     private LocalDate date;
@@ -29,7 +41,12 @@ public abstract class Event {
 
     private Image photo;
 
-    // costruttore
+    // CONSTRUCTOR:
+
+    /**
+     * Complete constructor to initialize all parameters.
+     * Note that an abstract class cannot be instantiated, this constructor will be used by classes that extend Event to initialize parameters.
+     */
 
     public Event(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, Type type, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, Image photo) {
         this.idEvent = idEvent;
@@ -46,7 +63,6 @@ public abstract class Event {
         setSeatsRemainedNumberForType(seatsRemainedNumberForType);
         setTicketsSoldNumberForType(ticketsSoldNumberForType);
         setPrice(price);
-        // crossCheck(price, ticketsSoldNumberForType, seatsRemainedNumberForType, typeOfSeats);
         this.creator = creator;
         this.artists = artists;
         this.description = description;
@@ -54,60 +70,117 @@ public abstract class Event {
     }
 
 
-    // Getter //
+    // GETTER:
+
+    /**
+     * Returns the Event ID as an int.
+     * @return idEvent
+     */
 
     public int getIdEvent() {
         return idEvent;
     }
 
+    /**
+     * Returns the Event name as a {@link String}.
+     * @return name
+     */
     public String getName() {
         return name;
     } // mi serve nel ResultResearchView per la TableView
 
+    /**
+     * Returns the Event city as a {@link String}.
+     * @return city
+     */
     public String getCity() {
         return city;
     } // mi serve nel ResultResearchView per la TableView
 
+    /**
+     * Returns the Event location as a {@link String}.
+     * @return location
+     */
     public String getLocation() {
         return location;
     } // mi serve nel ResultResearchView per la TableView
 
+    /**
+     * Returns the Event date as a {@link LocalDate}.
+     * @return date
+     */
     public LocalDate getDate() {
         return date;
     }
 
+    /**
+     * Returns the Event province as a {@link Province}.
+     * @return province
+     */
     public Province getProvince() {
         return province;
     }
 
+    /**
+     * Returns the Event name as a {@link String}.
+     * @return name
+     */
     public int getMaxNumberOfSeats() {
         return maxNumberOfSeats;
     }
 
+    /**
+     * Returns the Event ticketSoldNumberForType as an array of int.
+     * @return ticketSoldNumberForType
+     */
     public int[] getTicketsSoldNumberForType() {
         return ticketsSoldNumberForType;
     }
 
+    /**
+     * Returns the Event price as a double.
+     * @return price
+     */
     public double getPrice(TicketType type) {
-        return price[type.ordinal()]; //ordinal torna la posizione di type nella enum
+        return price[type.ordinal()]; //ordinal torna la posizione di type nella enum *************************** DA CAPIRE COME SCRIVERE IL JAVADOC
     }
 
+    /**
+     * Returns the Event price as an array of double.
+     * @return price
+     */
     public double[] getPrices() {
         return price;
     }
 
+    /**
+     * Returns the Event type as a {@link Type}.
+     * @return type
+     */
     public Type getType() {
         return type;
     }
 
+    /**
+     * Returns the Event genre as a {@link Genre}.
+     * @return genre
+     */
     public Genre getGenre() {
         return genre;
     }
 
+    /**
+     * Returns the Event seatsReamainedNumberForType as an array of int.
+     * @return seatsReamainedNumberForType
+     */
     public int[] getSeatsRemainedNumberForType() {
         return seatsRemainedNumberForType;
     }
 
+    /**
+     * Returns the Event seatsRemaining as an int.
+     * @return ntot
+     */
     public int getSeatsRemaining() {
         int ntot = 0;
         for(int x : seatsRemainedNumberForType) {
@@ -116,15 +189,18 @@ public abstract class Event {
         return ntot;
     }
 
+    /**
+     * Returns the Event creator as a {@link Manager}.
+     * @return creator
+     */
     public Manager getCreator() {
         return creator;
     }
 
-    public void updateSeatsRemainedAndTicketSoldForType(int type) {
-        seatsRemainedNumberForType[type]--;
-        ticketsSoldNumberForType[type]++;
-    }
-
+    /**
+     * Returns the Event ticketSoldNumber as an int.
+     * @return result
+     */
     public int getTicketSoldNumber () { // ritorna tutti i ticket venduti
         int i;
         int result = 0;
@@ -135,55 +211,97 @@ public abstract class Event {
         return result;
     }
 
+    /**
+     * Returns the Event artists as a {@link String}.
+     * @return asrtists
+     */
     public String getArtists() {
         return artists;
     }
 
+    /**
+     * Returns the Event time as a {@link LocalTime}.
+     * @return time
+     */
     public LocalTime getTime() {
         return time;
     }
 
+    /**
+     * Returns the Event typeOfSeats as an int.
+     * @return typeOfSeats
+     */
     public int getTypeOfSeats() {
         return typeOfSeats;
     }
 
+    /**
+     * Return the Event description as a {@link String}.
+     * @return description
+     */
     public String getDescription() {
         return description;
     }
 
+    /**
+     * Return the Event photo as an {@link Image}.
+     * @return photo
+     */
     public Image getPhoto() {
     	return photo;
     }
 
-    // Setter //
-    public void setIdEvent(int idEvent) {
-        this.idEvent = idEvent;
-    }
-
+    // SETTER:
+    /**
+     * Sets a new Event name as a {@link String}.
+     *
+     * @param name new name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Sets a new Event city as a {@link String}.
+     *
+     * @param city new city
+     */
     public void setCity(String city) {
         this.city = city;
     }
 
+    /**
+     * Sets a new Event location as a {@link String}.
+     *
+     * @param location new location
+     */
     public void setLocation(String location) {
         this.location = location;
     }
 
+    /**
+     * Sets a new Event province as a {@link Province}.
+     *
+     * @param province new province
+     */
     public void setProvince(Province province) {
         this.province = province;
     }
 
-    public void setMaxNumberOfSeats(int maxNumberOfSeats) {
-        this.maxNumberOfSeats = maxNumberOfSeats;
-    }
-
+    /**
+     * Sets a new Event genre as a {@link Genre}.
+     *
+     * @param genre new genre
+     */
     public void setGenre(Genre genre) {
         this.genre = genre;
     }
 
+    /**
+     * Sets a new Event date as a {@link LocalDate}.
+     *
+     * @param date new date
+     */
     public void setDate(LocalDate date) { // controllo che la data sia ammissibile per essere messa in un evento
         if (date != null){
             if (date.isBefore(LocalDate.of(2000, 1, 1)) ||  date.isAfter(LocalDate.of(2050, 1, 1))){ // check sulla data, se la data è prima del 2000 o dopo il 2050 è impossibile creare l'evento
@@ -196,10 +314,20 @@ public abstract class Event {
         }
     }
 
+    /**
+     * Sets a new Event time as a {@link LocalTime}.
+     *
+     * @param time new time
+     */
     public void setTime(LocalTime time) {
         this.time = time;
     }
 
+    /**
+     * Sets a new Event typeOfSeats as an int.
+     *
+     * @param typeOfSeats new typeOfSeats
+     */
     public void setTypeOfSeats(int typeOfSeats) {
         if(typeOfSeats > 3){
             throw new IllegalArgumentException("In TicketWave si possono avere un massimo di 3 tipi di sedute/biglietti, immettere un valore valido");
@@ -208,6 +336,11 @@ public abstract class Event {
         }
     }
 
+    /**
+     * Sets a new Event seatsRemainedNumberForType as an array of int.
+     *
+     * @param seatsRemainedNumberForType new seatsRemainedNumberForType
+     */
     public void setSeatsRemainedNumberForType(int[] seatsRemainedNumberForType) {
         if(seatsRemainedNumberForType.length > 3){
             throw new IllegalArgumentException("In TicketWave si possono avere un massimo di 3 tipi di sedute, reimmettere i valori riguardanti le sedute rimanenti");
@@ -216,6 +349,11 @@ public abstract class Event {
         }
     }
 
+    /**
+     * Sets a new Event ticketsSoldNumberForType as an array of int.
+     *
+     * @param ticketsSoldNumberForType new ticketsSoldNumberForType
+     */
     public void setTicketsSoldNumberForType(int[] ticketsSoldNumberForType) {
         if(ticketsSoldNumberForType.length > 3){
             throw new IllegalArgumentException("In TicketWave si possono avere un massimo di 3 tipi di ticket, reimmettere i valori riguardanti i ticket venduti per tipo");
@@ -224,6 +362,11 @@ public abstract class Event {
         }
     }
 
+    /**
+     * Sets a new Event price as an array of double.
+     *
+     * @param price new price
+     */
     public void setPrice(double[] price) {
         if(price.length > 3){
             throw new IllegalArgumentException("In TicketWave si possono avere un massimo di 3 tipi di ticket, reimmettere i valori riguardanti i prezzi dei ticket");
@@ -232,26 +375,21 @@ public abstract class Event {
         }
     }
 
- /*   public void crossCheck(double[] price, int[] ticketsSoldNumberForType, int[] seatsRemainedNumberForType, int typeOfSeats){ // serve per controllare che il numero di campi inseriti negli array coincida
-        if((price.length != ticketsSoldNumberForType.length) || (ticketsSoldNumberForType.length != seatsRemainedNumberForType.length) || (price.length != seatsRemainedNumberForType.length)
-                || (price.length != typeOfSeats) || (ticketsSoldNumberForType.length != typeOfSeats) || (seatsRemainedNumberForType.length != typeOfSeats)){
-            throw new IllegalArgumentException("Si è provato a creare un evento in cui il numero di campi dei prezzi e dei posti è diverso, riprovare la creazione");
-        }
-    } */  // QUESTO METODO VOLA, PERCHE' DA DB PRENDO SEMPRE TUTTI GLI ARRAY DI GRANDEZZA 3, SE NON HO UN TIPO DI BIGLIETTO ESSO E' PARI A 0
-
-    public void setCreator(Manager creator) {
-        this.creator = creator;
-    }
-
-    public void setArtists(String artists) {
-        this.artists = artists;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
+    /**
+     * Sets a new Event photo as an {@link Image}.
+     *
+     * @param photo new photo
+     */
     public void setPhoto(Image photo) {
     	this.photo = photo;
+    }
+
+    /**
+     * Sets a new Event name as an int.
+     *
+     */
+    public void updateSeatsRemainedAndTicketSoldForType(int type) { // NON SO CHE SCRIVERE NEL JAVADOC
+        seatsRemainedNumberForType[type]--;
+        ticketsSoldNumberForType[type]++;
     }
 }

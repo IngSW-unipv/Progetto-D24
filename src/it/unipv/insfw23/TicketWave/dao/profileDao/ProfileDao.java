@@ -1,5 +1,7 @@
 package it.unipv.insfw23.TicketWave.dao.profileDao;
 
+import it.unipv.insfw23.TicketWave.exceptions.AccountAlreadyExistsException;
+import it.unipv.insfw23.TicketWave.exceptions.WrongPasswordException;
 import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
@@ -25,6 +27,10 @@ import javafx.scene.image.Image;
 public class ProfileDao implements IProfileDao {
     private String schema;
     private Connection connection;
+    
+    private final int MAX_EVENTS_FOR_FREE_SUB = 1;
+	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
+	private final int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
 
     public ProfileDao() {
         super();
@@ -32,7 +38,7 @@ public class ProfileDao implements IProfileDao {
     }
 
     @Override
-    public void insertManager(Manager manager) throws SQLException {
+    public void insertManager(Manager manager) throws SQLException, AccountAlreadyExistsException {
 
         try {
             connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
@@ -59,7 +65,10 @@ public class ProfileDao implements IProfileDao {
                 System.out.println("query eseguita");
             }
         }catch (SQLException e) {
-            throw new SQLException("No zi non posso salvare i tuoi dati, c'è qualche prob", e);
+            if (e.getErrorCode() == 1062) {
+                throw new AccountAlreadyExistsException();
+            }
+            throw new SQLException("Impossibile salvare i dati della registrazione", e);
         }
         ConnectionDB.closeConnection(connection);
 
@@ -69,7 +78,7 @@ public class ProfileDao implements IProfileDao {
 
 
     @Override
-    public void insertCustomer(Customer customer)throws SQLException{
+    public void insertCustomer(Customer customer)throws SQLException, AccountAlreadyExistsException{
         try {
             connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
             if(ConnectionDB.isOpen(connection)){
@@ -103,7 +112,10 @@ public class ProfileDao implements IProfileDao {
                 preparedStatement.executeUpdate();
             }
         } catch (SQLException e) {
-            throw new SQLException("Errore per inserimento del Customer", e);
+            if (e.getErrorCode() == 1062) {
+                throw new AccountAlreadyExistsException();
+            }
+            throw new SQLException("Impossibile salvare i dati della registrazione", e);
         }
         ConnectionDB.closeConnection(connection);
     }
@@ -111,7 +123,7 @@ public class ProfileDao implements IProfileDao {
 
 
     @Override
-    public Manager selectManager(String mail, String password) throws SQLException{
+    public Manager selectManager(String mail, String password) throws SQLException, WrongPasswordException {
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
         PreparedStatement statement1;
         PreparedStatement statement2;
@@ -136,6 +148,11 @@ public class ProfileDao implements IProfileDao {
                 resultAvailable = true;
                 Object genericDbPassword= resultSet1.getString("PWD");
                 dbPassword = genericDbPassword.toString();
+
+                if(!checkPassword(password, dbPassword)){
+                    throw new WrongPasswordException();
+                }
+
             }
 
             if (resultAvailable && checkPassword(password, dbPassword)) {
@@ -285,7 +302,7 @@ public class ProfileDao implements IProfileDao {
 
 
     @Override
-    public Customer selectCustomer(String mail, String password) throws SQLException{
+    public Customer selectCustomer(String mail, String password) throws SQLException,WrongPasswordException{
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
         PreparedStatement statement1;
         PreparedStatement statement2;
@@ -310,7 +327,14 @@ public class ProfileDao implements IProfileDao {
                 resultAvailable = true;
                 Object genericDbPassword= resultSet1.getString("PWD");
                 dbPassword = genericDbPassword.toString();
+
+                if(!checkPassword(password, dbPassword)){
+                    throw new WrongPasswordException();
+                }
+
             }
+
+
             if (resultAvailable && checkPassword(password, dbPassword)) {
 
                 ArrayList<Ticket> boughtTickets = new ArrayList<>();   // creo l'arraylist per riempirla
@@ -367,7 +391,8 @@ public class ProfileDao implements IProfileDao {
         ConnectionDB.closeConnection(connection);
         return customer;
     }
-    
+
+
     private Genre[] splitStringToArrayGenre(String s) {
         String[] arrayString = s.split(",");
         Genre[] genreArray = new Genre[5];
@@ -385,8 +410,11 @@ public class ProfileDao implements IProfileDao {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
-    public static boolean checkPassword(String plainPassword, String hashedPassword) {
+    public static boolean checkPassword(String plainPassword, String hashedPassword)  {
+
+
         return BCrypt.checkpw(plainPassword, hashedPassword);
+
     }
 
 	@Override
@@ -400,13 +428,13 @@ public class ProfileDao implements IProfileDao {
 			statement1 = connection.prepareStatement(query1);
 			switch (ConnectedUser.getInstance().getNewSubLevel()) {
 			case 0:
-				statement1.setInt(1, 1);
+				statement1.setInt(1, MAX_EVENTS_FOR_FREE_SUB);
 				break;
 			case 1:
-				statement1.setInt(1, 5);
+				statement1.setInt(1, MAX_EVENTS_FOR_BASE_SUB);
 				break;
 			case 2:
-				statement1.setInt(1, Short.MAX_VALUE);
+				statement1.setInt(1, MAX_EVENTS_FOR_PREMIUM_SUB);
 			}
 			statement1.setInt(2, ConnectedUser.getInstance().getNewSubLevel());
 			statement1.setDate(3, Date.valueOf(LocalDate.now()));
@@ -422,6 +450,8 @@ public class ProfileDao implements IProfileDao {
 		
 		ConnectionDB.closeConnection(connection);
 	}
+	
+	
 
 
     @Override
@@ -481,6 +511,30 @@ public class ProfileDao implements IProfileDao {
         }
         ConnectionDB.closeConnection(connection);
         return customerWithProvMail;
+    }
+    
+    
+    @Override
+    public void updateEventCreatedCounter(Manager manager) throws SQLException {
+    	connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);
+    	PreparedStatement statement1;
+    	
+    	try {
+			String query1 = "UPDATE MANAGER SET COUNTER_CREATED_EVENTS = ? WHERE MAIL = ?";
+			
+			statement1 = connection.prepareStatement(query1);
+			
+			statement1.setInt(1, manager.getCounterCreatedEvents());
+			statement1.setString(2, manager.getEmail());
+			
+			statement1.executeUpdate();
+		} catch (SQLException e) {
+			throw new SQLException("Errore nell'aggiornamento del campo relativo agli eventi creati");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+    	
+    	ConnectionDB.closeConnection(connection);
     }
 
     public void updateCustomerPoints(Customer customer) throws SQLException {

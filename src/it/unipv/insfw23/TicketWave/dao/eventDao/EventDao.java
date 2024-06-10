@@ -31,7 +31,7 @@ public class EventDao implements IEventDao {
     @Override
     public void insertEvent(Event event) throws SQLException {
 
-        int eventNumber = selectEventNumber();
+        //int eventNumber = selectEventNumber();
 
         try {
             connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);  // apro connessione
@@ -52,7 +52,7 @@ public class EventDao implements IEventDao {
 
                 //setto i campi
                 PreparedStatement preparedStatement = connection.prepareStatement(query);
-                preparedStatement.setInt(1, eventNumber + 1);
+                preparedStatement.setInt(1, event.getIdEvent() + 1);
                 System.out.println(event.getIdEvent());
                 preparedStatement.setString(2, event.getName());
                 System.out.println(event.getName());
@@ -317,4 +317,63 @@ public class EventDao implements IEventDao {
         String[] words = input.split("\\s*,\\s*");
         return words.length;
     }
+
+
+    public void updateSeatsNumber(Event event) throws SQLException {
+        PreparedStatement statement1;
+        ResultSet resultSet1;
+
+        try {
+            connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);  // apro connessione
+            if (ConnectionDB.isOpen(connection)) {   // check se è tutto ok
+
+                //query d'inserimento
+                String query = "UPDATE EVENT_ SET SOLD_BASE_SEATS = ?, SOLD_PREMIUM_SEATS = ?, SOLD_VIP_SEATS = ?, REMAINING_BASE_SEATS = ?, REMAINING_PREMIUM_SEATS = ?, REMAINING_VIP_SEATS = ? WHERE ID_EVENT = ?";
+
+
+                //setto i campi
+                PreparedStatement preparedStatement = connection.prepareStatement(query);
+
+                preparedStatement.setInt(7, event.getIdEvent());
+
+                switch (event.getTypeOfSeats()) {
+                    case 3:
+                        preparedStatement.setInt(1, event.getTicketsSoldNumberForType()[0]);
+                        preparedStatement.setInt(2, event.getTicketsSoldNumberForType()[1]);
+                        preparedStatement.setInt(3, event.getTicketsSoldNumberForType()[2]);
+                        preparedStatement.setInt(4, event.getSeatsRemainedNumberForType()[0]);
+                        preparedStatement.setInt(5, event.getSeatsRemainedNumberForType()[1]);
+                        preparedStatement.setInt(6, event.getSeatsRemainedNumberForType()[2]);
+                        break;
+
+                    case 2:
+                        preparedStatement.setInt(1, event.getTicketsSoldNumberForType()[0]);
+                        preparedStatement.setInt(2, event.getTicketsSoldNumberForType()[1]);
+                        preparedStatement.setNull(3, Types.INTEGER);
+                        preparedStatement.setInt(4, event.getSeatsRemainedNumberForType()[0]);
+                        preparedStatement.setInt(5, event.getSeatsRemainedNumberForType()[1]);
+                        preparedStatement.setNull(6, Types.INTEGER);
+                        break;
+
+                    case 1:
+                        preparedStatement.setInt(1, event.getTicketsSoldNumberForType()[0]);
+                        preparedStatement.setNull(2, Types.INTEGER);
+                        preparedStatement.setNull(3, Types.INTEGER);
+                        preparedStatement.setInt(4, event.getSeatsRemainedNumberForType()[0]);
+                        preparedStatement.setNull(5, Types.INTEGER);
+                        preparedStatement.setNull(6, Types.INTEGER);
+                        break;
+                }
+                System.out.println("prova pre-esecuzione");
+                preparedStatement.executeUpdate();  // eseguo
+                System.out.println("query eseguita");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new SQLException("Problema nell'aggiornamento dei posti rimanenti");
+        }
+        ConnectionDB.closeConnection(connection);
+    }
+
+
 }

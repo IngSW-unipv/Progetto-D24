@@ -27,12 +27,14 @@ public class NotificationTest {
 	private Manager creator;
 	private INotificationHandler notificationHandler;
 
+	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
+	
 	
 	@Before
 	public void setUp() {
 		ArrayList<Event> events = new ArrayList<>();
 		creator = new Manager("Maurizio","Merluzzo","1980-03-20","mauricemerluzz@gmail.com","123456789",
-				Province.AOSTA,"3456785676954038",events,5,1,LocalDate.now(),0);
+				Province.AOSTA,"3456785676954038",events,MAX_EVENTS_FOR_BASE_SUB,1,LocalDate.now(),0);
 		
 		//evento corretto
 		int[] seatsremainedfortypecorrectevent = {60,20,25};

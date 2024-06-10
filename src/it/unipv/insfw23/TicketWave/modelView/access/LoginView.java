@@ -1,8 +1,13 @@
 package it.unipv.insfw23.TicketWave.modelView.access;
 
+
+//import it.unipv.insfw23.TicketWave.modelController.LoginController;
+//import it.unipv.insfw23.TicketWave.modelController.SignUpController;
 import it.unipv.insfw23.TicketWave.modelController.controller.access.LoginController;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
+import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
+import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -25,6 +30,8 @@ import javafx.scene.text.Font;
 public class LoginView extends Application {
     private Button loginButton = new Button("Login");
     private Button regButton = new Button("Registrati");
+    private SignUpView signUpView= new SignUpView();
+    private ManagerView managerView;
     private BorderPane root ;
     private Scene scene ;
     private GridPane grid ;
@@ -32,6 +39,7 @@ public class LoginView extends Application {
     private RadioButton managerRadioButton;
     private LowerBar lowerBar;
     private UpperBar upperBar;
+
     private TextField mail;
     private PasswordField password;
     private Label errorLabel;
@@ -43,22 +51,32 @@ public class LoginView extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         root= new BorderPane();
+
         root.setStyle("-fx-background-color: #91bad6;");
 
 
         grid= new GridPane();
+
+
         grid.setPadding(new Insets(20, 20, 20, 20));
         grid.setVgap(10);
         grid.setHgap(30);
         grid.setAlignment(Pos.CENTER);
+        // grid.setStyle("-fx-background-color: White;");
 
-        // setto barre sotto e sopra
+
+
+
+
         lowerBar = LowerBar.getInstance();
         upperBar= UpperBar.getIstance();
         upperBar.setForNoLogged();
         root.setBottom(lowerBar);
         root.setTop(upperBar);
         root.setCenter(grid);
+
+
+
 
         // imposto campo email
         Label emailnameLabel = new Label("Email:");
@@ -68,7 +86,7 @@ public class LoginView extends Application {
         this.mail=emailField;
         GridPane.setConstraints(emailField, 1, 1);
 
-        // imposto campo password
+        // Imposto camp password
         Label passwordLabel = new Label("Password:");
         passwordLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 20));
         GridPane.setConstraints(passwordLabel, 0, 2);
@@ -76,7 +94,6 @@ public class LoginView extends Application {
         this.password = passwordField;
         GridPane.setConstraints(passwordField, 1, 2);
 
-        //imposto bottone signup
         Label signupLabel = new Label("Non sei ancora iscritto ?");
         signupLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
         GridPane.setConstraints(signupLabel, 0, 6);
@@ -98,7 +115,7 @@ public class LoginView extends Application {
         errorLabel = new Label();
         errorLabel.setTextFill(javafx.scene.paint.Color.RED);
         errorLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
-        errorLabel.setText("Campi non validi o vuoti");
+        //errorLabel.setText("Campi non validi o vuoti");
         errorLabel.setVisible(false);
 
         accountTypeToggleGroup.selectedToggleProperty().addListener((observable, oldValue, newValue) -> {
@@ -114,9 +131,43 @@ public class LoginView extends Application {
         GridPane.setConstraints(managerRadioButton, 1, 0);
         GridPane.setConstraints(loginButton, 1, 5);
         GridPane.setConstraints(regButton, 1, 6);
-        GridPane.setConstraints(errorLabel, 2, 6);
-        grid.setAlignment(Pos.CENTER);
+        GridPane.setConstraints(errorLabel, 0, 9);
+
+       /* loginButton.setOnAction(e -> {
+
+            String email = emailField.getText();
+            String password = passwordField.getText();
+            if (customerRadioButton.isSelected()) {
+                System.out.println("Login come utente con username: " + email + " e password: " + password);
+            } else if (managerRadioButton.isSelected()) {
+                System.out.println("Login come gestore con username: " + email + " e password: " + password);
+            }
+        });*/
+
+        // aggiungo signupview al bottone registrati
+       /* loginButton.setOnAction(e -> {
+            CustomerView customerView = new CustomerView();
+            try {
+                customerView.start(new Stage());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });*/
+
+       /* regButton.setOnAction(e -> {
+            SignUpView signUpView = new SignUpView();
+            try {
+                signUpView.start(new Stage());
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });*/
+
+
+
+
         grid.getChildren().addAll(emailnameLabel, emailField, passwordLabel, passwordField, customerRadioButton, managerRadioButton, loginButton,signupLabel,regButton,errorLabel);
+
 
 
 
@@ -125,9 +176,10 @@ public class LoginView extends Application {
 
         primaryStage.setTitle("TicketWave");
 
-        Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/logo.png");
+      Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/logo.png");
 
         LoginController loginController = new LoginController(primaryStage, this);
+
 
         primaryStage.getIcons().add(icon);
         primaryStage.setWidth(1120);
@@ -181,7 +233,7 @@ public class LoginView extends Application {
         errorLabel.setVisible(false);
     }
     public boolean checkEmptyFields(){
-        if(mail.getText()== null || password.getText()==null){
+        if(mail.getText().isEmpty() || password.getText().isEmpty()){
             return true;
         }else {return false;}
     }
@@ -190,9 +242,8 @@ public class LoginView extends Application {
         return errorLabel;
     }
 
-    public void setErrorLabel(){
-
-        System.out.println("mail/password diverse o campi vuoti");
+    public void setErrorLabel(String message){
+        errorLabel.setText(message);
         errorLabel.setVisible(true);
     }
     public static void main(String[] args) {

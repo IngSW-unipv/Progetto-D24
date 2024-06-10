@@ -2,8 +2,10 @@ package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
 import java.sql.SQLException;
 
+import it.unipv.insfw23.TicketWave.dao.eventDao.EventDao;
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.dao.ticketDao.TicketDao;
+import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
 import it.unipv.insfw23.TicketWave.modelController.factory.payment.PaymentFactory;
 import it.unipv.insfw23.TicketWave.modelController.factory.subscription.SubscriptionHandlerFactory;
@@ -20,6 +22,7 @@ import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
+import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -30,17 +33,16 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 
-
-
 public class PaymentDataMController {
     private Stage mainStage;
     private PaymentDataMView paymentDataMView;
     private TicketPageView ticketpage;
     private PaymentSelectionView paymentSelectionView;
     private boolean isviewermanager;
-    private User user= ConnectedUser.getInstance().getUser();
+    private User user = ConnectedUser.getInstance().getUser();
+    private int numOfTickets;
 
-   private  IPaymentAdapter iPaymentAdapter;
+    private IPaymentAdapter iPaymentAdapter;
 
 
     private IResettableScene home = ConnectedUser.getInstance().getHome();
@@ -55,8 +57,6 @@ public class PaymentDataMController {
 
 
     public void initComponents() {
-
-
 
 
         EventHandler<MouseEvent> turnBackPaymentPage = new EventHandler<>() {
@@ -80,100 +80,105 @@ public class PaymentDataMController {
 
             @Override
             public void handle(MouseEvent actionEvent) {
+                // controllo sull'inserimento dei campi numerici
+                if (!checkNumericFields()) {
+                    // Se checkNumericFields ritorna false, esci dalla funzione
+                    return;
+                }
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("pagamento andato a buon fine stai tornando indietro alla home page!");
-                if(user.isCustomer()){
+                if (user.isCustomer()) {
                     System.out.println("Stai andando alla CustomerView");
+                    Customer customer = (Customer) user;
+                    
                     try {
-                        Customer customer = (Customer) user;
+                        
                         TicketDao ticketDao = new TicketDao();
-                        ProfileDao profileDao= new ProfileDao();
+                        EventDao eventDao = new EventDao();
+                        ProfileDao profileDao = new ProfileDao();
                         System.out.println("ticketdao creato");
 
                         MastercardPayment mastercardPayment = new MastercardPayment();
                         iPaymentAdapter = PaymentFactory.getMastercardAdapter(mastercardPayment);
                         System.out.println("creati i mastercardPayment payment e interfaccia");
 
+                        for(int i = 0; i < numOfTickets; i++) {
+                        	Ticket ticket = customer.buyticket(iPaymentAdapter, ConnectedUser.getInstance().getEventForTicket(), ConnectedUser.getInstance().getTicketType(), getUsePoint());
+                            System.out.println("Ticket associato correttamente");
 
-                        Ticket ticket = customer.buyticket(iPaymentAdapter, ConnectedUser.getInstance().getEventForTicket(), ConnectedUser.getInstance().getTicketType(), getUsePoint());
-                        System.out.println("Ticket associato correttamente");
+                            try {
+                                ticketDao.insertTicket(ticket, customer);
 
-                        try {
-                            ticketDao.insertTicket(ticket, customer);
+                                System.out.println("insert ticket eseguito");
+                            } catch (SQLException e) {
+                                throw new SQLException("Problema inserimento ticket", e);
+                            }
 
+                            try {
+                                profileDao.updateCustomerPoints(customer);
 
-                            System.out.println("insert ticket eseguito");
-                        } catch (SQLException e) {
-                            throw new SQLException("Problema inserimento ticket", e);
+                                System.out.println("updatePoints eseguito");
+                            } catch (SQLException e) {
+                                throw new SQLException("Problema aggiornamento punti", e);
+                            }
+
+                            try {
+                                eventDao.updateSeatsNumber(ConnectedUser.getInstance().getEventForTicket());
+
+                                System.out.println("updateSeats eseguito");
+                            } catch (SQLException e) {
+                                throw new SQLException("Problema aggiornamento posti", e);
+                            }
                         }
-                        try {
-                            profileDao.updateCustomerPoints(customer);
 
 
-                            System.out.println("updatepoints eseguito");
-                        } catch (SQLException e) {
-                            throw new SQLException("Problema aggiornamento punti", e);
-                        }
-
-
-
-
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
                     }
-                        catch (Exception e) {
-                            throw new RuntimeException(e);
+
+
+                    UpperBar.getIstance().setForCustomer();
+                    home.reSetBars();
+                    CustomerView customerview = (CustomerView) home;
+                    customerview.updateTicketsTable(customer.getTicketsList());
+                    CustomerController customerController = new CustomerController(mainStage, customerview, ConnectedUser.getInstance().getLoginView());
+                    mainStage.setScene(customerview);
+
+
+                } else {
+                    Manager managerlogged = (Manager) user;
+                    ProfileDao profiledao = new ProfileDao();
+                    SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMastercardAdapter(new MastercardPayment()), paymentSelectionView.getPrice());
+                    if (managerlogged.getSubscription() != -1) {
+                        try {
+                            profiledao.updateManagerSub(managerlogged);
+                        } catch (SQLException e) {
+                            e.printStackTrace();
                         }
+                    } else {
+                        System.out.println("pagamento non andato a buon fine");
+                    }
 
-
-
-                        UpperBar.getIstance().setForCustomer();
-                        home.reSetBars();
-                        Scene nextScene = (Scene) home;
-                        mainStage.setScene(nextScene);
-
-
-
-
-                }
-                else {
-                	Manager managerlogged = (Manager)user;
-                	ProfileDao profiledao = new ProfileDao();
-                	SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMastercardAdapter(new MastercardPayment()), paymentSelectionView.getPrice());
-                	if(managerlogged.getSubscription() != -1) {
-                		try {
-                			profiledao.updateManagerSub(managerlogged);
-						} catch (SQLException e) {
-							e.printStackTrace();
-						}
-                	}
-                	else {
-                		System.out.println("pagamento non andato a buon fine");
-                	}
-                	
-                    if(home!=null){
+                    if (home != null) {
                         UpperBar.getIstance().setForManager();
                         home.reSetBars();
-                        ManagerView managerView = (ManagerView)home;
-                        ManagerController managerController = new ManagerController(mainStage, managerView, ConnectedUser.getInstance().getLoginView());
+                        ManagerView managerView = (ManagerView) home;
                         managerView.updateSubLabels(managerlogged.getSubscription(), managerlogged.getCounterCreatedEvents());
-                        //Scene nextScene = (Scene) home;
-                        //mainStage.setScene(nextScene);
+                        ManagerController managerController = new ManagerController(mainStage, managerView, ConnectedUser.getInstance().getLoginView());                        
                         mainStage.setScene(managerView);
-                    }
-                    else{
+                    } else {
                         UpperBar.getIstance().setForManager();
-                        ManagerView managerView = new ManagerView(managerlogged.getName(), managerlogged.getNotification(), managerlogged.getEventlist(),managerlogged.getSubscription(),managerlogged.getCounterCreatedEvents());
+                        ManagerView managerView = new ManagerView(managerlogged.getName(), managerlogged.getNotification(), managerlogged.getEventlist(), managerlogged.getSubscription(), managerlogged.getCounterCreatedEvents());
                         ConnectedUser.getInstance().setHome(managerView);
                         ManagerController managerController = new ManagerController(mainStage, managerView, ConnectedUser.getInstance().getLoginView());
                         mainStage.setScene(managerView);
                     }
 
-              }
+                }
             }
         };
 
         paymentDataMView.getNextButton().setOnMouseClicked(goToNewPage);
-
-
 
 
         addCharacterLimit(paymentDataMView.getInsertNC(), 16);
@@ -194,44 +199,71 @@ public class PaymentDataMController {
             }
         });
     }
-/*
-    EventHandler<MouseEvent> buyTicketEventHandler = new EventHandler<>() {
-        @Override
-        public void handle(MouseEvent actionEvent) {
-            // Azione da eseguire quando il pulsante "Next" viene premuto
-            System.out.println("Hai Acquistato il biglietto");
-
-            // Esegui l'acquisto del biglietto
-            customer.buyticket(); // ???? cosa dovrei passare a questo punto??
-
-            // Chiudi la schermata corrente
-            mainStage.close();
-        }
-    };
-
-        paymentDataPage.getNextButton().setOnMouseClicked(buyTicketEventHandler);
-
-*/
 
 
-    public void setLabelforWavePoints(){
-        if(!user.isCustomer()){
+    public void setLabelforWavePoints() {
+        if (!user.isCustomer()) {
             paymentDataMView.getUsePointsButton().setVisible(false);
         }
     }
+    
+    public void setNumOfTickets(int number) {
+    	numOfTickets = number;
+    }
 
-    public int getUsePoint(){
+    private boolean isNumericAndNotEmpty(String str) {
+        return str != null && !str.isEmpty() && str.matches("\\d+");
+    }
+
+
+    private boolean checkNumericFields() {
+        boolean valid = true;
+
+        if (!isNumericAndNotEmpty(paymentDataMView.getInsertNC().getText()) || paymentDataMView.getInsertNC().getText().length() != 16) {
+            paymentDataMView.getErrorLabelNC().setVisible(true);
+            valid = false;
+        } else {
+            paymentDataMView.getErrorLabelNC().setVisible(false);
+        }
+
+        if (!isNumericAndNotEmpty(paymentDataMView.getInsertMM().getText()) || paymentDataMView.getInsertMM().getText().length() != 2) {
+            paymentDataMView.getErrorLabelMM().setVisible(true);
+            valid = false;
+        } else {
+            paymentDataMView.getErrorLabelMM().setVisible(false);
+        }
+
+        if (!isNumericAndNotEmpty(paymentDataMView.getInsertYY().getText()) || paymentDataMView.getInsertYY().getText().length() != 2) {
+            paymentDataMView.getErrorLabelYY().setVisible(true);
+            valid = false;
+        } else {
+            paymentDataMView.getErrorLabelYY().setVisible(false);
+        }
+
+        if (!isNumericAndNotEmpty(paymentDataMView.getInsertcvc().getText())) {
+            paymentDataMView.getErrorLabelCVC().setVisible(true);
+            valid = false;
+        } else {
+            paymentDataMView.getErrorLabelCVC().setVisible(false);
+        }
+
+       return valid;
+
+        }
+
+
+    public int getUsePoint() {
         int usePoint;
-        if(paymentDataMView.getUsePointsButton().isSelected()){
-             usePoint=1;
+        if (paymentDataMView.getUsePointsButton().isSelected()) {
+            usePoint = 1;
+        } else {
+            usePoint = 0;
         }
-        else{
-            usePoint=0;
-        }
-          return usePoint;
+        return usePoint;
     }
 
 }
+
 
 
 

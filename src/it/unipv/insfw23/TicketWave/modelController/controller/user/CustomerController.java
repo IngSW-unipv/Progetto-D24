@@ -47,18 +47,20 @@ public class CustomerController {
 				signUpView = new SignUpView();
 				LoginController logcon = new LoginController(mainstage, loginView);
                 loginView.reSetBars();
-                //
+                /*
                 ConnectedUser.getInstance().unlogUser();
                 ConnectedUser.getInstance().setHome(null);
                 ConnectedUser.getInstance().setLoginView(null);
-                //
+                */
                 loginView.makeBlankPage();
                 mainstage.setScene(loginView.getScene());
+                ConnectedUser.getInstance().logoutMethod();
             }
 
         };
-
         customerView.getLogoutButton().setOnMouseClicked(logoutButton);
+
+
         EventHandler<MouseEvent> profileButton = new EventHandler<>() {
 
             @Override
@@ -69,8 +71,8 @@ public class CustomerController {
 
             }
         };
-
         customerView.getProfileButton().setOnMouseClicked(profileButton);
+
 
         EventHandler<MouseEvent> searchButton = new EventHandler<>() {
 
@@ -120,6 +122,7 @@ public class CustomerController {
                 //metodo che setta upperbar manager
                 //opacita
                 //
+                tic.setForNotBuyable();
                 mainstage.setScene(tic);
             }
         };

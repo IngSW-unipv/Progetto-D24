@@ -1,7 +1,9 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
+import it.unipv.insfw23.TicketWave.dao.eventDao.EventDao;
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.dao.ticketDao.TicketDao;
+import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
 import it.unipv.insfw23.TicketWave.modelController.factory.payment.PaymentFactory;
 import it.unipv.insfw23.TicketWave.modelController.factory.subscription.SubscriptionHandlerFactory;
@@ -18,6 +20,7 @@ import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataPView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
+import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -35,6 +38,8 @@ public class PaymentDataPController {
     private User user= ConnectedUser.getInstance().getUser();
     private IResettableScene home = ConnectedUser.getInstance().getHome();
     private IPaymentAdapter iPaymentAdapter;
+    
+    private int numOfTickets;
 
     public PaymentDataPController(Stage mainStage, PaymentDataPView paymentDataPView, PaymentSelectionView paymentSelectionView){
        this.paymentDataPView = paymentDataPView;
@@ -74,9 +79,12 @@ public class PaymentDataPController {
                System.out.println("Pagamento andato a buon fine, stai tornando alla pagina principale!");
                if(user.isCustomer()){
                    System.out.println("Stai andando alla vista del cliente");
+                   Customer customer = (Customer) user;
+                   
                    try {
-                       Customer customer = (Customer) user;
+                       
                        TicketDao ticketDao = new TicketDao();
+                       EventDao eventDao = new EventDao();
                        ProfileDao profileDao= new ProfileDao();
                        System.out.println("TicketDao creato");
 
@@ -84,31 +92,46 @@ public class PaymentDataPController {
                        iPaymentAdapter = PaymentFactory.getPaypalAdapter(payPalPayment);
                        System.out.println("Creati PayPalPayment e interfaccia");
 
-                       Ticket ticket = customer.buyticket(iPaymentAdapter, ConnectedUser.getInstance().getEventForTicket(), ConnectedUser.getInstance().getTicketType(), getUsePoint());
-                       System.out.println("Biglietto associato correttamente");
+                       for(int i = 0; i < numOfTickets; i++) {
+                    	   Ticket ticket = customer.buyticket(iPaymentAdapter, ConnectedUser.getInstance().getEventForTicket(), ConnectedUser.getInstance().getTicketType(), getUsePoint());
+                           System.out.println("Biglietto associato correttamente");
 
-                       try {
-                           ticketDao.insertTicket(ticket, customer);
-                           System.out.println("Inserimento biglietto eseguito");
-                       } catch (SQLException e) {
-                           throw new SQLException("Problema inserimento biglietto", e);
+                           try {
+                               ticketDao.insertTicket(ticket, customer);
+                               System.out.println("Inserimento biglietto eseguito");
+                           } catch (SQLException e) {
+                               throw new SQLException("Problema inserimento biglietto", e);
+                           }
+                           
+                           try {
+                               profileDao.updateCustomerPoints(customer);
+
+
+                               System.out.println("updatepoints eseguito");
+                           } catch (SQLException e) {
+                               throw new SQLException("Problema aggiornamento punti", e);
+                           }
+                           
+                           try {
+                        	   eventDao.updateSeatsNumber(ConnectedUser.getInstance().getEventForTicket());
+                        	   
+                        	   System.out.println("updateSeats eseguito");
+                           } catch (SQLException e) {
+                        	   throw new SQLException("Problema aggiornamento posti");
+                           }
                        }
-                       try {
-                           profileDao.updateCustomerPoints(customer);
-
-
-                           System.out.println("updatepoints eseguito");
-                       } catch (SQLException e) {
-                           throw new SQLException("Problema aggiornamento punti", e);
-                       }
+                       
+                       
                    } catch (Exception e) {
                        throw new RuntimeException(e);
                    }
 
                    UpperBar.getIstance().setForCustomer();
                    home.reSetBars();
-                   Scene nextScene = (Scene) home;
-                   mainStage.setScene(nextScene);
+                   CustomerView customerview = (CustomerView) home;
+                   customerview.updateTicketsTable(customer.getTicketsList());
+                   CustomerController customerController = new CustomerController(mainStage, customerview, ConnectedUser.getInstance().getLoginView());
+                   mainStage.setScene(customerview);
 
                } else {
                    Manager managerlogged = (Manager)user;
@@ -128,11 +151,9 @@ public class PaymentDataPController {
                        UpperBar.getIstance().setForManager();
                        home.reSetBars();
                        ManagerView managerView = (ManagerView)home;
-                       ManagerController managerController = new ManagerController(mainStage, managerView, ConnectedUser.getInstance().getLoginView());
                        managerView.updateSubLabels(managerlogged.getSubscription(), managerlogged.getCounterCreatedEvents());
+                       ManagerController managerController = new ManagerController(mainStage, managerView, ConnectedUser.getInstance().getLoginView());
                        mainStage.setScene(managerView);
-//                       Scene nextScene = (Scene) home;
-//                       mainStage.setScene(nextScene);
                    } else {
                        UpperBar.getIstance().setForManager();
                        ManagerView managerView = new ManagerView(managerlogged.getName(), managerlogged.getNotification(), managerlogged.getEventlist(),managerlogged.getSubscription(),managerlogged.getCounterCreatedEvents());
@@ -151,6 +172,10 @@ public class PaymentDataPController {
         if(!user.isCustomer()){
             paymentDataPView.getUsePointsButton().setVisible(false);
         }
+    }
+    
+    public void setNumOfTickets(int number) {
+    	numOfTickets = number;
     }
 
     public int getUsePoint(){
