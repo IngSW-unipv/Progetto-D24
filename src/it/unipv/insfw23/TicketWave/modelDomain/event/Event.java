@@ -14,7 +14,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 
 /**
- * Abstract class representing a generic Event.
+ * Abstract class that represents a generic Event.
  * Contains attributes and methods common to {@link Concert}, {@link Festival}, {@link Theater} and {@link Other}.
  *
  * @see Concert
@@ -385,7 +385,7 @@ public abstract class Event {
     }
 
     /**
-     * Sets a new Event name as an int.
+     * Increment the ticketsSoldNumberForType and decrement the seatsRemainedNumberForType by 1 based on the type passed in input
      *
      */
     public void updateSeatsRemainedAndTicketSoldForType(int type) { // NON SO CHE SCRIVERE NEL JAVADOC

@@ -16,6 +16,10 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 
+/**
+ * Test the creation of an event like a {@link Concert}, {@link Festival}, {@link Theater}, {@link Other}.
+ */
+
 public class TestEvent {
     private Festival fs;
     private Concert co;
