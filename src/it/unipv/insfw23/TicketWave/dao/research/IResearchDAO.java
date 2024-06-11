@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 /**
  * Data Access Object (DAO) interface for managing operations related to the {@link Event} entity in the database.
- * This interface provides methods to search for {@link Event} items with a search field.
+ * This interface provides methods to search for {@link Event} items with a search field and some filters.
  *
  * @see Event
  */

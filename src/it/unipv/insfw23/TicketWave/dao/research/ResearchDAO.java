@@ -167,9 +167,9 @@ public class ResearchDAO implements IResearchDAO{
     // PRIVATE METHODS:
 
     /**
-     * This method count the words contained into the artists String from the database. This is useful for finding how many artists are in a festival
+     * This method count the words contained into the artists String from the database in order to find how many artists are in a festival
      * @param input
-     * @return
+     * @return words.lenght
      */
     private int countWords(String input){ // mi serve per contare quanti artisti sono stati messi nel festival, questo lo faccio separando la stringa
         if (input == null || input.isEmpty()) {
@@ -187,6 +187,12 @@ public class ResearchDAO implements IResearchDAO{
         return words.length;
     }
 
+    /**
+     * This method creates a manager by taking its data from the database. This is useful for creating an event later
+     * @param resultSet1
+     * @return new Manager()
+     * @throws SQLException
+     */
     private Manager createManager(ResultSet resultSet1) throws SQLException {
         try {
             LocalDate subDate = resultSet1.getDate("SUBSCRIPTION_DATE").toLocalDate();
@@ -199,6 +205,13 @@ public class ResearchDAO implements IResearchDAO{
 
     }
 
+    /**
+     * This method creates a specific event by taking data from the database and uses the previously created manager as the event creator
+     * @param rs
+     * @param manager
+     * @return new Event()
+     * @throws SQLException
+     */
     private Event createEvent(ResultSet rs, Manager manager) throws SQLException {
         LocalDate ld = rs.getDate("DATE_").toLocalDate();
         LocalTime tm = rs.getTime("TIME_").toLocalTime();
