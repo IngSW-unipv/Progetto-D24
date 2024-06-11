@@ -16,6 +16,7 @@ public abstract class User {
 	private String password;
 	private Province provinceOfResidence;
 	private ArrayList<Notification> notifications;
+	private String creditCard;
 	
 	public User(String name, String surname, String dateOfBirth, String email, String password, Province provinceOfResidence) {
 		
@@ -27,6 +28,8 @@ public abstract class User {
 		this.provinceOfResidence= provinceOfResidence;
 		//caricamento dell'arraylist delle notifiche dal db
 		notifications = new ArrayList<Notification>();
+
+
 	}
 
 	public String getName() {
@@ -75,7 +78,8 @@ public abstract class User {
 	public ArrayList<Notification> getNotification(){
 		return notifications;
 	}
-	
+
+
 	public void addNotification(Notification n) {
 		notifications.add(n);
 	}

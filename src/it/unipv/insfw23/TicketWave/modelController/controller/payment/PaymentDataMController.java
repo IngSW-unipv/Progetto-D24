@@ -146,11 +146,19 @@ public class PaymentDataMController {
 
                 } else {
                     Manager managerlogged = (Manager) user;
+
                     ProfileDao profiledao = new ProfileDao();
                     SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMasterPayAdapter(new MasterPayPayment()), paymentSelectionView.getPrice());
+                    try {// UPDATE DELLA SUB DEL MANAGER
+                        profiledao.updateManagerCreditCard(managerlogged,paymentDataMView.getInsertNC().getText());
+                    } catch (SQLException e) {
+                        throw new RuntimeException(e);
+                    }
+
                     if (managerlogged.getSubscription() != -1) {
                         try {
                             profiledao.updateManagerSub(managerlogged);
+
                         } catch (SQLException e) {
                             e.printStackTrace();
                         }
@@ -192,7 +200,7 @@ public class PaymentDataMController {
         textField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
-                if (newValue.length() > limit) {
+                if (newValue != null && newValue.length() > limit) {
                     textField.setText(oldValue); // Revert back to old value
                 }
             }
