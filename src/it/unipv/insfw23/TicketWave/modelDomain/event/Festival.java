@@ -1,11 +1,7 @@
 package it.unipv.insfw23.TicketWave.modelDomain.event;
 import java.lang.String;
-import java.sql.Blob;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Locale;
 
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import javafx.scene.image.Image;

@@ -1,15 +1,11 @@
 package it.unipv.insfw23.TicketWave.modelDomain.event;
 
 import java.lang.String;
-import java.sql.Blob;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
 
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import javafx.scene.image.Image;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 
@@ -25,19 +21,19 @@ import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 public abstract class Event {
 
     // ATTRIBUTES:
-    private int idEvent;
+    private final int idEvent;
     private String name, city, location;
     private LocalDate date;
     private LocalTime time;
     private Province province;
     private Genre genre;
-    private Type type;
-    private int maxNumberOfSeats;
+    private final Type type;
+    private final int maxNumberOfSeats;
     private int typeOfSeats; // indice dell'array ticketSoldNumberForType, serve per dire quante tipologie di posti ho: base + premium = 2, base = 1, base + premium + vip = 3 tipi di posti, mi server per scorrere l'array
     private int [] seatsRemainedNumberForType, ticketsSoldNumberForType; // vettore biglietti venduti per tipo
     private double [] price; // vettore prezzi per i vari tipi di biglietto, es: Vip = 40€, Base = 15€...
-    private Manager creator;
-    private String artists, description; // tutti gli eventi hanno una descrizione
+    private final Manager creator;
+    private final String artists, description; // tutti gli eventi hanno una descrizione
 
     private Image photo;
 

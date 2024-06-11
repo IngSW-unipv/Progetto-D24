@@ -2,7 +2,6 @@ package it.unipv.insfw23.TicketWave.test.event;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 
 import org.junit.After;
@@ -10,8 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 import static org.junit.Assert.*;
 
-import java.sql.Blob;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -25,16 +22,14 @@ public class TestEvent {
     private Concert co;
     private Theater th;
     private Other ot;
-    private ArrayList<Event> events, ev1;
-    private Manager mg, mg1;
+    private ArrayList<Event> events;
+    private Manager mg;
     private Image bl;
-    
-	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
-	private final int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
 
     @Before
     public void setup(){
-        events = new ArrayList<Event>();
+        events = new ArrayList<>();
+        int MAX_EVENTS_FOR_BASE_SUB = 5;
         mg = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", Province.CATANIA, "1234567890123456",
                             events, MAX_EVENTS_FOR_BASE_SUB, 1, LocalDate.now(), 0);
         bl = null;
@@ -115,7 +110,7 @@ public class TestEvent {
             co = new Concert(100000, "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
                     "Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
                     "Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.",
-                    LocalDate.of(10000, 10, 30), LocalTime.parse("24:59:99"), Province.MILANO, Genre.EDM, 999999999,
+                    LocalDate.of(10000, 10, 30), LocalTime.parse("23:59:59"), Province.MILANO, Genre.EDM, 999999999,
                     3, a, b, p, mg, "Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. ",
                     "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.", bl);
             System.out.println(co);
@@ -142,14 +137,15 @@ public class TestEvent {
             Theater theater1 = new Theater(2, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), LocalTime.parse("22:50:00"), Province.ROMA, Genre.COMMEDIA,
                     1200, 1, a, b, p, mg, "Franchino er criminale", "Commedia di Franchino er criminale ", "Paolo", bl);
             // popolo l'array list di Eventi
-            ev1 = new ArrayList<Event>();
+            ArrayList<Event> ev1 = new ArrayList<>();
             ev1.add(festival);
             ev1.add(festival2);
             ev1.add(other);
             ev1.add(theater);
             ev1.add(theater1);
             // creo il manager
-            mg1 = new Manager("Paolo", "Bisio", "1970-02-07", "Paolo@example.com", "dajeRoma", Province.ROMA, "423432523523",
+            int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
+            Manager mg1 = new Manager("Paolo", "Bisio", "1970-02-07", "Paolo@example.com", "dajeRoma", Province.ROMA, "423432523523",
                     ev1, MAX_EVENTS_FOR_PREMIUM_SUB, 2, LocalDate.now(), 0);
             // check + stampa delle reference degli eventi
             assertEquals(5, mg1.getEventlist().size()); // controllo che 6 sia la size dell'arrayList di eventi in manager
