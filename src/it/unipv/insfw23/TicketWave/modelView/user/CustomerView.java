@@ -1,13 +1,8 @@
 package it.unipv.insfw23.TicketWave.modelView.user;
 
-import it.unipv.insfw23.TicketWave.modelDomain.event.Concert;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
@@ -18,7 +13,6 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -35,6 +29,8 @@ public class CustomerView extends Scene implements IResettableScene {
     private GridPane grid;
     private Label nameLabel;
     private Label wavePoints;
+    private Label notificationLabel;
+    private Label ticketsLabel;
     private TableView<Notification> notificationTab;
     private TableView<Ticket> ticketTab;
     private Button logoutButton;
@@ -81,8 +77,6 @@ public class CustomerView extends Scene implements IResettableScene {
         grid.setPadding(new Insets(20, 20, 20, 20));
         grid.setVgap(8);
         grid.setHgap(10);
-        grid.setGridLinesVisible(true);
-
         logoutButton = new Button("Logout");
         /*GridPane.setConstraints(logoutButton, 1, 1, 2, 1);
         GridPane.setHalignment(logoutButton, HPos.CENTER);
@@ -102,6 +96,8 @@ public class CustomerView extends Scene implements IResettableScene {
         GridPane.setConstraints(wavePoints, 1, 0);
 
         // TableView per le notifiche
+        notificationLabel = new Label("Notifiche");
+        notificationLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 15));
         notificationTab = new TableView<Notification>();
         notificationTab.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
         
@@ -122,10 +118,13 @@ public class CustomerView extends Scene implements IResettableScene {
         if(nots != null){
             notificationTab.setItems(nots);}
        // notifyListView.getItems().addAll("Notifica 1", "Notifica 2", "Notifica 3"); // Dati di esempio
-        GridPane.setConstraints(notificationTab, 0, 1);
+        GridPane.setConstraints(notificationLabel, 0, 1);
+        GridPane.setConstraints(notificationTab, 0, 2);
 
         // AGGIUSTARE LA TABLEVIEW CON GLI ATTRIBUTI DEI BIGLIETTI E POI COLLEGARE CON IL DAO PER LEGGERE I DATI
         // TableView per i biglietti acquistati
+        ticketsLabel = new Label("Biglietti acquistati");
+        ticketsLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 15));
         ticketTab = new TableView<Ticket>();
         ticketTab.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
 
@@ -148,9 +147,10 @@ public class CustomerView extends Scene implements IResettableScene {
         if(tick != null) {
             ticketTab.setItems(tick);
         }
-        GridPane.setConstraints(ticketTab, 1, 1);
+        GridPane.setConstraints(ticketsLabel, 1, 1);
+        GridPane.setConstraints(ticketTab, 1, 2);
 
-        grid.getChildren().addAll(nameLabel, wavePoints, notificationTab, ticketTab,logoutButton);
+        grid.getChildren().addAll(nameLabel, wavePoints, notificationTab, ticketTab,logoutButton, ticketsLabel,notificationLabel);
 
 
 

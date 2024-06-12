@@ -10,6 +10,7 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 import javafx.stage.StageStyle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
@@ -49,7 +50,7 @@ public class TicketPageView extends Scene implements IResettableScene {
     private final Label eventDateField =new Label();
 
     private final Label eventArtistField =new Label();
-    private static Label eventDescriptionField = new Label();
+    private static final TextArea eventDescriptionField = new TextArea();
     private final Label eventCityLabel = new Label("Città:");
     private final Label eventLocationLabel = new Label("Location:");
     private final Label eventProvinceLabel = new Label("Provincia:");
@@ -202,6 +203,14 @@ public class TicketPageView extends Scene implements IResettableScene {
         this.layout=new BorderPane();
         setRoot(layout);
 
+        eventDescriptionField.setEditable(false);
+        eventDescriptionField.setMouseTransparent(true);
+        eventDescriptionField.setStyle("-fx-background-color: #91BAD6; -fx-control-inner-background: #91BAD6; -fx-text-fill: BLACK; -fx-border-color: transparent; -fx-blend-mode: SRC_OVER; -fx-hbar-policy: never; -fx-vbar-policy: never;");
+        eventDescriptionField.setWrapText(true); // rimuove la scrollbar orizzontale
+        eventDescriptionField.setOnMouseEntered(e -> eventDescriptionField.setStyle("-fx-border-color: #91BAD6; -fx-background-color: #91BAD6; -fx-control-inner-background: #91BAD6; -fx-text-fill: BLACK; -fx-blend-mode: SRC_OVER;"));
+        eventDescriptionField.setOnMouseExited(e -> eventDescriptionField.setStyle("-fx-border-color: #91BAD6; -fx-background-color: #91BAD6; -fx-control-inner-background: #91BAD6; -fx-text-fill: BLACK; -fx-blend-mode: SRC_OVER;"));
+        eventDescriptionField.setPrefWidth(400);
+
         // BorderPane per struttura interna
         BorderPane internalStructure = new BorderPane();
 
@@ -219,7 +228,6 @@ public class TicketPageView extends Scene implements IResettableScene {
         text.add(eventProvinceField);
         text.add(eventDateField);
         text.add(eventArtistField);
-        text.add(eventDescriptionField);
         text.add(ticketBaseLabel);
         text.add(ticketPremiumLabel);
         text.add(ticketVipLabel);
@@ -239,6 +247,7 @@ public class TicketPageView extends Scene implements IResettableScene {
             label.setTextFill(Color.BLACK);
             label.setFont(font);
         }
+        eventDescriptionField.setFont(font);
 
         eventNameField.setFont(Font.font("Helvetica", FontWeight.EXTRA_BOLD, 17));
 
@@ -421,9 +430,6 @@ public class TicketPageView extends Scene implements IResettableScene {
         layout.setTop(UpperBar.getIstance());
         layout.setCenter(root);
         layout.setBottom(LowerBar.getInstance());
-
-        reSetBars();
-
     }
 
     public int getWhichPriceSelected() {
