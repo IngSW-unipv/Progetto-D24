@@ -9,10 +9,10 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.*;
 public class NotificationHandler implements INotificationHandler {
 	
 	private static NotificationHandler istance = null;
-	final String MSG_SOLDOUT = "Evento soldout";
-	final String MSG_NEAR = "E' disponibile un nuovo evento nella tua provincia";
-	final String MSG_GENRE = "E' disponibile un nuovo evento del tuo genere preferito";
-	final String MSG_NEAR_GENRE = "E' disponibile un nuovo evento del tuo genere preferito nella tua provincia";
+	private final String MSG_SOLDOUT = "Evento soldout";
+	private final String MSG_NEAR = "E' disponibile un nuovo evento nella tua provincia";
+	private final String MSG_GENRE = "E' disponibile un nuovo evento del tuo genere preferito";
+	private final String MSG_NEAR_GENRE = "E' disponibile un nuovo evento del tuo genere preferito nella tua provincia";
 	private int counterNotification = 0;
 
 	
@@ -55,34 +55,51 @@ public class NotificationHandler implements INotificationHandler {
 */	
 	public ArrayList<Notification> sendNotificationNewEvent(Event ev, ArrayList<String> customerNear, ArrayList<String> customerFavGenre) {
 		ArrayList<Notification> notifications = new ArrayList<>();
+		ArrayList<String> customerAlreadyNotifiedForProvince = new ArrayList<String>();
 		Province province = ev.getProvince();
 		Genre genre = ev.getGenre();
 		Notification n2;
 		int subscription_creator = ev.getCreator().getSubscription();
-		//ArrayList <Customer> customernear = new ArrayList<>(); //select al db where province = province
+		Boolean notDoubleCondition;
+		System.out.println("dim dei vicini: ");
+		for(String s : customerNear) {
+			System.out.println(s);
+		}
+		System.out.println("dim dei gen: ");
+		for(String s1 : customerFavGenre) {
+			System.out.println(s1);
+		}
 		
 		switch(subscription_creator) {
 		case 2:
-			//ArrayList <Customer> customerfavgen = new ArrayList<>(); //select al db where favgen = favgen
-			for(String cfav : customerFavGenre) {
-				for(String cprov : customerNear) {
-					if(cfav.equals(cprov)) {
+			
+			for(int i = 0; i < customerFavGenre.size(); i++) {
+				
+				notDoubleCondition = true;
+				for(int j = 0; j < customerNear.size(); j++) {
+					
+					if(customerFavGenre.get(i).equals(customerNear.get(j))) {
 						counterNotification += 1;
-						n2 = new Notification(counterNotification, cfav, MSG_NEAR_GENRE);
-						//cfav.addNotification(n2);
+						n2 = new Notification(counterNotification, customerFavGenre.get(i), MSG_NEAR_GENRE);
 						notifications.add(n2);
-						// toglie il customer corrente dalla lista di quelli vicini dato che gli è già stata notificata la creazione dell'evento
-						customerNear.remove(cprov);
-					}
-					else {
-						counterNotification += 1;
-						n2 = new Notification(counterNotification, cfav, MSG_GENRE);
-						//cfav.addNotification(n2);
-						notifications.add(n2);
+						//tengo traccia di chi ha già ricevuto una notifica sia per vicinanza che per genere, così da non rinotificare la vicinanza nel case 1
+						customerAlreadyNotifiedForProvince.add(customerFavGenre.get(i));
+						notDoubleCondition = false; //vado al customerFavGen successivo
 					}
 				}
+				
+				if(notDoubleCondition) {
+					counterNotification += 1;
+					n2 = new Notification(counterNotification, customerFavGenre.get(i), MSG_GENRE);
+					//cfav.addNotification(n2);
+					notifications.add(n2);
+				}
 			}
+			//tolgo dai customer da notificare per la vicinanza quelli già notifcati per vicinanza e genere
+			customerNear.removeAll(customerAlreadyNotifiedForProvince);
+			System.out.println(customerAlreadyNotifiedForProvince);
 		case 1:
+			//System.out.println(customerNear);
 			for(String cprov : customerNear) {
 				counterNotification += 1;
 				n2 = new Notification(counterNotification, cprov, MSG_NEAR);

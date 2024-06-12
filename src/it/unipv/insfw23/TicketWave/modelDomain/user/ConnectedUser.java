@@ -75,6 +75,7 @@ public class ConnectedUser {
 	public void setNewSubLevel(int newSubLevel) {
 		this.newSubLevel = newSubLevel;
 	}
+
     
     public void logoutMethod(){
         this.user = null;

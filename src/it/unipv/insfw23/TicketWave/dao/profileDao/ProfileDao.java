@@ -482,8 +482,27 @@ public class ProfileDao implements IProfileDao {
 
 		ConnectionDB.closeConnection(connection);
 	}
+
+    @Override
+    public void updateManagerCreditCard(Manager manager ,String managerCreditCard) throws SQLException {
+        connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);
+        PreparedStatement statement;
+        try {
+            String query = "UPDATE MANAGER SET CARDNUMBER = ? WHERE MAIL = ?";
+            statement = connection.prepareStatement(query);
+            statement.setString(1,managerCreditCard);
+            statement.setString(2, manager.getEmail());
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            throw new SQLException("Errore nell'aggiornamento del numero della carta di credito del manager", e);
+        }
+            ConnectionDB.closeConnection(connection);
+
+    }
 	
-	
+
+
+
 
 
     @Override

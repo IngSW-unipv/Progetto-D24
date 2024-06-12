@@ -70,6 +70,7 @@ public class NewConcertView extends Scene{
 	private ImageView eventPhoto;
 	private final Label descriptionlabel = new Label("Descrizione: ");
 	private TextArea descriptionarea;
+
 	private final Label errlabel = new Label("Parametri non validi");	
 	private Button abort = new Button("Annulla");
 	private Button confirm = new Button("Conferma");
