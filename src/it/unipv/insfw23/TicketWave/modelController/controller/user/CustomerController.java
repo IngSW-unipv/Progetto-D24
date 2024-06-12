@@ -5,6 +5,7 @@ import it.unipv.insfw23.TicketWave.modelController.controller.access.LoginContro
 import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchController;
 
 import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageController;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
@@ -105,16 +106,23 @@ public class CustomerController {
             public void handle(MouseEvent event) {
 //				creo un manager finto per creare un evento finto
                 TicketPageView tic = new TicketPageView();
+                
                 try {
                 EventDao eventDao = new EventDao();
+                
                 
                	System.out.println(customerView.getTicketTab().getSelectionModel().getSelectedItem().getIdEvent());
                	//costruttore view
                	// Ticket tick = (Ticket) customerView.getTicketTab().getSelectionModel().getSelectedItem();
                	int idEvent = customerView.getTicketTab().getSelectionModel().getSelectedItem().getIdEvent();
+               	
+               	Event selectedEvent = eventDao.selectEvent(idEvent);
+               	if(selectedEvent.getSeatsRemaining() == 0){
+               		tic.setForNotBuyable();
+               	}
                 //costruttore controller
 
-                    TicketPageController buyticketcontroller = new TicketPageController(mainstage, tic, eventDao.selectEvent(idEvent), customerView);
+                TicketPageController buyticketcontroller = new TicketPageController(mainstage, tic, selectedEvent, customerView);
                     
                 } catch(NullPointerException e){
                 	/*per quando si clicca su una riga della tabella non popolata o quando si lascia lo scrollbar col mouse interno alla table senza avere
