@@ -24,6 +24,8 @@ import java.util.ArrayList;
 
 // Estende Scene, in maniera da poter visualizzare i nodes comuni della ResearchNodesView
 public class ResearchView extends Scene implements IResettableScene {
+
+    // ATTRIBUTES:
     private Button searchButton;
     private Menu genre;
     private Menu province;
@@ -33,7 +35,7 @@ public class ResearchView extends Scene implements IResettableScene {
     private TableView<Event> table;
     private BorderPane layout;
 
-    // costruttore
+    // CONSTRUCTOR:
     public ResearchView() {
         super(new Pane(), 1080, 600);
 
@@ -41,6 +43,7 @@ public class ResearchView extends Scene implements IResettableScene {
         researchScene();
     }
 
+    // PUBLIC METHODS:
     public void researchScene() {
         //__________ Istanzio gli oggetti più importanti _________//
         TextField searchBar = new TextField();
@@ -238,7 +241,28 @@ public class ResearchView extends Scene implements IResettableScene {
         setRoot(layout);
     }
 
-    // getter utili sia per la researchView che per il controller
+    @Override
+    public void reSetBars(){
+        BorderPane temp = new BorderPane();
+        setRoot(temp);
+        //controllo per il layout inizializzato
+        if (layout == null) {
+            System.err.println("Layout non inizializzato correttamente!");
+            return;}
+
+        ConnectedUser cu = ConnectedUser.getInstance();
+        if(cu.getUser().isCustomer()) {
+            UpperBar.getIstance().setForCustomer();
+        }
+        else{
+            UpperBar.getIstance().setForManager();
+        }
+        layout.setTop(UpperBar.getIstance());
+        layout.setBottom(LowerBar.getInstance());
+        setRoot(layout);
+    }
+
+    // GETTER:
     public Button getSearchButton() {
         return searchButton;
     }
@@ -265,26 +289,5 @@ public class ResearchView extends Scene implements IResettableScene {
 
     public TableView<Event> getTable() {
         return table;
-    }
-
-    @Override
-    public void reSetBars(){
-        BorderPane temp = new BorderPane();
-        setRoot(temp);
-        //controllo per il layout inizializzato
-        if (layout == null) {
-            System.err.println("Layout non inizializzato correttamente!");
-            return;}
-
-        ConnectedUser cu = ConnectedUser.getInstance();
-        if(cu.getUser().isCustomer()) {
-            UpperBar.getIstance().setForCustomer();
-        }
-        else{
-            UpperBar.getIstance().setForManager();
-        }
-        layout.setTop(UpperBar.getIstance());
-        layout.setBottom(LowerBar.getInstance());
-        setRoot(layout);
     }
 }

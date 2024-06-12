@@ -12,6 +12,8 @@ import java.util.ArrayList;
  * @see Event
  */
 public interface IResearchDAO {
+
+    // METHODS:
     ArrayList<Event> getFilteredEvents(String searchField, ArrayList<String> pr , ArrayList<String> gen) throws SQLException; // metodo della ricerca, esso fornisce i risultati
     ArrayList<Event> getAllEvents() throws SQLException; // Restituisco tutti gli eventi quando sul textField della ricerca non c'è nulla
 }

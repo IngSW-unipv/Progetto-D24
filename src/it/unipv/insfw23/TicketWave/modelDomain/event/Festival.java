@@ -10,6 +10,8 @@ import javafx.scene.image.Image;
  *  This class extends the {@link Event} and represents a Festival. A Festival is created by a {@link Manager}
  */
 public class Festival extends Event {
+
+    // ATTRIBUTES:
     int artistsNumber;
 
     // CONSTRUCTOR:

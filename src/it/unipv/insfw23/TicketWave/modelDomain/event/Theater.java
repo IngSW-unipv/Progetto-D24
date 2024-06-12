@@ -10,6 +10,8 @@ import javafx.scene.image.Image;
  * This class extends the {@link Event} and represents a Theater event. A Theater event is created by a {@link Manager}
  */
 public class Theater extends Event{
+
+    // ATTRIBUTES:
     String authorName;
 
     // CONSTRUCTOR:

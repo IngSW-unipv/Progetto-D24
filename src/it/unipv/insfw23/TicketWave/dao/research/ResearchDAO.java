@@ -20,6 +20,7 @@ import java.util.ArrayList;
  * @see Event
  */
 public class ResearchDAO implements IResearchDAO{
+
     // ATTRIBUTES:
     private final String schema;
     private Connection conn;

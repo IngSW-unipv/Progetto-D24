@@ -11,7 +11,7 @@ import javafx.scene.image.Image;
  */
 public class Concert extends Event{
 
-    // COSTRUTTORE:
+    // CONSTRUCTOR:
     public Concert(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, Image photo) {
         super(idEvent, name, city, location, date, time, province, genre, Type.CONCERT, maxNumberOfSeats, typeOfSeats, seatsRemainedNumberForType, ticketsSoldNumberForType, price, creator, artists, description, photo);
     }
