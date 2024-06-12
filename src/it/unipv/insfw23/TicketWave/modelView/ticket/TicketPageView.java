@@ -507,7 +507,6 @@ public class TicketPageView extends Scene implements IResettableScene {
         }
         return 0;
     }
-
 }
 
 
