@@ -3,6 +3,7 @@ package it.unipv.insfw23.TicketWave.modelView.event;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
+import java.util.Date;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
@@ -14,14 +15,7 @@ import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ChoiceBox;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.Label;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
@@ -30,6 +24,8 @@ import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.util.Callback;
+import javafx.scene.control.Alert.AlertType;
 
 public class NewConcertView extends Scene{
 	private final Font lebelsfont = Font.font("Helvetica", FontWeight.NORMAL, 13);
@@ -162,6 +158,7 @@ public class NewConcertView extends Scene{
 		
 		datepicker = new DatePicker();
 		datepicker.setMaxWidth(200);
+		validDate(datepicker);
 				
 		hourspinner = new Spinner<>(0,23,0);
 		hourspinner.setMinWidth(55);
@@ -514,5 +511,20 @@ public class NewConcertView extends Scene{
 	
 	public String getDescription() {
 		return descriptionarea.getText();
+	}
+
+	public static void validDate (DatePicker datepicker){
+		Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell(){
+			public void updateItem(LocalDate item, boolean empty) {
+				super.updateItem(item, empty);
+
+				// Disable past dates
+				if (item.isBefore(LocalDate.now().plusDays(1))) {
+					setDisable(true);
+					setStyle("-fx-background-color: #EEEEEE;");
+				}
+			}
+		};
+		datepicker.setDayCellFactory(dayCellFactory);
 	}
 }

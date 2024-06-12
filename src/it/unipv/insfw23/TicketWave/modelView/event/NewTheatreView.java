@@ -164,6 +164,7 @@ public class NewTheatreView extends Scene{
 		
 		datepicker = new DatePicker();
 		datepicker.setMaxWidth(200);
+		NewConcertView.validDate(datepicker);
 				
 		hourspinner = new Spinner<>(0,23,0);
 		hourspinner.setMinWidth(55);
