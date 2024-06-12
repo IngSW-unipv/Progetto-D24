@@ -96,13 +96,13 @@ public class ManagerView extends Scene  implements IResettableScene {
 		
 		
 		Label not = new Label("Notifiche");
-		not.setFont(Font.font("Helvetica", FontWeight.BOLD,20));
+		not.setFont(Font.font("Helvetica", FontWeight.BOLD,15));
 		GridPane.setConstraints(not, 0, 6);
 		GridPane.setHgrow(not, Priority.SOMETIMES);
 
 		
 		Label ev = new Label("Eventi pubblicati");
-		ev.setFont(Font.font("Helvetica", FontWeight.BOLD,20));
+		ev.setFont(Font.font("Helvetica", FontWeight.BOLD,15));
 		GridPane.setConstraints(ev, 2, 6);
 		GridPane.setHgrow(ev, Priority.SOMETIMES);
 		
