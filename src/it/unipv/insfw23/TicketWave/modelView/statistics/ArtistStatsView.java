@@ -28,7 +28,8 @@ public class ArtistStatsView extends BorderPane{
 
         final NumberAxis yAxis = new NumberAxis(0, 100, 10);
         final CategoryAxis xAxis = new CategoryAxis();
-        xAxis.setTickLabelRotation(120);
+
+
         xAxis.setLabel("Artisti");
         yAxis.setLabel("Percentuale venduta");
 
