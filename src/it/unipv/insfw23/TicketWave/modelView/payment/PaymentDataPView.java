@@ -38,6 +38,7 @@ public class PaymentDataPView extends Scene {
 
     private void initComponents(){
 
+        //set del font per Labels
         emailLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 20));
         insertEmail.setFont(font);
         errorLabel.setFont(font);
@@ -45,16 +46,11 @@ public class PaymentDataPView extends Scene {
 
         usePointsButton.setFont(font);
 
-        VBox textBox= new VBox(emailLabel, insertEmail, errorLabel, usePointsButton);
-        textBox.setStyle("-fx-font-size: 14px;");
-        textBox.setPadding(new Insets(40));
-        textBox.setAlignment(Pos.CENTER);
-        textBox.setSpacing(50);
-        insertEmail.setMaxWidth(200);
-        errorLabel.setVisible(false);
-
-        usePointsButton.setAlignment(Pos.BOTTOM_CENTER);
-
+        //logo metodo di pagamento
+        Image payPolLogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/PayPol.png");
+        ImageView payPolImage = new ImageView(payPolLogo);
+        payPolImage.setFitWidth(150);
+        payPolImage.setFitHeight(150);
         Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/backArrow.png");
         ImageView backarrow = new ImageView(backarrowlogo);
         backarrow.setFitWidth(50);
@@ -62,53 +58,45 @@ public class PaymentDataPView extends Scene {
         backButton.setGraphic(backarrow);
         backButton.setStyle("-fx-background-color: #91bad6;");
 
-        Image nextarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/nextArrow.png");
+        //logo bottone di pagamento
+        Image nextarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/NewBuyButton.png");
         ImageView nextarrow = new ImageView(nextarrowlogo);
-        nextarrow.setFitWidth(50);
+        nextarrow.setFitWidth(200);
         nextarrow.setPreserveRatio(true);
         nextButton.setGraphic(nextarrow);
         nextButton.setStyle("-fx-background-color: #91bad6;");
+        nextButton.setPadding(new Insets(0, 0, 0, 80));
 
-        Region leftSpacer = new Region();
-        HBox.setHgrow(leftSpacer, Priority.ALWAYS); // Consente a leftSpacer di espandersi per riempire lo spazio disponibile
+
+        //VBox per tutti i campi
+        VBox textBox= new VBox(payPolImage,emailLabel, insertEmail, errorLabel, usePointsButton,nextButton);
+        textBox.setStyle("-fx-font-size: 14px;");
+        textBox.setSpacing(20);
+        textBox.setAlignment(Pos.TOP_CENTER);
+        insertEmail.setMaxWidth(200);
+        errorLabel.setVisible(false);
+        usePointsButton.setAlignment(Pos.BOTTOM_CENTER);
+
 
         Region rightSpacer = new Region();
-        HBox.setHgrow(rightSpacer, Priority.ALWAYS); // Consente a rightSpacer di espandersi per riempire lo spazio disponibile// Imposta un margine di 10 unità a destra del backButton
-        // Creazione di un HBox per contenere i bottoni e le Region vuote
-        HBox buttonBox = new HBox(backButton, rightSpacer, nextButton);
-        buttonBox.setMargin(backButton, new Insets(0, 0, 0, 0)); // Margine a sinistra
-        buttonBox.setMargin(nextButton, new Insets(0, 0, 0, 0)); // Margine a destra
-
-        buttonBox.setSpacing(50); // Spazio tra i bottoni
+        HBox.setHgrow(rightSpacer, Priority.ALWAYS);
+        //Hbox per bottoni
+        HBox buttonBox = new HBox(backButton,rightSpacer,nextButton);
+        buttonBox.setMargin(backButton, new Insets(10, 0, 0, 0)); // Margine a sinistra
         buttonBox.setAlignment(Pos.CENTER);
 
-        Image payPolLogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/PayPol.png");
-        ImageView payPolImage = new ImageView(payPolLogo);
-        payPolImage.setFitWidth(300);
-        payPolImage.setFitHeight(300);
 
-
-
+        //set struttura interna
         BorderPane root= new BorderPane();
         root.setStyle("-fx-background-color: #91bad6;");
         root.setPadding(new Insets(10));
         root.setCenter(textBox);
-        root.setRight(payPolImage);
+
         root.setBottom(buttonBox);
-        BorderPane.setAlignment(backButton,Pos.BOTTOM_LEFT);
-        BorderPane.setAlignment(nextButton,Pos.BOTTOM_RIGHT);
-
-        // root.setBottom(backButton);
 
 
 
-        BorderPane.setAlignment(emailLabel, Pos.TOP_CENTER);
-        BorderPane.setAlignment(insertEmail, Pos.CENTER);
-
-
-
-
-        //Setting external layout
+        //Set struttura esterna
         BorderPane layout= new BorderPane();
         layout.setCenter(root);
         layout.setTop(UpperBar.getIstance());
