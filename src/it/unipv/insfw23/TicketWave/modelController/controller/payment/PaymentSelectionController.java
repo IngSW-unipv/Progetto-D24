@@ -2,6 +2,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
 
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
@@ -11,26 +12,28 @@ import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionV
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 public class PaymentSelectionController {
 
     private Stage mainStage;
-    private PaymentSelectionView paymentPage;
-    private TicketPageView ticketPage;
+    private PaymentSelectionView paymentSelectionView;
+    private TicketPageView ticketPageView;
     private SubscriptionSelectionView subscriptionSelectionView;
     private IResettableScene backScene;
-    private PaymentDataPView paymentDataPPage;
+    private PaymentDataPView paymentDataPView;
+    private Manager loggedManager;
 
 
 
-    private PaymentDataMView paymentDataMPage;
+    private PaymentDataMView paymentDataMView;
     private User user= ConnectedUser.getInstance().getUser();
 
-    public PaymentSelectionController(Stage mainStage, PaymentSelectionView PaymentPage, IResettableScene backScene) {
+    public PaymentSelectionController(Stage mainStage, PaymentSelectionView paymentSelectionView, IResettableScene backScene) {
         this.mainStage = mainStage;
-        this.paymentPage = PaymentPage;
+        this.paymentSelectionView = paymentSelectionView;
         this.backScene=backScene;
 
         initComponents();
@@ -42,36 +45,53 @@ public class PaymentSelectionController {
 
             @Override
             public void handle(MouseEvent actionEvent) {
-                if(paymentPage.getMasterPayButton().isSelected()){
+                if(paymentSelectionView.getMasterPayButton().isSelected()){
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("Stai andando alla PaymentDataMPage");
-                paymentDataMPage=new PaymentDataMView();
-               PaymentDataMController paymentDataMController = new PaymentDataMController(mainStage,paymentDataMPage,paymentPage);
-               
+                paymentDataMView =new PaymentDataMView();
+               PaymentDataMController paymentDataMController = new PaymentDataMController(mainStage, paymentDataMView, paymentSelectionView);
+
+
+
                if(user.isCustomer()) {
-            	   ticketPage = (TicketPageView)backScene;
-            	   paymentDataMController.setNumOfTickets(ticketPage.getNumOfTickets());
-               }            
-                mainStage.setScene(paymentDataMPage);
-            } else if (paymentPage.getPaypolButton().isSelected()) {
+
+            	   ticketPageView = (TicketPageView)backScene;
+            	   paymentDataMController.setNumOfTickets(ticketPageView.getNumOfTickets());
+               }
+
+               //CODICE DI SET PER LA CREDIT CARD DEL MANAGER
+               else{
+                   loggedManager = (Manager) user;
+                   paymentDataMView.setInsertNCText(loggedManager.getCreditCard());
+               }
+
+
+                              mainStage.setScene(paymentDataMView);
+
+
+            }
+                else if (paymentSelectionView.getPaypolButton().isSelected()) {
                     System.out.println("Stai andando alla PaymentDataPPage");
-                    paymentDataPPage=new PaymentDataPView();
-                    PaymentDataPController paymentDataPController=new PaymentDataPController(mainStage,paymentDataPPage,paymentPage);
+                    paymentDataPView =new PaymentDataPView();
+                    PaymentDataPController paymentDataPController=new PaymentDataPController(mainStage, paymentDataPView, paymentSelectionView);
                   //se lo user è cliente mi porto dietro il numero di biglietti che si vuole acquistare
+
                     if(user.isCustomer()) {
-                 	   ticketPage = (TicketPageView)backScene;
-                 	   paymentDataPController.setNumOfTickets(ticketPage.getNumOfTickets());
+                 	   ticketPageView = (TicketPageView)backScene;
+                 	   paymentDataPController.setNumOfTickets(ticketPageView.getNumOfTickets());
                     }
-                    mainStage.setScene(paymentDataPPage);
-                }else {
-                    paymentPage.getErrmessage().setOpacity(100);
+
+                    mainStage.setScene(paymentDataPView);
+                }
+                else {
+                    paymentSelectionView.getErrmessage().setOpacity(100);
                     System.out.println("Seleziona un Metodo di Pagamento");
 
                 }
 
                 }
             };
-        paymentPage.getNextButton().setOnMouseClicked(goToPaymentDataPage);
+        paymentSelectionView.getNextButton().setOnMouseClicked(goToPaymentDataPage);
 
 
 
@@ -88,7 +108,7 @@ public class PaymentSelectionController {
         };
 
 // Imposta l'handler sull'evento di clic del pulsante di ritorno
-        paymentPage.getBackButton().setOnMouseClicked(turnBack);
+        paymentSelectionView.getBackButton().setOnMouseClicked(turnBack);
 
 
 

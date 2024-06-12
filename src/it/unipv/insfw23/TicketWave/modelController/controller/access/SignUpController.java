@@ -114,6 +114,7 @@ public class SignUpController {
                         ConnectedUser.getInstance().setHome(customerview);
                         ConnectedUser.getInstance().setLoginView(loginView);
 
+
                         ArrayList<Ticket> arrayListTicket = customer.getTicketsList();
                         ArrayList<Notification> arrayListNotification = customer.getNotification();
                         CustomerView customerview = new CustomerView(customer.getName(),arrayListNotification,arrayListTicket,customer.getPoints() );

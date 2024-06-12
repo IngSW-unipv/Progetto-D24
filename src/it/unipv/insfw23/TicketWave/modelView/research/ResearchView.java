@@ -3,18 +3,14 @@ package it.unipv.insfw23.TicketWave.modelView.research;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
-        import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-        import javafx.scene.control.*;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -22,23 +18,13 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-
-import javax.imageio.event.IIOReadProgressListener;
-import java.sql.Blob;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-
-import static javafx.application.Application.launch;
 
 // Estende Scene, in maniera da poter visualizzare i nodes comuni della ResearchNodesView
 public class ResearchView extends Scene implements IResettableScene {
     private Button searchButton;
-    private MenuBar bar;
     private Menu genre;
     private Menu province;
     private ArrayList<CheckBox> prv; // vettore per poter gestire i CheckBox di province nel controller
@@ -64,7 +50,6 @@ public class ResearchView extends Scene implements IResettableScene {
         this.searchButton = searchButton;
 
         MenuBar bar = new MenuBar();
-        this.bar = bar;
 
         Menu genre = new Menu("_Generi"); // con l'underscore davanti se premo ALT + G apre il menu dei filtri per genere
         this.genre = genre;

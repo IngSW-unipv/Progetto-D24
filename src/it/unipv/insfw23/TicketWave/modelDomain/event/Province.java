@@ -1,5 +1,8 @@
 package it.unipv.insfw23.TicketWave.modelDomain.event;
 
+/**
+ * This enumeration represents all the provinces. A single province can be put into an event like a {@link Concert}, {@link Festival}, {@link Theater}, {@link Other}.
+ */
 public enum Province {
 
     AGRIGENTO,

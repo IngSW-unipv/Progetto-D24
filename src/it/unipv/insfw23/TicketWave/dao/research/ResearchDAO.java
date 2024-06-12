@@ -7,32 +7,42 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import javafx.scene.image.Image;
 
-import javax.xml.transform.Result;
-import java.awt.*;
 import java.io.InputStream;
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Objects;
 
+/**
+ * Implementation of the methods declared in {@link IResearchDAO}.
+ * It encapsulates database interactions, providing a clean and reusable interface for accessing {@link Event} data.
+ *
+ * @see Event
+ */
 public class ResearchDAO implements IResearchDAO{
+    // ATTRIBUTES:
     private final String schema;
     private Connection conn;
 
+    // CONSTRUCTOR:
     public ResearchDAO() { // è un Object easy
         super();
         this.schema = "TicketWaveDB";
-    } // costruttore
+    }
 
+    // PUBLIC METHODS:
+
+    /**
+     * Return all the Event from the database
+     * @return result
+     * @throws SQLException
+     */
     @Override
     public ArrayList<Event> getAllEvents() throws SQLException{ // Quando sulla ResearchBar non ho nulla, allora restituisco tutti gli eventi ----- FUNZIONA
         conn = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(conn,schema);
         ArrayList<Event> result = new ArrayList<>();
         ArrayList<Event> managerEvent = new ArrayList<>();
-        Manager manager = null;
+        Manager manager;
 
         if (ConnectionDB.isOpen(conn)) {
             try {
@@ -58,19 +68,27 @@ public class ResearchDAO implements IResearchDAO{
                     }
                 }
             } catch (SQLException e) {
-                e.printStackTrace();
                 throw new RuntimeException("Errore nella query di ricerca dell'evento (ResearchDAO riga 42)");
             }
         }
         ConnectionDB.closeConnection(conn); // chiudo la connessione
         return result;
     }
+
+    /**
+     * Returns all the events that match with the search field and that comply with the filters set. If I haven't set a search field, all the events that match the filters set are returned.
+     * @param searchField
+     * @param pr
+     * @param gen
+     * @return return
+     * @throws SQLException
+     */
     @Override
     public ArrayList<Event> getFilteredEvents(String searchField, ArrayList<String> pr , ArrayList<String> gen) throws SQLException{ // Quando qualcuno scrive sulla ResearchBar (TextField) e usa o meno i filtri, allora uso questo metodo
         conn = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(conn,schema);
         ArrayList<Event> result = new ArrayList<>();
         ArrayList<Event> managerEvent = new ArrayList<>();
-        Manager manager = null;
+        Manager manager;
 
          // controllo che la query venga costruita correttamente
          if (ConnectionDB.isOpen(conn)){
@@ -145,6 +163,14 @@ public class ResearchDAO implements IResearchDAO{
         ConnectionDB.closeConnection(conn); // chiudo la connessione
         return result;
     }
+
+    // PRIVATE METHODS:
+
+    /**
+     * This method count the words contained into the artists String from the database in order to find how many artists are in a festival
+     * @param input
+     * @return words.lenght
+     */
     private int countWords(String input){ // mi serve per contare quanti artisti sono stati messi nel festival, questo lo faccio separando la stringa
         if (input == null || input.isEmpty()) {
             return 0;
@@ -161,6 +187,12 @@ public class ResearchDAO implements IResearchDAO{
         return words.length;
     }
 
+    /**
+     * This method creates a manager by taking its data from the database. This is useful for creating an event later
+     * @param resultSet1
+     * @return new Manager()
+     * @throws SQLException
+     */
     private Manager createManager(ResultSet resultSet1) throws SQLException {
         try {
             LocalDate subDate = resultSet1.getDate("SUBSCRIPTION_DATE").toLocalDate();
@@ -173,6 +205,13 @@ public class ResearchDAO implements IResearchDAO{
 
     }
 
+    /**
+     * This method creates a specific event by taking data from the database and uses the previously created manager as the event creator
+     * @param rs
+     * @param manager
+     * @return new Event()
+     * @throws SQLException
+     */
     private Event createEvent(ResultSet rs, Manager manager) throws SQLException {
         LocalDate ld = rs.getDate("DATE_").toLocalDate();
         LocalTime tm = rs.getTime("TIME_").toLocalTime();

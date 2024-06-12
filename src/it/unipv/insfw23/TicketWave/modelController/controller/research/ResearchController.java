@@ -3,12 +3,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.research;
 import it.unipv.insfw23.TicketWave.dao.research.ResearchDAO;
 import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
-import it.unipv.insfw23.TicketWave.modelDomain.user.User;
-import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import javafx.collections.FXCollections;
@@ -28,8 +23,7 @@ public class ResearchController {
     private final Stage mainStage;
     // le mie view
     private final ResearchView rv;
-    private ArrayList<String> pr, gen; // sono gli arrayList che contengono i filtri selezionati, per cui le province selezionate ed i generi selezionati
-    private ResearchDAO rd;
+    private final ArrayList<String> pr, gen; // sono gli arrayList che contengono i filtri selezionati, per cui le province selezionate ed i generi selezionati
 
     // costruttore
     public ResearchController(Stage mainStage, ResearchView rv) {
