@@ -171,8 +171,8 @@ public class ManagerView extends Scene  implements IResettableScene {
 //		tabnot.setPrefWidth(400);
 
 		subButton = new Button("Cambia abbonamento");
-		GridPane.setConstraints(subButton, 0, 3);
-		GridPane.setHalignment(subButton, HPos.LEFT);
+		GridPane.setConstraints(subButton, 3, 2);
+		GridPane.setHalignment(subButton, HPos.RIGHT);
 		
 		
 		switch(currentSub) {
