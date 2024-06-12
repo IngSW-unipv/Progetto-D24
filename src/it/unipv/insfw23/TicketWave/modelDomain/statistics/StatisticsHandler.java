@@ -165,7 +165,7 @@ public class StatisticsHandler implements IStatisticsHandler {
         for (int j = 0; j < Array.getLength(provinceArray); j++) {
             for (Event currentEvent : eventList) {
 
-                if (currentEvent.getType() == typeCode && currentEvent.getArtists() == artistName
+                if (currentEvent.getType() == typeCode && currentEvent.getArtists().equals(artistName)
                         && currentEvent.getProvince() == provinceArray[j]) {
 
                     eventCounter++;

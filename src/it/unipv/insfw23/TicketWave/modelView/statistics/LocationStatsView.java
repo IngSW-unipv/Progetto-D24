@@ -15,14 +15,15 @@ import javafx.scene.paint.Color;
 
 public class LocationStatsView extends Scene {
 
-    private String artistTitle;
+    private String artistTitle = new String();
     private Button backButton;
     private XYChart<String, Number> LocationSerie;
     private WrapProv provRes;
 
-    public LocationStatsView(WrapProv provRes) {
+    public LocationStatsView(WrapProv provRes, String title) {
         super(new BorderPane(), 1080, 600);
         this.provRes = provRes;
+        this.artistTitle = title;
         init();
     }
 
@@ -47,7 +48,6 @@ public class LocationStatsView extends Scene {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
 
         if (provRes.getProvResult().size() != provRes.getProvinceArray().size()) {
-            System.out.println("cazzu");
             throw new IllegalArgumentException("Le liste devono avere la stessa dimensione");
         }
         else {
@@ -105,5 +105,6 @@ public class LocationStatsView extends Scene {
     public Button getBackButton(){
         return backButton;
     }
+
 
 }

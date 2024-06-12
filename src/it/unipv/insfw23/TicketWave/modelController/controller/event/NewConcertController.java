@@ -16,10 +16,14 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.event.NewConcertView;
 import it.unipv.insfw23.TicketWave.modelView.event.SelectionNewEventTypeView;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
@@ -130,8 +134,11 @@ public class NewConcertController {
 					Concert createdConcert = loggedmanager.createConcert(id, view.getNamefield(), view.getCityfield(), view.getAddressfield(), view.getDatepicked(), view.getTimeSelected(), view.getProvince(),
 												view.getGenre(), maxNumOfSeats, view.getTypesticket(), seatsRemainedNumberForType, ticketSoldNumberForType, prices, loggedmanager, view.getArtistfield(), view.getDescription(), photo);
 					
-					
-					eventDao.insertEvent(createdConcert);
+					try {
+						eventDao.insertEvent(createdConcert);
+					}catch (Exception e){
+						loggedmanager.getEventlist().remove(createdConcert);
+					}
 					
 					profileDao.updateEventCreatedCounter(loggedmanager);
 					
@@ -167,30 +174,55 @@ public class NewConcertController {
 		};
 		
 		view.getConfirmButton().setOnMouseClicked(confirmButton);
+
+
+
+		addCharacterLimit(view.getNameTextField(), 60);
+		addCharacterLimit(view.getCityTextField(), 60);
+		addCharacterLimit(view.getArtistsTextField(), 250);
+		view.getDescriptionTextArea().setTextFormatter(new TextFormatter<String>(change -> change.getControlNewText().length() <= 950 ? change: null));
 	}
 
-	public static boolean isJPEG(Image fxImage) throws IOException, InvalidJpegFormatException {
-		// Converti Image di JavaFX in BufferedImage
-		BufferedImage bufferedImage = SwingFXUtils.fromFXImage(fxImage, null);
 
-		// Scrivi il BufferedImage in un ByteArrayOutputStream
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		ImageIO.write(bufferedImage, "jpg", baos);
 
-		// Leggi i dati dall'array di byte
-		ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
-		ImageInputStream iis = ImageIO.createImageInputStream(bais);
-
-		// Ottieni i lettori di immagini disponibili
-		Iterator<ImageReader> imageReaders = ImageIO.getImageReaders(iis);
-
-		// Controlla se il formato è JPEG
-		while (imageReaders.hasNext()) {
-			ImageReader reader = imageReaders.next();
-			if (reader.getFormatName().equalsIgnoreCase("JPEG")) {
-				return true;
+	private void addCharacterLimit(TextField textField, int limit) {  // metodo che mi permette di avere un limite sui textfields
+		textField.textProperty().addListener(new ChangeListener<String>() {
+			@Override
+			public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
+				if (newValue != null && newValue.length() > limit) {
+					textField.setText(oldValue); // Revert back to old value
+				}
 			}
+		});
+	}
+
+
+	public static boolean isJPEG(Image fxImage) throws IOException, InvalidJpegFormatException {
+		if (fxImage != null) {
+			// Converti Image di JavaFX in BufferedImage
+			BufferedImage bufferedImage = SwingFXUtils.fromFXImage(fxImage, null);
+
+			// Scrivi il BufferedImage in un ByteArrayOutputStream
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			ImageIO.write(bufferedImage, "jpg", baos);
+
+			// Leggi i dati dall'array di byte
+			ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+			ImageInputStream iis = ImageIO.createImageInputStream(bais);
+
+			// Ottieni i lettori di immagini disponibili
+			Iterator<ImageReader> imageReaders = ImageIO.getImageReaders(iis);
+
+			// Controlla se il formato è JPEG
+			while (imageReaders.hasNext()) {
+				ImageReader reader = imageReaders.next();
+				if (reader.getFormatName().equalsIgnoreCase("JPEG")) {
+					return true;
+				}
+			}
+			throw new InvalidJpegFormatException();
 		}
+
 		throw new InvalidJpegFormatException();
     }
 }
