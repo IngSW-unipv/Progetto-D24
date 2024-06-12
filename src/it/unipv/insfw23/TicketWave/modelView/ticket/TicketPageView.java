@@ -382,7 +382,8 @@ public class TicketPageView extends Scene implements IResettableScene {
 
 			@Override
 			public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) {
-				baseSpinner.setVisible(false);
+				if(baseSpinner != null)
+                    baseSpinner.setVisible(false);
 				if(premiumSpinner != null)
 					premiumSpinner.setVisible(false);
 				if(vipSpinner != null)
@@ -491,12 +492,14 @@ public class TicketPageView extends Scene implements IResettableScene {
     }
     
     public int getNumOfTickets() {
-    	if(baseSpinner.isVisible())
+    	if(baseSpinner!= null && baseSpinner.isVisible())
     		return baseSpinner.getValue();
-    	else if(premiumSpinner.isVisible())
+    	else if(premiumSpinner != null && premiumSpinner.isVisible())
     		return premiumSpinner.getValue();
-    	else
-    		return vipSpinner.getValue();
+    	else if(vipSpinner != null) {
+            return vipSpinner.getValue();
+        }
+        return 0;
     }
 
 }
