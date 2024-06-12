@@ -179,6 +179,7 @@ public class SignUpController {
                         signUpView.setErrorLabel(e.getMessage());
                     }
 
+
                     // Imposta la scena subscriptio sulla stage principale
                 }
             }
