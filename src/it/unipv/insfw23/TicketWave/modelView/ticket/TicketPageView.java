@@ -127,9 +127,14 @@ public class TicketPageView extends Scene implements IResettableScene {
                 vipPricebutton.setVisible(false);
                 ticketPremiumField = new Label("Non disponibili");
                 premiumPricebutton.setVisible(false);
-                ticketBaseField = new Label(String.valueOf(seatsRemainedNumberForType[0]));
                 basePriceField = new Label("€"+price[0]);
-                baseSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[0]), 1);
+                if(seatsRemainedNumberForType[0] == 0) {
+                	ticketBaseField = new Label("Terminati");
+                	basePricebutton.setVisible(false);
+                }else {
+                	ticketBaseField = new Label(String.valueOf(seatsRemainedNumberForType[0]));
+                	baseSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[0]), 1);
+                }
                 break;
             case 2:
                 ticketVipField = new Label("Non disponibili");
@@ -259,10 +264,12 @@ public class TicketPageView extends Scene implements IResettableScene {
         errmessage.setStyle("-fx-text-fill: red;");
         
         //impostazioni relative alla grafica degli spinner
-        baseSpinner.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
-        baseSpinner.setPrefWidth(65);
-        baseSpinner.setPrefHeight(20);
-        baseSpinner.setVisible(false);
+        if(baseSpinner != null) {
+        	baseSpinner.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
+            baseSpinner.setPrefWidth(65);
+            baseSpinner.setPrefHeight(20);
+            baseSpinner.setVisible(false);
+        }	
         
         if(premiumSpinner != null) {
         	premiumSpinner.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
@@ -330,7 +337,8 @@ public class TicketPageView extends Scene implements IResettableScene {
         //aggiunta label quantity
         bottomGrid.add(quantityLabel, 4, 1);
         //aggiunta degli spinner per la selezione della quantità di biglietti solo se sono stati creati
-        bottomGrid.add(baseSpinner, 4, 2);//non c'è bisogno di controllo, almeno i posti base sono sempre presenti in un evento
+        if(baseSpinner != null)
+        	bottomGrid.add(baseSpinner, 4, 2);
         if(premiumSpinner != null)
         	bottomGrid.add(premiumSpinner, 4, 3);
         if(vipSpinner != null)
