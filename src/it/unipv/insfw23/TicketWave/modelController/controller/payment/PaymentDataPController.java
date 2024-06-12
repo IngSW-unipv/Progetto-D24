@@ -55,6 +55,8 @@ public class PaymentDataPController {
    }
 
    public void initComponents(){
+
+        //EventHandler---passaggio alla View precedente
        EventHandler<MouseEvent> turnBackPaymentPage = new EventHandler<>() {
 
            @Override
@@ -68,6 +70,8 @@ public class PaymentDataPController {
 
        paymentDataPView.getBackButton().setOnMouseClicked(turnBackPaymentPage);
 
+
+       //EventHandler---passaggio alla View successiva
        EventHandler<MouseEvent> goToNewPage = new EventHandler<>() {
            @Override
            public void handle(MouseEvent actionEvent) {
@@ -81,6 +85,8 @@ public class PaymentDataPController {
 
                // Azione da eseguire quando il pulsante avanti viene premuto
                System.out.println("Pagamento andato a buon fine, stai tornando alla pagina principale!");
+
+///////////////////////USER=CUSTOMER/////////////////////////////////////////////////////////////////////////
                if(user.isCustomer()){
                    System.out.println("Stai andando alla vista del cliente");
                    Customer customer = (Customer) user;
@@ -107,7 +113,7 @@ public class PaymentDataPController {
                            } catch (SQLException e) {
                                throw new SQLException("Problema inserimento biglietto", e);
                            }
-                           
+                           // BLOCCO TRY/CATCH UPDATEPOINTS
                            try {
                                profileDao.updateCustomerPoints(customer);
 
@@ -116,7 +122,7 @@ public class PaymentDataPController {
                            } catch (SQLException e) {
                                throw new SQLException("Problema aggiornamento punti", e);
                            }
-                           
+                           //BLOCCO TRY/CATCH UPDATESEATS
                            try {
                         	   eventDao.updateSeatsNumber(ConnectedUser.getInstance().getEventForTicket());
                         	   
@@ -126,7 +132,9 @@ public class PaymentDataPController {
                            }
                            
                        }
-                       
+
+                       //COSTRUTTO CONTROLLO DI NOTIFICHE
+
                        if(currentEvent.getSeatsRemaining() == 0) {
                     	   NotificationDao notificationDao = new NotificationDao();
                     	   INotificationHandler notificationHandler = NotificationHandlerFactory.getIstance().getNotificationHandler();
@@ -146,6 +154,8 @@ public class PaymentDataPController {
                    CustomerController customerController = new CustomerController(mainStage, customerview, ConnectedUser.getInstance().getLoginView());
                    mainStage.setScene(customerview);
 
+
+///////////////////USER=MANAGER/////////////////////////////////////////////////////////////
                } else {
                    Manager managerlogged = (Manager)user;
                    ProfileDao profiledao = new ProfileDao();
