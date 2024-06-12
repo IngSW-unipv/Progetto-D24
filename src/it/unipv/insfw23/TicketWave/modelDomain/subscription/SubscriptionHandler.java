@@ -15,7 +15,7 @@ public class SubscriptionHandler implements ISubscriptionHandlerFactory {
 		boolean checkPayment = payAdapter.paymentMethod(subPrice);
 
 
-		if (checkPayment == true) {  //se il pagamento va a buon fine, setto subscription, e la data nuova
+		if (checkPayment == true) {  //se il pagamento va a buon fine, setto subscription, la data nuova e azzero gli eventi creati nel mese
 			manager.setSubscription(subscription);
 			System.out.println("Pagamento avvenuto con successo. Sottoscrizione e data corrente aggiornate.");
 

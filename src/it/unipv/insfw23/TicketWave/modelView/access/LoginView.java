@@ -6,7 +6,6 @@ package it.unipv.insfw23.TicketWave.modelView.access;
 import it.unipv.insfw23.TicketWave.modelController.controller.access.LoginController;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
-import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -133,37 +132,6 @@ public class LoginView extends Application {
         GridPane.setConstraints(regButton, 1, 6);
         GridPane.setConstraints(errorLabel, 0, 9);
 
-       /* loginButton.setOnAction(e -> {
-
-            String email = emailField.getText();
-            String password = passwordField.getText();
-            if (customerRadioButton.isSelected()) {
-                System.out.println("Login come utente con username: " + email + " e password: " + password);
-            } else if (managerRadioButton.isSelected()) {
-                System.out.println("Login come gestore con username: " + email + " e password: " + password);
-            }
-        });*/
-
-        // aggiungo signupview al bottone registrati
-       /* loginButton.setOnAction(e -> {
-            CustomerView customerView = new CustomerView();
-            try {
-                customerView.start(new Stage());
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });*/
-
-       /* regButton.setOnAction(e -> {
-            SignUpView signUpView = new SignUpView();
-            try {
-                signUpView.start(new Stage());
-            } catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        });*/
-
-
 
 
         grid.getChildren().addAll(emailnameLabel, emailField, passwordLabel, passwordField, customerRadioButton, managerRadioButton, loginButton,signupLabel,regButton,errorLabel);
@@ -228,19 +196,15 @@ public class LoginView extends Application {
     public PasswordField getPassword(){return password;}
 
     public void makeBlankPage(){
-        mail.setText(null);
-        password.setText(null);
+        mail.setText("");
+        password.setText("");
         errorLabel.setVisible(false);
     }
     public boolean checkEmptyFields(){
-        if(mail.getText() != null && password.getText() != null){
-            if(mail.getText().isEmpty() || password.getText().isEmpty()){
-                return true;
-            }else {return false;}
-        }
-        else {return true;}
+        if(mail.getText().isEmpty() || password.getText().isEmpty()){
+            return true;
+        }else {return false;}
     }
-
 
     public Label getErrorLabel() {
         return errorLabel;

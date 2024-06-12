@@ -3,6 +3,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.event;
 import it.unipv.insfw23.TicketWave.dao.eventDao.EventDao;
 import it.unipv.insfw23.TicketWave.dao.notificationDao.NotificationDao;
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
+import it.unipv.insfw23.TicketWave.exceptions.InvalidJpegFormatException;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
 import it.unipv.insfw23.TicketWave.modelController.factory.notifications.INotificationHandler;
 import it.unipv.insfw23.TicketWave.modelController.factory.notifications.NotificationHandlerFactory;
@@ -15,17 +16,24 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.event.NewConcertView;
 import it.unipv.insfw23.TicketWave.modelView.event.SelectionNewEventTypeView;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
+import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
+import javax.imageio.stream.ImageInputStream;
+import java.awt.image.BufferedImage;
+import java.io.*;
 import java.sql.Blob;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 
 public class NewConcertController {
 	Stage window;
@@ -87,6 +95,8 @@ public class NewConcertController {
 				ArrayList<Notification> notifications = new ArrayList<>();
 				
 				try {
+					isJPEG(view.getPhotoView().getImage());
+
 					EventDao eventDao = new EventDao();
 					ProfileDao profileDao = new ProfileDao();
 					NotificationDao notificationDao = new NotificationDao();
@@ -128,6 +138,8 @@ public class NewConcertController {
 					customerFavGenre = profileDao.selectCustomerByGenre(createdConcert.getGenre());
 					customerProvince = profileDao.selectCustomerByProvince(createdConcert.getProvince());
 					
+					//aggiorno il numero di notifiche presenti sul db
+					notificationHandler.setCounterNotification(notificationDao.selectNotificationNumber());
 					notifications = notificationHandler.sendNotificationNewEvent(createdConcert, customerProvince, customerFavGenre);
 					
 					for(Notification x : notifications) {
@@ -140,6 +152,11 @@ public class NewConcertController {
 					window.setScene(home);
 					
 				}catch (NumberFormatException e){
+					view.getErrLabel().setText("Parametri non validi");
+					view.getErrLabel().setVisible(true);
+
+				}catch (InvalidJpegFormatException e){
+					view.getErrLabel().setText(e.getMessage());
 					view.getErrLabel().setVisible(true);
 					
 				}catch(Exception e){
@@ -151,4 +168,29 @@ public class NewConcertController {
 		
 		view.getConfirmButton().setOnMouseClicked(confirmButton);
 	}
+
+	public static boolean isJPEG(Image fxImage) throws IOException, InvalidJpegFormatException {
+		// Converti Image di JavaFX in BufferedImage
+		BufferedImage bufferedImage = SwingFXUtils.fromFXImage(fxImage, null);
+
+		// Scrivi il BufferedImage in un ByteArrayOutputStream
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		ImageIO.write(bufferedImage, "jpg", baos);
+
+		// Leggi i dati dall'array di byte
+		ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
+		ImageInputStream iis = ImageIO.createImageInputStream(bais);
+
+		// Ottieni i lettori di immagini disponibili
+		Iterator<ImageReader> imageReaders = ImageIO.getImageReaders(iis);
+
+		// Controlla se il formato è JPEG
+		while (imageReaders.hasNext()) {
+			ImageReader reader = imageReaders.next();
+			if (reader.getFormatName().equalsIgnoreCase("JPEG")) {
+				return true;
+			}
+		}
+		throw new InvalidJpegFormatException();
+    }
 }

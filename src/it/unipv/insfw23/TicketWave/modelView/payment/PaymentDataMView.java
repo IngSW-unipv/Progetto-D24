@@ -93,6 +93,8 @@ public class PaymentDataMView extends Scene {
                 textField.setFont(font);
             }
 
+
+
             //setting color for usePointsButton
             usePointsButton.setFont(font);
 
@@ -112,8 +114,13 @@ public class PaymentDataMView extends Scene {
             backButton.setGraphic(backarrow);
             backButton.setStyle("-fx-background-color: #91bad6;");
 
-            Region leftSpacer = new Region();
-            HBox.setHgrow(leftSpacer, Priority.ALWAYS); // Allows leftSpacer to expand to fill available space
+            Image masterPayLogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/MasterPay3.png");
+            ImageView masterPayImage = new ImageView(masterPayLogo);
+            masterPayImage.setFitWidth(300);
+            masterPayImage.setFitHeight(300);
+
+            //Region leftSpacer = new Region();
+           // HBox.setHgrow(leftSpacer, Priority.ALWAYS); // Allows leftSpacer to expand to fill available space
             Region rightSpacer = new Region();
             HBox.setHgrow(rightSpacer, Priority.ALWAYS); // Allows rightSpacer  to expand to fill available space
 
@@ -121,14 +128,16 @@ public class PaymentDataMView extends Scene {
             GridPane dataInput = new GridPane();
             dataInput.setAlignment(Pos.TOP_LEFT);
             dataInput.setHgap(10);
-            dataInput.setVgap(10);
+            dataInput.setVgap(30);
             dataInput.setPadding(new Insets(10));
             dataInput.addRow(0, nameLabel, insertName);
             dataInput.addRow(1, surnameLabel, insertSurname);
             dataInput.addRow(2, ncLabel, insertNC, errorLabelNC);
-            dataInput.addRow(3, expirationLabel, insertMM, insertYY, errorLabelMM, errorLabelYY);
-            dataInput.addRow(4, cvcLabel, insertcvc, errorLabelCVC);
-            dataInput.addRow(6, usePointsButton);
+            dataInput.addRow(3, expirationLabel, insertMM, insertYY);
+            dataInput.add(errorLabelMM, 1, 4);
+            dataInput.add(errorLabelYY, 2, 4);
+            dataInput.addRow(5, cvcLabel, insertcvc, errorLabelCVC);
+            dataInput.addRow(7, usePointsButton);
 
             // Setting of an HBox to contain the buttons and empty Regions
             HBox buttonBox = new HBox(backButton, rightSpacer, nextButton);
@@ -142,6 +151,7 @@ public class PaymentDataMView extends Scene {
             BorderPane root = new BorderPane();
             root.setPadding(new Insets(10));
             root.setCenter(dataInput);
+            root.setRight(masterPayImage);
             root.setBottom(buttonBox);
 
             //Setting external layout
@@ -198,6 +208,8 @@ public class PaymentDataMView extends Scene {
             return errorLabelCVC;
         }
 
-
+    public void setInsertNCText(String text) {
+        this.insertNC.setText(text);
     }
+}
 

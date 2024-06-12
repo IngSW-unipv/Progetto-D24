@@ -16,6 +16,10 @@ public class Manager extends User {
     private ArrayList <Event> event;
     private LocalDate subscriptionDate;
     private int counterCreatedEvents;
+    
+    private final int MAX_EVENTS_FOR_FREE_SUB = 1;
+   	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
+   	private final int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
 
     public Manager(String name, String surname, String dateOfBirth, String email, String password, Province provinceOfResidence, String creditCard, ArrayList <Event> event , int maxNumberOfEvents, int subscription, LocalDate subscriptionDate, int counterCreatedEvents){
         super (name,surname,dateOfBirth,email,password,provinceOfResidence);
@@ -50,6 +54,18 @@ public class Manager extends User {
     public void setSubscription(int subscription) {
         this.subscription = subscription;
         this.subscriptionDate=LocalDate.now(); // setto anche la data per compattare il metodo
+        this.counterCreatedEvents = 0;
+        switch(subscription) {
+        case 0:
+        	this.maxNumberOfEvents = MAX_EVENTS_FOR_FREE_SUB;
+        	break;
+        case 1:
+        	this.maxNumberOfEvents = MAX_EVENTS_FOR_BASE_SUB;
+        	break;
+        case 2:
+        	this.maxNumberOfEvents = MAX_EVENTS_FOR_PREMIUM_SUB;
+        	break;
+        }
     }
 
     public String getCreditCard() {

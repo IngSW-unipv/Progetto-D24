@@ -3,18 +3,14 @@ package it.unipv.insfw23.TicketWave.modelView.research;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
-        import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-        import javafx.scene.control.*;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.Menu;
@@ -22,23 +18,15 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-
-import javax.imageio.event.IIOReadProgressListener;
-import java.sql.Blob;
-import java.sql.Time;
-import java.time.LocalDate;
-import java.time.LocalTime;
 import java.util.ArrayList;
-
-import static javafx.application.Application.launch;
 
 // Estende Scene, in maniera da poter visualizzare i nodes comuni della ResearchNodesView
 public class ResearchView extends Scene implements IResettableScene {
+
+    // ATTRIBUTES:
     private Button searchButton;
-    private MenuBar bar;
     private Menu genre;
     private Menu province;
     private ArrayList<CheckBox> prv; // vettore per poter gestire i CheckBox di province nel controller
@@ -47,7 +35,7 @@ public class ResearchView extends Scene implements IResettableScene {
     private TableView<Event> table;
     private BorderPane layout;
 
-    // costruttore
+    // CONSTRUCTOR:
     public ResearchView() {
         super(new Pane(), 1080, 600);
 
@@ -55,6 +43,7 @@ public class ResearchView extends Scene implements IResettableScene {
         researchScene();
     }
 
+    // PUBLIC METHODS:
     public void researchScene() {
         //__________ Istanzio gli oggetti più importanti _________//
         TextField searchBar = new TextField();
@@ -64,7 +53,6 @@ public class ResearchView extends Scene implements IResettableScene {
         this.searchButton = searchButton;
 
         MenuBar bar = new MenuBar();
-        this.bar = bar;
 
         Menu genre = new Menu("_Generi"); // con l'underscore davanti se premo ALT + G apre il menu dei filtri per genere
         this.genre = genre;
@@ -253,7 +241,28 @@ public class ResearchView extends Scene implements IResettableScene {
         setRoot(layout);
     }
 
-    // getter utili sia per la researchView che per il controller
+    @Override
+    public void reSetBars(){
+        BorderPane temp = new BorderPane();
+        setRoot(temp);
+        //controllo per il layout inizializzato
+        if (layout == null) {
+            System.err.println("Layout non inizializzato correttamente!");
+            return;}
+
+        ConnectedUser cu = ConnectedUser.getInstance();
+        if(cu.getUser().isCustomer()) {
+            UpperBar.getIstance().setForCustomer();
+        }
+        else{
+            UpperBar.getIstance().setForManager();
+        }
+        layout.setTop(UpperBar.getIstance());
+        layout.setBottom(LowerBar.getInstance());
+        setRoot(layout);
+    }
+
+    // GETTER:
     public Button getSearchButton() {
         return searchButton;
     }
@@ -280,26 +289,5 @@ public class ResearchView extends Scene implements IResettableScene {
 
     public TableView<Event> getTable() {
         return table;
-    }
-
-    @Override
-    public void reSetBars(){
-        BorderPane temp = new BorderPane();
-        setRoot(temp);
-        //controllo per il layout inizializzato
-        if (layout == null) {
-            System.err.println("Layout non inizializzato correttamente!");
-            return;}
-
-        ConnectedUser cu = ConnectedUser.getInstance();
-        if(cu.getUser().isCustomer()) {
-            UpperBar.getIstance().setForCustomer();
-        }
-        else{
-            UpperBar.getIstance().setForManager();
-        }
-        layout.setTop(UpperBar.getIstance());
-        layout.setBottom(LowerBar.getInstance());
-        setRoot(layout);
     }
 }

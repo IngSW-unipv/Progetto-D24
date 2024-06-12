@@ -14,10 +14,10 @@ public class PaymentTest {
 
     private PaymentFactory paymentFactory;
     PaymentFactory factory;
-    private MastercardAdapter mastercardAdapter;
-    private PayPalAdapter payPalAdapter;
-    private MastercardPayment mastercardPayment;
-    private PayPalPayment payPalPayment;
+    private MasterPayAdapter masterPayAdapter;
+    private PayPolAdapter payPolAdapter;
+    private MasterPayPayment masterPayPayment;
+    private PayPolPayment payPolPayment;
 
 
 
@@ -31,20 +31,20 @@ public class PaymentTest {
 
     }
     @Test
-    public void testGetMastercardAdapter() {
+    public void testGetMasterPayAdapter() {
 
-        MastercardPayment mastercard= new MastercardPayment();
-        mastercardAdapter=PaymentFactory.getIstance().getMastercardAdapter(mastercard);
-        assertNotNull(mastercardAdapter);
+        MasterPayPayment masterPay= new MasterPayPayment();
+        masterPayAdapter =PaymentFactory.getIstance().getMasterPayAdapter(masterPay);
+        assertNotNull(masterPayAdapter);
 
     }
 
     @Test
-    public void testGetPaypalAdapter() {
-        PayPalPayment paypal= new PayPalPayment();
-        payPalAdapter= PaymentFactory.getIstance().getPaypalAdapter(paypal);
+    public void testGetPaypolAdapter() {
+        PayPolPayment paypol= new PayPolPayment();
+        payPolAdapter = PaymentFactory.getIstance().getPaypolAdapter(paypol);
 
-        assertNotNull(payPalAdapter);
+        assertNotNull(payPolAdapter);
 
     }
 }

@@ -17,6 +17,9 @@ public interface IProfileDao {
     public void insertCustomer(Customer customer) throws SQLException, AccountAlreadyExistsException, GenreNotSelected;
     public Manager selectManager(String mail, String password) throws SQLException, WrongPasswordException;
     public Customer selectCustomer(String mail, String password) throws SQLException, WrongPasswordException;
+
+    void updateManagerCreditCard(Manager manager,String managerCreditCard) throws SQLException;
+
     public ArrayList<String> selectCustomerByGenre(Genre genre) throws SQLException;
     public void updateManagerSub(Manager manager) throws SQLException;
     public void updateEventCreatedCounter(Manager manager) throws SQLException;

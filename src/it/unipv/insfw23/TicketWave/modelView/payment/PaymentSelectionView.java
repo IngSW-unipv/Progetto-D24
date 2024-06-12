@@ -23,8 +23,8 @@ import java.util.List;
 public class PaymentSelectionView extends Scene {
 
     private final Font font = Font.font("Helvetica", FontWeight.BOLD, 16);
-    private final RadioButton paypalButton = new RadioButton("Paypal");//paypal
-    private final RadioButton mastercardButton = new RadioButton("Mastercard"); //mastercard
+    private final RadioButton paypolButton = new RadioButton("PayPol");//paypal
+    private final RadioButton masterPayButton = new RadioButton("MasterPay"); //mastercard
     private final Button nextButton = new Button();
     private final  Button backButton = new Button();
 
@@ -49,8 +49,8 @@ public class PaymentSelectionView extends Scene {
 
     private void initComponents() {
         ToggleGroup paymethod = new ToggleGroup();
-        paypalButton.setToggleGroup(paymethod);
-        mastercardButton.setToggleGroup(paymethod);
+        paypolButton.setToggleGroup(paymethod);
+        masterPayButton.setToggleGroup(paymethod);
 
         
         numberOfTicketLabel.setFont(font);
@@ -58,22 +58,22 @@ public class PaymentSelectionView extends Scene {
         totalAmountLabel.setFont(font);
         paySelectionLabel.setFont(font);
         errmessage.setFont(font);
-        paypalButton.setFont(font);
-        mastercardButton.setFont(font);
+        paypolButton.setFont(font);
+        masterPayButton.setFont(font);
 
 
-        Image paypalLogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/Paypal_logo.png");
-        Image mastercardLogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/Mastercard_logo.png");
+        Image payPolLogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/PayPol.png");
+        Image masterPayLogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/MasterPay3.png");
         Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/backArrow.png");
         Image nextarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/nextArrow.png");
 
-        ImageView paypalImage = new ImageView(paypalLogo);
-        paypalImage.setFitWidth(100);
-        paypalImage.setFitHeight(30);
+        ImageView payPolImage = new ImageView(payPolLogo);
+        payPolImage.setFitWidth(100);
+        payPolImage.setFitHeight(100);
 
-        ImageView mastercardImage = new ImageView(mastercardLogo);
-        mastercardImage.setFitWidth(80);
-        mastercardImage.setFitHeight(50);
+        ImageView masterPayImage = new ImageView(masterPayLogo);
+        masterPayImage.setFitWidth(120);
+        masterPayImage.setFitHeight(120);
 
         ImageView backarrow = new ImageView(backarrowlogo);
         backarrow.setFitWidth(50);
@@ -115,10 +115,10 @@ public class PaymentSelectionView extends Scene {
         gridPane.add(totalAmountLabel, 0, 2);
         gridPane.add(numberOfTicketLabel, 1, 2);
         gridPane.add(paySelectionLabel, 0, 3);
-        gridPane.add(paypalButton, 0, 4);
-        gridPane.add(paypalImage, 1, 4);
-        gridPane.add(mastercardButton, 0, 5);
-        gridPane.add(mastercardImage, 1, 5);
+        gridPane.add(paypolButton, 0, 4);
+        gridPane.add(payPolImage, 1, 4);
+        gridPane.add(masterPayButton, 0, 5);
+        gridPane.add(masterPayImage, 1, 5);
         gridPane.add(errmessage, 0, 6);
 
 
@@ -165,12 +165,12 @@ public class PaymentSelectionView extends Scene {
     }
 
 
-    public  RadioButton getPaypalButton() {
-        return paypalButton;
+    public  RadioButton getPaypolButton() {
+        return paypolButton;
     }
 
-    public RadioButton getMastercardButton() {
-        return mastercardButton;
+    public RadioButton getMasterPayButton() {
+        return masterPayButton;
     }
 
     public  Button getNextButton() {

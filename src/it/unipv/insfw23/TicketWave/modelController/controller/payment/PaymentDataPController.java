@@ -1,15 +1,20 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 
 import it.unipv.insfw23.TicketWave.dao.eventDao.EventDao;
+import it.unipv.insfw23.TicketWave.dao.notificationDao.NotificationDao;
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.dao.ticketDao.TicketDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
+import it.unipv.insfw23.TicketWave.modelController.factory.notifications.INotificationHandler;
+import it.unipv.insfw23.TicketWave.modelController.factory.notifications.NotificationHandlerFactory;
 import it.unipv.insfw23.TicketWave.modelController.factory.payment.PaymentFactory;
 import it.unipv.insfw23.TicketWave.modelController.factory.subscription.SubscriptionHandlerFactory;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
-import it.unipv.insfw23.TicketWave.modelDomain.payment.MastercardPayment;
-import it.unipv.insfw23.TicketWave.modelDomain.payment.PayPalPayment;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.MasterPayPayment;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.PayPolPayment;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
@@ -23,7 +28,6 @@ import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -80,6 +84,7 @@ public class PaymentDataPController {
                if(user.isCustomer()){
                    System.out.println("Stai andando alla vista del cliente");
                    Customer customer = (Customer) user;
+                   Event currentEvent = ConnectedUser.getInstance().getEventForTicket();
                    
                    try {
                        
@@ -88,12 +93,12 @@ public class PaymentDataPController {
                        ProfileDao profileDao= new ProfileDao();
                        System.out.println("TicketDao creato");
 
-                       PayPalPayment payPalPayment = new PayPalPayment();
-                       iPaymentAdapter = PaymentFactory.getPaypalAdapter(payPalPayment);
-                       System.out.println("Creati PayPalPayment e interfaccia");
+                       PayPolPayment payPolPayment = new PayPolPayment();
+                       iPaymentAdapter = PaymentFactory.getPaypolAdapter(payPolPayment);
+                       System.out.println("Creati PayPolPayment e interfaccia");
 
                        for(int i = 0; i < numOfTickets; i++) {
-                    	   Ticket ticket = customer.buyticket(iPaymentAdapter, ConnectedUser.getInstance().getEventForTicket(), ConnectedUser.getInstance().getTicketType(), getUsePoint());
+                    	   Ticket ticket = customer.buyticket(iPaymentAdapter, currentEvent, ConnectedUser.getInstance().getTicketType(), getUsePoint());
                            System.out.println("Biglietto associato correttamente");
 
                            try {
@@ -119,8 +124,16 @@ public class PaymentDataPController {
                            } catch (SQLException e) {
                         	   throw new SQLException("Problema aggiornamento posti");
                            }
+                           
                        }
                        
+                       if(currentEvent.getSeatsRemaining() == 0) {
+                    	   NotificationDao notificationDao = new NotificationDao();
+                    	   INotificationHandler notificationHandler = NotificationHandlerFactory.getIstance().getNotificationHandler();
+                    	   notificationHandler.setCounterNotification(notificationDao.selectNotificationNumber());
+                    	   Notification n = notificationHandler.sendNotificationSoldOut(currentEvent);
+                    	   notificationDao.insertNotification(n);
+                       }
                        
                    } catch (Exception e) {
                        throw new RuntimeException(e);
@@ -136,7 +149,7 @@ public class PaymentDataPController {
                } else {
                    Manager managerlogged = (Manager)user;
                    ProfileDao profiledao = new ProfileDao();
-                   SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMastercardAdapter(new MastercardPayment()), paymentSelectionView.getPrice());
+                   SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMasterPayAdapter(new MasterPayPayment()), paymentSelectionView.getPrice());
                    if(managerlogged.getSubscription() != -1) {
                        try {
                            profiledao.updateManagerSub(managerlogged);

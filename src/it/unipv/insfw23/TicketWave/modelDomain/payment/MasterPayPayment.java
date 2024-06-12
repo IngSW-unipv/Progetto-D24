@@ -1,8 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelDomain.payment;
 
-import it.unipv.insfw23.TicketWave.modelDomain.user.User;
-
-public class MastercardPayment implements IMastercardPayment{
+public class MasterPayPayment implements IMasterPayPayment {
 
     @Override
     public boolean msPaymentMethod(double obPrice){
