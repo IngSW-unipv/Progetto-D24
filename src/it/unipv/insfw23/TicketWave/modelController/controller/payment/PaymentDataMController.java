@@ -3,13 +3,18 @@ package it.unipv.insfw23.TicketWave.modelController.controller.payment;
 import java.sql.SQLException;
 
 import it.unipv.insfw23.TicketWave.dao.eventDao.EventDao;
+import it.unipv.insfw23.TicketWave.dao.notificationDao.NotificationDao;
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.dao.ticketDao.TicketDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.CustomerController;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
+import it.unipv.insfw23.TicketWave.modelController.factory.notifications.INotificationHandler;
+import it.unipv.insfw23.TicketWave.modelController.factory.notifications.NotificationHandlerFactory;
 import it.unipv.insfw23.TicketWave.modelController.factory.payment.PaymentFactory;
 import it.unipv.insfw23.TicketWave.modelController.factory.subscription.SubscriptionHandlerFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.MasterPayPayment;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
+import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
@@ -89,6 +94,7 @@ public class PaymentDataMController {
                 if (user.isCustomer()) {
                     System.out.println("Stai andando alla CustomerView");
                     Customer customer = (Customer) user;
+                    Event currentEvent = ConnectedUser.getInstance().getEventForTicket();
                     
                     try {
                         
@@ -102,7 +108,7 @@ public class PaymentDataMController {
                         System.out.println("creati i masterPayPayment payment e interfaccia");
 
                         for(int i = 0; i < numOfTickets; i++) {
-                        	Ticket ticket = customer.buyticket(iPaymentAdapter, ConnectedUser.getInstance().getEventForTicket(), ConnectedUser.getInstance().getTicketType(), getUsePoint());
+                        	Ticket ticket = customer.buyticket(iPaymentAdapter, currentEvent, ConnectedUser.getInstance().getTicketType(), getUsePoint());
                             System.out.println("Ticket associato correttamente");
 
                             try {
@@ -129,7 +135,14 @@ public class PaymentDataMController {
                                 throw new SQLException("Problema aggiornamento posti", e);
                             }
                         }
-
+                        
+                        if(currentEvent.getSeatsRemaining() == 0) {
+                     	   NotificationDao notificationDao = new NotificationDao();
+                     	   INotificationHandler notificationHandler = NotificationHandlerFactory.getIstance().getNotificationHandler();
+                     	   notificationHandler.setCounterNotification(notificationDao.selectNotificationNumber());
+                     	   Notification n = notificationHandler.sendNotificationSoldOut(currentEvent);
+                     	   notificationDao.insertNotification(n);
+                        }
 
                     } catch (Exception e) {
                         throw new RuntimeException(e);

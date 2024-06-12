@@ -177,15 +177,15 @@ public class ManagerView extends Scene  implements IResettableScene {
 		switch(currentSub) {
 		case 0:
 			currentSubLabel = new Label("abbonamento: gratuito");
-			eventRemained = new Label("eventi creati: "+counterCreatedEvents+" su "+MAX_EVENTS_FOR_FREE_SUB);
+			eventRemained = new Label("eventi mensili creati: "+counterCreatedEvents+" su "+MAX_EVENTS_FOR_FREE_SUB);
 			break;
 		case 1:
 			currentSubLabel = new Label("abbonamento: base");
-			eventRemained = new Label("eventi creati: "+counterCreatedEvents+" su "+MAX_EVENTS_FOR_BASE_SUB);
+			eventRemained = new Label("eventi mensili creati: "+counterCreatedEvents+" su "+MAX_EVENTS_FOR_BASE_SUB);
 			break;
 		case 2:
 			currentSubLabel = new Label("abbonamento: premium");
-			eventRemained = new Label("eventi creati: "+counterCreatedEvents+" su nessun limite");
+			eventRemained = new Label("eventi mensili creati: "+counterCreatedEvents+" su nessun limite");
 			break;
 
 
