@@ -25,6 +25,7 @@ import javafx.stage.Stage;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.regex.Pattern;
 
 public class SignUpController {
     private Stage mainstage;
@@ -40,7 +41,11 @@ public class SignUpController {
     private User user= ConnectedUser.getInstance().getUser();
     
     private final int MAX_EVENTS_FOR_FREE_SUB = 1;
-	
+
+    private static final String nameRegex=new String("^[A-Z][a-zA-Z0-9_-]{1,50}$");
+    private static final String mailRegex=new String("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,100}$");         //RFC 5322
+    private static final String passwordRegex=new String("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,100}$");  //8 caratteri, maiuscola, minuscola, numero
+
 
 
     public SignUpController(Stage mainstage, SignUpView signUpView, LoginView loginView) {
@@ -89,11 +94,20 @@ public class SignUpController {
                     signUpView.setErrorLabel("Mail o password non corrispondenti");
 
                 }
-                else if(signUpView.checkFieldsEmpty() == true){
+                else if(signUpView.checkFieldsEmpty() == true) {
                     signUpView.setErrorLabel("Campi vuoti o non validi");
+/*
+                }else if(!Pattern.matches(nameRegex, signUpView.getNameField().getText()) || !Pattern.matches(nameRegex, signUpView.getSurnameField().getText())){
+                        signUpView.setErrorLabel("Nome e cognome devono iniziare \ncon una lettera maiuscola");
+                }else if(!(Pattern.matches(mailRegex, signUpView.getEmailField().getText()))){
+                        signUpView.setErrorLabel("Mail non valida");
+                }else if(!(Pattern.matches(passwordRegex, signUpView.getPasswordField().getText()))){
+                        signUpView.setErrorLabel("La password deve avere almeno 8 caratteri, \ndeve contenere almento una lettera minuscola, \nuna maiuscola e un numero");
 
+ */
                 }else if (signUpView.getCustomerRadioButton().isSelected()) {
 
+                    signUpView.setErrorLabel("");
 
                     System.out.println("Hai cliccato il pulsante registrati  come cliente");
 
@@ -110,16 +124,16 @@ public class SignUpController {
                     try {
                         profileDao.insertCustomer(customer);
 
-                        ConnectedUser.getInstance().setUser(customer);
-                        ConnectedUser.getInstance().setHome(customerview);
-                        ConnectedUser.getInstance().setLoginView(loginView);
-
 
                         ArrayList<Ticket> arrayListTicket = customer.getTicketsList();
                         ArrayList<Notification> arrayListNotification = customer.getNotification();
                         CustomerView customerview = new CustomerView(customer.getName(),arrayListNotification,arrayListTicket,customer.getPoints() );
                         CustomerController customerController = new CustomerController(mainstage,customerview,loginView);
                         customerview.reSetBars();
+
+                        ConnectedUser.getInstance().setUser(customer);
+                        ConnectedUser.getInstance().setHome(customerview);
+                        ConnectedUser.getInstance().setLoginView(loginView);
 
                     //
                         mainstage.setScene(customerview);
@@ -135,6 +149,7 @@ public class SignUpController {
                     // Imposta la scena SignUpView sulla stage principale
                 } else if (signUpView.getManagerRadioButton().isSelected()) {
 
+                    signUpView.setErrorLabel("");
 
                     System.out.println("Hai cliccato il pulsante registrati  come gestore");
 
@@ -163,6 +178,7 @@ public class SignUpController {
                     catch (AccountAlreadyExistsException e) {
                         signUpView.setErrorLabel(e.getMessage());
                     }
+
 
                     // Imposta la scena subscriptio sulla stage principale
                 }

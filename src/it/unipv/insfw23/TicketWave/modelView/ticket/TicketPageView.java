@@ -73,6 +73,8 @@ public class TicketPageView extends Scene implements IResettableScene {
     private  final RadioButton vipPricebutton = new RadioButton();
     
     private final int MAX_TICKET_BUYABLE = 4;
+    private final String NOT_AVAILABLE = "Non disponibili";
+    private final String SOLDOUT = "Terminati";
     
     private final Label quantityLabel = new Label("quantità da acquistare(max "+MAX_TICKET_BUYABLE+"): ");
     private Spinner<Integer> baseSpinner;
@@ -124,39 +126,64 @@ public class TicketPageView extends Scene implements IResettableScene {
 
         switch(seatsRemainedNumberForType.length) {
             case 1:
-                ticketVipField = new Label("Non disponibili");
-                vipPricebutton.setVisible(false);
-                ticketPremiumField = new Label("Non disponibili");
-                premiumPricebutton.setVisible(false);
-                basePriceField = new Label("€"+price[0]);
+            	basePriceField = new Label("€"+price[0]);
                 if(seatsRemainedNumberForType[0] == 0) {
-                	ticketBaseField = new Label("Terminati");
+                	ticketBaseField = new Label(SOLDOUT);
                 	basePricebutton.setVisible(false);
                 }else {
                 	ticketBaseField = new Label(String.valueOf(seatsRemainedNumberForType[0]));
                 	baseSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[0]), 1);
                 }
+                ticketPremiumField = new Label(NOT_AVAILABLE);
+                premiumPricebutton.setVisible(false);
+                ticketVipField = new Label(NOT_AVAILABLE);
+                vipPricebutton.setVisible(false);
                 break;
             case 2:
-                ticketVipField = new Label("Non disponibili");
+            	basePriceField = new Label("€"+price[0]);
+            	if(seatsRemainedNumberForType[0] == 0) {
+            		ticketBaseField = new Label(SOLDOUT);
+                	basePricebutton.setVisible(false);
+            	}else {
+            		ticketBaseField = new Label(String.valueOf(seatsRemainedNumberForType[0]));                
+            		baseSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[0]), 1);
+            	}
+            	premiumPriceField = new Label("€"+price[1]);
+            	if(seatsRemainedNumberForType[1] == 0) {
+            		ticketPremiumField = new Label(SOLDOUT);
+            		premiumPricebutton.setVisible(false);
+            	}else {
+            		ticketPremiumField = new Label(String.valueOf(seatsRemainedNumberForType[1]));                
+            		premiumSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[1]), 1);
+            	}
+                ticketVipField = new Label(NOT_AVAILABLE);
                 vipPricebutton.setVisible(false);
-                ticketBaseField = new Label(String.valueOf(seatsRemainedNumberForType[0]));
-                basePriceField = new Label("€"+price[0]);
-                baseSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[0]), 1);
-                ticketPremiumField = new Label(String.valueOf(seatsRemainedNumberForType[1]));
-                premiumPriceField = new Label("€"+price[1]);
-                premiumSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[1]), 1);
                 break;
             case 3:
-                ticketBaseField = new Label(String.valueOf(seatsRemainedNumberForType[0]));
-                basePriceField = new Label("€"+price[0]);
-                baseSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[0]), 1);
-                ticketPremiumField = new Label(String.valueOf(seatsRemainedNumberForType[1]));
+            	basePriceField = new Label("€"+price[0]);
+                if(seatsRemainedNumberForType[0] == 0) {
+                	ticketBaseField = new Label(SOLDOUT);
+                	basePricebutton.setVisible(false);
+                }else {
+                	ticketBaseField = new Label(String.valueOf(seatsRemainedNumberForType[0]));
+                	baseSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[0]), 1);
+                }
                 premiumPriceField = new Label("€"+price[1]);
-                premiumSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[1]), 1);
-                ticketVipField = new Label(String.valueOf(seatsRemainedNumberForType[2]));
+                if(seatsRemainedNumberForType[1] == 0) {
+            		ticketPremiumField = new Label(SOLDOUT);
+            		premiumPricebutton.setVisible(false);
+            	}else {
+            		ticketPremiumField = new Label(String.valueOf(seatsRemainedNumberForType[1]));                
+            		premiumSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[1]), 1);
+            	}
                 vipPriceField = new Label("€"+price[2]);
-                vipSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[2]), 1);
+                if(seatsRemainedNumberForType[2] == 0) {
+                	ticketVipField = new Label(SOLDOUT);
+                	vipPricebutton.setVisible(false);
+                }else {
+                	ticketVipField = new Label(String.valueOf(seatsRemainedNumberForType[2]));                
+                	vipSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[2]), 1);
+                }
         }
         // controllo e reset delle barre
         if(isCustomerViewer) {

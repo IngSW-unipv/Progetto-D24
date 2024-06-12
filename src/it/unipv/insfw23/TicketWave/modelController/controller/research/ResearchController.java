@@ -76,7 +76,7 @@ public class ResearchController {
                 // Prendo lo user connesso a questa sessione dell'applicativo
                 ConnectedUser cu = ConnectedUser.getInstance();
                 TicketPageView tpv = new TicketPageView();
-                if (!cu.getUser().isCustomer()) {
+                if (!cu.getUser().isCustomer() || rv.getTable().getSelectionModel().getSelectedItem().getSeatsRemaining() == 0) {
                     tpv.setForNotBuyable();
                 }
                 tpv.setComponents(cu.getUser().isCustomer(), rv.getTable().getSelectionModel().getSelectedItem().getType(), rv.getTable().getSelectionModel().getSelectedItem().getName(), rv.getTable().getSelectionModel().getSelectedItem().getCity(),
