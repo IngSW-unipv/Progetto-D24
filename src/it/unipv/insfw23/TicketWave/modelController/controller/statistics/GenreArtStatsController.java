@@ -48,7 +48,7 @@ public class GenreArtStatsController {
                 WrapProv provRes = statDominio.provinceStats(typeCode, pairDataClicked.getKey().toString(), (Manager) ConnectedUser.getInstance().getUser());
                 //al costruttore qui sotto passo il risultato delle località
                 System.out.println(provRes.getProvResult().get(0));
-                LocationStatsView locationView = new LocationStatsView(provRes);
+                LocationStatsView locationView = new LocationStatsView(provRes, pairDataClicked.getKey().toString());
                 System.out.println("PostLocView");
                 LocationStatsController locStatController = new LocationStatsController(mainStage, genreView, locationView);
                 mainStage.setScene(locationView);

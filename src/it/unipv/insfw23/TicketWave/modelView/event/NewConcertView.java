@@ -496,6 +496,22 @@ public class NewConcertView extends Scene{
 	public Button getConfirmButton() {
 		return confirm;
 	}
+
+	public TextField getNameTextField(){
+		return namefield;
+	}
+
+	public TextField getArtistsTextField(){
+		return artistfield;
+	}
+
+	public TextField getCityTextField(){
+		return cityfield;
+	}
+
+	public TextArea getDescriptionTextArea(){
+		return descriptionarea;
+	}
 	
 	public Label getErrLabel() {
 		return errlabel;
