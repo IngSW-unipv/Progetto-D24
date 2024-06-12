@@ -86,13 +86,13 @@ public class CustomerView extends Scene implements IResettableScene {
 
         // Nome e Cognome
 
-        nameLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 20));
+        nameLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 30));
 
         GridPane.setConstraints(nameLabel, 0, 0);
 
         // Punti Accumulati
 
-        wavePoints.setFont(Font.font("Helvetica ",FontWeight.BOLD, 20));
+        wavePoints.setFont(Font.font("Helvetica ",FontWeight.BOLD, 15));
         GridPane.setConstraints(wavePoints, 1, 0);
 
         // TableView per le notifiche
