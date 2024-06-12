@@ -76,34 +76,34 @@ public class ManagerView extends Scene  implements IResettableScene {
 		grid.setPadding(new Insets(50, 100, 50, 100));
 		grid.setVgap(15);
 		grid.setHgap(90);
-//		grid.setGridLinesVisible(true);
+		grid.setGridLinesVisible(true);
 		grid.setAlignment(Pos.CENTER);
 		
 		
 		
-		name.setFont(Font.font("Helvetica", FontWeight.BOLD,40));
-		GridPane.setConstraints(name, 1, 0, 2, 1);
-		GridPane.setHalignment(name, HPos.CENTER);
+		name.setFont(Font.font("Helvetica", FontWeight.BOLD,25));
+		GridPane.setConstraints(name, 0, 0);
+		GridPane.setHalignment(name, HPos.LEFT);
 		GridPane.setHgrow(name, Priority.SOMETIMES);
 		
 		
 		
 		logoutButton = new Button("Logout");
-		GridPane.setConstraints(logoutButton, 1, 1, 2, 1);
-		GridPane.setHalignment(logoutButton, HPos.CENTER);
+		GridPane.setConstraints(logoutButton, 3, 0);
+		GridPane.setHalignment(logoutButton, HPos.RIGHT);
 		GridPane.setHgrow(logoutButton, Priority.SOMETIMES);
 		
 		
 		
 		Label not = new Label("Notifiche");
 		not.setFont(Font.font("Helvetica", FontWeight.BOLD,20));
-		GridPane.setConstraints(not, 1, 5);
+		GridPane.setConstraints(not, 0, 5);
 		GridPane.setHgrow(not, Priority.SOMETIMES);
 
 		
 		Label ev = new Label("Eventi pubblicati");
-		ev.setFont(Font.font("Helvetica", FontWeight.BOLD,20));		
-		GridPane.setConstraints(ev, 3, 5);
+		ev.setFont(Font.font("Helvetica", FontWeight.BOLD,20));
+		GridPane.setConstraints(ev, 2, 5);
 		GridPane.setHgrow(ev, Priority.SOMETIMES);
 		
 		// tab eventi
@@ -171,7 +171,8 @@ public class ManagerView extends Scene  implements IResettableScene {
 //		tabnot.setPrefWidth(400);
 
 		subButton = new Button("Cambia abbonamento");
-		
+		GridPane.setConstraints(subButton, 3, 2);
+		GridPane.setHalignment(subButton, HPos.RIGHT);
 		
 		
 		switch(currentSub) {

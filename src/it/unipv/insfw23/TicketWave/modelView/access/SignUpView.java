@@ -14,7 +14,10 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
+import javafx.util.Callback;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 
 public class SignUpView extends Scene implements IResettableScene {
@@ -171,6 +174,25 @@ public class SignUpView extends Scene implements IResettableScene {
         dateLabel.setFont(labelFont);
         GridPane.setConstraints(dateLabel, 0, 2);
         GridPane.setConstraints(datePicker, 1, 2);
+        LocalDate today = LocalDate.now();
+        LocalDate minDate = today.minus(18, ChronoUnit.YEARS);
+        Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
+            @Override
+            public DateCell call(final DatePicker datePicker) {
+                return new DateCell() {
+                    @Override
+                    public void updateItem(LocalDate item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (item.isAfter(minDate)) {
+                            setDisable(true);
+                            setStyle("-fx-background-color: #ffc0cb;");
+                        }
+                    }
+                };
+            }
+        };
+        datePicker.setDayCellFactory(dayCellFactory);
+        datePicker.setValue(minDate);
 
         // PROVINCIA DI RESIDENZA
         provinceLabel.setFont(labelFont);
