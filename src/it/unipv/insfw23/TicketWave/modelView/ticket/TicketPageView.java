@@ -203,13 +203,12 @@ public class TicketPageView extends Scene implements IResettableScene {
         this.layout=new BorderPane();
         setRoot(layout);
 
-        eventDescriptionField.setEditable(false);
-        eventDescriptionField.setMouseTransparent(true);
-        eventDescriptionField.setStyle("-fx-background-color: #91BAD6; -fx-control-inner-background: #91BAD6; -fx-text-fill: BLACK; -fx-border-color: transparent; -fx-blend-mode: SRC_OVER; -fx-hbar-policy: never; -fx-vbar-policy: never;");
-        eventDescriptionField.setWrapText(true); // rimuove la scrollbar orizzontale
-        eventDescriptionField.setOnMouseEntered(e -> eventDescriptionField.setStyle("-fx-border-color: #91BAD6; -fx-background-color: #91BAD6; -fx-control-inner-background: #91BAD6; -fx-text-fill: BLACK; -fx-blend-mode: SRC_OVER;"));
-        eventDescriptionField.setOnMouseExited(e -> eventDescriptionField.setStyle("-fx-border-color: #91BAD6; -fx-background-color: #91BAD6; -fx-control-inner-background: #91BAD6; -fx-text-fill: BLACK; -fx-blend-mode: SRC_OVER;"));
+        eventDescriptionField.setEditable(false); // rende non editabile la textArea
+        eventDescriptionField.setMouseTransparent(false); // il mouse quando va sopra la text area non cambia aspetto
+        eventDescriptionField.setWrapText(true); // rende inutilizzabile lo scrolling orizzontale => fa andare a capo il testo quando sta per eccedere il box della textArea
+        eventDescriptionField.getStylesheets().add("it/unipv/insfw23/TicketWave/css/eventDescriptionField.css");
         eventDescriptionField.setPrefWidth(400);
+        eventDescriptionField.setPrefHeight(40);
 
         // BorderPane per struttura interna
         BorderPane internalStructure = new BorderPane();
