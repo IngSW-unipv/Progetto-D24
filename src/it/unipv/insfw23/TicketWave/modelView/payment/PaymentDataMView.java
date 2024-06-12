@@ -210,6 +210,8 @@ public class PaymentDataMView extends Scene {
 
     public void setInsertNCText(String text) {
         this.insertNC.setText(text);
+        initComponents();
+
     }
 }
 

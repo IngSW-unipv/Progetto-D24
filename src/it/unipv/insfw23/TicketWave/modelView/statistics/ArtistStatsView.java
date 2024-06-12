@@ -3,6 +3,8 @@ package it.unipv.insfw23.TicketWave.modelView.statistics;
 import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapArtist;
 import javafx.application.Application;
 import javafx.geometry.Insets;
+import javafx.geometry.Point3D;
+import javafx.geometry.Side;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -26,10 +28,12 @@ public class ArtistStatsView extends BorderPane{
 
         final NumberAxis yAxis = new NumberAxis(0, 100, 10);
         final CategoryAxis xAxis = new CategoryAxis();
+        xAxis.setTickLabelRotation(120);
         xAxis.setLabel("Artisti");
         yAxis.setLabel("Percentuale venduta");
 
         final BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
+        barChart.setMinSize(300, 500);
         barChart.setStyle("-fx-bar-fill: #91BAD6;");
         barChart.setTitle("Statistiche sugli Artisti degli eventi");
         barChart.setStyle("-fx-font-family: 'Helvetica'; -fx-font-size: 15px; -fx-font-weight: bold;");
@@ -46,8 +50,16 @@ public class ArtistStatsView extends BorderPane{
         else {
             // Aggiunta dei dati alla serie
             for (int i = 0; i < artistRes.getArtistNameArray().size(); i++) {
+/*
+                if (artistRes.getArtistNameArray().get(i).length() > 20) {
+                    String subString = (artistRes.getArtistNameArray().get(i).substring(0, 10)+"...");
+                    System.out.println(subString);
+                    series.getData().add(new XYChart.Data<>(subString, artistRes.getArtistResult().get(i)));
+                }else {
 
+ */
                 series.getData().add(new XYChart.Data<>(artistRes.getArtistNameArray().get(i), artistRes.getArtistResult().get(i)));
+
             }
         }
 

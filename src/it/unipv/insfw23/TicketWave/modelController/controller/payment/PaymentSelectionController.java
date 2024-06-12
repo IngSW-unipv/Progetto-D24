@@ -65,9 +65,7 @@ public class PaymentSelectionController {
                    paymentDataMView.setInsertNCText(loggedManager.getCreditCard());
                }
 
-
-                              mainStage.setScene(paymentDataMView);
-
+               mainStage.setScene(paymentDataMView);
 
             }
                 else if (paymentSelectionView.getPaypolButton().isSelected()) {

@@ -9,10 +9,10 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.*;
 public class NotificationHandler implements INotificationHandler {
 	
 	private static NotificationHandler istance = null;
-	private final String MSG_SOLDOUT = "Evento soldout";
-	private final String MSG_NEAR = "E' disponibile un nuovo evento nella tua provincia";
-	private final String MSG_GENRE = "E' disponibile un nuovo evento del tuo genere preferito";
-	private final String MSG_NEAR_GENRE = "E' disponibile un nuovo evento del tuo genere preferito nella tua provincia";
+	private final String MSG_SOLDOUT = "Evento soldout: ";
+	private final String MSG_NEAR = "E' disponibile un nuovo evento nella tua provincia: ";
+	private final String MSG_GENRE = "E' disponibile un nuovo evento del tuo genere preferito: ";
+	private final String MSG_NEAR_GENRE = "E' disponibile un nuovo evento del tuo genere preferito nella tua provincia: ";
 	private int counterNotification = 0;
 
 	
@@ -33,7 +33,7 @@ public class NotificationHandler implements INotificationHandler {
 		Notification n1;
 		String creator = ev.getCreator().getEmail();
 		counterNotification += 1;
-		n1 = new Notification(counterNotification, creator, MSG_SOLDOUT);
+		n1 = new Notification(counterNotification, creator, (MSG_SOLDOUT+ev.getName()));
 		//creator.addNotification(n1);
 		return n1;
 	}
@@ -80,7 +80,7 @@ public class NotificationHandler implements INotificationHandler {
 					
 					if(customerFavGenre.get(i).equals(customerNear.get(j))) {
 						counterNotification += 1;
-						n2 = new Notification(counterNotification, customerFavGenre.get(i), MSG_NEAR_GENRE);
+						n2 = new Notification(counterNotification, customerFavGenre.get(i), (MSG_NEAR_GENRE+ev.getName()));
 						notifications.add(n2);
 						//tengo traccia di chi ha già ricevuto una notifica sia per vicinanza che per genere, così da non rinotificare la vicinanza nel case 1
 						customerAlreadyNotifiedForProvince.add(customerFavGenre.get(i));
@@ -90,7 +90,7 @@ public class NotificationHandler implements INotificationHandler {
 				
 				if(notDoubleCondition) {
 					counterNotification += 1;
-					n2 = new Notification(counterNotification, customerFavGenre.get(i), MSG_GENRE);
+					n2 = new Notification(counterNotification, customerFavGenre.get(i), (MSG_GENRE+ev.getName()));
 					//cfav.addNotification(n2);
 					notifications.add(n2);
 				}
@@ -102,7 +102,7 @@ public class NotificationHandler implements INotificationHandler {
 			//System.out.println(customerNear);
 			for(String cprov : customerNear) {
 				counterNotification += 1;
-				n2 = new Notification(counterNotification, cprov, MSG_NEAR);
+				n2 = new Notification(counterNotification, cprov, (MSG_NEAR+ev.getName()));
 				//cprov.addNotification(n2);
 				notifications.add(n2);
 			}
