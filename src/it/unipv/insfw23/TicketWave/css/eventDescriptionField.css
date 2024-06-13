@@ -1,0 +1,25 @@
+/* Style of the TextArea */
+.text-area {
+    -fx-background-color: #91BAD6;
+    -fx-control-inner-background: #91BAD6;
+    -fx-text-fill: BLACK;
+    -fx-border-color: transparent;
+    -fx-blend-mode: SRC_OVER;
+}
+/* Style to remove border highlight on hover */
+.text-area:hover {
+    -fx-border-color: transparent; /* Ensure border color remains the same */
+    -fx-effect: null; /* Remove any hover effects */
+}
+/* Style the vertical scrollbar */
+.text-area .scroll-pane .scroll-bar:vertical {
+    -fx-opacity: 0; /* Set scrollbar opacity to 0% */
+}
+
+.text-area .scroll-pane .scroll-bar:vertical .thumb {
+    -fx-background-color: transparent; /* Transparent thumb */
+}
+
+.text-area .scroll-pane .scroll-bar:vertical .track {
+    -fx-background-color: transparent; /* Transparent track */
+}

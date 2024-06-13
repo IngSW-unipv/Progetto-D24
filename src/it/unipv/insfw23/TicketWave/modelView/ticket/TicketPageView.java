@@ -43,11 +43,18 @@ public class TicketPageView extends Scene implements IResettableScene {
 
     // campi riempiti dal controller
     private final  Label eventNameField = new Label();
+
+    private final Label typeOfEventField=new Label();
     private final Label eventCityField =new Label();
     private final Label eventLocationField =new Label();
 
     private final Label eventProvinceField =new Label();
     private final Label eventDateField =new Label();
+
+    private final Label typeOfEventLabel=new Label("Tipo:");
+
+    private final Label authorNameField=new Label();
+    private final Label authorNameLabel= new Label("Autore:");
 
     private final Label eventArtistField =new Label();
     private static final TextArea eventDescriptionField = new TextArea();
@@ -111,6 +118,7 @@ public class TicketPageView extends Scene implements IResettableScene {
 
         //settaggio valori da mostrare
         eventNameField.setText(name);
+        typeOfEventField.setText(typeofevent.toString());
         eventDescriptionField.setText(description);
         eventCityField.setText(città);
         eventLocationField.setText(location);
@@ -203,19 +211,22 @@ public class TicketPageView extends Scene implements IResettableScene {
         this.layout=new BorderPane();
         setRoot(layout);
 
-        eventDescriptionField.setEditable(false);
-        eventDescriptionField.setMouseTransparent(true);
-        eventDescriptionField.setStyle("-fx-background-color: #91BAD6; -fx-control-inner-background: #91BAD6; -fx-text-fill: BLACK; -fx-border-color: transparent; -fx-blend-mode: SRC_OVER; -fx-hbar-policy: never; -fx-vbar-policy: never;");
-        eventDescriptionField.setWrapText(true); // rimuove la scrollbar orizzontale
-        eventDescriptionField.setOnMouseEntered(e -> eventDescriptionField.setStyle("-fx-border-color: #91BAD6; -fx-background-color: #91BAD6; -fx-control-inner-background: #91BAD6; -fx-text-fill: BLACK; -fx-blend-mode: SRC_OVER;"));
-        eventDescriptionField.setOnMouseExited(e -> eventDescriptionField.setStyle("-fx-border-color: #91BAD6; -fx-background-color: #91BAD6; -fx-control-inner-background: #91BAD6; -fx-text-fill: BLACK; -fx-blend-mode: SRC_OVER;"));
+        eventDescriptionField.setEditable(false); // rende non editabile la textArea
+        eventDescriptionField.setMouseTransparent(false); // il mouse quando va sopra la text area non cambia aspetto
+        eventDescriptionField.setWrapText(true); // rende inutilizzabile lo scrolling orizzontale => fa andare a capo il testo quando sta per eccedere il box della textArea
+        eventDescriptionField.getStylesheets().add("it/unipv/insfw23/TicketWave/css/eventDescriptionField.css");
         eventDescriptionField.setPrefWidth(400);
+        eventDescriptionField.setPrefHeight(40);
 
         // BorderPane per struttura interna
         BorderPane internalStructure = new BorderPane();
 
         //aggiunta campi alla lista di testo
         text.add(eventNameLabel);
+        text.add(typeOfEventLabel);
+        text.add(authorNameField);
+        text.add(authorNameLabel);
+        text.add(typeOfEventField);
         text.add(eventCityLabel);
         text.add(eventLocationLabel);
         text.add(eventProvinceLabel);
@@ -329,6 +340,10 @@ public class TicketPageView extends Scene implements IResettableScene {
         centerGrid.setHgap(10);
         centerGrid.add(eventNameLabel, 0, 0);
         centerGrid.add(eventNameField, 1, 0);
+        centerGrid.add(typeOfEventLabel,2,0);
+        centerGrid.add(typeOfEventField,3,0);
+        centerGrid.add(authorNameLabel,2,1);
+        centerGrid.add(authorNameField,3,1);
         centerGrid.add(eventDateLabel, 0, 1);
         centerGrid.add(eventDateField, 1, 1);
         centerGrid.add(eventLocationLabel, 0, 2);
@@ -343,7 +358,8 @@ public class TicketPageView extends Scene implements IResettableScene {
         centerGrid.add(eventDescriptionField, 1, 6);
         centerGrid.add(errmessage, 0, 7);
 
-
+        //authorNameLabel.setVisible(false);
+        //authorNameField.setVisible(false);
 
 
         // Gridpane per sistemazione elementi sul fine pagina
@@ -391,7 +407,8 @@ public class TicketPageView extends Scene implements IResettableScene {
 
 			@Override
 			public void changed(ObservableValue<? extends Toggle> ov, Toggle oldToggle, Toggle newToggle) {
-				baseSpinner.setVisible(false);
+				if(baseSpinner != null)
+                    baseSpinner.setVisible(false);
 				if(premiumSpinner != null)
 					premiumSpinner.setVisible(false);
 				if(vipSpinner != null)
@@ -495,16 +512,33 @@ public class TicketPageView extends Scene implements IResettableScene {
         vipPricebutton.setVisible(false);
         quantityLabel.setVisible(false);
     }
-    
-    public int getNumOfTickets() {
-    	if(baseSpinner.isVisible())
-    		return baseSpinner.getValue();
-    	else if(premiumSpinner.isVisible())
-    		return premiumSpinner.getValue();
-    	else
-    		return vipSpinner.getValue();
+
+    public Label getAuthorNameField() {
+        return authorNameField;
     }
 
+    public Label getAuthorNameLabel() {
+        return authorNameLabel;
+    }
+
+    public void setAuthorNameField(String authorName) {
+        this.authorNameField.setText(authorName);
+    }
+    public void setAuthorNameLabel(String authorNameLabel) {
+        this.authorNameLabel.setText(authorNameLabel);
+    }
+
+
+    public int getNumOfTickets() {
+    	if(baseSpinner!= null && baseSpinner.isVisible())
+    		return baseSpinner.getValue();
+    	else if(premiumSpinner != null && premiumSpinner.isVisible())
+    		return premiumSpinner.getValue();
+    	else if(vipSpinner != null) {
+            return vipSpinner.getValue();
+        }
+        return 0;
+    }
 }
 
 
