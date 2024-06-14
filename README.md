@@ -1,5 +1,8 @@
-<h1 align="center"> TICKETWAVE - Progetto D24</h1>
-
+<div>
+  <h1 align="center"> TICKETWAVE - Progetto D24 
+  <img align="center" src="src/it/unipv/insfw23/TicketWave/modelView/imagesResources/logo.png" width="80" /> </h1> 
+</div>
+  
 <p float="left">
   <img alt="Static Badge" src="https://img.shields.io/badge/Backend-Java%20SE%2021-blue?style=for-the-badge&logo=intellijidea&logoColor=white&labelColor=grey&color=blue">
   &nbsp;
