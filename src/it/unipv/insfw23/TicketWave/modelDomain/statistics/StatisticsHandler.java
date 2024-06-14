@@ -12,11 +12,21 @@ import java.util.ArrayList;
 
 import static it.unipv.insfw23.TicketWave.modelDomain.event.Province.valueOf;
 
+/**
+ * This class represents the statistics mananger, performs calculations, and provides
+ * the results of ticket sales for a {@link Manager}'s event.
+ */
 public class StatisticsHandler implements IStatisticsHandler {
 
     public StatisticsHandler() {
     }
 
+
+    /**
+     *Method that returns the wrapper class {@link WrapType} for the statistcs results by {@link Type}.
+     * @param manager
+     * @return returnClass
+     */
     @Override
     public WrapType typeStats(Manager manager) {
 
@@ -48,6 +58,15 @@ public class StatisticsHandler implements IStatisticsHandler {
         return returnClass;
     }
 
+
+
+
+    /**
+     *Method that returns the wrapper class {@link WrapArtist} for the statistcs results by Artists name.
+     * @param typeCode
+     * @param manager
+     * @return wrapRes
+     */
     @Override
     public WrapArtist artistStats(Type typeCode, Manager manager){
 
@@ -98,6 +117,14 @@ public class StatisticsHandler implements IStatisticsHandler {
         return wrapRes;   //classe wrapper per restituire i due array che servono, ovvero artistNames creata, e results
     }
 
+
+
+    /**
+     *Method that returns the wrapper class {@link WrapGenre} for the statistcs results by {@link Genre}.
+     * @param typeCode
+     * @param manager
+     * @return resReturn
+     */
     @Override
     public WrapGenre genreStats(Type typeCode, Manager manager) {
 
@@ -151,6 +178,14 @@ public class StatisticsHandler implements IStatisticsHandler {
     }
 
 
+
+    /**
+     *Method that returns the wrapper class {@link WrapProv} for the statistcs results by {@link Province}.
+     * @param typeCode
+     * @param artistName
+     * @param manager
+     * @return resReturn
+     */
     @Override
     public WrapProv provinceStats(Type typeCode, String artistName, Manager manager) {
 
