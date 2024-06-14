@@ -61,6 +61,13 @@ public abstract class User {
 		return surname;
 	}
 
+	/**
+	 * Set the surname of the User
+	 * @param surname
+	 */
+	public void setSurname(String surname) {
+		this.surname = surname;
+	}
 
 	/**
 	 *
@@ -127,6 +134,7 @@ public abstract class User {
 	 * Method to recognize a {@link Customer} or a {@link Manager}
 	 * @return {@link Boolean}
 	 */
+
 	public abstract boolean isCustomer();
 
 

@@ -20,16 +20,10 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
-import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
-import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
 import it.unipv.insfw23.TicketWave.org.mindrot.jbcrypt.BCrypt;
 import javafx.scene.image.Image;
 
-/**
- * This class controls all management of the {@link Manager} and {@link Customer} classes and the persistence of their information
- * @see ConnectionDB
- * @see IProfileDao
- */
+
 
 public class ProfileDao implements IProfileDao {
     private String schema;
@@ -39,22 +33,11 @@ public class ProfileDao implements IProfileDao {
 	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
 	private final int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
 
-
-    /**
-     * In this constructor the name of the DB is associated with the String Schema
-     */
     public ProfileDao() {
         super();
         this.schema = "TicketWaveDB";
     }
 
-
-    /**
-     *This method allows to insert on the TicketWaveDB, a {@link Manager} when registering on the platform
-     * @param manager  is used when the data is taken from the {@link SignUpView}
-     * @throws SQLException if a generic SQL exception has occurred
-     * @throws AccountAlreadyExistsException  if there is duplicate entry error in the database (1062)
-     */
     @Override
     public void insertManager(Manager manager) throws SQLException, AccountAlreadyExistsException {
 
@@ -83,23 +66,18 @@ public class ProfileDao implements IProfileDao {
                 System.out.println("query eseguita");
             }
         }catch (SQLException e) {
-            if (e.getErrorCode() == 1062) {  //errore di duplicazione di un entrata
+            if (e.getErrorCode() == 1062) {
                 throw new AccountAlreadyExistsException();
             }
-            throw new SQLException("Impossible to save data of the registration", e);
+            throw new SQLException("Impossibile salvare i dati della registrazione", e);
         }
         ConnectionDB.closeConnection(connection);
 
     }
 
 
-    /**
-     * This method allows to insert on the TicketWaveDB, a {@link Customer} when registering on the platform
-     * @param customer is used when the data is taken from the {@link SignUpView}
-     * @throws SQLException if a generic  SQL exception has occurred
-     * @throws AccountAlreadyExistsException if there is duplicate entry error in the database (1062)
-     * @throws GenreNotSelected  when The {@link Customer} has not selected any Genre from the {@link SignUpView}
-     */
+
+
     @Override
     public void insertCustomer(Customer customer) throws SQLException, AccountAlreadyExistsException, GenreNotSelected {
         try {
@@ -111,9 +89,9 @@ public class ProfileDao implements IProfileDao {
                 Genre[] favoriteGenres = customer.getFavoriteGenre();
                 for (int i = 0; i < favoriteGenres.length; i++) {
                     if (i > 0) {
-                        genresBuilder.append(",");  // aggiungo virgola a ogni genere favorito selezionato
+                        genresBuilder.append(",");  // aggiungo virgola
                     }
-                    genresBuilder.append(favoriteGenres[i].toString());  // prendo il valore convertito in stringa
+                    genresBuilder.append(favoriteGenres[i].toString());
                 }
 
                 String favoriteGenresStr = genresBuilder.toString();
@@ -141,28 +119,13 @@ public class ProfileDao implements IProfileDao {
             if (e.getErrorCode() == 1062) {
                 throw new AccountAlreadyExistsException();
             }
-            throw new SQLException("Impossible to save data of the registration", e);
+            throw new SQLException("Impossibile salvare i dati della registrazione", e);
         }
         ConnectionDB.closeConnection(connection);
     }
 
 
-    /**
-     *This method allows you to get all the data of a {@link Manager } from the database
-     * when the {@link Manager } logs in from the {@link LoginView}.
-     *
-     *
-     * @param mail
-     * @param password
-     * @return Manager
-     * @throws SQLException
-     * @throws WrongPasswordException when the db password does not match the password entered
-     *
-     * @see Notification
-     * @see Event
-     *
-     *
-     */
+
     @Override
     public Manager selectManager(String mail, String password) throws SQLException, WrongPasswordException {
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
@@ -196,8 +159,6 @@ public class ProfileDao implements IProfileDao {
 
             }
 
-
-            // associazione  del manager sul dominio
             if (resultAvailable && checkPassword(password, dbPassword)) {
 
                 ArrayList<Event> createdEvents = new ArrayList<>();         //creo la arraylist da riempire
@@ -208,8 +169,6 @@ public class ProfileDao implements IProfileDao {
                         resultSet1.getString("MAIL"), null, Province.valueOf(resultSet1.getString("PROVINCE")), resultSet1.getString("CARDNUMBER"), createdEvents,
                         resultSet1.getInt("MAXEVENTS"), resultSet1.getInt("SUBSCRIPTION"), subDate, resultSet1.getInt("COUNTER_CREATED_EVENTS"));
 
-
-                //cassociazione degli eventi su dominio
                 try {
                     String query2 = "SELECT * FROM EVENT_ WHERE ID_MANAGER = ?";
 
@@ -219,7 +178,7 @@ public class ProfileDao implements IProfileDao {
 
                     while (resultSet2.next()) {
 
-                        LocalDate currentDate = resultSet2.getDate("DATE_").toLocalDate(); // conversione data in LocalData
+                        LocalDate currentDate = resultSet2.getDate("DATE_").toLocalDate(); // converto data in LocalData
 
                         double[] price = new double[resultSet2.getInt("NUM_SEATS_TYPE")];
                         int[] seatsRemaining = new int[resultSet2.getInt("NUM_SEATS_TYPE")];
@@ -247,8 +206,7 @@ public class ProfileDao implements IProfileDao {
                         InputStream is = blobphoto.getBinaryStream();
                         Image photo = new Image(is);
 
-
-                        //Associazione degli eventi per ogni tipo
+                        
                         switch (Type.valueOf(resultSet2.getString("TYPE_")).ordinal()) {
                             case 0:
                                 Festival currentFestival = new Festival(resultSet2.getInt("ID_EVENT"), resultSet2.getString("NAME_"),
@@ -290,15 +248,14 @@ public class ProfileDao implements IProfileDao {
                                 break;
                         }
                     }
-                    manager.setEvent(createdEvents);  //vengono caricati  gli eventi per il manager
+                    manager.setEvent(createdEvents);
 
                 } catch (SQLException e) {
                     e.printStackTrace();
-                    throw new RuntimeException("problem loading events");
+                    throw new RuntimeException("Problema nel caricamento degli eventi");
                 }
 
 
-                //caricamento delle notifiche al relativo manager
                 try {
                     String query3 = "SELECT * FROM NOTIFY WHERE MAIL = ?";
 
@@ -320,24 +277,30 @@ public class ProfileDao implements IProfileDao {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
+/*
+                //costrutto di controllo per verificare che la subscription sia scaduta
+                if(manager.oneMonthPassed()){  // se è passato >= di un mese dall'inizio della sub
+                    manager.setSubscription(-1);//allora abbonamento scaduto
+                    System.out.println(+manager.getSubscription());
 
+                    System.out.println("subscription settata");
 
+                 //  updateManagerSub((manager));
+                  //  System.out.println("query update eseguita");
+
+                }
+*/
             }
             else {
                 return null;}
         } catch (SQLException e) {
-            throw new RuntimeException("User not found or not registered");
+            throw new RuntimeException("Utente non trovato o non registrato");
         }
 
         ConnectionDB.closeConnection(connection);
         return manager;
     }
 
-    /**
-     *
-     * @param input
-     * @return countWords
-     */
     public int countWords(String input) {
         if (input == null || input.isEmpty()) {
             return 0;
