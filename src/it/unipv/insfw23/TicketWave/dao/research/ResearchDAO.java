@@ -14,10 +14,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 /**
- * Implementation of the methods declared in {@link IResearchDAO}.
+ * This class represents a ResearchDAO and implements all the methods declared in {@link IResearchDAO}.
  * It encapsulates database interactions, providing a clean and reusable interface for accessing {@link Event} data.
  *
- * @see Event
  */
 public class ResearchDAO implements IResearchDAO{
 
@@ -26,7 +25,7 @@ public class ResearchDAO implements IResearchDAO{
     private Connection conn;
 
     // CONSTRUCTOR:
-    public ResearchDAO() { // è un Object easy
+    public ResearchDAO() {
         super();
         this.schema = "TicketWaveDB";
     }
@@ -36,10 +35,10 @@ public class ResearchDAO implements IResearchDAO{
     /**
      * Return all the Event from the database
      * @return result
-     * @throws SQLException
+     * @throws SQLException  It's thrown if the query for creating events or if the query for creating managers fails
      */
     @Override
-    public ArrayList<Event> getAllEvents() throws SQLException{ // Quando sulla ResearchBar non ho nulla, allora restituisco tutti gli eventi ----- FUNZIONA
+    public ArrayList<Event> getAllEvents() throws SQLException{ // Quando sulla ResearchBar non ho nulla, allora restituisco tutti gli eventi
         conn = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(conn,schema);
         ArrayList<Event> result = new ArrayList<>();
         ArrayList<Event> managerEvent = new ArrayList<>();
@@ -76,7 +75,6 @@ public class ResearchDAO implements IResearchDAO{
                 }
             } catch (SQLException e) {
                 System.err.print("SQL exception occurred in search due to manager search query. " + e.getMessage());
-                //throw new RuntimeException("Errore nella query di ricerca dell'evento (ResearchDAO riga 42)");
             }
         }
         ConnectionDB.closeConnection(conn); // chiudo la connessione
@@ -85,11 +83,11 @@ public class ResearchDAO implements IResearchDAO{
 
     /**
      * Returns all the events that match with the search field and that comply with the filters set. If I haven't set a search field, all the events that match the filters set are returned.
-     * @param searchField
-     * @param pr
-     * @param gen
+     * @param searchField represents the text written in the textField of the ResearchView
+     * @param pr represents the provinceFilters selected by the ResearchView
+     * @param gen represents the genreFilters selected by the ResearchView
      * @return return
-     * @throws SQLException
+     * @throws SQLException It's thrown if the query for creating events or if the query for creating managers fails
      */
     @Override
     public ArrayList<Event> getFilteredEvents(String searchField, ArrayList<String> pr , ArrayList<String> gen) throws SQLException{ // Quando qualcuno scrive sulla ResearchBar (TextField) e usa o meno i filtri, allora uso questo metodo
@@ -180,7 +178,7 @@ public class ResearchDAO implements IResearchDAO{
 
     /**
      * This method count the words contained into the artists String from the database in order to find how many artists are in a festival
-     * @param input
+     * @param input represents the string of artists taken as input. It is used for the creation of a festival
      * @return words.lenght
      */
     private int countWords(String input){ // mi serve per contare quanti artisti sono stati messi nel festival, questo lo faccio separando la stringa
@@ -201,9 +199,9 @@ public class ResearchDAO implements IResearchDAO{
 
     /**
      * This method creates a manager by taking its data from the database. This is useful for creating an event later
-     * @param resultSet1
+     * @param resultSet1 represents the resultset of manager query
      * @return new Manager()
-     * @throws SQLException
+     * @throws SQLException It's thrown if the manager is not created correctly in the domain
      */
     private Manager createManager(ResultSet resultSet1) throws SQLException {
         try {
@@ -212,17 +210,17 @@ public class ResearchDAO implements IResearchDAO{
                     resultSet1.getString("MAIL"), null, Province.valueOf(resultSet1.getString("PROVINCE")), resultSet1.getString("CARDNUMBER"),null,
                     resultSet1.getInt("MAXEVENTS"), resultSet1.getInt("SUBSCRIPTION"), subDate, resultSet1.getInt("COUNTER_CREATED_EVENTS"));
         } catch (SQLException e) {
-            throw new RuntimeException("Manager non creato correttamente (ResearchDAO createManager)");
+            throw new RuntimeException("Manager not created correctly (error in the createManager method of the ResearchDAO)");
         }
 
     }
 
     /**
      * This method creates a specific event by taking data from the database and uses the previously created manager as the event creator
-     * @param rs
-     * @param manager
+     * @param rs represents the resultset of event query
+     * @param manager represents the manager created previously into the createManager method
      * @return new Event()
-     * @throws SQLException
+     * @throws SQLException It's thrown if the event is not created correctly in the domain
      */
     private Event createEvent(ResultSet rs, Manager manager) throws SQLException {
         LocalDate ld = rs.getDate("DATE_").toLocalDate();
@@ -282,6 +280,6 @@ public class ResearchDAO implements IResearchDAO{
                         manager, rs.getString("ARTISTS"), rs.getString("DESCRIPTION_"), photo);
             }
         }
-        throw new RuntimeException("L'evento non è stato creato nel dominio (errore nel metodo CreateEvent del ResearchDAO)");
+        throw new RuntimeException("The event was not created correctly in the domain (error in the CreateEvent method of the ResearchDAO)");
     }
 }

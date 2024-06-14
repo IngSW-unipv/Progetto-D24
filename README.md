@@ -15,8 +15,8 @@
 
 ## Obiettivo
 TicketWave è un software che permette di acquistare e vendere biglietti riguardanti eventi di diverso tipo. I servizi che offre sono: 
-- Creazione di 2 diversi tipi di account: Gestore e Utente
-- Area riservata per l'account Gestore e Utente
+- Creazione di 2 diversi tipi di account: Gestore e Cliente
+- Area riservata per l'account Gestore e Cliente
 - Possibilità di comprare un abbonamento da parte del Gestore
 - Sistema di statistiche riguardo gli eventi creati dal Gestore
 - Possibilità di creare nuovi eventi da parte del Gestore
@@ -37,7 +37,8 @@ Per quanto riguarda il database MySQL:
 
 Per quanto riguarda IntelliJ:
 1. Importare tutte le librerie utili (JAVAFX 21, JUnit 4 e MySQL Java connector) tramite ProjectStructure -> Libraries -> Add
-2. Prima di eseguire la classe Main mettere le VM options tramite Edit Configurations -> Main -> Modify options -> Add VM options
+2. Successivamente andare su Modules e spuntare tutte le librerie implementate
+3. Prima di eseguire la classe Main mettere le VM options tramite Run/Debug Configurations -> Edit Configurations -> Main -> Modify options -> Add VM options e immettere la stringa --module-path /path/to/javafx-sdk-22.0.1/lib --add-modules javafx.controls,javafx.fxml
 
 ## Immagini
 

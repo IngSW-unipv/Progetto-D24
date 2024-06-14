@@ -12,11 +12,6 @@ import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 /**
  * Abstract class that represents a generic Event.
  * Contains attributes and methods common to {@link Concert}, {@link Festival}, {@link Theater} and {@link Other}.
- *
- * @see Concert
- * @see Festival
- * @see Theater
- * @see Other
  */
 public abstract class Event {
 
@@ -29,7 +24,7 @@ public abstract class Event {
     private Genre genre;
     private final Type type;
     private final int maxNumberOfSeats;
-    private int typeOfSeats; // indice dell'array ticketSoldNumberForType, serve per dire quante tipologie di posti ho: base + premium = 2, base = 1, base + premium + vip = 3 tipi di posti, mi server per scorrere l'array
+    private int typeOfSeats; // indice dell'array ticketSoldNumberForType, serve per dire quante tipologie di posti ho: base + premium = 2, base = 1, base + premium + vip = 3 tipi di posti, mi serve per scorrere l'array
     private int [] seatsRemainedNumberForType, ticketsSoldNumberForType; // vettore biglietti venduti per tipo
     private double [] price; // vettore prezzi per i vari tipi di biglietto, es: Vip = 40€, Base = 15€...
     private final Manager creator;
@@ -42,6 +37,24 @@ public abstract class Event {
     /**
      * Complete constructor to initialize all parameters.
      * Note that an abstract class cannot be instantiated, this constructor will be used by classes that extend Event to initialize parameters.
+     * @param idEvent
+     * @param name
+     * @param city
+     * @param location
+     * @param date
+     * @param time
+     * @param province
+     * @param genre
+     * @param type
+     * @param maxNumberOfSeats
+     * @param typeOfSeats
+     * @param seatsRemainedNumberForType
+     * @param ticketsSoldNumberForType
+     * @param price
+     * @param creator
+     * @param artists
+     * @param description
+     * @param photo
      */
 
     public Event(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, Type type, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, Image photo) {
@@ -83,7 +96,7 @@ public abstract class Event {
      */
     public String getName() {
         return name;
-    } // mi serve nel ResultResearchView per la TableView
+    }
 
     /**
      * Returns the Event city as a {@link String}.
@@ -91,7 +104,7 @@ public abstract class Event {
      */
     public String getCity() {
         return city;
-    } // mi serve nel ResultResearchView per la TableView
+    }
 
     /**
      * Returns the Event location as a {@link String}.
@@ -99,7 +112,7 @@ public abstract class Event {
      */
     public String getLocation() {
         return location;
-    } // mi serve nel ResultResearchView per la TableView
+    }
 
     /**
      * Returns the Event date as a {@link LocalDate}.
@@ -134,11 +147,12 @@ public abstract class Event {
     }
 
     /**
-     * Returns the Event price as a double.
-     * @return price
+     * Returns the size of the price array, based on the number of ticket types i have.
+     * @param type
+     * @return the dimension of price
      */
     public double getPrice(TicketType type) {
-        return price[type.ordinal()]; //ordinal torna la posizione di type nella enum *************************** DA CAPIRE COME SCRIVERE IL JAVADOC
+        return price[type.ordinal()]; //ordinal torna la posizione di type nella enum ************************************ CONTROLLARE IL JAVADOC
     }
 
     /**
@@ -301,12 +315,12 @@ public abstract class Event {
     public void setDate(LocalDate date) { // controllo che la data sia ammissibile per essere messa in un evento
         if (date != null){
             if (date.isBefore(LocalDate.of(2000, 1, 1)) ||  date.isAfter(LocalDate.of(2050, 1, 1))){ // check sulla data, se la data è prima del 2000 o dopo il 2050 è impossibile creare l'evento
-                throw new IllegalArgumentException("Immettere una nuova data, data non valida");
+                throw new IllegalArgumentException("Please enter new date, invalid date");
             } else {
                 this.date = date;
             }
         } else {
-            throw new IllegalArgumentException("La data ha valore nullo, immettere una nuova data");
+            throw new IllegalArgumentException("The date has a null value, enter a new date");
         }
     }
 
@@ -326,7 +340,7 @@ public abstract class Event {
      */
     public void setTypeOfSeats(int typeOfSeats) {
         if(typeOfSeats > 3){
-            throw new IllegalArgumentException("In TicketWave si possono avere un massimo di 3 tipi di sedute/biglietti, immettere un valore valido");
+            throw new IllegalArgumentException("In TicketWave you can have a maximum of 3 types of seats/tickets, enter a valid value");
         } else {
             this.typeOfSeats = typeOfSeats;
         }
@@ -339,7 +353,7 @@ public abstract class Event {
      */
     public void setSeatsRemainedNumberForType(int[] seatsRemainedNumberForType) {
         if(seatsRemainedNumberForType.length > 3){
-            throw new IllegalArgumentException("In TicketWave si possono avere un massimo di 3 tipi di sedute, reimmettere i valori riguardanti le sedute rimanenti");
+            throw new IllegalArgumentException("In TicketWave you can have a maximum of 3 types of seats, re-enter the values relating to the remaining seats");
         } else {
             this.seatsRemainedNumberForType = seatsRemainedNumberForType;
         }
@@ -352,7 +366,7 @@ public abstract class Event {
      */
     public void setTicketsSoldNumberForType(int[] ticketsSoldNumberForType) {
         if(ticketsSoldNumberForType.length > 3){
-            throw new IllegalArgumentException("In TicketWave si possono avere un massimo di 3 tipi di ticket, reimmettere i valori riguardanti i ticket venduti per tipo");
+            throw new IllegalArgumentException("In TicketWave you can have a maximum of 3 types of tickets, re-enter the values regarding tickets sold by type");
         } else {
             this.ticketsSoldNumberForType = ticketsSoldNumberForType;
         }
@@ -365,7 +379,7 @@ public abstract class Event {
      */
     public void setPrice(double[] price) {
         if(price.length > 3){
-            throw new IllegalArgumentException("In TicketWave si possono avere un massimo di 3 tipi di ticket, reimmettere i valori riguardanti i prezzi dei ticket");
+            throw new IllegalArgumentException("In TicketWave you can have a maximum of 3 types of tickets, re-enter the values regarding the ticket prices");
         } else {
             this.price = price;
         }
@@ -384,7 +398,7 @@ public abstract class Event {
      * Increment the ticketsSoldNumberForType and decrement the seatsRemainedNumberForType by 1 based on the type passed in input
      *
      */
-    public void updateSeatsRemainedAndTicketSoldForType(int type) { // NON SO CHE SCRIVERE NEL JAVADOC
+    public void updateSeatsRemainedAndTicketSoldForType(int type) {
         seatsRemainedNumberForType[type]--;
         ticketsSoldNumberForType[type]++;
     }

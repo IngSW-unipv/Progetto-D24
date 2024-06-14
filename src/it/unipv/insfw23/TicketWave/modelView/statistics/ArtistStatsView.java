@@ -29,12 +29,14 @@ public class ArtistStatsView extends BorderPane{
         final NumberAxis yAxis = new NumberAxis(0, 100, 10);
         final CategoryAxis xAxis = new CategoryAxis();
 
+        xAxis.setTickLabelRotation(45);
+
 
         xAxis.setLabel("Artisti");
         yAxis.setLabel("Percentuale venduta");
 
         final BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
-        barChart.setMinSize(300, 500);
+        barChart.setMinHeight(400);
         barChart.setStyle("-fx-bar-fill: #91BAD6;");
         barChart.setTitle("Statistiche sugli Artisti degli eventi");
         barChart.setStyle("-fx-font-family: 'Helvetica'; -fx-font-size: 15px; -fx-font-weight: bold;");
