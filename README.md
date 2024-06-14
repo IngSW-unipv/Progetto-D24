@@ -15,8 +15,8 @@
 
 ## Obiettivo
 TicketWave è un software che permette di acquistare e vendere biglietti riguardanti eventi di diverso tipo. I servizi che offre sono: 
-- Creazione di 2 diversi tipi di account: Gestore e Utente
-- Area riservata per l'account Gestore e Utente
+- Creazione di 2 diversi tipi di account: Gestore e Cliente
+- Area riservata per l'account Gestore e Cliente
 - Possibilità di comprare un abbonamento da parte del Gestore
 - Sistema di statistiche riguardo gli eventi creati dal Gestore
 - Possibilità di creare nuovi eventi da parte del Gestore
