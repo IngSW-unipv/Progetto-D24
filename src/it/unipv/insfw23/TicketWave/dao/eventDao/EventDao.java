@@ -259,7 +259,7 @@ public class EventDao implements IEventDao {
                                 resultSet1.getString("CITY"), resultSet1.getString("LOCATION"),
                                 currentDate, resultSet1.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet1.getString("PROVINCE")),
                                 Genre.valueOf(resultSet1.getString("GENRE")), resultSet1.getInt("MAX_NUM_SEATS"), resultSet1.getInt("NUM_SEATS_TYPE"),
-                                seatsRemaining, seatsSold, price, manager, resultSet1.getString("ARTISTS"), resultSet1.getString("DESCRIPTION_"), countWords(resultSet1.getString("ARTISTS")),
+                                seatsRemaining, seatsSold, price, manager, resultSet1.getString("ARTISTS"), resultSet1.getString("DESCRIPTION_"),
                                 photo);
                         selectedEvent = currentFestival;
                         break;
@@ -301,22 +301,6 @@ public class EventDao implements IEventDao {
         return selectedEvent;
     }
 
-
-    public int countWords(String input) {
-        if (input == null || input.isEmpty()) {
-            return 0;
-        }
-        // Rimuove eventuali spazi bianchi prima e dopo la stringa
-        input = input.trim();
-
-        // Se la stringa è vuota dopo il trim, ritorna 0
-        if (input.isEmpty()) {
-            return 0;
-        }
-        // Divide la stringa in base alla virgola
-        String[] words = input.split("\\s*,\\s*");
-        return words.length;
-    }
 
 
     public void updateSeatsNumber(Event event) throws SQLException {
