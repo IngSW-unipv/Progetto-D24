@@ -12,6 +12,7 @@ import it.unipv.insfw23.TicketWave.modelController.factory.notifications.INotifi
 import it.unipv.insfw23.TicketWave.modelController.factory.notifications.NotificationHandlerFactory;
 import it.unipv.insfw23.TicketWave.modelController.factory.payment.PaymentFactory;
 import it.unipv.insfw23.TicketWave.modelController.factory.subscription.SubscriptionHandlerFactory;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.MasterPayAdapter;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.MasterPayPayment;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
@@ -36,21 +37,32 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+/**
+ * The class contains the control methods on the {@link MasterPayPayment}
+ * using {@link MasterPayAdapter}MasterPay payment domain classes and on the
+ * control and setting of certain parameters of the {@link PaymentDataMView}
+ *
+ */
 
 public class PaymentDataMController {
     private Stage mainStage;
     private PaymentDataMView paymentDataMView;
-    private TicketPageView ticketpage;
     private PaymentSelectionView paymentSelectionView;
-    private boolean isviewermanager;
-    private User user = ConnectedUser.getInstance().getUser();
+    private User user = ConnectedUser.getInstance().getUser();  // associo l'User corrente a una variabile User
     private int numOfTickets;
 
     private IPaymentAdapter iPaymentAdapter;
+    private IResettableScene home = ConnectedUser.getInstance().getHome();  // associo la home corrente alla variabile Home
 
 
-    private IResettableScene home = ConnectedUser.getInstance().getHome();
-
+    /**
+     * the constructor uses the Current UI {@link PaymentDataMView} and the Previous view {@link PaymentSelectionView}
+     *
+     * calling an initialization method and a setup method for a possible logged {@link Customer} as a {@link ConnectedUser}
+     * @param mainStage
+     * @param paymentDataMView
+     * @param paymentSelectionView
+     */
     public PaymentDataMController(Stage mainStage, PaymentDataMView paymentDataMView, PaymentSelectionView paymentSelectionView) {
         this.paymentDataMView = paymentDataMView;
         this.paymentSelectionView = paymentSelectionView;
@@ -60,7 +72,14 @@ public class PaymentDataMController {
     }
 
 
+    /**
+     * the methos has two EventHandlers associated with the {@link PaymentDataMView} buttons. if  BackButton is clicked--return back to the paymentSelectionView.
+     * If the NextButton is clicked--based on the LoggedUser, if is {@link Customer} buy one or more tickets, or if is {@link Manager} buy a subscription.
+     * Both options have additional input and domain controls
+     */
     public void initComponents() {
+
+        //***** EventHandler per ritornare alla UI precedente(PaymentSelectionView)*****//
 
 
         EventHandler<MouseEvent> turnBackPaymentPage = new EventHandler<>() {
@@ -69,17 +88,16 @@ public class PaymentDataMController {
             public void handle(MouseEvent actionEvent) {
                 // Azione da eseguire quando il pulsante viene premuto
                 System.out.println("Sei ritornato indietro alla paymentSelectionPage");
-                paymentSelectionView.reSetBars();
-                mainStage.setScene(paymentSelectionView);
+                paymentSelectionView.reSetBars();  // si accede al metodo per reimpostare le barre di layout
+                mainStage.setScene(paymentSelectionView);  //viene settata la scena sul MainStage principale
             }
         };
 
         paymentDataMView.getBackButton().setOnMouseClicked(turnBackPaymentPage);
 
 
-        //UNA VOLTA CHE VIENE CLICCATO IL PULSANTE ACQUISTA IL PAGAMENTO VA A BUON FINE(LO RIPORTO INDIETRO E RESETTO LE BARRE
-        //IN BASE AL METODO DI CONTROLLO CUSTOMER O MANAGER
 
+        //***** EventHandler per Proseguire avanti(PaymentSelectionView)*****//
         EventHandler<MouseEvent> goToNewPage = new EventHandler<>() {
 
             @Override
@@ -89,23 +107,28 @@ public class PaymentDataMController {
                     // Se checkNumericFields ritorna false, esci dalla funzione
                     return;
                 }
-                // Azione da eseguire quando il pulsante viene premuto
-                System.out.println("pagamento andato a buon fine stai tornando indietro alla home page!");
-                if (user.isCustomer()) {
-                    System.out.println("Stai andando alla CustomerView");
-                    Customer customer = (Customer) user;
-                    Event currentEvent = ConnectedUser.getInstance().getEventForTicket();
+
+
+                //*****Azione da eseguire quando il pulsante NextButton viene premuto*****//
+                if (user.isCustomer()) {            //controllo dal valore booleano di isCustomer
+                    System.out.println("The User is a Customer");
+                    Customer customer = (Customer) user;   //cast del User in Customer
+                    Event currentEvent = ConnectedUser.getInstance().getEventForTicket();  //associo l'Evento Corrente alla variabile Event
                     
                     try {
+
+                        //creazione Variabili dei DAO, associo alle istanze
                         
                         TicketDao ticketDao = new TicketDao();
                         EventDao eventDao = new EventDao();
                         ProfileDao profileDao = new ProfileDao();
-                        System.out.println("ticketdao creato");
 
+
+                        //utilizzo di un Istanza del PaymentFactor e associo a un iPaymentAdapter
                         MasterPayPayment masterPayPayment = new MasterPayPayment();
                         iPaymentAdapter = PaymentFactory.getMasterPayAdapter(masterPayPayment);
-                        System.out.println("creati i masterPayPayment payment e interfaccia");
+
+
 
                         for(int i = 0; i < numOfTickets; i++) {
                         	Ticket ticket = customer.buyticket(iPaymentAdapter, currentEvent, ConnectedUser.getInstance().getTicketType(), getUsePoint());
