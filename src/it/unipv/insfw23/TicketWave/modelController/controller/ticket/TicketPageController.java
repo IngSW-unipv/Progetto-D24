@@ -2,10 +2,7 @@ package it.unipv.insfw23.TicketWave.modelController.controller.ticket;
 
 
 import it.unipv.insfw23.TicketWave.modelController.controller.payment.PaymentSelectionController;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
+import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
@@ -41,15 +38,27 @@ public class TicketPageController {
     }
 
     public void initComponents() {
-//	ticketPage = new TicketPageView();
-        //assegnazione dei campi dell'evento ai campi della ticketpageview
+
+        //assegnazione dei parametri dell'evento(dominio) ai campi della ticketpageview(GUI)
         ticketPage.setComponents(user.isCustomer(), event.getType(), event.getName(), event.getCity(), event.getLocation(), event.getProvince(), event.getDate(),
                 event.getArtists(), event.getSeatsRemainedNumberForType(), event.getPrices(), event.getDescription(), event.getPhoto());
+
+        ticketPage.getAuthorNameField().setVisible(false);
+        ticketPage.getAuthorNameLabel().setVisible(false);
+
+        //contrutto di controllo per far vedere attributi di teatro
+        if(event.getType().toString()=="THEATER"){
+            ticketPage.getAuthorNameField().setVisible(true);
+            ticketPage.getAuthorNameLabel().setVisible(true);
+            Theater theater=(Theater) event;
+            ticketPage.setAuthorNameField(theater.getAuthorName());
+        }
         //fine assegnazione
-        //
         //cambio scena
         mainStage.setScene(ticketPage);
 
+
+        //EventHandler---passaggio view successiva
         EventHandler<MouseEvent> goToPSelectionViewHandler = new EventHandler<>() {
             @Override
             public void handle(MouseEvent actionEvent) {
@@ -80,15 +89,9 @@ public class TicketPageController {
 
 
                 }
-
-
-            
-
-        
-
                  else{
                     ticketPage.getErrmessage().setOpacity(100);
-                    System.out.println("Scegli una tipologia di biglietto");//da stampare a video o con eccezione
+                    System.out.println("Scegli una tipologia di biglietto");//stampa a video l'errore
                 }
 
             }
@@ -96,7 +99,7 @@ public class TicketPageController {
         };
         ticketPage.getBuyButton().setOnMouseClicked(goToPSelectionViewHandler);
 
-
+        // EventHandler---di ritorno alla scena precedente
         EventHandler<MouseEvent> goBackEvent = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent actionEvent) {

@@ -41,6 +41,7 @@ public class PaymentSelectionController {
 
     public void initComponents(){
 
+        //EventHandler---passaggio alla View successiva
         EventHandler<MouseEvent> goToPaymentDataPage= new EventHandler<>() {
 
             @Override
@@ -59,7 +60,7 @@ public class PaymentSelectionController {
             	   paymentDataMController.setNumOfTickets(ticketPageView.getNumOfTickets());
                }
 
-               //CODICE DI SET PER LA CREDIT CARD DEL MANAGER
+               //set della Carta di Credito del loggedManager
                else{
                    loggedManager = (Manager) user;
                    paymentDataMView.setInsertNCText(loggedManager.getCreditCard());
@@ -92,7 +93,7 @@ public class PaymentSelectionController {
         paymentSelectionView.getNextButton().setOnMouseClicked(goToPaymentDataPage);
 
 
-
+        //EventHandler--passaggio alla View precedente
         EventHandler<MouseEvent> turnBack = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent actionEvent) {
@@ -104,8 +105,6 @@ public class PaymentSelectionController {
 
             }
         };
-
-// Imposta l'handler sull'evento di clic del pulsante di ritorno
         paymentSelectionView.getBackButton().setOnMouseClicked(turnBack);
 
 
