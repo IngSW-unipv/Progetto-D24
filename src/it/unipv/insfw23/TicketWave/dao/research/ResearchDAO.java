@@ -256,7 +256,7 @@ public class ResearchDAO implements IResearchDAO{
                         rs.getString("CITY"), rs.getString("LOCATION"), ld, tm,
                         Province.valueOf(rs.getString("PROVINCE")), Genre.valueOf(rs.getString("GENRE")),
                         rs.getInt("MAX_NUM_SEATS"), rs.getInt("NUM_SEATS_TYPE"), seatsRemaining, ticketSoldNumberForType, price,
-                        manager, rs.getString("ARTISTS"), rs.getString("DESCRIPTION_"), photo);
+                        manager, rs.getString("ARTISTS"), rs.getString("DESCRIPTION_"), artistsNumber, photo);
             }
             case 1 -> {
                 return new Concert(rs.getInt("ID_EVENT"), rs.getString("NAME_"),

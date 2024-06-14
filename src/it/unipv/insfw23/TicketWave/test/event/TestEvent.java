@@ -42,7 +42,7 @@ public class TestEvent {
             double[] p = {150};
             fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.of(14, 4), Province.COMO, Genre.EDM,
                     3000,
-                    1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", bl);
+                    1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", artistsNumber, bl);
         } catch (Exception e) {
             assertEquals("CreateFestival error", e.getMessage());
         }
@@ -127,9 +127,9 @@ public class TestEvent {
             int[] b = {2080};
             double[] p = {150};
             Festival festival = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
-                    1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", bl);
+                    1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", artistsNumber, bl);
             Festival festival2 = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
-                    1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", bl);
+                    1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", artistsNumber, bl);
             Other other = new Other(3, "Sagra della salsiccia", "Roma", "Mercato de Roma", LocalDate.of(2023, 7, 22), LocalTime.parse("19:00:00"), Province.ROMA, null, 0,
                     1, a, b, p, mg, null, "Sagra della salsiccia de Roma, er mejo", bl);
             Theater theater = new Theater(2, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), LocalTime.parse("22:50:00"), Province.ROMA, Genre.COMMEDIA,
@@ -164,7 +164,7 @@ public class TestEvent {
             int[] b = {1980, 990};
             double[] p = {150, 270};
             fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
-                    2, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", bl);
+                    2, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", artistsNumber, bl);
             int [] ticketSold;
             ticketSold = fs.getTicketsSoldNumberForType();
             int sum = 0;

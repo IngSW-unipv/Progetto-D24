@@ -1,23 +1,17 @@
 package it.unipv.insfw23.TicketWave.dao.eventDao;
 
 import it.unipv.insfw23.TicketWave.dao.ConnectionDB;
-import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
-import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
-import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
-import javax.sql.rowset.serial.SerialBlob;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class EventDao implements IEventDao {
     private String schema;
@@ -260,7 +254,7 @@ public class EventDao implements IEventDao {
                                 currentDate, resultSet1.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet1.getString("PROVINCE")),
                                 Genre.valueOf(resultSet1.getString("GENRE")), resultSet1.getInt("MAX_NUM_SEATS"), resultSet1.getInt("NUM_SEATS_TYPE"),
                                 seatsRemaining, seatsSold, price, manager, resultSet1.getString("ARTISTS"), resultSet1.getString("DESCRIPTION_"),
-                                photo);
+                                artistsNumber, photo);
                         selectedEvent = currentFestival;
                         break;
 
