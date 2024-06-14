@@ -39,7 +39,7 @@ public class ResearchView extends Scene implements IResettableScene {
     public ResearchView() {
         super(new Pane(), 1080, 600);
 
-        // chiamo la creazione del GridPane
+        // chiamo la creazione della view
         researchScene();
     }
 
