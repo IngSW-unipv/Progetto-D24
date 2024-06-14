@@ -213,7 +213,7 @@ public class ProfileDao implements IProfileDao {
                                         resultSet2.getString("CITY"), resultSet2.getString("LOCATION"),
                                         currentDate, resultSet2.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet2.getString("PROVINCE")),
                                         Genre.valueOf(resultSet2.getString("GENRE")), resultSet2.getInt("MAX_NUM_SEATS"), resultSet2.getInt("NUM_SEATS_TYPE"),
-                                        seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION_"), countWords(resultSet2.getString("ARTISTS")),
+                                        seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION_"),
                                         photo);
                                 createdEvents.add(currentFestival);
                                 break;
@@ -301,21 +301,6 @@ public class ProfileDao implements IProfileDao {
         return manager;
     }
 
-    public int countWords(String input) {
-        if (input == null || input.isEmpty()) {
-            return 0;
-        }
-        // Rimuove eventuali spazi bianchi prima e dopo la stringa
-        input = input.trim();
-
-        // Se la stringa è vuota dopo il trim, ritorna 0
-        if (input.isEmpty()) {
-            return 0;
-        }
-        // Divide la stringa in base alla virgola
-        String[] words = input.split("\\s*,\\s*");
-        return words.length;
-    }
 
 
     @Override

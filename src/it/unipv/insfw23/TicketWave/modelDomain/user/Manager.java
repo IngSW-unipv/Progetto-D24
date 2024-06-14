@@ -85,10 +85,10 @@ public class Manager extends User {
     }
 
     //seguono dei metodi di crea Festival, Concerto ecc..
-    public Festival createFestival(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, int artistsNumber, Image photo) throws Exception {
+    public Festival createFestival(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, Image photo) throws Exception {
         if(((subscription == 1 || subscription == 0) && counterCreatedEvents < maxNumberOfEvents) || subscription == 2) {
 
-            Festival festival = new Festival(idEvent, name, city,location,date,time,province,genre,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,ticketsSoldNumberForType,price,creator,artists,description,artistsNumber,photo);
+            Festival festival = new Festival(idEvent, name, city,location,date,time,province,genre,maxNumberOfSeats,typeOfSeats,seatsRemainedNumberForType,ticketsSoldNumberForType,price,creator,artists,description,photo);
             event.add(festival);
             counterCreatedEvents++;
             return festival;
