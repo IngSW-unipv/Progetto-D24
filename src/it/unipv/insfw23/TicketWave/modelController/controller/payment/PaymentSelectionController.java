@@ -58,7 +58,7 @@ public class PaymentSelectionController {
      *
      * the same logic is applied if the payPol button is selected, except for the manager card insertion logic
      *
-     * turnBack EventHandler:
+     * turnBack EventHandler: the previous view is loaded
      *
      *
      */
@@ -120,7 +120,6 @@ public class PaymentSelectionController {
         EventHandler<MouseEvent> turnBack = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent actionEvent) {
-                // Azione da eseguire quando il pulsante viene premuto
 
                 backScene.reSetBars();
                 Scene backSceneCasted = (Scene) backScene;

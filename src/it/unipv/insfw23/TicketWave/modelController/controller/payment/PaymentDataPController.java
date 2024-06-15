@@ -64,7 +64,7 @@ public class PaymentDataPController {
    }
 
     /**
-     * This methos has two EventHandlers associated with the {@link PaymentDataPView} buttons.
+     * This method has two EventHandlers associated with the {@link PaymentDataPView} buttons.
      * turnBackPaymentPage EventHandler: if  BackButton is clicked--return back to the paymentSelectionView.
      *
      * goToNewPage EventHandler: if the NextButton is clicked--based on the LoggedUser, if is {@link Customer} buy one or more tickets, or if is {@link Manager} buy a subscription.

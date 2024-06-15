@@ -255,7 +255,7 @@ public class ProfileDao implements IProfileDao {
                                         resultSet2.getString("CITY"), resultSet2.getString("LOCATION"),
                                         currentDate, resultSet2.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet2.getString("PROVINCE")),
                                         Genre.valueOf(resultSet2.getString("GENRE")), resultSet2.getInt("MAX_NUM_SEATS"), resultSet2.getInt("NUM_SEATS_TYPE"),
-                                        seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION_"),
+                                        seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION_"), countWords(resultSet2.getString("ARTISTS")),
                                         photo);
                                 createdEvents.add(currentFestival);
                                 break;
@@ -333,7 +333,6 @@ public class ProfileDao implements IProfileDao {
         return manager;
     }
 
-<<<<<<< HEAD
     /**
      *
      * @param input
@@ -354,8 +353,6 @@ public class ProfileDao implements IProfileDao {
         String[] words = input.split("\\s*,\\s*");
         return words.length;
     }
-=======
->>>>>>> 66a70d5041d1edf54cb3b0d23b322704c320e423
 
 
     @Override

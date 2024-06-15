@@ -262,7 +262,7 @@ public class PaymentDataMController {
     }
 
     /**
-     * This method sets the Round Button inserted in the View not visible, if the user is a Customer
+     * This method sets the Round Button inserted in the View not visible, if the user is a {@link Manager}
      */
     public void setLabelforWavePoints() {
         if (!user.isCustomer()) {
@@ -272,7 +272,7 @@ public class PaymentDataMController {
 
 
     /**
-     * the number of tickets are set
+     * With this Method the number of tickets is set
      * @param number
      */
     public void setNumOfTickets(int number) {
