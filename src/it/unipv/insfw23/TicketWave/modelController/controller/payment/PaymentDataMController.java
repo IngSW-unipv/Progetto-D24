@@ -38,9 +38,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 /**
- * The class contains the control methods on the {@link MasterPayPayment}
- * using {@link MasterPayAdapter}MasterPay payment domain classes and on the
- * control and setting of certain parameters of the {@link PaymentDataMView}
+ * The class manages the {@link PaymentDataMView}
  *
  */
 
@@ -58,7 +56,7 @@ public class PaymentDataMController {
     /**
      * the constructor uses the Current UI {@link PaymentDataMView} and the Previous view {@link PaymentSelectionView}
      *
-     * calling an initialization method and a setup method for a possible logged {@link Customer} as a {@link ConnectedUser}
+     * calling an initialization method and a setup method for a possible logged {@link Customer} or a {@link Manager} as a {@link ConnectedUser}
      * @param mainStage
      * @param paymentDataMView
      * @param paymentSelectionView
@@ -79,7 +77,7 @@ public class PaymentDataMController {
      */
     public void initComponents() {
 
-        //***** EventHandler per ritornare alla UI precedente(PaymentSelectionView)*****//
+        //-----EventHandler per ritornare alla UI precedente(PaymentSelectionView)-----//
 
 
         EventHandler<MouseEvent> turnBackPaymentPage = new EventHandler<>() {
@@ -87,7 +85,7 @@ public class PaymentDataMController {
             @Override
             public void handle(MouseEvent actionEvent) {
                 // Azione da eseguire quando il pulsante viene premuto
-                System.out.println("Sei ritornato indietro alla paymentSelectionPage");
+                System.out.println("Return to the paymentSelectionView");
                 paymentSelectionView.reSetBars();  // si accede al metodo per reimpostare le barre di layout
                 mainStage.setScene(paymentSelectionView);  //viene settata la scena sul MainStage principale
             }
@@ -97,7 +95,7 @@ public class PaymentDataMController {
 
 
 
-        //***** EventHandler per Proseguire avanti(PaymentSelectionView)*****//
+        //-----EventHandler per Proseguire alla View Successiva(PaymentSelectionView)-----//
         EventHandler<MouseEvent> goToNewPage = new EventHandler<>() {
 
             @Override
@@ -109,7 +107,8 @@ public class PaymentDataMController {
                 }
 
 
-                //*****Azione da eseguire quando il pulsante NextButton viene premuto*****//
+                //-----Azione da eseguire quando il pulsante NextButton viene premuto-----//
+
                 if (user.isCustomer()) {            //controllo dal valore booleano di isCustomer
                     System.out.println("The User is a Customer");
                     Customer customer = (Customer) user;   //cast del User in Customer
@@ -129,36 +128,39 @@ public class PaymentDataMController {
                         iPaymentAdapter = PaymentFactory.getMasterPayAdapter(masterPayPayment);
 
 
+                        //associazione dei tickets
 
                         for(int i = 0; i < numOfTickets; i++) {
                         	Ticket ticket = customer.buyticket(iPaymentAdapter, currentEvent, ConnectedUser.getInstance().getTicketType(), getUsePoint());
-                            System.out.println("Ticket associato correttamente");
+                            System.out.println("ticket associated correctly");
 
                             try {
                                 ticketDao.insertTicket(ticket, customer);
 
-                                System.out.println("insert ticket eseguito");
+                                System.out.println("insert ticket query executed");
                             } catch (SQLException e) {
-                                throw new SQLException("Problema inserimento ticket", e);
+                                throw new SQLException("problem with ticket insert", e);
                             }
+
+                            //update dei points
 
                             try {
                                 profileDao.updateCustomerPoints(customer);
 
-                                System.out.println("updatePoints eseguito");
+                                System.out.println("updatePoints executed");
                             } catch (SQLException e) {
-                                throw new SQLException("Problema aggiornamento punti", e);
+                                throw new SQLException("Problems with ticket Update", e);
                             }
-
+                            //update del numero dei posti
                             try {
                                 eventDao.updateSeatsNumber(ConnectedUser.getInstance().getEventForTicket());
 
-                                System.out.println("updateSeats eseguito");
+                                System.out.println("updateSeats executed");
                             } catch (SQLException e) {
-                                throw new SQLException("Problema aggiornamento posti", e);
+                                throw new SQLException("Problems with Update Seats Number", e);
                             }
                         }
-                        
+                        // controllo e inserimento eventuale Notifica
                         if(currentEvent.getSeatsRemaining() == 0) {
                      	   NotificationDao notificationDao = new NotificationDao();
                      	   INotificationHandler notificationHandler = NotificationHandlerFactory.getIstance().getNotificationHandler();
@@ -179,18 +181,22 @@ public class PaymentDataMController {
                     CustomerController customerController = new CustomerController(mainStage, customerview, ConnectedUser.getInstance().getLoginView());
                     mainStage.setScene(customerview);
 
+                    //FINE CUSTOMER
 
+                    //USER=MANAGER
                 } else {
-                    Manager managerlogged = (Manager) user;
+                    Manager managerlogged = (Manager) user;  //cast dello user in Manager
 
                     ProfileDao profiledao = new ProfileDao();
                     SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMasterPayAdapter(new MasterPayPayment()), paymentSelectionView.getPrice());
-                    try {// UPDATE DELLA SUB DEL MANAGER
+
+                    // Update del Valore Subcription del Manager
+                    try {
                         profiledao.updateManagerCreditCard(managerlogged,paymentDataMView.getInsertNC().getText());
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
-
+                    // Controllo sull'iscrizione del manager
                     if (managerlogged.getSubscription() != -1) {
                         try {
                             profiledao.updateManagerSub(managerlogged);
@@ -199,17 +205,19 @@ public class PaymentDataMController {
                             e.printStackTrace();
                         }
                     } else {
-                        System.out.println("pagamento non andato a buon fine");
+                        System.out.println("Payment Failed");
                     }
 
-                    if (home != null) {
+
+                    //
+                    if (home != null) {  // Utilizzo ManagerView esistente
                         UpperBar.getIstance().setForManager();
                         home.reSetBars();
                         ManagerView managerView = (ManagerView) home;
                         managerView.updateSubLabels(managerlogged.getSubscription(), managerlogged.getCounterCreatedEvents());
                         ManagerController managerController = new ManagerController(mainStage, managerView, ConnectedUser.getInstance().getLoginView());                        
                         mainStage.setScene(managerView);
-                    } else {
+                    } else {  //Creo una nuova ManagerView
                         UpperBar.getIstance().setForManager();
                         ManagerView managerView = new ManagerView(managerlogged.getName(), managerlogged.getNotification(), managerlogged.getEventlist(), managerlogged.getSubscription(), managerlogged.getCounterCreatedEvents());
                         ConnectedUser.getInstance().setHome(managerView);
@@ -218,11 +226,15 @@ public class PaymentDataMController {
                     }
 
                 }
+
+                //FINE MANAGER
             }
         };
 
         paymentDataMView.getNextButton().setOnMouseClicked(goToNewPage);
 
+
+        //-----Controllo inserimento valori per i campi della View-----//
 
         addCharacterLimit(paymentDataMView.getInsertNC(), 16);
         addCharacterLimit(paymentDataMView.getInsertMM(), 2);
@@ -232,33 +244,55 @@ public class PaymentDataMController {
 
     }
 
+
+    /**
+     * This method allows to set a maximum value of characters that can be inserted in the view fields
+     * @param textField
+     * @param limit
+     */
     private void addCharacterLimit(TextField textField, int limit) {  // metodo che mi permette di avere un limite sui textfields
         textField.textProperty().addListener(new ChangeListener<String>() {
             @Override
             public void changed(ObservableValue<? extends String> observable, String oldValue, String newValue) {
                 if (newValue != null && newValue.length() > limit) {
-                    textField.setText(oldValue); // Revert back to old value
+                    textField.setText(oldValue);
                 }
             }
         });
     }
 
-
+    /**
+     * This method sets the Round Button inserted in the View not visible, if the user is a Customer
+     */
     public void setLabelforWavePoints() {
         if (!user.isCustomer()) {
             paymentDataMView.getUsePointsButton().setVisible(false);
         }
     }
-    
+
+
+    /**
+     * the number of tickets are set
+     * @param number
+     */
     public void setNumOfTickets(int number) {
     	numOfTickets = number;
     }
 
+
+    /**
+     *Method that checks whether the string passed as a parameter is numeric or empty
+     * @param str
+     * @return {@link Boolean} true if is exist, is not empty and contains only digits
+     */
     private boolean isNumericAndNotEmpty(String str) {
         return str != null && !str.isEmpty() && str.matches("\\d+");
     }
 
-
+    /**
+     * The method checks the characters and numbers to insert for each field and sets the error labels
+     * @return true if all fields are ok.
+     */
     private boolean checkNumericFields() {
         boolean valid = true;
 
@@ -295,6 +329,10 @@ public class PaymentDataMController {
         }
 
 
+    /**
+     *The method is used for the BuySub method for purchasing the ticket
+     * @return 1 if the User has selected the UsePointsButton. 0 Otherwise.
+     */
     public int getUsePoint() {
         int usePoint;
         if (paymentDataMView.getUsePointsButton().isSelected()) {

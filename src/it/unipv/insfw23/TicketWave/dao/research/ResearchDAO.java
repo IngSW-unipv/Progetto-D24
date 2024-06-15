@@ -252,18 +252,18 @@ public class ResearchDAO implements IResearchDAO{
         }
         switch (Type.valueOf(rs.getString("TYPE_")).ordinal()) {
             case 0 -> {
-                return new Festival(rs.getInt("ID_EVENT"), rs.getString("NAME_"),
+                return new Concert(rs.getInt("ID_EVENT"), rs.getString("NAME_"),
                         rs.getString("CITY"), rs.getString("LOCATION"), ld, tm,
                         Province.valueOf(rs.getString("PROVINCE")), Genre.valueOf(rs.getString("GENRE")),
                         rs.getInt("MAX_NUM_SEATS"), rs.getInt("NUM_SEATS_TYPE"), seatsRemaining, ticketSoldNumberForType, price,
                         manager, rs.getString("ARTISTS"), rs.getString("DESCRIPTION_"), artistsNumber, photo);
             }
             case 1 -> {
-                return new Concert(rs.getInt("ID_EVENT"), rs.getString("NAME_"),
+                return new Festival(rs.getInt("ID_EVENT"), rs.getString("NAME_"),
                         rs.getString("CITY"), rs.getString("LOCATION"), ld, tm,
                         Province.valueOf(rs.getString("PROVINCE")), Genre.valueOf(rs.getString("GENRE")),
                         rs.getInt("MAX_NUM_SEATS"), rs.getInt("NUM_SEATS_TYPE"), seatsRemaining, ticketSoldNumberForType, price,
-                        manager, rs.getString("ARTISTS"), rs.getString("DESCRIPTION_"), photo);
+                        manager, rs.getString("ARTISTS"), rs.getString("DESCRIPTION_"), countWords(rs.getString("ARTISTS")), photo);
             }
             case 2 -> {
                 return new Theater(rs.getInt("ID_EVENT"), rs.getString("NAME_"),

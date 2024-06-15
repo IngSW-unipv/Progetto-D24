@@ -460,9 +460,6 @@ public class NewConcertView extends Scene{
 	}
 
 	public int getNumbasefield() throws NumberFormatException{
-		if(!numbasefield.isVisible()) {
-			return 0;
-		}
 		return Integer.parseInt(numbasefield.getText());
 	}
 	
@@ -532,7 +529,7 @@ public class NewConcertView extends Scene{
 		return descriptionarea.getText();
 	}
 
-	private void validDate (DatePicker datepicker){
+	public static void validDate (DatePicker datepicker){
 		Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell(){
 			public void updateItem(LocalDate item, boolean empty) {
 				super.updateItem(item, empty);

@@ -142,6 +142,7 @@ public class Manager extends User {
         this.event = event;
     }
 
+<<<<<<< HEAD
     /**
      * The method allows you to create a {@link Festival} only if the registration value is 0 or 1 and CounterCreatedEvents is
      * less than the maximum Events that have been created or if the registration value is 2 (infinite events can be created).
@@ -171,6 +172,9 @@ public class Manager extends User {
 
 
     //***** Metodi di creazione degli Eventi*****
+=======
+    //seguono dei metodi di crea Festival, Concerto ecc..
+>>>>>>> parent of 638a42d (-fix alle view di creazione degli eventi)
     public Festival createFestival(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, int artistsNumber, Image photo) throws Exception {
         if(((subscription == 1 || subscription == 0) && counterCreatedEvents < maxNumberOfEvents) || subscription == 2) {
 

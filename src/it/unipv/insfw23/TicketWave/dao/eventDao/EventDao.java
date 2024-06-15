@@ -1,17 +1,23 @@
 package it.unipv.insfw23.TicketWave.dao.eventDao;
 
 import it.unipv.insfw23.TicketWave.dao.ConnectionDB;
+import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
+import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
+import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
+import javax.sql.rowset.serial.SerialBlob;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public class EventDao implements IEventDao {
     private String schema;
@@ -253,8 +259,8 @@ public class EventDao implements IEventDao {
                                 resultSet1.getString("CITY"), resultSet1.getString("LOCATION"),
                                 currentDate, resultSet1.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet1.getString("PROVINCE")),
                                 Genre.valueOf(resultSet1.getString("GENRE")), resultSet1.getInt("MAX_NUM_SEATS"), resultSet1.getInt("NUM_SEATS_TYPE"),
-                                seatsRemaining, seatsSold, price, manager, resultSet1.getString("ARTISTS"), resultSet1.getString("DESCRIPTION_"),
-                                artistsNumber, photo);
+                                seatsRemaining, seatsSold, price, manager, resultSet1.getString("ARTISTS"), resultSet1.getString("DESCRIPTION_"), countWords(resultSet1.getString("ARTISTS")),
+                                photo);
                         selectedEvent = currentFestival;
                         break;
 
@@ -295,6 +301,22 @@ public class EventDao implements IEventDao {
         return selectedEvent;
     }
 
+
+    public int countWords(String input) {
+        if (input == null || input.isEmpty()) {
+            return 0;
+        }
+        // Rimuove eventuali spazi bianchi prima e dopo la stringa
+        input = input.trim();
+
+        // Se la stringa è vuota dopo il trim, ritorna 0
+        if (input.isEmpty()) {
+            return 0;
+        }
+        // Divide la stringa in base alla virgola
+        String[] words = input.split("\\s*,\\s*");
+        return words.length;
+    }
 
 
     public void updateSeatsNumber(Event event) throws SQLException {

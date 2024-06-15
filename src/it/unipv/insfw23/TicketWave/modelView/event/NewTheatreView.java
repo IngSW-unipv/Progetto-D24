@@ -18,7 +18,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
-import javafx.scene.control.DateCell;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
@@ -32,7 +31,6 @@ import javafx.scene.layout.Priority;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.util.Callback;
 
 public class NewTheatreView extends Scene{
 	private final Font lebelsfont = Font.font("Helvetica", FontWeight.NORMAL, 13);
@@ -75,7 +73,7 @@ public class NewTheatreView extends Scene{
 	private ImageView eventPhoto;
 	private final Label descriptionlabel = new Label("Descrizione: ");
 	private TextArea descriptionarea;
-	private Label errlabel = new Label();	
+	private final Label errlabel = new Label("Parametri non validi");	
 	private Button abort = new Button("Annulla");
 	private Button confirm = new Button("Conferma");
 	
@@ -166,7 +164,7 @@ public class NewTheatreView extends Scene{
 		
 		datepicker = new DatePicker();
 		datepicker.setMaxWidth(200);
-		validDate(datepicker);
+		NewConcertView.validDate(datepicker);
 				
 		hourspinner = new Spinner<>(0,23,0);
 		hourspinner.setMinWidth(55);
@@ -485,23 +483,14 @@ public class NewTheatreView extends Scene{
 	}
 	
 	public int getNumbasefield() throws NumberFormatException{
-		if(!numbasefield.isVisible()) {
-			return 0;
-		}
 		return Integer.parseInt(numbasefield.getText());
 	}
 	
 	public int getNumpremiumfield() throws NumberFormatException{
-		if(!numpremiumfield.isVisible()) {
-			return 0;
-		}
 		return Integer.parseInt(numpremiumfield.getText());
 	}
 	
 	public int getNumvipfield() throws NumberFormatException{
-		if(!numvipfield.isVisible()) {
-			return 0;
-		}
 		return Integer.parseInt(numvipfield.getText());
 	}
 
@@ -525,22 +514,6 @@ public class NewTheatreView extends Scene{
 		return confirm;
 	}
 	
-	public TextField getNameTextField(){
-		return namefield;
-	}
-
-	public TextField getArtistsTextField(){
-		return artistfield;
-	}
-
-	public TextField getCityTextField(){
-		return cityfield;
-	}
-
-	public TextArea getDescriptionTextArea(){
-		return descriptionarea;
-	}
-	
 	public Label getErrLabel() {
 		return errlabel;
 	}
@@ -554,21 +527,6 @@ public class NewTheatreView extends Scene{
 	}
 	
 	public String getDescription() {
-		return descriptionarea.getText();
-	}
-	
-	private void validDate (DatePicker datepicker){
-		Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell(){
-			public void updateItem(LocalDate item, boolean empty) {
-				super.updateItem(item, empty);
-
-				// Disable past dates
-				if (item.isBefore(LocalDate.now().plusDays(1))) {
-					setDisable(true);
-					setStyle("-fx-background-color: #EEEEEE;");
-				}
-			}
-		};
-		datepicker.setDayCellFactory(dayCellFactory);
+		return descriptionarea.toString();
 	}
 }
