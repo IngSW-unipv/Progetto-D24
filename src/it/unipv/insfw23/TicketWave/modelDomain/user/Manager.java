@@ -35,6 +35,7 @@ public class Manager extends User {
         //in più il subscriptionHandler deve anche impostare il maxnumberofevents per subscription =1 o 2
 
 
+        
     }
 
     //getters and setters
