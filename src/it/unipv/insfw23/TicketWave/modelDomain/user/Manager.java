@@ -142,7 +142,7 @@ public class Manager extends User {
         this.event = event;
     }
 
-
+    //***** Metodi di creazione degli Eventi*****
     /**
      * The method allows you to create a {@link Festival} only if the registration value is 0 or 1 and CounterCreatedEvents is
      * less than the maximum Events that have been created or if the registration value is 2 (infinite events can be created).
@@ -168,10 +168,6 @@ public class Manager extends User {
      * @return {@link Festival}
      * @throws Exception
      */
-
-
-    //***** Metodi di creazione degli Eventi*****
-
     public Festival createFestival(int idEvent, String name, String city, String location, LocalDate date, LocalTime time, Province province, Genre genre, int maxNumberOfSeats, int typeOfSeats, int[] seatsRemainedNumberForType, int[] ticketsSoldNumberForType, double[] price, Manager creator, String artists, String description, Image photo) throws Exception {
         if(((subscription == 1 || subscription == 0) && counterCreatedEvents < maxNumberOfEvents) || subscription == 2) {
 
@@ -181,7 +177,7 @@ public class Manager extends User {
             return festival;
         }
         else {
-            throw new Exception("Impossibile Creare l'evento:" + name + ".Non puoi creare altri Eventi");
+            throw new Exception("Unable to create event:" + name + ".You Cannot create other Events");
         }
     }
 
@@ -219,7 +215,7 @@ public class Manager extends User {
             return concert;
         }
         else {
-            throw new Exception("Impossibile Creare l'evento:" + name + ".Non puoi creare altri Eventi");
+            throw new Exception("Unable to create event:" + name + ".You Cannot create other Events");
         }
     }
 
@@ -259,7 +255,7 @@ public class Manager extends User {
             return theater;
         }
         else {
-            throw new Exception("Impossibile Creare l'evento:" + name + ".Non puoi creare altri Eventi");
+            throw new Exception("Unable to create event:" + name + ".You Cannot create other Events");
         }
     }
 
@@ -296,7 +292,7 @@ public class Manager extends User {
             return other;
         }
         else {
-            throw new Exception("Impossibile Creare l'evento:" + name + ".Non puoi creare altri Eventi");
+            throw new Exception("Unable to create event:" + name + ".You Cannot create other Events");
         }
 
     }
@@ -335,6 +331,8 @@ public class Manager extends User {
     /**
      * Inherited from the superclass {@link User}
      * @return {@link Boolean} false
+     *
+     * @see Customer
      */
     @Override
     public boolean isCustomer() {
@@ -342,8 +340,8 @@ public class Manager extends User {
     }
 
     /**
-     *
-     * @return {@link Boolean} true if the manager can still create events,false otherwise.
+     *This method is used to control whether the manager can create other events
+     * @return anotherEvents as a  {@link Boolean} true if the manager can still create events,false otherwise.
      */
     public boolean anotherEvents(){
         if (maxNumberOfEvents-counterCreatedEvents>0){
