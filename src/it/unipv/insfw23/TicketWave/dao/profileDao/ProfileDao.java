@@ -3,6 +3,10 @@ package it.unipv.insfw23.TicketWave.dao.profileDao;
 import it.unipv.insfw23.TicketWave.exceptions.AccountAlreadyExistsException;
 import it.unipv.insfw23.TicketWave.exceptions.GenreNotSelected;
 import it.unipv.insfw23.TicketWave.exceptions.WrongPasswordException;
+import it.unipv.insfw23.TicketWave.modelController.controller.event.NewConcertController;
+import it.unipv.insfw23.TicketWave.modelController.controller.event.NewFestivalController;
+import it.unipv.insfw23.TicketWave.modelController.controller.event.NewOtherController;
+import it.unipv.insfw23.TicketWave.modelController.controller.event.NewTheatreController;
 import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
@@ -154,14 +158,12 @@ public class ProfileDao implements IProfileDao {
      *
      * @param mail
      * @param password
-     * @return Manager
-     * @throws SQLException
+     * @return {@link Manager }
+     * @throws SQLException  when a generic SQL exception occurs
      * @throws WrongPasswordException when the db password does not match the password entered
      *
      * @see Notification
      * @see Event
-     *
-     *
      */
     @Override
     public Manager selectManager(String mail, String password) throws SQLException, WrongPasswordException {
@@ -175,6 +177,8 @@ public class ProfileDao implements IProfileDao {
 
         Manager manager = null;
 
+
+        //Caricamento dati Manager
         try {
             String query1 = "SELECT * FROM MANAGER WHERE (MAIL = ?)";
             statement1 = connection.prepareStatement(query1);
@@ -334,7 +338,15 @@ public class ProfileDao implements IProfileDao {
     }
 
 
-
+    /**
+     * This method allows you to get all the data of a {@link Customer} from the database
+     *  when the {@link Customer} logs in from the {@link LoginView}.
+     * @param mail
+     * @param password
+     * @return {@link Customer}
+     * @throws SQLException when a generic SQL exception occurs
+     * @throws WrongPasswordException when the db password does not match the password entered
+     */
     @Override
     public Customer selectCustomer(String mail, String password) throws SQLException,WrongPasswordException{
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
@@ -347,6 +359,7 @@ public class ProfileDao implements IProfileDao {
 
         Customer customer = null;
 
+        //carico dati Customer
         try {
             String query1 = "SELECT * FROM CUSTOMER WHERE (MAIL = ?)";
             statement1 = connection.prepareStatement(query1);
@@ -377,6 +390,7 @@ public class ProfileDao implements IProfileDao {
                         resultSet1.getString("MAIL"), null, Province.valueOf(resultSet1.getString("PROVINCE")), splitStringToArrayGenre(resultSet1.getString("FAVOURITE_GENRE")),
                         resultSet1.getInt("POINTS"), boughtTickets);
 
+                //carico dati dei Ticket del Customer
                 try {
                     String query2 = "SELECT * FROM TICKET WHERE ID_CUSTOMER = ?";
                     statement2 = connection.prepareStatement(query2);
@@ -392,9 +406,11 @@ public class ProfileDao implements IProfileDao {
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
-                    throw new RuntimeException("Errore nel caricamento dei biglietti");
+                    throw new RuntimeException("error loading tickets");
                 }
 
+
+                //carico le notifiche del Customer
                 try {
                     String query3 = "SELECT * FROM NOTIFY WHERE MAIL = ?";
 
@@ -420,13 +436,19 @@ public class ProfileDao implements IProfileDao {
             else{ return null;}
 
         } catch (SQLException e) {
-            throw new RuntimeException("Utente non trovato o non registrato");
+            throw new RuntimeException("User not found or not registered");
         }
         ConnectionDB.closeConnection(connection);
         return customer;
     }
 
-
+    /**
+     *This method takes a {@link String} as input, splits it by commas,
+     * and converts each resulting substring into a {@link Genre} object.
+     * It then puts these Genre objects into an array and returns it.
+     * @param s input string
+     * @return {@link Genre} Array where each genre is separated by a comma
+     */
     private Genre[] splitStringToArrayGenre(String s) {
         String[] arrayString = s.split(",");
         Genre[] genreArray = new Genre[5];
@@ -440,10 +462,22 @@ public class ProfileDao implements IProfileDao {
         return genreArray;
     }
 
+    /**
+     *This Method  takes a user's password as input and returns a hashed version of the password using the BCrypt library.
+     * @param password
+     * @return hashPassword as a {@link String}
+     */
     public static String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
+
+    /**
+     * The method checks whether a plaintext password matches a hashed password using the BCrypt library
+     * @param plainPassword insert by the User
+     * @param hashedPassword
+     * @return {@link Boolean} True if the Passwords are Matched. Otherwise false.
+     */
     public static boolean checkPassword(String plainPassword, String hashedPassword)  {
 
 
@@ -451,6 +485,13 @@ public class ProfileDao implements IProfileDao {
 
     }
 
+    /**
+     * This method update the  {@link Manager } subscription using a double logic:
+     * if subscription has expired (subscription -1),updates database's values. Indicating that subscription has expired
+     * if the Manager choose a new Plan, an update is made of the various values based on the plan chosen by the Manager
+     * @param manager
+     * @throws SQLException when a generic SQL exception occurs
+     */
 	@Override
 	public void updateManagerSub(Manager manager) throws SQLException {
 		connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);
@@ -461,16 +502,16 @@ public class ProfileDao implements IProfileDao {
 
 			statement1 = connection.prepareStatement(query1);
             //CONTROLLO PER LA SUB SCADUTA
-            if(manager.getSubscription()==-1){
+            if(manager.getSubscription()==-1){  //subcription scaduta
 
-                statement1.setInt(1, 0); //MAXEVENTS=0
+                statement1.setInt(1, 0); //MAXEVENTS=0 non si possono creare nuovi eventi
                 statement1.setInt(2, -1);  //SUB=-1
                 statement1.setDate(3, Date.valueOf(manager.getSubscriptionDate()));
                 statement1.setInt(4, manager.getCounterCreatedEvents());
                 statement1.setString(5, manager.getEmail());
-                System.out.println("statement di correzione eseguito ");
+                System.out.println(" SubUpdate statement executed");
             }
-            else {
+            else {  //il manager sceglie un Nuovo Abbonamento esegue questo codice quando il pagamento è andato a buon fine
                 switch (ConnectedUser.getInstance().getNewSubLevel()) {
                     case 0:
                         statement1.setInt(1, MAX_EVENTS_FOR_FREE_SUB);
@@ -500,6 +541,13 @@ public class ProfileDao implements IProfileDao {
 		ConnectionDB.closeConnection(connection);
 	}
 
+
+    /**
+     * This method performs an update on the manager's credit card field  in the database
+     * @param manager
+     * @param managerCreditCard
+     * @throws SQLException when a generic SQL exception occurs
+     */
     @Override
     public void updateManagerCreditCard(Manager manager ,String managerCreditCard) throws SQLException {
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);
@@ -511,17 +559,26 @@ public class ProfileDao implements IProfileDao {
             statement.setString(2, manager.getEmail());
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new SQLException("Errore nell'aggiornamento del numero della carta di credito del manager", e);
+            throw new SQLException("Error updating manager's credit card number", e);
         }
             ConnectionDB.closeConnection(connection);
 
     }
-	
 
 
-
-
-
+    /**
+     *This method is used for Event notifications,
+     *all emails from the relevant Customers who have a specific preferred genre are taken
+     * @param genreToCheck
+     * @return ArrayList of {@link String} (Customers emails)
+     * @throws SQLException
+     *
+     *
+     * @see NewTheatreController
+     * @see NewConcertController
+     * @see NewOtherController
+     * @see NewFestivalController
+     */
     @Override
     public ArrayList<String> selectCustomerByGenre (Genre genreToCheck) throws SQLException{
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
@@ -547,12 +604,24 @@ public class ProfileDao implements IProfileDao {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Utente non trovato o non registrato");
+            throw new RuntimeException("User not found or User not registered");
         }
         ConnectionDB.closeConnection(connection);
         return customerWithGenreMail;
     }
 
+    /**
+     *This method is used for Event notifications,
+     * all emails from the relevant Customers who have a specific {@link Province} are taken
+     * @param provToCheck
+     * @return ArrayList of {@link String} (Customers emails)
+     * @throws SQLException
+     *
+     * @see NewTheatreController
+     * @see NewConcertController
+     * @see NewOtherController
+     * @see NewFestivalController
+     */
     public ArrayList<String> selectCustomerByProvince (Province provToCheck) throws SQLException{
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
         PreparedStatement statement1;
@@ -575,13 +644,19 @@ public class ProfileDao implements IProfileDao {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Utente non trovato o non registrato");
+            throw new RuntimeException("User-Mail not found or not user not registered");
         }
         ConnectionDB.closeConnection(connection);
         return customerWithProvMail;
     }
-    
-    
+
+    /**
+     *The method allows you to update the count of the events created by the {@link Manager}
+     * @param manager
+     * @throws SQLException when a generic SQL exception occurs
+     *
+     *
+     */
     @Override
     public void updateEventCreatedCounter(Manager manager) throws SQLException {
     	connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);
@@ -597,7 +672,7 @@ public class ProfileDao implements IProfileDao {
 			
 			statement1.executeUpdate();
 		} catch (SQLException e) {
-			throw new SQLException("Errore nell'aggiornamento del campo relativo agli eventi creati");
+			throw new SQLException("Error updating the created events field");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -605,6 +680,12 @@ public class ProfileDao implements IProfileDao {
     	ConnectionDB.closeConnection(connection);
     }
 
+
+    /**
+     * This method allows you to update a {@link Customer}'s points when purchasing a ticket
+     * @param customer
+     * @throws SQLException  when a generic SQL exception occurs
+     */
     public void updateCustomerPoints(Customer customer) throws SQLException {
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);
         PreparedStatement statement1;
@@ -619,7 +700,7 @@ public class ProfileDao implements IProfileDao {
 
             statement1.execute();
         } catch (SQLException e) {
-            throw new SQLException("Errore nell'aggiornamento dei punti");
+            throw new SQLException("Error updating points");
         }catch(Exception e) {
             e.printStackTrace();
         }

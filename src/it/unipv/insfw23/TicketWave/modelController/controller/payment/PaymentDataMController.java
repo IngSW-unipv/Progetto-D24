@@ -196,7 +196,7 @@ public class PaymentDataMController {
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
-                    // Controllo sull'iscrizione del manager
+                    // Controllo sull'iscrizione del manager eseguo solo se è scaduto l'abbonament e il manager vuole acquistarne uno nuovo
                     if (managerlogged.getSubscription() != -1) {
                         try {
                             profiledao.updateManagerSub(managerlogged);
