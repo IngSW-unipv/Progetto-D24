@@ -5,8 +5,7 @@ import it.unipv.insfw23.TicketWave.modelController.factory.ticket.ITicketHandler
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 
 public class TicketHandler implements ITicketHandler{
-		
-	
+			
 		private static TicketHandler istance;
 		
 //		public TicketHandler() {
