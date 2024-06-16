@@ -12,9 +12,7 @@ import it.unipv.insfw23.TicketWave.modelController.factory.payment.PaymentFactor
 import it.unipv.insfw23.TicketWave.modelController.factory.subscription.SubscriptionHandlerFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
-import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
-import it.unipv.insfw23.TicketWave.modelDomain.payment.MasterPayPayment;
-import it.unipv.insfw23.TicketWave.modelDomain.payment.PayPolPayment;
+import it.unipv.insfw23.TicketWave.modelDomain.payment.*;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
@@ -23,6 +21,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
+import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataPView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
@@ -33,18 +32,28 @@ import javafx.stage.Stage;
 
 import java.sql.SQLException;
 
-public class PaymentDataPController {
 
-    private PaymentSelectionView paymentSelectionView;
+/**
+ * The class manages the {@link PaymentDataPView}
+ *
+ */
+public class PaymentDataPController {
     private Stage mainStage;
     private PaymentDataPView paymentDataPView;
-
-    private User user= ConnectedUser.getInstance().getUser();
-    private IResettableScene home = ConnectedUser.getInstance().getHome();
-    private IPaymentAdapter iPaymentAdapter;
-    
+    private PaymentSelectionView paymentSelectionView;
+    private User user= ConnectedUser.getInstance().getUser();  // associo l'User corrente a una variabile User
     private int numOfTickets;
+    private IPaymentAdapter iPaymentAdapter;
+    private IResettableScene home = ConnectedUser.getInstance().getHome();   // associo la home corrente alla variabile Home
 
+    /**
+     * the constructor uses the Current UI {@link PaymentDataPView} and the Previous view {@link PaymentSelectionView}
+     *
+     * calling an initialization method and a setup method for a possible logged {@link Customer} or {@link Manager}  as a {@link ConnectedUser}
+     * @param mainStage
+     * @param paymentDataPView
+     * @param paymentSelectionView
+     */
     public PaymentDataPController(Stage mainStage, PaymentDataPView paymentDataPView, PaymentSelectionView paymentSelectionView){
        this.paymentDataPView = paymentDataPView;
        this.paymentSelectionView = paymentSelectionView;
@@ -54,15 +63,23 @@ public class PaymentDataPController {
 
    }
 
+    /**
+     * This method has two EventHandlers associated with the {@link PaymentDataPView} buttons.
+     * turnBackPaymentPage EventHandler: if  BackButton is clicked--return back to the paymentSelectionView.
+     *
+     * goToNewPage EventHandler: if the NextButton is clicked--based on the LoggedUser, if is {@link Customer} buy one or more tickets, or if is {@link Manager} buy a subscription.
+     * Both options have additional input and domain controls
+     *
+    */
    public void initComponents(){
 
-        //EventHandler---passaggio alla View precedente
+        //-----EventHandler passaggio alla View precedente-----//
        EventHandler<MouseEvent> turnBackPaymentPage = new EventHandler<>() {
 
            @Override
            public void handle(MouseEvent actionEvent) {
                // Azione da eseguire quando il pulsante viene premuto
-               System.out.println("Sei ritornato indietro alla PaySelectionPage");
+               System.out.println("Return to the  PaySelectionPage");
                paymentSelectionView.reSetBars();
                mainStage.setScene(paymentSelectionView);
            }
@@ -71,7 +88,7 @@ public class PaymentDataPController {
        paymentDataPView.getBackButton().setOnMouseClicked(turnBackPaymentPage);
 
 
-       //EventHandler---passaggio alla View successiva
+       //-----EventHandler passaggio alla View successiva-----//
        EventHandler<MouseEvent> goToNewPage = new EventHandler<>() {
            @Override
            public void handle(MouseEvent actionEvent) {
@@ -83,57 +100,61 @@ public class PaymentDataPController {
                    paymentDataPView.getErrorLabel().setVisible(false);
                }
 
-               // Azione da eseguire quando il pulsante avanti viene premuto
-               System.out.println("Pagamento andato a buon fine, stai tornando alla pagina principale!");
 
-///////////////////////USER=CUSTOMER/////////////////////////////////////////////////////////////////////////
+               //USER=CUSTOMER
                if(user.isCustomer()){
-                   System.out.println("Stai andando alla vista del cliente");
-                   Customer customer = (Customer) user;
-                   Event currentEvent = ConnectedUser.getInstance().getEventForTicket();
+                   System.out.println("The User is a Customer ");
+                   Customer customer = (Customer) user;  //cast del User in Customer
+                   Event currentEvent = ConnectedUser.getInstance().getEventForTicket();   //associo l'Evento Corrente alla variabile Event
                    
                    try {
+
+                       //creazione Variabili dei DAO, associo alle istanze
                        
                        TicketDao ticketDao = new TicketDao();
                        EventDao eventDao = new EventDao();
                        ProfileDao profileDao= new ProfileDao();
-                       System.out.println("TicketDao creato");
 
+
+
+                       //utilizzo di un Istanza del PaymentFactor e associo a un iPaymentAdapter
                        PayPolPayment payPolPayment = new PayPolPayment();
                        iPaymentAdapter = PaymentFactory.getPaypolAdapter(payPolPayment);
-                       System.out.println("Creati PayPolPayment e interfaccia");
 
+
+                       //associazione dei tickets
                        for(int i = 0; i < numOfTickets; i++) {
                     	   Ticket ticket = customer.buyticket(iPaymentAdapter, currentEvent, ConnectedUser.getInstance().getTicketType(), getUsePoint());
-                           System.out.println("Biglietto associato correttamente");
+                           System.out.println("ticket associated correctly");
 
                            try {
                                ticketDao.insertTicket(ticket, customer);
-                               System.out.println("Inserimento biglietto eseguito");
+                               System.out.println("insert ticket query executed");
                            } catch (SQLException e) {
-                               throw new SQLException("Problema inserimento biglietto", e);
+                               throw new SQLException("problem with ticket insert", e);
                            }
-                           // BLOCCO TRY/CATCH UPDATEPOINTS
+
+                           //update dei points
                            try {
                                profileDao.updateCustomerPoints(customer);
 
 
-                               System.out.println("updatepoints eseguito");
+                               System.out.println("updatepoints executed");
                            } catch (SQLException e) {
-                               throw new SQLException("Problema aggiornamento punti", e);
+                               throw new SQLException("Problems with ticket Update", e);
                            }
-                           //BLOCCO TRY/CATCH UPDATESEATS
+                           //update del numero dei posti
                            try {
                         	   eventDao.updateSeatsNumber(ConnectedUser.getInstance().getEventForTicket());
                         	   
-                        	   System.out.println("updateSeats eseguito");
+                        	   System.out.println("updateSeats executed");
                            } catch (SQLException e) {
-                        	   throw new SQLException("Problema aggiornamento posti");
+                        	   throw new SQLException("Problems with Update Seats Number");
                            }
                            
                        }
 
-                       //COSTRUTTO CONTROLLO DI NOTIFICHE
+                       //controllo e inserimento eventuale Notifica
 
                        if(currentEvent.getSeatsRemaining() == 0) {
                     	   NotificationDao notificationDao = new NotificationDao();
@@ -154,8 +175,10 @@ public class PaymentDataPController {
                    CustomerController customerController = new CustomerController(mainStage, customerview, ConnectedUser.getInstance().getLoginView());
                    mainStage.setScene(customerview);
 
+                   //FINE CUSTOMER
 
-///////////////////USER=MANAGER/////////////////////////////////////////////////////////////
+
+                //USER=MANAGER
                } else {
                    Manager managerlogged = (Manager)user;
                    ProfileDao profiledao = new ProfileDao();
@@ -167,17 +190,17 @@ public class PaymentDataPController {
                            e.printStackTrace();
                        }
                    } else {
-                       System.out.println("Pagamento non andato a buon fine");
+                       System.out.println("Payment Failed ");
                    }
 
-                   if(home!=null){
+                   if(home!=null){  //utilizzo managerView esistente
                        UpperBar.getIstance().setForManager();
                        home.reSetBars();
                        ManagerView managerView = (ManagerView)home;
                        managerView.updateSubLabels(managerlogged.getSubscription(), managerlogged.getCounterCreatedEvents());
                        ManagerController managerController = new ManagerController(mainStage, managerView, ConnectedUser.getInstance().getLoginView());
                        mainStage.setScene(managerView);
-                   } else {
+                   } else {  //creo nuova managerView
                        UpperBar.getIstance().setForManager();
                        ManagerView managerView = new ManagerView(managerlogged.getName(), managerlogged.getNotification(), managerlogged.getEventlist(),managerlogged.getSubscription(),managerlogged.getCounterCreatedEvents());
                        ConnectedUser.getInstance().setHome(managerView);
@@ -185,22 +208,37 @@ public class PaymentDataPController {
                        mainStage.setScene(managerView);
                    }
                }
+               //FINE MANAGER
            }
        };
 
        paymentDataPView.getNextButton().setOnMouseClicked(goToNewPage);
 
    }
+
+    /**
+     * This method sets the Round Button inserted in the View not visible, if the user is a {@link Manager}
+     */
     public void setLabelforWavePoints() {
         if(!user.isCustomer()){
             paymentDataPView.getUsePointsButton().setVisible(false);
         }
     }
-    
+
+
+    /**
+     * With this Method the number of tickets is set
+     * @param number
+     */
     public void setNumOfTickets(int number) {
     	numOfTickets = number;
     }
 
+
+    /**
+     *The method is used for the BuySub method for purchasing the ticket
+     * @return 1 if the User has selected the UsePointsButton. 0 Otherwise.
+     */
     public int getUsePoint(){
         int usePoint;
         if(paymentDataPView.getUsePointsButton().isSelected()){

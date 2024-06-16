@@ -1,32 +1,18 @@
 package it.unipv.insfw23.TicketWave.dao.eventDao;
 
 import it.unipv.insfw23.TicketWave.dao.ConnectionDB;
-import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
-import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapType;
-import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
-import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 
 import javax.imageio.ImageIO;
-import javax.sql.rowset.serial.SerialBlob;
 import java.awt.image.BufferedImage;
 import java.io.*;
 import java.sql.*;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
-
-/**
- * Implementation of the methods declared in {@link IEventDao}.
- * It encapsulates database interactions, providing a clean and reusable interface
- * for accessing database items.
- *
- */
 public class EventDao implements IEventDao {
     private String schema;
     private Connection connection;
@@ -36,12 +22,6 @@ public class EventDao implements IEventDao {
         this.schema = "TicketWaveDB";
     }
 
-
-
-    /**
-     *Method that allows inserting an {@link Event} into the database.
-     * @param event
-     */
     @Override
     public void insertEvent(Event event) throws SQLException {
 
@@ -156,18 +136,31 @@ public class EventDao implements IEventDao {
                 preparedStatement.setBlob(25, photoDB);
 
 
-                System.out.println("pre-execution check");
+                System.out.println("prova pre-esecuzione");
                 preparedStatement.executeUpdate();  // eseguo
-                System.out.println("query executed");
+                System.out.println("query eseguita");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("Problems with event insertion in the database!");
+            throw new SQLException("No zi non posso salvare i tuoi dati, c'è qualche prob");
         }
         ConnectionDB.closeConnection(connection);
 
     }
+/*
+    public static byte[] imageToByteArray(Image image, String formatName) throws IOException {
+        BufferedImage bufferedImage = SwingFXUtils.fromFXImage(image, null);
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        ImageIO.write(bufferedImage, formatName, baos);
+        return baos.toByteArray();
+    }
 
+    // Metodo per convertire un array di byte in un Blob
+    public static Blob byteArrayToBlob(byte[] byteArray) throws SQLException {
+        return new SerialBlob(byteArray);
+    }
+
+ */
 
     private InputStream transformImageIntoInputStream(final Image image) {
         BufferedImage awtBufferedImage = SwingFXUtils.fromFXImage(image, null);
@@ -180,15 +173,9 @@ public class EventDao implements IEventDao {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        throw new IllegalStateException("Problems with image conversion in eventDao");
+        throw new IllegalStateException("Should not reach this point in method `transformImageIntoInputStream`.");
     }
 
-
-
-    /**
-     *Method that allows calculating the number of events that are in the database.
-     * @return eventNumber
-     */
     public int selectEventNumber() throws SQLException {
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);  // apro connessione
         PreparedStatement statement1;
@@ -207,19 +194,13 @@ public class EventDao implements IEventDao {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("User not found or not registered");
+            throw new RuntimeException("Utente non trovato o non registrato");
         }
         ConnectionDB.closeConnection(connection);
         return eventNumber;
     }
 
 
-
-    /**
-     *Method that allows retrieving an {@link Event} from the database.
-     * @param event_Id
-     * @return selectedEvent
-     */
     public Event selectEvent(int event_Id) throws SQLException {
         Event selectedEvent = null;
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);  // apro connessione
@@ -272,7 +253,7 @@ public class EventDao implements IEventDao {
                                 resultSet1.getString("CITY"), resultSet1.getString("LOCATION"),
                                 currentDate, resultSet1.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet1.getString("PROVINCE")),
                                 Genre.valueOf(resultSet1.getString("GENRE")), resultSet1.getInt("MAX_NUM_SEATS"), resultSet1.getInt("NUM_SEATS_TYPE"),
-                                seatsRemaining, seatsSold, price, manager, resultSet1.getString("ARTISTS"), resultSet1.getString("DESCRIPTION_"), countWords(resultSet1.getString("ARTISTS")),
+                                seatsRemaining, seatsSold, price, manager, resultSet1.getString("ARTISTS"), resultSet1.getString("DESCRIPTION_"),
                                 photo);
                         selectedEvent = currentFestival;
                         break;
@@ -309,34 +290,13 @@ public class EventDao implements IEventDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("Problem with loading event from the database");
+            throw new RuntimeException("Problema nel caricamento degli eventi");
         }
         return selectedEvent;
     }
 
 
-    public int countWords(String input) {
-        if (input == null || input.isEmpty()) {
-            return 0;
-        }
-        // Rimuove eventuali spazi bianchi prima e dopo la stringa
-        input = input.trim();
 
-        // Se la stringa è vuota dopo il trim, ritorna 0
-        if (input.isEmpty()) {
-            return 0;
-        }
-        // Divide la stringa in base alla virgola
-        String[] words = input.split("\\s*,\\s*");
-        return words.length;
-    }
-
-
-    /**
-     *Method that allows updating the number of sold tickets and the remaining seats of
-     * an {@link Event} in the database.
-     * @param event
-     */
     public void updateSeatsNumber(Event event) throws SQLException {
         PreparedStatement statement1;
         ResultSet resultSet1;
@@ -382,13 +342,13 @@ public class EventDao implements IEventDao {
                         preparedStatement.setNull(6, Types.INTEGER);
                         break;
                 }
-                System.out.println("pre-execution check");
+                System.out.println("prova pre-esecuzione");
                 preparedStatement.executeUpdate();  // eseguo
-                System.out.println("query executed");
+                System.out.println("query eseguita");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("Problem with updating event's seats number in eventDao");
+            throw new SQLException("Problema nell'aggiornamento dei posti rimanenti");
         }
         ConnectionDB.closeConnection(connection);
     }

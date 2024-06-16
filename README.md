@@ -37,7 +37,8 @@ Per quanto riguarda il database MySQL:
 
 Per quanto riguarda IntelliJ:
 1. Importare tutte le librerie utili (JAVAFX 21, JUnit 4 e MySQL Java connector) tramite ProjectStructure -> Libraries -> Add
-2. Prima di eseguire la classe Main mettere le VM options tramite Edit Configurations -> Main -> Modify options -> Add VM options
+2. Successivamente andare su Modules e spuntare tutte le librerie implementate
+3. Prima di eseguire la classe Main mettere le VM options tramite Run/Debug Configurations -> Edit Configurations -> Main -> Modify options -> Add VM options e immettere la stringa --module-path /path/to/javafx-sdk-22.0.1/lib --add-modules javafx.controls,javafx.fxml
 
 ## Immagini
 

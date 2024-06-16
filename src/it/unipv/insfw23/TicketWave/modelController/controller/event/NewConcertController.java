@@ -92,8 +92,6 @@ public class NewConcertController {
 			public void handle(MouseEvent event){
 				view.getErrLabel().setVisible(false);
 				
-				//System.out.println(view.getPricebasefield());
-				//System.out.println(view.getTypesticket());
 				ArrayList<String> customerFavGenre = new ArrayList<>();
 				ArrayList<String> customerProvince = new ArrayList<>();
 				ArrayList<Notification> notifications = new ArrayList<>();

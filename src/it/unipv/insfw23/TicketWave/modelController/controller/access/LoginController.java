@@ -172,7 +172,7 @@ public class LoginController {
                     // Azione da eseguire quando il pulsante "Login" viene premuto
                     if(loggedManager != null){
                         System.out.println("Hai cliccato il pulsante Login come gestore");
-                        if(loggedManager.oneMonthPassed() && loggedManager.getSubscription() != 0 && loggedManager.getSubscription()!=-1){
+                        if(loggedManager.oneMonthPassed() && loggedManager.getSubscription() != 0 && loggedManager.getSubscription()!=-1){ //controllo sull'abbonamento scaduto
                             loggedManager.setSubscription(-1);
                             try {
                                 profileDao.updateManagerSub(loggedManager);
@@ -185,8 +185,6 @@ public class LoginController {
                         ArrayList<Notification> arrayListNotification = loggedManager.getNotification();
                         ManagerView managerView = new ManagerView(loggedManager.getName(),arrayListNotification,arrayListEvent,loggedManager.getSubscription(),loggedManager.getCounterCreatedEvents());
 
-                        //managerView.setEventsforTableev(managerfinto);
-                        //managerView.reSetBars();
 
                         ConnectedUser.getInstance().setUser(loggedManager);
                         ConnectedUser.getInstance().setHome(managerView);

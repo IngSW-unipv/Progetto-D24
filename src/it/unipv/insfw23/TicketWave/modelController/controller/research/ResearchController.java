@@ -19,6 +19,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Objects;
 
+/**
+ * This controller manages all clicks made on the ResearchView.
+ */
 public class ResearchController {
 
     // ATTRIBUTES:
@@ -27,6 +30,12 @@ public class ResearchController {
     private final ArrayList<String> pr, gen; // sono gli arrayList che contengono i filtri selezionati, per cui le province selezionate ed i generi selezionati
 
     // CONSTRUCTOR:
+
+    /**
+     * The constructor of ResearchController takes 2 parameters as input and calls the serResearchListener() method to manage all the events that occur on the ResearchView
+     * @param mainStage
+     * @param rv
+     */
     public ResearchController(Stage mainStage, ResearchView rv) {
         this.mainStage = mainStage;
         this.rv = rv;
@@ -36,6 +45,27 @@ public class ResearchController {
     }
 
     // PUBLIC METHODS:
+
+    /**
+     * Method that sets all the listeners of the ResearchView.
+     * <ul>
+     *     <li>
+     *         The first listener handles the researchButton. If the button is pressed without parameters in the text field or without putting filters, then all the events are taken from the database and placed in the table view.
+     *         On the other hand, if the button is pressed and text is written in the text field or filters are imposed, then all the events that comply with the imposed filters are placed in the table view.
+     *     </li>
+     *     <li>
+     *         The second listener handles the click on a row of the tableView. If a row is pressed within the tableView. If a row is pressed in the table, then I have to go to the TicketPageView to purchase a ticket regarding that event.
+     *     </li>
+     *     <li>
+     *         The third listener handles the genreFilter, that is an array of checkboxes. If a checkbox (represents a genre) of the genreFilter is pressed, then i have to add it to the gen, that is an arrayList of Strings. This is useful for getting filtered events from the database.
+     *     </li>
+     *     <li>
+     *         The fourth listener handles the provinceFilter, that is an array of checkboxes. If a checkbox (represents a province) of the provinceFilter is pressed, then i have to add it to the pr, that is an arrayList of Strings. This is useful for getting filtered events from the database.
+     *     </li>
+     *
+     *
+     * </ul>
+     */
     public void setResearchListener() {
         // click sul bottone di ricerca => appare la table con i risultati
         EventHandler<javafx.scene.input.MouseEvent> researchPressHandlerResearchView = mouseEvent -> {
@@ -47,7 +77,7 @@ public class ResearchController {
                     ObservableList<Event> evs = FXCollections.observableArrayList(ev);
                     rv.getTable().setItems(evs); // mostro gli eventi nella tabella dei risultati
                 } catch (SQLException e) {
-                    throw new RuntimeException("Tutti gli eventi non trovati (ResearchController riga 56)");
+                    throw new RuntimeException("All events not found)");
                 }
             } else { // se scrivo qualcosa sulla barra di ricerca faccio una ricerca filtrata
                 try {

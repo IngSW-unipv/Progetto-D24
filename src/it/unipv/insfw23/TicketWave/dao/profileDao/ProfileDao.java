@@ -3,6 +3,10 @@ package it.unipv.insfw23.TicketWave.dao.profileDao;
 import it.unipv.insfw23.TicketWave.exceptions.AccountAlreadyExistsException;
 import it.unipv.insfw23.TicketWave.exceptions.GenreNotSelected;
 import it.unipv.insfw23.TicketWave.exceptions.WrongPasswordException;
+import it.unipv.insfw23.TicketWave.modelController.controller.event.NewConcertController;
+import it.unipv.insfw23.TicketWave.modelController.controller.event.NewFestivalController;
+import it.unipv.insfw23.TicketWave.modelController.controller.event.NewOtherController;
+import it.unipv.insfw23.TicketWave.modelController.controller.event.NewTheatreController;
 import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
@@ -20,10 +24,16 @@ import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
+import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
 import it.unipv.insfw23.TicketWave.org.mindrot.jbcrypt.BCrypt;
 import javafx.scene.image.Image;
 
-
+/**
+ * This class controls all management of the {@link Manager} and {@link Customer} classes and the persistence of their information
+ * @see ConnectionDB
+ * @see IProfileDao
+ */
 
 public class ProfileDao implements IProfileDao {
     private String schema;
@@ -33,11 +43,22 @@ public class ProfileDao implements IProfileDao {
 	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
 	private final int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
 
+
+    /**
+     * In this constructor the name of the DB is associated with the String Schema
+     */
     public ProfileDao() {
         super();
         this.schema = "TicketWaveDB";
     }
 
+
+    /**
+     *This method allows to insert on the TicketWaveDB, a {@link Manager} when registering on the platform
+     * @param manager  is used when the data is taken from the {@link SignUpView}
+     * @throws SQLException if a generic SQL exception has occurred
+     * @throws AccountAlreadyExistsException  if there is duplicate entry error in the database (1062)
+     */
     @Override
     public void insertManager(Manager manager) throws SQLException, AccountAlreadyExistsException {
 
@@ -66,18 +87,23 @@ public class ProfileDao implements IProfileDao {
                 System.out.println("query eseguita");
             }
         }catch (SQLException e) {
-            if (e.getErrorCode() == 1062) {
+            if (e.getErrorCode() == 1062) {  //errore di duplicazione di un entrata
                 throw new AccountAlreadyExistsException();
             }
-            throw new SQLException("Impossibile salvare i dati della registrazione", e);
+            throw new SQLException("Impossible to save data of the registration", e);
         }
         ConnectionDB.closeConnection(connection);
 
     }
 
 
-
-
+    /**
+     * This method allows to insert on the TicketWaveDB, a {@link Customer} when registering on the platform
+     * @param customer is used when the data is taken from the {@link SignUpView}
+     * @throws SQLException if a generic  SQL exception has occurred
+     * @throws AccountAlreadyExistsException if there is duplicate entry error in the database (1062)
+     * @throws GenreNotSelected  when The {@link Customer} has not selected any Genre from the {@link SignUpView}
+     */
     @Override
     public void insertCustomer(Customer customer) throws SQLException, AccountAlreadyExistsException, GenreNotSelected {
         try {
@@ -89,9 +115,9 @@ public class ProfileDao implements IProfileDao {
                 Genre[] favoriteGenres = customer.getFavoriteGenre();
                 for (int i = 0; i < favoriteGenres.length; i++) {
                     if (i > 0) {
-                        genresBuilder.append(",");  // aggiungo virgola
+                        genresBuilder.append(",");  // aggiungo virgola a ogni genere favorito selezionato
                     }
-                    genresBuilder.append(favoriteGenres[i].toString());
+                    genresBuilder.append(favoriteGenres[i].toString());  // prendo il valore convertito in stringa
                 }
 
                 String favoriteGenresStr = genresBuilder.toString();
@@ -119,13 +145,26 @@ public class ProfileDao implements IProfileDao {
             if (e.getErrorCode() == 1062) {
                 throw new AccountAlreadyExistsException();
             }
-            throw new SQLException("Impossibile salvare i dati della registrazione", e);
+            throw new SQLException("Impossible to save data of the registration", e);
         }
         ConnectionDB.closeConnection(connection);
     }
 
 
-
+    /**
+     *This method allows you to get all the data of a {@link Manager } from the database
+     * when the {@link Manager } logs in from the {@link LoginView}.
+     *
+     *
+     * @param mail
+     * @param password
+     * @return {@link Manager }
+     * @throws SQLException  when a generic SQL exception occurs
+     * @throws WrongPasswordException when the db password does not match the password entered
+     *
+     * @see Notification
+     * @see Event
+     */
     @Override
     public Manager selectManager(String mail, String password) throws SQLException, WrongPasswordException {
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
@@ -138,6 +177,8 @@ public class ProfileDao implements IProfileDao {
 
         Manager manager = null;
 
+
+        //Caricamento dati Manager
         try {
             String query1 = "SELECT * FROM MANAGER WHERE (MAIL = ?)";
             statement1 = connection.prepareStatement(query1);
@@ -159,6 +200,8 @@ public class ProfileDao implements IProfileDao {
 
             }
 
+
+            // associazione  del manager sul dominio
             if (resultAvailable && checkPassword(password, dbPassword)) {
 
                 ArrayList<Event> createdEvents = new ArrayList<>();         //creo la arraylist da riempire
@@ -169,6 +212,8 @@ public class ProfileDao implements IProfileDao {
                         resultSet1.getString("MAIL"), null, Province.valueOf(resultSet1.getString("PROVINCE")), resultSet1.getString("CARDNUMBER"), createdEvents,
                         resultSet1.getInt("MAXEVENTS"), resultSet1.getInt("SUBSCRIPTION"), subDate, resultSet1.getInt("COUNTER_CREATED_EVENTS"));
 
+
+                //cassociazione degli eventi su dominio
                 try {
                     String query2 = "SELECT * FROM EVENT_ WHERE ID_MANAGER = ?";
 
@@ -178,7 +223,7 @@ public class ProfileDao implements IProfileDao {
 
                     while (resultSet2.next()) {
 
-                        LocalDate currentDate = resultSet2.getDate("DATE_").toLocalDate(); // converto data in LocalData
+                        LocalDate currentDate = resultSet2.getDate("DATE_").toLocalDate(); // conversione data in LocalData
 
                         double[] price = new double[resultSet2.getInt("NUM_SEATS_TYPE")];
                         int[] seatsRemaining = new int[resultSet2.getInt("NUM_SEATS_TYPE")];
@@ -206,14 +251,15 @@ public class ProfileDao implements IProfileDao {
                         InputStream is = blobphoto.getBinaryStream();
                         Image photo = new Image(is);
 
-                        
+
+                        //Associazione degli eventi per ogni tipo
                         switch (Type.valueOf(resultSet2.getString("TYPE_")).ordinal()) {
                             case 0:
                                 Festival currentFestival = new Festival(resultSet2.getInt("ID_EVENT"), resultSet2.getString("NAME_"),
                                         resultSet2.getString("CITY"), resultSet2.getString("LOCATION"),
                                         currentDate, resultSet2.getTime("TIME_").toLocalTime(), Province.valueOf(resultSet2.getString("PROVINCE")),
                                         Genre.valueOf(resultSet2.getString("GENRE")), resultSet2.getInt("MAX_NUM_SEATS"), resultSet2.getInt("NUM_SEATS_TYPE"),
-                                        seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION_"), countWords(resultSet2.getString("ARTISTS")),
+                                        seatsRemaining, seatsSold, price, manager, resultSet2.getString("ARTISTS"), resultSet2.getString("DESCRIPTION_"),
                                         photo);
                                 createdEvents.add(currentFestival);
                                 break;
@@ -248,14 +294,15 @@ public class ProfileDao implements IProfileDao {
                                 break;
                         }
                     }
-                    manager.setEvent(createdEvents);
+                    manager.setEvent(createdEvents);  //vengono caricati  gli eventi per il manager
 
                 } catch (SQLException e) {
                     e.printStackTrace();
-                    throw new RuntimeException("Problema nel caricamento degli eventi");
+                    throw new RuntimeException("problem loading events");
                 }
 
 
+                //caricamento delle notifiche al relativo manager
                 try {
                     String query3 = "SELECT * FROM NOTIFY WHERE MAIL = ?";
 
@@ -277,47 +324,29 @@ public class ProfileDao implements IProfileDao {
                 } catch (SQLException e) {
                     throw new RuntimeException(e);
                 }
-/*
-                //costrutto di controllo per verificare che la subscription sia scaduta
-                if(manager.oneMonthPassed()){  // se è passato >= di un mese dall'inizio della sub
-                    manager.setSubscription(-1);//allora abbonamento scaduto
-                    System.out.println(+manager.getSubscription());
 
-                    System.out.println("subscription settata");
 
-                 //  updateManagerSub((manager));
-                  //  System.out.println("query update eseguita");
-
-                }
-*/
             }
             else {
                 return null;}
         } catch (SQLException e) {
-            throw new RuntimeException("Utente non trovato o non registrato");
+            throw new RuntimeException("User not found or not registered");
         }
 
         ConnectionDB.closeConnection(connection);
         return manager;
     }
 
-    public int countWords(String input) {
-        if (input == null || input.isEmpty()) {
-            return 0;
-        }
-        // Rimuove eventuali spazi bianchi prima e dopo la stringa
-        input = input.trim();
 
-        // Se la stringa è vuota dopo il trim, ritorna 0
-        if (input.isEmpty()) {
-            return 0;
-        }
-        // Divide la stringa in base alla virgola
-        String[] words = input.split("\\s*,\\s*");
-        return words.length;
-    }
-
-
+    /**
+     * This method allows you to get all the data of a {@link Customer} from the database
+     *  when the {@link Customer} logs in from the {@link LoginView}.
+     * @param mail
+     * @param password
+     * @return {@link Customer}
+     * @throws SQLException when a generic SQL exception occurs
+     * @throws WrongPasswordException when the db password does not match the password entered
+     */
     @Override
     public Customer selectCustomer(String mail, String password) throws SQLException,WrongPasswordException{
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
@@ -330,6 +359,7 @@ public class ProfileDao implements IProfileDao {
 
         Customer customer = null;
 
+        //carico dati Customer
         try {
             String query1 = "SELECT * FROM CUSTOMER WHERE (MAIL = ?)";
             statement1 = connection.prepareStatement(query1);
@@ -354,12 +384,13 @@ public class ProfileDao implements IProfileDao {
 
             if (resultAvailable && checkPassword(password, dbPassword)) {
 
-                ArrayList<Ticket> boughtTickets = new ArrayList<>();   // creo l'arraylist per riempirla
+                ArrayList<Ticket> boughtTickets = new ArrayList<>();   // creo l'arraylist per i biglietti acquistati
 
                 customer = new Customer(resultSet1.getString("NAME_"), resultSet1.getString("SURNAME"), resultSet1.getString("BIRTHDATE"),
                         resultSet1.getString("MAIL"), null, Province.valueOf(resultSet1.getString("PROVINCE")), splitStringToArrayGenre(resultSet1.getString("FAVOURITE_GENRE")),
                         resultSet1.getInt("POINTS"), boughtTickets);
 
+                //carico dati dei Ticket del Customer
                 try {
                     String query2 = "SELECT * FROM TICKET WHERE ID_CUSTOMER = ?";
                     statement2 = connection.prepareStatement(query2);
@@ -375,9 +406,11 @@ public class ProfileDao implements IProfileDao {
                     }
                 } catch (SQLException e) {
                     e.printStackTrace();
-                    throw new RuntimeException("Errore nel caricamento dei biglietti");
+                    throw new RuntimeException("error loading tickets");
                 }
 
+
+                //carico le notifiche del Customer
                 try {
                     String query3 = "SELECT * FROM NOTIFY WHERE MAIL = ?";
 
@@ -403,13 +436,19 @@ public class ProfileDao implements IProfileDao {
             else{ return null;}
 
         } catch (SQLException e) {
-            throw new RuntimeException("Utente non trovato o non registrato");
+            throw new RuntimeException("User not found or not registered");
         }
         ConnectionDB.closeConnection(connection);
         return customer;
     }
 
-
+    /**
+     *This method takes a {@link String} as input, splits it by commas,
+     * and converts each resulting substring into a {@link Genre} object.
+     * It then puts these Genre objects into an array and returns it.
+     * @param s input string
+     * @return {@link Genre} Array where each genre is separated by a comma
+     */
     private Genre[] splitStringToArrayGenre(String s) {
         String[] arrayString = s.split(",");
         Genre[] genreArray = new Genre[5];
@@ -423,10 +462,22 @@ public class ProfileDao implements IProfileDao {
         return genreArray;
     }
 
+    /**
+     *This Method  takes a user's password as input and returns a hashed version of the password using the BCrypt library.
+     * @param password
+     * @return hashPassword as a {@link String}
+     */
     public static String hashPassword(String password) {
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
 
+
+    /**
+     * The method checks whether a plaintext password matches a hashed password using the BCrypt library
+     * @param plainPassword insert by the User
+     * @param hashedPassword
+     * @return {@link Boolean} True if the Passwords are Matched. Otherwise false.
+     */
     public static boolean checkPassword(String plainPassword, String hashedPassword)  {
 
 
@@ -434,6 +485,13 @@ public class ProfileDao implements IProfileDao {
 
     }
 
+    /**
+     * This method update the  {@link Manager } subscription using a double logic:
+     * if subscription has expired (subscription -1),updates database's values. Indicating that subscription has expired
+     * if the Manager choose a new Plan, an update is made of the various values based on the plan chosen by the Manager
+     * @param manager
+     * @throws SQLException when a generic SQL exception occurs
+     */
 	@Override
 	public void updateManagerSub(Manager manager) throws SQLException {
 		connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);
@@ -444,16 +502,16 @@ public class ProfileDao implements IProfileDao {
 
 			statement1 = connection.prepareStatement(query1);
             //CONTROLLO PER LA SUB SCADUTA
-            if(manager.getSubscription()==-1){
+            if(manager.getSubscription()==-1){  //subcription scaduta
 
-                statement1.setInt(1, 0); //MAXEVENTS=0
+                statement1.setInt(1, 0); //MAXEVENTS=0 non si possono creare nuovi eventi
                 statement1.setInt(2, -1);  //SUB=-1
                 statement1.setDate(3, Date.valueOf(manager.getSubscriptionDate()));
                 statement1.setInt(4, manager.getCounterCreatedEvents());
                 statement1.setString(5, manager.getEmail());
-                System.out.println("statement di correzione eseguito ");
+                System.out.println(" SubUpdate statement executed");
             }
-            else {
+            else {  //il manager sceglie un Nuovo Abbonamento esegue questo codice quando il pagamento è andato a buon fine
                 switch (ConnectedUser.getInstance().getNewSubLevel()) {
                     case 0:
                         statement1.setInt(1, MAX_EVENTS_FOR_FREE_SUB);
@@ -483,6 +541,13 @@ public class ProfileDao implements IProfileDao {
 		ConnectionDB.closeConnection(connection);
 	}
 
+
+    /**
+     * This method performs an update on the manager's credit card field  in the database
+     * @param manager
+     * @param managerCreditCard
+     * @throws SQLException when a generic SQL exception occurs
+     */
     @Override
     public void updateManagerCreditCard(Manager manager ,String managerCreditCard) throws SQLException {
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);
@@ -494,17 +559,26 @@ public class ProfileDao implements IProfileDao {
             statement.setString(2, manager.getEmail());
             statement.executeUpdate();
         } catch (SQLException e) {
-            throw new SQLException("Errore nell'aggiornamento del numero della carta di credito del manager", e);
+            throw new SQLException("Error updating manager's credit card number", e);
         }
             ConnectionDB.closeConnection(connection);
 
     }
-	
 
 
-
-
-
+    /**
+     *This method is used for Event notifications,
+     *all emails from the relevant Customers who have a specific preferred genre are taken
+     * @param genreToCheck
+     * @return ArrayList of {@link String} (Customers emails)
+     * @throws SQLException
+     *
+     *
+     * @see NewTheatreController
+     * @see NewConcertController
+     * @see NewOtherController
+     * @see NewFestivalController
+     */
     @Override
     public ArrayList<String> selectCustomerByGenre (Genre genreToCheck) throws SQLException{
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
@@ -530,12 +604,24 @@ public class ProfileDao implements IProfileDao {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Utente non trovato o non registrato");
+            throw new RuntimeException("User not found or User not registered");
         }
         ConnectionDB.closeConnection(connection);
         return customerWithGenreMail;
     }
 
+    /**
+     *This method is used for Event notifications,
+     * all emails from the relevant Customers who have a specific {@link Province} are taken
+     * @param provToCheck
+     * @return ArrayList of {@link String} (Customers emails)
+     * @throws SQLException
+     *
+     * @see NewTheatreController
+     * @see NewConcertController
+     * @see NewOtherController
+     * @see NewFestivalController
+     */
     public ArrayList<String> selectCustomerByProvince (Province provToCheck) throws SQLException{
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection,schema);  // apro connessione
         PreparedStatement statement1;
@@ -558,13 +644,19 @@ public class ProfileDao implements IProfileDao {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Utente non trovato o non registrato");
+            throw new RuntimeException("User-Mail not found or not user not registered");
         }
         ConnectionDB.closeConnection(connection);
         return customerWithProvMail;
     }
-    
-    
+
+    /**
+     *The method allows you to update the count of the events created by the {@link Manager}
+     * @param manager
+     * @throws SQLException when a generic SQL exception occurs
+     *
+     *
+     */
     @Override
     public void updateEventCreatedCounter(Manager manager) throws SQLException {
     	connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);
@@ -580,7 +672,7 @@ public class ProfileDao implements IProfileDao {
 			
 			statement1.executeUpdate();
 		} catch (SQLException e) {
-			throw new SQLException("Errore nell'aggiornamento del campo relativo agli eventi creati");
+			throw new SQLException("Error updating the created events field");
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -588,6 +680,12 @@ public class ProfileDao implements IProfileDao {
     	ConnectionDB.closeConnection(connection);
     }
 
+
+    /**
+     * This method allows you to update a {@link Customer}'s points when purchasing a ticket
+     * @param customer
+     * @throws SQLException  when a generic SQL exception occurs
+     */
     public void updateCustomerPoints(Customer customer) throws SQLException {
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);
         PreparedStatement statement1;
@@ -602,7 +700,7 @@ public class ProfileDao implements IProfileDao {
 
             statement1.execute();
         } catch (SQLException e) {
-            throw new SQLException("Errore nell'aggiornamento dei punti");
+            throw new SQLException("Error updating points");
         }catch(Exception e) {
             e.printStackTrace();
         }
