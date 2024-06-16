@@ -118,7 +118,7 @@ public class LoginController {
                      * */
                     Manager loggedManager = null;
 
-                    //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
+
                     try{
                         loggedManager = profileDao.selectManager(loginView.getMail().getText(), loginView.getPassword().getText());
 

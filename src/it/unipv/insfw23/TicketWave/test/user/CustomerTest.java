@@ -29,14 +29,8 @@ public class CustomerTest {
     private Manager mg;
     private ArrayList<Event> events = new ArrayList<>();
     private Festival fs;
-    
-    private final int MAX_EVENTS_FOR_FREE_SUB = 1;
+
 	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
-	private final int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
-
-
-    private double points;
-   // private Genre[] favoriteGenre ;
 
     @Before
     public void setUp(){
