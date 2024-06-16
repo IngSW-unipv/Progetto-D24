@@ -178,7 +178,6 @@ public class PaymentDataPController {
 
                    //FINE CUSTOMER
 
-
                 //USER=MANAGER
                } else {
                    Manager managerlogged = (Manager)user;
