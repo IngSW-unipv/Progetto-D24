@@ -1,13 +1,12 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.statistics;
 
-import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
+import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.statistics.StatisticsHandler;
 import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapArtist;
 import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapGenre;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
-import it.unipv.insfw23.TicketWave.modelView.statistics.GenreStatsView;
-import it.unipv.insfw23.TicketWave.modelView.statistics.TypeStatsView;
+import it.unipv.insfw23.TicketWave.modelView.statistics.*;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.chart.BarChart;
@@ -16,6 +15,15 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.util.Pair;
 
+
+/**
+ * This class represents the controller that allows switching from the statistics view by {@link Type}
+ * to the view with statistics by {@link Genre} and artist.
+ *
+ * @see StatisticsHandler
+ * @see GenreStatsView
+ * @see ArtistStatsView
+ */
 public class TypeStatsController {
     private Stage mainStage;
     private TypeStatsView typeView;
@@ -34,12 +42,12 @@ public class TypeStatsController {
             @Override
             public void handle(MouseEvent actionEvent) {
                 Node clickedNode = (Node) actionEvent.getSource();
-                System.out.println("PASSO AI GENERI E ARTISTI");
+                System.out.println("GOING TO GENRES AND ARTISTS STATS");
                 StatisticsHandler statDominio = new StatisticsHandler();
 
                 Pair<Number, String> pairDataClicked = (Pair)clickedNode.getUserData();
 
-                System.out.println(pairDataClicked.getValue().toString());
+                System.out.println("Clicked on " + pairDataClicked.getValue().toString());
                 WrapGenre genreRes = statDominio.genreStats(Type.valueOf(pairDataClicked.getValue().toString()), (Manager) ConnectedUser.getInstance().getUser());
 
                 WrapArtist artistRes = statDominio.artistStats(Type.valueOf(pairDataClicked.getValue().toString()), (Manager) ConnectedUser.getInstance().getUser());
