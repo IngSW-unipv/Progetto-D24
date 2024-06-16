@@ -66,7 +66,7 @@ public class ManagerTest {
             manager1.createFestival(1, "Festival Test", "City Test", "Location Test", LocalDate.now(), LocalTime.of(20, 30), Province.AGRIGENTO, Genre.ROCK, 100, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Pino Daniele,Calcutta", "Description Test", bl);
         } catch (Exception e) {
 
-            assertEquals("Impossibile Creare l'evento:Festival Test.Non puoi creare altri Eventi", e.getMessage());
+            assertEquals("Unable to create event:Festival Test.You Cannot create other Events", e.getMessage());
         }
     }
 
@@ -75,7 +75,7 @@ public class ManagerTest {
             manager2.createFestival(1, "Festival Test", "City Test", "Location Test", LocalDate.now(), LocalTime.of(20, 30), Province.AGRIGENTO, Genre.ROCK, 100, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Pino Daniele,Calcutta", "Description Test", bl);
         } catch (Exception e) {
 
-            assertEquals("Impossibile Creare l'evento:Festival Test.Non puoi creare altri Eventi", e.getMessage());
+            assertEquals("Unable to create event:Festival Test.You Cannot create other Events", e.getMessage());
         }
 
     }
@@ -90,23 +90,7 @@ public class ManagerTest {
             System.out.println(e.getMessage());
         }
     }
-
-    /*
-
-    @Test public void testSetSubscription(){
-
-        SubscriptionHandler subscriptionHandler= SubscriptionHandlerFactory.getInstance().getSubscriptionHandler();
-
-        double price=50.00;
-        subscriptionHandler.buySub(manager1,2,paymentAdapter,price);
-        assertEquals(2,manager1.getSubscription());
-
-
-
-
-    }
-
-*/
+    
 
 
 
