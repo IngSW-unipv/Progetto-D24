@@ -136,7 +136,7 @@ public class CustomerTest {
             assertEquals(0, customer.getTicketsList().size());
             assertEquals(0, customer.getPoints(), 0);
         } catch(Exception e){
-            assertEquals("Selezionare un numero valido", e.getMessage());
+            assertEquals("Select a valid number", e.getMessage());
         }
     }
     @Test
@@ -146,7 +146,7 @@ public class CustomerTest {
         customer2=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.CREMONA,favoriteGenre, 100,tickets);
         customer2.setFavoriteGenre(favoriteGenre);
         } catch(Exception e){
-            assertEquals("Impossibile selezionere più di 5 generi", e.getMessage());
+            assertEquals("Impossible to select more than 5 genres", e.getMessage());
         }
     }
 

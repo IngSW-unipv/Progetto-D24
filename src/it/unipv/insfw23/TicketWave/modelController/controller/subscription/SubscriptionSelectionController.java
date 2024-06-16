@@ -10,6 +10,7 @@ import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
+import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
@@ -23,6 +24,12 @@ import java.lang.reflect.Method;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * This controller manages all the buttons selected in {@link SubscriptionSelectionView}
+ * EventHandler<MouseEvent> goToBuySubscription: if you click one of the subscriptionButton you go to the{@link  PaymentSelectionController}
+ * EventHandler<MouseEvent> goBackEvent: if you click on the backButton you go back to the {@link it.unipv.insfw23.TicketWave.modelView.access.SignUpView} or
+ * to the {@link it.unipv.insfw23.TicketWave.modelView.user.ManagerView}
+ */
 public class SubscriptionSelectionController {
     private Stage mainstage;
     private SubscriptionSelectionView subscriptionSelectionView;
@@ -44,7 +51,7 @@ public class SubscriptionSelectionController {
         EventHandler<MouseEvent> goToBuySubscription = new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent actionEvent) {
-                System.out.println("Hai selezionato un abbonamento. Reindirizzamento alla pagina di pagamento.");
+                System.out.println("You selected a subscription. Redirect to payment page.");
                 double price = 0;
                 if (actionEvent.getSource() == subscriptionSelectionView.getBottonePrimaSub()) {
                     price = subscriptionSelectionView.getPricePrimaSub();

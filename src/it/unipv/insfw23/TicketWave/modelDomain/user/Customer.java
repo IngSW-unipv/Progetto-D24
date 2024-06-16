@@ -70,28 +70,28 @@ public class Customer extends User {
 
             if(pay.paymentMethod(endPrice) == true) {
                 points = points - usablePoints(startPrice, points);
-                System.out.println("L'acquisto del tuo biglietto per " + event + " è andato a buon fine ");
+                System.out.println("L'acquisto del tuo biglietto per " + event + " was successful");
                 ticket = TicketHandler.getIstance().createTicket(event, type);
                 points = points + (int) (endPrice / 10);
                 ticket.setPrice(endPrice);
                 addTickets(ticket);
             } else {
-                throw new Exception ( "L'acquisto del tuo biglietto per " + event + "non è andato a buon fine ");
+                throw new Exception ( "Your ticket purchase for " + event + "non è andato a buon fine ");
             }
 
         } else if (usePoints == 0) {
             endPrice = startPrice;
             if (pay.paymentMethod(endPrice) == true){
-                System.out.println( "L'acquisto del tuo biglietto per " + event + "è andato a buon fine ");
+                System.out.println( "Your ticket purchase for " + event + "was successful");
                 points = points + (int) (endPrice/10);
                  ticket= TicketHandler.getIstance().createTicket(event,type);
                 addTickets(ticket);
             }  else {
-                throw new Exception ( "L'acquisto del tuo biglietto per " + event + "non è andato a buon fine ");
+                throw new Exception ( "Your ticket purchase for  " + event + "didn't work out ");
             }
         }
         else {
-            throw new Exception("Selezionare un numero valido");
+            throw new Exception("Select a valid number");
         }
         return ticket;
     }
@@ -106,7 +106,7 @@ public class Customer extends User {
      */
     public void setFavoriteGenre(Genre [] favorite) throws Exception {
         if (favorite.length > 5) {
-            throw new Exception ("Impossibile selezionere più di 5 generi");
+            throw new Exception ("Impossible to select more the 5 genres");
         } else {
 
             for (int i = 0; i < maxfavoriteGenre; i++) {
