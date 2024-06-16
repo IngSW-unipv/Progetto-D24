@@ -172,6 +172,7 @@ public class PaymentDataPController {
                    home.reSetBars();
                    CustomerView customerview = (CustomerView) home;
                    customerview.updateTicketsTable(customer.getTicketsList());
+                   customerview.updateWavePoints(customer.getPoints());
                    CustomerController customerController = new CustomerController(mainStage, customerview, ConnectedUser.getInstance().getLoginView());
                    mainStage.setScene(customerview);
 
