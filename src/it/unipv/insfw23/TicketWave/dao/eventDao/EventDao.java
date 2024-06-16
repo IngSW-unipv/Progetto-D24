@@ -13,6 +13,13 @@ import java.io.*;
 import java.sql.*;
 import java.time.LocalDate;
 
+
+/**
+ * Implementation of the methods declared in {@link IEventDao}.
+ * It encapsulates database interactions, providing a clean and reusable interface
+ * for accessing database items.
+ *
+ */
 public class EventDao implements IEventDao {
     private String schema;
     private Connection connection;
@@ -22,6 +29,11 @@ public class EventDao implements IEventDao {
         this.schema = "TicketWaveDB";
     }
 
+
+    /**
+     *Method that allows inserting an {@link Event} into the database.
+     * @param event
+     */
     @Override
     public void insertEvent(Event event) throws SQLException {
 
@@ -176,6 +188,11 @@ public class EventDao implements IEventDao {
         throw new IllegalStateException("Should not reach this point in method `transformImageIntoInputStream`.");
     }
 
+
+    /**
+     *Method that allows calculating the number of events that are in the database.
+     * @return eventNumber
+     */
     public int selectEventNumber() throws SQLException {
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);  // apro connessione
         PreparedStatement statement1;
@@ -201,6 +218,12 @@ public class EventDao implements IEventDao {
     }
 
 
+
+    /**
+     *Method that allows retrieving an {@link Event} from the database starting from its id.
+     * @param event_Id
+     * @return selectedEvent
+     */
     public Event selectEvent(int event_Id) throws SQLException {
         Event selectedEvent = null;
         connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);  // apro connessione
@@ -297,6 +320,11 @@ public class EventDao implements IEventDao {
 
 
 
+    /**
+     *Method that allows updating the number of sold tickets and the remaining seats of
+     * an {@link Event} in the database.
+     * @param event
+     */
     public void updateSeatsNumber(Event event) throws SQLException {
         PreparedStatement statement1;
         ResultSet resultSet1;
