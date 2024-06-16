@@ -85,7 +85,7 @@ public class CustomerTest {
 
     @Test
     public void ticketTest(){
-        Ticket ticket= new Ticket("12345",50.00,TicketType.BASE,12,"lalaprovaprova provolone");
+        Ticket ticket= new Ticket("12345",50.00,TicketType.BASE,12,"EventTest");
         customer.addTickets(ticket);
         assertEquals(1,customer.getTicketsList().size());
     }

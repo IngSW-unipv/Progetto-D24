@@ -176,6 +176,10 @@ public class CustomerView extends Scene implements IResettableScene {
 		initComponents();
 	}
 
+    public void updateWavePoints(int points){
+        wavePoints.setText("WavePoints: " +points);
+    }
+
     public TableView<Ticket> getTicketTab() {
         return ticketTab;
     }

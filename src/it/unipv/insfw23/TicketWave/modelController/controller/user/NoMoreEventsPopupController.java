@@ -1,7 +1,11 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.user;
 
 import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+import it.unipv.insfw23.TicketWave.modelDomain.statistics.StatisticsHandler;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
+import it.unipv.insfw23.TicketWave.modelView.statistics.LocationStatsView;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.user.NoMoreEventsPopup;
 import javafx.event.EventHandler;
@@ -16,6 +20,13 @@ public class NoMoreEventsPopupController {
     private Button backButton;
     private Button subButton;
 
+
+    /**
+     * This class represents the controller that enable displaying a popup window ({@link NoMoreEventsPopup}) to show messages.
+     * This window may lead to selecting a new subscription.
+     *
+     * @see SubscriptionSelectionView
+     */
     public NoMoreEventsPopupController(Stage mainStage, Button backButton, Button subButton, IResettableScene managerView) {
         this.mainStage = mainStage;
         this.managerView = managerView;

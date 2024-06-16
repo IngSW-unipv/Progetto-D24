@@ -34,7 +34,7 @@ import java.sql.SQLException;
 
 
 /**
- * The class manages the {@link PaymentDataMView}
+ * The class manages the {@link PaymentDataPView}
  *
  */
 public class PaymentDataPController {
@@ -172,11 +172,11 @@ public class PaymentDataPController {
                    home.reSetBars();
                    CustomerView customerview = (CustomerView) home;
                    customerview.updateTicketsTable(customer.getTicketsList());
+                   customerview.updateWavePoints(customer.getPoints());
                    CustomerController customerController = new CustomerController(mainStage, customerview, ConnectedUser.getInstance().getLoginView());
                    mainStage.setScene(customerview);
 
                    //FINE CUSTOMER
-
 
                 //USER=MANAGER
                } else {

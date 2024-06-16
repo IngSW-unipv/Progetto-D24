@@ -1,6 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelView.research;
 
-import it.unipv.insfw23.TicketWave.modelController.controller.upperBar.UpperBarController;
+//import it.unipv.insfw23.TicketWave.modelController.controller.upperBar.UpperBarController;
 import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchController;
 import javafx.application.Application;
 import javafx.scene.image.Image;
@@ -26,7 +26,7 @@ public class StarterNicholas extends Application {
         primaryStage.setFullScreenExitHint("");
         primaryStage.setFullScreen(true);
 
-        UpperBarController ctrl = new UpperBarController(primaryStage);
+        //UpperBarController ctrl = new UpperBarController(primaryStage);
         ResearchView scene = new ResearchView();
         ResearchController controller = new ResearchController(primaryStage, scene);
         primaryStage.setScene(scene);

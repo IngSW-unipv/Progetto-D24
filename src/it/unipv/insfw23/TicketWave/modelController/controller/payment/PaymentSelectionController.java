@@ -51,9 +51,9 @@ public class PaymentSelectionController {
     /**
      * This method has two EventHandlers associated with the {@link PaymentSelectionView} buttons.
      *
-     * goToPaymentDataPage EventHandler: allows passage to the next view which can be {@link PaymentDataPView }or {@link PaymentDataMView}.
-     * if the connected user is a Customer, the Ticket Number is set.
-     * otherwise if the connected user is manager, his credit card is set in the label
+     * goToPaymentDataPage EventHandler: allows passage to the next view which can be {@link PaymentDataPView } or {@link PaymentDataMView}.
+     * If the connected user is a Customer, the Ticket Number is set.
+     * Otherwise, if the connected user is manager, his credit card is set in the label
      * (empty string if a previous card has not already been inserted)
      *
      * the same logic is applied if the payPol button is selected, except for the manager card insertion logic

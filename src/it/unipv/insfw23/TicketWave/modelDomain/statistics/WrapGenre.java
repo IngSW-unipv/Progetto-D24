@@ -1,9 +1,17 @@
 package it.unipv.insfw23.TicketWave.modelDomain.statistics;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 
 import java.util.ArrayList;
 
+
+/**
+ * This wrap class represents the result of a statistic and contains 2 arrayLists:
+ * one for the numerical results (Double) and one for the corresponding genres ({@link Genre}).
+ *
+ * @see StatisticsHandler
+ */
 public class WrapGenre{
     private ArrayList<Genre> genreNameArray;
     private ArrayList<Double> genreResults;

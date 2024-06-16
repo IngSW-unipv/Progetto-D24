@@ -384,7 +384,7 @@ public class ProfileDao implements IProfileDao {
 
             if (resultAvailable && checkPassword(password, dbPassword)) {
 
-                ArrayList<Ticket> boughtTickets = new ArrayList<>();   // creo l'arraylist per riempirla
+                ArrayList<Ticket> boughtTickets = new ArrayList<>();   // creo l'arraylist per i biglietti acquistati
 
                 customer = new Customer(resultSet1.getString("NAME_"), resultSet1.getString("SURNAME"), resultSet1.getString("BIRTHDATE"),
                         resultSet1.getString("MAIL"), null, Province.valueOf(resultSet1.getString("PROVINCE")), splitStringToArrayGenre(resultSet1.getString("FAVOURITE_GENRE")),
