@@ -34,7 +34,7 @@ import java.sql.SQLException;
 
 
 /**
- * The class manages the {@link PaymentDataMView}
+ * The class manages the {@link PaymentDataPView}
  *
  */
 public class PaymentDataPController {
