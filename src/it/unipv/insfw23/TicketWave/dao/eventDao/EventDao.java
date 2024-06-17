@@ -148,13 +148,13 @@ public class EventDao implements IEventDao {
                 preparedStatement.setBlob(25, photoDB);
 
 
-                System.out.println("prova pre-esecuzione");
+                System.out.println("pre-execution check");
                 preparedStatement.executeUpdate();  // eseguo
-                System.out.println("query eseguita");
+                System.out.println("query executed");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("No zi non posso salvare i tuoi dati, c'è qualche prob");
+            throw new SQLException("Problems inserting event item in eventDao");
         }
         ConnectionDB.closeConnection(connection);
 
@@ -185,7 +185,7 @@ public class EventDao implements IEventDao {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        throw new IllegalStateException("Should not reach this point in method `transformImageIntoInputStream`.");
+        throw new IllegalStateException("Problems in `transformImageIntoInputStream`");
     }
 
 
@@ -211,7 +211,7 @@ public class EventDao implements IEventDao {
             }
 
         } catch (SQLException e) {
-            throw new RuntimeException("Utente non trovato o non registrato");
+            throw new RuntimeException("User not found or unregistered");
         }
         ConnectionDB.closeConnection(connection);
         return eventNumber;
@@ -313,7 +313,7 @@ public class EventDao implements IEventDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new RuntimeException("Problema nel caricamento degli eventi");
+            throw new RuntimeException("Problems in selecting event item in eventDao");
         }
         return selectedEvent;
     }
@@ -370,13 +370,13 @@ public class EventDao implements IEventDao {
                         preparedStatement.setNull(6, Types.INTEGER);
                         break;
                 }
-                System.out.println("prova pre-esecuzione");
+                System.out.println("pre-execution check");
                 preparedStatement.executeUpdate();  // eseguo
-                System.out.println("query eseguita");
+                System.out.println("query executed");
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new SQLException("Problema nell'aggiornamento dei posti rimanenti");
+            throw new SQLException("Problems updating seats data in eventDao");
         }
         ConnectionDB.closeConnection(connection);
     }

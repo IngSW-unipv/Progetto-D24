@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import it.unipv.insfw23.TicketWave.modelController.factory.notifications.INotificationHandler;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
-import it.unipv.insfw23.TicketWave.modelDomain.user.*;
+import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 
 public class NotificationHandler implements INotificationHandler {
 	
@@ -15,7 +15,7 @@ public class NotificationHandler implements INotificationHandler {
 	private final String MSG_NEAR_GENRE = "E' disponibile un nuovo evento del tuo genere preferito nella tua provincia: ";
 	private int counterNotification = 0;
 
-	
+
 	private NotificationHandler() { //counterNotification -> num di notifiche create finora (sul db)
 		//counterNotification = counterNotificationDao;
 		counterNotification = 0; //da modificare con il prelievo del numero di notifiche fatte finore presenti sul db con COUNT
@@ -28,7 +28,7 @@ public class NotificationHandler implements INotificationHandler {
 		return istance;
 	}
 	
-	//notifica evento sold out
+
 	public Notification sendNotificationSoldOut(Event ev) {
 		Notification n1;
 		String creator = ev.getCreator().getEmail();
@@ -39,36 +39,12 @@ public class NotificationHandler implements INotificationHandler {
 	}
 	
 	
-	//notifica creazione nuovo evento nella stessa provincia
-/*	public void sendNotificationNewEvent(Event ev) {
-		Province province;
-		Notification n2;
-		String msg2 = "E' disponibile un nuovo evento nella tua provincia";
-		province = ev.getProvince();
-		ArrayList<Customer> customerNear; //select al db where province = province dell'evento
-		for(Customer c : customerNear) {
-			counterNotification += 1;
-			n2 = new Notification(counterNotification, c, msg2);
-			c.addNotification(n2);
-		}
-	}
-*/	
 	public ArrayList<Notification> sendNotificationNewEvent(Event ev, ArrayList<String> customerNear, ArrayList<String> customerFavGenre) {
 		ArrayList<Notification> notifications = new ArrayList<>();
 		ArrayList<String> customerAlreadyNotifiedForProvince = new ArrayList<String>();
-		Province province = ev.getProvince();
-		Genre genre = ev.getGenre();
 		Notification n2;
 		int subscription_creator = ev.getCreator().getSubscription();
 		Boolean notDoubleCondition;
-		System.out.println("dim dei vicini: ");
-		for(String s : customerNear) {
-			System.out.println(s);
-		}
-		System.out.println("dim dei gen: ");
-		for(String s1 : customerFavGenre) {
-			System.out.println(s1);
-		}
 		
 		switch(subscription_creator) {
 		case 2:
