@@ -34,12 +34,7 @@ public class TicketHandler implements ITicketHandler{
 			if(barcode == null)
 				return null;
 			Ticket t = new Ticket(barcode, price, type, event.getIdEvent(), event.getName());
-			//se non ci sono piu' biglietti notifica il creatore dell'evento
-			if(event.getSeatsRemaining() == 0) {
-				//Manager creator;
-				//creator = event.getCreator();
-				NotificationHandlerFactory.getIstance().getNotificationHandler().sendNotificationSoldOut(event);
-			}
+			
 			return t;
 		}
 		
