@@ -3,9 +3,7 @@ package it.unipv.insfw23.TicketWave.test.event;
 import it.unipv.insfw23.TicketWave.dao.eventDao.EventDao;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
-import javafx.application.Application;
 import javafx.scene.image.Image;
-import javafx.stage.Stage;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,7 +14,7 @@ import java.util.ArrayList;
 
 import static org.junit.Assert.*;
 
-public class eventInsertTest extends Application {
+public class eventInsertTest {
     private EventDao eventDao;
     private Event eventFestivalTest;
     private Event eventConcertTest;
@@ -109,9 +107,4 @@ public class eventInsertTest extends Application {
         assertTrue(result);
     }
 
-
-    @Override
-    public void start(Stage stage) throws Exception {
-
-    }
 }
