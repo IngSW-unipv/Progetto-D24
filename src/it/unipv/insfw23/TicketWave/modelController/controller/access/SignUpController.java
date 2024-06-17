@@ -1,6 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.access;
 
-import it.unipv.insfw23.TicketWave.dao.profileDao.IProfileDao;
+
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.exceptions.AccountAlreadyExistsException;
 import it.unipv.insfw23.TicketWave.exceptions.GenreNotSelected;
@@ -21,12 +21,17 @@ import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
-
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+/**
+ * This controller manages all the buttons selected in {@link SignUpView}
+ * EventHandler<ActionEvent> goToLoginView: if you click on the backButton you go back to the {@link LoginView}
+ * EventHandler<ActionEvent> goToSelection:if you click on the signUpButton , you go to the {@link SubscriptionSelectionView} if you want to sign in as a
+ * manager, or you go to the {@link CustomerView} if you want to sign up as a customer
+ */
 public class SignUpController {
     private Stage mainstage;
 
@@ -65,7 +70,7 @@ public class SignUpController {
             @Override
             public void handle(ActionEvent actionEvent) {
                 // Azione da eseguire quando il pulsante "Torna Indietro" viene premuto
-                System.out.println("Hai cliccato il pulsante Torna Indietro");
+                System.out.println("You clicked on the backButton");
                 //loginView= new LoginView();
                 LoginController loginController= new LoginController(mainstage,loginView );
                 loginView.reSetBars();
@@ -109,7 +114,7 @@ public class SignUpController {
 
                     signUpView.setErrorLabel("");
 
-                    System.out.println("Hai cliccato il pulsante registrati  come cliente");
+                    System.out.println("You are signing up as a customer");
 
 
                     //set del customer, CHIAMATA AL DAO PER LA REGISTRAZIONE
@@ -151,7 +156,7 @@ public class SignUpController {
 
                     signUpView.setErrorLabel("");
 
-                    System.out.println("Hai cliccato il pulsante registrati  come gestore");
+                    System.out.println("You are signing up as a manager");
 
 
                     //set del manager, CHIAMATA AL DAO PER LA REGISTRAZIONE

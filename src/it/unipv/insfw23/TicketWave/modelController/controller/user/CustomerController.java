@@ -3,13 +3,10 @@ package it.unipv.insfw23.TicketWave.modelController.controller.user;
 import it.unipv.insfw23.TicketWave.dao.eventDao.EventDao;
 import it.unipv.insfw23.TicketWave.modelController.controller.access.LoginController;
 import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchController;
-
 import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageController;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
-import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
 import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
@@ -19,14 +16,24 @@ import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
-
 import java.sql.SQLException;
 
+/**
+ * This controller manages all the buttons selected in {@link CustomerView}
+ * EventHandler<MouseEvent> logoutButton : if you click on the logout button you
+ * go back to the {@link LoginView}
+ * EventHandler<MouseEvent> profileButton: if the profile button is clicked you go back to the
+ * {@link CustomerView}
+ * EventHandler<MouseEvent> searchButton: if the search button is clicked you go to the {@link ResearchView}
+ * where you can buy search for new Events
+ * EventHandler<MouseEvent> openTicket: if you click on one row of the ticketTableView you go to the
+ * {@link  TicketPageView} where you can see the information about the ticket you bought
+ */
 public class CustomerController {
     private LoginView loginView;
     private Stage mainstage;
     private CustomerView customerView;
-    private SignUpView signUpView;
+   // private SignUpView signUpView;
     private ManagerView managerView;
     Customer loggedCustomer;
 
@@ -44,8 +51,6 @@ public class CustomerController {
             @Override
             public void handle(MouseEvent event) {
                 System.out.println("logout");
-				//loginView = new LoginView();
-				signUpView = new SignUpView();
 				LoginController logcon = new LoginController(mainstage, loginView);
                 loginView.reSetBars();
                 /*
@@ -66,7 +71,7 @@ public class CustomerController {
 
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("vai al profilo");
+                System.out.println("go to profile");
                 customerView.reSetBars();
                 mainstage.setScene(customerView);
 
@@ -79,27 +84,14 @@ public class CustomerController {
 
             @Override
             public void handle(MouseEvent event) {
-                System.out.println("vai alla ricerca");
+                System.out.println("go to research");
                 ResearchView researchview = new ResearchView();
                 ResearchController rescontroller = new ResearchController(mainstage, researchview);
                 mainstage.setScene(researchview);
             }
         };
         customerView.getSearchButton().setOnMouseClicked(searchButton);
-       /*EventHandler<MouseEvent> openevent = new EventHandler<>() {
 
-            @Override
-            public void handle(MouseEvent event) {
-
-                //costruttore view
-                TicketPageView tic = new TicketPageView();
-                //costruttore controller
-                TicketPageController buyticketcontroller = new TicketPageController(mainstage, tic,customerView.getTicketTab().getSelectionModel().getSelectedItem(),customerView);
-
-                mainstage.setScene(tic);
-            }
-        };
-        customerView.getTicketTab().setOnMouseClicked(openevent);*/
         EventHandler<MouseEvent> openTicket = new EventHandler<>() {
 
             @Override
@@ -112,8 +104,6 @@ public class CustomerController {
                 
                 
                	System.out.println(customerView.getTicketTab().getSelectionModel().getSelectedItem().getIdEvent());
-               	//costruttore view
-               	// Ticket tick = (Ticket) customerView.getTicketTab().getSelectionModel().getSelectedItem();
                	int idEvent = customerView.getTicketTab().getSelectionModel().getSelectedItem().getIdEvent();
                	
                	Event selectedEvent = eventDao.selectEvent(idEvent);

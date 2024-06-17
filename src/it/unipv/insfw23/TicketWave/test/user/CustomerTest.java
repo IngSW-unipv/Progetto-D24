@@ -29,14 +29,8 @@ public class CustomerTest {
     private Manager mg;
     private ArrayList<Event> events = new ArrayList<>();
     private Festival fs;
-    
-    private final int MAX_EVENTS_FOR_FREE_SUB = 1;
+
 	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
-	private final int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
-
-
-    private double points;
-   // private Genre[] favoriteGenre ;
 
     @Before
     public void setUp(){
@@ -85,7 +79,7 @@ public class CustomerTest {
 
     @Test
     public void ticketTest(){
-        Ticket ticket= new Ticket("12345",50.00,TicketType.BASE,12,"lalaprovaprova provolone");
+        Ticket ticket= new Ticket("12345",50.00,TicketType.BASE,12,"EventTest");
         customer.addTickets(ticket);
         assertEquals(1,customer.getTicketsList().size());
     }
@@ -136,7 +130,7 @@ public class CustomerTest {
             assertEquals(0, customer.getTicketsList().size());
             assertEquals(0, customer.getPoints(), 0);
         } catch(Exception e){
-            assertEquals("Selezionare un numero valido", e.getMessage());
+            assertEquals("Select a valid number", e.getMessage());
         }
     }
     @Test
@@ -146,7 +140,7 @@ public class CustomerTest {
         customer2=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.CREMONA,favoriteGenre, 100,tickets);
         customer2.setFavoriteGenre(favoriteGenre);
         } catch(Exception e){
-            assertEquals("Impossibile selezionere più di 5 generi", e.getMessage());
+            assertEquals("Impossible to select more than 5 genres", e.getMessage());
         }
     }
 

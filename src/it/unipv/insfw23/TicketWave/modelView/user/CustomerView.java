@@ -41,11 +41,9 @@ public class CustomerView extends Scene implements IResettableScene {
     private UpperBar customerUpperBar;
     private LowerBar lowerBar;
 
-
-    // private final
     public CustomerView(String name, ArrayList<Notification> nots, ArrayList<Ticket> tick, int points) {
         super(new BorderPane(), 1080, 600);
-        this.nameLabel = new Label("Benvenuto, "+name);
+        this.nameLabel = new Label("Ciao, "+name);
         this.wavePoints = new Label("WavePoints: " +points);
         this.nots = FXCollections.observableArrayList(nots);
         this.tick = FXCollections.observableArrayList(tick);
@@ -80,10 +78,6 @@ public class CustomerView extends Scene implements IResettableScene {
         grid.setVgap(10);
         grid.setHgap(15);
         logoutButton = new Button("Logout");
-        /*GridPane.setConstraints(logoutButton, 1, 1, 2, 1);
-        GridPane.setHalignment(logoutButton, HPos.CENTER);
-        GridPane.setHgrow(logoutButton, Priority.SOMETIMES);
-        GridPane.setConstraints(wavePoints, 1, 0);*/
         GridPane.setConstraints(logoutButton, 1, 0);
         GridPane.setHalignment(logoutButton,HPos.RIGHT);
         // Nome e Cognome
@@ -114,7 +108,7 @@ public class CustomerView extends Scene implements IResettableScene {
         
         notificationTab.getColumns().addAll(dateCol, timeCol, msgCol);
         notificationTab.setMinWidth(400);
-        //notificationTab.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+
         
         if(nots != null){
             notificationTab.setItems(nots);}
@@ -145,7 +139,6 @@ public class CustomerView extends Scene implements IResettableScene {
 
         ticketTab.getColumns().addAll(eventCol,barcodeCol, priceCol,typeCol);
         ticketTab.setMinWidth(430);
-        //ticketTab.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
         if(tick != null) {
             ticketTab.setItems(tick);
         }

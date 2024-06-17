@@ -1,9 +1,8 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.access;
 
-import java.nio.channels.AcceptPendingException;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
-
 import it.unipv.insfw23.TicketWave.dao.profileDao.ProfileDao;
 import it.unipv.insfw23.TicketWave.exceptions.AccountNotFoundException;
 import it.unipv.insfw23.TicketWave.exceptions.WrongPasswordException;
@@ -21,16 +20,18 @@ import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
 import javafx.event.*;
 import javafx.stage.Stage;
+
+/**
+ * This controller manages all the buttons selected in {@link LoginView}
+ * EventHandler<ActionEvent> goToSignUpView: if you click on the signUpButton you go to the {@link SignUpView}
+ * EventHandler<ActionEvent> goToCustomerorManagerView: if you click on the loginButton and on the customerButton you go to the {@link CustomerView} else
+ * if you click on the managerButton you go to the {@link ManagerView}
+ */
 public class LoginController {
 
     private Stage mainstage;
-
-    // view da considerare
-    //private SignUpView signUpView;
-    private CustomerView customerview;
-    private SignUpView signUpView;
     private LoginView loginView;
-    private ManagerView managerView;
+
 
 
     public LoginController(Stage mainstage ,LoginView loginView) {
@@ -50,7 +51,7 @@ public class LoginController {
             public void handle(ActionEvent actionEvent) {
 
                 // Azione da eseguire quando il pulsante "Registrati" viene premuto
-                System.out.println("Hai cliccato il pulsante Registrati");
+                System.out.println("You clicked on the signUpButton");
                 SignUpView signUpView = new SignUpView();
                 SignUpController signUpController = new SignUpController(mainstage, signUpView, loginView);
                 signUpView.reSetBars();
@@ -66,27 +67,16 @@ public class LoginController {
                 ProfileDao profileDao = new ProfileDao();
 
                  if (loginView.getCustomerRadioButton().isSelected() && loginView.checkEmptyFields()==false) {
-                     System.out.println("Hai cliccato il pulsante login come cliente");
+                     System.out.println("You clicked on the loginButton as a Customer");
                      Customer loggedCustomer = null;
-                    /*creazione customer ed evento per poi creare vari biglietti e fare delle verifiche
-                     *
-                     * */
 
-                    //customer esempio
-/*
-                    Genre[] favoriteGenre= {Genre.EDM,Genre.HOUSE,Genre.POP};
-                    ArrayList<Ticket> tickets= new ArrayList<>();
-                    Customer customer=new Customer("Mario","Rossi","2000-10-10","mariorossi@gmail.com","123",Province.BARI,favoriteGenre, 100,tickets);
- */
-                    //
-                    //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
                     try {
                         loggedCustomer = profileDao.selectCustomer(loginView.getMail().getText(), loginView.getPassword().getText());
                         if (loggedCustomer == null){
                             throw new AccountNotFoundException();
                         }
                     } catch (SQLException e) {
-                        throw new RuntimeException("Utente non registrato");
+                        throw new RuntimeException("No logged user");
                     } catch (AccountNotFoundException e) {
                         loginView.setErrorLabel(e.getMessage());
                     } catch (WrongPasswordException e) {
@@ -95,7 +85,7 @@ public class LoginController {
                      //
 
                     if(loggedCustomer != null){
-                        System.out.println("Hai cliccato il pulsante Login come cliente");
+                        System.out.println("You clicked on the loginButton as a Customer");
                         ArrayList<Ticket> arrayListTicket = loggedCustomer.getTicketsList();
                         ArrayList<Notification> arrayListNotification = loggedCustomer.getNotification();
                         CustomerView customerview = new CustomerView(loggedCustomer.getName(),arrayListNotification,arrayListTicket,loggedCustomer.getPoints() );
@@ -111,13 +101,10 @@ public class LoginController {
                     }
                 }
                 else if (loginView.getManagerRadioButton().isSelected() && loginView.checkEmptyFields()==false) {
-                    /*	modifiche fatte da Loris per simulare la creazione di un manager senza eventi, simulare la creazione di un evento
-                     * 	da parte di questo manager e simulare aggiunta di questo evento al suo arraylist di eventi
-                     * 	cosi da lavorare con un ipotetico manager che ha pubblicato degli eventi
-                     * */
+
                     Manager loggedManager = null;
 
-                    //ATTENZIONE, QUI VA LA CHIAMATA AL DAO
+
                     try{
                         loggedManager = profileDao.selectManager(loginView.getMail().getText(), loginView.getPassword().getText());
 
@@ -126,52 +113,14 @@ public class LoginController {
                         }
 
                     } catch (SQLException e) {
-                        throw new RuntimeException("Utente non registrato");
+                        throw new RuntimeException("No logged user");
                     } catch (AccountNotFoundException | WrongPasswordException e ) {
                         loginView.setErrorLabel(e.getMessage());
                     }
 
-                     //
-/*
-                    ArrayList<Notification> arrayListNotification = new ArrayList<>();
-                    ArrayList<Event> arraylistevent = new ArrayList<>();
-                    LocalDate datasub = LocalDate.of(2024, 02, 25);
-                    Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","password1234",Province.CREMONA, "2324523432451420", arraylistevent,5,1,datasub,0);
-
-                    int[] seduteRImasteev1 = {200,100};
-                    double[] vettfalsopriceev1 = {5,320};
-                    LocalDate dataev1 = LocalDate.of(2025, 03, 20);
-                    ArrayList<String> arrfintoartista1 = new ArrayList<>();
-                    arrfintoartista1.add("califano");
-                    //Concert eventofinto1 = new Concert(12,"reunion","busto arstizio",dataev1, "via dei matti ,0", Province.LIVORNO,300,2, seduteRImasteev1, vettfalsopriceev1,Genre.INDIE,managerfinto,arrfintoartista1);
-
-                    int[] seduterimasteev2 = {100,80,12};
-                    int[] ticketsoldev2 = {700,20,88};
-                    double[] vettfalsopriceev2 = {11,250,500};
-                    LocalDate dataev2 = LocalDate.of(2024, 10, 02);
-                    ArrayList<String> arrfintoartista2 = new ArrayList<>();
-                    arrfintoartista2.add("loredana berte");
-                    LocalTime time = LocalTime.of(19, 30);
-                    Image bl = null;
-                    //Concert eventofinto2 = new Concert(12,"reunion","busto arstizio",dataev2, "via dei matti ,0", Province.LIVORNO,300,2, seduterimasteev2, vettfalsopriceev2,Genre.INDIE,managerfinto,arrfintoartista2);
-
-                    try {
-                        managerfinto.createConcert(12, "reunion", "milano","discoteca",dataev1,time,Province.AGRIGENTO,Genre.HOUSE, 1000,3,seduterimasteev2,ticketsoldev2,vettfalsopriceev2,managerfinto,"U2","BELLO", bl);
-                                //managerfinto.createConcert(14, "festino", "Rozzano", dataev2, "stadio dell'albero", Province.MILANO, 10000, 3, seduterimasteev2, vettfalsopriceev2, Genre.HOUSE, managerfinto, arrfintoartista2);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
-
-                    /*
-                     * 	fine modifiche di Loris
-                     *
-                     */
-
-
-
                     // Azione da eseguire quando il pulsante "Login" viene premuto
                     if(loggedManager != null){
-                        System.out.println("Hai cliccato il pulsante Login come gestore");
+                        System.out.println("You clicked on the loginButton as a Manager");
                         if(loggedManager.oneMonthPassed() && loggedManager.getSubscription() != 0 && loggedManager.getSubscription()!=-1){ //controllo sull'abbonamento scaduto
                             loggedManager.setSubscription(-1);
                             try {
