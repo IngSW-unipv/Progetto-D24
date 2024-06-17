@@ -44,7 +44,7 @@ public class profileTest {
 
         try{
             profileDao.insertManager(managerTest);
-
+            result = true;
         }catch (AccountAlreadyExistsException e) {
             result = false;
         } catch (SQLException e) {
