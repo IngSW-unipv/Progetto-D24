@@ -72,7 +72,7 @@ public class Notification {
 	}
 
 	/**
-	 * provides the way to set the notification generation time
+	 * provides the way to set the notification generation time      ,
 	 * @param time a {@link LocalTime} value 
 	 */
 	public void setTime(LocalTime time) {
