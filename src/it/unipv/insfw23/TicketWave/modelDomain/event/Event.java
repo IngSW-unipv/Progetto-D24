@@ -148,7 +148,7 @@ public abstract class Event {
 
     /**
      * Returns the price corresponding to the input ticketType
-     * @param type
+     * @param type represents the ticket type (base, premium or vip)
      * @return the dimension of price
      */
     public double getPrice(TicketType type) {

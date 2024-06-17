@@ -10,7 +10,6 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.scene.control.*;
-import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import javafx.event.EventHandler;
@@ -26,21 +25,21 @@ public class ResearchController {
 
     // ATTRIBUTES:
     private final Stage mainStage;
-    private final ResearchView rv;
-    private final ArrayList<String> pr, gen; // sono gli arrayList che contengono i filtri selezionati, per cui le province selezionate ed i generi selezionati
+    private final ResearchView researchView;
+    private final ArrayList<String> provinceFilters, genreFilters; // sono gli arrayList che contengono i filtri selezionati, per cui le province selezionate ed i generi selezionati
 
     // CONSTRUCTOR:
 
     /**
      * The constructor of ResearchController takes 2 parameters as input and calls the serResearchListener() method to manage all the events that occur on the ResearchView
      * @param mainStage
-     * @param rv
+     * @param researchView
      */
-    public ResearchController(Stage mainStage, ResearchView rv) {
+    public ResearchController(Stage mainStage, ResearchView researchView) {
         this.mainStage = mainStage;
-        this.rv = rv;
-        pr = new ArrayList<>();
-        gen = new ArrayList<>();
+        this.researchView = researchView;
+        provinceFilters = new ArrayList<>();
+        genreFilters = new ArrayList<>();
         setResearchListener();
     }
 
@@ -69,81 +68,73 @@ public class ResearchController {
     public void setResearchListener() {
         // click sul bottone di ricerca => appare la table con i risultati
         EventHandler<javafx.scene.input.MouseEvent> researchPressHandlerResearchView = mouseEvent -> {
-            ResearchDAO rd = new ResearchDAO();
-            ArrayList<Event> ev = new ArrayList<>();
-            if (Objects.equals(rv.getSearchBar().getText(), "") && pr.isEmpty() && gen.isEmpty()){ // se non scrivo nulla nella barra di ricerca => ricerco tutti gli eventi e li stampo
+            ResearchDAO researchDAO = new ResearchDAO();
+            ArrayList<Event> eventsResearched = new ArrayList<>();
+            if (Objects.equals(researchView.getSearchBar().getText(), "") && provinceFilters.isEmpty() && genreFilters.isEmpty()){ // se non scrivo nulla nella barra di ricerca => ricerco tutti gli eventi e li stampo
                 try { // CHIAMATA AL DAO
-                    ev = rd.getAllEvents(); // devo passarla alla tabella
-                    ObservableList<Event> evs = FXCollections.observableArrayList(ev);
-                    rv.getTable().setItems(evs); // mostro gli eventi nella tabella dei risultati
+                    eventsResearched = researchDAO.getAllEvents(); // devo passarla alla tabella
+                    ObservableList<Event> evs = FXCollections.observableArrayList(eventsResearched);
+                    researchView.getResultTable().setItems(evs); // mostro gli eventi nella tabella dei risultati
                 } catch (SQLException e) {
                     throw new RuntimeException("All events not found)");
                 }
             } else { // se scrivo qualcosa sulla barra di ricerca faccio una ricerca filtrata
                 try {
-                    ev = rd.getFilteredEvents(rv.getSearchBar().getText(), pr, gen);
-                    ObservableList<Event> evs = FXCollections.observableArrayList(ev);
-                    rv.getTable().setItems(evs); // mostro gli eventi filtrati nella tabella dei risultati
+                    eventsResearched = researchDAO.getFilteredEvents(researchView.getSearchBar().getText(), provinceFilters, genreFilters);
+                    ObservableList<Event> listOfResearchedEvents = FXCollections.observableArrayList(eventsResearched); // lista contenente gli eventi che ho ricercato, la metto nella Table dei risultati della researchView, in modo da vedere i risultati
+                    researchView.getResultTable().setItems(listOfResearchedEvents); // mostro gli eventi filtrati nella tabella dei risultati
                 } catch (SQLException e) {
-                    throw new RuntimeException("Eventi filtrati non trovati (ResearchController riga 64)");
+                    throw new RuntimeException("Filtered events not found");
                 }
             }
-            System.out.println("Faccio la query di ricerca");
-            System.out.println(rv.getSearchBar().getText());
-            rv.getTable().setVisible(true);
-            rv.getTable().getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
+            researchView.getResultTable().setVisible(true);
+            researchView.getResultTable().getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
         };
-        rv.getSearchButton().setOnMouseClicked(researchPressHandlerResearchView);
+        researchView.getSearchButton().setOnMouseClicked(researchPressHandlerResearchView);
 
         // quando clicco su una riga della tabella prendo l'evento in quella riga
         EventHandler<javafx.scene.input.MouseEvent> eventPressHandler = mouseEvent -> {
-            if (rv.getTable().getSelectionModel().getSelectedIndex() == -1){ // Se clicko una riga vuota o la tabella vuota non succede nulla, questo evento viene consumato
+            if (researchView.getResultTable().getSelectionModel().getSelectedIndex() == -1){ // Se clicko una riga vuota o la tabella vuota non succede nulla, questo evento viene consumato
                 mouseEvent.consume();
             } else {
-                rv.getTable().getSelectionModel().setSelectionMode(SelectionMode.SINGLE);
-                System.out.println(rv.getTable().getSelectionModel().getSelectedItem()); // prendo l'elemento cliccato dalla tabella
+                researchView.getResultTable().getSelectionModel().setSelectionMode(SelectionMode.SINGLE); // prendo l'elemento cliccato dalla tabella
 
                 // Prendo lo user connesso a questa sessione dell'applicativo
                 ConnectedUser cu = ConnectedUser.getInstance();
-                TicketPageView tpv = new TicketPageView();
-                if (!cu.getUser().isCustomer() || rv.getTable().getSelectionModel().getSelectedItem().getSeatsRemaining() == 0) {
-                    tpv.setForNotBuyable();
+                TicketPageView ticketPageView = new TicketPageView();
+                if (!cu.getUser().isCustomer() || researchView.getResultTable().getSelectionModel().getSelectedItem().getSeatsRemaining() == 0) {
+                    ticketPageView.setForNotBuyable();
                 }
-                tpv.setComponents(cu.getUser().isCustomer(), rv.getTable().getSelectionModel().getSelectedItem().getType(), rv.getTable().getSelectionModel().getSelectedItem().getName(), rv.getTable().getSelectionModel().getSelectedItem().getCity(),
-                        rv.getTable().getSelectionModel().getSelectedItem().getLocation(), rv.getTable().getSelectionModel().getSelectedItem().getProvince(), rv.getTable().getSelectionModel().getSelectedItem().getDate(),
-                        rv.getTable().getSelectionModel().getSelectedItem().getArtists(), rv.getTable().getSelectionModel().getSelectedItem().getSeatsRemainedNumberForType(), rv.getTable().getSelectionModel().getSelectedItem().getPrices(), rv.getTable().getSelectionModel().getSelectedItem().getDescription(), rv.getTable().getSelectionModel().getSelectedItem().getPhoto());
+                ticketPageView.setComponents(cu.getUser().isCustomer(), researchView.getResultTable().getSelectionModel().getSelectedItem().getType(), researchView.getResultTable().getSelectionModel().getSelectedItem().getName(), researchView.getResultTable().getSelectionModel().getSelectedItem().getCity(),
+                        researchView.getResultTable().getSelectionModel().getSelectedItem().getLocation(), researchView.getResultTable().getSelectionModel().getSelectedItem().getProvince(), researchView.getResultTable().getSelectionModel().getSelectedItem().getDate(),
+                        researchView.getResultTable().getSelectionModel().getSelectedItem().getArtists(), researchView.getResultTable().getSelectionModel().getSelectedItem().getSeatsRemainedNumberForType(), researchView.getResultTable().getSelectionModel().getSelectedItem().getPrices(), researchView.getResultTable().getSelectionModel().getSelectedItem().getDescription(), researchView.getResultTable().getSelectionModel().getSelectedItem().getPhoto());
                 // creazione del TicketPageController
-                new TicketPageController(mainStage, tpv, rv.getTable().getSelectionModel().getSelectedItem(), rv);
-                mainStage.setScene(tpv);
+                new TicketPageController(mainStage, ticketPageView, researchView.getResultTable().getSelectionModel().getSelectedItem(), researchView);
+                mainStage.setScene(ticketPageView);
             }
         };
-        rv.getTable().setOnMouseClicked(eventPressHandler);
+        researchView.getResultTable().setOnMouseClicked(eventPressHandler);
 
         // click su un genere specifico presente nel filtro generi della ricerca
         EventHandler<ActionEvent> genrePressHandler = actionEvent -> {
-            CheckBox cmi = (CheckBox) actionEvent.getSource();
-            if (cmi.isSelected()){ // se un checkbox viene selezionato => il genere fa parte dell'array list di stringhe, altrimenti no
-                System.out.println(cmi.getText() + " is selected");
-                gen.add(cmi.getText());
+            CheckBox genreChechBox = (CheckBox) actionEvent.getSource();
+            if (genreChechBox.isSelected()){ // se un checkbox viene selezionato => il genere fa parte dell'array list di stringhe, altrimenti no. L'arrayList di stringhe mi serve per fare la query filtrata nel ResearchDAO
+                genreFilters.add(genreChechBox.getText());
             } else {
-                System.out.println(cmi.getText() + " is deselected");
-                gen.remove(cmi.getText());
+                genreFilters.remove(genreChechBox.getText());
             }
         };
-        rv.getGenv().forEach(CheckMenuItem -> CheckMenuItem.setOnAction(genrePressHandler));
+        researchView.getGenreCheckBoxArray().forEach(CheckMenuItem -> CheckMenuItem.setOnAction(genrePressHandler));
 
         // click su una provincia specifica presente nel filtro delle province
         EventHandler<ActionEvent> provincePressHandler = actionEvent -> {
-            CheckBox cmi = (CheckBox) actionEvent.getSource();
-            if (cmi.isSelected()){ // se un checkbox viene selezionato => la provincia fa parte dell'array list di stringhe, altrimenti no
-                System.out.println(cmi.getText() + " is selected");
-                pr.add(cmi.getText());
+            CheckBox provinceCheckBox = (CheckBox) actionEvent.getSource();
+            if (provinceCheckBox.isSelected()){ // se un checkbox viene selezionato => la provincia fa parte dell'array list di stringhe, altrimenti no
+                provinceFilters.add(provinceCheckBox.getText());
             } else {
-                System.out.println(cmi.getText() + " is deselected");
-                pr.remove(cmi.getText());
+                provinceFilters.remove(provinceCheckBox.getText());
             }
         };
-        rv.getPrv().forEach(CheckMenuItem -> CheckMenuItem.setOnAction(provincePressHandler));
-
+        researchView.getProvinceCheckBoxArray().forEach(CheckMenuItem -> CheckMenuItem.setOnAction(provincePressHandler));
     }
 }

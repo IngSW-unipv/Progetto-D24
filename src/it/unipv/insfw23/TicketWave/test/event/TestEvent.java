@@ -96,7 +96,7 @@ public class TestEvent {
                     null, null, null, null, null, null, null);
             System.out.println(co);
         } catch (IllegalArgumentException e) {
-            assertEquals("La data ha valore nullo, immettere una nuova data", e.getMessage());
+            assertEquals("The date has a null value, enter a new date", e.getMessage());
         }
     }
 
@@ -115,7 +115,7 @@ public class TestEvent {
                     "Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.", bl);
             System.out.println(co);
         } catch (IllegalArgumentException e) {
-            assertEquals("Immettere una nuova data, data non valida", e.getMessage());
+            assertEquals("Please enter new date, invalid date", e.getMessage());
         }
     }
 
