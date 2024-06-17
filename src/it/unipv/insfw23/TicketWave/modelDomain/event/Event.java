@@ -147,12 +147,12 @@ public abstract class Event {
     }
 
     /**
-     * Returns the size of the price array, based on the number of ticket types i have.
+     * Returns the price corresponding to the input ticketType
      * @param type
      * @return the dimension of price
      */
     public double getPrice(TicketType type) {
-        return price[type.ordinal()]; //ordinal torna la posizione di type nella enum ************************************ CONTROLLARE IL JAVADOC
+        return price[type.ordinal()]; //ordinal torna la posizione di type nella enum 
     }
 
     /**
