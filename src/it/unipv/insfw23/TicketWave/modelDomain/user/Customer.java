@@ -70,7 +70,7 @@ public class Customer extends User {
 
             if(pay.paymentMethod(endPrice) == true) {
                 points = points - usablePoints(startPrice, points);
-                System.out.println("L'acquisto del tuo biglietto per " + event + " was successful");
+                System.out.println("Your ticket purchase for " + event + " was successful");
                 ticket = TicketHandler.getIstance().createTicket(event, type);
                 points = points + (int) (endPrice / 10);
                 ticket.setPrice(endPrice);
@@ -106,7 +106,7 @@ public class Customer extends User {
      */
     public void setFavoriteGenre(Genre [] favorite) throws Exception {
         if (favorite.length > 5) {
-            throw new Exception ("Impossible to select more the 5 genres");
+            throw new Exception ("Impossible to select more than 5 genres");
         } else {
 
             for (int i = 0; i < maxfavoriteGenre; i++) {

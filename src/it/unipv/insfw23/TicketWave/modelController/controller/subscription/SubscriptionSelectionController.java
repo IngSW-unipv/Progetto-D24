@@ -26,8 +26,8 @@ import java.util.ArrayList;
 
 /**
  * This controller manages all the buttons selected in {@link SubscriptionSelectionView}
- * EventHandler<MouseEvent> goToBuySubscription: if you click one of the subscriptionButton you go to the{@link  PaymentSelectionController}
- * EventHandler<MouseEvent> goBackEvent: if you click on the backButton you go back to the {@link it.unipv.insfw23.TicketWave.modelView.access.SignUpView} or
+ * EventHandler MouseEvent goToBuySubscription: if you click one of the subscriptionButton you go to the{@link  PaymentSelectionController}
+ * EventHandler MouseEvent goBackEvent: if you click on the backButton you go back to the {@link it.unipv.insfw23.TicketWave.modelView.access.SignUpView} or
  * to the {@link it.unipv.insfw23.TicketWave.modelView.user.ManagerView}
  */
 public class SubscriptionSelectionController {

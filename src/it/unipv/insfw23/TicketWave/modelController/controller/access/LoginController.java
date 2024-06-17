@@ -23,8 +23,8 @@ import javafx.stage.Stage;
 
 /**
  * This controller manages all the buttons selected in {@link LoginView}
- * EventHandler<ActionEvent> goToSignUpView: if you click on the signUpButton you go to the {@link SignUpView}
- * EventHandler<ActionEvent> goToCustomerorManagerView: if you click on the loginButton and on the customerButton you go to the {@link CustomerView} else
+ * EventHandler ActionEvent goToSignUpView: if you click on the signUpButton you go to the {@link SignUpView}
+ * EventHandler ActionEvent goToCustomerorManagerView: if you click on the loginButton and on the customerButton you go to the {@link CustomerView} else
  * if you click on the managerButton you go to the {@link ManagerView}
  */
 public class LoginController {
