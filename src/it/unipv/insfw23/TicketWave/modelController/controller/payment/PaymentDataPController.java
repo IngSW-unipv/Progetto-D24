@@ -68,7 +68,8 @@ public class PaymentDataPController {
      * turnBackPaymentPage EventHandler: if  BackButton is clicked--return back to the paymentSelectionView.
      *
      * goToNewPage EventHandler: if the NextButton is clicked--based on the LoggedUser, if is {@link Customer} buy one or more tickets, or if is {@link Manager} buy a subscription.
-     * Both options have additional input and domain controls
+     * Both options have additional input and domain controls.
+     * For example, we have the possibility that the incoming input contains certain characters and that it is not empty if we try to move forward to next views.
      *
     */
    public void initComponents(){
@@ -93,7 +94,11 @@ public class PaymentDataPController {
            @Override
            public void handle(MouseEvent actionEvent) {
                // Validare il campo email
-               if(paymentDataPView.getInsertEmail().getText().isEmpty()){
+               String email = paymentDataPView.getInsertEmail().getText();
+               String emailRegex = "^[\\w._%+-]+@[\\w.-]+\\.[a-zA-Z]{2,}$";  // controlla che l'email contenga almeno un carattere prima e dopo il simbolo "@",
+                                                                            // e che ci sia un dominio valido dopo il punto.
+
+               if(email.isEmpty() || !email.matches(emailRegex)) {
                    paymentDataPView.getErrorLabel().setVisible(true);
                    return;
                } else {

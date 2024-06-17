@@ -71,7 +71,7 @@ public class PaymentDataMController {
 
 
     /**
-     * the methos has two EventHandlers associated with the {@link PaymentDataMView} buttons. if  BackButton is clicked--return back to the paymentSelectionView.
+     * the methods have two EventHandlers associated with the {@link PaymentDataMView} buttons. if  BackButton is clicked--return back to the paymentSelectionView.
      * If the NextButton is clicked--based on the LoggedUser, if is {@link Customer} buy one or more tickets, or if is {@link Manager} buy a subscription.
      * Both options have additional input and domain controls
      */
