@@ -106,60 +106,56 @@ public class ResearchDAO implements IResearchDAO{
                      try{
                          manager = createManager(resultset1);
 
-                         if (manager.getCounterCreatedEvents() != 0){ // se gli eventi creati dal manager sono 0, non ha neanche senso che faccia la query
-                             StringBuilder query2 = new StringBuilder("SELECT * FROM EVENT_ WHERE ID_MANAGER = ? AND (NAME_ LIKE ? OR ARTISTS LIKE ?)");
-                             if(!provinceFilters.isEmpty()) { // se è uguale a 0 => non ho messo filtri => non metto la parte di query "PROVINCE IN()"
-                                 query2.append(" AND PROVINCE IN ( ");
-                                 for (int i = 0; i < provinceFilters.size(); i++) {
-                                     query2.append("?");
-                                     if (i < provinceFilters.size() - 1) {
-                                         query2.append(",");
-                                     }
-                                 }
-                                 query2.append(" )");
-                             }
-                             if (!genreFilters.isEmpty()){ // se è uguale a 0 => non ho messo filtri => non metto la parte di query "GENRE IN()"
-                                 query2.append("AND GENRE IN ( ");
-                                 for (int i = 0; i < genreFilters.size(); i++) {
-                                     query2.append("?");
-                                     if (i < genreFilters.size() - 1) {
-                                         query2.append(",");
-                                     }
-                                 }
-                                 query2.append(" );");
-                             } else {
-                                 query2.append(";");
-                             }
-                             // la query dinamica mi permette di prendere tutte le province e i generi clickati nella view
-                             PreparedStatement statement2 = conn.prepareStatement(query2.toString()); // la query che è di tipo StringBuilder la faccio diventare di tipo String
-                             statement2.setString(1, manager.getEmail());
-                             statement2.setString(2, "%" + searchField + "%"); // controlla se nel DB c'è un evento che ha da qualche parte nel nome la sottostringa searchField
-                             statement2.setString(3, "%" + searchField + "%");
-                             int k = 3; // mi serve per settare i paramtri della query nel resultset2
-                             if (!provinceFilters.isEmpty()) { // stesso discorso di prima se non ho filtri sulle PROVINCE vado ai filtri per GENRE
-                                 for (String s : provinceFilters) { //setto i parametri con il ?. Vado avanti finché non arrivo a pr.size()
-                                     statement2.setString(k + 1, s);
-                                     k++;
+                         StringBuilder query2 = new StringBuilder("SELECT * FROM EVENT_ WHERE ID_MANAGER = ? AND (NAME_ LIKE ? OR ARTISTS LIKE ?)");
+                         if(!provinceFilters.isEmpty()) { // se è uguale a 0 => non ho messo filtri => non metto la parte di query "PROVINCE IN()"
+                             query2.append(" AND PROVINCE IN ( ");
+                             for (int i = 0; i < provinceFilters.size(); i++) {
+                                 query2.append("?");
+                                 if (i < provinceFilters.size() - 1) {
+                                     query2.append(",");
                                  }
                              }
-                             if (!genreFilters.isEmpty()) {
-                                 for (String s : genreFilters) { // vado avanti finché non arrivo a gen.size()
-                                     statement2.setString(k + 1, s);
-                                     k++;
-                                 }
-                             }
-                             ResultSet resultSet2 = statement2.executeQuery();
-
-                             // While annidato seconda query
-                             while(resultSet2.next()){
-                                 managerEvent.add(createEvent(resultSet2, manager));
-                             }
-                             manager.setEvent(managerEvent);
-                             result.addAll(managerEvent);
-                             managerEvent = new ArrayList<>();
-                         } else {
-                             System.out.println("This manager didn't create events"); // il gestore non ha mai creato un evento
+                             query2.append(" )");
                          }
+                         if (!genreFilters.isEmpty()){ // se è uguale a 0 => non ho messo filtri => non metto la parte di query "GENRE IN()"
+                             query2.append("AND GENRE IN ( ");
+                             for (int i = 0; i < genreFilters.size(); i++) {
+                                 query2.append("?");
+                                 if (i < genreFilters.size() - 1) {
+                                     query2.append(",");
+                                 }
+                             }
+                             query2.append(" );");
+                         } else {
+                             query2.append(";");
+                         }
+                         // la query dinamica mi permette di prendere tutte le province e i generi clickati nella view
+                         PreparedStatement statement2 = conn.prepareStatement(query2.toString()); // la query che è di tipo StringBuilder la faccio diventare di tipo String
+                         statement2.setString(1, manager.getEmail());
+                         statement2.setString(2, "%" + searchField + "%"); // controlla se nel DB c'è un evento che ha da qualche parte nel nome la sottostringa searchField
+                         statement2.setString(3, "%" + searchField + "%");
+                         int k = 3; // mi serve per settare i paramtri della query nel resultset2
+                         if (!provinceFilters.isEmpty()) { // stesso discorso di prima se non ho filtri sulle PROVINCE vado ai filtri per GENRE
+                             for (String s : provinceFilters) { //setto i parametri con il ?. Vado avanti finché non arrivo a pr.size()
+                                 statement2.setString(k + 1, s);
+                                 k++;
+                             }
+                         }
+                         if (!genreFilters.isEmpty()) {
+                             for (String s : genreFilters) { // vado avanti finché non arrivo a gen.size()
+                                 statement2.setString(k + 1, s);
+                                 k++;
+                             }
+                         }
+                         ResultSet resultSet2 = statement2.executeQuery();
+
+                         // While annidato seconda query
+                         while(resultSet2.next()){
+                             managerEvent.add(createEvent(resultSet2, manager));
+                         }
+                         manager.setEvent(managerEvent);
+                         result.addAll(managerEvent);
+                         managerEvent = new ArrayList<>();
                      } catch (SQLException e){
                          System.err.print("SQL exception occurred in filtered-search due to event search query. " + e.getMessage());
                      }
