@@ -52,10 +52,11 @@ public class ManagerController {
 		initComponents();
 	}
 	
+	/**
+	 * 
+	 */
 	public void initComponents() {
-		/**
-		 * prova
-		 */
+		
 		EventHandler<MouseEvent> logoutButton = new EventHandler<>() {
 			@Override
 			public void handle(MouseEvent event) {
