@@ -16,6 +16,7 @@ import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
 import it.unipv.insfw23.TicketWave.modelView.statistics.TypeStatsView;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
+import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import it.unipv.insfw23.TicketWave.modelView.user.NoMoreEventsPopup;
 import javafx.event.ActionEvent;
@@ -23,16 +24,24 @@ import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
-
+/**
+ *  This controller manages all the buttons selected in {@link ManagerView}
+ */
 public class ManagerController {
-	Stage mainStage;
-	ManagerView managerview;
-	LoginView logview;
-	Manager loggedmanager;
-	IResettableScene backScene;
+	private Stage mainStage;
+	private ManagerView managerview;
+	private LoginView logview;
+	private Manager loggedmanager;
+
 	private double xStageSize;
 	private double yStageSize;
 	
+	/**
+	 * This method 
+	 * @param primarystage the {@link Stage} of this program
+	 * @param managerview a {@link ManagerView}, the controlled one by this controller
+	 * @param logview a {@link LoginView}
+	 */
 	public ManagerController(Stage primarystage, ManagerView managerview, LoginView logview) {
 		mainStage = primarystage;
 		this.managerview = managerview;
@@ -44,20 +53,14 @@ public class ManagerController {
 	}
 	
 	public void initComponents() {
-		
+		/**
+		 * prova
+		 */
 		EventHandler<MouseEvent> logoutButton = new EventHandler<>() {
 			@Override
 			public void handle(MouseEvent event) {
 				System.out.println("logout");
-//				LoginView logview = new LoginView();
-//				SignUpView signupview = new SignUpView();
-//				LoginController logcon = new LoginController(window, signupview, null, logview);
 				logview.reSetBars();
-				/*
-				ConnectedUser.getInstance().unlogUser();
-				ConnectedUser.getInstance().setHome(null);
-				ConnectedUser.getInstance().setLoginView(null);
-				*/
 				logview.makeBlankPage();
 				mainStage.setScene(logview.getScene());
 				ConnectedUser.getInstance().logoutMethod();
@@ -70,7 +73,6 @@ public class ManagerController {
 			@Override
 			public void handle(MouseEvent event) {
 				if (loggedmanager.anotherEvents()) {
-					//crea controller per typeselectionevent
 					SelectionNewEventTypeView typesel = new SelectionNewEventTypeView();
 					SelectionNewEventTypeController typeselectioneventview = new SelectionNewEventTypeController(mainStage, managerview, typesel);
 					mainStage.setScene(typesel);
