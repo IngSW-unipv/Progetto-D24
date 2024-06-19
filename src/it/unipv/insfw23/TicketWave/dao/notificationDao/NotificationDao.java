@@ -33,7 +33,7 @@ public class NotificationDao implements INotificationDao{
 	}
 
 	/**
-	 * It provides the way to insert a {@link Notificationi} in the database
+	 * It provides the way to insert a {@link Notification} in the database
 	 * @param notification a {@link Notification} created by the domain model
 	 * @throws SQLException if a generic SQL exception has occurred
 	 */
