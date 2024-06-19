@@ -2,9 +2,6 @@ package it.unipv.insfw23.TicketWave.modelController.controller.user;
 
 import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
 import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageController;
-
-import java.awt.Button;
-
 import it.unipv.insfw23.TicketWave.modelController.controller.event.SelectionNewEventTypeController;
 import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchController;
 import it.unipv.insfw23.TicketWave.modelController.controller.statistics.TypeStatsController;
@@ -13,15 +10,12 @@ import it.unipv.insfw23.TicketWave.modelDomain.statistics.StatisticsHandler;
 import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
-import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.event.SelectionNewEventTypeView;
-import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataPView;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
 import it.unipv.insfw23.TicketWave.modelView.statistics.TypeStatsView;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
-import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import it.unipv.insfw23.TicketWave.modelView.user.NoMoreEventsPopup;
 import javafx.event.ActionEvent;
