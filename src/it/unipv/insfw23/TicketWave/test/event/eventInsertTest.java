@@ -28,7 +28,7 @@ public class eventInsertTest {
         int[] remainedSeats = {20};
         int[] ticketSold = {2080};
         double[] price = {150};
-        Image photo = new Image("C:/Users/david/Pictures/evento_techno.jpeg"); // da problemi questa riga (non posso mettere imagine null perchè non è previsto da db)
+        Image photo = new Image("/it/unipv/insfw23/TicketWave/modelView/imagesResources/eventImageExample.jpg"); // da problemi questa riga (non posso mettere imagine null perchè non è previsto da db)
 
         Manager manager = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgio1@example.com", "eminflex", Province.CATANIA, "1234567890123456",
                 events, MAX_EVENTS_FOR_BASE_SUB, 1, LocalDate.now(), 0);

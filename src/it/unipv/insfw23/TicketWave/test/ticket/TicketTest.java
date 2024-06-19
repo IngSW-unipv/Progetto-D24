@@ -191,7 +191,7 @@ public class TicketTest {
 									Ticket premiumticket;
 									premiumticket = ticketHandler.createTicket(event, TicketType.PREMIUM);
 									});
-		assertEquals("Evento soldout", exception.getMessage());
+		assertEquals("Event sold out", exception.getMessage());
 		
 	}
 	
