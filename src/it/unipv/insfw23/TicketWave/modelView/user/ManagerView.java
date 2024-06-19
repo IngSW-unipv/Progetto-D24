@@ -38,9 +38,9 @@ public class ManagerView extends Scene  implements IResettableScene {
 	private LowerBar lowerbar;
 	private BorderPane layout;
 	private GridPane grid;
-	private TableView<Event> tabEv;
+	private TableView<Event> eventsTable;
 	private ObservableList<Event> evs;
-	private TableView<Notification> tabNot;
+	private TableView<Notification> notificationsTable;
 	private ObservableList<Notification> nots;
 	private Label name;
 	private int currentSub;
@@ -107,11 +107,11 @@ public class ManagerView extends Scene  implements IResettableScene {
 		GridPane.setHgrow(ev, Priority.SOMETIMES);
 		
 		// tab eventi
-		tabEv = new TableView<>();
-		tabEv.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
-		GridPane.setConstraints(tabEv, 2, 7, 2, 1);
-		GridPane.setHgrow(tabEv, Priority.SOMETIMES);
-		GridPane.setVgrow(tabEv, Priority.SOMETIMES);
+		eventsTable = new TableView<>();
+		eventsTable.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
+		GridPane.setConstraints(eventsTable, 2, 7, 2, 1);
+		GridPane.setHgrow(eventsTable, Priority.SOMETIMES);
+		GridPane.setVgrow(eventsTable, Priority.SOMETIMES);
 		
 		TableColumn<Event, Integer> codevcol = new TableColumn<>("ID");
 		codevcol.setCellValueFactory(new PropertyValueFactory<>("idEvent"));
@@ -125,24 +125,24 @@ public class ManagerView extends Scene  implements IResettableScene {
 		cityevcol.setCellValueFactory(new PropertyValueFactory<>("city"));
 		cityevcol.setStyle("-fx-alignment: CENTER");
 		
-		tabEv.getColumns().addAll(codevcol, evnomecol, cityevcol);
+		eventsTable.getColumns().addAll(codevcol, evnomecol, cityevcol);
 		
 //		ObservableList<Event> evs = FXCollections.observableArrayList();
 //		evs.add(new it.unipv.insfw23.TicketWave.modelView.Event(1,"nome1"));
 //		evs.add(new it.unipv.insfw23.TicketWave.modelView.Event(3,"nome2"));
-		tabEv.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
-		tabEv.setItems(evs);
+		eventsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+		eventsTable.setItems(evs);
 //		tabev.setPrefWidth(400);
 		
 		
 		
 		
 		// tab notifiche
-		tabNot = new TableView<>();
-		tabNot.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
-		GridPane.setConstraints(tabNot, 0, 7, 2,1);
-		GridPane.setHgrow(tabNot, Priority.SOMETIMES);
-		GridPane.setVgrow(tabNot, Priority.SOMETIMES);
+		notificationsTable = new TableView<>();
+		notificationsTable.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css");
+		GridPane.setConstraints(notificationsTable, 0, 7, 2,1);
+		GridPane.setHgrow(notificationsTable, Priority.SOMETIMES);
+		GridPane.setVgrow(notificationsTable, Priority.SOMETIMES);
 
 		
 		TableColumn<Notification, Integer> codcol = new TableColumn<>("codice");
@@ -161,13 +161,13 @@ public class ManagerView extends Scene  implements IResettableScene {
 		datacol.setCellValueFactory(new PropertyValueFactory<>("date"));
 		datacol.setStyle("-fx-alignment: CENTER");
 		
-		tabNot.getColumns().addAll(codcol, msgcol, orariocol, datacol);
+		notificationsTable.getColumns().addAll(codcol, msgcol, orariocol, datacol);
 		
 //		ObservableList<Notification> nots = FXCollections.observableArrayList();
 //		nots.add(new Notification(1,new Customer("f", "tf", "h", "d", "cf", Province.AGRIGENTO, null, 300),"str2"));
 //		nots.add(new Notification(3,"str3","str4"));
-		tabNot.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
-		tabNot.setItems(nots);
+		notificationsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
+		notificationsTable.setItems(nots);
 //		tabnot.setPrefWidth(400);
 
 		subButton = new Button("Cambia abbonamento");
@@ -208,7 +208,7 @@ public class ManagerView extends Scene  implements IResettableScene {
 
 
 		
-		grid.getChildren().addAll(name, logoutButton, tabNot, tabEv, not, ev, subButton, currentSubLabel, eventRemained);
+		grid.getChildren().addAll(name, logoutButton, notificationsTable, eventsTable, not, ev, subButton, currentSubLabel, eventRemained);
 		
 		
 		
@@ -271,11 +271,11 @@ public class ManagerView extends Scene  implements IResettableScene {
 	public TableView<Event> getTableEv(){
 //		TableViewSelectionModel<it.unipv.insfw23.TicketWave.modelView.Event> a = tabev.getSelectionModel();
 //		return a.getSelectedItem();
-		return tabEv;
+		return eventsTable;
 	}
 	
 	public TableView<Notification> getTableNot(){
-		return tabNot;
+		return notificationsTable;
 	}
 	
 	public void updateEvsTable(ArrayList<Event> evs, int counterCreatedEvents) {

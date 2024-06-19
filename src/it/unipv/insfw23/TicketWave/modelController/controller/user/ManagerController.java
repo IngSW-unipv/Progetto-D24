@@ -2,9 +2,13 @@ package it.unipv.insfw23.TicketWave.modelController.controller.user;
 
 import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
 import it.unipv.insfw23.TicketWave.modelController.controller.ticket.TicketPageController;
+
+import java.awt.Button;
+
 import it.unipv.insfw23.TicketWave.modelController.controller.event.SelectionNewEventTypeController;
 import it.unipv.insfw23.TicketWave.modelController.controller.research.ResearchController;
 import it.unipv.insfw23.TicketWave.modelController.controller.statistics.TypeStatsController;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.statistics.StatisticsHandler;
 import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
@@ -12,6 +16,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.event.SelectionNewEventTypeView;
+import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataPView;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
 import it.unipv.insfw23.TicketWave.modelView.statistics.TypeStatsView;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
@@ -25,7 +30,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 /**
- *  This controller manages all the buttons selected in {@link ManagerView}
+ *  This class represents the controller that manages all the {@link javafx.scene.control.Button} selected in {@link ManagerView}
  */
 public class ManagerController {
 	private Stage mainStage;
@@ -37,7 +42,8 @@ public class ManagerController {
 	private double yStageSize;
 	
 	/**
-	 * This method 
+	 * This constructor take as input the current UI , a {@link ManagerView}, the {@link LoginView} and the program Stage. It calculates the 
+	 * {@link NoMoreEventsPopup} position and calls an initialization method
 	 * @param primarystage the {@link Stage} of this program
 	 * @param managerview a {@link ManagerView}, the controlled one by this controller
 	 * @param logview a {@link LoginView}
@@ -53,7 +59,24 @@ public class ManagerController {
 	}
 	
 	/**
+	 * This method has seven {@link EventHandler}s associated with the {@link ManagerView} buttons.
 	 * 
+	 * logoutButton EventHandler: if you click on the logout button you go back to the {@link LoginView}.
+	 * 
+	 * newEventButton EventHandler: if you click on the newEvent button, this handler checks if you can create new events: if you can you go to {@link SelectionNewEventTypeView} 
+	 * where you can continue with the event creation process else the handler sets the {@link NoMoreEventsPopup} and denies you to continue.
+	 * 
+	 * searchButton EventHandler: if you click on the search button you go to the {@link ResearchView} where you can search {@link Event}s.
+	 * 
+	 * statsButton EventHandler: if you click the stats button you go to the {@link TypeStatsView} where are displayed the sales statistics data.
+	 * 
+	 * profileButton EventHandler: if you click on the profile button you go back to the {@link ManagerView}.
+	 * 
+	 * openEvent EventHandler: if you click on one row of the eventsTable you go to the {@link TicketPageView} where you can see the information about the
+	 * {@link Event} you published.
+	 * 
+	 * subscriptionButton EventHandler: if you click on the subscription button you go to the {@link SubscriptionSelectionView} where you can change your
+	 * subscription
 	 */
 	public void initComponents() {
 		
@@ -99,7 +122,7 @@ public class ManagerController {
 		EventHandler<MouseEvent> searchButton = new EventHandler<>() {
 			@Override
 			public void handle(MouseEvent event) {
-				System.out.println("vai alla ricerca");
+				System.out.println("going to research");
 				ResearchView researchview = new ResearchView();
 				ResearchController rescontroller = new ResearchController(mainStage, researchview);
 				mainStage.setScene(researchview);
@@ -109,11 +132,9 @@ public class ManagerController {
 
 
 
-		EventHandler<ActionEvent> statsButtonHandler = new EventHandler<>(){
+		EventHandler<ActionEvent> statsButton = new EventHandler<>(){
 			@Override
 			public void handle(ActionEvent actionEvent){
-				//mi viene passato il manager
-
 				//creo una nuova classe di statistiche, a cui passo il manager
 				StatisticsHandler statDominio = new StatisticsHandler();
 				WrapType typeRes = statDominio.typeStats(loggedmanager);
@@ -123,60 +144,41 @@ public class ManagerController {
 				mainStage.setScene(typeView);
 			}
 		};
-		UpperBar.getIstance().getStatsButton().setOnAction(statsButtonHandler);
+		UpperBar.getIstance().getStatsButton().setOnAction(statsButton);
 
 
-		EventHandler<MouseEvent> profileButton = new EventHandler<>() {
-			
+		EventHandler<MouseEvent> profileButton = new EventHandler<>() {		
 			@Override
 			public void handle(MouseEvent event) {
 				managerview.reSetBars();
-				mainStage.setScene(managerview);
-				
+				mainStage.setScene(managerview);				
 			}
-		};
-		
+		};	
 		managerview.getProfileButton().setOnMouseClicked(profileButton);
 
 
-		EventHandler<MouseEvent> openevent = new EventHandler<>() {
-			
+		EventHandler<MouseEvent> openEvent = new EventHandler<>() {			
 			@Override
 			public void handle(MouseEvent event) {
-//				creo un manager finto per creare un evento finto
-				
-			/*	creazione di un finto manager e un finto evento
-			/	int[] card = {2,6,5,1};
-			/	int[] seduteRImaste = {20, 20};
-			/	ArrayList<Event> arraylistevent = new ArrayList<>();
-			/	LocalDate data = LocalDate.of(2024, 12, 20);
-			/	Manager managerfinto = new Manager("paolo","brosio","2000-12-30","paobro@gmail.com","passwd",2, "23245234324", arraylistevent,5,1,data,4);
-			/	int[] vettfalsoprice = {5};
-			/	ArrayList<String> arrfintoartista = new ArrayList<>();
-			/	arrfintoartista.add("califano");
-			/	Concert eventofinto = new Concert(12,"reunion","busto arstizio",data, "via dei matti ,0", Province.LIVORNO,2,1, seduteRImaste, vettfalsoprice,Genre.INDIE,managerfinto,arrfintoartista);
-			*/
-				System.out.println(managerview.getTableEv().getSelectionModel().getSelectedItem());
-				//costruttore view
+				System.out.println("Event selected: "+managerview.getTableEv().getSelectionModel().getSelectedItem());
+				//costruzione view
 				TicketPageView tic = new TicketPageView();
 				tic.setForNotBuyable();
-				//costruttore controller
+				//costruzione controller
 				try {
 					TicketPageController buyticketcontroller = new TicketPageController(mainStage, tic, managerview.getTableEv().getSelectionModel().getSelectedItem(),managerview);
 				} catch(NullPointerException e){
-                	/*per quando si clicca su una riga della tabella non popolata o quando si lascia lo scrollbar col mouse interno alla table senza avere
-              	  	cliccato un ticket prima
+                	/* per quando si clicca su una riga della tabella non popolata o quando si lascia lo scrollbar col mouse interno alla table senza avere
+              	  	 * cliccato un ticket prima e quindi non devono avvenire cambiamenti di view o altro
                 	 */
                 	return;
 				}
-				//metodo che setta upperbar manager
-				//opacita
-				//
 				mainStage.setScene(tic);
 			}
 		};
-		managerview.getTableEv().setOnMouseClicked(openevent);
+		managerview.getTableEv().setOnMouseClicked(openEvent);
 
+		
 		EventHandler<MouseEvent> subscriptionButton = new EventHandler<>() {
 			@Override
 			public void handle(MouseEvent event) {
