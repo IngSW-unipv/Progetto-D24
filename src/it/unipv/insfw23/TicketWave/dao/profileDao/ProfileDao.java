@@ -451,7 +451,7 @@ public class ProfileDao implements IProfileDao {
      */
     private Genre[] splitStringToArrayGenre(String s) {
         String[] arrayString = s.split(",");
-        Genre[] genreArray = new Genre[5];
+        Genre[] genreArray = new Genre[arrayString.length];
         Genre singleGenre;
         int i = 0;
         for (String string : arrayString) {
