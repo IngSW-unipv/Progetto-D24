@@ -24,7 +24,6 @@ TicketWave permette di svolgere diverse attività:
 - Possibilità di creare nuovi eventi da parte del Gestore
 - Possibilità di ricercare eventi
 - Sistema di notifiche riguardo gli eventi sia per il Gestore che per il Cliente
-- ....
 
 ## Dipendenze 
 Il software per funzionare necessita l'installazione delle seguenti librerie:

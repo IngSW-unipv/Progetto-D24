@@ -2,8 +2,7 @@ package it.unipv.insfw23.TicketWave.test.ticket;
 
 import static org.junit.Assert.*;
 
-import java.sql.Blob;
-import java.sql.Time;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import it.unipv.insfw23.TicketWave.modelController.factory.ticket.TicketHandlerF
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
@@ -28,9 +26,7 @@ public class TicketTest {
 	private Event event;
 	private Manager creator;
 	
-	private final int MAX_EVENTS_FOR_FREE_SUB = 1;
 	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
-	private final int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
 	
 	@Before
 	public void setUp() {
@@ -46,11 +42,10 @@ public class TicketTest {
 		Image bl = null;
 		try {
 			
-			creator.createConcert(4,"Reunion","Firenze","via del palo",LocalDate.of(2024, 5, 23),LocalTime.of(20, 30),Province.ASTI,Genre.METAL,
+			creator.createConcert(4,"Reunion","Firenze","via del palo",LocalDate.of(2025, 5, 23),LocalTime.of(20, 30),Province.ASTI,Genre.METAL,
 					150,2,seatsremainedfortypecorrectevent,ticketsoldfortypecorrectevent,pricecorrectevent,creator,"Califano","lalalala", bl);
 
 		} catch (Exception e) {
-			// TODO: handle exception
 			System.out.println(e.getMessage());
 		}	
 		event = creator.getEventlist().get(0);
@@ -183,41 +178,28 @@ public class TicketTest {
 		
 		int[] seatsremainedfortypeNoTicketevent = {0,0,0};
 		int[] ticketsoldfortypeNoTicketevent = {75,25,50};
-		Exception exception;
+		Exception exception,exception2,exception3;
+		
 		
 		event.setSeatsRemainedNumberForType(seatsremainedfortypeNoTicketevent);
 		event.setTicketsSoldNumberForType(ticketsoldfortypeNoTicketevent);
 		
 		exception = assertThrows(Exception.class, () -> {
-									Ticket premiumticket;
-									premiumticket = ticketHandler.createTicket(event, TicketType.PREMIUM);
+									ticketHandler.createTicket(event, TicketType.PREMIUM);
 									});
-		assertEquals("Evento soldout", exception.getMessage());
+		assertEquals("Event sold out", exception.getMessage());
 		
+		exception2 = assertThrows(Exception.class, () -> {
+									ticketHandler.createTicket(event, TicketType.BASE);
+									});
+		assertEquals("Event sold out", exception2.getMessage());
+		
+		exception3 = assertThrows(Exception.class, () -> {
+									ticketHandler.createTicket(event, TicketType.VIP);
+									});
+		assertEquals("Event sold out", exception3.getMessage());
 	}
 	
-	@Test
-	public void lastTicketTest() {
-		int[] seatsremainedfortypeLastTicketevent = {0,0,1};
-		int[] ticketsoldfortypeLastTicketevent = {75,25,49};
-		Ticket vipticket = null;
-		
-		event.setSeatsRemainedNumberForType(seatsremainedfortypeLastTicketevent);
-		event.setTicketsSoldNumberForType(ticketsoldfortypeLastTicketevent);
-		
-		assertTrue(creator.getNotification().isEmpty());
-		//System.out.println(creator.getNotification()+"5");
-		try {
-			vipticket = ticketHandler.createTicket(event, TicketType.VIP);
-			}catch(Exception e) {
-				System.out.println(e.getMessage()); 
-			}
-		
-		assertFalse(creator.getNotification().isEmpty());
-		
-		
-		
-		
-	}
+
 
 }

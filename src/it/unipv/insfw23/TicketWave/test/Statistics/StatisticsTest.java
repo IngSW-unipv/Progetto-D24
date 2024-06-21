@@ -10,8 +10,6 @@ import javafx.scene.image.Image;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.Blob;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -34,15 +32,15 @@ public class StatisticsTest {
     @Before
     public void setUp() {
         // Preparazione dei dati per i test
-        int [] af1 = {20};
+        int [] af1 = {1125};
         int [] bf1 = {1125};
         double [] pf1 = {50};
 
-        int [] af2 = {20};
+        int [] af2 = {1125};
         int [] bf2 = {1125};
         double [] pf2 = {50};
 
-        int [] ac1 = {20};
+        int [] ac1 = {0};
         int [] bc1 = {2250};
         double [] pc1 = {50};
 
@@ -50,15 +48,15 @@ public class StatisticsTest {
 
         events = new ArrayList<Event>();
 
-        Festival f1 = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024,4,20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 2250,
+        Festival f1 = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2025,4,20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 2250,
                 1, af1, bf1, pf1, manager, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", bl);
         events.add(f1);
 
-        Festival f2 = new Festival(0, "Nameless", "Pavia", "Parco di Pavia", LocalDate.of(2024,4,28), LocalTime.parse("14:04:00"), Province.PAVIA, Genre.EDM, 2250,
+        Festival f2 = new Festival(0, "Nameless", "Pavia", "Parco di Pavia", LocalDate.of(2025,4,28), LocalTime.parse("14:04:00"), Province.PAVIA, Genre.EDM, 2250,
                 1, af2, bf2, pf2, manager, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", bl);
         events.add(f2);
 
-        Concert c1 = new Concert(0, "Nameless", "Milano", "Forum", LocalDate.of(2024,3,20), LocalTime.parse("14:04:00"), Province.MILANO, Genre.RAP, 2250,
+        Concert c1 = new Concert(0, "Nameless", "Milano", "Forum", LocalDate.of(2025,3,20), LocalTime.parse("14:04:00"), Province.MILANO, Genre.RAP, 2250,
                 1, ac1, bc1, pc1, manager, "Salmo", "Festival di musica EDM", bl);
         events.add(c1);
 

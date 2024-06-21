@@ -1,6 +1,5 @@
 package it.unipv.insfw23.TicketWave.modelDomain.statistics;
 
-import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 
 import java.util.ArrayList;
 
@@ -19,8 +18,12 @@ public class WrapArtist{
         this.artistNameArray = typeNameArray;
         this.artistResults = results;
     }
+    
     public ArrayList<String> getArtistNameArray(){
         return artistNameArray;
     }
-    public ArrayList<Double> getArtistResult(){ return artistResults;}
+    
+    public ArrayList<Double> getArtistResult(){ 
+    	return artistResults;
+    }
 }

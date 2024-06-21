@@ -7,19 +7,36 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 
+import it.unipv.insfw23.TicketWave.dao.ConnectionDB;
+import it.unipv.insfw23.TicketWave.dao.profileDao.IProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
+import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 
+/**
+ * This class controls all management of the {@link Notification} class' persistence 
+ * @see ConnectionDB
+ * @see INotificationDao
+ */
 public class NotificationDao implements INotificationDao{
 	
 	private String schema;
 	private Connection connection;
 	
+	/**
+     * In this constructor the name of the DB is associated with the String Schema
+     */
 	public NotificationDao() {
 		super();
 		this.schema = "TicketWaveDB";
 	}
 
+	/**
+	 * It provides the way to insert a {@link Notification} in the database
+	 * @param notification a {@link Notification} created by the domain model
+	 * @throws SQLException if a generic SQL exception has occurred
+	 */
 	@Override
 	public void insertNotification(Notification notification) throws SQLException {
 		connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);
@@ -37,15 +54,19 @@ public class NotificationDao implements INotificationDao{
 			
 			statement.executeUpdate();
 		}catch (SQLException e) {
-			e.printStackTrace();
-			throw new SQLException("Problema nell'inserimento della notifica");
-		}catch (Exception e) {
-			e.printStackTrace();
+			
+			throw new SQLException("A problem has occurred while trying to insert the notification");
+		
 		}
+		
 		ConnectionDBFactory.getInstance().getConnectionDB().closeConnection(connection);
 	}
 
-	
+	/**
+	 * This method allows you to know how many {@link Notification}s are there in the particular database instance
+	 * @return the number of {@link Notification}s in the database
+	 * @throws SQLException if a generic SQL exception has occurred
+	 */
 	@Override
 	public int selectNotificationNumber() throws SQLException {
 		connection = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(connection, schema);
@@ -65,9 +86,9 @@ public class NotificationDao implements INotificationDao{
 			}
 				
 		}catch (SQLException e) {
-			throw new SQLException("Errore nel calcolo del numero di notifiche");
-		}catch (Exception e) {
-			e.printStackTrace();
+		
+			throw new SQLException("A problem has occurred while trying to count the notifications");
+		
 		}
 		
 		ConnectionDBFactory.getInstance().getConnectionDB().closeConnection(connection);

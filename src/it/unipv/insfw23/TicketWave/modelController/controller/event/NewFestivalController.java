@@ -7,6 +7,7 @@ import it.unipv.insfw23.TicketWave.exceptions.InvalidJpegFormatException;
 import it.unipv.insfw23.TicketWave.modelController.controller.user.ManagerController;
 import it.unipv.insfw23.TicketWave.modelController.factory.notifications.INotificationHandler;
 import it.unipv.insfw23.TicketWave.modelController.factory.notifications.NotificationHandlerFactory;
+import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Festival;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
@@ -38,24 +39,46 @@ import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.ImageInputStream;
 
+/**
+ * This class represents the controller that manages all the {@link javafx.scene.control.Button} selected in {@link NewFestivalView} and allows 
+ * to continue in the {@link Event} creation process.
+ */
 public class NewFestivalController {
-	Stage window;
-	NewFestivalView view;
-	SelectionNewEventTypeView typeselevview;
-	Manager loggedmanager;
-	ManagerView home;
-	INotificationHandler notificationHandler;
+	private Stage window;
+	private NewFestivalView view;
+	private SelectionNewEventTypeView selNewEvTypeView;
+	private Manager loggedManager;
+	private ManagerView home;
+	private INotificationHandler notificationHandler;
 	
-	public NewFestivalController(Stage primarystage, NewFestivalView newfestview, SelectionNewEventTypeView typeselevview) {
-		window = primarystage;
-		this.view = newfestview;
-		this.typeselevview = typeselevview;
-		this.loggedmanager = (Manager) ConnectedUser.getInstance().getUser();
+	/**
+	 * This constructor takes as input the current UI , i.e. a {@link NewFestivalView}, the previous UI, that is a {@link SelectionNewEventTypeView}, the program 
+	 * Stage and calls an initialization method
+	 * @param primaryStage the {@link Stage} of this program
+	 * @param newFestView a {@link NewFestivalView}, the controlled one by this controller
+	 * @param selNewEvTypeView a {@link SelectionNewEventTypeView}
+	 */
+	public NewFestivalController(Stage primaryStage, NewFestivalView newFestView, SelectionNewEventTypeView selNewEvTypeView) {
+		window = primaryStage;
+		this.view = newFestView;
+		this.selNewEvTypeView = selNewEvTypeView;
+		this.loggedManager = (Manager) ConnectedUser.getInstance().getUser();
 		this.home = (ManagerView)ConnectedUser.getInstance().getHome();
 		this.notificationHandler = NotificationHandlerFactory.getIstance().getNotificationHandler();
 		initComponents();
 	}
 	
+	/**
+	 * This method has three {@link EventHandler}s associated with the {@link NewFestivalView} buttons.
+	 * 
+	 * photoChooser EventHandler: if you click on the photo button it allows to load an image from your device 
+	 * 
+	 * abortButton EventHandler: if you click on the abort button you return to the {@link SelectionNewEventTypeView}
+	 * 
+	 * confirmButton EventHandler: if you click on the confirm button the data inserted in the {@link NewFestivalView} are taken and processed in order to 
+	 * create the {@link Festival}. Then it is loaded in the database and the possible {@link Notification}s are created. After that you are moved to the 
+	 * {@link ManagerView}. 
+	 */
 	public void initComponents() {
 
 		EventHandler<MouseEvent> photoChooser = new EventHandler<>() {
@@ -74,26 +97,22 @@ public class NewFestivalController {
 		view.getPhotoButton().setOnMouseClicked(photoChooser);
 		
 		
-		EventHandler<MouseEvent> abortButton = new EventHandler<>() {
-			
+		EventHandler<MouseEvent> abortButton = new EventHandler<>() {			
 			@Override
 			public void handle(MouseEvent event) {
-				typeselevview.reSetBars();
-				window.setScene(typeselevview);
+				selNewEvTypeView.reSetBars();
+				window.setScene(selNewEvTypeView);
 				System.out.println("34");
 			}
-		};
-		
+		};		
 		view.getAbortButton().setOnMouseClicked(abortButton);
 	
 	
 	
-	EventHandler<MouseEvent> confirmButton = new EventHandler<>() {
-		
+	EventHandler<MouseEvent> confirmButton = new EventHandler<>() {		
+
 		@Override
 		public void handle(MouseEvent event){
-			view.getErrLabel().setVisible(false);
-			
 			ArrayList<String> customerFavGenre = new ArrayList<>();
 			ArrayList<String> customerProvince = new ArrayList<>();
 			ArrayList<Notification> notifications = new ArrayList<>();
@@ -104,10 +123,12 @@ public class NewFestivalController {
 				EventDao eventDao = new EventDao();
 				ProfileDao profileDao = new ProfileDao();
 				NotificationDao notificationDao = new NotificationDao();
-				//calcolo dei param da passare al metodo per la creazione nel dominio
-			
-				//id preso come count ella table event sul db
-				int id = eventDao.selectEventNumber()+1;
+				
+				
+				//calcolo dei param da passare al metodo per la creazione nel dominio			
+				
+				int id = eventDao.selectEventNumber()+1; //id preso come count della table event sul db
+				
 				int maxNumOfSeats = view.getNumbasefield()+view.getNumpremiumfield()+view.getNumvipfield();
 			
 				int[] seatsRemainedNumberForType = new int[view.getTypesticket()];
@@ -131,16 +152,16 @@ public class NewFestivalController {
 				//conversione da ImageView nella view a Image
 				Image photo = view.getPhotoView().getImage();
 				
-				Festival createdFestival = loggedmanager.createFestival(id, view.getNamefield(), view.getCityfield(), view.getAddressfield(), view.getDatepicked(), view.getTimeSelected(), view.getProvince(),
-											view.getGenre(), maxNumOfSeats, view.getTypesticket(), seatsRemainedNumberForType, ticketSoldNumberForType, prices, loggedmanager, view.getArtistfield(), view.getDescription(), photo);
+				Festival createdFestival = loggedManager.createFestival(id, view.getNamefield(), view.getCityfield(), view.getAddressfield(), view.getDatepicked(), view.getTimeSelected(), view.getProvince(),
+											view.getGenre(), maxNumOfSeats, view.getTypesticket(), seatsRemainedNumberForType, ticketSoldNumberForType, prices, loggedManager, view.getArtistfield(), view.getDescription(), photo);
 				
 				try {
-					eventDao.insertEvent(createdFestival);
+					eventDao.insertEvent(createdFestival); //inserimento nel db
 				}catch (Exception e){
-					loggedmanager.getEventlist().remove(createdFestival);
+					loggedManager.getEventlist().remove(createdFestival); //se inserimento non va a buon fine si rimuove l'evento appena creato dal dominio
 				}
 				
-				profileDao.updateEventCreatedCounter(loggedmanager);
+				profileDao.updateEventCreatedCounter(loggedManager);
 				
 				customerFavGenre = profileDao.selectCustomerByGenre(createdFestival.getGenre());
 				customerProvince = profileDao.selectCustomerByProvince(createdFestival.getProvince());
@@ -153,7 +174,7 @@ public class NewFestivalController {
 					notificationDao.insertNotification(x);
 				}
 				
-				home.updateEvsTable(loggedmanager.getEventlist(),loggedmanager.getCounterCreatedEvents());
+				home.updateEvsTable(loggedManager.getEventlist(),loggedManager.getCounterCreatedEvents());
 				home.reSetBars();
 				ManagerController managerController = new ManagerController(window, home, ConnectedUser.getInstance().getLoginView());
 				window.setScene(home);
@@ -171,8 +192,7 @@ public class NewFestivalController {
 			}
 			
 		}
-	};
-	
+	};	
 	view.getConfirmButton().setOnMouseClicked(confirmButton);
 
 
@@ -184,7 +204,11 @@ public class NewFestivalController {
 }
 
 
-
+	/**
+	 * This method allows to set a maximum value of characters that can be inserted in the view fields
+	 * @param textField a particular {@link TextField} to limit
+	 * @param limit the max number of character
+	 */
 	private void addCharacterLimit(TextField textField, int limit) {  // metodo che mi permette di avere un limite sui textfields
 		textField.textProperty().addListener(new ChangeListener<String>() {
 			@Override
@@ -196,7 +220,13 @@ public class NewFestivalController {
 		});
 	}
 	
-	
+	/**
+	 * This method controls if the {@link Image} object is in JPEG format or not
+	 * @param fxImage a {@link Image} to check
+	 * @return true if the fxImage format is JPEG
+	 * @throws IOException
+	 * @throws InvalidJpegFormatException this Exception is thrown when the format is not JPEG or when the fxImage is null
+	 */
 	public static boolean isJPEG(Image fxImage) throws IOException, InvalidJpegFormatException {
 		if (fxImage != null) {
 			// Converti Image di JavaFX in BufferedImage

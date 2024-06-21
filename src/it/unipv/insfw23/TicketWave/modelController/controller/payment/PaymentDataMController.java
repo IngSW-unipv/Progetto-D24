@@ -71,7 +71,7 @@ public class PaymentDataMController {
 
 
     /**
-     * the methos has two EventHandlers associated with the {@link PaymentDataMView} buttons. if  BackButton is clicked--return back to the paymentSelectionView.
+     * the methods have two EventHandlers associated with the {@link PaymentDataMView} buttons. if  BackButton is clicked--return back to the paymentSelectionView.
      * If the NextButton is clicked--based on the LoggedUser, if is {@link Customer} buy one or more tickets, or if is {@link Manager} buy a subscription.
      * Both options have additional input and domain controls
      */
@@ -125,7 +125,7 @@ public class PaymentDataMController {
 
                         //utilizzo di un Istanza del PaymentFactor e associo a un iPaymentAdapter
                         MasterPayPayment masterPayPayment = new MasterPayPayment();
-                        iPaymentAdapter = PaymentFactory.getMasterPayAdapter(masterPayPayment);
+                        iPaymentAdapter = PaymentFactory.getMasterPayAdapter();
 
 
                         //associazione dei tickets
@@ -189,7 +189,7 @@ public class PaymentDataMController {
                     Manager managerlogged = (Manager) user;  //cast dello user in Manager
 
                     ProfileDao profiledao = new ProfileDao();
-                    SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMasterPayAdapter(new MasterPayPayment()), paymentSelectionView.getPrice());
+                    SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMasterPayAdapter(), paymentSelectionView.getPrice());
 
                     // Update del Valore Subcription del Manager
                     try {

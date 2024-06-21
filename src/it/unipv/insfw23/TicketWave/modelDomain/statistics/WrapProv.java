@@ -1,7 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelDomain.statistics;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 
 import java.util.ArrayList;
 
@@ -19,8 +18,12 @@ public class WrapProv{
         this.provNameArray = typeNameArray;
         this.provResults = results;
     }
+    
     public ArrayList<Province> getProvinceArray(){
         return provNameArray;
     }
-    public ArrayList<Double> getProvResult(){ return provResults; }
+    
+    public ArrayList<Double> getProvResult(){ 
+    	return provResults; 
+    }
 }

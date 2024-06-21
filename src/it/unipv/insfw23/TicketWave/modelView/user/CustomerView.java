@@ -71,6 +71,7 @@ public class CustomerView extends Scene implements IResettableScene {
         layout.setCenter(grid);
 
 
+
         grid = new GridPane();
         grid.setAlignment(Pos.CENTER);
         layout.setCenter(grid);

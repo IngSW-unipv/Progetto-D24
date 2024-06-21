@@ -28,9 +28,7 @@ public class ManagerTest {
     private Image bl;
     IPaymentAdapter paymentAdapter ;
     
-    private final int MAX_EVENTS_FOR_FREE_SUB = 1;
 	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
-	private final int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
     @Before
     public void setUp() {
         // Preparazione dei dati per i test
@@ -47,7 +45,7 @@ public class ManagerTest {
     @Test
     public void testCreateFestival() {
         try {
-            manager.createFestival(1, "Festival Test", "City Test", "Location Test", LocalDate.now(), LocalTime.of(20, 30), Province.AGRIGENTO, Genre.ROCK, 100, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Pino Daniele,Calcutta", "Description Test", bl);
+            manager.createFestival(1, "Festival Test", "City Test", "Location Test", LocalDate.of(2026, 10, 01), LocalTime.of(20, 30), Province.AGRIGENTO, Genre.ROCK, 100, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Pino Daniele,Calcutta", "Description Test", bl);
             assertEquals(1, manager.getEventlist().size());
         }
         catch(Exception e){
@@ -63,7 +61,7 @@ public class ManagerTest {
     @Test
     public void testDontCreateFestival() {  //caso limite utilizzo un manager che abbia un subscription non accettabile
         try {
-            manager1.createFestival(1, "Festival Test", "City Test", "Location Test", LocalDate.now(), LocalTime.of(20, 30), Province.AGRIGENTO, Genre.ROCK, 100, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Pino Daniele,Calcutta", "Description Test", bl);
+            manager1.createFestival(1, "Festival Test", "City Test", "Location Test", LocalDate.of(2024, 11, 02), LocalTime.of(20, 30), Province.AGRIGENTO, Genre.ROCK, 100, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Pino Daniele,Calcutta", "Description Test", bl);
         } catch (Exception e) {
 
             assertEquals("Unable to create event:Festival Test.You Cannot create other Events", e.getMessage());
@@ -72,7 +70,7 @@ public class ManagerTest {
 
     @Test public void testDontCreateFestival2(){ // caso limite utilizzo un manager con numero di eventi creati maggiori al massimo
         try {
-            manager2.createFestival(1, "Festival Test", "City Test", "Location Test", LocalDate.now(), LocalTime.of(20, 30), Province.AGRIGENTO, Genre.ROCK, 100, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Pino Daniele,Calcutta", "Description Test", bl);
+            manager2.createFestival(1, "Festival Test", "City Test", "Location Test", LocalDate.of(2027, 01, 01), LocalTime.of(20, 30), Province.AGRIGENTO, Genre.ROCK, 100, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Pino Daniele,Calcutta", "Description Test", bl);
         } catch (Exception e) {
 
             assertEquals("Unable to create event:Festival Test.You Cannot create other Events", e.getMessage());
@@ -82,7 +80,7 @@ public class ManagerTest {
 
     @Test public void testDontCreateFestival3(){ // caso limite utilizzo test con parametri nulli su data, tempo e genere
         try {
-            manager2.createFestival(1, null, "City Test", "Location Test", null,null, Province.AGRIGENTO, null, 100, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Pino Daniele,Calcutta", "Description Test", bl);
+            manager.createFestival(1, null, "City Test", "Location Test", null,null, Province.AGRIGENTO, null, 100, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Pino Daniele,Calcutta", "Description Test", bl);
             assertEquals(1, manager.getEventlist().size());
         }
         catch(Exception e){

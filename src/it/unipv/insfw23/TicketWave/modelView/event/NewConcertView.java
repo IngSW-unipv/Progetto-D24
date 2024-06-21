@@ -436,7 +436,7 @@ public class NewConcertView extends Scene{
 		return addressfield.getText();
 	}
 
-	public int getTypesticket() {
+	public int getTicketTypes() {
 		return Integer.parseInt(typesticketbox.getValue());
 	}
 

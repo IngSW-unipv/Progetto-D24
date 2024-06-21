@@ -29,10 +29,10 @@ public class ResearchView extends Scene implements IResettableScene {
     private Button searchButton;
     private Menu genre;
     private Menu province;
-    private ArrayList<CheckBox> prv; // vettore per poter gestire i CheckBox di province nel controller
-    private ArrayList <CheckBox> genv; // vettore per poter gestire i CheckBox di generi nel controller
+    private ArrayList<CheckBox> provinceCheckBoxArray; // vettore per poter gestire i CheckBox di province nel controller
+    private ArrayList <CheckBox> genreCheckBoxArray; // vettore per poter gestire i CheckBox di generi nel controller
     private TextField searchBar;
-    private TableView<Event> table;
+    private TableView<Event> resultTable;
     private BorderPane layout;
 
     // CONSTRUCTOR:
@@ -52,7 +52,7 @@ public class ResearchView extends Scene implements IResettableScene {
         Button searchButton = new Button();
         this.searchButton = searchButton;
 
-        MenuBar bar = new MenuBar();
+        MenuBar bar = new MenuBar(); // barra dei menu
 
         Menu genre = new Menu("_Generi"); // con l'underscore davanti se premo ALT + G apre il menu dei filtri per genere
         this.genre = genre;
@@ -60,8 +60,8 @@ public class ResearchView extends Scene implements IResettableScene {
         Menu province = new Menu("_Provincia");
         this.province = province;
 
-        TableView<Event> table = new TableView<>();
-        this.table = table;
+        TableView<Event> resultTable = new TableView<>();
+        this.resultTable = resultTable;
 
         BorderPane layout = new BorderPane();
         this.layout = layout;
@@ -85,157 +85,156 @@ public class ResearchView extends Scene implements IResettableScene {
 
         //__________ Creo  la MenuBar con i filtri _________//
         ///////**** Menu filtri generi ****////////
-        VBox vb1 = new VBox();
-        ScrollPane sp1 = new ScrollPane();
-        Genre[] gnValues = Genre.values(); // ho un array con tutti i valori associati ai nomi della ENUM
-        ArrayList<String> gen = new ArrayList<>(); // stringa di generi
-        for (Genre value : gnValues) { // popolo la mia lista di generi (stringa) partendo dalla ENUM
+        VBox vbGenre = new VBox(); // Vbox che contiene lo scrollpane
+        ScrollPane spGenre = new ScrollPane(); // scrollpane che contiene i checkbox
+        Genre[] genreValuesOfEnum = Genre.values(); // ho un array con tutti i valori associati ai nomi della ENUM
+        ArrayList<String> genreStringOfEnum = new ArrayList<>(); // stringa di generi
+        for (Genre value : genreValuesOfEnum) { // popolo la mia lista di generi (stringa) partendo dalla ENUM
             if (value != Genre.START_THEATER) { // se la stringa è diversa dal separatore dei generi la metto nella successiva CheckBox, per cui la metto nell'array di stringhe
-                gen.add(value.toString());
+                genreStringOfEnum.add(value.toString());
             }
         }
-        genv = new ArrayList<CheckBox>();  // array che contiene tutti i CheckBox da mettere nel Menu del genere
+        genreCheckBoxArray = new ArrayList<CheckBox>();  // array che contiene tutti i CheckBox da mettere nel Menu del genere
 
-        for (String s : gen) { // Arraylist di CheckMenuItems che popolo
-            //CheckMenuItem cmi = new CheckMenuItem(s);
+        for (String s : genreStringOfEnum) { // Arraylist di CheckMenuItems che popolo
             CheckBox cbox = new CheckBox(s);
             cbox.setStyle("-fx-background-color: #ffff");
             cbox.setStyle("-fx-font-family: 'Helvetica'; -fx-font-size: 12px; -fx-text-fill: black;");
-            genv.add(cbox);
+            genreCheckBoxArray.add(cbox);
         }
         // VBox che contiene lo ScrollPane
-        vb1.getChildren().addAll(genv);
-        vb1.setPrefHeight(200);
-        vb1.setStyle("-fx-background-color: #ffff");
-        vb1.setAlignment(Pos.CENTER_LEFT);
+        vbGenre.getChildren().addAll(genreCheckBoxArray);
+        vbGenre.setPrefHeight(200);
+        vbGenre.setStyle("-fx-background-color: #ffff");
+        vbGenre.setAlignment(Pos.CENTER_LEFT);
         // ScrollPane che contiene tutti i CheckBox
-        sp1.setContent(vb1);
-        sp1.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        sp1.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        sp1.setStyle("-fx-background-color: #ffff");
+        spGenre.setContent(vbGenre);
+        spGenre.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spGenre.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spGenre.setStyle("-fx-background-color: #ffff");
         // CustomMenuitem che contiene lo ScrollPane, lo devo per forza usare, poiché in un Menu vanno solo MenuItem o CustomMenuItem
         CustomMenuItem cmi1 = new CustomMenuItem();
-        cmi1.setContent(sp1);
+        cmi1.setContent(spGenre);
         cmi1.setStyle("-fx-background-color: #ffff");
-        // Creazione vera e propria del Menu
+        // Creazione vera e propria del Menu per i filtri del genere
         genre.getItems().addAll(cmi1); // Creo il Menu con i CheckMenuItems da mettere dentro la MenuBar
 
         ///////**** Menu filtri provincia ****////////
-        VBox vb = new VBox();
-        ScrollPane sp = new ScrollPane();
-        Province[] prValues = Province.values(); // ho un array con tutti i valori associati ai nomi della ENUM
-        ArrayList<String> pr = new ArrayList<>(); // stringa di generi
-        for (Province value : prValues) { // popolo la mia lista di generi (stringa) partendo dalla ENUM
-            pr.add(value.toString());
+        VBox vbProvince = new VBox();
+        ScrollPane spProvince = new ScrollPane();
+        Province[] prValuesOfEnum = Province.values(); // ho un array con tutti i valori associati ai nomi della ENUM
+        ArrayList<String> provinceStringOfEnum = new ArrayList<>(); // stringa di generi
+        for (Province value : prValuesOfEnum) { // popolo la mia lista di generi (stringa) partendo dalla ENUM
+            provinceStringOfEnum.add(value.toString());
         }
-        prv = new ArrayList<CheckBox>(); // vettore per poter gestire i CheckBox di province nel controller
+        provinceCheckBoxArray = new ArrayList<CheckBox>(); // vettore per poter gestire i CheckBox di province nel controller
 
-        for (String s : pr) { // Arraylist di CheckBox che popolo
+        for (String s : provinceStringOfEnum) { // Arraylist di CheckBox che popolo
             //CheckMenuItem cmi = new CheckMenuItem(s);
             CheckBox cbox = new CheckBox(s);
             cbox.setStyle("-fx-background-color: #ffff");
             cbox.setStyle("-fx-font-family: 'Helvetica'; -fx-font-size: 12px; -fx-text-fill: black;");
-            prv.add(cbox);
+            provinceCheckBoxArray.add(cbox);
         }
         // VBox che contiene lo ScrollPane
-        vb.getChildren().addAll(prv);
-        vb.setPrefHeight(200);
-        vb.setStyle("-fx-background-color: #ffff");
-        vb.setAlignment(Pos.CENTER_LEFT);
-        vb.setMaxHeight(400);
+        vbProvince.getChildren().addAll(provinceCheckBoxArray);
+        vbProvince.setPrefHeight(200);
+        vbProvince.setStyle("-fx-background-color: #ffff");
+        vbProvince.setAlignment(Pos.CENTER_LEFT);
+        vbProvince.setMaxHeight(400);
         // ScrollPane che contiene tutti i CheckBox
-        sp.setContent(vb);
-        sp.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        sp.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        sp.setStyle("-fx-background-color: #ffff");
+        spProvince.setContent(vbProvince);
+        spProvince.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spProvince.setVbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
+        spProvince.setStyle("-fx-background-color: #ffff");
         // CustomMenuitem che contiene lo ScrollPane, lo devo per forza usare, poiché in un Menu vanno solo MenuItem o CustomMenuItem
         CustomMenuItem cmi = new CustomMenuItem();
-        cmi.setContent(sp);
+        cmi.setContent(spProvince);
         cmi.setStyle("-fx-background-color: #ffff");
-        // Creazione vera e propria del Menu
+        // Creazione vera e propria del Menu per i filtri delle province
         province.getItems().add(cmi); // Creo il Menu con il CustomMenuItem, che contiene lo ScrollPane, che a sua volta contiene la VBox, che a sua volta contiene i vari CheckBox
 
-        // Creazione della MenuBar con i Menu genre e province
+        // Creazione della MenuBar che contiene i Menu genre e province
         bar.getMenus().addAll(genre, province);
         bar.setStyle("-fx-background-color: #ffff");
 
         //__________ Creo la TableView per visualizzare i risultati della ricerca, essa va nascosta fino alla prima ricerca; quando avviene la prima ricerca diventa visibile (quando clicco sul SearchButton) _________//
-        TableColumn<Event,String> tcEvent = new TableColumn<>("Evento");
+        TableColumn<Event,String> tcEvent = new TableColumn<>("Evento"); // Colonna che contiene il nome dell'evento una volta estratto dal DAO
         tcEvent.setCellValueFactory(new PropertyValueFactory<>("name"));
         tcEvent.setStyle("-fx-alignment: CENTER");
         tcEvent.setSortable(false);
         tcEvent.setReorderable(false); // mi permette di disattivare il drag and drop delle colonne interne alla tableview
 
-        TableColumn<Event,String> tcCity = new TableColumn<>("Città");
+        TableColumn<Event,String> tcCity = new TableColumn<>("Città"); // Colonna che contiene la città dell'evento una volta estratto dal DAO
         tcCity.setCellValueFactory(new PropertyValueFactory<>("city"));
         tcCity.setStyle("-fx-alignment: CENTER");
         tcCity.setSortable(false);
         tcCity.setReorderable(false);
 
-        TableColumn<Event,String> tcLocation = new TableColumn<>("Luogo");
+        TableColumn<Event,String> tcLocation = new TableColumn<>("Luogo"); // Colonna che contiene la location dell'evento una volta estratto dal DAO
         tcLocation.setCellValueFactory(new PropertyValueFactory<>("location"));
         tcLocation.setStyle("-fx-alignment: CENTER");
         tcLocation.setSortable(false);
         tcLocation.setReorderable(false);
 
-        TableColumn<Event,String> tcProvince = new TableColumn<>("Provincia");
+        TableColumn<Event,String> tcProvince = new TableColumn<>("Provincia"); // Colonna che contiene la provincia dell'evento una volta estratto dal DAO
         tcProvince.setCellValueFactory(new PropertyValueFactory<>("province"));
         tcProvince.setStyle("-fx-alignment: CENTER");
         tcProvince.setSortable(false);
         tcProvince.setReorderable(false);
 
-        table.getColumns().addAll(tcEvent, tcCity, tcLocation, tcProvince);
-        table.setVisible(false); // fino al primo click del searchButton deve rimanere non visibile
-        table.getSelectionModel().setSelectionMode(null); // fino al primo click del searchButton deve rimanere non clickabile
-        table.setPlaceholder(new Label("Nessun evento con quelle caratteristiche è stato trovato")); // mex che viene messo a display quando la ricerca non porta a nessun evento
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS); // mi permette di allargare la table senza creare colonne aggiuntive
-        table.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css"); // estetica della tableView
-        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
+        resultTable.getColumns().addAll(tcEvent, tcCity, tcLocation, tcProvince); // creazione della tabella degli eventi risultanti dalla ricerca, contiene le colonne create sopra
+        resultTable.setVisible(false); // fino al primo click del searchButton deve rimanere non visibile
+        resultTable.getSelectionModel().setSelectionMode(null); // fino al primo click del searchButton deve rimanere non clickabile
+        resultTable.setPlaceholder(new Label("Nessun evento con quelle caratteristiche è stato trovato")); // mex che viene messo a display quando la ricerca non porta a nessun evento
+        resultTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS); // mi permette di allargare la resultTable senza creare colonne aggiuntive
+        resultTable.getStylesheets().add("it/unipv/insfw23/TicketWave/css/researchTableViewStyle.css"); // estetica della tableView
+        resultTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
 
         //*_____________________________________________* //
         // Inizio creazione GridPane //
         //*_____________________________________________*  //
-        GridPane gp = new GridPane();
-        gp.setStyle("-fx-background-color: #91BAD6");
-        gp.setAlignment(Pos.TOP_CENTER);
+        GridPane gridPane = new GridPane();
+        gridPane.setStyle("-fx-background-color: #91BAD6");
+        gridPane.setAlignment(Pos.TOP_CENTER);
         // decido qual'è la distanza da tutti i bordi
-        gp.setPadding(new Insets(50,50,50,50));
+        gridPane.setPadding(new Insets(50,50,50,50));
 
         // posiziono gli elementi nel gridPane
-        gp.add(bar, 0, 0, 1, 1);
-        gp.add(searchBar, 1, 0, 1,1);
-        gp.add(searchButton,2,0,1,1);
-        gp.add(table,0,1,3,1);
+        gridPane.add(bar, 0, 0, 1, 1);
+        gridPane.add(searchBar, 1, 0, 1,1);
+        gridPane.add(searchButton,2,0,1,1);
+        gridPane.add(resultTable,0,1,3,1);
         // decido di quanto spaziare gli elementi del gridPane
-        gp.setHgap(20); // gap orizzontale
-        gp.setVgap(20); // gap verticale
+        gridPane.setHgap(20); // gap orizzontale
+        gridPane.setVgap(20); // gap verticale
 
-        // creo dei vincoli sulle colonne, in modo da decidere se una colonna deve essere più grande di un'altra
+        // creo dei vincoli sulle colonne del GridPane, in modo da decidere se una colonna deve essere più grande di un'altra
         ColumnConstraints column1 = new ColumnConstraints();
         ColumnConstraints column2 = new ColumnConstraints();
         column2.setPercentWidth(35);
         column2.setMinWidth(330.40);
-        gp.getColumnConstraints().addAll(column1, column2);
+        gridPane.getColumnConstraints().addAll(column1, column2);
 
-        // vincoli sulle righe
+        // vincoli sulle righe del GridPane
         RowConstraints row1 = new RowConstraints();
         RowConstraints row2 = new RowConstraints();
         row2.setMinHeight(100);
         row2.setPrefHeight(1000); // permette alla row2 (quella che contiene la tableview) di prendere tutta la lunghezza disponibile del GridPane
-        gp.getRowConstraints().addAll(row1, row2);
+        gridPane.getRowConstraints().addAll(row1, row2);
 
         // allineo i vari nodi all'interno delle loro celle della gridpane
         GridPane.setHalignment(bar, HPos.CENTER);
         GridPane.setHalignment(searchBar, HPos.CENTER);
         GridPane.setHalignment(searchButton, HPos.CENTER);
-        GridPane.setHalignment(table, HPos.CENTER);
+        GridPane.setHalignment(resultTable, HPos.CENTER);
 
-        gp.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+        gridPane.setMaxSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
 
         //*_____________________________________________* //
-        // BorderPane che contiene le barre e il GridPane //
+        // BorderPane che contiene la barra superiore ed inferiore e il GridPane //
         //*_____________________________________________*  //
-        layout.setCenter(gp);
+        layout.setCenter(gridPane);
         layout.setBottom(LowerBar.getInstance());
         layout.setTop(UpperBar.getIstance());
         setRoot(layout);
@@ -275,19 +274,19 @@ public class ResearchView extends Scene implements IResettableScene {
         return province;
     }
 
-    public ArrayList<CheckBox> getPrv() {
-        return prv;
+    public ArrayList<CheckBox> getProvinceCheckBoxArray() {
+        return provinceCheckBoxArray;
     }
 
-    public ArrayList<CheckBox> getGenv() {
-        return genv;
+    public ArrayList<CheckBox> getGenreCheckBoxArray() {
+        return genreCheckBoxArray;
     }
 
     public TextField getSearchBar() {
         return searchBar;
     }
 
-    public TableView<Event> getTable() {
-        return table;
+    public TableView<Event> getResultTable() {
+        return resultTable;
     }
 }

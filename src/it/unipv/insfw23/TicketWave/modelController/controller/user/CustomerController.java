@@ -20,13 +20,13 @@ import java.sql.SQLException;
 
 /**
  * This controller manages all the buttons selected in {@link CustomerView}
- * EventHandler<MouseEvent> logoutButton : if you click on the logout button you
+ * EventHandler MouseEvent logoutButton : if you click on the logout button you
  * go back to the {@link LoginView}
- * EventHandler<MouseEvent> profileButton: if the profile button is clicked you go back to the
+ * EventHandler MouseEvent profileButton: if the profile button is clicked you go back to the
  * {@link CustomerView}
- * EventHandler<MouseEvent> searchButton: if the search button is clicked you go to the {@link ResearchView}
+ * EventHandler MouseEvent searchButton: if the search button is clicked you go to the {@link ResearchView}
  * where you can buy search for new Events
- * EventHandler<MouseEvent> openTicket: if you click on one row of the ticketTableView you go to the
+ * EventHandler MouseEvent openTicket: if you click on one row of the ticketTableView you go to the
  * {@link  TicketPageView} where you can see the information about the ticket you bought
  */
 public class CustomerController {
@@ -59,7 +59,7 @@ public class CustomerController {
                 ConnectedUser.getInstance().setLoginView(null);
                 */
                 loginView.makeBlankPage();
-                mainstage.setScene(loginView.getScene());
+                mainstage.setScene(loginView);
                 ConnectedUser.getInstance().logoutMethod();
             }
 

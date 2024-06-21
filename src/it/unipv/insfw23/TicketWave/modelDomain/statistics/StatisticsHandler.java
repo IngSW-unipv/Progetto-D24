@@ -10,10 +10,9 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import static it.unipv.insfw23.TicketWave.modelDomain.event.Province.valueOf;
 
 /**
- * This class represents the statistics mananger, performs calculations, and provides
+ * This class represents the statistics manager, performs calculations, and provides
  * the results of ticket sales for a {@link Manager}'s event.
  */
 public class StatisticsHandler implements IStatisticsHandler {

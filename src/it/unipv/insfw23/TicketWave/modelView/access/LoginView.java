@@ -1,13 +1,9 @@
 package it.unipv.insfw23.TicketWave.modelView.access;
 
 
-//import it.unipv.insfw23.TicketWave.modelController.LoginController;
-//import it.unipv.insfw23.TicketWave.modelController.SignUpController;
-import it.unipv.insfw23.TicketWave.modelController.controller.access.LoginController;
+
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
-import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -18,20 +14,16 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
-import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 
 
 
 
 
-public class LoginView extends Application {
+public class LoginView extends Scene {
     private Button loginButton = new Button("Login");
     private Button regButton = new Button("Registrati");
-    private SignUpView signUpView= new SignUpView();
-    private ManagerView managerView;
-    private BorderPane root ;
+    private BorderPane layout;
     private Scene scene ;
     private GridPane grid ;
     private  RadioButton customerRadioButton;
@@ -39,19 +31,26 @@ public class LoginView extends Application {
     private LowerBar lowerBar;
     private UpperBar upperBar;
 
-    private TextField mail;
-    private PasswordField password;
+    private Label emailLabel;
+    private TextField emailField;
+    private Label passwordLabel;
+    private PasswordField passwordField;
+    private Label signupLabel;
     private Label errorLabel;
     private  ToggleGroup accountTypeToggleGroup;
 
 
+    public LoginView(){
+        super(new BorderPane(),1080,600);
+        initComponents();
+    }
+    
+    
+    public void initComponents(){
 
-    @Override
-    public void start(Stage primaryStage) throws Exception{
-
-        root= new BorderPane();
-
-        root.setStyle("-fx-background-color: #91bad6;");
+        layout= (BorderPane) getRoot();
+        layout.setStyle("-fx-background-color: #91bad6;");
+        
 
 
         grid= new GridPane();
@@ -61,39 +60,33 @@ public class LoginView extends Application {
         grid.setVgap(10);
         grid.setHgap(30);
         grid.setAlignment(Pos.CENTER);
-        // grid.setStyle("-fx-background-color: White;");
-
-
 
 
 
         lowerBar = LowerBar.getInstance();
         upperBar= UpperBar.getIstance();
         upperBar.setForNoLogged();
-        root.setBottom(lowerBar);
-        root.setTop(upperBar);
-        root.setCenter(grid);
-
+        layout.setBottom(lowerBar);
+        layout.setTop(upperBar);
+        layout.setCenter(grid);
 
 
 
         // imposto campo email
-        Label emailnameLabel = new Label("Email:");
-        emailnameLabel.setFont(Font.font("Helvetica", FontWeight.BOLD,20));
-        GridPane.setConstraints(emailnameLabel, 0, 1);
-        TextField emailField = new TextField();
-        this.mail=emailField;
+        emailLabel = new Label("Email:");
+        emailLabel.setFont(Font.font("Helvetica", FontWeight.BOLD,20));
+        GridPane.setConstraints(emailLabel, 0, 1);
+        emailField=new TextField();
         GridPane.setConstraints(emailField, 1, 1);
 
         // Imposto camp password
-        Label passwordLabel = new Label("Password:");
+        passwordLabel = new Label("Password:");
         passwordLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 20));
         GridPane.setConstraints(passwordLabel, 0, 2);
-        PasswordField passwordField = new PasswordField();
-        this.password = passwordField;
+        passwordField = new PasswordField();
         GridPane.setConstraints(passwordField, 1, 2);
 
-        Label signupLabel = new Label("Non sei ancora iscritto ?");
+        signupLabel = new Label("Non sei ancora iscritto ?");
         signupLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
         GridPane.setConstraints(signupLabel, 0, 6);
 
@@ -134,27 +127,12 @@ public class LoginView extends Application {
 
 
 
-        grid.getChildren().addAll(emailnameLabel, emailField, passwordLabel, passwordField, customerRadioButton, managerRadioButton, loginButton,signupLabel,regButton,errorLabel);
+        grid.getChildren().addAll(emailLabel, emailField, passwordLabel, passwordField, customerRadioButton, managerRadioButton, loginButton,signupLabel,regButton,errorLabel);
 
 
 
 
-        this.scene= new Scene(root, 500, 500);
-        primaryStage.setScene(scene);
-
-        primaryStage.setTitle("TicketWave");
-
-      Image icon = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/logo.png");
-
-        LoginController loginController = new LoginController(primaryStage, this);
-
-
-        primaryStage.getIcons().add(icon);
-        primaryStage.setWidth(1120);
-        primaryStage.setHeight(600);
-        primaryStage.setMinHeight(600);
-        primaryStage.setMinWidth(800);
-        primaryStage.show();
+        
     }
 
     public RadioButton getCustomerRadioButton() {
@@ -171,17 +149,17 @@ public class LoginView extends Application {
     public void reSetBars(){
 
         BorderPane temp = new BorderPane();
-        scene.setRoot(temp);
+        setRoot(temp);
 
         lowerBar = LowerBar.getInstance();
         upperBar= UpperBar.getIstance();
         upperBar.setForNoLogged();
 
-        root.setBottom(lowerBar);
-        root.setTop(upperBar);
-        root.setCenter(grid);
+        layout.setBottom(lowerBar);
+        layout.setTop(upperBar);
+        layout.setCenter(grid);
 
-        scene.setRoot(root);
+        setRoot(layout);
     }
     public Button getRegButton() {
         return regButton;
@@ -191,19 +169,25 @@ public class LoginView extends Application {
         return scene;
     }
 
-    public TextField getMail(){return mail;}
+    public TextField getMail(){
+    	return emailField;
+    }
 
-    public PasswordField getPassword(){return password;}
+    public PasswordField getPassword(){
+    	return passwordField;
+    }
 
     public void makeBlankPage(){
-        mail.setText("");
-        password.setText("");
+        emailField.setText("");
+        passwordField.setText("");
         errorLabel.setVisible(false);
     }
     public boolean checkEmptyFields(){
-        if(mail.getText().isEmpty() || password.getText().isEmpty()){
+        if(emailField.getText().isEmpty() || passwordField.getText().isEmpty()){
             return true;
-        }else {return false;}
+        }else {
+        	return false;
+        }
     }
 
     public Label getErrorLabel() {
@@ -214,7 +198,5 @@ public class LoginView extends Application {
         errorLabel.setText(message);
         errorLabel.setVisible(true);
     }
-    public static void main(String[] args) {
-        launch(args);
-    }
+
 }

@@ -2,8 +2,6 @@ package it.unipv.insfw23.TicketWave.test.notification;
 
 import static org.junit.Assert.*;
 
-import java.sql.Blob;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -17,7 +15,6 @@ import it.unipv.insfw23.TicketWave.modelController.factory.notifications.Notific
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import javafx.scene.image.Image;
@@ -30,10 +27,10 @@ public class NotificationTest {
 
 	private final int MAX_EVENTS_FOR_FREE_SUB = 1;
 	
-	private final String MSG_SOLDOUT = "Evento soldout";
-	private final String MSG_NEAR = "E' disponibile un nuovo evento nella tua provincia";
-	private final String MSG_GENRE = "E' disponibile un nuovo evento del tuo genere preferito";
-	private final String MSG_NEAR_GENRE = "E' disponibile un nuovo evento del tuo genere preferito nella tua provincia";
+	private final String MSG_SOLDOUT = "Evento soldout: ";
+	private final String MSG_NEAR = "E' disponibile un nuovo evento nella tua provincia: ";
+	private final String MSG_GENRE = "E' disponibile un nuovo evento del tuo genere preferito: ";
+	private final String MSG_NEAR_GENRE = "E' disponibile un nuovo evento del tuo genere preferito nella tua provincia: ";
 	
 	ArrayList<String> customerNear = new ArrayList<>();
 	ArrayList<String> customerPrefGenre = new ArrayList<>();
@@ -60,18 +57,18 @@ public class NotificationTest {
 				Province.AOSTA,"3456785676954038",events,MAX_EVENTS_FOR_FREE_SUB,0,LocalDate.now(),0);
 		
 		//creazione di un evento 
-		int[] seatsremainedfortypecorrectevent = {60,20,25};
-		int[] ticketsoldfortypecorrectevent = {15,5,25};
-		double[] pricecorrectevent = {35.50,70,100};
+		int[] seatsRemainedForType = {60,20,25};
+		int[] ticketSoldForType = {15,5,25};
+		double[] prices = {35.50,70,100};
 		Image bl = null;
 		try {
 			
-			event = creator.createConcert(4,"Reunion","Firenze","via del palo",LocalDate.of(2024, 5, 23),LocalTime.of(20, 30),Province.ASTI,Genre.METAL,
-								150,2,seatsremainedfortypecorrectevent,ticketsoldfortypecorrectevent,pricecorrectevent,creator,"Califano","lalalala", bl);
+			event = creator.createConcert(4,"Reunion","Firenze","via del palo",LocalDate.of(2025, 5, 23),LocalTime.of(20, 30),Province.ASTI,Genre.METAL,
+								150,2,seatsRemainedForType,ticketSoldForType,prices,creator,"Califano","lalalala", bl);
 		
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}	
 		//event = creator.getEventlist().get(0);
 		
@@ -92,7 +89,7 @@ public class NotificationTest {
 		assertEquals(LocalTime.now().truncatedTo(ChronoUnit.SECONDS),creator.getNotification().getFirst().getTime());
 		assertEquals(1,creator.getNotification().getFirst().getId());
 		assertEquals("mauricemerluzz@gmail.com",creator.getNotification().getFirst().getEmailReceiver());
-		assertEquals(MSG_SOLDOUT,creator.getNotification().getFirst().getMsg());
+		assertEquals((MSG_SOLDOUT+event.getName()),creator.getNotification().getFirst().getMsg());
 		
 		
 	}
@@ -117,19 +114,19 @@ public class NotificationTest {
 		assertEquals(notifications.size(), 5);
 		//controllo che le notifiche siano per i customer giusti e abbiano il giusto messaggio
 		assertEquals("Paolo", notifications.get(0).getEmailReceiver());
-		assertEquals(MSG_NEAR, notifications.get(0).getMsg());
+		assertEquals((MSG_NEAR+event.getName()), notifications.get(0).getMsg());
 		
 		assertEquals("Giuseppe", notifications.get(1).getEmailReceiver());
-		assertEquals(notifications.get(1).getMsg(), MSG_NEAR);
+		assertEquals((MSG_NEAR+event.getName()),notifications.get(1).getMsg());
 		
 		assertEquals("Franco", notifications.get(2).getEmailReceiver());
-		assertEquals(notifications.get(2).getMsg(), MSG_NEAR);
+		assertEquals((MSG_NEAR+event.getName()),notifications.get(2).getMsg());
 		
 		assertEquals("Luca", notifications.get(3).getEmailReceiver());
-		assertEquals(notifications.get(3).getMsg(), MSG_NEAR);
+		assertEquals((MSG_NEAR+event.getName()),notifications.get(3).getMsg());
 		
 		assertEquals("Giorgio", notifications.get(4).getEmailReceiver());
-		assertEquals(notifications.get(4).getMsg(), MSG_NEAR);
+		assertEquals((MSG_NEAR+event.getName()),notifications.get(4).getMsg());
 	}
 	
 	@Test
@@ -143,28 +140,28 @@ public class NotificationTest {
 		assertEquals(8, notifications.size());
 		//controllo che le notifiche siano per i customer giusti e abbiano il giusto messaggio
 		assertEquals("Francesco", notifications.get(0).getEmailReceiver());
-		assertEquals(MSG_GENRE, notifications.get(0).getMsg());
+		assertEquals((MSG_GENRE+event.getName()), notifications.get(0).getMsg());
 		
 		assertEquals("Fabio", notifications.get(1).getEmailReceiver());
-		assertEquals(MSG_GENRE, notifications.get(1).getMsg());
+		assertEquals((MSG_GENRE+event.getName()), notifications.get(1).getMsg());
 		
 		assertEquals("Paolo", notifications.get(2).getEmailReceiver());
-		assertEquals(MSG_NEAR_GENRE, notifications.get(2).getMsg());
+		assertEquals((MSG_NEAR_GENRE+event.getName()), notifications.get(2).getMsg());
 		
 		assertEquals("Luca", notifications.get(3).getEmailReceiver());
-		assertEquals(MSG_NEAR_GENRE, notifications.get(3).getMsg());
+		assertEquals((MSG_NEAR_GENRE+event.getName()), notifications.get(3).getMsg());
 		
 		assertEquals("Federico", notifications.get(4).getEmailReceiver());
-		assertEquals(MSG_GENRE, notifications.get(4).getMsg());
+		assertEquals((MSG_GENRE+event.getName()), notifications.get(4).getMsg());
 		
 		assertEquals("Giuseppe", notifications.get(5).getEmailReceiver());
-		assertEquals(MSG_NEAR, notifications.get(5).getMsg());
+		assertEquals((MSG_NEAR+event.getName()), notifications.get(5).getMsg());
 		
 		assertEquals("Franco", notifications.get(6).getEmailReceiver());
-		assertEquals(MSG_NEAR, notifications.get(6).getMsg());
+		assertEquals((MSG_NEAR+event.getName()), notifications.get(6).getMsg());
 		
 		assertEquals("Giorgio", notifications.get(7).getEmailReceiver());
-		assertEquals(MSG_NEAR, notifications.get(7).getMsg());
+		assertEquals((MSG_NEAR+event.getName()), notifications.get(7).getMsg());
 		
 	}
 	

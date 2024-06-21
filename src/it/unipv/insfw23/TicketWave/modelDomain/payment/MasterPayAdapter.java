@@ -1,7 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelDomain.payment;
 
-import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapArtist;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+
 
 /**
  * This class provide specific methods for processing payments via MasterPay.
@@ -14,11 +13,11 @@ public class MasterPayAdapter implements IPaymentAdapter{
 
     //public MasterPayAdapter(){};
 
-    private IMasterPayPayment mastercardPayment;
+    private IMasterPayPayment masterPayPayment;
 
 
-    public MasterPayAdapter(IMasterPayPayment mPayment){
-        this.mastercardPayment = mPayment;
+    public MasterPayAdapter(){
+        this.masterPayPayment = new MasterPayPayment();
     }
 
 
@@ -29,7 +28,7 @@ public class MasterPayAdapter implements IPaymentAdapter{
      */
     @Override
     public boolean paymentMethod(double obPrice){
-        boolean result = mastercardPayment.msPaymentMethod(obPrice);
+        boolean result = masterPayPayment.msPaymentMethod(obPrice);
         return result;
     }
 }

@@ -1,7 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelDomain.statistics;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 
 import java.util.ArrayList;
 
@@ -20,6 +19,7 @@ public class WrapGenre{
         this.genreNameArray = typeNameArray;
         this.genreResults = results;
     }
+    
     public ArrayList<Genre> getGenreArray(){
         return genreNameArray;
     }

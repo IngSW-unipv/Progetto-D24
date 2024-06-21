@@ -152,8 +152,8 @@ public class EventDao implements IEventDao {
                 preparedStatement.executeUpdate();  // eseguo
                 System.out.println("query executed");
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
+        } catch (SQLException e) {        	
+//            e.printStackTrace();
             throw new SQLException("Problems inserting event item in eventDao");
         }
         ConnectionDB.closeConnection(connection);

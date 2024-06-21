@@ -2,8 +2,6 @@ package it.unipv.insfw23.TicketWave.test.user;
 import it.unipv.insfw23.TicketWave.modelController.factory.payment.PaymentFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
-import it.unipv.insfw23.TicketWave.modelDomain.payment.MasterPayPayment;
-import it.unipv.insfw23.TicketWave.modelDomain.payment.PayPolPayment;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
@@ -42,11 +40,11 @@ public class CustomerTest {
 
         mg = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", Province.CAMPOBASSO, "1234567890123456",
                 events, MAX_EVENTS_FOR_BASE_SUB, 1, LocalDate.now(), 0);
-        int [] a = {20};
+        int [] a = {920};
         int [] b = {2080};
         double [] p = {125};
         Image bl = null;
-        fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024,4,20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
+        fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024,10,20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
                 1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", bl);
 
     }
@@ -55,8 +53,7 @@ public class CustomerTest {
 
     @Test
     public void buyWithPointsTest() throws Exception  {
-        MasterPayPayment mastercard= new MasterPayPayment();
-        paymentmastercard = PaymentFactory.getMasterPayAdapter(mastercard);
+        paymentmastercard = PaymentFactory.getMasterPayAdapter();
         customer.buyticket(paymentmastercard,fs,TicketType.BASE,1);
         assertEquals(1,customer.getTicketsList().size());
         assertEquals(100.0, customer.getTicketsList().getFirst().getPrice(), 0);
@@ -66,8 +63,7 @@ public class CustomerTest {
     @Test
     public void buyWithoutPointsTest()   {
         try {
-            PayPolPayment paypal = new PayPolPayment();
-            paymentpaypal = PaymentFactory.getPaypolAdapter(paypal);
+            paymentpaypal = PaymentFactory.getPaypolAdapter();
             customer.buyticket(paymentpaypal, fs, TicketType.BASE, 0);
             assertEquals(1, customer.getTicketsList().size());
             assertEquals(125.0, customer.getTicketsList().getFirst().getPrice(), 0);
@@ -94,8 +90,7 @@ public class CustomerTest {
         try{
 
         customer.setPoints(1000);
-        PayPolPayment paypal= new PayPolPayment();
-        paymentpaypal= PaymentFactory.getPaypolAdapter(paypal);
+        paymentpaypal= PaymentFactory.getPaypolAdapter();
         customer.buyticket(paymentpaypal,fs,TicketType.BASE,1);
         assertEquals(1,customer.getTicketsList().size());
         assertEquals(0, customer.getTicketsList().getFirst().getPrice(), 0);
@@ -109,8 +104,7 @@ public class CustomerTest {
     public void zeroPointsTest() {
         try {
             customer.setPoints(0);
-            PayPolPayment paypal = new PayPolPayment();
-            paymentpaypal = PaymentFactory.getPaypolAdapter(paypal);
+            paymentpaypal = PaymentFactory.getPaypolAdapter();
             customer.buyticket(paymentpaypal, fs, TicketType.BASE, 1);
             assertEquals(1, customer.getTicketsList().size());
             assertEquals(125, customer.getTicketsList().getFirst().getPrice(), 0);
@@ -124,8 +118,7 @@ public class CustomerTest {
     public void pointsExceptionTest(){
         try {
             customer.setPoints(0);
-            PayPolPayment paypal = new PayPolPayment();
-            paymentpaypal = PaymentFactory.getPaypolAdapter(paypal);
+            paymentpaypal = PaymentFactory.getPaypolAdapter();
             customer.buyticket(paymentpaypal, fs, TicketType.BASE, 2);
             assertEquals(0, customer.getTicketsList().size());
             assertEquals(0, customer.getPoints(), 0);
@@ -133,6 +126,7 @@ public class CustomerTest {
             assertEquals("Select a valid number", e.getMessage());
         }
     }
+    
     @Test
     public void favoriteGenreLimitTest(){
         try {

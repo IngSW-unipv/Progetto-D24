@@ -28,8 +28,8 @@ import java.util.regex.Pattern;
 
 /**
  * This controller manages all the buttons selected in {@link SignUpView}
- * EventHandler<ActionEvent> goToLoginView: if you click on the backButton you go back to the {@link LoginView}
- * EventHandler<ActionEvent> goToSelection:if you click on the signUpButton , you go to the {@link SubscriptionSelectionView} if you want to sign in as a
+ * EventHandler ActionEvent  goToLoginView: if you click on the backButton you go back to the {@link LoginView}
+ * EventHandler ActionEvent goToSelection:if you click on the signUpButton , you go to the {@link SubscriptionSelectionView} if you want to sign in as a
  * manager, or you go to the {@link CustomerView} if you want to sign up as a customer
  */
 public class SignUpController {
@@ -72,10 +72,11 @@ public class SignUpController {
                 // Azione da eseguire quando il pulsante "Torna Indietro" viene premuto
                 System.out.println("You clicked on the backButton");
                 //loginView= new LoginView();
-                LoginController loginController= new LoginController(mainstage,loginView );
                 loginView.reSetBars();
                 loginView.makeBlankPage();
-                mainstage.setScene(loginView.getScene()); // Imposta la scena LoginView sullo Stage principal
+                LoginController loginController= new LoginController(mainstage,loginView );
+                
+                mainstage.setScene(loginView); // Imposta la scena LoginView sullo Stage principal
 
             }
         };

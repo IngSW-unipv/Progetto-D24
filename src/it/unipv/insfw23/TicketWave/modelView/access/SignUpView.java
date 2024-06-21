@@ -42,6 +42,7 @@ public class SignUpView extends Scene implements IResettableScene {
     private  final int MAX_SELECTIONS = 5;  // Numero massimo di selezioni consentite
     private int currentSelections = 0;            // Numero attuale di selezioni
 
+    private final LocalDate minDate = LocalDate.now().minus(18, ChronoUnit.YEARS);
     private BorderPane layout ;
     private GridPane grid;
     private Button signUpButton = new Button("Registrati");
@@ -71,9 +72,9 @@ public class SignUpView extends Scene implements IResettableScene {
 
         // creazione borderpane e setto upper e lower bar
 
-        BorderPane layout= (BorderPane) getRoot();
+        layout= (BorderPane) getRoot();
         layout.setStyle("-fx-background-color: #91bad6;");
-        this.layout= layout;
+        
 
         // posizione le barre sopra e sotto
         lowerBar=LowerBar.getInstance();
@@ -174,8 +175,6 @@ public class SignUpView extends Scene implements IResettableScene {
         dateLabel.setFont(labelFont);
         GridPane.setConstraints(dateLabel, 0, 2);
         GridPane.setConstraints(datePicker, 1, 2);
-        LocalDate today = LocalDate.now();
-        LocalDate minDate = today.minus(18, ChronoUnit.YEARS);
         Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
             @Override
             public DateCell call(final DatePicker datePicker) {

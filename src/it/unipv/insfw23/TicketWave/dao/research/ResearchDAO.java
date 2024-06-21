@@ -52,9 +52,8 @@ public class ResearchDAO implements IResearchDAO{
 
                 while(resultset1.next()) { // creazione Manager
                     manager = createManager(resultset1);
+
                     try {
-
-
                         String query2 = "SELECT * FROM EVENT_ WHERE ID_MANAGER = ?"; // query per prendere tutti gli eventi
                         PreparedStatement statement2 = conn.prepareStatement(query2);
                         statement2.setString(1, manager.getEmail());
@@ -84,13 +83,13 @@ public class ResearchDAO implements IResearchDAO{
     /**
      * Returns all the events that match with the search field and that comply with the filters set. If I haven't set a search field, all the events that match the filters set are returned.
      * @param searchField represents the text written in the textField of the ResearchView
-     * @param pr represents the provinceFilters selected by the ResearchView
-     * @param gen represents the genreFilters selected by the ResearchView
+     * @param provinceFilters represents the provinceFilters selected by the ResearchView
+     * @param genreFilters represents the genreFilters selected by the ResearchView
      * @return return
      * @throws SQLException It's thrown if the query for creating events or if the query for creating managers fails
      */
     @Override
-    public ArrayList<Event> getFilteredEvents(String searchField, ArrayList<String> pr , ArrayList<String> gen) throws SQLException{ // Quando qualcuno scrive sulla ResearchBar (TextField) e usa o meno i filtri, allora uso questo metodo
+    public ArrayList<Event> getFilteredEvents(String searchField, ArrayList<String> provinceFilters , ArrayList<String> genreFilters) throws SQLException{ // Quando qualcuno scrive sulla ResearchBar (TextField) e usa o meno i filtri, allora uso questo metodo
         conn = ConnectionDBFactory.getInstance().getConnectionDB().startConnection(conn,schema);
         ArrayList<Event> result = new ArrayList<>();
         ArrayList<Event> managerEvent = new ArrayList<>();
@@ -107,61 +106,56 @@ public class ResearchDAO implements IResearchDAO{
                      try{
                          manager = createManager(resultset1);
 
-                         if (manager.getCounterCreatedEvents() != 0){ // se gli eventi creati dal manager sono 0, non ha neanche senso che faccia la query
-                             StringBuilder query2 = new StringBuilder("SELECT * FROM EVENT_ WHERE ID_MANAGER = ? AND (NAME_ LIKE ? OR ARTISTS LIKE ?)");
-                             if(!pr.isEmpty()) { // se è uguale a 0 => non ho messo filtri => non metto la parte di query "PROVINCE IN()"
-                                 query2.append(" AND PROVINCE IN ( ");
-                                 for (int i = 0; i < pr.size(); i++) {
-                                     query2.append("?");
-                                     if (i < pr.size() - 1) {
-                                         query2.append(",");
-                                     }
-                                 }
-                                 query2.append(" )");
-                             }
-                             if (!gen.isEmpty()){ // se è uguale a 0 => non ho messo filtri => non metto la parte di query "GENRE IN()"
-                                 query2.append("AND GENRE IN ( ");
-                                 for (int i = 0; i < gen.size(); i++) {
-                                     query2.append("?");
-                                     if (i < gen.size() - 1) {
-                                         query2.append(",");
-                                     }
-                                 }
-                                 query2.append(" );");
-                             } else {
-                                 query2.append(";");
-                             }
-                             // la query dinamica mi permette di prendere tutte le province e i generi clickati nella view
-                             System.out.println(query2);
-                             PreparedStatement statement2 = conn.prepareStatement(query2.toString()); // la query che è di tipo StringBuilder la faccio diventare di tipo String
-                             statement2.setString(1, manager.getEmail());
-                             statement2.setString(2, "%" + searchField + "%"); // controlla se nel DB c'è un evento che ha da qualche parte nel nome la sottostringa searchField
-                             statement2.setString(3, "%" + searchField + "%");
-                             int k = 3; // mi serve per settare i paramtri della query nel resultset2
-                             if (!pr.isEmpty()) { // stesso discorso di prima se non ho filtri sulle PROVINCE vado ai filtri per GENRE
-                                 for (String s : pr) { //setto i parametri con il ?. Vado avanti finché non arrivo a pr.size()
-                                     statement2.setString(k + 1, s);
-                                     k++;
+                         StringBuilder query2 = new StringBuilder("SELECT * FROM EVENT_ WHERE ID_MANAGER = ? AND (NAME_ LIKE ? OR ARTISTS LIKE ?)");
+                         if(!provinceFilters.isEmpty()) { // se è uguale a 0 => non ho messo filtri => non metto la parte di query "PROVINCE IN()"
+                             query2.append(" AND PROVINCE IN ( ");
+                             for (int i = 0; i < provinceFilters.size(); i++) {
+                                 query2.append("?");
+                                 if (i < provinceFilters.size() - 1) {
+                                     query2.append(",");
                                  }
                              }
-                             if (!gen.isEmpty()) {
-                                 for (String s : gen) { // vado avanti finché non arrivo a gen.size()
-                                     statement2.setString(k + 1, s);
-                                     k++;
-                                 }
-                             }
-                             ResultSet resultSet2 = statement2.executeQuery();
-
-                             // While annidato seconda query
-                             while(resultSet2.next()){
-                                 managerEvent.add(createEvent(resultSet2, manager));
-                             }
-                             manager.setEvent(managerEvent);
-                             result.addAll(managerEvent);
-                             managerEvent = new ArrayList<>();
-                         } else {
-                             System.out.println("Questo manager non ha creato eventi");
+                             query2.append(" )");
                          }
+                         if (!genreFilters.isEmpty()){ // se è uguale a 0 => non ho messo filtri => non metto la parte di query "GENRE IN()"
+                             query2.append("AND GENRE IN ( ");
+                             for (int i = 0; i < genreFilters.size(); i++) {
+                                 query2.append("?");
+                                 if (i < genreFilters.size() - 1) {
+                                     query2.append(",");
+                                 }
+                             }
+                             query2.append(" );");
+                         } else {
+                             query2.append(";");
+                         }
+                         // la query dinamica mi permette di prendere tutte le province e i generi clickati nella view
+                         PreparedStatement statement2 = conn.prepareStatement(query2.toString()); // la query che è di tipo StringBuilder la faccio diventare di tipo String
+                         statement2.setString(1, manager.getEmail());
+                         statement2.setString(2, "%" + searchField + "%"); // controlla se nel DB c'è un evento che ha da qualche parte nel nome la sottostringa searchField
+                         statement2.setString(3, "%" + searchField + "%");
+                         int k = 3; // mi serve per settare i paramtri della query nel resultset2
+                         if (!provinceFilters.isEmpty()) { // stesso discorso di prima se non ho filtri sulle PROVINCE vado ai filtri per GENRE
+                             for (String s : provinceFilters) { //setto i parametri con il ?. Vado avanti finché non arrivo a pr.size()
+                                 statement2.setString(k + 1, s);
+                                 k++;
+                             }
+                         }
+                         if (!genreFilters.isEmpty()) {
+                             for (String s : genreFilters) { // vado avanti finché non arrivo a gen.size()
+                                 statement2.setString(k + 1, s);
+                                 k++;
+                             }
+                         }
+                         ResultSet resultSet2 = statement2.executeQuery();
+
+                         // While annidato seconda query
+                         while(resultSet2.next()){
+                             managerEvent.add(createEvent(resultSet2, manager));
+                         }
+                         manager.setEvent(managerEvent);
+                         result.addAll(managerEvent);
+                         managerEvent = new ArrayList<>();
                      } catch (SQLException e){
                          System.err.print("SQL exception occurred in filtered-search due to event search query. " + e.getMessage());
                      }
@@ -175,27 +169,6 @@ public class ResearchDAO implements IResearchDAO{
     }
 
     // PRIVATE METHODS:
-
-    /**
-     * This method count the words contained into the artists String from the database in order to find how many artists are in a festival
-     * @param input represents the string of artists taken as input. It is used for the creation of a festival
-     * @return words.lenght
-     */
-    private int countWords(String input){ // mi serve per contare quanti artisti sono stati messi nel festival, questo lo faccio separando la stringa
-        if (input == null || input.isEmpty()) {
-            return 0;
-        }
-        // Rimuove eventuali spazi bianchi prima e dopo la stringa
-        input = input.trim();
-
-        // Se la stringa è vuota dopo il trim, ritorna 0
-        if (input.isEmpty()) {
-            return 0;
-        }
-        // Divide la stringa in base alla virgola
-        String[] words = input.split("\\s*,\\s*");
-        return words.length;
-    }
 
     /**
      * This method creates a manager by taking its data from the database. This is useful for creating an event later
@@ -217,67 +190,67 @@ public class ResearchDAO implements IResearchDAO{
 
     /**
      * This method creates a specific event by taking data from the database and uses the previously created manager as the event creator
-     * @param rs represents the resultset of event query
+     * @param resultSet represents the resultset of event query
      * @param manager represents the manager created previously into the createManager method
      * @return new Event()
      * @throws SQLException It's thrown if the event is not created correctly in the domain
      */
-    private Event createEvent(ResultSet rs, Manager manager) throws SQLException {
-        LocalDate ld = rs.getDate("DATE_").toLocalDate();
-        LocalTime tm = rs.getTime("TIME_").toLocalTime();
+    private Event createEvent(ResultSet resultSet, Manager manager) throws SQLException {
+        LocalDate ld = resultSet.getDate("DATE_").toLocalDate();
+        LocalTime tm = resultSet.getTime("TIME_").toLocalTime();
         //conversione da blob a image
-        Blob bl = rs.getBlob("PHOTO");
+        Blob bl = resultSet.getBlob("PHOTO");
         InputStream is = bl.getBinaryStream();
         Image photo = new Image(is);
         
-        double[] price = new double[rs.getInt("NUM_SEATS_TYPE")];
-        int[] seatsRemaining = new int[rs.getInt("NUM_SEATS_TYPE")];
-        int[] ticketSoldNumberForType = new int[rs.getInt("NUM_SEATS_TYPE")];
+        double[] price = new double[resultSet.getInt("NUM_SEATS_TYPE")];
+        int[] seatsRemaining = new int[resultSet.getInt("NUM_SEATS_TYPE")];
+        int[] ticketSoldNumberForType = new int[resultSet.getInt("NUM_SEATS_TYPE")];
 
-        switch (rs.getInt("NUM_SEATS_TYPE")){
+        switch (resultSet.getInt("NUM_SEATS_TYPE")){
             case 3:
-                price[2] = rs.getDouble("VIP_PRICE");
-                seatsRemaining[2] = rs.getInt("REMAINING_VIP_SEATS");
-                ticketSoldNumberForType[2] = rs.getInt("SOLD_VIP_SEATS");
+                price[2] = resultSet.getDouble("VIP_PRICE");
+                seatsRemaining[2] = resultSet.getInt("REMAINING_VIP_SEATS");
+                ticketSoldNumberForType[2] = resultSet.getInt("SOLD_VIP_SEATS");
 
             case 2:
-                price[1] = rs.getDouble("PREMIUM_PRICE");
-                seatsRemaining[1] = rs.getInt("REMAINING_PREMIUM_SEATS");
-                ticketSoldNumberForType[1] = rs.getInt("SOLD_PREMIUM_SEATS");
+                price[1] = resultSet.getDouble("PREMIUM_PRICE");
+                seatsRemaining[1] = resultSet.getInt("REMAINING_PREMIUM_SEATS");
+                ticketSoldNumberForType[1] = resultSet.getInt("SOLD_PREMIUM_SEATS");
 
             case 1:
-                price[0] = rs.getDouble("BASE_PRICE");
-                seatsRemaining[0] = rs.getInt("REMAINING_BASE_SEATS");
-                ticketSoldNumberForType[0] = rs.getInt("SOLD_BASE_SEATS");
+                price[0] = resultSet.getDouble("BASE_PRICE");
+                seatsRemaining[0] = resultSet.getInt("REMAINING_BASE_SEATS");
+                ticketSoldNumberForType[0] = resultSet.getInt("SOLD_BASE_SEATS");
         }
-        switch (Type.valueOf(rs.getString("TYPE_")).ordinal()) {
+        switch (Type.valueOf(resultSet.getString("TYPE_")).ordinal()) {
             case 0 -> {
-                return new Festival(rs.getInt("ID_EVENT"), rs.getString("NAME_"),
-                        rs.getString("CITY"), rs.getString("LOCATION"), ld, tm,
-                        Province.valueOf(rs.getString("PROVINCE")), Genre.valueOf(rs.getString("GENRE")),
-                        rs.getInt("MAX_NUM_SEATS"), rs.getInt("NUM_SEATS_TYPE"), seatsRemaining, ticketSoldNumberForType, price,
-                        manager, rs.getString("ARTISTS"), rs.getString("DESCRIPTION_"), photo);
+                return new Festival(resultSet.getInt("ID_EVENT"), resultSet.getString("NAME_"),
+                        resultSet.getString("CITY"), resultSet.getString("LOCATION"), ld, tm,
+                        Province.valueOf(resultSet.getString("PROVINCE")), Genre.valueOf(resultSet.getString("GENRE")),
+                        resultSet.getInt("MAX_NUM_SEATS"), resultSet.getInt("NUM_SEATS_TYPE"), seatsRemaining, ticketSoldNumberForType, price,
+                        manager, resultSet.getString("ARTISTS"), resultSet.getString("DESCRIPTION_"), photo);
             }
             case 1 -> {
-                return new Concert(rs.getInt("ID_EVENT"), rs.getString("NAME_"),
-                        rs.getString("CITY"), rs.getString("LOCATION"), ld, tm,
-                        Province.valueOf(rs.getString("PROVINCE")), Genre.valueOf(rs.getString("GENRE")),
-                        rs.getInt("MAX_NUM_SEATS"), rs.getInt("NUM_SEATS_TYPE"), seatsRemaining, ticketSoldNumberForType, price,
-                        manager, rs.getString("ARTISTS"), rs.getString("DESCRIPTION_"), photo);
+                return new Concert(resultSet.getInt("ID_EVENT"), resultSet.getString("NAME_"),
+                        resultSet.getString("CITY"), resultSet.getString("LOCATION"), ld, tm,
+                        Province.valueOf(resultSet.getString("PROVINCE")), Genre.valueOf(resultSet.getString("GENRE")),
+                        resultSet.getInt("MAX_NUM_SEATS"), resultSet.getInt("NUM_SEATS_TYPE"), seatsRemaining, ticketSoldNumberForType, price,
+                        manager, resultSet.getString("ARTISTS"), resultSet.getString("DESCRIPTION_"), photo);
             }
             case 2 -> {
-                return new Theater(rs.getInt("ID_EVENT"), rs.getString("NAME_"),
-                        rs.getString("CITY"), rs.getString("LOCATION"), ld, tm,
-                        Province.valueOf(rs.getString("PROVINCE")), Genre.valueOf(rs.getString("GENRE")),
-                        rs.getInt("MAX_NUM_SEATS"), rs.getInt("NUM_SEATS_TYPE"), seatsRemaining, ticketSoldNumberForType, price,
-                        manager, rs.getString("ARTISTS"), rs.getString("DESCRIPTION_"), rs.getString("AUTHOR"), photo);
+                return new Theater(resultSet.getInt("ID_EVENT"), resultSet.getString("NAME_"),
+                        resultSet.getString("CITY"), resultSet.getString("LOCATION"), ld, tm,
+                        Province.valueOf(resultSet.getString("PROVINCE")), Genre.valueOf(resultSet.getString("GENRE")),
+                        resultSet.getInt("MAX_NUM_SEATS"), resultSet.getInt("NUM_SEATS_TYPE"), seatsRemaining, ticketSoldNumberForType, price,
+                        manager, resultSet.getString("ARTISTS"), resultSet.getString("DESCRIPTION_"), resultSet.getString("AUTHOR"), photo);
             }
             case 3 -> {
-                return new Other(rs.getInt("ID_EVENT"), rs.getString("NAME_"),
-                        rs.getString("CITY"), rs.getString("LOCATION"), ld, tm,
-                        Province.valueOf(rs.getString("PROVINCE")), Genre.valueOf(rs.getString("GENRE")),
-                        rs.getInt("MAX_NUM_SEATS"), rs.getInt("NUM_SEATS_TYPE"), seatsRemaining, ticketSoldNumberForType, price,
-                        manager, rs.getString("ARTISTS"), rs.getString("DESCRIPTION_"), photo);
+                return new Other(resultSet.getInt("ID_EVENT"), resultSet.getString("NAME_"),
+                        resultSet.getString("CITY"), resultSet.getString("LOCATION"), ld, tm,
+                        Province.valueOf(resultSet.getString("PROVINCE")), Genre.valueOf(resultSet.getString("GENRE")),
+                        resultSet.getInt("MAX_NUM_SEATS"), resultSet.getInt("NUM_SEATS_TYPE"), seatsRemaining, ticketSoldNumberForType, price,
+                        manager, resultSet.getString("ARTISTS"), resultSet.getString("DESCRIPTION_"), photo);
             }
         }
         throw new RuntimeException("The event was not created correctly in the domain (error in the CreateEvent method of the ResearchDAO)");

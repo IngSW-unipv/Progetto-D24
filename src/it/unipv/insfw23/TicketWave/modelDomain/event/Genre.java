@@ -26,7 +26,7 @@ public enum Genre {
     SKETCH,
     TRAGEDIA,
     START_OTHER,
-    OTHER
+    ALTRO
 }
 
     

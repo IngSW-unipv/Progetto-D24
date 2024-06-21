@@ -8,14 +8,16 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.*;
 
 /**
  * This class represents a notification, an object whose function is to deliver messages to {@link User}s
+ * @see NotificationHandler
  */
 
 public class Notification {
-	int id;
-	String emailReceiver;
-	String msg;
-	LocalTime time;
-	LocalDate date;
+	
+	private int id;
+	private String emailReceiver;
+	private String msg;
+	private LocalTime time;
+	private LocalDate date;
 	
 	/**
 	 * This constructor associates the notification's data provided by the {@link NotificationHandler} with the creation date and time 
@@ -41,7 +43,7 @@ public class Notification {
 
 	/**
 	 * returns a {@link String} to identify the notification recipient 
-	 * @return the notification receiver in a {@link String}
+	 * @return the notification receiver as a {@link String}
 	 */
 	public String getEmailReceiver() {
 		return emailReceiver;

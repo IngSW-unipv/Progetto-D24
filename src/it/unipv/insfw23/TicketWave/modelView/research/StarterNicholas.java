@@ -6,7 +6,7 @@ import javafx.application.Application;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-public class StarterNicholas extends Application {
+public class StarterNicholas extends Application { // CLASSE DA FAR VOLARE, NON SERVE ******************************************
     public static void main(String[] args) {
         launch(args);
     }
