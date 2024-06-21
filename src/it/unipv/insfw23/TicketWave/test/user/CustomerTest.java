@@ -42,7 +42,7 @@ public class CustomerTest {
 
         mg = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", Province.CAMPOBASSO, "1234567890123456",
                 events, MAX_EVENTS_FOR_BASE_SUB, 1, LocalDate.now(), 0);
-        int [] a = {20};
+        int [] a = {920};
         int [] b = {2080};
         double [] p = {125};
         Image bl = null;
@@ -133,6 +133,7 @@ public class CustomerTest {
             assertEquals("Select a valid number", e.getMessage());
         }
     }
+    
     @Test
     public void favoriteGenreLimitTest(){
         try {

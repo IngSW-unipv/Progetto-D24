@@ -28,9 +28,7 @@ public class ManagerTest {
     private Image bl;
     IPaymentAdapter paymentAdapter ;
     
-    private final int MAX_EVENTS_FOR_FREE_SUB = 1;
 	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
-	private final int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
     @Before
     public void setUp() {
         // Preparazione dei dati per i test
@@ -82,7 +80,7 @@ public class ManagerTest {
 
     @Test public void testDontCreateFestival3(){ // caso limite utilizzo test con parametri nulli su data, tempo e genere
         try {
-            manager2.createFestival(1, null, "City Test", "Location Test", null,null, Province.AGRIGENTO, null, 100, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Pino Daniele,Calcutta", "Description Test", bl);
+            manager.createFestival(1, null, "City Test", "Location Test", null,null, Province.AGRIGENTO, null, 100, 1, seatsremainedfortypecorrectevent, ticketsoldfortypecorrectevent, pricecorrectevent, manager, "Pino Daniele,Calcutta", "Description Test", bl);
             assertEquals(1, manager.getEventlist().size());
         }
         catch(Exception e){

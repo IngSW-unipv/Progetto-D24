@@ -10,8 +10,6 @@ import javafx.scene.image.Image;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.sql.Blob;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -34,15 +32,15 @@ public class StatisticsTest {
     @Before
     public void setUp() {
         // Preparazione dei dati per i test
-        int [] af1 = {20};
+        int [] af1 = {1125};
         int [] bf1 = {1125};
         double [] pf1 = {50};
 
-        int [] af2 = {20};
+        int [] af2 = {1125};
         int [] bf2 = {1125};
         double [] pf2 = {50};
 
-        int [] ac1 = {20};
+        int [] ac1 = {0};
         int [] bc1 = {2250};
         double [] pc1 = {50};
 

@@ -25,128 +25,165 @@ public class TestEvent {
     private ArrayList<Event> events;
     private Manager mg;
     private Image bl;
-
+    private final int MAX_EVENTS_FOR_BASE_SUB = 5;
+    private final int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
+    
     @Before
     public void setup(){
         events = new ArrayList<>();
-        int MAX_EVENTS_FOR_BASE_SUB = 5;
         mg = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgiom@example.com", "eminflex", Province.CATANIA, "1234567890123456",
                             events, MAX_EVENTS_FOR_BASE_SUB, 1, LocalDate.now(), 0);
         bl = null;
     }
+    
     @Test
-    public void createFestival(){
-        try {
-            int[] a = {20};
-            int[] b = {2080};
-            double[] p = {150};
-            fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.of(14, 4), Province.COMO, Genre.EDM,
-                    3000,
-                    1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", bl);
-        } catch (Exception e) {
-            assertEquals("CreateFestival error", e.getMessage());
-        }
+    public void createFestivalTest(){
+        
+        int[] seatsRemainedForType = {20};
+        int[] ticketSoldForType = {2080};
+        double[] prices = {150};
+        fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.of(14, 4), Province.COMO, Genre.EDM,
+                2100, 1, seatsRemainedForType, ticketSoldForType, prices, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", bl);
+        
+        assertEquals(0, fs.getIdEvent());
+        assertEquals("Nameless", fs.getName());
+        assertEquals("Como", fs.getCity());
+        assertEquals("Parco di Como", fs.getLocation());
+        assertEquals("2024-04-20", fs.getDate().toString());
+        assertEquals("14:04", fs.getTime().toString());
+        assertEquals("COMO", fs.getProvince().toString());
+        assertEquals("EDM", fs.getGenre().toString());
+        assertEquals(2100, fs.getMaxNumberOfSeats());
+        assertEquals(1, fs.getTypeOfSeats());
+        assertArrayEquals(new int[] {20}, fs.getSeatsRemainedNumberForType());
+        assertArrayEquals(new int[] {2080}, fs.getTicketsSoldNumberForType());
+        assertArrayEquals(new double[] {150}, fs.getPrices(), 0);
+        assertEquals("giorgiom@example.com", fs.getCreator().getEmail());
+        assertEquals("Rooler, Salmo, Nello Taver", fs.getArtists());
+        assertEquals("Festival di musica EDM", fs.getDescription());
+        assertEquals(null, fs.getPhoto());
+            
     }
 
     @Test
-    public void createConcert(){
-        try {
-            int[] a = {20, 10};
-            int[] b = {1480, 490};
-            double[] p = {150, 300};
-            co = new Concert(1, "Martin Garrix", "Milano", "San Siro", LocalDate.of(2024, 7, 24), LocalTime.of(21, 34), Province.MILANO, Genre.EDM, 2000,
-                    2, a, b, p, mg, "Martin Garrix", "Concerto di Martin Garrix", bl);
-        } catch (Exception e) {
-            assertEquals("CreateConcert error", e.getMessage());
-        }
+    public void createConcertTest(){
+        
+        int[] seatsRemainedForType = {20, 10};
+        int[] ticketsoldForType = {1480, 490};
+        double[] prices = {150, 300};
+        co = new Concert(1, "Martin Garrix", "Milano", "San Siro", LocalDate.of(2024, 7, 24), LocalTime.of(21, 34), Province.MILANO, Genre.EDM, 2000,
+                2, seatsRemainedForType, ticketsoldForType, prices, mg, "Martin Garrix", "Concerto di Martin Garrix", bl);
+        
+        assertEquals(1, co.getIdEvent());
+        assertEquals("Martin Garrix", co.getName());
+        assertEquals("Milano", co.getCity());
+        assertEquals("San Siro", co.getLocation());
+        assertEquals("2024-07-24", co.getDate().toString());
+        assertEquals("21:34", co.getTime().toString());
+        assertEquals("MILANO", co.getProvince().toString());
+        assertEquals("EDM", co.getGenre().toString());
+        assertEquals(2000, co.getMaxNumberOfSeats());
+        assertEquals(2, co.getTypeOfSeats());
+        assertArrayEquals(new int[] {20,10}, co.getSeatsRemainedNumberForType());
+        assertArrayEquals(new int[] {1480,490}, co.getTicketsSoldNumberForType());
+        assertArrayEquals(new double[] {150,300}, co.getPrices(), 0);
+        assertEquals("giorgiom@example.com", co.getCreator().getEmail());
+        assertEquals("Martin Garrix", co.getArtists());
+        assertEquals("Concerto di Martin Garrix", co.getDescription());
+        assertEquals(null, co.getPhoto());
     }
 
     @Test
-    public void createTheater(){
-        try {
-            int[] a = {23, 10, 50};
-            int[] b = {477, 490, 150};
-            double[] p = {50, 300, 1000};
-            th = new Theater(2, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), LocalTime.of(22, 50), Province.ROMA, Genre.COMMEDIA,
-                    1200, 3, a, b, p, mg, "Franchino er criminale", "Commedia di Franchino er criminale ", "Paolo", bl);
-        } catch (Exception e) {
-            assertEquals("CreateTheater error", e.getMessage());
-        }
+    public void createTheaterTest(){
+    
+        int[] seatsRemainedForType = {23, 10, 50};
+        int[] ticketSoldForType = {477, 490, 150};
+        double[] prices = {50, 300, 1000};
+        th = new Theater(2, "Franchino er criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), LocalTime.of(22, 50), Province.ROMA, Genre.COMMEDIA,
+                1200, 3, seatsRemainedForType, ticketSoldForType, prices, mg, "Franchino er criminale", "Commedia di Franchino er criminale", "Paolo", bl);
+    
+        assertEquals(2, th.getIdEvent());
+        assertEquals("Franchino er criminale", th.getName());
+        assertEquals("Roma", th.getCity());
+        assertEquals("Teatro de Tivoli", th.getLocation());
+        assertEquals("2023-10-30", th.getDate().toString());
+        assertEquals("22:50", th.getTime().toString());
+        assertEquals("ROMA", th.getProvince().toString());
+        assertEquals("COMMEDIA", th.getGenre().toString());
+        assertEquals(1200, th.getMaxNumberOfSeats());
+        assertEquals(3, th.getTypeOfSeats());
+        assertArrayEquals(new int[] {23, 10, 50}, th.getSeatsRemainedNumberForType());
+        assertArrayEquals(new int[] {477, 490, 150}, th.getTicketsSoldNumberForType());
+        assertArrayEquals(new double[] {50, 300, 1000}, th.getPrices(), 0);
+        assertEquals("giorgiom@example.com", th.getCreator().getEmail());
+        assertEquals("Franchino er criminale", th.getArtists());
+        assertEquals("Commedia di Franchino er criminale", th.getDescription());
+        assertEquals("Paolo", th.getAuthorName());
+        assertEquals(null, th.getPhoto());
+    
     }
 
     @Test
-    public void createOther(){
-        try {
-            int[] a = {};
-            int[] b = {};
-            double[] p = {};
-            ot = new Other(3, "Sagra della salsiccia", "Roma", "Mercato de Roma", LocalDate.of(2023, 7, 22), LocalTime.parse("19:00:00"), Province.ROMA, null, 0,
-                    0, a, b, p, mg, null, "Sagra della salsiccia de Roma, er mejo", bl);
-        } catch (Exception e) {
-            assertEquals("CreateOther error", e.getMessage());
-        }
+    public void createOtherTest(){
+    
+        int[] seatsRemainedForType = {70,20};
+        int[] ticketSoldForType = {6,4};
+        double[] prices = {80,200};
+        ot = new Other(3, "Sagra della salsiccia", "Roma", "Mercato de Roma", LocalDate.of(2023, 7, 22), LocalTime.parse("19:00:00"), Province.ROMA, Genre.OTHER, 
+        		100, 2, seatsRemainedForType, ticketSoldForType, prices, mg, "Califano", "Sagra della salsiccia de Roma, er mejo", bl);
+        
+        assertEquals(3, ot.getIdEvent());
+        assertEquals("Sagra della salsiccia", ot.getName());
+        assertEquals("Roma", ot.getCity());
+        assertEquals("Mercato de Roma", ot.getLocation());
+        assertEquals("2023-07-22", ot.getDate().toString());
+        assertEquals("19:00", ot.getTime().toString());
+        assertEquals("ROMA", ot.getProvince().toString());
+        assertEquals("OTHER", ot.getGenre().toString());
+        assertEquals(100, ot.getMaxNumberOfSeats());
+        assertEquals(2, ot.getTypeOfSeats());
+        assertArrayEquals(new int[] {70, 20}, ot.getSeatsRemainedNumberForType());
+        assertArrayEquals(new int[] {6, 4}, ot.getTicketsSoldNumberForType());
+        assertArrayEquals(new double[] {80, 200}, ot.getPrices(), 0);
+        assertEquals("giorgiom@example.com", ot.getCreator().getEmail());
+        assertEquals("Califano", ot.getArtists());
+        assertEquals("Sagra della salsiccia de Roma, er mejo", ot.getDescription());
+        assertEquals(null, ot.getPhoto());
+    
     }
 
     @Test
-    public void checkEventsCreatedFromManager(){
-        try {
-            //creo degli eventi
-            int[] a = {20};
-            int[] b = {2080};
-            double[] p = {150};
-            Festival festival = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
-                    1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", bl);
-            Festival festival2 = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
-                    1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", bl);
-            Other other = new Other(3, "Sagra della salsiccia", "Roma", "Mercato de Roma", LocalDate.of(2023, 7, 22), LocalTime.parse("19:00:00"), Province.ROMA, null, 0,
-                    1, a, b, p, mg, null, "Sagra della salsiccia de Roma, er mejo", bl);
-            Theater theater = new Theater(2, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), LocalTime.parse("22:50:00"), Province.ROMA, Genre.COMMEDIA,
-                    1200, 1, a, b, p, mg, "Franchino er criminale", "Commedia di Franchino er criminale ", "Paolo", bl);
-            Theater theater1 = new Theater(2, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), LocalTime.parse("22:50:00"), Province.ROMA, Genre.COMMEDIA,
-                    1200, 1, a, b, p, mg, "Franchino er criminale", "Commedia di Franchino er criminale ", "Paolo", bl);
-            // popolo l'array list di Eventi
-            ArrayList<Event> ev1 = new ArrayList<>();
-            ev1.add(festival);
-            ev1.add(festival2);
-            ev1.add(other);
-            ev1.add(theater);
-            ev1.add(theater1);
-            // creo il manager
-            int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
-            Manager mg1 = new Manager("Paolo", "Bisio", "1970-02-07", "Paolo@example.com", "dajeRoma", Province.ROMA, "423432523523",
-                    ev1, MAX_EVENTS_FOR_PREMIUM_SUB, 2, LocalDate.now(), 0);
-            // check + stampa delle reference degli eventi
-            assertEquals(5, mg1.getEventlist().size()); // controllo che 6 sia la size dell'arrayList di eventi in manager
-            for (int i = 0; i < 5; i++) {
-                System.out.println(mg1.getEventlist().get(i)); // stampo la reference dell'evento puntato in quel giro
-            }
-        } catch (Exception e) {
-            assertEquals("CreatedEventsFromManager error", e.getMessage());
-        }
+    public void checkEventsCreatedFromManagerTest(){
+
+        //creo degli eventi
+        int[] a = {920};
+        int[] b = {2080};
+        double[] p = {150};
+        Festival festival = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
+                1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", bl);
+        Festival festival2 = new Festival(1, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
+                1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", bl);
+        Other other = new Other(3, "Sagra della salsiccia", "Roma", "Mercato de Roma", LocalDate.of(2023, 7, 22), LocalTime.parse("19:00:00"), Province.ROMA, Genre.OTHER, 3000,
+                1, a, b, p, mg, "Califano", "Sagra della salsiccia de Roma, er mejo", bl);
+        Theater theater = new Theater(2, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), LocalTime.parse("22:50:00"), Province.ROMA, Genre.COMMEDIA,
+                3000, 1, a, b, p, mg, "Franchino er criminale", "Commedia di Franchino er criminale ", "Paolo", bl);
+        Theater theater1 = new Theater(5, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), LocalTime.parse("22:50:00"), Province.ROMA, Genre.COMMEDIA,
+                3000, 1, a, b, p, mg, "Franchino er criminale", "Commedia di Franchino er criminale ", "Paolo", bl);
+        // popolo l'array list di Eventi
+        ArrayList<Event> ev1 = new ArrayList<>();
+        ev1.add(festival);
+        ev1.add(festival2);
+        ev1.add(other);
+        ev1.add(theater);
+        ev1.add(theater1);
+        // creo il manager
+        Manager mg1 = new Manager("Paolo", "Bisio", "1970-02-07", "Paolo@example.com", "dajeRoma", Province.ROMA, "423432523523",
+                ev1, MAX_EVENTS_FOR_PREMIUM_SUB, 2, LocalDate.now(), 0);
+        // check + stampa delle reference degli eventi
+        assertEquals(5, mg1.getEventlist().size()); // controllo che 5 sia la size dell'arrayList di eventi in manager
+   
     }
 
-    @Test
-    public void ticketSoldNumberForTypeTest(){ // controllo se i biglietti per tipo che prendo sono corretti e controllo la somma
-        try {
-            int[] a = {20, 10};
-            int[] b = {1980, 990};
-            double[] p = {150, 270};
-            fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
-                    2, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", bl);
-            int [] ticketSold;
-            ticketSold = fs.getTicketsSoldNumberForType();
-            int sum = 0;
-
-            for (int j : ticketSold) { // check
-                System.out.println(j);
-                sum += j;
-                System.out.println(sum);
-            }
-
-        } catch (Exception e) {
-            assertEquals("ticketSoldNumberTest error", e.getMessage());
-        }
-    }
     @After
     public void clear(){
         fs = null;
@@ -155,6 +192,6 @@ public class TestEvent {
         ot = null;
         events.clear();
         mg = null;
-        System.gc(); // dico al Garbage Collector di rimuovere dalla memoria gli oggetti inutilizzati
+        
     }
 }

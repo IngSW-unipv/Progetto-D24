@@ -2,8 +2,7 @@ package it.unipv.insfw23.TicketWave.test.ticket;
 
 import static org.junit.Assert.*;
 
-import java.sql.Blob;
-import java.sql.Time;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -16,7 +15,6 @@ import it.unipv.insfw23.TicketWave.modelController.factory.ticket.TicketHandlerF
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
@@ -28,9 +26,7 @@ public class TicketTest {
 	private Event event;
 	private Manager creator;
 	
-	private final int MAX_EVENTS_FOR_FREE_SUB = 1;
 	private final int MAX_EVENTS_FOR_BASE_SUB = 5;
-	private final int MAX_EVENTS_FOR_PREMIUM_SUB = Short.MAX_VALUE;
 	
 	@Before
 	public void setUp() {
@@ -182,17 +178,26 @@ public class TicketTest {
 		
 		int[] seatsremainedfortypeNoTicketevent = {0,0,0};
 		int[] ticketsoldfortypeNoTicketevent = {75,25,50};
-		Exception exception;
+		Exception exception,exception2,exception3;
+		
 		
 		event.setSeatsRemainedNumberForType(seatsremainedfortypeNoTicketevent);
 		event.setTicketsSoldNumberForType(ticketsoldfortypeNoTicketevent);
 		
 		exception = assertThrows(Exception.class, () -> {
-									Ticket premiumticket;
-									premiumticket = ticketHandler.createTicket(event, TicketType.PREMIUM);
+									ticketHandler.createTicket(event, TicketType.PREMIUM);
 									});
 		assertEquals("Event sold out", exception.getMessage());
 		
+		exception2 = assertThrows(Exception.class, () -> {
+									ticketHandler.createTicket(event, TicketType.BASE);
+									});
+		assertEquals("Event sold out", exception2.getMessage());
+		
+		exception3 = assertThrows(Exception.class, () -> {
+									ticketHandler.createTicket(event, TicketType.VIP);
+									});
+		assertEquals("Event sold out", exception3.getMessage());
 	}
 	
 

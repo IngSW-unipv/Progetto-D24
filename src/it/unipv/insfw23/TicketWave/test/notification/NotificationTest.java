@@ -2,8 +2,6 @@ package it.unipv.insfw23.TicketWave.test.notification;
 
 import static org.junit.Assert.*;
 
-import java.sql.Blob;
-import java.sql.Time;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
@@ -17,7 +15,6 @@ import it.unipv.insfw23.TicketWave.modelController.factory.notifications.Notific
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import javafx.scene.image.Image;
@@ -60,18 +57,18 @@ public class NotificationTest {
 				Province.AOSTA,"3456785676954038",events,MAX_EVENTS_FOR_FREE_SUB,0,LocalDate.now(),0);
 		
 		//creazione di un evento 
-		int[] seatsremainedfortypecorrectevent = {60,20,25};
-		int[] ticketsoldfortypecorrectevent = {15,5,25};
-		double[] pricecorrectevent = {35.50,70,100};
+		int[] seatsRemainedForType = {60,20,25};
+		int[] ticketSoldForType = {15,5,25};
+		double[] prices = {35.50,70,100};
 		Image bl = null;
 		try {
 			
 			event = creator.createConcert(4,"Reunion","Firenze","via del palo",LocalDate.of(2024, 5, 23),LocalTime.of(20, 30),Province.ASTI,Genre.METAL,
-								150,2,seatsremainedfortypecorrectevent,ticketsoldfortypecorrectevent,pricecorrectevent,creator,"Califano","lalalala", bl);
+								150,2,seatsRemainedForType,ticketSoldForType,prices,creator,"Califano","lalalala", bl);
 		
 		} catch (Exception e) {
 			// TODO: handle exception
-			System.out.println(e.getMessage());
+			System.err.println(e.getMessage());
 		}	
 		//event = creator.getEventlist().get(0);
 		

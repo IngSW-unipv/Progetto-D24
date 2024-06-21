@@ -187,7 +187,7 @@ public class PaymentDataPController {
                } else {
                    Manager managerlogged = (Manager)user;
                    ProfileDao profiledao = new ProfileDao();
-                   SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMasterPayAdapter(new MasterPayPayment()), paymentSelectionView.getPrice());
+                   SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getPaypolAdapter(new PayPolPayment()), paymentSelectionView.getPrice());
                    if(managerlogged.getSubscription() != -1) {
                        try {
                            profiledao.updateManagerSub(managerlogged);
