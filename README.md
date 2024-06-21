@@ -31,7 +31,7 @@ Il software per funzionare necessita l'installazione delle seguenti librerie:
 - [JUnit 4](https://github.com/junit-team/junit4/releases/tag/r4.13.2)
 - [MySQL java connector](https://github.com/mysql/mysql-connector-j)
 
-## Setup iniziale  
+## Setup iniziale 
 Per quanto riguarda il database MySQL:
 1. Aprire MySQL Workbench e creare un'istanza in locale del database
 2. Importare i file TicketWaveDB e TicketWavePopolamento
@@ -47,4 +47,6 @@ Per quanto riguarda IntelliJ:
 Prima di eseguire il software si consiglia di controllare la documentazione presente su GitHub
 
 ## Immagini
+ ![Screenshot (115)](https://github.com/IngSW-unipv/Progetto-D24/assets/150967773/44cdac4f-8047-4e8b-b96d-f8a33bf658b3)
+ ![Screenshot (118)](https://github.com/IngSW-unipv/Progetto-D24/assets/150967773/0f53f642-363f-408e-a320-0378f2a14ba2)
 
