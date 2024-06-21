@@ -1,12 +1,9 @@
 package it.unipv.insfw23.TicketWave.modelView.access;
 
 
-//import it.unipv.insfw23.TicketWave.modelController.LoginController;
-//import it.unipv.insfw23.TicketWave.modelController.SignUpController;
-import it.unipv.insfw23.TicketWave.modelController.controller.access.LoginController;
+
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
-import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -17,8 +14,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.FontWeight;
-import javafx.stage.Stage;
-import javafx.scene.image.Image;
 import javafx.scene.text.Font;
 
 
@@ -174,9 +169,13 @@ public class LoginView extends Scene {
         return scene;
     }
 
-    public TextField getMail(){return emailField;}
+    public TextField getMail(){
+    	return emailField;
+    }
 
-    public PasswordField getPassword(){return passwordField;}
+    public PasswordField getPassword(){
+    	return passwordField;
+    }
 
     public void makeBlankPage(){
         emailField.setText("");
@@ -186,7 +185,9 @@ public class LoginView extends Scene {
     public boolean checkEmptyFields(){
         if(emailField.getText().isEmpty() || passwordField.getText().isEmpty()){
             return true;
-        }else {return false;}
+        }else {
+        	return false;
+        }
     }
 
     public Label getErrorLabel() {
@@ -197,7 +198,5 @@ public class LoginView extends Scene {
         errorLabel.setText(message);
         errorLabel.setVisible(true);
     }
-//    public static void main(String[] args) {
-//        launch(args);
-//    }
+
 }
