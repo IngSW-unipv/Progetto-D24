@@ -15,6 +15,8 @@ import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
  */
 public abstract class Event {
 
+	//CONSTANTS:
+	private final int NUMBER_OF_TYPES = 3;
     // ATTRIBUTES:
     private final int idEvent;
     private String name, city, location;
@@ -314,7 +316,7 @@ public abstract class Event {
      */
     public void setDate(LocalDate date) { // controllo che la data sia ammissibile per essere messa in un evento
         if (date != null){
-            if (date.isBefore(LocalDate.of(2000, 1, 1)) ||  date.isAfter(LocalDate.of(2050, 1, 1))){ // check sulla data, se la data è prima del 2000 o dopo il 2050 è impossibile creare l'evento
+            if (date.isBefore(LocalDate.now()) ||  date.isAfter(LocalDate.of(2050, 1, 1))){ // check sulla data, se la data è prima del 2000 o dopo il 2050 è impossibile creare l'evento
                 throw new IllegalArgumentException("Please enter new date, invalid date");
             } else {
                 this.date = date;
@@ -339,7 +341,7 @@ public abstract class Event {
      * @param typeOfSeats new typeOfSeats
      */
     public void setTypeOfSeats(int typeOfSeats) {
-        if(typeOfSeats > 3){
+        if(typeOfSeats > NUMBER_OF_TYPES){
             throw new IllegalArgumentException("In TicketWave you can have a maximum of 3 types of seats/tickets, enter a valid value");
         } else {
             this.typeOfSeats = typeOfSeats;
@@ -352,7 +354,7 @@ public abstract class Event {
      * @param seatsRemainedNumberForType new seatsRemainedNumberForType
      */
     public void setSeatsRemainedNumberForType(int[] seatsRemainedNumberForType) {
-        if(seatsRemainedNumberForType.length > 3){
+        if(seatsRemainedNumberForType.length > NUMBER_OF_TYPES){
             throw new IllegalArgumentException("In TicketWave you can have a maximum of 3 types of seats, re-enter the values relating to the remaining seats");
         } else {
             this.seatsRemainedNumberForType = seatsRemainedNumberForType;
@@ -365,7 +367,7 @@ public abstract class Event {
      * @param ticketsSoldNumberForType new ticketsSoldNumberForType
      */
     public void setTicketsSoldNumberForType(int[] ticketsSoldNumberForType) {
-        if(ticketsSoldNumberForType.length > 3){
+        if(ticketsSoldNumberForType.length > NUMBER_OF_TYPES){
             throw new IllegalArgumentException("In TicketWave you can have a maximum of 3 types of tickets, re-enter the values regarding tickets sold by type");
         } else {
             this.ticketsSoldNumberForType = ticketsSoldNumberForType;
@@ -378,7 +380,7 @@ public abstract class Event {
      * @param price new price
      */
     public void setPrice(double[] price) {
-        if(price.length > 3){
+        if(price.length > NUMBER_OF_TYPES){
             throw new IllegalArgumentException("In TicketWave you can have a maximum of 3 types of tickets, re-enter the values regarding the ticket prices");
         } else {
             this.price = price;

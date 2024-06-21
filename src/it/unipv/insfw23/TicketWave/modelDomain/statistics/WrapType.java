@@ -1,7 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelDomain.statistics;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 
 
 /**
@@ -13,6 +12,7 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 public class WrapType {
     private Type[] typeNameArray;
     private double[] typeResults;
+    
     public WrapType(double[] results, Type[] typeNameArray) {
         this.typeNameArray = typeNameArray;
         this.typeResults = results;
@@ -23,6 +23,6 @@ public class WrapType {
     }
 
     public double[] getTypeResult() {
-            return typeResults;
-        }
+        return typeResults;
+    }
 }

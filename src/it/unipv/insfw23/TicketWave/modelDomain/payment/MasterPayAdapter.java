@@ -1,7 +1,6 @@
 package it.unipv.insfw23.TicketWave.modelDomain.payment;
 
-import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapArtist;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+
 
 /**
  * This class provide specific methods for processing payments via MasterPay.

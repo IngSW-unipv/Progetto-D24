@@ -2,7 +2,6 @@ package it.unipv.insfw23.TicketWave.modelDomain.user;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
-import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
 
 import java.util.*;
 /**
@@ -109,7 +108,8 @@ public abstract class User {
 	 *
 	 * @return the ProvinceOfResidence as a {@link Province}
 	 */
-	public Province getProvinceOfResidence() { return provinceOfResidence;
+	public Province getProvinceOfResidence() { 
+		return provinceOfResidence;
 	}
 
 

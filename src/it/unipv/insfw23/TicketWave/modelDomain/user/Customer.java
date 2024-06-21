@@ -18,7 +18,7 @@ public class Customer extends User {
     private ArrayList<Ticket> ticketsList;
     private int points;
     private Genre [] favoriteGenre ;
-    int maxfavoriteGenre = 5;
+    private final int MAX_OF_FAVOURITE_GENRE = 5;
 
     /**
      *
@@ -105,13 +105,12 @@ public class Customer extends User {
      * @throws Exception
      */
     public void setFavoriteGenre(Genre [] favorite) throws Exception {
-        if (favorite.length > 5) {
+        if (favorite.length > MAX_OF_FAVOURITE_GENRE) {
             throw new Exception ("Impossible to select more than 5 genres");
         } else {
 
-            for (int i = 0; i < maxfavoriteGenre; i++) {
+            for (int i = 0; i < favorite.length; i++) {
                 favoriteGenre[i] = favorite[i];
-
             }
         }
     }

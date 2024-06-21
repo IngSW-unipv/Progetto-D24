@@ -32,7 +32,6 @@ public class SubscriptionHandler implements ISubscriptionHandlerFactory {
 
 		}
 		else {
-			manager.setSubscription(-1);
 			System.out.println("Pagamento negato");
 		}
 	}

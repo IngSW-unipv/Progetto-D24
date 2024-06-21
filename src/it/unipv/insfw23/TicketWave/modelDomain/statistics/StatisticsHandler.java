@@ -10,7 +10,6 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 
-import static it.unipv.insfw23.TicketWave.modelDomain.event.Province.valueOf;
 
 /**
  * This class represents the statistics manager, performs calculations, and provides

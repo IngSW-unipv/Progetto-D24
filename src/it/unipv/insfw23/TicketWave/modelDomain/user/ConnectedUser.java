@@ -4,7 +4,6 @@ import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
-import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 
 /**
  * public class (singleton) that is used to different stages at the login and holds a user as
@@ -23,6 +22,8 @@ public class ConnectedUser {
     private TicketType ticketType;
     private LoginView logView;
     private int newSubLevel;
+    
+    private final int LOGOUT_LEVEL_SUB = -2;
 
     private ConnectedUser(){
         this.user = null;
@@ -92,13 +93,17 @@ public class ConnectedUser {
      * sets the home for the different views
      * @param home
      */
-    public void setHome(IResettableScene home) {this.home = home;}
+    public void setHome(IResettableScene home) {
+    	this.home = home;
+    }
 
     /**
      * returns the home for the different views
      * @return home as {@link IResettableScene}
      */
-    public IResettableScene getHome(){return home;}
+    public IResettableScene getHome(){
+    	return home;
+    }
 
     /**
      *
@@ -140,7 +145,7 @@ public class ConnectedUser {
         this.home = null;
         this.logView = null;
         this.eventForTicket = null;
-        this.newSubLevel = -2;
+        this.newSubLevel = LOGOUT_LEVEL_SUB;
         this.ticketType = null;
     }
 }
