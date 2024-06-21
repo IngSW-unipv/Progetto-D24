@@ -10,10 +10,10 @@ package it.unipv.insfw23.TicketWave.modelDomain.payment;
  */
 public class PayPolAdapter implements IPaymentAdapter{
     
-    private IPaypolPayment paypalPayment;
+    private IPaypolPayment paypolPayment;
 
-    public PayPolAdapter(IPaypolPayment ppPayment){
-        this.paypalPayment = ppPayment;
+    public PayPolAdapter(){
+        this.paypolPayment = new PayPolPayment();
     }
 
     /**
@@ -23,7 +23,7 @@ public class PayPolAdapter implements IPaymentAdapter{
      */
     @Override
     public boolean paymentMethod(double obPrice){
-        boolean result = paypalPayment.ppPaymentMethod(obPrice);
+        boolean result = paypolPayment.ppPaymentMethod(obPrice);
         return result;
     }
 }

@@ -125,7 +125,7 @@ public class PaymentDataMController {
 
                         //utilizzo di un Istanza del PaymentFactor e associo a un iPaymentAdapter
                         MasterPayPayment masterPayPayment = new MasterPayPayment();
-                        iPaymentAdapter = PaymentFactory.getMasterPayAdapter(masterPayPayment);
+                        iPaymentAdapter = PaymentFactory.getMasterPayAdapter();
 
 
                         //associazione dei tickets
@@ -189,7 +189,7 @@ public class PaymentDataMController {
                     Manager managerlogged = (Manager) user;  //cast dello user in Manager
 
                     ProfileDao profiledao = new ProfileDao();
-                    SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMasterPayAdapter(new MasterPayPayment()), paymentSelectionView.getPrice());
+                    SubscriptionHandlerFactory.getInstance().getSubscriptionHandler().buySub(managerlogged, ConnectedUser.getInstance().getNewSubLevel(), PaymentFactory.getMasterPayAdapter(), paymentSelectionView.getPrice());
 
                     // Update del Valore Subcription del Manager
                     try {

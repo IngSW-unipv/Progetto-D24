@@ -55,16 +55,16 @@ public class eventInsertTest {
         manager = new Manager("Giorgio", "Mastrota", "1990-01-01", "giorgio1@example.com", "eminflex", Province.CATANIA, "1234567890123456",
                 events, MAX_EVENTS_FOR_BASE_SUB, 1, LocalDate.now(), 0);
 
-        eventFestivalTest = new Festival(MAX_ID-1, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.of(14, 4), Province.COMO, Genre.EDM,
+        eventFestivalTest = new Festival(MAX_ID-1, "Nameless", "Como", "Parco di Como", LocalDate.of(2025, 4, 20), LocalTime.of(14, 4), Province.COMO, Genre.EDM,
                 maxSeats, 1, remainedSeats, ticketSold, price, manager, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", photo);
 
-        eventConcertTest = new Concert(MAX_ID-2, "Martin Garrix", "Milano", "San Siro", LocalDate.of(2024, 7, 24), LocalTime.of(21, 34), Province.MILANO, Genre.EDM,
+        eventConcertTest = new Concert(MAX_ID-2, "Martin Garrix", "Milano", "San Siro", LocalDate.of(2025, 7, 24), LocalTime.of(21, 34), Province.MILANO, Genre.EDM,
         		maxSeats, 1, remainedSeats, ticketSold, price, manager, "Martin Garrix", "Concerto di Martin Garrix", photo);
 
-        eventTheatreTest = new Theater(MAX_ID-3, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), LocalTime.of(22, 50), Province.ROMA, Genre.COMMEDIA,
+        eventTheatreTest = new Theater(MAX_ID-3, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2025, 10, 30), LocalTime.of(22, 50), Province.ROMA, Genre.COMMEDIA,
                 maxSeats, 1, remainedSeats, ticketSold, price, manager, "Franchino er criminale", "Commedia di Franchino er criminale ", "Paolo", photo);
 
-        eventOtherTest = new Other(MAX_ID-4, "Sagra della salsiccia", "Roma", "Mercato de Roma", LocalDate.of(2023, 7, 22), LocalTime.parse("19:00:00"), Province.ROMA, Genre.OTHER,
+        eventOtherTest = new Other(MAX_ID-4, "Sagra della salsiccia", "Roma", "Mercato de Roma", LocalDate.of(2025, 7, 22), LocalTime.parse("19:00:00"), Province.ROMA, Genre.ALTRO,
         		maxSeats, 1, remainedSeats, ticketSold, price, manager, null, "Sagra della salsiccia de Roma, er mejo", photo);
     }
     

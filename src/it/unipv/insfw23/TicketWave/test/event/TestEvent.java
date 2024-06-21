@@ -42,14 +42,14 @@ public class TestEvent {
         int[] seatsRemainedForType = {20};
         int[] ticketSoldForType = {2080};
         double[] prices = {150};
-        fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.of(14, 4), Province.COMO, Genre.EDM,
+        fs = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2025, 4, 20), LocalTime.of(14, 4), Province.COMO, Genre.EDM,
                 2100, 1, seatsRemainedForType, ticketSoldForType, prices, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", bl);
         
         assertEquals(0, fs.getIdEvent());
         assertEquals("Nameless", fs.getName());
         assertEquals("Como", fs.getCity());
         assertEquals("Parco di Como", fs.getLocation());
-        assertEquals("2024-04-20", fs.getDate().toString());
+        assertEquals("2025-04-20", fs.getDate().toString());
         assertEquals("14:04", fs.getTime().toString());
         assertEquals("COMO", fs.getProvince().toString());
         assertEquals("EDM", fs.getGenre().toString());
@@ -99,14 +99,14 @@ public class TestEvent {
         int[] seatsRemainedForType = {23, 10, 50};
         int[] ticketSoldForType = {477, 490, 150};
         double[] prices = {50, 300, 1000};
-        th = new Theater(2, "Franchino er criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), LocalTime.of(22, 50), Province.ROMA, Genre.COMMEDIA,
+        th = new Theater(2, "Franchino er criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2025, 10, 30), LocalTime.of(22, 50), Province.ROMA, Genre.COMMEDIA,
                 1200, 3, seatsRemainedForType, ticketSoldForType, prices, mg, "Franchino er criminale", "Commedia di Franchino er criminale", "Paolo", bl);
     
         assertEquals(2, th.getIdEvent());
         assertEquals("Franchino er criminale", th.getName());
         assertEquals("Roma", th.getCity());
         assertEquals("Teatro de Tivoli", th.getLocation());
-        assertEquals("2023-10-30", th.getDate().toString());
+        assertEquals("2025-10-30", th.getDate().toString());
         assertEquals("22:50", th.getTime().toString());
         assertEquals("ROMA", th.getProvince().toString());
         assertEquals("COMMEDIA", th.getGenre().toString());
@@ -129,17 +129,17 @@ public class TestEvent {
         int[] seatsRemainedForType = {70,20};
         int[] ticketSoldForType = {6,4};
         double[] prices = {80,200};
-        ot = new Other(3, "Sagra della salsiccia", "Roma", "Mercato de Roma", LocalDate.of(2023, 7, 22), LocalTime.parse("19:00:00"), Province.ROMA, Genre.OTHER, 
+        ot = new Other(3, "Sagra della salsiccia", "Roma", "Mercato de Roma", LocalDate.of(2025, 7, 22), LocalTime.parse("19:00:00"), Province.ROMA, Genre.ALTRO, 
         		100, 2, seatsRemainedForType, ticketSoldForType, prices, mg, "Califano", "Sagra della salsiccia de Roma, er mejo", bl);
         
         assertEquals(3, ot.getIdEvent());
         assertEquals("Sagra della salsiccia", ot.getName());
         assertEquals("Roma", ot.getCity());
         assertEquals("Mercato de Roma", ot.getLocation());
-        assertEquals("2023-07-22", ot.getDate().toString());
+        assertEquals("2025-07-22", ot.getDate().toString());
         assertEquals("19:00", ot.getTime().toString());
         assertEquals("ROMA", ot.getProvince().toString());
-        assertEquals("OTHER", ot.getGenre().toString());
+        assertEquals("ALTRO", ot.getGenre().toString());
         assertEquals(100, ot.getMaxNumberOfSeats());
         assertEquals(2, ot.getTypeOfSeats());
         assertArrayEquals(new int[] {70, 20}, ot.getSeatsRemainedNumberForType());
@@ -159,15 +159,15 @@ public class TestEvent {
         int[] a = {920};
         int[] b = {2080};
         double[] p = {150};
-        Festival festival = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
+        Festival festival = new Festival(0, "Nameless", "Como", "Parco di Como", LocalDate.of(2025, 4, 20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
                 1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", bl);
-        Festival festival2 = new Festival(1, "Nameless", "Como", "Parco di Como", LocalDate.of(2024, 4, 20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
+        Festival festival2 = new Festival(1, "Nameless", "Como", "Parco di Como", LocalDate.of(2025, 4, 20), LocalTime.parse("14:04:00"), Province.COMO, Genre.EDM, 3000,
                 1, a, b, p, mg, "Rooler, Salmo, Nello Taver", "Festival di musica EDM", bl);
-        Other other = new Other(3, "Sagra della salsiccia", "Roma", "Mercato de Roma", LocalDate.of(2023, 7, 22), LocalTime.parse("19:00:00"), Province.ROMA, Genre.OTHER, 3000,
+        Other other = new Other(3, "Sagra della salsiccia", "Roma", "Mercato de Roma", LocalDate.of(2025, 7, 22), LocalTime.parse("19:00:00"), Province.ROMA, Genre.ALTRO, 3000,
                 1, a, b, p, mg, "Califano", "Sagra della salsiccia de Roma, er mejo", bl);
-        Theater theater = new Theater(2, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), LocalTime.parse("22:50:00"), Province.ROMA, Genre.COMMEDIA,
+        Theater theater = new Theater(2, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2025, 10, 30), LocalTime.parse("22:50:00"), Province.ROMA, Genre.COMMEDIA,
                 3000, 1, a, b, p, mg, "Franchino er criminale", "Commedia di Franchino er criminale ", "Paolo", bl);
-        Theater theater1 = new Theater(5, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2023, 10, 30), LocalTime.parse("22:50:00"), Province.ROMA, Genre.COMMEDIA,
+        Theater theater1 = new Theater(5, "Franchino er Criminale", "Roma", "Teatro de Tivoli", LocalDate.of(2025, 10, 30), LocalTime.parse("22:50:00"), Province.ROMA, Genre.COMMEDIA,
                 3000, 1, a, b, p, mg, "Franchino er criminale", "Commedia di Franchino er criminale ", "Paolo", bl);
         // popolo l'array list di Eventi
         ArrayList<Event> ev1 = new ArrayList<>();

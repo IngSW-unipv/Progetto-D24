@@ -26,7 +26,7 @@ public class PaymentFactory {
         return istance;
     }
 
-    public static MasterPayAdapter getMasterPayAdapter(IMasterPayPayment payment) {
+    public static MasterPayAdapter getMasterPayAdapter() {
         if (masterPayAdapter == null) {
             String masterPayAdaptClassName;
 
@@ -35,8 +35,8 @@ public class PaymentFactory {
                 prop.load(new FileInputStream("src/it/unipv/insfw23/TicketWave/properties"));
                 masterPayAdaptClassName = prop.getProperty(M_PROPERTYNAME);
 
-                Constructor c = Class.forName(masterPayAdaptClassName).getConstructor(IMasterPayPayment.class);  //java reflection
-                masterPayAdapter = (MasterPayAdapter) c.newInstance(payment);
+                Constructor c = Class.forName(masterPayAdaptClassName).getConstructor();  //java reflection
+                masterPayAdapter = (MasterPayAdapter) c.newInstance();
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -45,7 +45,7 @@ public class PaymentFactory {
         return masterPayAdapter;
     }
 
-        public static PayPolAdapter getPaypolAdapter(IPaypolPayment payment){
+        public static PayPolAdapter getPaypolAdapter(){
             if(paypolAdapter ==null){
                 String paypalAdaptClassName;
 
@@ -54,8 +54,8 @@ public class PaymentFactory {
                     prop.load(new FileInputStream("src/it/unipv/insfw23/TicketWave/properties"));
                     paypalAdaptClassName=prop.getProperty(P_PROPERTYNAME);
 
-                    Constructor c= Class.forName(paypalAdaptClassName).getConstructor(IPaypolPayment.class);
-                    paypolAdapter =(PayPolAdapter)c.newInstance(payment);
+                    Constructor c= Class.forName(paypalAdaptClassName).getConstructor();
+                    paypolAdapter =(PayPolAdapter)c.newInstance();
                 }
                 catch (Exception e) {
                     // TODO Auto-generated catch block

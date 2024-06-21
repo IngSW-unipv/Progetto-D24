@@ -17,16 +17,14 @@ public class PaymentTest {
     @Test
     public void getMasterPayAdapterTest() {
 
-        MasterPayPayment masterPay= new MasterPayPayment();
-        masterPayAdapter =PaymentFactory.getMasterPayAdapter(masterPay);
+        masterPayAdapter =PaymentFactory.getMasterPayAdapter();
         assertNotNull(masterPayAdapter);
 
     }
 
     @Test
     public void getPaypolAdapterTest() {
-        PayPolPayment paypol= new PayPolPayment();
-        payPolAdapter = PaymentFactory.getPaypolAdapter(paypol);
+        payPolAdapter = PaymentFactory.getPaypolAdapter();
 
         assertNotNull(payPolAdapter);
 
