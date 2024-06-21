@@ -72,10 +72,11 @@ public class SignUpController {
                 // Azione da eseguire quando il pulsante "Torna Indietro" viene premuto
                 System.out.println("You clicked on the backButton");
                 //loginView= new LoginView();
-                LoginController loginController= new LoginController(mainstage,loginView );
                 loginView.reSetBars();
                 loginView.makeBlankPage();
-                mainstage.setScene(loginView.getScene()); // Imposta la scena LoginView sullo Stage principal
+                LoginController loginController= new LoginController(mainstage,loginView );
+                
+                mainstage.setScene(loginView); // Imposta la scena LoginView sullo Stage principal
 
             }
         };

@@ -59,7 +59,7 @@ public class CustomerController {
                 ConnectedUser.getInstance().setLoginView(null);
                 */
                 loginView.makeBlankPage();
-                mainstage.setScene(loginView.getScene());
+                mainstage.setScene(loginView);
                 ConnectedUser.getInstance().logoutMethod();
             }
 

@@ -80,7 +80,7 @@ public class ManagerController {
 				System.out.println("logout");
 				logview.reSetBars();
 				logview.makeBlankPage();
-				mainStage.setScene(logview.getScene());
+				mainStage.setScene(logview);
 				ConnectedUser.getInstance().logoutMethod();
 			}
 		};
