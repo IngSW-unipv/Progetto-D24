@@ -67,7 +67,7 @@ public class SubscriptionSelectionController {
                 }
                 paymentPage = new PaymentSelectionView();
                 paymentPage.setPriceComponent(price);
-                System.out.println("prezzo impostato");
+                System.out.println("Price Set");
                 PaymentSelectionController paymentSelectionController = new PaymentSelectionController(mainstage, paymentPage, subscriptionSelectionView);
                 mainstage.setScene(paymentPage);
             }
