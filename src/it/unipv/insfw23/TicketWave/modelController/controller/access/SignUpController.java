@@ -12,12 +12,10 @@ import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
-import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
-import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -38,12 +36,9 @@ public class SignUpController {
     // view da considerare
 
     private SignUpView signUpView;
-    private ManagerView managerView;
-    private CustomerView customerview;
     private LoginView loginView;
     private SubscriptionSelectionView subscriptionSelectionView;
     private ProfileDao profileDao;
-    private User user= ConnectedUser.getInstance().getUser();
     
     private final int MAX_EVENTS_FOR_FREE_SUB = 1;
 
@@ -141,7 +136,7 @@ public class SignUpController {
                         ConnectedUser.getInstance().setHome(customerview);
                         ConnectedUser.getInstance().setLoginView(loginView);
 
-                    //
+                    
                         mainstage.setScene(customerview);
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
@@ -177,7 +172,7 @@ public class SignUpController {
                         SubscriptionSelectionController subscriptionSelectionController = new SubscriptionSelectionController(mainstage,subscriptionSelectionView,signUpView);
                         subscriptionSelectionView.reSetBars();
 
-                        mainstage.setScene(subscriptionSelectionView);
+                        mainstage.setScene(subscriptionSelectionView);// Imposta la scena subscriptio sulla stage principale
                     } catch (SQLException e) {
                         throw new RuntimeException(e);
                     }
@@ -186,7 +181,7 @@ public class SignUpController {
                     }
 
 
-                    // Imposta la scena subscriptio sulla stage principale
+                    
                 }
             }
         };

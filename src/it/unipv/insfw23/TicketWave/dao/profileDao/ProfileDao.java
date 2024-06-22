@@ -310,7 +310,6 @@ public class ProfileDao implements IProfileDao {
                     statement3.setString(1, mail);
                     resultSet3 = statement3.executeQuery();
 
-                    ArrayList<Notification> notificationArrayList= new ArrayList<>();
 
                     while (resultSet3.next()) {
                         Notification currentNotify = new Notification(resultSet3.getInt("ID"), null,
@@ -418,7 +417,6 @@ public class ProfileDao implements IProfileDao {
                     statement3.setString(1, mail);
                     resultSet3 = statement3.executeQuery();
 
-                    ArrayList<Notification> notificationArrayList= new ArrayList<>();
 
                     while (resultSet3.next()) {
                         Notification currentNotify = new Notification(resultSet3.getInt("ID"), null,

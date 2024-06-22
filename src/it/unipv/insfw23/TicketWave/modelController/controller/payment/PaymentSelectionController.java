@@ -8,11 +8,9 @@ import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataPView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
-import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 

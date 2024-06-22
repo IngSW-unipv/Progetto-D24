@@ -60,7 +60,7 @@ public class GenreArtStatsController {
         };
 
         for (XYChart.Data<String, Number> data : genreView.getArtistPane().getArtistSerie().getData()) {
-            data.getNode().setUserData(new Pair(data.getXValue(), data.getYValue()));
+            data.getNode().setUserData(new Pair<String, Number>(data.getXValue(), data.getYValue()));
             data.getNode().setOnMouseClicked(artistBarButtonHandler);
         }
 

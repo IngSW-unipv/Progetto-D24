@@ -315,6 +315,7 @@ public class EventDao implements IEventDao {
             e.printStackTrace();
             throw new RuntimeException("Problems in selecting event item in eventDao");
         }
+        ConnectionDB.closeConnection(connection);
         return selectedEvent;
     }
 
@@ -379,6 +380,7 @@ public class EventDao implements IEventDao {
             throw new SQLException("Problems updating seats data in eventDao");
         }
         ConnectionDB.closeConnection(connection);
+        
     }
 
 

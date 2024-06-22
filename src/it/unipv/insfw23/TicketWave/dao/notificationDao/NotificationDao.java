@@ -8,11 +8,9 @@ import java.sql.SQLException;
 import java.sql.Time;
 
 import it.unipv.insfw23.TicketWave.dao.ConnectionDB;
-import it.unipv.insfw23.TicketWave.dao.profileDao.IProfileDao;
 import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
+
 
 /**
  * This class controls all management of the {@link Notification} class' persistence 
