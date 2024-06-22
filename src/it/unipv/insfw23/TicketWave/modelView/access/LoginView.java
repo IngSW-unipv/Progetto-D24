@@ -21,10 +21,9 @@ import javafx.scene.text.Font;
 
 
 public class LoginView extends Scene {
-    private Button loginButton = new Button("Login");
-    private Button regButton = new Button("Registrati");
+    private Button loginButton ;
+    private Button regButton ;
     private BorderPane layout;
-    private Scene scene ;
     private GridPane grid ;
     private  RadioButton customerRadioButton;
     private RadioButton managerRadioButton;
@@ -103,6 +102,8 @@ public class LoginView extends Scene {
         managerRadioButton = new RadioButton("Gestore");
         managerRadioButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
         managerRadioButton.setToggleGroup(accountTypeToggleGroup);
+        loginButton = new Button("Login");
+        regButton = new Button("Registrati");
 
         errorLabel = new Label();
         errorLabel.setTextFill(javafx.scene.paint.Color.RED);
@@ -164,11 +165,7 @@ public class LoginView extends Scene {
     public Button getRegButton() {
         return regButton;
     }
-
-    public Scene getScene() {
-        return scene;
-    }
-
+    
     public TextField getMail(){
     	return emailField;
     }
