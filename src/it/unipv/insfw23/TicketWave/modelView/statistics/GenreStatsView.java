@@ -44,7 +44,7 @@ public class GenreStatsView extends Scene {
         final NumberAxis yAxis = new NumberAxis(0, 100, 10);
         final CategoryAxis xAxis = new CategoryAxis();
         xAxis.setLabel("Generi");
-        yAxis.setLabel("Percentuale venduta");
+        yAxis.setLabel("Percentuale vendita");
 
         final BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
         barChart.setStyle("-fx-bar-fill: #EE6D21FC;");
