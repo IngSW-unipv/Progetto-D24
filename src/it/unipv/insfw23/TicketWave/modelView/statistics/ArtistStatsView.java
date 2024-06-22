@@ -27,7 +27,7 @@ public class ArtistStatsView extends BorderPane{
 
 
         xAxis.setLabel("Artisti");
-        yAxis.setLabel("Percentuale venduta");
+        yAxis.setLabel("Percentuale vendita");
 
         final BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
         barChart.setMinHeight(400);

@@ -38,7 +38,7 @@ public class TypeStatsView extends Scene{
         final NumberAxis xAxis = new NumberAxis(0, 100, 10);
         final CategoryAxis yAxis = new CategoryAxis();
         yAxis.setLabel("Categoria evento");
-        xAxis.setLabel("Percentuale venduta");
+        xAxis.setLabel("Percentuale vendita");
 
         //BarChart final??
         barChart = new BarChart<>(xAxis, yAxis);
