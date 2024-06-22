@@ -126,9 +126,9 @@ public class ManagerController {
 
 
 
-		EventHandler<ActionEvent> statsButton = new EventHandler<>(){
+		EventHandler<MouseEvent> statsButton = new EventHandler<>(){
 			@Override
-			public void handle(ActionEvent actionEvent){
+			public void handle(MouseEvent event){
 				//creo una nuova classe di statistiche, a cui passo il manager
 				StatisticsHandler statDominio = new StatisticsHandler();
 				WrapType typeRes = statDominio.typeStats(loggedmanager);
@@ -138,7 +138,7 @@ public class ManagerController {
 				mainStage.setScene(typeView);
 			}
 		};
-		UpperBar.getIstance().getStatsButton().setOnAction(statsButton);
+		managerview.getStatsButton().setOnMouseClicked(statsButton);
 
 
 		EventHandler<MouseEvent> profileButton = new EventHandler<>() {		

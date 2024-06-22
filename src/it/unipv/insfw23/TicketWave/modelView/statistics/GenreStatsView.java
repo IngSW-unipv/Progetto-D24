@@ -1,7 +1,5 @@
 package it.unipv.insfw23.TicketWave.modelView.statistics;
 
-import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapArtist;
 import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapGenre;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
@@ -22,7 +20,6 @@ import javafx.scene.paint.Color;
 
 public class GenreStatsView extends Scene {
 
-    private String genre;
     private Button backButton;
     private XYChart<String, Number> genreSerie;
     private ArtistStatsView artistPane;
@@ -127,9 +124,7 @@ public class GenreStatsView extends Scene {
         return genreSerie;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
-    }
+
 
     public Button getBackButton(){
         return backButton;

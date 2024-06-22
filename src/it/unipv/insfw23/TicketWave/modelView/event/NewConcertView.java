@@ -3,7 +3,6 @@ package it.unipv.insfw23.TicketWave.modelView.event;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.Date;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
@@ -25,7 +24,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.util.Callback;
-import javafx.scene.control.Alert.AlertType;
 
 public class NewConcertView extends Scene{
 	private final Font lebelsfont = Font.font("Helvetica", FontWeight.NORMAL, 13);
@@ -404,9 +402,9 @@ public class NewConcertView extends Scene{
 		
 		grid.getChildren().addAll(titlelabel, namelabel, namefield,citylabel, cityfield, provincelabel, provincesbox, addresslabel, 
 								   addressfield, datetimelabel, hboxdatetime, numtypeticketlabel, typesticketbox, 
-								   genlabel, gensbox, artistlabel, artistfield, numbaselabel, numbasefield, numviplabel, numvipfield, 
-								   numpremiumlabel, numpremiumfield, photoButton, eventPhoto, pricebaselabel, pricebasefield, 
-								   priceviplabel, pricevipfield, pricepremiumlabel, pricepremiumfield, descriptionlabel, descriptionarea,
+								   genlabel, gensbox, artistlabel, artistfield, numbaselabel, numbasefield, numpremiumlabel, numpremiumfield,
+								   numviplabel, numvipfield, photoButton, eventPhoto, pricebaselabel, pricebasefield, 
+								   pricepremiumlabel, pricepremiumfield, priceviplabel, pricevipfield, descriptionlabel, descriptionarea,
 								   confirm, errlabel,abort);
 		
 		

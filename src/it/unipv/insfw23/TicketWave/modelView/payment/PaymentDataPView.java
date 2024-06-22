@@ -82,7 +82,6 @@ public class PaymentDataPView extends Scene {
         HBox.setHgrow(rightSpacer, Priority.ALWAYS);
         //Hbox per bottoni
         HBox buttonBox = new HBox(backButton,rightSpacer,nextButton);
-        buttonBox.setMargin(backButton, new Insets(10, 0, 0, 0)); // Margine a sinistra
         buttonBox.setAlignment(Pos.CENTER);
 
 

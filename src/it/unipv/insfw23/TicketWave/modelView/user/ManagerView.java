@@ -5,10 +5,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
@@ -31,8 +28,6 @@ import javafx.scene.text.FontWeight;
 
 public class ManagerView extends Scene  implements IResettableScene {
 	
-//	Stage window;
-
 	private Button logoutButton;
 	private UpperBar upperbar;
 	private LowerBar lowerbar;
@@ -65,8 +60,6 @@ public class ManagerView extends Scene  implements IResettableScene {
 
 	
 	public void init(){
-//		window = primarystage;
-//		window.setTitle("speriamo figa");
 		
 		layout = (BorderPane) getRoot();
 		layout.setStyle("-fx-background-color: #91bad6;");
@@ -127,15 +120,9 @@ public class ManagerView extends Scene  implements IResettableScene {
 		
 		eventsTable.getColumns().addAll(codevcol, evnomecol, cityevcol);
 		
-//		ObservableList<Event> evs = FXCollections.observableArrayList();
-//		evs.add(new it.unipv.insfw23.TicketWave.modelView.Event(1,"nome1"));
-//		evs.add(new it.unipv.insfw23.TicketWave.modelView.Event(3,"nome2"));
-		eventsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_FLEX_LAST_COLUMN);
 		eventsTable.setItems(evs);
-//		tabev.setPrefWidth(400);
-		
-		
-		
+
+				
 		
 		// tab notifiche
 		notificationsTable = new TableView<>();
@@ -144,31 +131,24 @@ public class ManagerView extends Scene  implements IResettableScene {
 		GridPane.setHgrow(notificationsTable, Priority.SOMETIMES);
 		GridPane.setVgrow(notificationsTable, Priority.SOMETIMES);
 
+
+		TableColumn<Notification, LocalDate> datacol = new TableColumn<>("data");
+		datacol.setCellValueFactory(new PropertyValueFactory<>("date"));
+		datacol.setStyle("-fx-alignment: CENTER");		
 		
-		TableColumn<Notification, Integer> codcol = new TableColumn<>("codice");
-		codcol.setCellValueFactory(new PropertyValueFactory<>("id"));
-		codcol.setStyle("-fx-alignment: CENTER");
+		TableColumn<Notification, LocalTime> timecol = new TableColumn<>("orario");
+		timecol.setCellValueFactory(new PropertyValueFactory<>("time"));
+		timecol.setStyle("-fx-alignment: CENTER");
 		
 		TableColumn<Notification, String> msgcol = new TableColumn<>("Message");
 		msgcol.setCellValueFactory(new PropertyValueFactory<>("msg"));
 		msgcol.setStyle("-fx-alignment: CENTER");
 		
-		TableColumn<Notification, LocalTime> orariocol = new TableColumn<>("orario");
-		orariocol.setCellValueFactory(new PropertyValueFactory<>("time"));
-		orariocol.setStyle("-fx-alignment: CENTER");
+		notificationsTable.getColumns().addAll(datacol, timecol, msgcol);
 		
-		TableColumn<Notification, LocalDate> datacol = new TableColumn<>("data");
-		datacol.setCellValueFactory(new PropertyValueFactory<>("date"));
-		datacol.setStyle("-fx-alignment: CENTER");
-		
-		notificationsTable.getColumns().addAll(codcol, msgcol, orariocol, datacol);
-		
-//		ObservableList<Notification> nots = FXCollections.observableArrayList();
-//		nots.add(new Notification(1,new Customer("f", "tf", "h", "d", "cf", Province.AGRIGENTO, null, 300),"str2"));
-//		nots.add(new Notification(3,"str3","str4"));
-		notificationsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY_ALL_COLUMNS);
 		notificationsTable.setItems(nots);
-//		tabnot.setPrefWidth(400);
+
+		
 
 		subButton = new Button("Cambia abbonamento");
 		GridPane.setConstraints(subButton, 3, 2);
@@ -188,14 +168,10 @@ public class ManagerView extends Scene  implements IResettableScene {
 			currentSubLabel = new Label("Abbonamento: premium");
 			eventRemained = new Label("Eventi mensili creati: "+counterCreatedEvents+" su nessun limite");
 			break;
-
-
-			//AGGIUNTA CASE PER IL SET DI ABBONAMENTO SCADUTO
-			case -1:
-				currentSubLabel = new Label("Abbonamento: scaduto");
-				eventRemained = new Label("Non puoi creare altri eventi");
-				break;
-
+		case -1: //scaduto
+			currentSubLabel = new Label("Abbonamento: scaduto");
+			eventRemained = new Label("Non puoi creare altri eventi");
+			break;
 		}
 		
 		currentSubLabel.setFont(Font.font("Helvetica", FontWeight.BOLD,15));
@@ -221,18 +197,6 @@ public class ManagerView extends Scene  implements IResettableScene {
 		layout.setBottom(lowerbar);
 		
 		
-//		ManagerController m = new ManagerController(window, this);
-
-//		window.sizeToScene();
-//		window.setMinHeight(400);
-//		window.setMinWidth(850);
-//		window.setHeight(900);
-//		window.setWidth(1200);
-		
-//		Scene scene = new Scene(layout, window.getWidth(), window.getHeight());		
-		
-//		window.setScene(scene);
-//		window.show();
 	}
 	
 	
@@ -269,8 +233,6 @@ public class ManagerView extends Scene  implements IResettableScene {
     }
 
 	public TableView<Event> getTableEv(){
-//		TableViewSelectionModel<it.unipv.insfw23.TicketWave.modelView.Event> a = tabev.getSelectionModel();
-//		return a.getSelectedItem();
 		return eventsTable;
 	}
 	
@@ -290,10 +252,5 @@ public class ManagerView extends Scene  implements IResettableScene {
 		init();
 	}
 	
-	
-	
-//	public void setEventsforTableev(Manager manager) {
-//		evs = FXCollections.observableArrayList(manager.getEventlist());
-//		init();
-//	}
+
 }

@@ -38,7 +38,6 @@ public class PaymentSelectionView extends Scene {
     private final Text errmessage = new Text("Devi prima selezionare un metodo di pagamento!");
     private Scene scene;
     private BorderPane layout;
-    private Pane root;
 
     public PaymentSelectionView() {
         super(new BorderPane(), 1080, 600);
@@ -101,8 +100,8 @@ public class PaymentSelectionView extends Scene {
         HBox.setHgrow(rightSpacer, Priority.ALWAYS); // Consente a rightSpacer di espandersi per riempire lo spazio disponibile// Imposta un margine di 10 unità a destra del backButton
         // Creazione di un HBox per contenere i bottoni e le Region vuote
         HBox buttonBox = new HBox( backButton, rightSpacer, nextButton);
-        buttonBox.setMargin(backButton, new Insets(0, 10, 10, 10)); // Margine a sinistra
-        buttonBox.setMargin(nextButton, new Insets(0, 10, 10, 10)); // Margine a destra
+        HBox.setMargin(backButton, new Insets(0, 10, 10, 10)); // Margine a sinistra
+        HBox.setMargin(nextButton, new Insets(0, 10, 10, 10)); // Margine a destra
 
         buttonBox.setSpacing(50); // Spazio tra i bottoni
         buttonBox.setAlignment(Pos.CENTER);
@@ -138,7 +137,6 @@ public class PaymentSelectionView extends Scene {
         UpperBar.getIstance().setForNoLogged();
         setRoot(layout);
         this.layout = layout;
-        this.root = root;
     }
 
     public void setPriceComponent(double price) {

@@ -66,17 +66,9 @@ public class UpperBar extends HBox {
         statsButton.setGraphic(statsIcon);
         
         
-        // search button
+        //search button
         Button searchButton = new Button();
         this.searchButton = searchButton;
-        /*****************************
-        statsButton.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                System.out.println("Cliccato statistche");
-            }
-        });
-        */
         searchButton.setStyle("-fx-background-color: #2E5984");
         ImageView searchIcon = new ImageView("it/unipv/insfw23/TicketWave/modelView/imagesResources/search_glass.png");
         searchIcon.setFitHeight(25);
@@ -84,7 +76,7 @@ public class UpperBar extends HBox {
         searchButton.setGraphic(searchIcon);
 
 
-
+        //profile button
         Button profileButton = new Button();
         this.profileButton = profileButton;
         profileButton.setStyle("-fx-background-color: #2E5984");

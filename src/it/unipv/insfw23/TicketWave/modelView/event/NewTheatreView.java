@@ -425,9 +425,9 @@ public class NewTheatreView extends Scene{
 		
 		grid.getChildren().addAll(titlelabel, namelabel, namefield,citylabel, cityfield, provincelabel, provincesbox, addresslabel, 
 								   addressfield, datetimelabel, hboxdatetime, numtypeticketlabel, typesticketbox, 
-								   genlabel, gensbox, artistlabel, artistfield, numbaselabel, numbasefield, numviplabel, numvipfield, 
-								   numpremiumlabel, numpremiumfield, photoButton, eventPhoto, pricebaselabel, pricebasefield, 
-								   priceviplabel, pricevipfield, pricepremiumlabel, pricepremiumfield, descriptionlabel, descriptionarea,
+								   genlabel, gensbox, artistlabel, artistfield, numbaselabel, numbasefield, numpremiumlabel, numpremiumfield, 
+								   numviplabel, numvipfield, photoButton, eventPhoto, pricebaselabel, pricebasefield, 
+								   pricepremiumlabel, pricepremiumfield, priceviplabel, pricevipfield, descriptionlabel, descriptionarea,
 								   authorlabel, authorfield, errlabel,abort, confirm);
 		
 		
