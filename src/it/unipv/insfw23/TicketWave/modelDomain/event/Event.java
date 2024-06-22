@@ -64,7 +64,7 @@ public abstract class Event {
         this.name = name;
         this.city = city;
         this.location = location;
-        setDate(date);
+        this.date = date;
         this.time = time;
         this.province = province;
         this.genre = genre;
@@ -315,15 +315,7 @@ public abstract class Event {
      * @param date new date
      */
     public void setDate(LocalDate date) { // controllo che la data sia ammissibile per essere messa in un evento
-        if (date != null){
-            if (date.isBefore(LocalDate.now()) ||  date.isAfter(LocalDate.of(2050, 1, 1))){ // check sulla data, se la data è prima del 2000 o dopo il 2050 è impossibile creare l'evento
-                throw new IllegalArgumentException("Please enter new date, invalid date");
-            } else {
-                this.date = date;
-            }
-        } else {
-            throw new IllegalArgumentException("The date has a null value, enter a new date");
-        }
+        this.date = date;
     }
 
     /**
