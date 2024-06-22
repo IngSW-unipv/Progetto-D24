@@ -100,12 +100,15 @@ public class CustomerView extends Scene implements IResettableScene {
         
         TableColumn<Notification, LocalDate> dateCol = new TableColumn<>("Data");
         dateCol.setCellValueFactory(new PropertyValueFactory<>("date"));
+        dateCol.setStyle("-fx-alignment: CENTER");
         
         TableColumn<Notification, LocalTime> timeCol = new TableColumn<>("Orario");
         timeCol.setCellValueFactory(new PropertyValueFactory<>("time"));
+        timeCol.setStyle("-fx-alignment: CENTER");
         
         TableColumn<Notification, String> msgCol = new TableColumn<>("Messaggio");
         msgCol.setCellValueFactory(new PropertyValueFactory<>("msg"));
+        msgCol.setStyle("-fx-alignment: CENTER");
         
         notificationTab.getColumns().addAll(dateCol, timeCol, msgCol);
         notificationTab.setMinWidth(400);
@@ -128,17 +131,22 @@ public class CustomerView extends Scene implements IResettableScene {
 
         TableColumn<Ticket, String> barcodeCol = new TableColumn<>("Barcode");
         barcodeCol.setCellValueFactory(new PropertyValueFactory<>("barcode"));
+        barcodeCol.setStyle("-fx-alignment: CENTER");
 
         TableColumn<Ticket, TicketType> typeCol = new TableColumn<>("Tipo");
         typeCol.setCellValueFactory(new PropertyValueFactory<>("type"));
+        typeCol.setStyle("-fx-alignment: CENTER");
 
         TableColumn<Ticket, Double> priceCol = new TableColumn<>("Prezzo");
         priceCol.setCellValueFactory(new PropertyValueFactory<>("price"));
+        priceCol.setStyle("-fx-alignment: CENTER");
 
         TableColumn<Ticket, String> eventCol = new TableColumn<>("Evento");
         eventCol.setCellValueFactory(new PropertyValueFactory<>("eventName"));
-
+        eventCol.setStyle("-fx-alignment: CENTER");
+        
         ticketTab.getColumns().addAll(eventCol,barcodeCol, priceCol,typeCol);
+        
         ticketTab.setMinWidth(430);
         if(tick != null) {
             ticketTab.setItems(tick);

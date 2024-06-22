@@ -2,9 +2,7 @@ package it.unipv.insfw23.TicketWave.dao.ticketDao;
 
 import it.unipv.insfw23.TicketWave.dao.ConnectionDB;
 import it.unipv.insfw23.TicketWave.modelController.factory.ConnectionDBFactory;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.Ticket;
-import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 
 import java.sql.Connection;

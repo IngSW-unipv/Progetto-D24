@@ -5,7 +5,6 @@ import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.chart.*;
 import javafx.scene.control.Button;

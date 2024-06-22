@@ -143,11 +143,10 @@ public class LoginController {
                         mainstage.setScene(managerView); // Imposta la scena SignUpView sulla stage principale }
                     }
 
-                }// devi mettere managerview anche all'interno del costruttore
+                }
 
                 else{loginView.setErrorLabel("Campi vuoti o non validi");}
 
-                // Imposta l'handler sull'azione del pulsante "Registrati"
             }
 
         };

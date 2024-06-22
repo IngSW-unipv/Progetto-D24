@@ -36,7 +36,6 @@ public class TicketHandlerFactory {
 				c.setAccessible(false);
 				
 			} catch (Exception e) {
-				// TODO: handle exception
 				e.printStackTrace();
 			}
 		}

@@ -9,7 +9,6 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 import it.unipv.insfw23.TicketWave.modelView.statistics.*;
 import javafx.event.EventHandler;
 import javafx.scene.Node;
-import javafx.scene.chart.BarChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -27,12 +26,10 @@ import javafx.util.Pair;
 public class TypeStatsController {
     private Stage mainStage;
     private TypeStatsView typeView;
-    private Manager loggedManager;
 
     public TypeStatsController(Stage mainStage, TypeStatsView typeView){
         this.mainStage=mainStage;
         this.typeView=typeView;
-        this.loggedManager = (Manager) ConnectedUser.getInstance().getUser();
         initComponents();
     }
 
@@ -60,7 +57,7 @@ public class TypeStatsController {
         };
 
         for (XYChart.Data<Number, String> data : typeView.getTypeSerie().getData()) {
-            data.getNode().setUserData(new Pair(data.getXValue(), data.getYValue()));
+            data.getNode().setUserData(new Pair<Number, String>(data.getXValue(), data.getYValue()));
             data.getNode().setOnMouseClicked(statsBarButtonHandler);
         }
 

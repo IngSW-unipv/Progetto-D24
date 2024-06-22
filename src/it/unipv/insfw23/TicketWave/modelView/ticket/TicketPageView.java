@@ -10,16 +10,11 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.stage.StageStyle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-
-import java.awt.Paint;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -302,7 +297,6 @@ public class TicketPageView extends Scene implements IResettableScene {
     HBox.setHgrow(rightSpacer, Priority.ALWAYS); // Consente a rightSpacer di espandersi per riempire lo spazio disponibile// Imposta un margine di 10 unità a destra del backButton
     // Creazione di un HBox per contenere i bottoni e le Region vuote
     HBox buttonBox = new HBox( backButton, rightSpacer, buyButton);
-    HBox.setMargin(backButton, new Insets(0, 10, -40, 10));
 
     buttonBox.setSpacing(50); // Spazio tra i bottoni
     buttonBox.setAlignment(Pos.CENTER); // Allinea i bottoni al centro
@@ -433,12 +427,14 @@ public class TicketPageView extends Scene implements IResettableScene {
 
         //Borderpane esterno per l'immissione di tutto al centro+ layout sopra e sotto
         BorderPane root=new BorderPane();
-
+        
         root.setCenter(internalStructure);
         root.setStyle("-fx-background-color: #91BAD6;");
         BorderPane.setMargin(eventPosterImage, new Insets(30, 50, 0, 0));
         root.setRight(eventPosterImage);
         root.setBottom(buttonBox);
+        BorderPane.setMargin(buttonBox, new Insets(-10,0,-20,0));
+
 
 
 

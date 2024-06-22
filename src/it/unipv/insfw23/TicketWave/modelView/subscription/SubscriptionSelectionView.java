@@ -11,18 +11,16 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 
-import javax.imageio.event.IIOReadProgressListener;
 
 public class SubscriptionSelectionView extends Scene implements IResettableScene{
 
     private BorderPane layout;
-    private Pane contenuto;
+    private BorderPane contenuto;
     private StackPane bottonePrimaSub;
     private StackPane bottoneSecondaSub;
     private StackPane bottoneTerzaSub;
@@ -39,7 +37,7 @@ public class SubscriptionSelectionView extends Scene implements IResettableScene
 
     public void init(){
 
-        BorderPane contenuto = new BorderPane();
+        contenuto = new BorderPane();
         contenuto.setStyle("-fx-background-color: #91bad6;");
 
         Image backarrowlogo = new Image("it/unipv/insfw23/TicketWave/modelView/imagesResources/backArrow.png");
@@ -149,19 +147,15 @@ public class SubscriptionSelectionView extends Scene implements IResettableScene
         BorderPane.setAlignment(terzaSub, Pos.CENTER_RIGHT);
 
 
-        BorderPane layout = new BorderPane();
+        layout = (BorderPane)getRoot();
         UpperBar.getIstance().setForNoLogged();
         layout.setTop(UpperBar.getIstance());
         layout.setCenter(contenuto);
         layout.setBottom(LowerBar.getInstance());
 
-        this.contenuto = contenuto;
-        this.layout = layout;
-        this.bottonePrimaSub=bottonePrimaSub;
-        this.bottoneSecondaSub=bottoneSecondaSub;
-        this.bottoneTerzaSub=bottoneTerzaSub;
+        
 
-        setRoot(layout);
+       
     }
 
     public void reSetBars(){

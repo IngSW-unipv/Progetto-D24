@@ -1,23 +1,17 @@
 package it.unipv.insfw23.TicketWave.modelView.statistics;
 
 import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapArtist;
-import javafx.application.Application;
 import javafx.geometry.Insets;
-import javafx.geometry.Point3D;
-import javafx.geometry.Side;
 import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.paint.Color;
-import javafx.stage.Stage;
 
 public class ArtistStatsView extends BorderPane{
 
@@ -33,7 +27,7 @@ public class ArtistStatsView extends BorderPane{
 
 
         xAxis.setLabel("Artisti");
-        yAxis.setLabel("Percentuale venduta");
+        yAxis.setLabel("Percentuale vendita");
 
         final BarChart<String, Number> barChart = new BarChart<>(xAxis, yAxis);
         barChart.setMinHeight(400);

@@ -17,7 +17,6 @@ public class  ConnectionDB {
     private static String password;
     private static String dbDriver;
     private static String dbURL;
-    private static ConnectionDB conn;
 
     // Davide: ho cambiato il metodo init in un metodo costruttore pubblico così da poter usare il factory
     public ConnectionDB() {

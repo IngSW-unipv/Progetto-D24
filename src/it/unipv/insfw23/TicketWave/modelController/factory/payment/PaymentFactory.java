@@ -38,7 +38,6 @@ public class PaymentFactory {
                 Constructor c = Class.forName(masterPayAdaptClassName).getConstructor();  //java reflection
                 masterPayAdapter = (MasterPayAdapter) c.newInstance();
             } catch (Exception e) {
-                // TODO Auto-generated catch block
                 e.printStackTrace();
             }
         }
@@ -57,8 +56,7 @@ public class PaymentFactory {
                     Constructor c= Class.forName(paypalAdaptClassName).getConstructor();
                     paypolAdapter =(PayPolAdapter)c.newInstance();
                 }
-                catch (Exception e) {
-                    // TODO Auto-generated catch block
+                catch (Exception e) {                    
                     e.printStackTrace();
                 }
             }

@@ -1,28 +1,18 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.subscription;
 
 import it.unipv.insfw23.TicketWave.modelController.controller.payment.PaymentSelectionController;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
+
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
-import it.unipv.insfw23.TicketWave.modelDomain.user.User;
+
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
-import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
-import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.StackPane;
+
 import javafx.stage.Stage;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 /**
  * This controller manages all the buttons selected in {@link SubscriptionSelectionView}

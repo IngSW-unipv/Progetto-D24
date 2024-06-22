@@ -5,10 +5,8 @@ import it.unipv.insfw23.TicketWave.modelController.controller.payment.PaymentSel
 import it.unipv.insfw23.TicketWave.modelDomain.event.*;
 import it.unipv.insfw23.TicketWave.modelDomain.ticket.TicketType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
-import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.User;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
-import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import javafx.event.EventHandler;
@@ -22,7 +20,6 @@ public class TicketPageController {
     private TicketPageView ticketPage;
 
     private Event event;
-    private boolean isviewermanager;
     private IResettableScene backScene;
 
     private User user = ConnectedUser.getInstance().getUser();
