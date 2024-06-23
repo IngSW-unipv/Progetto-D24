@@ -2,30 +2,19 @@ package it.unipv.insfw23.TicketWave.modelView.statistics;
 
 import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapType;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
-import javafx.event.EventHandler;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.MenuBar;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.stage.*;
 import javafx.scene.*;
-import javafx.scene.image.*;
 import it.unipv.insfw23.TicketWave.modelView.bars.LowerBar;
 
 public class TypeStatsView extends Scene{
 
-    private BarChart barChart;
+    private BarChart<Number, String> barChart;
     private XYChart.Series<Number, String> typeSerie;
     private BorderPane layout;
     private Pane content;
@@ -49,11 +38,10 @@ public class TypeStatsView extends Scene{
         final NumberAxis xAxis = new NumberAxis(0, 100, 10);
         final CategoryAxis yAxis = new CategoryAxis();
         yAxis.setLabel("Categoria evento");
-        xAxis.setLabel("Percentuale venduta");
+        xAxis.setLabel("Percentuale vendita");
 
         //BarChart final??
-        BarChart <Number, String> barChart = new BarChart<>(xAxis, yAxis);
-        this.barChart=barChart;
+        barChart = new BarChart<>(xAxis, yAxis);
         barChart.setStyle("-fx-bar-fill: #EE6D21FC;");
         barChart.setTitle("                 Statistiche sulle categorie eventi");
         barChart.setStyle("-fx-font-family: 'Helvetica'; -fx-font-size: 15px; -fx-font-weight: bold;");
@@ -95,7 +83,7 @@ public class TypeStatsView extends Scene{
         setRoot(layout);
     }
 
-    public BarChart getBarChart() {
+    public BarChart<Number, String> getBarChart() {
         return barChart;
     }
 

@@ -10,7 +10,6 @@ import it.unipv.insfw23.TicketWave.modelDomain.statistics.StatisticsHandler;
 import it.unipv.insfw23.TicketWave.modelDomain.statistics.WrapType;
 import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
-import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.event.SelectionNewEventTypeView;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
 import it.unipv.insfw23.TicketWave.modelView.statistics.TypeStatsView;
@@ -18,7 +17,6 @@ import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionV
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import it.unipv.insfw23.TicketWave.modelView.user.NoMoreEventsPopup;
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -126,9 +124,9 @@ public class ManagerController {
 
 
 
-		EventHandler<ActionEvent> statsButton = new EventHandler<>(){
+		EventHandler<MouseEvent> statsButton = new EventHandler<>(){
 			@Override
-			public void handle(ActionEvent actionEvent){
+			public void handle(MouseEvent event){
 				//creo una nuova classe di statistiche, a cui passo il manager
 				StatisticsHandler statDominio = new StatisticsHandler();
 				WrapType typeRes = statDominio.typeStats(loggedmanager);
@@ -138,7 +136,7 @@ public class ManagerController {
 				mainStage.setScene(typeView);
 			}
 		};
-		UpperBar.getIstance().getStatsButton().setOnAction(statsButton);
+		managerview.getStatsButton().setOnMouseClicked(statsButton);
 
 
 		EventHandler<MouseEvent> profileButton = new EventHandler<>() {		

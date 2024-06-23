@@ -9,10 +9,8 @@ import it.unipv.insfw23.TicketWave.modelDomain.user.ConnectedUser;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelView.access.LoginView;
 import it.unipv.insfw23.TicketWave.modelView.research.ResearchView;
-import it.unipv.insfw23.TicketWave.modelView.access.SignUpView;
 import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
-import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.event.EventHandler;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
@@ -33,8 +31,6 @@ public class CustomerController {
     private LoginView loginView;
     private Stage mainstage;
     private CustomerView customerView;
-   // private SignUpView signUpView;
-    private ManagerView managerView;
     Customer loggedCustomer;
 
     public CustomerController(Stage mainstage, CustomerView customerView, LoginView loginView) {

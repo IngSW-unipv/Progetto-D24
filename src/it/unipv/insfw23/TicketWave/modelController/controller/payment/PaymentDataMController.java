@@ -12,8 +12,6 @@ import it.unipv.insfw23.TicketWave.modelController.factory.notifications.INotifi
 import it.unipv.insfw23.TicketWave.modelController.factory.notifications.NotificationHandlerFactory;
 import it.unipv.insfw23.TicketWave.modelController.factory.payment.PaymentFactory;
 import it.unipv.insfw23.TicketWave.modelController.factory.subscription.SubscriptionHandlerFactory;
-import it.unipv.insfw23.TicketWave.modelDomain.payment.MasterPayAdapter;
-import it.unipv.insfw23.TicketWave.modelDomain.payment.MasterPayPayment;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Event;
 import it.unipv.insfw23.TicketWave.modelDomain.notifications.Notification;
 import it.unipv.insfw23.TicketWave.modelDomain.payment.IPaymentAdapter;
@@ -27,7 +25,6 @@ import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
 import it.unipv.insfw23.TicketWave.modelView.bars.UpperBar;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentDataMView;
 import it.unipv.insfw23.TicketWave.modelView.payment.PaymentSelectionView;
-import it.unipv.insfw23.TicketWave.modelView.ticket.TicketPageView;
 import it.unipv.insfw23.TicketWave.modelView.user.CustomerView;
 import it.unipv.insfw23.TicketWave.modelView.user.ManagerView;
 import javafx.beans.value.ChangeListener;
@@ -124,7 +121,6 @@ public class PaymentDataMController {
 
 
                         //utilizzo di un Istanza del PaymentFactor e associo a un iPaymentAdapter
-                        MasterPayPayment masterPayPayment = new MasterPayPayment();
                         iPaymentAdapter = PaymentFactory.getMasterPayAdapter();
 
 

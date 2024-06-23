@@ -145,7 +145,7 @@ public class PaymentDataMView extends Scene {
         HBox.setHgrow(rightSpacer, Priority.ALWAYS);
         //hBox bottoni
         HBox buttonBox = new HBox(backButton,rightSpacer,nextButton);
-        buttonBox.setMargin(backButton, new Insets(10, 0, 0, 0)); // Margine a sinistra
+
         buttonBox.setAlignment(Pos.CENTER);
 
        //set struttura interna

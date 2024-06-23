@@ -22,31 +22,30 @@ import java.util.ArrayList;
 
 public class SignUpView extends Scene implements IResettableScene {
 
-    private Label nameLabel = new Label("Nome");
-    private  Label surnameLabel = new Label("Cognome");
-    private  Label emailLabel = new Label("Email");
-    private  Label confirmEmailLabel = new Label("Conferma Email");
-    private  Label passwordLabel = new Label("Password:");
-    private  Label confirmPasswordLabel = new Label("Conferma password:");
-    private  Label dateLabel = new Label("Data di nascita");
-    private  TextField surnameField = new TextField();
-    private  TextField confirmEmailField = new TextField();
-    private  PasswordField passwordField = new PasswordField();
-    private  PasswordField confirmPasswordField = new PasswordField();
-    private  DatePicker datePicker = new DatePicker();
-    private  Label provinceLabel = new Label("Comune di residenza");
-    private  TextField nameField = new TextField();
-    private  TextField emailField = new TextField();
-    private  ComboBox<Province> residenceComboBox = new ComboBox<>();
+    private Label nameLabel ;
+    private  Label surnameLabel;
+    private  Label emailLabel;
+    private  Label confirmEmailLabel;
+    private  Label passwordLabel;
+    private  Label confirmPasswordLabel;
+    private  Label dateLabel;
+    private  TextField surnameField;
+    private  TextField confirmEmailField;
+    private  PasswordField passwordField;
+    private  PasswordField confirmPasswordField;
+    private  DatePicker datePicker;
+    private  Label provinceLabel;
+    private  TextField nameField;
+    private  TextField emailField;
+    private  ComboBox<Province> residenceComboBox;
     private Label genreLbel;
     private  final int MAX_SELECTIONS = 5;  // Numero massimo di selezioni consentite
     private int currentSelections = 0;            // Numero attuale di selezioni
-
     private final LocalDate minDate = LocalDate.now().minus(18, ChronoUnit.YEARS);
     private BorderPane layout ;
     private GridPane grid;
-    private Button signUpButton = new Button("Registrati");
-    private Button backButton = new Button("Torna indietro");
+    private Button signUpButton;
+    private Button backButton;
     private RadioButton managerRadioButton;
     private RadioButton customerRadioButton;
    private  ToggleGroup accountTypeToggleGroup;
@@ -100,16 +99,20 @@ public class SignUpView extends Scene implements IResettableScene {
         Font labelFont = Font.font("Helvetica", FontWeight.BOLD, 18); // imposto font di tutta la pagina
 
         // NOME UTENTE
+        nameLabel = new Label("Nome");
         nameLabel.setFont(labelFont);
+        nameField = new TextField();
         GridPane.setConstraints(nameLabel, 0, 1);
         GridPane.setConstraints(nameField, 1, 1);
 
         // COGNOME UTENTE
+        surnameLabel = new Label("Cognome");
         surnameLabel.setFont(labelFont);
+        surnameField = new TextField();
         GridPane.setConstraints(surnameLabel, 2, 1);
         GridPane.setConstraints(surnameField, 3, 1);
 
-
+        // GENERI PREFERITI
         genreLbel = new Label(" Generi Preferiti ");
         genreLbel.setFont(labelFont);
         // Creare caselle di controllo per i generi
@@ -148,33 +151,46 @@ public class SignUpView extends Scene implements IResettableScene {
         genreScrollP.setContent(vb1);
         genreScrollP.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
 
-
+        // SETTO POSIZIONE SCROLLPANE E LABEL ASSOCIATO
         GridPane.setConstraints(genreLbel, 4, 1);
         GridPane.setConstraints(genreScrollP, 5, 1,1,2);
+
         // EMAIL
+        emailLabel = new Label("Email");
         emailLabel.setFont(labelFont);
+        emailField = new TextField();
         GridPane.setConstraints(emailLabel, 0, 3);
         GridPane.setConstraints(emailField, 1, 3);
 
         //CONFERMA EMAIL
+        confirmEmailLabel = new Label("Conferma Email");
         confirmEmailLabel.setFont(labelFont);
+        confirmEmailField = new TextField();
         GridPane.setConstraints(confirmEmailLabel, 2, 3);
         GridPane.setConstraints(confirmEmailField, 3, 3);
 
         // PASSWORD
+        passwordLabel = new Label("Password:");
         passwordLabel.setFont(labelFont);
+        passwordField = new PasswordField();
         GridPane.setConstraints(passwordLabel, 0, 4);
         GridPane.setConstraints(passwordField, 1, 4);
 
         //CONFERMA PASSWORD
+        confirmPasswordLabel = new Label("Conferma password:");
         confirmPasswordLabel.setFont(labelFont);
+        confirmPasswordField = new PasswordField();
         GridPane.setConstraints(confirmPasswordLabel, 2, 4);
         GridPane.setConstraints(confirmPasswordField, 3, 4);
 
         // DATA DI NASCITA
+        dateLabel = new Label("Data di nascita");
         dateLabel.setFont(labelFont);
+        datePicker = new DatePicker();
         GridPane.setConstraints(dateLabel, 0, 2);
         GridPane.setConstraints(datePicker, 1, 2);
+
+        //METODO PER SETTARE VISIBILI SOLE LE DATE VALIDE
         Callback<DatePicker, DateCell> dayCellFactory = new Callback<DatePicker, DateCell>() {
             @Override
             public DateCell call(final DatePicker datePicker) {
@@ -194,21 +210,24 @@ public class SignUpView extends Scene implements IResettableScene {
         datePicker.setValue(minDate);
 
         // PROVINCIA DI RESIDENZA
+        provinceLabel = new Label("Comune di residenza");
         provinceLabel.setFont(labelFont);
         GridPane.setConstraints(provinceLabel, 2, 2);
+        residenceComboBox = new ComboBox<>();
         residenceComboBox.getItems().addAll(Province.values());
         GridPane.setConstraints(residenceComboBox, 3, 2);
 
-
-
+        //BOTTONI DEL CLIENTE DEL GESTORE
         accountTypeToggleGroup = new ToggleGroup();
 
+        //BOTTONE CLIENTE
         customerRadioButton = new RadioButton("Cliente");
         customerRadioButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
         customerRadioButton.setToggleGroup(accountTypeToggleGroup);
         customerRadioButton.setSelected(true);
         GridPane.setConstraints(customerRadioButton, 0, 0);
 
+        //VOTTONE GESTORE
         managerRadioButton = new RadioButton("Gestore");
         managerRadioButton.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
         managerRadioButton.setToggleGroup(accountTypeToggleGroup);
@@ -228,22 +247,23 @@ public class SignUpView extends Scene implements IResettableScene {
         // Inizialmente la ScrollPane è visibile poiché "Cliente" è selezionato
         genreScrollP.setVisible(true);
 
-
+        // Bottone registrazione
+        signUpButton = new Button("Registrati");
         GridPane.setConstraints(signUpButton, 2, 5);
 
-
+        //bottone ritorno
+        backButton = new Button("Torna indietro");
         GridPane.setConstraints(backButton,1,5);
-
 
         // controllo sulle password
         errorLabel = new Label();
         errorLabel.setTextFill(javafx.scene.paint.Color.RED);
         errorLabel.setFont(Font.font("Helvetica", FontWeight.BOLD, 14));
-        //errorLabel.setText("Campi non validi o vuoti");
         errorLabel.setVisible(false);
         GridPane.setColumnSpan(errorLabel, 2);
         GridPane.setConstraints(errorLabel, 3, 5);
 
+        //AGGIUNGO ELEMNTI ALLA GRID
         grid.getChildren().addAll(
                 nameLabel, nameField, surnameLabel, surnameField, dateLabel, datePicker,
                 emailLabel, emailField, confirmEmailLabel, confirmEmailField,
@@ -256,6 +276,7 @@ public class SignUpView extends Scene implements IResettableScene {
 
 
     }
+    // CONTROLLO IL NUMERO DI BOX SELEZIONATI
     private void updateCheckBoxesState(ArrayList<CheckBox> checkBoxes) {
         if (currentSelections >= MAX_SELECTIONS) {
             for (CheckBox checkBox : checkBoxes) {
@@ -269,6 +290,7 @@ public class SignUpView extends Scene implements IResettableScene {
             }
         }
     }
+    // RESETTO LE BARRE
     public void reSetBars(){
         BorderPane temp = new BorderPane();
         setRoot(temp);
@@ -343,6 +365,7 @@ public class SignUpView extends Scene implements IResettableScene {
         }
         return selectedGenres.toArray(new Genre[0]);  // converto l'arraylist in un array di generi
     }
+    // CHECK SU CORRETTEZZA CHE I TEXTFIELDS SIANO UGUALI
     public boolean checkEqualEmailAndPassword(){
         if (!passwordField.getText().equals(confirmPasswordField.getText()) || !emailField.getText().equals(confirmEmailField.getText())){
             return false;
@@ -354,6 +377,7 @@ public class SignUpView extends Scene implements IResettableScene {
         errorLabel.setText(message);
         errorLabel.setVisible(true);
     }
+    // CONTROLLO SE ALMENO UN CHECKBOX è SELEZIONATO
     private boolean isAnyCheckBoxSelected() {
         for (CheckBox checkBox : choiceGenre) {
             if (checkBox.isSelected() && customerRadioButton.isSelected()) {
@@ -362,6 +386,7 @@ public class SignUpView extends Scene implements IResettableScene {
         }
         return false;
     }
+    // CHECK SE I CAMPI SONO VUOTI
     public boolean checkFieldsEmpty(){
         if(getNameField().getText()== null || getSurnameField().getText()== null || getEmailField().getText()==null || getConfirmEmailField().getText()== null ||
                 getPasswordField().getText()== null || getConfirmPasswordField().getText()==null || getDatePicker().getValue() == null || getSelectedProvince()==null  ){
@@ -370,15 +395,6 @@ public class SignUpView extends Scene implements IResettableScene {
             return  false;
         }
     }
-    public boolean checkEmptyGenre(){
-        if(isAnyCheckBoxSelected()== false && customerRadioButton.isSelected()){
-            return true;
-        }else{
-            return false;
-        }
-    }
-
-
 
 }
 

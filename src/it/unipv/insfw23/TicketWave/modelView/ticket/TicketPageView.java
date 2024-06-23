@@ -10,16 +10,11 @@ import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.stage.StageStyle;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
-import javafx.geometry.HPos;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-
-import java.awt.Paint;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -78,16 +73,16 @@ public class TicketPageView extends Scene implements IResettableScene {
     private  final RadioButton basePricebutton = new RadioButton();
     private  final RadioButton premiumPricebutton = new RadioButton();
     private  final RadioButton vipPricebutton = new RadioButton();
-    
+
     private final int MAX_TICKET_BUYABLE = 4;
     private final String NOT_AVAILABLE = "Non disponibili";
     private final String SOLDOUT = "Terminati";
-    
+
     private final Label quantityLabel = new Label("quantità da acquistare(max "+MAX_TICKET_BUYABLE+"): ");
     private Spinner<Integer> baseSpinner;
     private Spinner<Integer> premiumSpinner;
     private Spinner<Integer> vipSpinner;
-    
+
     private Scene scene;
     private BorderPane layout;
     private boolean isCustomerViewer;
@@ -125,8 +120,8 @@ public class TicketPageView extends Scene implements IResettableScene {
         eventProvinceField.setText(prov.toString());
         eventDateField.setText(data.toString());
         eventArtistField.setText(artist);
-        
-        
+
+
 
 
         //DA PRENDERE DAL DAO
@@ -153,7 +148,7 @@ public class TicketPageView extends Scene implements IResettableScene {
             		ticketBaseField = new Label(SOLDOUT);
                 	basePricebutton.setVisible(false);
             	}else {
-            		ticketBaseField = new Label(String.valueOf(seatsRemainedNumberForType[0]));                
+            		ticketBaseField = new Label(String.valueOf(seatsRemainedNumberForType[0]));
             		baseSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[0]), 1);
             	}
             	premiumPriceField = new Label("€"+price[1]);
@@ -161,7 +156,7 @@ public class TicketPageView extends Scene implements IResettableScene {
             		ticketPremiumField = new Label(SOLDOUT);
             		premiumPricebutton.setVisible(false);
             	}else {
-            		ticketPremiumField = new Label(String.valueOf(seatsRemainedNumberForType[1]));                
+            		ticketPremiumField = new Label(String.valueOf(seatsRemainedNumberForType[1]));
             		premiumSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[1]), 1);
             	}
                 ticketVipField = new Label(NOT_AVAILABLE);
@@ -181,7 +176,7 @@ public class TicketPageView extends Scene implements IResettableScene {
             		ticketPremiumField = new Label(SOLDOUT);
             		premiumPricebutton.setVisible(false);
             	}else {
-            		ticketPremiumField = new Label(String.valueOf(seatsRemainedNumberForType[1]));                
+            		ticketPremiumField = new Label(String.valueOf(seatsRemainedNumberForType[1]));
             		premiumSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[1]), 1);
             	}
                 vipPriceField = new Label("€"+price[2]);
@@ -189,7 +184,7 @@ public class TicketPageView extends Scene implements IResettableScene {
                 	ticketVipField = new Label(SOLDOUT);
                 	vipPricebutton.setVisible(false);
                 }else {
-                	ticketVipField = new Label(String.valueOf(seatsRemainedNumberForType[2]));                
+                	ticketVipField = new Label(String.valueOf(seatsRemainedNumberForType[2]));
                 	vipSpinner = new Spinner<>(1, Integer.min(MAX_TICKET_BUYABLE, seatsRemainedNumberForType[2]), 1);
                 }
         }
@@ -302,29 +297,28 @@ public class TicketPageView extends Scene implements IResettableScene {
     HBox.setHgrow(rightSpacer, Priority.ALWAYS); // Consente a rightSpacer di espandersi per riempire lo spazio disponibile// Imposta un margine di 10 unità a destra del backButton
     // Creazione di un HBox per contenere i bottoni e le Region vuote
     HBox buttonBox = new HBox( backButton, rightSpacer, buyButton);
-    HBox.setMargin(backButton, new Insets(0, 10, -40, 10));
 
     buttonBox.setSpacing(50); // Spazio tra i bottoni
     buttonBox.setAlignment(Pos.CENTER); // Allinea i bottoni al centro
 
         errmessage.setOpacity(0);
         errmessage.setStyle("-fx-text-fill: red;");
-        
+
         //impostazioni relative alla grafica degli spinner
         if(baseSpinner != null) {
         	baseSpinner.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
             baseSpinner.setPrefWidth(65);
             baseSpinner.setPrefHeight(20);
             baseSpinner.setVisible(false);
-        }	
-        
+        }
+
         if(premiumSpinner != null) {
         	premiumSpinner.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
         	premiumSpinner.setPrefWidth(65);
         	premiumSpinner.setPrefHeight(20);
         	premiumSpinner.setVisible(false);
         }
-        
+
         if(vipSpinner != null) {
         	vipSpinner.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
         	vipSpinner.setPrefWidth(65);
@@ -401,7 +395,7 @@ public class TicketPageView extends Scene implements IResettableScene {
         basePricebutton.setToggleGroup(priceselection);
         premiumPricebutton.setToggleGroup(priceselection);
         vipPricebutton.setToggleGroup(priceselection);
-        
+
         //listener per il cambio dello spinner visibile a seconda del radiobutton
         priceselection.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
@@ -413,7 +407,7 @@ public class TicketPageView extends Scene implements IResettableScene {
 					premiumSpinner.setVisible(false);
 				if(vipSpinner != null)
 					vipSpinner.setVisible(false);
-				
+
 				if(priceselection.getSelectedToggle().equals(basePricebutton)) {
 					baseSpinner.setVisible(true);
 				}else if(priceselection.getSelectedToggle().equals(premiumPricebutton) && premiumSpinner != null) {
@@ -433,12 +427,14 @@ public class TicketPageView extends Scene implements IResettableScene {
 
         //Borderpane esterno per l'immissione di tutto al centro+ layout sopra e sotto
         BorderPane root=new BorderPane();
-
+        
         root.setCenter(internalStructure);
         root.setStyle("-fx-background-color: #91BAD6;");
         BorderPane.setMargin(eventPosterImage, new Insets(30, 50, 0, 0));
         root.setRight(eventPosterImage);
         root.setBottom(buttonBox);
+        BorderPane.setMargin(buttonBox, new Insets(-10,0,-20,0));
+
 
 
 
@@ -464,7 +460,7 @@ public class TicketPageView extends Scene implements IResettableScene {
     public Scene getScene() {
         return scene;
     }
-        //??????
+
         public void reSetBars(){
             BorderPane temp = new BorderPane();
             setRoot(temp);
@@ -501,9 +497,6 @@ public class TicketPageView extends Scene implements IResettableScene {
     }
 
 
-    public RadioButton getBasePricebutton(){
-        return basePricebutton;
-    }
 
     public void setForNotBuyable(){
         buyButton.setVisible(false);

@@ -4,7 +4,6 @@ import it.unipv.insfw23.TicketWave.exceptions.AccountAlreadyExistsException;
 import it.unipv.insfw23.TicketWave.exceptions.GenreNotSelected;
 import it.unipv.insfw23.TicketWave.exceptions.WrongPasswordException;
 import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Type;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Customer;
 import it.unipv.insfw23.TicketWave.modelDomain.user.Manager;
 

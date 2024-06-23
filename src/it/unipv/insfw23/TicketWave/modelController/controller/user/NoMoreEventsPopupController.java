@@ -1,15 +1,10 @@
 package it.unipv.insfw23.TicketWave.modelController.controller.user;
 
 import it.unipv.insfw23.TicketWave.modelController.controller.subscription.SubscriptionSelectionController;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Genre;
-import it.unipv.insfw23.TicketWave.modelDomain.event.Province;
-import it.unipv.insfw23.TicketWave.modelDomain.statistics.StatisticsHandler;
 import it.unipv.insfw23.TicketWave.modelView.IResettableScene;
-import it.unipv.insfw23.TicketWave.modelView.statistics.LocationStatsView;
 import it.unipv.insfw23.TicketWave.modelView.subscription.SubscriptionSelectionView;
 import it.unipv.insfw23.TicketWave.modelView.user.NoMoreEventsPopup;
 import javafx.event.EventHandler;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
