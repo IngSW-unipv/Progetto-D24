@@ -90,7 +90,7 @@ public class ResearchView extends Scene implements IResettableScene {
         Genre[] genreValuesOfEnum = Genre.values(); // ho un array con tutti i valori associati ai nomi della ENUM
         ArrayList<String> genreStringOfEnum = new ArrayList<>(); // stringa di generi
         for (Genre value : genreValuesOfEnum) { // popolo la mia lista di generi (stringa) partendo dalla ENUM
-            if (value != Genre.START_THEATER) { // se la stringa è diversa dal separatore dei generi la metto nella successiva CheckBox, per cui la metto nell'array di stringhe
+            if (value != Genre.START_THEATER && value != Genre.START_OTHER) { // se la stringa è diversa dal separatore dei generi la metto nella successiva CheckBox, per cui la metto nell'array di stringhe
                 genreStringOfEnum.add(value.toString());
             }
         }
