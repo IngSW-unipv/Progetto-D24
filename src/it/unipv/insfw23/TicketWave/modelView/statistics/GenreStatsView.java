@@ -56,7 +56,7 @@ public class GenreStatsView extends Scene {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
 
         if (genreRes.getGenreResult().size() != genreRes.getGenreArray().size()) {
-            throw new IllegalArgumentException("Le liste devono avere la stessa dimensione");
+            throw new IllegalArgumentException("List's dimensions must be the same");
         }
         else {
 

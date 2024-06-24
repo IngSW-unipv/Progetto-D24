@@ -47,14 +47,7 @@ public class ArtistStatsView extends BorderPane{
         else {
             // Aggiunta dei dati alla serie
             for (int i = 0; i < artistRes.getArtistNameArray().size(); i++) {
-/*
-                if (artistRes.getArtistNameArray().get(i).length() > 20) {
-                    String subString = (artistRes.getArtistNameArray().get(i).substring(0, 10)+"...");
-                    System.out.println(subString);
-                    series.getData().add(new XYChart.Data<>(subString, artistRes.getArtistResult().get(i)));
-                }else {
 
- */
                 series.getData().add(new XYChart.Data<>(artistRes.getArtistNameArray().get(i), artistRes.getArtistResult().get(i)));
 
             }

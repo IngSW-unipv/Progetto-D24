@@ -47,7 +47,7 @@ public class LocationStatsView extends Scene {
         XYChart.Series<String, Number> series = new XYChart.Series<>();
 
         if (provRes.getProvResult().size() != provRes.getProvinceArray().size()) {
-            throw new IllegalArgumentException("Le liste devono avere la stessa dimensione");
+            throw new IllegalArgumentException("Lists must be of the same dimension");
         }
         else {
             // Aggiunta dei dati alla serie

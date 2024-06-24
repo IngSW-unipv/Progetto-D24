@@ -110,7 +110,7 @@ public class StatisticsHandler implements IStatisticsHandler {
                 results.set(indexMod, (results.get(indexMod) / artistCounter.get(indexMod)));
             }
         }
-        else {System.out.println("Problemiiiiiiii");}
+        else {System.out.println("Problems");}
 
         WrapArtist wrapRes = new WrapArtist(results, artistNames);
         return wrapRes;   //classe wrapper per restituire i due array che servono, ovvero artistNames creata, e results

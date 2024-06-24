@@ -21,7 +21,7 @@ import java.util.Objects;
 
 import static org.junit.Assert.*;
 
-public class profileTest {
+public class ProfileTest {
 
     ProfileDao profileDao;
     private Customer customerTest;
