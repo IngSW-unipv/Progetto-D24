@@ -91,6 +91,7 @@ public class LocationStatsView extends Scene {
         BorderPane.setMargin(backButton, new Insets(10));
 
 
+
         layout.setTop(UpperBar.getIstance());
         layout.setCenter(content);
         layout.setBottom(LowerBar.getInstance());
