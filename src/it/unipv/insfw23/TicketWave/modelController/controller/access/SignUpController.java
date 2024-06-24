@@ -113,6 +113,7 @@ public class SignUpController {
                     System.out.println("You are signing up as a customer");
 
 
+
                     //set del customer, CHIAMATA AL DAO PER LA REGISTRAZIONE
 
                     ArrayList<Ticket> tickets= new ArrayList<>();
