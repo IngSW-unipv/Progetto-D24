@@ -97,7 +97,7 @@ public class SignUpController {
                 }
                 else if(signUpView.checkFieldsEmpty() == true) {
                     signUpView.setErrorLabel("Campi vuoti o non validi");
-/*
+
                 }else if(!Pattern.matches(nameRegex, signUpView.getNameField().getText()) || !Pattern.matches(nameRegex, signUpView.getSurnameField().getText())){
                         signUpView.setErrorLabel("Nome e cognome devono iniziare \ncon una lettera maiuscola");
                 }else if(!(Pattern.matches(mailRegex, signUpView.getEmailField().getText()))){
@@ -105,7 +105,7 @@ public class SignUpController {
                 }else if(!(Pattern.matches(passwordRegex, signUpView.getPasswordField().getText()))){
                         signUpView.setErrorLabel("La password deve avere almeno 8 caratteri, \ndeve contenere almento una lettera minuscola, \nuna maiuscola e un numero");
 
- */
+
                 }else if (signUpView.getCustomerRadioButton().isSelected()) {
 
                     signUpView.setErrorLabel("");
